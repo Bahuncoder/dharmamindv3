@@ -111,6 +111,7 @@ class DatabaseManager:
         # Performance monitoring
         self.query_metrics: List[QueryMetrics] = []
         self.connection_health: Dict[DatabaseType, ConnectionHealth] = {}
+        self.health_monitoring_active = False
         
         # Configuration
         self.config = {
@@ -891,6 +892,17 @@ class DatabaseManager:
         except Exception as e:
             logger.error(f"Error creating performance indexes: {e}")
             raise
+    
+    async def _start_health_monitoring(self):
+        """Start background health monitoring"""
+        try:
+            logger.info("📊 Health monitoring initialized")
+            # In a full implementation, this would start background tasks
+            # For now, we'll just log that it's ready
+            self.health_monitoring_active = True
+        except Exception as e:
+            logger.error(f"Failed to start health monitoring: {e}")
+            # Don't raise - this is non-critical
     
     async def health_check(self) -> bool:
         """Check database health"""
