@@ -1,0 +1,14 @@
+name: analysis_engine
+description: Deep analytical processing and pattern recognition for spiritual insights
+category: analysis
+expertise_areas:
+  - pattern_analysis
+  - data_processing
+  - insight_generation
+  - spiritual_analytics
+  - behavioral_analysis
+  - trend_identification
+  - correlation_detection
+  - predictive_analysis
+priority: high
+activation_threshold: 0.8

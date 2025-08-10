@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Import refined color system (emerald borders, sophisticated grays) */
+@import './colors-refined.css';
+
+/* Import mobile optimization styles */
+@import './mobile.css';
+
+/* Import message actions styles */
+@import './message-actions.css';
+
+/* Import enhanced chat UI styles */
+@import './chat-ui-polish.css';
+
+@layer base {
+  html {
+    font-family: Inter, system-ui, sans-serif;
+  }
+  
+  body {
+    background-color: var(--color-bg-primary); /* Light gray background */
+    color: var(--color-text-primary); /* Deep charcoal text */
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark mode styles */
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.dark body {
+    background-color: #1a202c;
+    color: #f7fafc;
+  }
+
+  /* Spiritual mode styles */
+  html.spiritual {
+    color-scheme: dark;
+  }
+
+  html.spiritual body {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+    color: #f7fafc;
+  }
+
+  html.spiritual::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(128, 90, 213, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(66, 153, 225, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@layer components {
+  .chat-container {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+  
+  .message-bubble {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-width: 80%;
+  }
+  
+  .message-user {
+    background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+    color: var(--color-text-inverse);
+    margin-left: auto;
+  }
+  
+  .message-ai {
+    background-color: var(--color-neutral-50);
+    color: var(--color-text-primary);
+    margin-right: auto;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border-medium);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
+    border-color: var(--color-focus);
+  }
+  
+  /* Button styles are now in colors.css */
+  
+  .card {
+    background-color: var(--color-bg-primary);
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border-light);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+}

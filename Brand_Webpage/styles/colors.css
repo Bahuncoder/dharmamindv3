@@ -1,0 +1,825 @@
+/**
+ * ===================================
+ * DHARMAMIND MASTER COLOR SYSTEM
+ * ===================================
+ * 
+ * 🎨 SINGLE SOURCE OF TRUTH FOR ALL COLORS
+ * 
+ * Change colors here and they automatically apply throughout the entire application:
+ * - All components (buttons, cards, forms, etc.)
+ * - All pages (home, enterprise, contact, etc.) 
+ * - All interactive states (hover, focus, active)
+ * - All themes and variations
+ * 
+ * NO MORE scattered color definitions! Everything references these master variables.
+ */
+
+:root {
+  /* ===================================
+   * 🎯 MASTER BRAND COLORS
+   * ===================================
+   * These are the ONLY colors you need to change to update the entire app
+   */
+  
+  /* 🔹 Primary Brand Color (Main theme color - used everywhere) */
+  --brand-primary: #6b7280;           /* Gray-500: Main brand color */
+  --brand-primary-hover: #4b5563;     /* Gray-600: Hover state */
+  --brand-primary-light: #9ca3af;     /* Gray-400: Light variant */
+  --brand-primary-dark: #374151;      /* Gray-700: Dark variant */
+  
+  /* 🔸 Accent Color (Borders, highlights, CTAs) */
+  --brand-accent: #10b981;            /* Emerald-500: Only accent color */
+  --brand-accent-hover: #059669;      /* Emerald-600: Accent hover */
+  --brand-accent-light: #6ee7b7;      /* Emerald-300: Light accent */
+  --brand-accent-dark: #047857;       /* Emerald-700: Dark accent */
+  
+  /* 🔹 Secondary Color (Supporting elements) */
+  --brand-secondary: #8b5cf6;         /* Violet-500: Secondary actions */
+  --brand-secondary-hover: #7c3aed;   /* Violet-600: Secondary hover */
+  
+  /* ===================================
+   * 🎨 DERIVED COLORS (Auto-calculated from brand colors)
+   * ===================================
+   * These automatically update when you change the brand colors above
+   */
+  
+  /* Logo & Identity */
+  --color-logo-primary: var(--brand-accent);
+  --color-logo-secondary: var(--brand-primary);
+  
+  /* Primary System Colors */
+  --color-primary: var(--brand-primary);
+  --color-primary-hover: var(--brand-primary-hover);
+  --color-primary-light: var(--brand-primary-light);
+  --color-primary-dark: var(--brand-primary-dark);
+  
+  /* Accent System Colors */
+  --color-accent: var(--brand-accent);
+  --color-accent-hover: var(--brand-accent-hover);
+  --color-accent-light: var(--brand-accent-light);
+  --color-accent-dark: var(--brand-accent-dark);
+  
+  /* Secondary System Colors */
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-hover: var(--brand-secondary-hover);
+  
+  /* ===================================
+   * 🎯 NEUTRAL SYSTEM COLORS
+   * ===================================
+   * Background, text, and border colors
+   */
+  
+  /* Text Colors (Derived from brand) */
+  --color-text-primary: #2C2C2C;          /* Main text - dark charcoal */
+  --color-text-secondary: #6E6E6E;        /* Secondary text - medium gray */
+  --color-text-muted: var(--brand-primary-light);    /* Muted text uses brand light */
+  --color-text-inverse: #ffffff;          /* White text for dark backgrounds */
+  --color-text-accent: var(--brand-accent);          /* Accent text uses brand accent */
+  
+  /* Background Colors */
+  --color-bg-primary: #ffffff;            /* Main white background */
+  --color-bg-secondary: #f9fafb;          /* Light gray background */
+  --color-bg-tertiary: #f3f4f6;           /* Medium gray background */
+  --color-bg-dark: var(--brand-primary-dark);        /* Dark background uses brand */
+  --color-bg-accent: var(--brand-accent);            /* Accent background */
+  --color-bg-overlay: rgba(107, 114, 128, 0.75);     /* Overlay uses brand primary */
+  
+  /* Border Colors (Derived from brand) */
+  --color-border-light: #e5e7eb;          /* Light borders */
+  --color-border-medium: #d1d5db;         /* Medium borders */
+  --color-border-dark: var(--brand-primary-light);   /* Dark borders use brand */
+  --color-border-accent: var(--brand-accent);        /* Accent borders use brand accent */
+  
+  /* ===================================
+   * 🎯 STATE COLORS
+   * ===================================
+   * Success, warning, error, info - integrated with brand
+   */
+  
+  --color-success: var(--brand-accent);           /* Success uses brand accent (emerald) */
+  --color-success-light: #d1fae5;                /* Light success background */
+  --color-warning: var(--brand-primary);         /* Warning uses brand primary */
+  --color-warning-light: #f3f4f6;               /* Light warning background */
+  --color-error: #ef4444;                       /* Error red */
+  --color-error-light: #fee2e2;                 /* Light error background */
+  --color-info: var(--brand-secondary);         /* Info uses brand secondary */
+  --color-info-light: #e0e7ff;                  /* Light info background */
+  
+  /* ===================================
+   * 🎯 INTERACTION COLORS
+   * ===================================
+   * Focus, hover, active states - all derived from brand
+   */
+  
+  --color-focus: var(--brand-accent);           /* Focus color uses brand accent */
+  --color-focus-ring: rgba(16, 185, 129, 0.2); /* Focus ring uses brand accent with opacity */
+  --color-hover: var(--brand-primary-hover);   /* Hover uses brand hover */
+  --color-active: var(--brand-primary-dark);   /* Active uses brand dark */
+  
+  /* ===================================
+   * 🎯 SPECIALIZED SYSTEM COLORS
+   * ===================================
+   * All derived from the master brand colors above
+   */
+  
+  /* Enterprise Colors (Professional look using brand colors) */
+  --color-enterprise: var(--brand-primary-dark);        /* Uses brand dark */
+  --color-enterprise-hover: var(--brand-primary);       /* Uses brand primary */
+  --color-enterprise-light: var(--brand-primary-light); /* Uses brand light */
+  --color-enterprise-bg: var(--color-bg-secondary);     /* Light background */
+  --color-enterprise-border: var(--brand-accent);       /* Accent border */
+  
+  /* Contact/Sales Colors (Derived from brand) */
+  --color-contact: var(--brand-primary);           /* Uses brand primary */
+  --color-contact-hover: var(--brand-primary-hover); /* Uses brand hover */
+  --color-contact-bg-hover: var(--color-bg-secondary); /* Light background */
+  --color-contact-border: var(--brand-accent);     /* Accent border */
+  --color-contact-border-hover: var(--brand-accent-hover); /* Accent hover border */
+  
+  /* ===================================
+   * 🎯 LEGACY COMPATIBILITY
+   * ===================================
+   * These ensure old code still works while using the new system
+   */
+  
+  /* Old Logo Colors (Now point to new system) */
+  --color-logo-emerald: var(--brand-accent);
+  
+  /* Old Secondary Colors (Now point to new system) */
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-hover: var(--brand-secondary-hover);
+  --color-secondary-light: #a78bfa;               /* Violet-400 */
+  --color-secondary-dark: #6d28d9;                /* Violet-700 */
+  
+  /* Old Neutral Colors (Keep as-is for now) */
+  --color-neutral-50: #fafaf9;        /* Stone-50 */
+  --color-neutral-100: #f5f5f4;       /* Stone-100 */
+  --color-neutral-200: #e7e5e4;       /* Stone-200 */
+  --color-neutral-300: #d6d3d1;       /* Stone-300 */
+  --color-neutral-400: #a8a29e;       /* Stone-400 */
+  --color-neutral-500: #78716c;       /* Stone-500 */
+  --color-neutral-600: #57534e;       /* Stone-600 */
+  --color-neutral-700: #44403c;       /* Stone-700 */
+  --color-neutral-800: #292524;       /* Stone-800 */
+  --color-neutral-900: #1c1917;       /* Stone-900 */
+  
+  /* ===================================
+   * 🎯 VISUAL DESIGN SYSTEM
+   * ===================================
+   * Shadows, transitions, and effects using brand colors
+   */
+  
+  /* Shadows (Enhanced with brand accent) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-accent: 0 4px 12px rgba(16, 185, 129, 0.3); /* Accent shadow using brand accent */
+  --shadow-brand: 0 4px 12px rgba(107, 114, 128, 0.2); /* Brand shadow using brand primary */
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.2s ease-in-out;
+  --transition-slow: 0.3s ease-in-out;
+}
+
+/* ===================================
+ * 🎨 CENTRALIZED COMPONENT STYLES
+ * ===================================
+ * These replace ALL scattered styling throughout the app
+ * All components use these standardized styles
+ */
+
+/* Feature Boxes - All styled consistently */
+.feature-box {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  transition: var(--transition-normal);
+}
+
+.feature-box-accented {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  transition: var(--transition-normal);
+}
+
+.feature-box:hover,
+.feature-box-accented:hover {
+  background-color: var(--color-hover);
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-2px);
+}
+
+/* Content Cards - Standardized across all pages */
+.content-card {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.content-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-accent);
+  transform: translateY(-1px);
+}
+
+.content-card-featured {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-accent);
+  border-radius: 1rem;
+  padding: 2rem;
+  transform: scale(1.02);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Info Boxes - Light backgrounds */
+.info-box {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  transition: var(--transition-normal);
+}
+
+.info-box-small {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: var(--transition-normal);
+}
+
+/* Quote Boxes - Special styling */
+.quote-box,
+p.quote-box {
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+  border-left: 4px solid var(--color-accent) !important;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  transition: var(--transition-normal);
+}
+
+/* Action/CTA Boxes */
+.action-box {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  transition: var(--transition-normal);
+}
+
+.action-box:hover {
+  background-color: var(--color-hover);
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-2px);
+}
+
+/* Form Boxes */
+.form-box {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: var(--transition-normal);
+}
+
+.form-box:focus-within {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* ===================================
+ * 🔘 MASTER BUTTON SYSTEM
+ * ===================================
+ * ALL buttons use these styles - derived from brand colors
+ * Change the brand colors above and all buttons automatically update
+ */
+
+/* 🔹 Primary Buttons - Main actions using brand colors */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  border-color: var(--color-focus);
+}
+
+/* 🔸 Secondary Buttons - Supporting actions */
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* 🔹 Outline Buttons - Subtle actions */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* 🔸 Soft Buttons - Very subtle */
+.btn-soft {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-soft:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-brand);
+}
+
+/* 🔹 Enterprise Buttons - Professional */
+.btn-enterprise {
+  background-color: var(--color-enterprise);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-enterprise:hover {
+  background-color: var(--color-enterprise-hover);
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* 🔸 Contact/Sales Buttons */
+.btn-contact {
+  background-color: transparent;
+  color: var(--color-contact);
+  border: 2px solid var(--color-contact-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-contact:hover {
+  background-color: var(--color-contact-bg-hover);
+  color: var(--color-contact-hover);
+  border-color: var(--color-contact-border-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-brand);
+}
+
+/* 🔹 Ghost Buttons - Ultra minimal */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-medium);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent);
+}
+
+/* 🔸 Danger Buttons - For destructive actions */
+.btn-danger {
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+}
+
+/* 🎯 Universal Button Focus - All buttons get same focus treatment */
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-outline:focus,
+.btn-soft:focus,
+.btn-enterprise:focus,
+.btn-contact:focus,
+.btn-ghost:focus,
+.btn-danger:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  border-color: var(--color-focus);
+}
+
+/* 🎯 Button Sizes - Consistent sizing system */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.btn-xl {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25rem;
+}
+
+/* 🎯 Button States */
+.btn:disabled,
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn:disabled:hover {
+  background-color: inherit;
+  border-color: inherit;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===================================
+ * 🎨 MASTER UTILITY SYSTEM
+ * ===================================
+ * Universal utility classes that override Tailwind and custom styles
+ * All derived from the brand colors above
+ */
+
+/* 🎯 Background Utilities - All use brand colors */
+.bg-brand-primary { background-color: var(--brand-primary) !important; }
+.bg-brand-primary:hover { background-color: var(--brand-primary-hover) !important; }
+.bg-brand-accent { background-color: var(--brand-accent) !important; }
+.bg-brand-accent:hover { background-color: var(--brand-accent-hover) !important; }
+.bg-brand-secondary { background-color: var(--brand-secondary) !important; }
+
+/* Legacy compatibility - redirect to brand colors */
+.bg-primary { background-color: var(--brand-primary) !important; }
+.bg-primary:hover { background-color: var(--brand-primary-hover) !important; }
+.bg-accent { background-color: var(--brand-accent) !important; }
+.bg-accent:hover { background-color: var(--brand-accent-hover) !important; }
+.bg-logo-gradient { background-color: var(--brand-accent) !important; }
+.bg-primary-clean { background-color: var(--brand-primary) !important; }
+.bg-primary-clean:hover { background-color: var(--brand-primary-hover) !important; }
+
+/* Section backgrounds */
+.bg-primary-background { background-color: var(--color-bg-secondary) !important; }
+.bg-primary-background-main { background-color: var(--color-bg-tertiary) !important; }
+.bg-section-light { background-color: var(--color-bg-secondary) !important; }
+.bg-card-white { background-color: var(--color-bg-primary) !important; }
+
+/* 🎯 Text Color Utilities - All use brand colors */
+.text-brand-primary { color: var(--brand-primary) !important; }
+.text-brand-accent { color: var(--brand-accent) !important; }
+.text-brand-secondary { color: var(--brand-secondary) !important; }
+
+/* Legacy text colors - redirect to centralized system */
+.text-primary,
+h1.text-primary,
+h2.text-primary, 
+h3.text-primary,
+h4.text-primary,
+span.text-primary,
+div.text-primary,
+p.text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.text-secondary { color: var(--color-text-secondary) !important; }
+.text-muted { color: var(--color-text-muted) !important; }
+.text-inverse { color: var(--color-text-inverse) !important; }
+
+/* 🎯 Border Utilities - All use brand colors */
+.border-brand-primary { border-color: var(--brand-primary) !important; }
+.border-brand-accent { border-color: var(--brand-accent) !important; }
+.border-brand-secondary { border-color: var(--brand-secondary) !important; }
+
+/* Legacy border colors */
+.border-primary { border-color: var(--brand-accent) !important; }
+.border-card { border-color: var(--color-border-light) !important; }
+.border-light { border-color: var(--color-border-light) !important; }
+.border-medium { border-color: var(--color-border-medium) !important; }
+.border-dark { border-color: var(--color-border-dark) !important; }
+.border-accent { border-color: var(--brand-accent) !important; }
+.border-success { border-color: var(--color-success) !important; }
+
+/* 🎯 Override ALL Tailwind Orange/Amber Classes */
+/* These ensure no orange colors can appear anywhere in the app */
+.text-amber-500,
+.text-amber-600,
+.text-amber-700,
+.text-orange-500,
+.text-orange-600,
+.text-orange-700 {
+  color: var(--brand-accent) !important;
+}
+
+.bg-amber-50,
+.bg-amber-100,
+.bg-orange-50,
+.bg-orange-100 {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.bg-amber-500,
+.bg-amber-600,
+.bg-amber-700,
+.bg-orange-500,
+.bg-orange-600,
+.bg-orange-700 {
+  background-color: var(--brand-primary) !important;
+}
+
+.border-amber-200,
+.border-amber-400,
+.border-amber-500,
+.border-orange-200,
+.border-orange-400,
+.border-orange-500 {
+  border-color: var(--brand-accent) !important;
+}
+
+.focus\:ring-amber-500:focus,
+.ring-amber-500,
+.ring-amber-400,
+.focus\:ring-orange-500:focus,
+.ring-orange-500,
+.ring-orange-400 {
+  --tw-ring-color: var(--brand-accent) !important;
+}
+
+.hover\:bg-amber-600:hover,
+.hover\:bg-amber-700:hover,
+.hover\:bg-orange-600:hover,
+.hover\:bg-orange-700:hover {
+  background-color: var(--brand-primary-hover) !important;
+}
+
+.hover\:text-primary:hover,
+a.hover\:text-primary:hover,
+button.hover\:text-primary:hover,
+.text-secondary.hover\:text-primary:hover {
+  color: var(--color-text-primary) !important;
+}
+
+/* Override gradient backgrounds to use solid brand colors */
+.bg-gradient-to-r.from-amber-600.to-emerald-600,
+.bg-gradient-to-r.from-amber-700.to-emerald-700,
+.bg-gradient-to-r.from-orange-600,
+.bg-gradient-to-r.from-orange-500,
+.from-amber-600,
+.from-amber-700,
+.from-orange-500,
+.from-orange-600,
+.via-orange-500,
+.via-orange-600,
+.to-red-500 {
+  background: var(--brand-primary) !important;
+}
+
+.hover\:from-amber-700:hover,
+.hover\:from-amber-600:hover,
+.hover\:via-orange-600:hover,
+.hover\:to-red-600:hover {
+  background: var(--brand-primary-hover) !important;
+}
+
+/* 🎯 Text Color Utilities - All use brand colors */
+.text-brand-primary { color: var(--brand-primary) !important; }
+.text-brand-accent { color: var(--brand-accent) !important; }
+.text-brand-secondary { color: var(--brand-secondary) !important; }
+
+/* Legacy text colors - redirect to centralized system */
+.text-primary,
+h1.text-primary,
+h2.text-primary, 
+h3.text-primary,
+h4.text-primary,
+span.text-primary,
+div.text-primary,
+p.text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.text-secondary { color: var(--color-text-secondary) !important; }
+.text-muted { color: var(--color-text-muted) !important; }
+.text-inverse { color: var(--color-text-inverse) !important; }
+
+/* 🎯 Border Utilities - All use brand colors */
+.border-brand-primary { border-color: var(--brand-primary) !important; }
+.border-brand-accent { border-color: var(--brand-accent) !important; }
+.border-brand-secondary { border-color: var(--brand-secondary) !important; }
+
+/* Legacy border colors */
+.border-primary { border-color: var(--brand-accent) !important; }
+.border-card { border-color: var(--color-border-light) !important; }
+.border-light { border-color: var(--color-border-light) !important; }
+.border-medium { border-color: var(--color-border-medium) !important; }
+.border-dark { border-color: var(--color-border-dark) !important; }
+.border-accent { border-color: var(--brand-accent) !important; }
+.border-success { border-color: var(--color-success) !important; }
+
+/* 🎯 Override ALL Tailwind Orange/Amber Classes */
+/* These ensure no orange colors can appear anywhere in the app */
+.text-amber-500,
+.text-amber-600,
+.text-amber-700,
+.text-orange-500,
+.text-orange-600,
+.text-orange-700 {
+  color: var(--brand-accent) !important;
+}
+
+.bg-amber-50,
+.bg-amber-100,
+.bg-orange-50,
+.bg-orange-100 {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.bg-amber-500,
+.bg-amber-600,
+.bg-amber-700,
+.bg-orange-500,
+.bg-orange-600,
+.bg-orange-700 {
+  background-color: var(--brand-primary) !important;
+}
+
+.border-amber-200,
+.border-amber-400,
+.border-amber-500,
+.border-orange-200,
+.border-orange-400,
+.border-orange-500 {
+  border-color: var(--brand-accent) !important;
+}
+
+.focus\:ring-amber-500:focus,
+.ring-amber-500,
+.ring-amber-400,
+.focus\:ring-orange-500:focus,
+.ring-orange-500,
+.ring-orange-400 {
+  --tw-ring-color: var(--brand-accent) !important;
+}
+
+.hover\:bg-amber-600:hover,
+.hover\:bg-amber-700:hover,
+.hover\:bg-orange-600:hover,
+.hover\:bg-orange-700:hover {
+  background-color: var(--brand-primary-hover) !important;
+}
+
+.hover\:text-primary:hover,
+a.hover\:text-primary:hover,
+button.hover\:text-primary:hover,
+.text-secondary.hover\:text-primary:hover {
+  color: var(--color-text-primary) !important;
+}
+
+/* Override gradient backgrounds to use solid brand colors */
+.bg-gradient-to-r.from-amber-600.to-emerald-600,
+.bg-gradient-to-r.from-amber-700.to-emerald-700,
+.bg-gradient-to-r.from-orange-600,
+.bg-gradient-to-r.from-orange-500,
+.from-amber-600,
+.from-amber-700,
+.from-orange-500,
+.from-orange-600,
+.via-orange-500,
+.via-orange-600,
+.to-red-500 {
+  background: var(--brand-primary) !important;
+}
+
+.hover\:from-amber-700:hover,
+.hover\:from-amber-600:hover,
+.hover\:via-orange-600:hover,
+.hover\:to-red-600:hover {
+  background: var(--brand-primary-hover) !important;
+}
+
+/* Fix loading spinners and other UI elements */
+.border-amber-600 {
+  border-color: var(--brand-accent) !important;
+}

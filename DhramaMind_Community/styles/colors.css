@@ -1,0 +1,444 @@
+/**
+ * DharmaMind Centralized Color System
+ * 
+ * This file defines all colors used throughout the application.
+ * Update colors here and they will automatically apply everywhere.
+ */
+
+:root {
+  /* === PRIMARY BRAND COLORS === */
+  --color-primary-start: #F2A300; /* saffron orange */
+  --color-primary-end: #32A370;   /* emerald green */
+  --color-primary-hover-start: #E0920A; /* darker saffron */
+  --color-primary-hover-end: #278A5E;   /* darker emerald */
+  
+  /* Individual primary colors for non-gradient use */
+  --color-primary: #F2A300; /* saffron orange for main actions */
+  --color-primary-hover: #E0920A;
+  --color-primary-light: #FDB849; /* lighter saffron */
+  --color-primary-dark: #CC8800;  /* darker saffron */
+  
+  /* === SECONDARY COLORS === */
+  --color-secondary: #6E6E6E;     /* medium gray for secondary text */
+  --color-secondary-hover: #5A5A5A; /* darker gray on hover */
+  --color-secondary-light: #9E9E9E; /* lighter gray */
+  --color-secondary-dark: #4A4A4A;  /* darker gray */
+  
+  /* === NEUTRAL COLORS === */
+  --color-neutral-50: #F7F7F7;    /* very light gray background */
+  --color-neutral-100: #EEEEEE;   /* light gray for cards */
+  --color-neutral-200: #E0E0E0;   /* medium light gray for borders */
+  --color-neutral-300: #CCCCCC;   /* medium gray */
+  --color-neutral-400: #999999;   /* darker medium gray */
+  --color-neutral-500: #6E6E6E;   /* medium gray for secondary text */
+  --color-neutral-600: #5A5A5A;   /* darker gray */
+  --color-neutral-700: #4A4A4A;   /* dark gray */
+  --color-neutral-800: #2C2C2C;   /* charcoal for primary text */
+  --color-neutral-900: #1A1A1A;   /* very dark gray */
+  
+  /* === TEXT COLORS === */
+  --color-text-primary: #2C2C2C;    /* charcoal for main text */
+  --color-text-secondary: #6E6E6E;  /* medium gray for secondary text */
+  --color-text-muted: #999999;      /* lighter gray for muted text */
+  --color-text-inverse: #ffffff;    /* white text on dark backgrounds */
+  
+  /* === BACKGROUND COLORS === */
+  --color-bg-primary: #ffffff;      /* white for cards */
+  --color-bg-secondary: #F7F7F7;    /* very light gray main background */
+  --color-bg-tertiary: #EEEEEE;     /* light gray for sections */
+  --color-bg-dark: #2C2C2C;         /* charcoal for dark sections */
+  --color-bg-overlay: rgba(44, 44, 44, 0.75); /* charcoal overlay */
+  
+  /* === BORDER COLORS === */
+  --color-border-light: #E0E0E0;    /* light gray borders */
+  --color-border-medium: #CCCCCC;   /* medium gray borders */
+  --color-border-dark: #999999;     /* darker gray borders */
+  --color-border-primary: #32A370;  /* emerald green for accent borders */
+  
+  /* === STATE COLORS === */
+  --color-success: #32A370;         /* emerald green for success */
+  --color-success-light: #E8F5E8;   /* light green background */
+  --color-warning: #F2A300;         /* saffron orange for warnings */
+  --color-warning-light: #FFF4E0;   /* light orange background */
+  --color-error: #DC3545;           /* red for errors */
+  --color-error-light: #FCE8E8;     /* light red background */
+  --color-info: #17A2B8;            /* blue for info */
+  --color-info-light: #E1F7FA;      /* light blue background */
+  
+  /* === ENTERPRISE COLORS === */
+  --color-enterprise: #1f2937;        /* gray-800 for professional look */
+  --color-enterprise-hover: #111827;   /* gray-900 for hover */
+  --color-enterprise-light: #6b7280;  /* gray-500 for secondary text */
+  --color-enterprise-bg: #f9fafb;     /* gray-50 for backgrounds */
+  --color-enterprise-border: #d1d5db; /* gray-300 for borders */
+  
+  /* === CONTACT/SALES COLORS === */
+  --color-contact: #6b7280;           /* gray-500 for outline buttons */
+  --color-contact-hover: #4b5563;     /* gray-600 for outline hover */
+  --color-contact-bg-hover: #f9fafb;  /* gray-50 for outline bg hover */
+  --color-contact-border: #d1d5db;    /* gray-300 for outline border */
+  --color-contact-border-hover: #9ca3af; /* gray-400 for outline border hover */
+  
+  /* === FOCUS & INTERACTION === */
+  --color-focus: var(--color-primary);
+  --color-focus-ring: rgba(217, 119, 6, 0.2); /* amber-600/20 */
+  
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* === UTILITY CLASSES === */
+
+/* Primary gradient backgrounds */
+.bg-primary-gradient {
+  background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+}
+
+.bg-primary-gradient:hover {
+  background: linear-gradient(to right, var(--color-primary-hover-start), var(--color-primary-hover-end));
+}
+
+/* Light gradient backgrounds for sections */
+.bg-primary-gradient-light {
+  background: linear-gradient(to right, #FFF4E0, #E8F5E8); /* light orange to light green */
+}
+
+.bg-primary-gradient-light-alt {
+  background: linear-gradient(to right, #E8F5E8, #FFF4E0); /* light green to light orange */
+}
+
+/* Professional background gradients */
+.bg-primary-background {
+  background-color: var(--color-bg-secondary); /* clean light gray */
+}
+
+.bg-primary-background-light {
+  background: linear-gradient(135deg, #F7F7F7, #EEEEEE); /* subtle gray gradient */
+}
+
+.bg-primary-background-light-horizontal {
+  background: linear-gradient(to right, #fef3c7, #d1fae5); /* amber-50 to emerald-50 */
+}
+
+/* Additional background variations */
+.bg-primary-background-main {
+  background: linear-gradient(to bottom right, #f5f5f4, #fef3c7, #d1fae5); /* stone-100 via amber-50 to emerald-50 */
+}
+
+.bg-section-light {
+  background-color: var(--color-neutral-50); /* stone-50 instead of gray-50 */
+}
+
+.bg-card-white {
+  background-color: var(--color-bg-primary);
+}
+
+.border-card {
+  border-color: var(--color-border-light); /* stone-200 instead of gray-200 */
+}
+
+/* Dark testimonial card styles */
+.bg-testimonial {
+  background-color: var(--color-neutral-800); /* stone-800 instead of gray-800 */
+}
+
+.text-testimonial-name {
+  color: var(--color-neutral-50); /* stone-50 for names */
+}
+
+.text-testimonial-title {
+  color: var(--color-neutral-400); /* stone-400 for titles */
+}
+
+.text-testimonial-quote {
+  color: var(--color-neutral-300); /* stone-300 for quotes */
+}
+
+.text-testimonial-author {
+  color: var(--color-neutral-400); /* stone-400 for author info */
+}
+
+/* Contact button styles (using stone instead of gray) */
+.btn-contact-alt {
+  background-color: transparent;
+  color: var(--color-neutral-700); /* stone-700 instead of gray-700 */
+  border: 2px solid var(--color-border-medium); /* stone-300 instead of gray-300 */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-contact-alt:hover {
+  background-color: var(--color-neutral-50); /* stone-50 instead of gray-50 */
+  border-color: var(--color-neutral-400); /* stone-400 instead of gray-400 */
+  color: var(--color-neutral-700);
+}
+
+/* Solid primary backgrounds */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Text colors */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-inverse {
+  color: var(--color-text-inverse);
+}
+
+/* Background colors */
+.bg-primary-bg {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-secondary-bg {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-tertiary-bg {
+  background-color: var(--color-bg-tertiary);
+}
+
+.bg-neutral-100 {
+  background-color: var(--color-neutral-100);
+}
+
+.bg-neutral-200 {
+  background-color: var(--color-neutral-200);
+}
+
+.bg-secondary-bg {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-tertiary-bg {
+  background-color: var(--color-bg-tertiary);
+}
+
+.border-border-primary {
+  border-color: var(--color-border-primary);
+}
+
+.border-light {
+  border-color: var(--color-border-light);
+}
+
+.border-medium {
+  border-color: var(--color-border-medium);
+}
+
+.border-dark {
+  border-color: var(--color-border-dark);
+}
+
+.bg-overlay {
+  background-color: var(--color-bg-overlay);
+  backdrop-filter: blur(8px);
+}
+
+/* Border colors */
+.border-light {
+  border-color: var(--color-border-light);
+}
+
+.border-medium {
+  border-color: var(--color-border-medium);
+}
+
+.border-dark {
+  border-color: var(--color-border-dark);
+}
+
+/* Focus styles */
+.focus-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
+  border-color: var(--color-focus);
+}
+
+/* Button variants using the professional color system */
+.btn-primary {
+  background-color: var(--color-primary); /* solid saffron orange */
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-primary);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(242, 163, 0, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border-medium);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(242, 163, 0, 0.2);
+}
+
+/* Success button with emerald green */
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-success);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-success:hover {
+  background-color: #278A5E;
+  border-color: #278A5E;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(50, 163, 112, 0.3);
+}
+
+/* Enterprise button styles */
+.btn-enterprise {
+  background-color: var(--color-enterprise);
+  color: var(--color-text-inverse);
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-enterprise:hover {
+  background-color: var(--color-enterprise-hover);
+}
+
+.btn-enterprise:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(31, 41, 55, 0.2);
+}
+
+/* Contact Sales button styles (outline style) */
+.btn-contact {
+  background-color: transparent;
+  color: var(--color-contact);
+  border: 2px solid var(--color-contact-border);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-contact:hover {
+  background-color: var(--color-contact-bg-hover);
+  border-color: var(--color-contact-border-hover);
+  color: var(--color-contact-hover);
+}
+
+.btn-contact:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.2);
+}
+
+/* Avatar styles */
+.avatar-primary {
+  background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+  color: var(--color-text-inverse);
+}
+
+/* Message bubble styles */
+.message-user {
+  background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+  color: var(--color-text-inverse);
+}
+
+.message-ai {
+  background-color: var(--color-neutral-100);
+  color: var(--color-text-primary);
+}
+
+/* State colors */
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+.text-info { color: var(--color-info); }
+
+.bg-success-light { background-color: var(--color-success-light); }
+.bg-warning-light { background-color: var(--color-warning-light); }
+.bg-error-light { background-color: var(--color-error-light); }
+.bg-info-light { background-color: var(--color-info-light); }
+
+/* Professional card styles with emerald borders */
+.card-primary {
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border-light);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card-primary:hover {
+  border-color: var(--color-border-primary); /* emerald green border on hover */
+  box-shadow: 0 8px 24px rgba(44, 44, 44, 0.12);
+  transform: translateY(-2px);
+}
+
+.card-elevated {
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border-primary); /* emerald green border */
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44, 44, 44, 0.12);
+  position: relative;
+}
+
+.card-elevated::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+  border-radius: 18px;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Modal styles */
+.modal-overlay {
+  background-color: var(--color-bg-overlay);
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background-color: var(--color-bg-primary);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-xl);
+}

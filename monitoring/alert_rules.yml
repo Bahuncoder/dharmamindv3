@@ -1,0 +1,334 @@
+# 🚨 Prometheus Alert Rules
+# Production monitoring and alerting configuration
+
+groups:
+  # ================================
+  # 🌟 APPLICATION HEALTH ALERTS
+  # ================================
+  - name: dharmamind-application
+    rules:
+      - alert: DharmaMindBackendDown
+        expr: up{job="dharmamind-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "DharmaMind Backend is down"
+          description: "DharmaMind Backend has been down for more than 1 minute"
+          runbook_url: "https://docs.dharmamind.ai/runbooks/backend-down"
+
+      - alert: DharmaMindFrontendDown
+        expr: up{job="dharmamind-frontend"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: frontend
+        annotations:
+          summary: "DharmaMind Frontend is down"
+          description: "DharmaMind Frontend has been down for more than 2 minutes"
+
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="dharmamind-backend"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is {{ $value }}s"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 3m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }}"
+
+      - alert: DatabaseConnectionFailure
+        expr: db_connection_errors_total > 10
+        for: 2m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "Database connection failures"
+          description: "{{ $value }} database connection errors in the last 2 minutes"
+
+  # ================================
+  # 💾 DATABASE ALERTS
+  # ================================
+  - name: database-alerts
+    rules:
+      - alert: PostgreSQLDown
+        expr: up{job="postgres-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "PostgreSQL is down"
+          description: "PostgreSQL database has been down for more than 1 minute"
+
+      - alert: DatabaseHighCPU
+        expr: rate(pg_stat_database_tup_fetched[5m]) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Database high CPU usage"
+          description: "Database CPU usage is high: {{ $value }} queries/sec"
+
+      - alert: DatabaseHighConnections
+        expr: pg_stat_activity_count > 80
+        for: 3m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High database connections"
+          description: "Database has {{ $value }} active connections"
+
+      - alert: DatabaseSlowQueries
+        expr: rate(pg_stat_database_calls_total[5m]) / rate(pg_stat_database_total_time[5m]) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Slow database queries detected"
+          description: "Average query time is {{ $value }}ms"
+
+  # ================================
+  # 🗄️ REDIS ALERTS
+  # ================================
+  - name: redis-alerts
+    rules:
+      - alert: RedisDown
+        expr: up{job="redis-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: "Redis is down"
+          description: "Redis cache has been down for more than 1 minute"
+
+      - alert: RedisHighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 3m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Redis high memory usage"
+          description: "Redis memory usage is {{ $value | humanizePercentage }}"
+
+      - alert: RedisHighConnections
+        expr: redis_connected_clients > 100
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "High Redis connections"
+          description: "Redis has {{ $value }} connected clients"
+
+  # ================================
+  # ☸️ KUBERNETES ALERTS
+  # ================================
+  - name: kubernetes-alerts
+    rules:
+      - alert: PodCrashLooping
+        expr: rate(kube_pod_container_status_restarts_total[15m]) * 60 * 15 > 0
+        for: 5m
+        labels:
+          severity: warning
+          service: kubernetes
+        annotations:
+          summary: "Pod is crash looping"
+          description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is crash looping"
+
+      - alert: PodNotReady
+        expr: kube_pod_status_ready{condition="false"} == 1
+        for: 10m
+        labels:
+          severity: warning
+          service: kubernetes
+        annotations:
+          summary: "Pod not ready"
+          description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is not ready"
+
+      - alert: DeploymentReplicasMismatch
+        expr: kube_deployment_spec_replicas != kube_deployment_status_available_replicas
+        for: 5m
+        labels:
+          severity: warning
+          service: kubernetes
+        annotations:
+          summary: "Deployment replicas mismatch"
+          description: "Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has {{ $labels.spec_replicas }} desired but {{ $labels.available_replicas }} available"
+
+      - alert: NodeNotReady
+        expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+        for: 3m
+        labels:
+          severity: critical
+          service: kubernetes
+        annotations:
+          summary: "Node not ready"
+          description: "Node {{ $labels.node }} is not ready"
+
+      - alert: NodeHighCPU
+        expr: (1 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) by (instance))) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: kubernetes
+        annotations:
+          summary: "Node high CPU usage"
+          description: "Node {{ $labels.instance }} CPU usage is {{ $value }}%"
+
+      - alert: NodeHighMemory
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: kubernetes
+        annotations:
+          summary: "Node high memory usage"
+          description: "Node {{ $labels.instance }} memory usage is {{ $value }}%"
+
+      - alert: NodeDiskSpaceRunningLow
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: kubernetes
+        annotations:
+          summary: "Node disk space running low"
+          description: "Node {{ $labels.instance }} disk usage is {{ $value }}%"
+
+  # ================================
+  # 🌐 LOAD BALANCER ALERTS
+  # ================================
+  - name: load-balancer-alerts
+    rules:
+      - alert: LoadBalancerHighLatency
+        expr: histogram_quantile(0.95, rate(aws_applicationelb_target_response_time_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: load-balancer
+        annotations:
+          summary: "Load balancer high latency"
+          description: "95th percentile latency is {{ $value }}s"
+
+      - alert: LoadBalancerHighErrorRate
+        expr: rate(aws_applicationelb_httpcode_target_5xx_count[5m]) / rate(aws_applicationelb_request_count[5m]) > 0.05
+        for: 3m
+        labels:
+          severity: critical
+          service: load-balancer
+        annotations:
+          summary: "Load balancer high error rate"
+          description: "Error rate is {{ $value | humanizePercentage }}"
+
+      - alert: LoadBalancerUnhealthyTargets
+        expr: aws_applicationelb_unhealthy_host_count > 0
+        for: 2m
+        labels:
+          severity: warning
+          service: load-balancer
+        annotations:
+          summary: "Load balancer has unhealthy targets"
+          description: "{{ $value }} unhealthy targets detected"
+
+  # ================================
+  # 🔐 SECURITY ALERTS
+  # ================================
+  - name: security-alerts
+    rules:
+      - alert: TooManyFailedLogins
+        expr: rate(auth_failed_attempts_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "Too many failed login attempts"
+          description: "{{ $value }} failed login attempts per second"
+
+      - alert: UnauthorizedAPIAccess
+        expr: rate(http_requests_total{status="401"}[5m]) > 5
+        for: 3m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "High unauthorized API access"
+          description: "{{ $value }} unauthorized requests per second"
+
+      - alert: SuspiciousTraffic
+        expr: rate(http_requests_total[1m]) > 1000
+        for: 2m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "Suspicious traffic detected"
+          description: "{{ $value }} requests per second - possible DDoS attack"
+
+  # ================================
+  # 💰 COST OPTIMIZATION ALERTS
+  # ================================
+  - name: cost-alerts
+    rules:
+      - alert: HighResourceUsage
+        expr: avg(rate(container_cpu_usage_seconds_total[5m])) by (pod) > 0.8
+        for: 10m
+        labels:
+          severity: info
+          service: cost-optimization
+        annotations:
+          summary: "High resource usage detected"
+          description: "Pod {{ $labels.pod }} is using {{ $value | humanizePercentage }} CPU"
+
+      - alert: UnderutilizedNodes
+        expr: avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) by (instance) > 0.9
+        for: 30m
+        labels:
+          severity: info
+          service: cost-optimization
+        annotations:
+          summary: "Node is underutilized"
+          description: "Node {{ $labels.instance }} is {{ $value | humanizePercentage }} idle"
+
+  # ================================
+  # 🔄 BACKUP ALERTS
+  # ================================
+  - name: backup-alerts
+    rules:
+      - alert: BackupFailed
+        expr: backup_last_success_timestamp < (time() - 86400)
+        for: 1m
+        labels:
+          severity: critical
+          service: backup
+        annotations:
+          summary: "Backup failed"
+          description: "Backup has not completed successfully in the last 24 hours"
+
+      - alert: BackupOld
+        expr: backup_last_success_timestamp < (time() - 172800)
+        for: 1m
+        labels:
+          severity: warning
+          service: backup
+        annotations:
+          summary: "Backup is old"
+          description: "Last successful backup was {{ $value | humanizeDuration }} ago"

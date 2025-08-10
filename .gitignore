@@ -1,0 +1,392 @@
+# DharmaMind - Git Ignore File
+# ================================
+
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.metadata
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.next/
+out/
+.nuxt/
+dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+dharmamind.db
+database.db
+
+# Cache directories
+.cache/
+cache/
+.temp/
+temp/
+.tmp/
+tmp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*.old
+backups/
+*.tar.gz
+*.zip
+*.rar
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# SSL Certificates (for security)
+*.pem
+*.key
+*.crt
+*.csr
+ssl/
+certificates/
+
+# API Keys and Secrets
+secrets/
+keys/
+*.key
+api_keys.txt
+config/secrets.json
+
+# User uploads and temporary files
+uploads/
+downloads/
+temp_downloads/
+user_data/
+.history/
+
+# History and cache files (prevent deleted files from coming back)
+**/.history/
+**/.next/
+**/cache/
+**/__pycache__/
+*.backup
+*.bak
+*.tmp
+*.cache
+.pytest_cache/
+**/node_modules/.cache/
+
+# Model files (can be large)
+models/*.bin
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.h5
+*.model
+*.pkl
+*.joblib
+
+# Vector database files
+vector_db/
+embeddings/
+*.faiss
+*.index
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# Local development
+local_settings.py
+development.py
+test_data/
+sample_data/
+
+# Monitoring and metrics
+monitoring/data/
+grafana/data/
+prometheus/data/
+elasticsearch/data/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Configuration files with secrets
+config.json
+settings.json
+local_config.py
+
+# Temporary Python files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Package files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Machine Learning
+experiments/
+runs/
+wandb/
+mlruns/
+.mlflow/
+
+# Large data files
+data/raw/
+data/processed/
+data/external/
+*.csv
+*.json
+*.parquet
+*.feather
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Application specific
+exports/
+reports/
+screenshots/
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+test-results/
+
+# Documentation build
+docs/_build/
+docs/build/
+
+# Frontend specific
+.next/
+out/
+build/
+dist/
+.cache/
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ESLint
+.eslintcache
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+.env.production
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local configuration
+local.json
+local.yaml
+local.yml

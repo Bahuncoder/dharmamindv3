@@ -1,0 +1,16 @@
+name: llm_engine
+description: Language model processing and intelligent communication
+category: communication
+expertise_areas:
+  - natural_language_processing
+  - intelligent_communication
+  - language_understanding
+  - response_generation
+  - conversational_ai
+  - text_processing
+  - semantic_understanding
+  - contextual_awareness
+  - dialogue_management
+  - linguistic_intelligence
+priority: high
+activation_threshold: 0.7

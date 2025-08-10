@@ -1,0 +1,16 @@
+name: system_analyzer
+description: System health monitoring and performance analysis
+category: system_monitoring
+expertise_areas:
+  - system_analysis
+  - performance_monitoring
+  - health_assessment
+  - diagnostic_analysis
+  - system_optimization
+  - resource_monitoring
+  - operational_insights
+  - system_intelligence
+  - monitoring_analytics
+  - infrastructure_analysis
+priority: medium
+activation_threshold: 0.6

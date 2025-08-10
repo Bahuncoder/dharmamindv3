@@ -1,0 +1,18 @@
+name: emotional_intelligence
+description: Emotional understanding and compassionate guidance
+category: emotional_support
+expertise_areas:
+  - emotional_intelligence
+  - compassion
+  - empathy
+  - emotional_healing
+  - mental_wellbeing
+  - psychological_support
+  - emotional_balance
+  - stress_management
+  - anxiety_relief
+  - depression_support
+  - grief_counseling
+  - emotional_wisdom
+priority: high
+activation_threshold: 0.8

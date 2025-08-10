@@ -1,0 +1,18 @@
+name: knowledge_base
+description: Vast repository of authentic Hindu and spiritual knowledge
+category: knowledge
+expertise_areas:
+  - vedic_knowledge
+  - upanishads
+  - bhagavad_gita
+  - puranas
+  - sanskrit_texts
+  - spiritual_scriptures
+  - ancient_wisdom
+  - traditional_knowledge
+  - guru_teachings
+  - spiritual_texts
+  - sacred_literature
+  - philosophical_knowledge
+priority: highest
+activation_threshold: 0.9

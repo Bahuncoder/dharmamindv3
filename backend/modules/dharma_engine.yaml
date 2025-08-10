@@ -1,0 +1,18 @@
+name: dharma_engine
+description: Core dharmic wisdom and righteous living guidance
+category: dharmic_principles
+expertise_areas:
+  - dharma
+  - righteousness
+  - duty
+  - life_purpose
+  - moral_conduct
+  - ethical_living
+  - spiritual_duty
+  - social_responsibility
+  - righteous_action
+  - vedic_principles
+  - hindu_philosophy
+  - sanatana_dharma
+priority: highest
+activation_threshold: 0.9

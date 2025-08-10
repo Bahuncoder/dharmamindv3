@@ -1,0 +1,451 @@
+/**
+ * DharmaMind Refined Color System
+ * 
+ * Design Philosophy: Clean, calm, sophisticated
+ * - Emerald green: Used only for borders and subtle accents
+ * - Neutral grays: Primary focus for content and backgrounds
+ * - Minimal saffron: Removed from primary usage, kept only for special highlights
+ */
+
+:root {
+  /* === REFINED BORDER SYSTEM (Emerald green borders only) === */
+  --color-border-emerald: #10b981;    /* emerald-500 - for all decorative borders */
+  --color-border-emerald-light: #34d399; /* emerald-400 - for hover states */
+  --color-border-emerald-dark: #059669;  /* emerald-600 - for focus states */
+  
+  /* === PRIMARY SYSTEM (Sophisticated grays) === */
+  --color-primary: #374151;           /* gray-700 - sophisticated dark gray for buttons */
+  --color-primary-hover: #1f2937;     /* gray-800 - darker on hover */
+  --color-primary-light: #6b7280;     /* gray-500 - lighter variant */
+  --color-primary-dark: #111827;      /* gray-900 - darkest variant */
+  
+  /* === SECONDARY COLORS (Supporting grays) === */
+  --color-secondary: #6b7280;         /* gray-500 - medium gray */
+  --color-secondary-hover: #4b5563;   /* gray-600 */
+  --color-secondary-light: #9ca3af;   /* gray-400 */
+  --color-secondary-dark: #374151;    /* gray-700 */
+  
+  /* === ACCENT (Minimal saffron - special use only) === */
+  --color-accent: #f59e0b;            /* amber-500 - reserved for critical highlights only */
+  --color-accent-hover: #d97706;      /* amber-600 */
+  --color-accent-light: #fbbf24;      /* amber-400 */
+  --color-accent-dark: #b45309;       /* amber-700 */
+  
+  /* === NEUTRAL COLORS === */
+  --color-neutral-50: #fafaf9;        /* stone-50 */
+  --color-neutral-100: #f5f5f4;       /* stone-100 */
+  --color-neutral-200: #e7e5e4;       /* stone-200 */
+  --color-neutral-300: #d6d3d1;       /* stone-300 */
+  --color-neutral-400: #a8a29e;       /* stone-400 */
+  --color-neutral-500: #78716c;       /* stone-500 */
+  --color-neutral-600: #57534e;       /* stone-600 */
+  --color-neutral-700: #44403c;       /* stone-700 */
+  --color-neutral-800: #292524;       /* stone-800 */
+  --color-neutral-900: #1c1917;       /* stone-900 */
+  
+  /* === TEXT COLORS === */
+  --color-text-primary: #1f2937;          /* gray-800 - dark gray for excellent readability */
+  --color-text-secondary: #4b5563;        /* gray-600 - medium gray for supporting text */
+  --color-text-muted: #6b7280;            /* gray-500 - light gray for muted text */
+  --color-text-inverse: #ffffff;          /* white for dark backgrounds */
+  
+  /* === BACKGROUND COLORS === */
+  --color-bg-primary: #ffffff;            /* pure white */
+  --color-bg-secondary: #f9fafb;          /* gray-50 - very light gray */
+  --color-bg-tertiary: #f3f4f6;           /* gray-100 - light gray */
+  --color-bg-dark: var(--color-neutral-800);
+  --color-bg-overlay: rgba(107, 114, 128, 0.75);
+  
+  /* === BORDER COLORS (Emerald green system) === */
+  --color-border-light: #e5e7eb;          /* gray-200 - subtle borders */
+  --color-border-medium: #d1d5db;         /* gray-300 - standard borders */
+  --color-border-dark: #9ca3af;           /* gray-400 - prominent borders */
+  --color-border-primary: var(--color-border-emerald); /* emerald for all decorative borders */
+  
+  /* === STATE COLORS === */
+  --color-success: #10b981;       /* emerald-500 - success states */
+  --color-success-light: #d1fae5; /* emerald-100 */
+  --color-success-dark: #059669;  /* emerald-600 */
+  --color-warning: #f59e0b;       /* amber-500 */
+  --color-warning-light: #fef3c7; /* amber-100 */
+  --color-error: #ef4444;         /* red-500 */
+  --color-error-light: #fee2e2;   /* red-100 */
+  --color-info: #3b82f6;          /* blue-500 */
+  --color-info-light: #dbeafe;    /* blue-100 */
+  
+  /* === ENTERPRISE COLORS === */
+  --color-enterprise: #1f2937;        /* gray-800 for professional look */
+  --color-enterprise-hover: #111827;   /* gray-900 for hover */
+  --color-enterprise-light: #6b7280;  /* gray-500 for secondary text */
+  --color-enterprise-bg: #f9fafb;     /* gray-50 for backgrounds */
+  --color-enterprise-border: #d1d5db; /* gray-300 for borders */
+  
+  /* === CONTACT/SALES COLORS === */
+  --color-contact: #6b7280;           /* gray-500 for outline buttons */
+  --color-contact-hover: #4b5563;     /* gray-600 for outline hover */
+  --color-contact-bg-hover: #f9fafb;  /* gray-50 for outline bg hover */
+  --color-contact-border: #d1d5db;    /* gray-300 for outline border */
+  --color-contact-border-hover: #9ca3af; /* gray-400 for outline border hover */
+  
+  /* === FOCUS & INTERACTION === */
+  --color-focus: var(--color-accent);
+  --color-focus-ring: rgba(249, 115, 22, 0.2); /* orange-500/20 - saffron focus ring */
+  
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* === LEGACY SUPPORT (keeping compatibility) === */
+  --color-primary-saffron: #F2A300;        /* For backward compatibility */
+  --color-primary-saffron-dark: #D4910A;   /* For backward compatibility */
+  --color-btn-primary-bg: var(--color-primary);
+  --color-btn-primary-hover: var(--color-primary-hover);
+  --color-btn-primary-text: var(--color-text-inverse);
+  --color-bg-light: var(--color-bg-secondary);
+  --color-bg-card: var(--color-bg-primary);
+}
+
+/* === CENTRALIZED CARD/BOX STYLES === */
+/* These replace scattered bg-primary-clean, border-emerald, etc. for better control */
+
+/* Feature Box - Dark grey with white text (for highlighted features) */
+.feature-box {
+  background-color: var(--color-primary);      /* #6b7280 - grey background */
+  color: var(--color-text-inverse);            /* #ffffff - white text */
+  border: 2px solid transparent;
+  border-radius: 0.75rem;                      /* rounded-xl */
+  padding: 2rem;                               /* p-8 */
+}
+
+.feature-box-accented {
+  background-color: var(--color-primary);      /* #6b7280 - grey background */
+  color: var(--color-text-inverse);            /* #ffffff - white text */
+  border: 2px solid var(--color-logo-emerald); /* #10b981 - emerald border */
+  border-radius: 0.75rem;                      /* rounded-xl */
+  padding: 2rem;                               /* p-8 */
+}
+
+/* Info Box - Light grey with dark text (for regular content) */
+.info-box {
+  background-color: #f9fafb;                   /* gray-50 - light grey background */
+  color: var(--color-text-primary);            /* #2C2C2C - dark text */
+  border: 1px solid #e5e7eb;                   /* gray-200 - light border */
+  border-radius: 0.75rem;                      /* rounded-xl */
+  padding: 2rem;                               /* p-8 */
+}
+
+/* Card - White background for content cards */
+.content-card {
+  background-color: #ffffff;                   /* white background */
+  color: var(--color-text-primary);            /* #2C2C2C - dark text */
+  border: 1px solid #e5e7eb;                   /* gray-200 - light border */
+  border-radius: 0.75rem;                      /* rounded-xl */
+  padding: 2rem;                               /* p-8 */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+}
+
+.content-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+}
+
+/* === BUTTON STYLES === */
+
+/* Primary buttons - soft grey main actions */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse) !important;        /* White text on gray background */
+  border: 2px solid var(--color-logo-emerald);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-inverse) !important;        /* Ensure white text on hover */
+  border-color: var(--color-success-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Secondary buttons - accent purple for important actions */
+.btn-secondary {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);        /* White text */
+  border: 2px solid var(--color-logo-emerald);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-success-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Outline buttons - clean emerald outline */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text-primary);        /* Dark text */
+  border: 2px solid var(--color-logo-emerald);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);        /* White text on hover */
+  border-color: var(--color-success-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Success buttons - emerald green */
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-success-dark);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-success:hover {
+  background-color: var(--color-success-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Ghost buttons - ultra minimal */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-medium);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-logo-emerald);
+}
+
+/* Google OAuth Button - Special styling */
+.btn-google {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary) !important;
+  border: 2px solid var(--color-border-medium);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-logo-emerald);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.btn-google:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* === UTILITY CLASSES === */
+
+/* Message bubble styles - clean and professional */
+.message-user {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  margin-left: auto;
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 80%;
+}
+
+.message-ai {
+  background-color: var(--color-neutral-100);
+  color: var(--color-text-primary);
+  margin-right: auto;
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 80%;
+}
+
+/* Text colors */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-inverse {
+  color: var(--color-text-inverse);
+}
+
+/* Background colors */
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Border colors */
+.border-light {
+  border-color: var(--color-border-light);
+}
+
+.border-medium {
+  border-color: var(--color-border-medium);
+}
+
+/* State colors */
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+.text-info { color: var(--color-info); }
+
+/* Card styles */
+.card-primary {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-elevated {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Logo spiritual gradient (used only for logo elements) */
+.bg-logo-gradient {
+  background: linear-gradient(to right, var(--color-logo-saffron), var(--color-logo-amber), var(--color-logo-emerald));
+}
+
+/* Professional Logo Style - Emerald Border + Saffron Interior */
+.logo-professional {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  border: 3px solid var(--color-logo-emerald);
+  box-shadow: 
+    0 4px 16px rgba(16, 185, 129, 0.3), 
+    0 2px 8px rgba(249, 115, 22, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo-professional:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 8px 24px rgba(16, 185, 129, 0.4), 
+    0 4px 16px rgba(249, 115, 22, 0.3);
+  border-color: var(--color-success-dark);
+}
+
+/* Override any conflicting styles */
+.bg-primary,
+div.bg-primary,
+button.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.text-primary,
+h1.text-primary,
+h2.text-primary, 
+h3.text-primary,
+h4.text-primary,
+span.text-primary,
+div.text-primary,
+p.text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.border-primary {
+  border-color: var(--color-logo-emerald) !important;
+}
+
+/* Ensure button text and icons are always visible */
+.btn-primary,
+.btn-primary *,
+button.btn-primary,
+button.btn-primary * {
+  color: var(--color-text-inverse) !important;
+}
+
+.btn-google,
+.btn-google *,
+button.btn-google,
+button.btn-google * {
+  color: var(--color-text-primary) !important;
+}
+
+.btn-outline,
+.btn-outline *,
+button.btn-outline,
+button.btn-outline * {
+  color: var(--color-text-primary) !important;
+}
+
+.btn-outline:hover,
+.btn-outline:hover *,
+button.btn-outline:hover,
+button.btn-outline:hover * {
+  color: var(--color-text-inverse) !important;
+}
