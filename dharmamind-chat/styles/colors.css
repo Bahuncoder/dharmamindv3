@@ -13,11 +13,11 @@
   --color-border-emerald-light: #34d399; /* emerald-400 - for hover states */
   --color-border-emerald-dark: #059669;  /* emerald-600 - for focus states */
   
-  /* === PRIMARY SYSTEM (Sophisticated grays) === */
-  --color-primary: #374151;           /* gray-700 - sophisticated dark gray for buttons */
-  --color-primary-hover: #1f2937;     /* gray-800 - darker on hover */
-  --color-primary-light: #6b7280;     /* gray-500 - lighter variant */
-  --color-primary-dark: #111827;      /* gray-900 - darkest variant */
+  /* === PRIMARY SYSTEM (Light gray backgrounds with dark text) === */
+  --color-primary: #f3f4f6;           /* Light gray background for better visibility */
+  --color-primary-hover: #e5e7eb;     /* Slightly darker light gray on hover */
+  --color-primary-light: #f9fafb;     /* Very light gray */
+  --color-primary-dark: #d1d5db;      /* Medium gray */
   
   /* === SECONDARY COLORS (Supporting grays) === */
   --color-secondary: #6b7280;         /* gray-500 - medium gray */
@@ -25,11 +25,11 @@
   --color-secondary-light: #9ca3af;   /* gray-400 */
   --color-secondary-dark: #374151;    /* gray-700 */
   
-  /* === ACCENT (Minimal saffron - special use only) === */
-  --color-accent: #f59e0b;            /* amber-500 - reserved for critical highlights only */
-  --color-accent-hover: #d97706;      /* amber-600 */
-  --color-accent-light: #fbbf24;      /* amber-400 */
-  --color-accent-dark: #b45309;       /* amber-700 */
+  /* === ACCENT (Completely removed - no orange/saffron anywhere) === */
+  --color-accent: #f9fafb;            /* Light gray background instead of dark gray */
+  --color-accent-hover: #f3f4f6;      /* Slightly darker light gray */
+  --color-accent-light: #ffffff;      /* White */
+  --color-accent-dark: #e5e7eb;       /* Medium light gray */
   
   /* === NEUTRAL COLORS === */
   --color-neutral-50: #fafaf9;        /* stone-50 */
@@ -44,10 +44,11 @@
   --color-neutral-900: #1c1917;       /* stone-900 */
   
   /* === TEXT COLORS === */
-  --color-text-primary: #1f2937;          /* gray-800 - dark gray for excellent readability */
-  --color-text-secondary: #4b5563;        /* gray-600 - medium gray for supporting text */
-  --color-text-muted: #6b7280;            /* gray-500 - light gray for muted text */
-  --color-text-inverse: #ffffff;          /* white for dark backgrounds */
+  --color-text-primary: #1f2937;          /* Dark charcoal for excellent readability */
+  --color-text-secondary: #374151;        /* Medium charcoal for supporting text */
+  --color-text-muted: #6b7280;            /* Gray for muted text */
+  --color-text-inverse: #ffffff;          /* White for dark backgrounds */
+  --color-text-button: #10b981;           /* Emerald green for button text */
   
   /* === BACKGROUND COLORS === */
   --color-bg-primary: #ffffff;            /* pure white */
@@ -62,101 +63,76 @@
   --color-border-dark: #9ca3af;           /* gray-400 - prominent borders */
   --color-border-primary: var(--color-border-emerald); /* emerald for all decorative borders */
   
-  /* === STATE COLORS === */
+  /* === STATE COLORS (No orange anywhere) === */
   --color-success: #10b981;       /* emerald-500 - success states */
   --color-success-light: #d1fae5; /* emerald-100 */
   --color-success-dark: #059669;  /* emerald-600 */
-  --color-warning: #f59e0b;       /* amber-500 */
-  --color-warning-light: #fef3c7; /* amber-100 */
+  --color-warning: #6b7280;       /* Gray instead of orange - NO orange/saffron */
+  --color-warning-light: #f3f4f6; /* Light gray instead of orange */
   --color-error: #ef4444;         /* red-500 */
   --color-error-light: #fee2e2;   /* red-100 */
   --color-info: #3b82f6;          /* blue-500 */
   --color-info-light: #dbeafe;    /* blue-100 */
   
-  /* === ENTERPRISE COLORS === */
-  --color-enterprise: #1f2937;        /* gray-800 for professional look */
-  --color-enterprise-hover: #111827;   /* gray-900 for hover */
-  --color-enterprise-light: #6b7280;  /* gray-500 for secondary text */
-  --color-enterprise-bg: #f9fafb;     /* gray-50 for backgrounds */
-  --color-enterprise-border: #d1d5db; /* gray-300 for borders */
-  
-  /* === CONTACT/SALES COLORS === */
-  --color-contact: #6b7280;           /* gray-500 for outline buttons */
-  --color-contact-hover: #4b5563;     /* gray-600 for outline hover */
-  --color-contact-bg-hover: #f9fafb;  /* gray-50 for outline bg hover */
-  --color-contact-border: #d1d5db;    /* gray-300 for outline border */
-  --color-contact-border-hover: #9ca3af; /* gray-400 for outline border hover */
+  /* === REFINED BUTTON SYSTEM === */
+  --color-btn-primary-bg: var(--color-primary);       /* Light gray backgrounds */
+  --color-btn-primary-hover: var(--color-primary-hover);
+  --color-btn-primary-text: var(--color-text-button); /* Dark charcoal text */
+  --color-btn-primary-border: var(--color-border-emerald); /* Emerald borders only */
   
   /* === FOCUS & INTERACTION === */
-  --color-focus: var(--color-accent);
-  --color-focus-ring: rgba(249, 115, 22, 0.2); /* orange-500/20 - saffron focus ring */
+  --color-focus: var(--color-border-emerald);         /* emerald focus rings */
+  --color-focus-ring: rgba(16, 185, 129, 0.2);        /* emerald-500/20 */
   
   /* === SHADOWS === */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-emerald: 0 4px 16px rgba(16, 185, 129, 0.2); /* subtle emerald glow */
 
-  /* === LEGACY SUPPORT (keeping compatibility) === */
-  --color-primary-saffron: #F2A300;        /* For backward compatibility */
-  --color-primary-saffron-dark: #D4910A;   /* For backward compatibility */
-  --color-btn-primary-bg: var(--color-primary);
-  --color-btn-primary-hover: var(--color-primary-hover);
-  --color-btn-primary-text: var(--color-text-inverse);
-  --color-bg-light: var(--color-bg-secondary);
-  --color-bg-card: var(--color-bg-primary);
+  /* === LEGACY COMPATIBILITY === */
+  --color-logo-emerald: var(--color-border-emerald);  /* for existing logo references */
 }
 
-/* === CENTRALIZED CARD/BOX STYLES === */
-/* These replace scattered bg-primary-clean, border-emerald, etc. for better control */
+/* === REFINED CARD/CONTAINER STYLES === */
 
-/* Feature Box - Dark grey with white text (for highlighted features) */
+/* Feature Box - sophisticated dark gray with emerald border */
 .feature-box {
-  background-color: var(--color-primary);      /* #6b7280 - grey background */
-  color: var(--color-text-inverse);            /* #ffffff - white text */
-  border: 2px solid transparent;
-  border-radius: 0.75rem;                      /* rounded-xl */
-  padding: 2rem;                               /* p-8 */
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-border-emerald);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
 }
 
-.feature-box-accented {
-  background-color: var(--color-primary);      /* #6b7280 - grey background */
-  color: var(--color-text-inverse);            /* #ffffff - white text */
-  border: 2px solid var(--color-logo-emerald); /* #10b981 - emerald border */
-  border-radius: 0.75rem;                      /* rounded-xl */
-  padding: 2rem;                               /* p-8 */
+.feature-box:hover {
+  box-shadow: var(--shadow-emerald);
 }
 
-/* Info Box - Light grey with dark text (for regular content) */
-.info-box {
-  background-color: #f9fafb;                   /* gray-50 - light grey background */
-  color: var(--color-text-primary);            /* #2C2C2C - dark text */
-  border: 1px solid #e5e7eb;                   /* gray-200 - light border */
-  border-radius: 0.75rem;                      /* rounded-xl */
-  padding: 2rem;                               /* p-8 */
-}
-
-/* Card - White background for content cards */
+/* Content Card - clean white with subtle borders */
 .content-card {
-  background-color: #ffffff;                   /* white background */
-  color: var(--color-text-primary);            /* #2C2C2C - dark text */
-  border: 1px solid #e5e7eb;                   /* gray-200 - light border */
-  border-radius: 0.75rem;                      /* rounded-xl */
-  padding: 2rem;                               /* p-8 */
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .content-card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  border-color: var(--color-border-emerald);
+  box-shadow: var(--shadow-md);
 }
 
-/* === BUTTON STYLES === */
+/* === REFINED BUTTON STYLES === */
 
-/* Primary buttons - soft grey main actions */
+/* Primary buttons - light gray background with dark charcoal text */
 .btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse) !important;        /* White text on gray background */
-  border: 2px solid var(--color-logo-emerald);
+  background-color: var(--color-primary);      /* Light gray background */
+  color: var(--color-text-button) !important;  /* Dark charcoal text */
+  border: 2px solid var(--color-border-emerald);
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 600;
@@ -168,11 +144,11 @@
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-hover);
-  color: var(--color-text-inverse) !important;        /* Ensure white text on hover */
-  border-color: var(--color-success-dark);
+  background-color: var(--color-primary-hover); /* Darker light gray on hover */
+  color: var(--color-text-button) !important;   /* Keep dark charcoal text */
+  border-color: var(--color-border-emerald-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  box-shadow: var(--shadow-emerald);
 }
 
 .btn-primary:focus {
@@ -180,11 +156,11 @@
   box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 
-/* Secondary buttons - accent purple for important actions */
+/* Secondary buttons - white background with emerald text */
 .btn-secondary {
-  background-color: var(--color-accent);
-  color: var(--color-text-inverse);        /* White text */
-  border: 2px solid var(--color-logo-emerald);
+  background-color: var(--color-bg-primary);     /* White background */
+  color: var(--color-border-emerald);              /* Emerald text */
+  border: 2px solid var(--color-border-emerald);
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 600;
@@ -196,40 +172,18 @@
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-success-dark);
+  background-color: var(--color-bg-secondary); /* Light gray background */
+  color: var(--color-border-emerald-dark);                /* Darker emerald text */
+  border-color: var(--color-border-emerald-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  box-shadow: var(--shadow-emerald);
 }
 
-/* Outline buttons - clean emerald outline */
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-text-primary);        /* Dark text */
-  border: 2px solid var(--color-logo-emerald);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-outline:hover {
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse);        /* White text on hover */
-  border-color: var(--color-success-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-}
-
-/* Success buttons - emerald green */
+/* Success buttons - light gray background with emerald text (NO dark charcoal) */
 .btn-success {
-  background-color: var(--color-success);
-  color: var(--color-text-inverse);
-  border: 2px solid var(--color-success-dark);
+  background-color: var(--color-bg-primary);       /* White background */
+  color: var(--color-border-emerald);              /* Emerald text */
+  border: 2px solid var(--color-border-emerald);  /* Emerald border only */
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 600;
@@ -241,19 +195,44 @@
 }
 
 .btn-success:hover {
-  background-color: var(--color-success-dark);
+  background-color: var(--color-bg-secondary);  /* Light gray background */
+  color: var(--color-border-emerald-dark);               /* Darker emerald text */
+  border-color: var(--color-border-emerald-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+  box-shadow: var(--shadow-emerald);
 }
 
-/* Ghost buttons - ultra minimal */
-.btn-ghost {
+/* Outline buttons - transparent with emerald border and emerald text */
+.btn-outline {
   background-color: transparent;
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border-medium);
+  color: var(--color-border-emerald);            /* Emerald text */
+  border: 2px solid var(--color-border-emerald);  /* Emerald border only */
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bg-secondary);       /* Light gray background on hover */
+  color: var(--color-border-emerald-dark);              /* Darker emerald text on hover */
+  border-color: var(--color-border-emerald-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-emerald);
+}
+
+/* Ghost buttons - minimal with emerald border and emerald text */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-border-emerald);            /* Emerald text */
+  border: 1px solid var(--color-border-emerald); /* Emerald border */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
   display: inline-flex;
@@ -262,15 +241,16 @@
 }
 
 .btn-ghost:hover {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-logo-emerald);
+  background-color: var(--color-bg-secondary);  /* Light gray background on hover */
+  border-color: var(--color-border-emerald-dark);    /* Darker emerald border on hover */
+  color: var(--color-border-emerald-dark);             /* Darker emerald text */
 }
 
-/* Google OAuth Button - Special styling */
-.btn-google {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary) !important;
-  border: 2px solid var(--color-border-medium);
+/* Warning/Alert buttons - light gray (NO orange/saffron at all) */
+.btn-warning {
+  background-color: var(--color-primary);       /* Light gray background, NO orange */
+  color: var(--color-text-button);              /* Dark charcoal text */
+  border: 2px solid var(--color-border-medium); /* Gray border, NO orange */
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 600;
@@ -279,81 +259,32 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-google:hover {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-primary) !important;
-  border-color: var(--color-logo-emerald);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-}
-
-.btn-google:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+.btn-warning:hover {
+  background-color: var(--color-primary-hover); /* Darker light gray, NO orange */
+  color: var(--color-text-button);              /* Keep dark charcoal text */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* === UTILITY CLASSES === */
 
-/* Message bubble styles - clean and professional */
-.message-user {
-  background-color: var(--color-accent);
-  color: var(--color-text-inverse);
-  margin-left: auto;
-  border-radius: 1rem;
-  padding: 1rem;
-  max-width: 80%;
-}
-
-.message-ai {
-  background-color: var(--color-neutral-100);
-  color: var(--color-text-primary);
-  margin-right: auto;
-  border-radius: 1rem;
-  padding: 1rem;
-  max-width: 80%;
-}
-
 /* Text colors */
-.text-primary {
-  color: var(--color-text-primary);
-}
-
-.text-secondary {
-  color: var(--color-text-secondary);
-}
-
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-.text-inverse {
-  color: var(--color-text-inverse);
-}
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-inverse { color: var(--color-text-inverse); }
 
 /* Background colors */
-.bg-primary {
-  background-color: var(--color-bg-primary);
-}
-
-.bg-secondary {
-  background-color: var(--color-bg-secondary);
-}
-
-.bg-tertiary {
-  background-color: var(--color-bg-tertiary);
-}
+.bg-primary { background-color: var(--color-bg-primary); }
+.bg-secondary { background-color: var(--color-bg-secondary); }
+.bg-tertiary { background-color: var(--color-bg-tertiary); }
 
 /* Border colors */
-.border-light {
-  border-color: var(--color-border-light);
-}
-
-.border-medium {
-  border-color: var(--color-border-medium);
-}
+.border-light { border-color: var(--color-border-light); }
+.border-medium { border-color: var(--color-border-medium); }
+.border-emerald { border-color: var(--color-border-emerald); }
 
 /* State colors */
 .text-success { color: var(--color-success); }
@@ -361,91 +292,47 @@
 .text-error { color: var(--color-error); }
 .text-info { color: var(--color-info); }
 
-/* Card styles */
-.card-primary {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-light);
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.card-elevated {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-light);
-  border-radius: 0.75rem;
-  box-shadow: var(--shadow-lg);
-}
-
-/* Logo spiritual gradient (used only for logo elements) */
-.bg-logo-gradient {
-  background: linear-gradient(to right, var(--color-logo-saffron), var(--color-logo-amber), var(--color-logo-emerald));
-}
-
-/* Professional Logo Style - Emerald Border + Saffron Interior */
+/* Professional Logo Style - light gray with emerald border only */
 .logo-professional {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
-  border: 3px solid var(--color-logo-emerald);
-  box-shadow: 
-    0 4px 16px rgba(16, 185, 129, 0.3), 
-    0 2px 8px rgba(249, 115, 22, 0.2);
+  background: var(--color-primary);             /* Light gray background inside */
+  color: var(--color-text-button);              /* Dark charcoal text inside */
+  border: 3px solid var(--color-border-emerald); /* Emerald border only */
+  box-shadow: var(--shadow-emerald);
   transition: all 0.3s ease;
 }
 
 .logo-professional:hover {
   transform: scale(1.05);
-  box-shadow: 
-    0 8px 24px rgba(16, 185, 129, 0.4), 
-    0 4px 16px rgba(249, 115, 22, 0.3);
-  border-color: var(--color-success-dark);
+  background: var(--color-primary-hover);       /* Darker light gray on hover */
+  color: var(--color-text-button);              /* Keep dark charcoal text */
+  box-shadow: var(--shadow-lg), var(--shadow-emerald);
 }
 
-/* Override any conflicting styles */
-.bg-primary,
-div.bg-primary,
-button.bg-primary {
-  background-color: var(--color-primary) !important;
-}
-
-.text-primary,
-h1.text-primary,
-h2.text-primary, 
-h3.text-primary,
-h4.text-primary,
-span.text-primary,
-div.text-primary,
-p.text-primary {
-  color: var(--color-text-primary) !important;
-}
-
-.border-primary {
-  border-color: var(--color-logo-emerald) !important;
-}
-
-/* Ensure button text and icons are always visible */
+/* Override any conflicting styles - use emerald text */
 .btn-primary,
 .btn-primary *,
 button.btn-primary,
 button.btn-primary * {
-  color: var(--color-text-inverse) !important;
+  color: var(--color-border-emerald) !important;   /* Emerald text */
 }
 
-.btn-google,
-.btn-google *,
-button.btn-google,
-button.btn-google * {
-  color: var(--color-text-primary) !important;
+.btn-secondary,
+.btn-secondary *,
+button.btn-secondary,
+button.btn-secondary * {
+  color: var(--color-border-emerald) !important;   /* Emerald text */
 }
 
 .btn-outline,
 .btn-outline *,
 button.btn-outline,
 button.btn-outline * {
-  color: var(--color-text-primary) !important;
+  color: var(--color-border-emerald) !important;  /* Emerald text */
 }
 
 .btn-outline:hover,
 .btn-outline:hover *,
 button.btn-outline:hover,
 button.btn-outline:hover * {
-  color: var(--color-text-inverse) !important;
+  color: var(--color-border-emerald-dark) !important;   /* Darker emerald text on hover */
 }

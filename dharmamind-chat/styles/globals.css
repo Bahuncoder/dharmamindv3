@@ -4,8 +4,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Import refined color system (emerald borders, sophisticated grays) */
-@import './colors-refined.css';
+/* Import color system (emerald borders, sophisticated grays) */
+@import './colors.css';
 
 /* Import mobile optimization styles */
 @import './mobile.css';
@@ -15,6 +15,12 @@
 
 /* Import enhanced chat UI styles */
 @import './chat-ui-polish.css';
+
+/* Import enhanced chat interface styles */
+@import './chat-interface-enhanced.css';
+
+/* Import advanced spiritual design styles */
+@import './advanced-spiritual-design.css';
 
 @layer base {
   html {

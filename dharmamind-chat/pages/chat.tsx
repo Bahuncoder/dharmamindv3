@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
 import { useAuth } from '../contexts/AuthContext';
-import SidebarQuotes from '../components/SidebarQuotes';
+import ProtectedRoute from '../components/ProtectedRoute';
+import ChatInterface from '../components/ChatInterface';
 import Logo from '../components/Logo';
-import FeedbackButton from '../components/FeedbackButton';
-import Button from '../components/Button';
+import SidebarQuotes from '../components/SidebarQuotes';
 import UserProfileMenu from '../components/UserProfileMenu';
-import CentralizedSubscriptionModal from '../components/CentralizedSubscriptionModal';
 import PersonalizedSuggestions from '../components/PersonalizedSuggestions';
+import FeedbackButton from '../components/FeedbackButton';
+import CentralizedSubscriptionModal from '../components/CentralizedSubscriptionModal';
 
 interface Message {
   id: string;
@@ -447,7 +448,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
       <div className="h-screen flex" style={{backgroundColor: 'var(--color-bg-white)'}}>
         
         {/* Sidebar */}
-        <div className="hidden md:flex md:w-64 md:flex-col">
+        <div className="hidden md:flex md:w-64 md:flex-col" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
           <div className="flex flex-col h-full" 
                style={{borderRight: '1px solid var(--color-border-light)'}}>
             
@@ -464,7 +465,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                 {router.query.demo === 'true' && (
                   <div className="flex items-center space-x-1 px-2 py-1 rounded-md flex-1" 
                        style={{
-                         backgroundColor: 'var(--color-accent)',
+                         backgroundColor: 'var(--color-border-emerald)',
                          color: 'white'
                        }}>
                     <span className="text-xs">🚀</span>
@@ -475,7 +476,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
             </div>
 
             {/* Scrollable Content Area */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
               {/* New Chat Button */}
               <div className="p-3">
                 <button
@@ -533,7 +534,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         }}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="truncate flex-1">
+                          <span className="truncate flex-1" style={{ color: currentChatId === chat.id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)' }}>
                             {chat.title || 'Untitled Chat'}
                           </span>
                           <button
@@ -541,14 +542,21 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                               e.stopPropagation();
                               deleteChatHistory(chat.id);
                             }}
-                            className="opacity-0 group-hover:opacity-100 ml-2 text-gray-400 hover:text-red-500 transition-all"
+                            className="opacity-0 group-hover:opacity-100 ml-2 transition-all"
+                            style={{ color: 'var(--color-text-muted)' }}
+                            onMouseEnter={(e) => {
+                              (e.target as HTMLElement).style.color = 'var(--color-error)';
+                            }}
+                            onMouseLeave={(e) => {
+                              (e.target as HTMLElement).style.color = 'var(--color-text-muted)';
+                            }}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                           </button>
                         </div>
-                        <div className="text-xs text-gray-400 mt-1">
+                        <div className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
                           {new Date(chat.lastUpdate).toLocaleDateString()}
                         </div>
                       </button>
@@ -563,7 +571,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
             </div>
 
             {/* User Profile - Sticky to Bottom */}
-            <div className="border-t border-gray-200 bg-gray-50">
+            <div className="border-t" style={{ borderColor: 'var(--color-border-light)', backgroundColor: 'var(--color-bg-secondary)' }}>
               <div className="p-4">
                 
                 {/* Demo User Info - Non-clickable for demo users */}
@@ -636,7 +644,19 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                   <div className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => setShowUserDropdown(!showUserDropdown)}
-                      className="w-full flex items-center space-x-3 p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all duration-200 group"
+                      className="w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 group"
+                      style={{
+                        backgroundColor: 'transparent',
+                        borderColor: 'var(--color-border-light)'
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.target as HTMLElement).style.backgroundColor = 'var(--color-bg-white)';
+                        (e.target as HTMLElement).style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.target as HTMLElement).style.backgroundColor = 'transparent';
+                        (e.target as HTMLElement).style.boxShadow = 'none';
+                      }}
                     >
                       <div className="relative">
                         <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-emerald-600 rounded-full flex items-center justify-center shadow-sm">
@@ -651,11 +671,11 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         )}
                       </div>
                       <div className="flex-1 min-w-0 text-left">
-                        <p className="text-sm font-semibold text-gray-900 truncate group-hover:text-gray-800">
+                        <p className="text-sm font-semibold truncate group-hover:text-gray-800" style={{ color: 'var(--color-text-primary)' }}>
                           {user?.name || 'User'}
                         </p>
                         <div className="flex items-center space-x-2">
-                          <p className="text-xs text-gray-500 capitalize">
+                          <p className="text-xs capitalize" style={{ color: 'var(--color-text-secondary)' }}>
                             {user?.isGuest ? 'Guest User' : (user?.plan || 'Basic Plan')}
                           </p>
                           {session?.provider === 'google' && (
@@ -665,7 +685,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                           )}
                         </div>
                       </div>
-                      <div className="text-gray-400 group-hover:text-gray-600 transition-colors">
+                      <div className="transition-colors" style={{ color: 'var(--color-text-secondary)' }}>
                         <svg 
                           className={`w-4 h-4 transition-transform duration-200 ${showUserDropdown ? 'rotate-180' : ''}`} 
                           fill="none" 
@@ -738,7 +758,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
             {/* Demo Banner */}
             {router.query.demo === 'true' && (
               <div className="px-4 py-3" 
@@ -800,11 +820,11 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               </div>
             )}
             
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto" style={{ backgroundColor: 'var(--color-bg-primary)', minHeight: '100%' }}>
               
               {/* Welcome Screen */}
               {messages.length === 1 && (
-                <div className="px-6 py-12 text-center">
+                <div className="px-6 py-12 text-center" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
                   <div className="flex justify-center mb-6">
                     <Logo size="lg" showText={false} />
                   </div>
@@ -828,11 +848,12 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className="px-6 py-6"
+                  className="px-6 py-6 border-b"
                   style={{
                     backgroundColor: message.sender === 'user' 
                       ? 'var(--color-bg-white)' 
-                      : 'var(--color-bg-secondary)'
+                      : 'var(--color-bg-secondary)',
+                    borderColor: 'var(--color-border-light)'
                   }}
                 >
                   <div className="flex space-x-4">
@@ -866,7 +887,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
 
               {/* Loading Indicator */}
               {isLoading && (
-                <div className="px-6 py-6 bg-gray-50">
+                <div className="px-6 py-6" style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
                   <div className="flex space-x-4">
                     <Logo size="avatar" showText={false} />
                     <div className="flex-1">

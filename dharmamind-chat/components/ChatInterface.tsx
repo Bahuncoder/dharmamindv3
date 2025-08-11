@@ -111,6 +111,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [showInsightsModal, setShowInsightsModal] = useState(false);
   const [currentTags, setCurrentTags] = useState<string[]>([]);
   const [messageReactions, setMessageReactions] = useState<Record<string, any>>({});
+  const [showBreathingGuide, setShowBreathingGuide] = useState(false);
+  const [meditationMode, setMeditationMode] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -408,7 +410,36 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''}`}>
+      {/* Advanced Spiritual Background */}
+      <div className="floating-orbs-container">
+        <div className="floating-orb large" style={{ top: '10%', left: '20%', animationDelay: '0s' }}></div>
+        <div className="floating-orb medium" style={{ top: '60%', right: '15%', animationDelay: '2s' }}></div>
+        <div className="floating-orb small" style={{ top: '30%', left: '70%', animationDelay: '4s' }}></div>
+        <div className="floating-orb medium" style={{ bottom: '20%', left: '10%', animationDelay: '6s' }}></div>
+        <div className="floating-orb small" style={{ top: '80%', right: '40%', animationDelay: '8s' }}></div>
+      </div>
+      
+      {/* Sacred Geometry Background */}
+      <div className="sacred-geometry-bg"></div>
+      
+      {/* Lotus Patterns */}
+      <div className="lotus-pattern" style={{ top: '15%', right: '5%', animationDelay: '0s' }}></div>
+      <div className="lotus-pattern" style={{ bottom: '25%', left: '3%', animationDelay: '10s' }}></div>
+      
+      {/* Breathing Guide */}
+      {showBreathingGuide && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          className="breathing-guide"
+          onClick={() => setShowBreathingGuide(false)}
+          title="Click to hide breathing guide"
+        >
+          <div className="breathing-circle"></div>
+        </motion.div>
+      )}
       {/* Usage Alert Banner */}
       {isFreePlan() && shouldShowUpgradePrompt('messages') && (
         <MiniUpgradeBanner 
@@ -417,159 +448,226 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       )}
       
       {/* Header */}
-      <div className="flex-shrink-0 bg-white border-b border-gray-200 p-3 sm:p-4">
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <Logo size="sm" showText={false} />
-          <div className="flex-1 min-w-0">
-            <h1 className="text-lg sm:text-xl font-semibold text-gray-900 truncate">DharmaMind AI</h1>
-            <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Your spiritual wisdom companion</p>
-          </div>
-          
-          {/* Current Tags Display */}
-          {currentTags.length > 0 && (
-            <div className="hidden md:flex items-center space-x-1">
-              {currentTags.slice(0, 2).map(tagId => {
-                const tag = availableTags.find(t => t.id === tagId);
-                return tag ? (
-                  <span
-                    key={tagId}
-                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: tag.color + '20', color: tag.color }}
-                  >
-                    <span className="mr-1">{tag.icon}</span>
-                    {tag.name}
-                  </span>
-                ) : null;
-              })}
-              {currentTags.length > 2 && (
-                <span className="text-xs text-gray-500">
-                  +{currentTags.length - 2}
-                </span>
-              )}
+      <div className="flex-shrink-0 p-4 sm:p-6 chat-header-enhanced animate-slide-in-down relative z-10">
+        <div className="organic-chat-container">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="interactive-element spiritual-glow">
+              <Logo size="sm" showText={false} />
             </div>
-          )}
-          
-          {/* Theme Toggle & Insights */}
-          <div className="flex items-center space-x-2">
-            <ThemeToggle size="sm" />
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl typography-heading text-gray-900 truncate emerald-gradient-text">
+                DharmaMind AI
+              </h1>
+              <p className="text-sm sm:text-base typography-caption text-gray-600 hidden sm:block mt-1">
+                Your spiritual wisdom companion
+              </p>
+            </div>
             
-            <button
-              onClick={() => setShowInsightsModal(true)}
-              className="flex items-center space-x-1 px-2 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-              title="View conversation insights"
-            >
-              <ChartBarIcon className="w-4 h-4 text-gray-600" />
-              <span className="hidden sm:inline text-xs font-medium text-gray-600">
-                Insights
-              </span>
-            </button>
+            {/* Current Tags Display */}
+            {currentTags.length > 0 && (
+              <div className="hidden md:flex items-center space-x-1">
+                {currentTags.slice(0, 2).map(tagId => {
+                  const tag = availableTags.find(t => t.id === tagId);
+                  return tag ? (
+                    <span
+                      key={tagId}
+                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
+                      style={{ backgroundColor: tag.color + '20', color: tag.color }}
+                    >
+                      <span className="mr-1">{tag.icon}</span>
+                      {tag.name}
+                    </span>
+                  ) : null;
+                })}
+                {currentTags.length > 2 && (
+                  <span className="text-xs text-gray-500">
+                    +{currentTags.length - 2}
+                  </span>
+                )}
+              </div>
+            )}
+            
+            {/* Theme Toggle & Insights */}
+            <div className="flex items-center space-x-3">
+              <div className="interactive-element">
+                <ThemeToggle size="sm" />
+              </div>
+              
+              {/* Meditation Mode Toggle */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setMeditationMode(!meditationMode)}
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  meditationMode 
+                    ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' 
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
+                }`}
+                title="Toggle Meditation Mode"
+              >
+                <SparklesIcon className="h-4 w-4" />
+              </motion.button>
+
+              {/* Breathing Guide Toggle */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setShowBreathingGuide(!showBreathingGuide)}
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  showBreathingGuide 
+                    ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' 
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
+                }`}
+                title="Toggle Breathing Guide"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </motion.button>
+              
+              <button
+                onClick={() => setShowInsightsModal(true)}
+                className="btn-premium btn-premium-ghost flex items-center space-x-2"
+                title="View conversation insights"
+              >
+                <ChartBarIcon className="w-4 h-4" />
+                <span className="hidden sm:inline typography-caption">
+                  Insights
+                </span>
+              </button>
+            </div>
+            
+            {/* Usage Progress in Header - Desktop Only */}
+            {isFreePlan() && (
+              <div className="hidden lg:block w-32">
+                <UsageProgress 
+                  feature="messages" 
+                  showDetails={false}
+                  className="mr-4"
+                />
+              </div>
+            )}
+            
+            {/* User Profile Dropdown */}
+            {isAuthenticated && user && (
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setShowUserDropdown(!showUserDropdown)}
+                  className="btn-premium btn-premium-secondary flex items-center space-x-2 animate-pulse-emerald"
+                  style={{ 
+                    borderColor: currentTheme.colors.primary + '20',
+                    backgroundColor: showUserDropdown ? currentTheme.colors.primary + '10' : 'transparent'
+                  }}
+                >
+                  <UserCircleIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <div className="hidden md:block text-left">
+                    <p className="typography-caption text-sm">{user.first_name || 'User'}</p>
+                    <p className="typography-caption text-xs opacity-75 capitalize">
+                      {user.subscription_plan} Plan
+                    </p>
+                  </div>
+                  <ChevronDownIcon 
+                    className={`h-4 w-4 transition-transform duration-300 ${showUserDropdown ? 'rotate-180' : ''}`} 
+                  />
+                  {/* Mobile upgrade indicator */}
+                  {isFreePlan() && (
+                    <span className="md:hidden w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse-emerald"></span>
+                  )}
+                </button>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {showUserDropdown && (
+                    <UserProfileMenu
+                      onUpgrade={() => setShowSubscriptionModal(true)}
+                      onClose={() => setShowUserDropdown(false)}
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
+            
+            {error && (
+              <div className="bg-red-100 text-red-800 px-2 sm:px-3 py-1 rounded-full text-xs">
+                <span className="hidden sm:inline">Connection issue</span>
+                <span className="sm:hidden">!</span>
+              </div>
+            )}
           </div>
           
-          {/* Usage Progress in Header - Desktop Only */}
+          {/* Mobile Usage Progress */}
           {isFreePlan() && (
-            <div className="hidden lg:block w-32">
-              <UsageProgress 
-                feature="messages" 
-                showDetails={false}
-                className="mr-4"
-              />
-            </div>
-          )}
-          
-          {/* User Profile Dropdown */}
-          {isAuthenticated && user && (
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setShowUserDropdown(!showUserDropdown)}
-                className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-                style={{ 
-                  borderColor: currentTheme.colors.primary + '20',
-                  backgroundColor: showUserDropdown ? currentTheme.colors.primary + '10' : 'transparent'
-                }}
-              >
-                <UserCircleIcon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
-                <div className="hidden md:block text-left">
-                  <p className="text-sm font-medium text-gray-900">{user.first_name || 'User'}</p>
-                  <p className="text-xs text-gray-500 capitalize">
-                    {user.subscription_plan} Plan
-                  </p>
-                </div>
-                <ChevronDownIcon 
-                  className={`h-3 w-3 sm:h-4 sm:w-4 text-gray-500 transition-transform ${showUserDropdown ? 'rotate-180' : ''}`} 
-                />
-                {/* Mobile upgrade indicator */}
-                {isFreePlan() && (
-                  <span className="md:hidden w-2 h-2 bg-emerald-400 rounded-full"></span>
-                )}
-              </button>
-
-              {/* Dropdown Menu */}
-              <AnimatePresence>
-                {showUserDropdown && (
-                  <UserProfileMenu
-                    onUpgrade={() => setShowSubscriptionModal(true)}
-                    onClose={() => setShowUserDropdown(false)}
-                  />
-                )}
-              </AnimatePresence>
-            </div>
-          )}
-          
-          {error && (
-            <div className="bg-red-100 text-red-800 px-2 sm:px-3 py-1 rounded-full text-xs">
-              <span className="hidden sm:inline">Connection issue</span>
-              <span className="sm:hidden">!</span>
+            <div className="lg:hidden mt-3">
+              <UsageProgress feature="messages" />
             </div>
           )}
         </div>
-        
-        {/* Mobile Usage Progress */}
-        {isFreePlan() && (
-          <div className="lg:hidden mt-3">
-            <UsageProgress feature="messages" />
-          </div>
-        )}
       </div>
 
       {/* Messages Container */}
       <div 
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 scroll-smooth"
+        className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 sm:space-y-8 scroll-smooth chat-messages-enhanced chat-messages-container organic-chat-container"
+        style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#10b981 transparent'
+        }}
       >
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {messages.map((message, index) => (
-            <EnhancedMessageBubble
+            <motion.div
               key={message.id}
-              message={message}
-              isHovered={hoveredMessageId === message.id}
-              onHover={(hovered) => setHoveredMessageId(hovered ? message.id : null)}
-              onCopy={copyMessage}
-              onRegenerate={message.role === 'assistant' ? regenerateMessage : undefined}
-              onToggleFavorite={toggleFavorite}
-              onToggleSaved={toggleSaved}
-              onSpeak={speakMessage}
-              onShare={shareMessage}
-              onReact={(messageId: string, reaction: string) => handleReaction(messageId, reaction)}
-              isPlaying={isPlaying === message.id}
-            />
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ 
+                duration: 0.4, 
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 500,
+                damping: 30
+              }}
+              className="animate-fade-in-scale"
+            >
+              <div className={`organic-bubble ${message.role === 'user' ? 'user' : 'ai'} fade-in-up`}>
+                <EnhancedMessageBubble
+                  key={message.id}
+                  message={message}
+                  isHovered={hoveredMessageId === message.id}
+                  onHover={(hovered) => setHoveredMessageId(hovered ? message.id : null)}
+                  onCopy={copyMessage}
+                  onRegenerate={message.role === 'assistant' ? regenerateMessage : undefined}
+                  onToggleFavorite={toggleFavorite}
+                  onToggleSaved={toggleSaved}
+                  onSpeak={speakMessage}
+                  onShare={shareMessage}
+                  onReact={(messageId: string, reaction: string) => handleReaction(messageId, reaction)}
+                  isPlaying={isPlaying === message.id}
+                />
+              </div>
+            </motion.div>
           ))}
         </AnimatePresence>
 
         {/* Loading indicator */}
         {isLoading && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
             className="flex justify-start"
           >
-            <div className="bg-white text-gray-800 border border-gray-200 rounded-2xl px-4 py-3 shadow-sm">
-              <div className="flex items-center space-x-2">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            <div className="organic-bubble ai">
+              <div className="flex items-center space-x-4">
+                <div className="loading-dots-enhanced">
+                  <div className="loading-dot-enhanced"></div>
+                  <div className="loading-dot-enhanced"></div>
+                  <div className="loading-dot-enhanced"></div>
                 </div>
-                <span className="text-sm text-gray-500">DharmaMind is contemplating...</span>
+                <span className="typography-caption text-sm text-gray-600">
+                  DharmaMind is contemplating...
+                </span>
               </div>
             </div>
           </motion.div>
@@ -584,27 +682,38 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
       {/* Usage Alert */}
       {usageAlert && (
-        <div className="p-4">
-          <UpgradePrompt
-            feature="messages"
-            trigger="limit"
-            onUpgrade={() => setShowSubscriptionModal(true)}
-            onDismiss={() => setUsageAlert(null)}
-          />
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="p-4 sm:p-6"
+        >
+          <div className="glass-morphism rounded-xl p-4">
+            <UpgradePrompt
+              feature="messages"
+              trigger="limit"
+              onUpgrade={() => setShowSubscriptionModal(true)}
+              onDismiss={() => setUsageAlert(null)}
+            />
+          </div>
+        </motion.div>
       )}
 
       {/* Input Area */}
-      <div className="flex-shrink-0 bg-white border-t border-gray-200 p-3 sm:p-4">
-        <EnhancedMessageInput
-          value={inputMessage}
-          onChange={setInputMessage}
-          onSend={handleSendMessage}
-          isLoading={isLoading}
-          showVoiceInput={true}
-          placeholder="Ask me anything about spiritual wisdom, dharma, or life guidance..."
-          disabled={isLoading}
-        />
+      <div className="flex-shrink-0 p-6 sm:p-8 chat-input-enhanced animate-slide-in-up relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="mystical-input-container">
+            <EnhancedMessageInput
+              value={inputMessage}
+              onChange={setInputMessage}
+              onSend={handleSendMessage}
+              isLoading={isLoading}
+              showVoiceInput={true}
+              placeholder="Ask me anything about spiritual wisdom, dharma, or life guidance..."
+              disabled={isLoading}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Subscription Modal */}

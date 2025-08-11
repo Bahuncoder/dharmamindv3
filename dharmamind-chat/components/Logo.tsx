@@ -67,9 +67,9 @@ const Logo: React.FC<LogoProps> = ({
     <>
       <div className={`${currentSize.container} rounded-${size === 'avatar' ? 'full' : 'lg'} flex items-center justify-center overflow-hidden relative`}
            style={{
-             background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-hover))',
+             background: 'var(--color-bg-primary)',
              border: '3px solid var(--color-logo-emerald)',
-             boxShadow: '0 4px 16px rgba(16, 185, 129, 0.3), 0 2px 8px rgba(249, 115, 22, 0.2)'
+             boxShadow: '0 4px 16px rgba(16, 185, 129, 0.2)'
            }}>
         <Image
           src="/logo.jpeg"
@@ -79,20 +79,12 @@ const Logo: React.FC<LogoProps> = ({
           className="object-cover rounded-inherit relative z-10"
           priority
         />
-        {/* Professional overlay gradient */}
-        <div 
-          className="absolute inset-0 rounded-inherit"
-          style={{
-            background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1))',
-            zIndex: 5
-          }}
-        />
       </div>
       {showText && (
         <div className="ml-3">
           <span className={`font-semibold ${currentSize.titleText}`}
                 style={{color: 'var(--color-text-primary)'}}>
-            DharmaMind-AI with Soul
+            DharmaMind
           </span>
           {isAuthenticated && user && (
             <div className={`${size === 'xs' || size === 'sm' ? 'text-xs' : 'text-sm'} font-medium`}

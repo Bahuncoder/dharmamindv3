@@ -32,14 +32,14 @@ interface FeedbackButtonProps {
 // Complex styling configurations for different variants
 const variantConfigurations = {
   floating: {
-    base: 'fixed bg-gradient-to-r shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 backdrop-blur-sm border-2 border-emerald-500',
+    base: 'fixed bg-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 backdrop-blur-sm border-2 border-emerald-500',
     colors: {
-      primary: 'from-gray-500 via-gray-600 to-gray-500 text-white hover:from-gray-600 hover:via-gray-700 hover:to-gray-600',
-      secondary: 'from-gray-500 via-gray-600 to-gray-500 text-white hover:from-gray-600 hover:via-gray-700 hover:to-gray-600',
-      spiritual: 'from-gray-500 via-gray-600 to-gray-500 text-white hover:from-gray-600 hover:via-gray-700 hover:to-gray-600',
-      success: 'from-gray-500 via-gray-600 to-gray-500 text-white hover:from-gray-600 hover:via-gray-700 hover:to-gray-600',
-      warning: 'from-gray-500 via-gray-600 to-gray-500 text-white hover:from-gray-600 hover:via-gray-700 hover:to-gray-600',
-      error: 'from-gray-500 via-gray-600 to-gray-500 text-white hover:from-gray-600 hover:via-gray-700 hover:to-gray-600'
+      primary: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
+      secondary: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
+      spiritual: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
+      success: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
+      warning: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
+      error: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700'
     }
   },
   inline: {
