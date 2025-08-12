@@ -212,7 +212,10 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
       <SpiritualBackground />
       
       {/* Breathing Guide */}
-      <BreathingGuide isActive={isBreathingActive} />
+      <BreathingGuide 
+        isVisible={isBreathingActive} 
+        onClose={() => setIsBreathingActive(false)}
+      />
       
       {/* Header with Aurora Effect */}
       <motion.header 
@@ -494,7 +497,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                   exit={{ opacity: 0, scale: 0.8 }}
                   className="flex-1"
                 >
-                  <VoiceWaveVisualization isListening={isListening} />
+                  <VoiceWaveVisualization isActive={isListening} />
                 </motion.div>
               )}
 

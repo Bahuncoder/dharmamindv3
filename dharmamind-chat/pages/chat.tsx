@@ -11,6 +11,11 @@ import UserProfileMenu from '../components/UserProfileMenu';
 import PersonalizedSuggestions from '../components/PersonalizedSuggestions';
 import FeedbackButton from '../components/FeedbackButton';
 import CentralizedSubscriptionModal from '../components/CentralizedSubscriptionModal';
+import EnhancedMessageBubble from '../components/EnhancedMessageBubble';
+import EnhancedMessageBubbleV2 from '../components/EnhancedMessageBubbleV2';
+import EnhancedChatInput from '../components/EnhancedChatInput';
+import EnhancedMessageInput from '../components/EnhancedMessageInput';
+import FloatingActionMenu from '../components/FloatingActionMenu';
 
 interface Message {
   id: string;
@@ -19,6 +24,9 @@ interface Message {
   timestamp: Date;
   wisdom_score?: number;
   dharmic_alignment?: number;
+  isFavorite?: boolean;
+  isSaved?: boolean;
+  reactions?: { [key: string]: number };
 }
 
 interface ChatHistory {
@@ -199,59 +207,6 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      sender: 'user',
-      content: inputValue.trim(),
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: userMessage.content,
-          user: user
-        })
-      });
-
-      if (!response.ok) throw new Error('Failed to get response');
-
-      const data = await response.json();
-      
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        content: data.response,
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
-      console.error('Error:', error);
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        content: 'I apologize, but I encountered an issue. Please try again.',
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleLogout = () => {
     // For demo users, go to landing page
     if (router.query.demo === 'true') {
@@ -427,6 +382,149 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
     }
   };
 
+  // Handle message reactions
+  const handleReact = (messageId: string, reaction: string) => {
+    setMessages(prev => prev.map(message => {
+      if (message.id === messageId) {
+        const reactions = { ...message.reactions };
+        reactions[reaction] = (reactions[reaction] || 0) + 1;
+        return { ...message, reactions };
+      }
+      return message;
+    }));
+  };
+
+  // Handle toggle favorite
+  const handleToggleFavorite = (messageId: string) => {
+    setMessages(prev => prev.map(message => {
+      if (message.id === messageId) {
+        return { ...message, isFavorite: !message.isFavorite };
+      }
+      return message;
+    }));
+  };
+
+  // Handle toggle saved
+  const handleToggleSaved = (messageId: string) => {
+    setMessages(prev => prev.map(message => {
+      if (message.id === messageId) {
+        return { ...message, isSaved: !message.isSaved };
+      }
+      return message;
+    }));
+  };
+
+  // Handle message regeneration
+  const handleRegenerate = async (messageId: string) => {
+    const messageIndex = messages.findIndex(msg => msg.id === messageId);
+    if (messageIndex === -1 || messageIndex === 0) return;
+
+    const previousUserMessage = messages[messageIndex - 1];
+    if (!previousUserMessage || previousUserMessage.sender !== 'user') return;
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: previousUserMessage.content,
+          user: user,
+          regenerate: true
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to regenerate response');
+
+      const data = await response.json();
+      
+      const newBotMessage: Message = {
+        ...messages[messageIndex],
+        content: data.response,
+        timestamp: new Date(),
+        dharmic_alignment: data.dharmic_alignment || 0.8,
+        reactions: {}
+      };
+
+      setMessages(prev => {
+        const newMessages = [...prev];
+        newMessages[messageIndex] = newBotMessage;
+        return newMessages;
+      });
+    } catch (error) {
+      console.error('Error regenerating:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle message sending
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputValue.trim() || isLoading) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      sender: 'user',
+      content: inputValue.trim(),
+      timestamp: new Date(),
+      isFavorite: false,
+      isSaved: false,
+      reactions: {}
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputValue('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage.content,
+          user: user
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get response');
+
+      const data = await response.json();
+      
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        content: data.response,
+        timestamp: new Date(),
+        dharmic_alignment: data.dharmic_alignment || 0.8,
+        isFavorite: false,
+        isSaved: false,
+        reactions: {}
+      };
+
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        content: 'I apologize, but I encountered an issue. Please try again.',
+        timestamp: new Date(),
+        isFavorite: false,
+        isSaved: false,
+        reactions: {}
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center" 
@@ -445,29 +543,18 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="h-screen flex" style={{backgroundColor: 'var(--color-bg-white)'}}>
+      <div className="h-screen flex bg-gradient-to-br from-gray-50 to-emerald-50/30">
         
-        {/* Sidebar */}
-        <div className="hidden md:flex md:w-64 md:flex-col" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
-          <div className="flex flex-col h-full" 
-               style={{borderRight: '1px solid var(--color-border-light)'}}>
+        {/* Fixed Sidebar */}
+        <div className="hidden md:flex md:w-64 md:flex-col bg-white/80 backdrop-blur-xl border-r border-gray-200/50 relative z-10">
+          <div className="flex flex-col h-full">
             
-            {/* Header */}
-            <div className="flex items-center h-16 px-4" 
-                 style={{
-                   borderBottom: '1px solid var(--color-border-light)',
-                   backgroundColor: 'var(--color-bg-secondary)'
-                 }}>
+            {/* Header - Fixed */}
+            <div className="flex-shrink-0 flex items-center h-16 px-4 border-b border-gray-200/50 bg-white/60 backdrop-blur-sm">
               <div className="flex items-center space-x-3 w-full">
-                <Logo 
-                  size="sm"
-                />
+                <Logo size="sm" />
                 {router.query.demo === 'true' && (
-                  <div className="flex items-center space-x-1 px-2 py-1 rounded-md flex-1" 
-                       style={{
-                         backgroundColor: 'var(--color-border-emerald)',
-                         color: 'white'
-                       }}>
+                  <div className="flex items-center space-x-1 px-2 py-1 rounded-lg flex-1 border border-emerald-500 text-emerald-600 bg-transparent shadow-sm">
                     <span className="text-xs">🚀</span>
                     <span className="text-xs font-medium">Demo Mode</span>
                   </div>
@@ -475,8 +562,8 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               </div>
             </div>
 
-            {/* Scrollable Content Area */}
-            <div className="flex-1 overflow-y-auto" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+            {/* Scrollable Content Area - Only this part scrolls */}
+            <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
               {/* New Chat Button */}
               <div className="p-3">
                 <button
@@ -488,7 +575,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                       timestamp: new Date()
                     }]);
                   }}
-                  className="btn-secondary w-full flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                  className="btn-enhanced w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 border border-emerald-500 text-emerald-600 bg-transparent hover:border-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 shadow-sm hover:shadow-md"
                 >
                   <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -498,43 +585,29 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               </div>
 
               {/* Content Sections */}
-              <div className="px-3 pb-4">
+              <div className="px-3 pb-4 space-y-6">
               
               {/* Chat History Section (only for logged-in users) */}
               {user && !router.query.demo && chatHistory.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider mb-3 px-2"
-                      style={{color: 'var(--color-text-muted)'}}>
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider mb-3 px-2 text-gray-500">
                     Recent Chats
                   </h3>
-                  <div className="space-y-1 max-h-48 overflow-y-auto">
-                    {chatHistory.slice(0, 8).map((chat, index) => (
+                  <div className="space-y-2 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                    {chatHistory.slice(0, 10).map((chat, index) => (
                       <button
                         key={chat.id || index}
                         onClick={() => loadChat(chat.id)}
-                        className={`w-full text-left px-3 py-2 text-sm rounded-md transition-colors group ${
+                        className={`chat-history-item w-full text-left px-3 py-3 text-sm rounded-xl transition-all duration-200 group relative ${
                           currentChatId === chat.id 
-                            ? 'border' 
-                            : ''
+                            ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 shadow-sm' 
+                            : 'hover:bg-gray-50 hover:shadow-sm'
                         }`}
-                        style={{
-                          backgroundColor: currentChatId === chat.id ? 'var(--color-primary-gradient-light)' : 'transparent',
-                          color: currentChatId === chat.id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                          borderColor: currentChatId === chat.id ? 'var(--color-border-light)' : 'transparent'
-                        }}
-                        onMouseEnter={(e) => {
-                          if (currentChatId !== chat.id) {
-                            (e.target as HTMLElement).style.backgroundColor = 'var(--color-bg-secondary)';
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (currentChatId !== chat.id) {
-                            (e.target as HTMLElement).style.backgroundColor = 'transparent';
-                          }
-                        }}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="truncate flex-1" style={{ color: currentChatId === chat.id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)' }}>
+                          <span className={`truncate flex-1 font-medium ${
+                            currentChatId === chat.id ? 'text-emerald-700' : 'text-gray-700'
+                          }`}>
                             {chat.title || 'Untitled Chat'}
                           </span>
                           <button
@@ -542,21 +615,14 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                               e.stopPropagation();
                               deleteChatHistory(chat.id);
                             }}
-                            className="opacity-0 group-hover:opacity-100 ml-2 transition-all"
-                            style={{ color: 'var(--color-text-muted)' }}
-                            onMouseEnter={(e) => {
-                              (e.target as HTMLElement).style.color = 'var(--color-error)';
-                            }}
-                            onMouseLeave={(e) => {
-                              (e.target as HTMLElement).style.color = 'var(--color-text-muted)';
-                            }}
+                            className="opacity-0 group-hover:opacity-100 ml-2 p-1 rounded-md transition-all duration-200 hover:bg-red-50 hover:text-red-600 text-gray-400"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                           </button>
                         </div>
-                        <div className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
+                        <div className="text-xs mt-1 text-gray-500">
                           {new Date(chat.lastUpdate).toLocaleDateString()}
                         </div>
                       </button>
@@ -565,13 +631,15 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                 </div>
               )}
               
-              {/* Spiritual Quotes */}
-              <SidebarQuotes />
+              {/* Enhanced Spiritual Quotes Section */}
+              <div className="spiritual-quotes-container bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-4 border border-purple-100">
+                <SidebarQuotes />
+              </div>
             </div>
             </div>
 
-            {/* User Profile - Sticky to Bottom */}
-            <div className="border-t" style={{ borderColor: 'var(--color-border-light)', backgroundColor: 'var(--color-bg-secondary)' }}>
+            {/* User Profile - Fixed to Bottom */}
+            <div className="flex-shrink-0 border-t border-gray-200/50 bg-white/60 backdrop-blur-sm">
               <div className="p-4">
                 
                 {/* Demo User Info - Non-clickable for demo users */}
@@ -716,25 +784,15 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
           </div>
         </div>
 
-        {/* Main Chat Area */}
-        <div className="flex-1 flex flex-col">
+        {/* Main Chat Area - Full Height */}
+        <div className="flex-1 flex flex-col h-full overflow-hidden">
           
           {/* Mobile Header */}
-          <div className="md:hidden flex items-center justify-between h-16 px-4" 
-               style={{
-                 borderBottom: '1px solid var(--color-border-light)',
-                 backgroundColor: 'var(--color-bg-secondary)'
-               }}>
+          <div className="md:hidden flex items-center justify-between h-16 px-4 bg-white/80 backdrop-blur-sm border-b border-gray-200/50 flex-shrink-0">
             <div className="flex items-center space-x-3">
-              <Logo 
-                size="sm"
-              />
+              <Logo size="sm" />
               {router.query.demo === 'true' && (
-                <div className="flex items-center space-x-1 px-2 py-1 rounded-md" 
-                     style={{
-                       backgroundColor: 'var(--color-accent)',
-                       color: 'white'
-                     }}>
+                <div className="flex items-center space-x-1 px-2 py-1 rounded-md border border-emerald-500 text-emerald-600 bg-transparent">
                   <span className="text-xs">🚀</span>
                   <span className="text-xs font-medium">Demo</span>
                 </div>
@@ -742,14 +800,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
             </div>
             <button
               onClick={handleLogout}
-              className="transition-colors"
-              style={{color: 'var(--color-text-muted)'}}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.color = 'var(--color-text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.color = 'var(--color-text-muted)';
-              }}
+              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -757,22 +808,17 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
             </button>
           </div>
 
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
+          {/* Enhanced Chat Interface - Full Height */}
+          <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
             {/* Demo Banner */}
             {router.query.demo === 'true' && (
-              <div className="px-4 py-3" 
-                   style={{
-                     backgroundColor: 'var(--color-success)',
-                     color: 'white',
-                     borderBottom: '1px solid var(--color-border-light)'
-                   }}>
+              <div className="flex-shrink-0 px-4 py-3 border border-emerald-500 text-emerald-600 bg-emerald-50 border-b">
                 <div className="flex items-center justify-between max-w-6xl mx-auto">
                   <div className="flex items-center space-x-2">
                     <span className="text-lg">🚀</span>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-                      <span className="font-medium text-white">Demo Mode</span>
-                      <span className="text-sm text-white opacity-90">- Experience DharmaMind's AI wisdom</span>
+                      <span className="font-medium text-emerald-700">Demo Mode</span>
+                      <span className="text-sm text-emerald-600">- Experience DharmaMind's AI wisdom</span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -781,18 +827,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         const currentUrl = router.asPath;
                         router.push(`/auth?mode=login&returnUrl=${encodeURIComponent(currentUrl)}`);
                       }}
-                      className="btn-ghost px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                      style={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                        color: 'var(--color-text-inverse)',
-                        border: 'none'
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.target as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.target as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                      }}
+                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 border border-emerald-500 text-emerald-600 bg-transparent hover:bg-emerald-50"
                     >
                       Sign In
                     </button>
@@ -801,17 +836,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         const currentUrl = router.asPath;
                         router.push(`/auth?mode=signup&returnUrl=${encodeURIComponent(currentUrl)}`);
                       }}
-                      className="px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                      style={{
-                        backgroundColor: 'var(--color-bg-white)',
-                        color: 'var(--color-primary-saffron)'
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.target as HTMLElement).style.backgroundColor = 'var(--color-bg-secondary)';
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.target as HTMLElement).style.backgroundColor = 'var(--color-bg-white)';
-                      }}
+                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 border border-emerald-500 bg-white text-emerald-600 hover:bg-emerald-50"
                     >
                       Sign Up Free
                     </button>
@@ -819,181 +844,183 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                 </div>
               </div>
             )}
-            
-            <div className="max-w-3xl mx-auto" style={{ backgroundColor: 'var(--color-bg-primary)', minHeight: '100%' }}>
-              
-              {/* Welcome Screen */}
-              {messages.length === 1 && (
-                <div className="px-6 py-12 text-center" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
-                  <div className="flex justify-center mb-6">
-                    <Logo size="lg" showText={false} />
-                  </div>
-                  <h2 className="text-2xl font-semibold mb-2" style={{color: 'var(--color-text-primary)'}}>
-                    What part of your journey would you like to explore right now?
-                  </h2>
-                  <p className="mb-8" style={{color: 'var(--color-text-secondary)'}}>
-                    DharmaMind is here to help you grow — with calm, clarity, and purpose.
-                  </p>
-                  
-                  {/* Personalized Suggestions */}
-                  <PersonalizedSuggestions 
-                    onSuggestionClick={(suggestion) => setInputValue(suggestion)}
-                    messages={messages}
-                    className="max-w-4xl mx-auto"
-                  />
-                </div>
-              )}
 
-              {/* Messages */}
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className="px-6 py-6 border-b"
-                  style={{
-                    backgroundColor: message.sender === 'user' 
-                      ? 'var(--color-bg-white)' 
-                      : 'var(--color-bg-secondary)',
-                    borderColor: 'var(--color-border-light)'
-                  }}
-                >
-                  <div className="flex space-x-4">
-                    <div className="flex-shrink-0">
-                      {message.sender === 'user' ? (
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center"
-                             style={{
-                               background: 'linear-gradient(45deg, var(--color-primary-saffron), var(--color-primary-emerald))'
-                             }}>
-                          <span className="text-sm font-medium" style={{color: 'var(--color-text-inverse)'}}>
-                            {user?.name?.charAt(0)?.toUpperCase() || 'U'}
-                          </span>
-                        </div>
-                      ) : (
-                        <Logo size="avatar" showText={false} />
-                      )}
+            {/* Enhanced Messages Area with Modern Background */}
+            <div className="flex-1 overflow-y-auto relative enhanced-messages-container">
+              {/* Modern Background */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="floating-orb floating-orb-1"></div>
+                <div className="floating-orb floating-orb-2"></div>
+                <div className="floating-orb floating-orb-3"></div>
+                <div className="sacred-geometry-bg"></div>
+              </div>
+
+              <div className="relative z-10 max-w-4xl mx-auto py-6">
+                {/* Welcome Screen */}
+                {messages.length === 1 && (
+                  <div className="px-6 py-12 text-center">
+                    <div className="flex justify-center mb-6">
+                      <div className="relative">
+                        <Logo size="lg" showText={false} />
+                        <div className="absolute inset-0 animate-pulse bg-emerald-200/30 rounded-full blur-xl"></div>
+                      </div>
                     </div>
+                    <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                      What part of your journey would you like to explore right now?
+                    </h2>
+                    <p className="text-lg text-gray-600 mb-8">
+                      DharmaMind is here to help you grow — with calm, clarity, and purpose.
+                    </p>
                     
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm whitespace-pre-wrap leading-relaxed" 
-                           style={{color: 'var(--color-text-primary)'}}>
-                        {message.content}
-                      </div>
-                      <div className="mt-2 text-xs text-gray-500">
-                        {message.timestamp.toLocaleTimeString()}
-                      </div>
+                    {/* Enhanced Personalized Suggestions */}
+                    <div className="glass-morphism rounded-2xl p-6 mb-8">
+                      <PersonalizedSuggestions 
+                        onSuggestionClick={(suggestion) => setInputValue(suggestion)}
+                        messages={messages}
+                        className="max-w-4xl mx-auto"
+                      />
                     </div>
                   </div>
-                </div>
-              ))}
+                )}
 
-              {/* Loading Indicator */}
-              {isLoading && (
-                <div className="px-6 py-6" style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
-                  <div className="flex space-x-4">
-                    <Logo size="avatar" showText={false} />
-                    <div className="flex-1">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-75"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-150"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div ref={messagesEndRef} />
-            </div>
-          </div>
-
-          {/* Input Area */}
-          <div className="border-t bg-white" style={{ borderColor: 'var(--color-border-light)' }}>
-            <div className="max-w-3xl mx-auto px-6 py-4">
-              {/* Personalized Suggestions for ongoing conversations */}
-              {messages.length > 1 && (
-                <PersonalizedSuggestions 
-                  onSuggestionClick={(suggestion) => setInputValue(suggestion)}
-                  messages={messages}
-                  className="mb-4"
-                />
-              )}
-              
-              <form onSubmit={handleSubmit} className="flex space-x-4">
-                <div className="flex-1 relative">
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Message DharmaMind..."
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none text-sm transition-all duration-300"
-                    style={{
-                      border: '2px solid var(--color-border-light)',
-                      backgroundColor: 'var(--color-bg-primary)',
-                      color: 'var(--color-text-primary)'
+                {/* Enhanced Messages */}
+                {messages.slice(1).map((message, index) => (
+                  <EnhancedMessageBubbleV2
+                    key={message.id}
+                    message={{
+                      id: message.id,
+                      content: message.content,
+                      role: message.sender === 'user' ? 'user' : 'assistant',
+                      timestamp: message.timestamp,
+                      confidence: message.sender === 'ai' ? 0.9 : undefined,
+                      dharmic_alignment: message.dharmic_alignment || 0.8,
+                      modules_used: message.sender === 'ai' ? ['Vedic Wisdom', 'Hindu Philosophy'] : undefined,
+                      isFavorite: message.isFavorite || false,
+                      isSaved: message.isSaved || false
                     }}
-                    onFocus={(e) => {
-                      (e.target as HTMLInputElement).style.borderColor = 'var(--color-logo-emerald)';
-                      (e.target as HTMLInputElement).style.boxShadow = '0 0 0 2px rgba(16, 185, 129, 0.1)';
+                    onCopy={(content: string) => navigator.clipboard.writeText(content)}
+                    onRegenerate={message.sender === 'ai' ? handleRegenerate : undefined}
+                    onToggleFavorite={handleToggleFavorite}
+                    onToggleSaved={handleToggleSaved}
+                    onSpeak={(content: string, messageId: string) => {
+                      if ('speechSynthesis' in window) {
+                        const utterance = new SpeechSynthesisUtterance(content);
+                        speechSynthesis.speak(utterance);
+                      }
                     }}
-                    onBlur={(e) => {
-                      (e.target as HTMLInputElement).style.borderColor = 'var(--color-border-light)';
-                      (e.target as HTMLInputElement).style.boxShadow = 'none';
+                    onShare={(content: string) => {
+                      if (navigator.share) {
+                        navigator.share({ text: content });
+                      }
                     }}
-                    disabled={isLoading}
+                    onReact={handleReact}
                   />
-                </div>
-                <button
-                  type="submit"
-                  disabled={!inputValue.trim() || isLoading}
-                  className="px-4 py-3 min-w-[48px] rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: 'var(--color-success)',
-                    borderColor: 'var(--color-success)',
-                    color: 'white',
-                    border: '2px solid var(--color-success)'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!e.currentTarget.disabled) {
-                      (e.target as HTMLElement).style.backgroundColor = 'var(--color-success-dark)';
-                      (e.target as HTMLElement).style.borderColor = 'var(--color-success-dark)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!e.currentTarget.disabled) {
-                      (e.target as HTMLElement).style.backgroundColor = 'var(--color-success)';
-                      (e.target as HTMLElement).style.borderColor = 'var(--color-success)';
-                    }
-                  }}
-                >
-                  {isLoading ? (
-                    <div 
-                      className="w-5 h-5 border-2 rounded-full animate-spin"
-                      style={{
-                        borderColor: 'white',
-                        borderTopColor: 'transparent'
-                      }}
-                    ></div>
-                  ) : (
-                    <svg 
-                      className="w-5 h-5" 
-                      fill="white" 
-                      stroke="white" 
-                      viewBox="0 0 24 24"
-                      style={{ 
-                        color: 'white',
-                        stroke: 'white',
-                        fill: 'white'
-                      }}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  )}
-                </button>
-              </form>
-              
-              <p className="mt-2 text-xs text-center" style={{ color: 'var(--color-text-muted)' }}>
-                DharmaMind can make mistakes. Consider checking important information.
-              </p>
+                ))}
+
+                {/* Enhanced Loading Indicator */}
+                {isLoading && (
+                  <div className="px-6 py-4">
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+                          <Logo size="avatar" showText={false} />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="glass-morphism rounded-2xl p-4">
+                          <div className="flex items-center space-x-3">
+                            <div className="typing-indicator">
+                              <div className="typing-dot"></div>
+                              <div className="typing-dot"></div>
+                              <div className="typing-dot"></div>
+                            </div>
+                            <span className="text-sm text-emerald-600 font-medium">
+                              Contemplating your question...
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
             </div>
+
+            {/* Enhanced Input Area - Fixed at Bottom */}
+            <div className="flex-shrink-0 border-t border-gray-200/30 enhanced-input-area">
+              <div className="max-w-4xl mx-auto px-6 py-4">
+                {/* Enhanced Personalized Suggestions for ongoing conversations */}
+                {messages.length > 1 && (
+                  <div className="mb-4">
+                    <PersonalizedSuggestions 
+                      onSuggestionClick={(suggestion) => setInputValue(suggestion)}
+                      messages={messages}
+                      className="opacity-90"
+                    />
+                  </div>
+                )}
+                
+                <EnhancedChatInput
+                  value={inputValue}
+                  onChange={setInputValue}
+                  onSend={() => {
+                    const event = new Event('submit') as any;
+                    event.preventDefault = () => {};
+                    handleSubmit(event);
+                  }}
+                  isLoading={isLoading}
+                  placeholder="Message DharmaMind..."
+                  showVoiceInput={true}
+                  maxLength={2000}
+                  showAttachments={router.query.demo !== 'true'}
+                  showEmoji={true}
+                />
+                
+                {/* Disclaimer hidden per user request */}
+                <div style={{display: 'none'}}>
+                  <p className="mt-3 text-xs text-center text-gray-500">
+                    <span className="inline-flex items-center space-x-1">
+                      <span>🙏</span>
+                      <span>DharmaMind can make mistakes. Consider checking important information.</span>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Action Menu */}
+            <FloatingActionMenu
+              onNewChat={() => {
+                // Reset chat
+                setMessages([{
+                  id: 'welcome',
+                  sender: 'ai',
+                  content: 'Welcome to DharmaMind! How can I guide you on your spiritual journey today?',
+                  timestamp: new Date()
+                }]);
+                setInputValue('');
+              }}
+              onOpenNotes={() => {
+                console.log('Notes opened');
+              }}
+              onSearchHistory={() => {
+                console.log('Search opened');
+              }}
+              onOpenSettings={() => {
+                router.push('/settings');
+              }}
+              onOpenJournal={() => {
+                console.log('Journal opened');
+              }}
+              onOpenInsights={() => {
+                console.log('Insights opened');
+              }}
+              onOpenCommunity={() => {
+                console.log('Community opened');
+              }}
+            />
           </div>
         </div>
       </div>

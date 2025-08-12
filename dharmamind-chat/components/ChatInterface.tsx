@@ -32,6 +32,9 @@ import ConversationInsights from './ConversationInsights';
 import EnhancedMessageInput from './EnhancedMessageInput';
 import EnhancedMessageBubble from './EnhancedMessageBubble';
 import ScrollToBottom from './ScrollToBottom';
+import FloatingActionMenu from './FloatingActionMenu';
+import TypingIndicator from './TypingIndicator';
+import MessageSearch from './MessageSearch';
 
 interface Message {
   id: string;
@@ -113,6 +116,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [messageReactions, setMessageReactions] = useState<Record<string, any>>({});
   const [showBreathingGuide, setShowBreathingGuide] = useState(false);
   const [meditationMode, setMeditationMode] = useState(false);
+  const [showMessageSearch, setShowMessageSearch] = useState(false);
+  const [showFloatingMenu, setShowFloatingMenu] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -409,6 +414,54 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     });
   };
 
+  // Floating Action Menu Handlers
+  const handleNewChat = () => {
+    setMessages([{
+      id: Date.now().toString(),
+      content: '🕉️ Namaste! I am DharmaMind, your companion on the path of wisdom. How may I serve you today?',
+      role: 'assistant',
+      timestamp: new Date(),
+      confidence: 1.0,
+      dharmic_alignment: 1.0,
+      modules_used: ['wisdom']
+    }]);
+    setConversationId(undefined);
+  };
+
+  const handleOpenNotes = () => {
+    // Implement notes functionality
+    console.log('Opening notes...');
+  };
+
+  const handleSearchHistory = () => {
+    setShowMessageSearch(true);
+  };
+
+  const handleOpenSettings = () => {
+    // Implement settings functionality
+    console.log('Opening settings...');
+  };
+
+  const handleOpenJournal = () => {
+    // Implement journal functionality
+    console.log('Opening journal...');
+  };
+
+  const handleOpenInsights = () => {
+    setShowInsightsModal(true);
+  };
+
+  const handleOpenCommunity = () => {
+    // Implement community functionality
+    console.log('Opening community...');
+  };
+
+  const handleSelectMessage = (result: any) => {
+    // Navigate to the specific conversation/message
+    console.log('Selected message:', result);
+    setShowMessageSearch(false);
+  };
+
   return (
     <div className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''}`}>
       {/* Advanced Spiritual Background */}
@@ -634,7 +687,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   key={message.id}
                   message={message}
                   isHovered={hoveredMessageId === message.id}
-                  onHover={(hovered) => setHoveredMessageId(hovered ? message.id : null)}
+                  onHover={(hovered: boolean) => setHoveredMessageId(hovered ? message.id : null)}
                   onCopy={copyMessage}
                   onRegenerate={message.role === 'assistant' ? regenerateMessage : undefined}
                   onToggleFavorite={toggleFavorite}
@@ -649,29 +702,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           ))}
         </AnimatePresence>
 
-        {/* Loading indicator */}
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            className="flex justify-start"
-          >
-            <div className="organic-bubble ai">
-              <div className="flex items-center space-x-4">
-                <div className="loading-dots-enhanced">
-                  <div className="loading-dot-enhanced"></div>
-                  <div className="loading-dot-enhanced"></div>
-                  <div className="loading-dot-enhanced"></div>
-                </div>
-                <span className="typography-caption text-sm text-gray-600">
-                  DharmaMind is contemplating...
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        )}
+        {/* Enhanced Typing indicator */}
+        <TypingIndicator isVisible={isLoading} />
 
         <div ref={messagesEndRef} />
       </div>
@@ -732,6 +764,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       <ConversationInsights
         isOpen={showInsightsModal}
         onClose={() => setShowInsightsModal(false)}
+      />
+
+      {/* Floating Action Menu */}
+      {showFloatingMenu && (
+        <FloatingActionMenu
+          onNewChat={handleNewChat}
+          onOpenNotes={handleOpenNotes}
+          onSearchHistory={handleSearchHistory}
+          onOpenSettings={handleOpenSettings}
+          onOpenJournal={handleOpenJournal}
+          onOpenInsights={handleOpenInsights}
+          onOpenCommunity={handleOpenCommunity}
+        />
+      )}
+
+      {/* Message Search Modal */}
+      <MessageSearch
+        isOpen={showMessageSearch}
+        onClose={() => setShowMessageSearch(false)}
+        onSelectMessage={handleSelectMessage}
       />
     </div>
   );

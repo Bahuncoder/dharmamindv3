@@ -22,6 +22,15 @@
 /* Import advanced spiritual design styles */
 @import './advanced-spiritual-design.css';
 
+/* Import enhanced chat UI styles */
+@import './enhanced-chat-ui.css';
+
+/* Import enhanced input styles */
+@import './enhanced-input.css';
+
+/* Import enhanced message bubble styles */
+@import './enhanced-message-bubble.css';
+
 @layer base {
   html {
     font-family: Inter, system-ui, sans-serif;

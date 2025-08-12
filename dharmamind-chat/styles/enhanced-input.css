@@ -1,0 +1,487 @@
+/* Enhanced Chat Input Styles */
+/* =========================== */
+
+/* Override Tailwind classes for textarea */
+.enhanced-textarea,
+textarea.enhanced-textarea {
+  width: 100%;
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  resize: none;
+  outline: none !important;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-primary) !important;  /* Force use of centralized primary text */
+  min-height: 24px;
+  max-height: 120px;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-light) transparent;  /* using centralized border color */
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.enhanced-textarea::placeholder {
+  color: var(--color-text-tertiary) !important;  /* Force use of centralized tertiary text */
+  font-weight: 400;
+}
+
+/* Additional focus and state overrides for textarea */
+.enhanced-textarea:focus,
+.enhanced-textarea:active,
+.enhanced-textarea:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any browser default styling */
+.enhanced-textarea::-webkit-input-placeholder {
+  background: transparent !important;
+}
+
+.enhanced-textarea::-moz-placeholder {
+  background: transparent !important;
+}
+
+.enhanced-textarea:-ms-input-placeholder {
+  background: transparent !important;
+}
+
+.enhanced-input-container {
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--color-border-emerald);  /* emerald green border */
+  padding: 20px 24px;
+  position: relative;
+}
+
+.enhanced-input-wrapper {
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  border: 2px solid var(--color-border-emerald);  /* emerald green border */
+  border-radius: 24px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-input-wrapper.focused {
+  border-color: var(--color-border-emerald-light);  /* lighter emerald on focus */
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);  /* emerald glow effect */
+}
+
+.enhanced-input-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--color-focus-ring) 0%, var(--color-focus-ring) 100%);  /* using your centralized focus ring */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.enhanced-input-wrapper.focused::before {
+  opacity: 0.1;
+}
+
+/* Send icon styling for maximum visibility */
+.send-button svg,
+.send-button .heroicon {
+  width: 20px !important;
+  height: 20px !important;
+  color: white !important;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.send-button.inactive svg,
+.send-button.inactive .heroicon {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Input Actions */
+.input-actions-left,
+.input-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.action-button {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);  /* using your centralized secondary text */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.action-button:hover {
+  background: var(--color-focus-ring);  /* using your centralized focus ring color */
+  border-color: var(--color-focus);  /* using your centralized focus color */
+  color: var(--color-success);  /* using your centralized success color */
+  transform: translateY(-1px);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+.plus-button {
+  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);  /* using your centralized success colors */
+  border: none;
+  color: white;
+  box-shadow: var(--shadow-emerald);  /* using your centralized emerald shadow */
+}
+
+.plus-button:hover {
+  background: linear-gradient(135deg, var(--color-success-dark) 0%, var(--color-success) 100%);  /* using your centralized success colors */
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: var(--shadow-lg), var(--shadow-emerald);  /* using your centralized shadows */
+}
+
+/* Text Input Field */
+.input-field-container {
+  flex: 1;
+  position: relative;
+  min-height: 24px;
+}
+
+.enhanced-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-primary);  /* using your centralized primary text */
+  min-height: 24px;
+  max-height: 120px;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.enhanced-textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.enhanced-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.enhanced-textarea::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 2px;
+}
+
+.enhanced-textarea::placeholder {
+  color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+  font-weight: 400;
+}
+
+.enhanced-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Character Counter */
+.character-counter {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  padding: 2px 6px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-light);  /* using your centralized light border */
+}
+
+.character-counter.near-limit {
+  color: var(--color-warning);  /* using your centralized warning color */
+  border-color: var(--color-warning);  /* using your centralized warning color */
+}
+
+.character-counter.over-limit {
+  color: var(--color-error);  /* using your centralized error color */
+  border-color: var(--color-error);  /* using your centralized error color */
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Voice Button */
+.voice-button {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);  /* using your centralized secondary text */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.voice-button:hover {
+  background: var(--color-focus-ring);  /* using your centralized focus ring color */
+  border-color: var(--color-focus);  /* using your centralized focus color */
+  color: var(--color-success);  /* using your centralized success color */
+  transform: translateY(-1px) scale(1.05);
+}
+
+.voice-button.recording {
+  background: var(--color-error);  /* using your centralized error color */
+  border-color: var(--color-error);  /* using your centralized error color */
+  color: white;
+  animation: recordingPulse 2s infinite;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes recordingPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+  }
+}
+
+/* Send Button - using centralized color system */
+.send-button {
+  background: var(--color-border-emerald);  /* solid emerald background */
+  border: 2px solid var(--color-border-emerald);  /* emerald border */
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;  /* force white icon color */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);  /* emerald shadow for visibility */
+  position: relative;
+  overflow: hidden;
+  opacity: 1;  /* ensure full visibility */
+}
+
+.send-button.active {
+  background: var(--color-border-emerald-light);  /* lighter emerald when active */
+  transform: scale(1.05);  /* slight scale for feedback */
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);  /* stronger emerald shadow */
+}
+
+.send-button.inactive {
+  background: var(--color-bg-tertiary);  /* using your centralized tertiary background */
+  color: var(--color-text-tertiary) !important;  /* using your centralized tertiary text */
+  box-shadow: none;
+  cursor: not-allowed;
+  border-color: var(--color-border-light);  /* light border when inactive */
+}
+
+.send-button:not(.inactive):hover {
+  background: var(--color-border-emerald-dark);  /* darker emerald on hover */
+  transform: scale(1.1);  /* scale up on hover */
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);  /* enhanced emerald shadow */
+}
+
+.send-button:not(.inactive):active {
+  transform: scale(0.95);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  color: currentColor;
+}
+
+/* Recording Indicator */
+.recording-indicator {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(239, 68, 68, 0.95);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  animation: recordingDot 1.5s infinite;
+}
+
+@keyframes recordingDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .enhanced-input-container {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-emerald);  /* emerald border in dark mode too */
+  }
+  
+  .enhanced-input-wrapper {
+    background: var(--color-bg-primary);  /* using your centralized primary background */
+    border-color: var(--color-border-emerald);  /* emerald border in dark mode */
+  }
+  
+  .enhanced-input-wrapper.focused {
+    background: var(--color-bg-primary);  /* using your centralized primary background */
+    border-color: var(--color-border-emerald-light);  /* lighter emerald on focus */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);  /* emerald glow in dark mode */
+  }
+  
+  .enhanced-textarea {
+    color: var(--color-text-primary);  /* using your centralized primary text */
+  }
+  
+  .enhanced-textarea::placeholder {
+    color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+  }
+  
+  .action-button {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-light);  /* using your centralized light border */
+    color: var(--color-text-secondary);  /* using your centralized secondary text */
+  }
+  
+  .action-button:hover {
+    background: var(--color-focus-ring);  /* using your centralized focus ring color */
+    border-color: var(--color-focus);  /* using your centralized focus color */
+    color: var(--color-success);  /* using your centralized success color */
+  }
+  
+  .voice-button {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-light);  /* using your centralized light border */
+    color: var(--color-text-secondary);  /* using your centralized secondary text */
+  }
+  
+  .character-counter {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-light);  /* using your centralized light border */
+    color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .enhanced-input-container {
+    padding: 16px;
+  }
+  
+  .enhanced-input-wrapper {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  
+  .action-button,
+  .voice-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .send-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .enhanced-textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .character-counter {
+    font-size: 10px;
+    bottom: -18px;
+  }
+  
+  .recording-indicator {
+    top: -36px;
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .action-button,
+  .voice-button,
+  .send-button,
+  .enhanced-input-wrapper {
+    transition: none;
+  }
+  
+  .recording-dot,
+  .voice-button.recording {
+    animation: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .enhanced-input-wrapper {
+    border-width: 3px;
+  }
+  
+  .action-button,
+  .voice-button {
+    border-width: 2px;
+  }
+}
