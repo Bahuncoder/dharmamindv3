@@ -17,6 +17,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { apiService, ChatMessage, ChatResponse } from '../utils/apiService';
+import { chatService } from '../services/chatService';
 import { useSubscription } from '../hooks/useSubscription';
 import { useColors } from '../contexts/ColorContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -177,35 +178,36 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     }
 
     try {
-      // Call the actual API
-      const response = await apiService.sendChatMessage({
-        message: inputMessage,
-        conversation_id: conversationId,
-        context: 'spiritual_guidance'
-      });
+      // Use new dharmic chat for better ChatGPT-like responses
+      const response = await chatService.sendMessageEnhanced(
+        inputMessage,
+        conversationId,
+        'user',
+        true // Use dharmic chat
+      );
 
-      if (response.success && response.data) {
+      if (response) {
         const assistantMessage: Message = {
           id: (Date.now() + 1).toString(),
-          content: response.data.message,
+          content: response.response,
           role: 'assistant',
           timestamp: new Date(),
-          confidence: response.data.metadata?.confidence || 0.9,
-          dharmic_alignment: response.data.metadata?.dharmic_alignment || 0.9,
-          modules_used: response.data.metadata?.modules_used || []
+          confidence: response.metadata?.confidence || 0.9,
+          dharmic_alignment: response.metadata?.dharmic_alignment || 0.9,
+          modules_used: response.metadata?.chakra_modules_used || response.modules_used || []
         };
 
         setMessages(prev => [...prev, assistantMessage]);
         
         // Update conversation ID for continuity
-        if (response.data.conversation_id) {
-          setConversationId(response.data.conversation_id);
+        if (response.conversation_id) {
+          setConversationId(response.conversation_id);
         }
 
         // Auto-tag conversation
         const allMessages = [...messages, userMessage, assistantMessage].map(m => m.content);
         const detectedTags = tagConversation(
-          response.data.conversation_id || conversationId || Date.now().toString(),
+          response.conversation_id || conversationId || Date.now().toString(),
           `Chat ${new Date().toLocaleDateString()}`,
           allMessages,
           assistantMessage.content,
@@ -213,16 +215,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         );
         setCurrentTags(detectedTags);
       } else {
-        // Handle API error
+        // Handle case where response is null
         const errorMessage: Message = {
           id: (Date.now() + 1).toString(),
-          content: `I apologize, but I'm experiencing technical difficulties. ${response.error || 'Please try again in a moment.'}`,
+          content: `I apologize, but I'm experiencing technical difficulties. Please try again in a moment.`,
           role: 'assistant',
           timestamp: new Date(),
           confidence: 0.1
         };
         setMessages(prev => [...prev, errorMessage]);
-        setError(response.error || 'Failed to get response');
+        setError('Failed to get response from dharmic chat service');
       }
     } catch (error) {
       console.error('Chat error:', error);

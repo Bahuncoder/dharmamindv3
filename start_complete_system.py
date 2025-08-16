@@ -68,10 +68,10 @@ class DharmaMindSystemManager:
         logger.info("🔍 Checking system prerequisites...")
         
         requirements = {
-            "python": {"cmd": ["python", "--version"], "min_version": "3.9"},
+            "python": {"cmd": ["python3", "--version"], "min_version": "3.9"},
             "node": {"cmd": ["node", "--version"], "min_version": "16"},
             "npm": {"cmd": ["npm", "--version"], "min_version": "8"},
-            "pip": {"cmd": ["pip", "--version"], "min_version": "21"}
+            "pip": {"cmd": ["pip3", "--version"], "min_version": "21"}
         }
         
         for name, req in requirements.items():

@@ -46,7 +46,7 @@ export default function SEOHead({
   
   // Construct title
   const fullTitle = title 
-    ? `${title} | DharmaMind`
+    ? (title.includes('DharmaMind') ? title : `${title} | DharmaMind`)
     : defaultSEO.title;
 
   return (

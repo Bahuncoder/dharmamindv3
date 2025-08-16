@@ -1,0 +1,42 @@
+
+🕉️ DharmaLLM Training Data Summary
+================================
+
+📊 Dataset Statistics:
+├── Total Examples: 8
+├── Training Examples: 8
+├── Validation Examples: 1
+├── Test Examples: 1
+
+📚 Category Coverage:
+├── Spiritual Guidance: 2 examples
+├── Ethical Dilemmas: 1 examples
+├── Emotional Support: 1 examples
+├── Life Purpose: 0 examples
+├── Relationship Wisdom: 0 examples
+├── Grief Counseling: 0 examples
+├── Personal Growth: 0 examples
+├── Crisis Intervention: 0 examples
+
+⚖️ Quality Metrics:
+├── Average Dharmic Alignment: 0.896
+├── Average Compassion Level: 0.894
+├── Principle Coverage: 9 principles
+├── Topic Diversity: 6 topics
+
+🔮 Dharmic Principles Covered:
+├── ahimsa: Non-violence, compassion toward all beings
+├── satya: Truth, honesty in thought, word, and deed
+├── asteya: Non-stealing, contentment with what one has
+├── brahmacharya: Moderation, conservation of energy
+├── aparigraha: Non-attachment, freedom from possessiveness
+├── karma: Action-consequence, personal responsibility
+├── dharma: Righteous duty, natural law of existence
+├── moksha: Liberation, spiritual freedom and realization
+
+📝 Collection Date: 2025-08-15T11:17:34.457867
+
+🌟 This dataset will train an AI to provide authentic dharmic guidance,
+   compassionate support, and ethical wisdom for all seekers.
+
+🙏 May this training serve all beings with wisdom and compassion!

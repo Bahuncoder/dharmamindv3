@@ -103,9 +103,9 @@ const WelcomePage: React.FC = () => {
   return (
     <>
       <SEOHead 
-        title="AI Life Coach for Finding Purpose & Conscious Living"
-        description="Discover your life purpose with DharmaMind AI. Get personalized guidance for conscious living, ethical decisions, and personal growth. Start your meaningful journey today."
-        keywords="finding life purpose, how to find my passion, conscious living guide, ethical decision making, personal growth AI, mindfulness and purpose, AI for self-reflection, inner peace guidance, living with intention, AI life coach, stress management AI, DharmaMind AI, ethical AI companion"
+        title="DharmaMind - AI with Soul Powered by Dharma"
+        description="Experience DharmaMind - AI with Soul Powered by Dharma. Advanced intelligence combined with ancient wisdom for insights that truly matter. Get clarity, wisdom, and purpose-driven decisions."
+        keywords="AI with soul, dharmic AI, ethical AI companion, conscious AI, spiritual technology, AI wisdom, mindful AI, purpose-driven AI, dharma AI, enlightened AI, soulful AI assistant"
         image="/og-image.jpg"
       />
 

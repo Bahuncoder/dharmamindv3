@@ -63,7 +63,7 @@ from datasets import Dataset, DatasetDict
 import wandb
 from accelerate import Accelerator
 
-from .advanced_config import (
+from ..config.advanced_config import (
     DharmaLLMAdvancedConfig, TrainingStage, 
     WisdomTradition, DharmicPrinciple,
     EvaluationMetric, OptimizationObjective
@@ -842,7 +842,7 @@ class DharmicTrainingCallback(TrainerCallback):
 # ================================
 
 if __name__ == "__main__":
-    from .advanced_config import DharmaLLMConfigFactory
+    from ..config.advanced_config import DharmaLLMConfigFactory
     
     # Create configuration
     config = DharmaLLMConfigFactory.create_config("development")

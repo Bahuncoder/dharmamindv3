@@ -20,12 +20,14 @@ from enum import Enum
 
 from ..models.chat import ChatMessage, ModuleInfo
 from ..config import settings
+from .local_llm import get_local_llm_service
 
 logger = logging.getLogger(__name__)
 
 class LLMProvider(str, Enum):
     """Available LLM providers"""
     DHARMALLM = "dharmallm"
+    LOCAL_HF = "local-huggingface"  # Local Hugging Face models
     OPENAI_GPT4 = "openai-gpt4"
     OPENAI_GPT35 = "openai-gpt35" 
     ANTHROPIC_CLAUDE = "anthropic-claude"
@@ -49,17 +51,22 @@ class LLMRouter:
         self.providers = {}
         self.fallback_chain = [
             LLMProvider.DHARMALLM,
+            LLMProvider.LOCAL_HF,  # Local models as fallback
             LLMProvider.OPENAI_GPT4,
             LLMProvider.ANTHROPIC_CLAUDE,
             LLMProvider.OPENAI_GPT35
         ]
         self.performance_metrics = {}
+        self.local_llm_service = None
         
     async def initialize(self):
         """Initialize LLM providers"""
         logger.info("Initializing LLM Router...")
         
         try:
+            # Initialize Local Hugging Face models (always available)
+            await self._init_local_hf()
+            
             # Initialize DharmaLLM (local model)
             if settings.DHARMALLM_MODEL_PATH:
                 await self._init_dharmallm()
@@ -81,6 +88,21 @@ class LLMRouter:
         except Exception as e:
             logger.error(f"Failed to initialize LLM Router: {e}")
             raise
+    
+    async def _init_local_hf(self):
+        """Initialize Local Hugging Face models"""
+        try:
+            self.local_llm_service = await get_local_llm_service()
+            await self.local_llm_service.initialize()
+            
+            self.providers[LLMProvider.LOCAL_HF] = {
+                "status": "ready",
+                "service": self.local_llm_service,
+                "available_models": await self.local_llm_service.get_available_models()
+            }
+            logger.info("Local Hugging Face provider initialized")
+        except Exception as e:
+            logger.error(f"Failed to initialize Local HF: {e}")
     
     async def _init_dharmallm(self):
         """Initialize DharmaLLM local model"""
@@ -254,6 +276,8 @@ class LLMRouter:
         
         if provider == LLMProvider.DHARMALLM:
             return await self._generate_dharmallm(full_prompt)
+        elif provider == LLMProvider.LOCAL_HF:
+            return await self._generate_local_hf(full_prompt, message, context)
         elif provider == LLMProvider.OPENAI_GPT4:
             return await self._generate_openai(full_prompt, "gpt-4")
         elif provider == LLMProvider.OPENAI_GPT35:
@@ -331,6 +355,59 @@ class LLMRouter:
             confidence=0.85,
             metadata={"source": "local", "temperature": settings.DHARMALLM_TEMPERATURE}
         )
+    
+    async def _generate_local_hf(self, prompt: str, message: str, context: Optional[str] = None) -> LLMResponse:
+        """Generate response using Local Hugging Face models"""
+        start_time = time.time()
+        
+        try:
+            # Select best local model based on message complexity
+            model_name = self._select_local_model(message)
+            
+            # Generate response using local LLM service
+            result = await self.local_llm_service.generate_response(
+                message=message,
+                model_name=model_name,
+                context=context,
+                max_length=1024,
+                temperature=0.7
+            )
+            
+            return LLMResponse(
+                content=result["content"],
+                model_name=result["model_name"],
+                provider=LLMProvider.LOCAL_HF,
+                processing_time=result["processing_time"],
+                tokens_used=result["tokens_used"],
+                confidence=result["confidence"],
+                metadata=result["metadata"]
+            )
+            
+        except Exception as e:
+            logger.error(f"Local HF generation failed: {e}")
+            # Fallback response
+            processing_time = time.time() - start_time
+            return LLMResponse(
+                content="I understand your question. Let me provide some guidance based on wisdom principles. [Local model temporarily unavailable]",
+                model_name="fallback",
+                provider=LLMProvider.LOCAL_HF,
+                processing_time=processing_time,
+                tokens_used=20,
+                confidence=0.6,
+                metadata={"source": "fallback", "error": str(e)}
+            )
+    
+    def _select_local_model(self, message: str) -> str:
+        """Select best local model based on message"""
+        message_len = len(message.split())
+        
+        # For short messages, use smaller models
+        if message_len < 10:
+            return "distilgpt2"
+        elif message_len < 50:
+            return "microsoft/DialoGPT-small" 
+        else:
+            return "microsoft/DialoGPT-medium"
     
     async def _generate_openai(self, prompt: str, model: str) -> LLMResponse:
         """Generate response using OpenAI"""

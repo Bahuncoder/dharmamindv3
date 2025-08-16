@@ -58,7 +58,7 @@ from langdetect import detect, DetectorFactory
 import requests
 from urllib.parse import urljoin
 
-from .advanced_config import (
+from ..config.advanced_config import (
     DharmaLLMAdvancedConfig, WisdomTradition, 
     DharmicPrinciple
 )
@@ -121,6 +121,7 @@ class ProcessedDataSample:
     # Core content
     text: str
     original_text: str
+    source: str
     
     # Tokenized content
     input_ids: List[int]
@@ -133,7 +134,6 @@ class ProcessedDataSample:
     cultural_context: Optional[Dict[str, Any]] = None
     
     # Metadata
-    source: str
     tradition: Optional[WisdomTradition] = None
     quality_metrics: Optional[DataQualityMetrics] = None
     
@@ -1134,7 +1134,7 @@ class DharmaLLMDataProcessor:
 # ===============================
 
 if __name__ == "__main__":
-    from .advanced_config import DharmaLLMConfigFactory
+    from ..config.advanced_config import DharmaLLMConfigFactory
     
     # Create configuration
     config = DharmaLLMConfigFactory.create_config("development")

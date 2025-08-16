@@ -47,6 +47,8 @@ from backend.app.routes.spiritual_knowledge import router as knowledge_router
 from backend.app.routes.enhanced_chat import router as enhanced_chat_router
 from backend.app.routes.darshana import router as darshana_router
 from backend.app.routes.universal_guidance import router as universal_router
+from backend.app.routes.local_llm_test import router as local_llm_router
+from backend.app.routes.dharmic_chat import router as dharmic_chat_router
 from backend.app.services.llm_router import LLMRouter
 from backend.app.services.module_selector import ModuleSelector
 from backend.app.services.evaluator import ResponseEvaluator
@@ -278,6 +280,12 @@ app.include_router(universal_router, prefix="/api/v1", tags=["universal-guidance
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
 app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
 app.include_router(knowledge_router, tags=["spiritual-knowledge"])
+app.include_router(local_llm_router, tags=["local-llm"])
+app.include_router(dharmic_chat_router, tags=["dharmic-chat"])
+
+# Import and include internal spiritual processing router
+from backend.app.routes.internal_spiritual import router as internal_spiritual_router
+app.include_router(internal_spiritual_router, tags=["internal-spiritual"])
 
 @app.get("/", tags=["system"])
 async def root():

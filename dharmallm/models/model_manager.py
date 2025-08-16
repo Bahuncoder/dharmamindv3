@@ -65,8 +65,8 @@ import redis
 from prometheus_client import Counter, Histogram, Gauge, start_http_server
 import docker
 
-from .advanced_config import DharmaLLMAdvancedConfig
-from .advanced_evaluator import DharmaLLMAdvancedEvaluator
+from ..config.advanced_config import DharmaLLMAdvancedConfig
+from ..evaluate.advanced_evaluator import DharmaLLMAdvancedEvaluator
 
 logger = logging.getLogger(__name__)
 
@@ -875,7 +875,7 @@ def main():
     """Main function for running the model management system"""
     
     # Load configuration
-    from .advanced_config import DharmaLLMConfigFactory
+    from ..config.advanced_config import DharmaLLMConfigFactory
     config = DharmaLLMConfigFactory.create_config("production")
     
     # Initialize components

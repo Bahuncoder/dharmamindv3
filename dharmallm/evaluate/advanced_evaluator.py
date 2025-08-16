@@ -54,7 +54,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from textstat import flesch_reading_ease, gunning_fog
 import requests
 
-from .advanced_config import (
+from ..config.advanced_config import (
     DharmaLLMAdvancedConfig, WisdomTradition, 
     DharmicPrinciple, EvaluationMetric
 )
@@ -1187,7 +1187,7 @@ class DharmaLLMAdvancedEvaluator:
 # ===============================
 
 if __name__ == "__main__":
-    from .advanced_config import DharmaLLMConfigFactory
+    from ..config.advanced_config import DharmaLLMConfigFactory
     
     # Create configuration
     config = DharmaLLMConfigFactory.create_config("development")

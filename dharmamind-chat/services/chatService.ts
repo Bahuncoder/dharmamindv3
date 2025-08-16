@@ -16,6 +16,7 @@ export interface ChatMessage {
 export interface ChatResponse {
   response: string;
   conversation_id?: string;
+  message_id?: string;
   confidence_score?: number;
   dharmic_alignment?: number;
   modules_used?: string[];
@@ -24,12 +25,62 @@ export interface ChatResponse {
   processing_time?: number;
   sources?: string[];
   suggestions?: string[];
+  metadata?: Record<string, any>;
+  // New dharmic chat fields
+  dharmic_insights?: string[];
+  growth_suggestions?: string[];
+  spiritual_context?: string;
+  ethical_guidance?: string;
+  conversation_style?: string;
+}
+
+export interface SpiritualWisdomRequest {
+  message: string;
+  user_id?: string;
+  context?: Record<string, any>;
+  tradition_preference?: string;
+}
+
+export interface SpiritualWisdomResponse {
+  response: string;
+  wisdom_source: string;
+  dharma_assessment: Record<string, any>;
+  consciousness_level: string;
+  emotional_tone: string;
+  confidence: number;
+  timestamp: string;
 }
 
 export interface WisdomRequest {
   query: string;
   context?: string;
   user_preferences?: Record<string, any>;
+}
+
+export interface DharmicChatRequest {
+  message: string;
+  conversation_id?: string;
+  user_id?: string;
+  include_personal_growth?: boolean;
+  include_spiritual_guidance?: boolean;
+  include_ethical_guidance?: boolean;
+  response_style?: 'conversational' | 'wise' | 'practical';
+}
+
+export interface DharmicChatResponse {
+  response: string;
+  conversation_id: string;
+  dharmic_insights: string[];
+  growth_suggestions: string[];
+  spiritual_context: string;
+  ethical_guidance: string;
+  conversation_style: string;
+  processing_info: {
+    processing_time: number;
+    chakra_modules_used: string[];
+    model_used: string;
+    dharmic_enhancement: boolean;
+  };
 }
 
 export interface WisdomResponse {
@@ -85,7 +136,7 @@ class ChatService {
   }
 
   /**
-   * Send a chat message to the backend
+   * Send a chat message to the backend - Now using internal spiritual processing
    */
   async sendMessage(
     message: string,
@@ -93,6 +144,27 @@ class ChatService {
     userId?: string
   ): Promise<ChatResponse> {
     try {
+      // First try internal spiritual processing
+      console.log('Using internal spiritual processing...');
+      const spiritualResponse = await this.getInternalSpiritualWisdom(message, userId);
+      
+      if (spiritualResponse) {
+        return {
+          response: spiritualResponse.response,
+          conversation_id: conversationId || 'internal-spiritual',
+          message_id: `spiritual-${Date.now()}`,
+          timestamp: spiritualResponse.timestamp,
+          metadata: {
+            source: 'internal-chakra-modules',
+            wisdom_source: spiritualResponse.wisdom_source,
+            consciousness_level: spiritualResponse.consciousness_level,
+            dharma_assessment: spiritualResponse.dharma_assessment,
+            confidence: spiritualResponse.confidence
+          }
+        };
+      }
+
+      // Fallback to original chat endpoint if internal processing fails
       const payload = {
         message,
         conversation_id: conversationId,
@@ -100,11 +172,11 @@ class ChatService {
         timestamp: new Date().toISOString()
       };
 
-      console.log('Sending chat message to backend:', `${BACKEND_URL}/chat`);
+      console.log('Sending chat message to backend:', `${BACKEND_URL}/api/v1/chat`);
       console.log('Payload:', payload);
 
       const response = await axios.post(
-        `${BACKEND_URL}/chat`,
+        `${BACKEND_URL}/api/v1/chat`,
         payload,
         {
           headers: this.getHeaders(),
@@ -126,6 +198,109 @@ class ChatService {
       }
       
       throw new Error('An unexpected error occurred while sending the message.');
+    }
+  }
+
+  /**
+   * Send a message using the new dharmic chat endpoint
+   * This provides ChatGPT-style responses with deep dharmic wisdom
+   */
+  async sendDharmicChat(
+    message: string,
+    options: {
+      conversationId?: string;
+      userId?: string;
+      includePersonalGrowth?: boolean;
+      includeSpiritualGuidance?: boolean;
+      includeEthicalGuidance?: boolean;
+      responseStyle?: 'conversational' | 'wise' | 'practical';
+    } = {}
+  ): Promise<ChatResponse> {
+    try {
+      const payload: DharmicChatRequest = {
+        message,
+        conversation_id: options.conversationId,
+        user_id: options.userId || 'seeker',
+        include_personal_growth: options.includePersonalGrowth ?? true,
+        include_spiritual_guidance: options.includeSpiritualGuidance ?? true,
+        include_ethical_guidance: options.includeEthicalGuidance ?? true,
+        response_style: options.responseStyle || 'conversational'
+      };
+
+      console.log('Sending dharmic chat message:', `${BACKEND_URL}/api/v1/dharmic/chat`);
+      console.log('Payload:', payload);
+
+      const response = await axios.post<DharmicChatResponse>(
+        `${BACKEND_URL}/api/v1/dharmic/chat`,
+        payload,
+        {
+          headers: this.getHeaders(),
+          timeout: 30000, // 30 second timeout for dharmic processing
+        }
+      );
+
+      console.log('Dharmic chat response received:', response.data);
+
+      return {
+        response: response.data.response,
+        conversation_id: response.data.conversation_id,
+        message_id: `dharmic-${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        processing_time: response.data.processing_info.processing_time,
+        model_used: response.data.processing_info.model_used,
+        dharmic_insights: response.data.dharmic_insights,
+        growth_suggestions: response.data.growth_suggestions,
+        spiritual_context: response.data.spiritual_context,
+        ethical_guidance: response.data.ethical_guidance,
+        conversation_style: response.data.conversation_style,
+        metadata: {
+          source: 'dharmic-chat',
+          chakra_modules_used: response.data.processing_info.chakra_modules_used,
+          dharmic_enhancement: response.data.processing_info.dharmic_enhancement,
+          wisdom_type: 'comprehensive_dharmic_guidance'
+        }
+      };
+
+    } catch (error) {
+      console.error('Error sending dharmic chat message:', error);
+      
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          throw new Error(`Dharmic chat error: ${error.response.data?.detail || error.response.statusText}`);
+        } else if (error.request) {
+          throw new Error('Unable to connect to dharmic chat service. Please check if the server is running.');
+        }
+      }
+      
+      throw new Error('An unexpected error occurred while processing your dharmic chat message.');
+    }
+  }
+
+  /**
+   * Enhanced sendMessage method with dharmic chat option
+   * Now defaults to dharmic chat for better ChatGPT-like responses
+   */
+  async sendMessageEnhanced(
+    message: string,
+    conversationId?: string,
+    userId?: string,
+    useDharmicChat: boolean = true
+  ): Promise<ChatResponse> {
+    if (useDharmicChat) {
+      try {
+        // Try dharmic chat first for best experience
+        return await this.sendDharmicChat(message, {
+          conversationId,
+          userId,
+          responseStyle: 'conversational'
+        });
+      } catch (error) {
+        console.warn('Dharmic chat failed, falling back to standard chat:', error);
+        // Fall back to original sendMessage if dharmic chat fails
+        return await this.sendMessage(message, conversationId, userId);
+      }
+    } else {
+      return await this.sendMessage(message, conversationId, userId);
     }
   }
 
@@ -170,6 +345,49 @@ class ChatService {
       }
       
       throw new Error('An unexpected error occurred while requesting wisdom.');
+    }
+  }
+
+  /**
+   * Get spiritual wisdom using internal DharmaMind processing
+   */
+  async getInternalSpiritualWisdom(
+    message: string,
+    userId?: string
+  ): Promise<SpiritualWisdomResponse | null> {
+    try {
+      const payload: SpiritualWisdomRequest = {
+        message,
+        user_id: userId || 'guest'
+      };
+
+      console.log('Requesting internal spiritual wisdom:', `${BACKEND_URL}/api/v1/internal/spiritual-wisdom`);
+      console.log('Payload:', payload);
+
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/internal/spiritual-wisdom`,
+        payload,
+        {
+          headers: this.getHeaders(),
+          timeout: 30000, // 30 second timeout
+        }
+      );
+
+      console.log('Internal spiritual wisdom response:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error getting internal spiritual wisdom:', error);
+      
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error details:', {
+          status: error.response?.status,
+          statusText: error.response?.statusText,
+          data: error.response?.data
+        });
+      }
+      
+      // Return null to allow fallback to external chat
+      return null;
     }
   }
 
