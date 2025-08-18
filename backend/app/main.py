@@ -40,36 +40,37 @@ from datetime import datetime
 import redis.asyncio as redis
 
 # Import our application modules
-from backend.app.routes.chat import router as chat_router
-from backend.app.routes.auth import router as auth_router
-from backend.app.routes.feedback import router as feedback_router
-from backend.app.routes.spiritual_knowledge import router as knowledge_router
-from backend.app.routes.enhanced_chat import router as enhanced_chat_router
-from backend.app.routes.darshana import router as darshana_router
-from backend.app.routes.universal_guidance import router as universal_router
-from backend.app.routes.local_llm_test import router as local_llm_router
-from backend.app.routes.dharmic_chat import router as dharmic_chat_router
-from backend.app.services.llm_router import LLMRouter
-from backend.app.services.module_selector import ModuleSelector
-from backend.app.services.evaluator import ResponseEvaluator
-from backend.app.services.memory_manager import MemoryManager
-from backend.app.db.database import DatabaseManager
-from backend.app.config import settings
+from .routes.chat import router as chat_router
+from .routes.auth import router as auth_router
+from .routes.feedback import router as feedback_router
+from .routes.spiritual_knowledge import router as knowledge_router
+from .routes.enhanced_chat import router as enhanced_chat_router
+from .routes.darshana import router as darshana_router
+from .routes.universal_guidance import router as universal_router
+from .routes.local_llm_test import router as local_llm_router
+from .routes.dharmic_chat import router as dharmic_chat_router
+from .routes.external_llm import router as external_llm_router
+from .services.llm_router import LLMRouter
+from .services.module_selector import ModuleSelector
+from .services.evaluator import ResponseEvaluator
+from .services.memory_manager import MemoryManager
+from .db.database import DatabaseManager
+from .config import settings
 
 # Import all Chakra modules
-from backend.app.chakra_modules import (
+from .chakra_modules import (
     get_consciousness_core, get_knowledge_base, get_emotional_intelligence,
     get_dharma_engine, get_ai_core, get_protection_layer, 
     get_system_orchestrator, get_llm_engine, get_module_info, initialize_all_modules
 )
 
 # Import analysis engine
-from backend.app.chakra_modules.analysis_engine import (
+from .chakra_modules.analysis_engine import (
     get_analysis_engine, AnalysisRequest, AnalysisType, AnalysisLevel
 )
 
 # Import rate limiting middleware
-from backend.app.middleware.rate_limiting import RateLimitMiddleware
+from .middleware.rate_limiting import RateLimitMiddleware
 
 # Configure logging
 logging.basicConfig(
@@ -282,9 +283,10 @@ app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
 app.include_router(knowledge_router, tags=["spiritual-knowledge"])
 app.include_router(local_llm_router, tags=["local-llm"])
 app.include_router(dharmic_chat_router, tags=["dharmic-chat"])
+app.include_router(external_llm_router, prefix="/api/v1", tags=["external-llm"])
 
 # Import and include internal spiritual processing router
-from backend.app.routes.internal_spiritual import router as internal_spiritual_router
+from .routes.internal_spiritual import router as internal_spiritual_router
 app.include_router(internal_spiritual_router, tags=["internal-spiritual"])
 
 @app.get("/", tags=["system"])

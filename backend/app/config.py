@@ -15,7 +15,7 @@ Uses environment variables with sensible defaults and advanced features:
 import os
 from typing import List, Optional, Dict, Any, Union
 from pydantic_settings import BaseSettings
-from pydantic import field_validator, model_validator
+from pydantic import field_validator, model_validator, Field
 from pathlib import Path
 from enum import Enum
 import json
@@ -83,16 +83,18 @@ class Settings(BaseSettings):
     MAX_REQUEST_SIZE: int = 10 * 1024 * 1024  # 10MB
     
     # CORS Configuration
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:3002",  # Brand website
-        "http://localhost:3003",  # Chat application
-        "http://localhost:8000",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3002",  # Brand website
-        "http://127.0.0.1:3003",  # Chat application
-        "http://127.0.0.1:8000"
-    ]
+    CORS_ORIGINS: Union[List[str], str] = Field(
+        default=[
+            "http://localhost:3000",
+            "http://localhost:3002",  # Brand website
+            "http://localhost:3003",  # Chat application
+            "http://localhost:8000",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:3002",  # Brand website
+            "http://127.0.0.1:3003",  # Chat application
+            "http://127.0.0.1:8000"
+        ]
+    )
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: List[str] = ["GET", "POST", "PUT", "DELETE", "PATCH"]
     CORS_ALLOW_HEADERS: List[str] = ["*"]
@@ -324,7 +326,10 @@ class Settings(BaseSettings):
         """Parse CORS origins from string if needed"""
         if isinstance(v, str):
             # Handle comma-separated string
-            return [origin.strip() for origin in v.split(",")]
+            origins = [origin.strip() for origin in v.split(",")]
+            return origins
+        elif isinstance(v, list):
+            return v
         return v
     
     @field_validator("ALLOWED_HOSTS", mode="before")
@@ -403,10 +408,12 @@ class Settings(BaseSettings):
         """Get feature flag value"""
         return self.FEATURE_FLAGS.get(flag_name, default)
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
-        use_enum_values = True
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": True,
+        "use_enum_values": True,
+        "extra": "ignore"
+    }
 
 # Global settings instance
 settings = Settings()

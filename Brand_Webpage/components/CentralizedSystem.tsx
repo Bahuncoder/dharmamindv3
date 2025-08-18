@@ -16,6 +16,7 @@ import AuthComponent from './AuthComponent';
 import FeedbackButton from './FeedbackButton';
 import Logo from './Logo';
 import Button from './Button';
+import brandAuth from '../services/brandAuth';
 
 // ===============================
 // CENTRALIZED SYSTEM CONTEXT
@@ -68,8 +69,9 @@ export const CentralizedSystemProvider: React.FC<{ children: React.ReactNode }> 
   };
 
   const goToAuth = (mode: 'login' | 'signup' = 'login') => {
-    // Navigate to professional auth page
-    navigateTo(`/auth?mode=${mode}`);
+    // For unified experience, redirect directly to central auth hub
+    const returnUrl = window.location.pathname;
+    brandAuth.redirectToCentralAuth(mode, returnUrl);
   };
 
   const goToSubscription = () => {

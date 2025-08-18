@@ -118,8 +118,8 @@ class AnalysisEngine:
         self.consciousness_analyzer = None
         self.performance_monitor = None
         
-        # Initialize async
-        asyncio.create_task(self._initialize_components())
+        # Initialize async (deferred)
+        self._initialized = False
         
         self.logger.info("🔍 Analysis Engine initialized")
     
@@ -177,6 +177,11 @@ class AnalysisEngine:
         Returns:
             SystemAnalysisReport with complete analysis results
         """
+        
+        # Ensure initialization is complete
+        if not self._initialized:
+            await self._initialize_components()
+            self._initialized = True
         
         start_time = datetime.now()
         analysis_id = f"analysis_{start_time.strftime('%Y%m%d_%H%M%S')}"

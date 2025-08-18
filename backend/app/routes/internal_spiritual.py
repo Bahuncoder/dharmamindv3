@@ -18,11 +18,11 @@ from datetime import datetime
 import asyncio
 
 # Import Chakra modules
-from backend.app.chakra_modules.consciousness_core import get_consciousness_core, ConsciousnessLevel
-from backend.app.chakra_modules.knowledge_base import get_knowledge_base
-from backend.app.chakra_modules.dharma_engine import get_dharma_engine
-from backend.app.chakra_modules.emotional_intelligence import get_emotional_intelligence
-from backend.app.chakra_modules.ai_core import get_ai_core
+from ..chakra_modules.consciousness_core import get_consciousness_core, ConsciousnessLevel
+from ..chakra_modules.knowledge_base import get_knowledge_base
+from ..chakra_modules.dharma_engine import get_dharma_engine
+from ..chakra_modules.emotional_intelligence import get_emotional_intelligence
+from ..chakra_modules.ai_core import get_ai_core
 
 logger = logging.getLogger(__name__)
 
@@ -53,8 +53,8 @@ class InternalSpiritualProcessor:
         self.emotional_intelligence = get_emotional_intelligence()
         self.ai_core = get_ai_core()
         
-        # Initialize emotional intelligence engine
-        asyncio.create_task(self._initialize_modules())
+        # Initialize emotional intelligence engine (deferred)
+        self._initialized = False
         
         self.spiritual_templates = {
             "stress": [
@@ -121,6 +121,11 @@ class InternalSpiritualProcessor:
     async def process_spiritual_query(self, query: SpiritualQuery) -> SpiritualResponse:
         """Process spiritual query using internal Chakra modules"""
         try:
+            # Ensure initialization is complete
+            if not self._initialized:
+                await self._initialize_modules()
+                self._initialized = True
+                
             # Step 1: Consciousness processing
             consciousness_event = await self.consciousness_core.process_input(
                 query.message, 
