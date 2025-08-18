@@ -15,13 +15,13 @@ import json
 import logging
 from typing import Dict, Any, Optional
 from fastapi import Request, Response, HTTPException
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from starlette.responses import JSONResponse
 import redis.asyncio as redis
-from backend.app.config import settings, is_production
-from backend.app.services.cache_service import CacheService
+from ..config import settings, is_production
+from ..services.cache_service import AdvancedCacheService
 
 # Security logger
 security_logger = logging.getLogger("dharmamind.security")
@@ -58,7 +58,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
                 "font-src 'self' https://fonts.gstatic.com; "
                 "img-src 'self' data: https:; "
-                "connect-src 'self' https://api.openai.com https://api.anthropic.com; "
+                "connect-src 'self' http://localhost:8003; "  # LLM Gateway only
                 "frame-ancestors 'none';"
             )
         }
@@ -83,7 +83,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
     
     def __init__(self, app):
         super().__init__(app)
-        self.cache_service = CacheService()
+        self.cache_service = AdvancedCacheService()
         self.rate_limits = {
             "default": {
                 "requests": settings.RATE_LIMIT_REQUESTS,
@@ -224,7 +224,7 @@ class BruteForceProtectionMiddleware(BaseHTTPMiddleware):
     
     def __init__(self, app):
         super().__init__(app)
-        self.cache_service = CacheService()
+        self.cache_service = AdvancedCacheService()
         self.max_attempts = 5
         self.base_lockout_time = 300  # 5 minutes
         self.max_lockout_time = 3600  # 1 hour

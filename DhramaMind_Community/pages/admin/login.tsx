@@ -17,13 +17,30 @@ const AdminLogin: React.FC = () => {
     setIsLoading(true);
     setError('');
 
-    // Simple authentication check (replace with real authentication)
-    if (credentials.email === 'admin@dharmamind.com' && credentials.password === 'DharmaAdmin2025!') {
-      // Store admin session (in real app, use proper JWT/session management)
-      localStorage.setItem('dharma_admin', 'true');
-      router.push('/admin/dashboard');
-    } else {
-      setError('Invalid credentials. Please try again.');
+    try {
+      // Secure authentication via backend API
+      const response = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Store secure session token
+        localStorage.setItem('dharma_admin_token', data.token);
+        router.push('/admin/dashboard');
+      } else {
+        setError(data.message || 'Invalid credentials. Please try again.');
+      }
+    } catch (error) {
+      setError('Authentication service unavailable. Please try again later.');
     }
     
     setIsLoading(false);
@@ -113,12 +130,12 @@ const AdminLogin: React.FC = () => {
               </div>
             </form>
 
-            {/* Demo Credentials */}
-            <div className="mt-6 p-4 bg-primary-gradient-light rounded-lg">
-              <h4 className="text-sm font-bold text-primary mb-2">Demo Credentials:</h4>
-              <div className="text-xs text-secondary font-semibold space-y-1">
-                <p><strong>Email:</strong> admin@dharmamind.com</p>
-                <p><strong>Password:</strong> DharmaAdmin2025!</p>
+            {/* Security Notice */}
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <h4 className="text-sm font-bold text-red-800 mb-2">Security Notice:</h4>
+              <div className="text-xs text-red-700 font-semibold space-y-1">
+                <p>This admin panel uses secure authentication.</p>
+                <p>Contact your system administrator for access credentials.</p>
               </div>
             </div>
           </div>

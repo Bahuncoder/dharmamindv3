@@ -13,6 +13,7 @@ Uses environment variables with sensible defaults and advanced features:
 """
 
 import os
+import logging
 from typing import List, Optional, Dict, Any, Union
 from pydantic_settings import BaseSettings
 from pydantic import field_validator, model_validator, Field
@@ -45,11 +46,10 @@ class VectorDBType(str, Enum):
 
 class AIProvider(str, Enum):
     """AI service providers"""
-    OPENAI = "openai"
-    ANTHROPIC = "anthropic"
     HUGGINGFACE = "huggingface"
     LOCAL = "local"
     DHARMALLM = "dharmallm"
+    GATEWAY = "gateway"  # External LLMs via gateway service
 
 class Settings(BaseSettings):
     """🕉️ Advanced DharmaMind Application Settings"""
@@ -59,8 +59,8 @@ class Settings(BaseSettings):
     # ===============================
     APP_NAME: str = "DharmaMind Complete API"
     VERSION: str = "2.0.0"
-    ENVIRONMENT: Environment = Environment.DEVELOPMENT
-    DEBUG: bool = False
+    ENVIRONMENT: Environment = Field(default=Environment.DEVELOPMENT, env="ENVIRONMENT")
+    DEBUG: bool = Field(default=False, env="DEBUG")
     
     # Server Configuration
     HOST: str = "0.0.0.0"
@@ -71,8 +71,8 @@ class Settings(BaseSettings):
     # ===============================
     # SECURITY & AUTHENTICATION
     # ===============================
-    SECRET_KEY: str = "your-secret-key-here"  # Override in production
-    JWT_SECRET_KEY: str = "jwt-secret-key-here"
+    SECRET_KEY: str = Field(default="", env="SECRET_KEY")
+    JWT_SECRET_KEY: str = Field(default="", env="JWT_SECRET_KEY")
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRATION_HOURS: int = 24
     
@@ -85,19 +85,24 @@ class Settings(BaseSettings):
     # CORS Configuration
     CORS_ORIGINS: Union[List[str], str] = Field(
         default=[
-            "http://localhost:3000",
+            "http://localhost:3000",  # Development frontend
             "http://localhost:3002",  # Brand website
             "http://localhost:3003",  # Chat application
-            "http://localhost:8000",
             "http://127.0.0.1:3000",
-            "http://127.0.0.1:3002",  # Brand website
-            "http://127.0.0.1:3003",  # Chat application
-            "http://127.0.0.1:8000"
-        ]
+            "http://127.0.0.1:3002",
+            "http://127.0.0.1:3003"
+        ],
+        env="CORS_ORIGINS",
+        description="Allowed CORS origins - configure specific domains for production"
     )
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: List[str] = ["GET", "POST", "PUT", "DELETE", "PATCH"]
-    CORS_ALLOW_HEADERS: List[str] = ["*"]
+    CORS_ALLOW_HEADERS: List[str] = [
+        "Authorization",
+        "Content-Type", 
+        "X-API-Key",
+        "X-Requested-With"
+    ]
     
     # Trusted Hosts
     ALLOWED_HOSTS: List[str] = ["localhost", "127.0.0.1", "*"]
@@ -158,7 +163,11 @@ class Settings(BaseSettings):
     # DATABASE CONFIGURATION
     # ===============================
     # Primary Database
-    DATABASE_URL: str = "postgresql://user:password@localhost:5432/dharmamind"
+    DATABASE_URL: str = Field(
+        default="sqlite:///./dharmamind_dev.db",
+        env="DATABASE_URL",
+        description="Database connection URL"
+    )
     DB_POOL_SIZE: int = 10
     DB_MAX_OVERFLOW: int = 20
     DB_POOL_TIMEOUT: int = 30
@@ -183,22 +192,12 @@ class Settings(BaseSettings):
     # AI/ML MODEL CONFIGURATION
     # ===============================
     # Primary AI Provider
-    PRIMARY_AI_PROVIDER: AIProvider = AIProvider.OPENAI
-    FALLBACK_AI_PROVIDER: AIProvider = AIProvider.DHARMALLM
+    PRIMARY_AI_PROVIDER: AIProvider = AIProvider.DHARMALLM
+    FALLBACK_AI_PROVIDER: AIProvider = AIProvider.LOCAL
     
-    # OpenAI Configuration
-    OPENAI_API_KEY: Optional[str] = None
-    OPENAI_MODEL: str = "gpt-4"
-    OPENAI_EMBEDDING_MODEL: str = "text-embedding-ada-002"
-    OPENAI_MAX_TOKENS: int = 4096
-    OPENAI_TEMPERATURE: float = 0.7
-    OPENAI_TIMEOUT: int = 60
-    
-    # Anthropic Configuration
-    ANTHROPIC_API_KEY: Optional[str] = None
-    ANTHROPIC_MODEL: str = "claude-3-sonnet-20240229"
-    ANTHROPIC_MAX_TOKENS: int = 4096
-    ANTHROPIC_TEMPERATURE: float = 0.7
+    # LLM Gateway Configuration (Separate Microservice)
+    LLM_GATEWAY_URL: str = "http://localhost:8003"
+    LLM_GATEWAY_API_KEY: str = Field(default="", env="LLM_GATEWAY_API_KEY")
     
     # HuggingFace Configuration
     HUGGINGFACE_API_KEY: Optional[str] = None
@@ -358,23 +357,36 @@ class Settings(BaseSettings):
         if isinstance(values, dict):
             primary_provider = values.get("PRIMARY_AI_PROVIDER")
             environment = values.get("ENVIRONMENT")
-            openai_key = values.get("OPENAI_API_KEY")
-            anthropic_key = values.get("ANTHROPIC_API_KEY")
-        else:
-            primary_provider = values.PRIMARY_AI_PROVIDER
-            environment = values.ENVIRONMENT
-            openai_key = values.OPENAI_API_KEY
-            anthropic_key = values.ANTHROPIC_API_KEY
+    @model_validator(mode='before')
+    @classmethod
+    def validate_settings(cls, values):
+        """Validate critical security settings"""
         
-        # Check if required API keys are present for the primary provider
-        if primary_provider == AIProvider.OPENAI and not openai_key:
-            if environment == Environment.PRODUCTION:
-                raise ValueError("OpenAI API key required for production")
+        # Validate environment-specific settings
+        environment = values.get("ENVIRONMENT", Environment.DEVELOPMENT)
         
-        if primary_provider == AIProvider.ANTHROPIC and not anthropic_key:
-            if environment == Environment.PRODUCTION:
-                raise ValueError("Anthropic API key required for production")
+        # Check for production security requirements
+        if environment == Environment.PRODUCTION:
+            secret_key = values.get("SECRET_KEY", "")
+            jwt_secret = values.get("JWT_SECRET_KEY", "")
+            
+            if not secret_key or len(secret_key) < 32:
+                raise ValueError("SECRET_KEY must be at least 32 characters in production")
+            
+            if not jwt_secret or len(jwt_secret) < 32:
+                raise ValueError("JWT_SECRET_KEY must be at least 32 characters in production")
+            
+            # Validate database URL in production
+            db_url = values.get("DATABASE_URL", "")
+            if "sqlite" in db_url.lower():
+                raise ValueError("SQLite not recommended for production. Use PostgreSQL.")
+            
+            # Check debug mode
+            debug = values.get("DEBUG", False)
+            if debug:
+                raise ValueError("DEBUG must be False in production")
         
+        # Basic validation - gateway URL should be configured for external LLM features
         return values
     
     @property
@@ -422,6 +434,10 @@ settings = Settings()
 # ===============================
 # UTILITY FUNCTIONS
 # ===============================
+
+def is_production() -> bool:
+    """Convenience function to check if running in production"""
+    return settings.is_production
 
 def get_env_file_path() -> str:
     """Get path to environment file based on environment"""
@@ -489,6 +505,7 @@ __all__ = [
     "VectorDBType",
     "AIProvider",
     "settings",
+    "is_production",
     "get_settings_for_environment",
     "load_settings"
 ]

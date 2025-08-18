@@ -8,7 +8,8 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, EmailStr
 from datetime import datetime, timedelta
 from typing import Optional
-import hashlib
+from passlib.context import CryptContext
+from jose import JWTError, jwt
 import secrets
 import json
 import os
@@ -17,6 +18,14 @@ from ..services.notification_service import send_verification_code
 
 router = APIRouter()
 security = HTTPBearer()
+
+# Secure password hashing
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# JWT Configuration
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-secret-key-change-in-production")
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # Simple user storage (in production, use a proper database)
 USERS_FILE = "users.json"
@@ -82,49 +91,47 @@ def save_verifications(verifications):
         json.dump(verifications, f, indent=2)
 
 def hash_password(password: str) -> str:
-    """Hash password using SHA-256"""
-    return hashlib.sha256(password.encode()).hexdigest()
+    """Securely hash password using bcrypt with salt"""
+    return pwd_context.hash(password)
 
-def generate_token(user_id: str, email: str, plan: str) -> str:
-    """Generate a simple demo token"""
-    payload = {
-        "user_id": user_id,
-        "email": email,
-        "plan": plan,
-        "exp": (datetime.now() + timedelta(days=30)).isoformat()
-    }
-    # In production, use proper JWT
-    import base64
-    return f"demo_{base64.b64encode(json.dumps(payload).encode()).decode()}"
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify a password against its hash"""
+    return pwd_context.verify(plain_password, hashed_password)
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+    """Create a JWT access token"""
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
 
 def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    """Verify authentication token"""
+    """Verify JWT authentication token"""
     token = credentials.credentials
     
-    if token.startswith("demo_"):
-        try:
-            import base64
-            payload = json.loads(base64.b64decode(token[5:]).decode())
-            
-            # Check if token is expired
-            exp_time = datetime.fromisoformat(payload["exp"])
-            if datetime.now() > exp_time:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Token expired"
-                )
-            
-            return payload
-        except Exception:
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id: str = payload.get("sub")
+        email: str = payload.get("email")
+        
+        if user_id is None or email is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token"
             )
-    
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Invalid token format"
-    )
+        
+        # Check if token is expired (handled by jwt.decode)
+        return payload
+    except JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token"
+        )
 
 @router.post("/register", response_model=AuthResponse)
 async def register_user(user_data: UserRegistration):
@@ -208,8 +215,9 @@ async def verify_code(verification_data: VerificationRequest):
     verifications.pop(verification_data.email)
     save_verifications(verifications)
     
-    # Generate tokens
-    access_token = generate_token(user_id, data["email"], plan)
+    # Generate secure JWT tokens
+    token_data = {"sub": user_id, "email": data["email"], "plan": plan}
+    access_token = create_access_token(data=token_data)
     
     return AuthResponse(
         success=True,
@@ -269,17 +277,16 @@ async def login_user(login_data: UserLogin):
         )
     
     user = users[login_data.email]
-    hashed_password = hash_password(login_data.password)
-    
-    # Verify password
-    if user["password"] != hashed_password:
+    # Verify password using secure verification
+    if not verify_password(login_data.password, user["password"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials"
         )
     
-    # Generate tokens
-    access_token = generate_token(user["id"], login_data.email, user["subscription_plan"])
+    # Generate secure JWT tokens
+    token_data = {"sub": user["id"], "email": login_data.email, "plan": user["subscription_plan"]}
+    access_token = create_access_token(data=token_data)
     
     return AuthResponse(
         success=True,
@@ -312,21 +319,22 @@ async def refresh_token(refresh_data: dict):
         )
     
     try:
-        import base64
-        payload = json.loads(base64.b64decode(refresh_token[5:]).decode())
+        # Verify and decode the current refresh token
+        payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
         
         # Generate new token with same data
-        new_token = generate_token(
-            payload["user_id"], 
-            payload["email"], 
-            payload["plan"]
-        )
+        token_data = {
+            "sub": payload["sub"], 
+            "email": payload["email"], 
+            "plan": payload.get("plan", "free")
+        }
+        new_token = create_access_token(data=token_data)
         
         return {
             "access_token": new_token,
             "refresh_token": new_token
         }
-    except Exception:
+    except JWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid refresh token"
@@ -345,8 +353,9 @@ async def demo_login(plan: str = "free"):
     if plan not in valid_plans:
         plan = "free"
     
-    # Generate demo token
-    access_token = generate_token(demo_user_id, demo_email, plan)
+    # Generate secure demo token
+    token_data = {"sub": demo_user_id, "email": demo_email, "plan": plan}
+    access_token = create_access_token(data=token_data)
     
     return AuthResponse(
         success=True,

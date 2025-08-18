@@ -1,21 +1,6 @@
 #!/usr/bin/env python3
 """
-DharmaMind F# Import all # Import analysis engine
-from .chakra_modules.analysis_engine import (
-    get_analysis_engine, AnalysisRequest, AnalysisType, AnalysisLevel
-)
-
-# Import rate limiting middleware
-from .middleware.rate_limiting import RateLimitMiddleware
-
-
-# Configure loggingdules
-from .chakra_modules import (
-    get_consciousness_core, get_knowledge_base, get_emotional_intelligence,
-    get_dharma_engine, get_ai_core, get_protection_layer,
-    get_system_orchestrator, get_llm_engine, get_module_info,
-    initialize_all_modules
-) Backend - Complete System Integration
+DharmaMind Backend - Complete System Integration
 
 This is the main FastAPI application that orchestrates all DharmaMind services:
 - Complete Chakra module integration (consciousness, knowledge, AI, etc.)
@@ -24,6 +9,8 @@ This is the main FastAPI application that orchestrates all DharmaMind services:
 - Dharmic validation and compliance
 - System analysis and monitoring
 - Memory management and persistence
+- Enterprise security framework
+- Session management and authentication
 
 🕉️ May this serve all beings with wisdom and compassion
 """
@@ -42,6 +29,7 @@ import redis.asyncio as redis
 # Import our application modules
 from .routes.chat import router as chat_router
 from .routes.auth import router as auth_router
+from .routes.admin_auth import router as admin_auth_router
 from .routes.feedback import router as feedback_router
 from .routes.spiritual_knowledge import router as knowledge_router
 from .routes.enhanced_chat import router as enhanced_chat_router
@@ -54,8 +42,14 @@ from .services.llm_router import LLMRouter
 from .services.module_selector import ModuleSelector
 from .services.evaluator import ResponseEvaluator
 from .services.memory_manager import MemoryManager
+from .services.llm_gateway_client import init_llm_gateway_client
 from .db.database import DatabaseManager
 from .config import settings
+
+# Import observability components
+from .observability.distributed_tracing import initialize_tracing, TracingConfig, TracingMiddleware
+from .observability.analytics_engine import AdvancedAnalyticsEngine
+from .observability.realtime_dashboard import initialize_dashboard, dashboard_router
 
 # Import all Chakra modules
 from .chakra_modules import (
@@ -69,8 +63,18 @@ from .chakra_modules.analysis_engine import (
     get_analysis_engine, AnalysisRequest, AnalysisType, AnalysisLevel
 )
 
-# Import rate limiting middleware
+# Import security components
+from .security.jwt_manager import init_jwt_manager
+from .security.monitoring import init_security_monitor
+from .security.session_middleware import init_session_security_middleware
 from .middleware.rate_limiting import RateLimitMiddleware
+from .middleware.security import SecurityMiddleware
+
+# Import enhanced performance components
+from .services.advanced_llm_router import init_advanced_llm_router
+from .services.intelligent_cache import init_intelligent_cache, CacheMiddleware
+from .db.advanced_pool import init_db_pool_manager
+from .monitoring.performance_monitor import init_performance_monitoring, PerformanceMiddleware
 
 # Configure logging
 logging.basicConfig(
@@ -125,6 +129,81 @@ async def lifespan(app: FastAPI):
         db_manager = DatabaseManager()
         await db_manager.initialize()
         logger.info("✅ Database initialized")
+        
+        # Initialize security components
+        if redis_client:
+            logger.info("🔐 Initializing enterprise security framework...")
+            
+            # Initialize JWT manager
+            jwt_manager = init_jwt_manager(redis_client)
+            logger.info("✅ JWT manager initialized")
+            
+            # Initialize security monitoring
+            security_monitor = init_security_monitor(redis_client)
+            await security_monitor.start_monitoring()
+            logger.info("✅ Security monitoring started")
+            
+            # Initialize session security middleware
+            session_middleware = init_session_security_middleware(redis_client)
+            logger.info("✅ Session security middleware initialized")
+            
+            logger.info("🛡️ Enterprise security framework ready")
+        else:
+            logger.warning("⚠️ Security features disabled - Redis unavailable")
+        
+        # Initialize enhanced performance components
+        if redis_client:
+            logger.info("⚡ Initializing performance enhancement framework...")
+            
+            # Initialize distributed tracing
+            tracing_config = TracingConfig(
+                service_name="dharmamind-backend",
+                service_version="2.0.0",
+                environment=settings.ENVIRONMENT.value,
+                jaeger_endpoint="http://localhost:14268/api/traces"
+            )
+            tracer = initialize_tracing(tracing_config)
+            logger.info("✅ Distributed tracing system initialized")
+            
+            # Initialize analytics engine
+            analytics_engine = AdvancedAnalyticsEngine(redis_client)
+            logger.info("✅ Advanced analytics engine initialized")
+            
+            # Initialize real-time dashboard
+            dashboard = initialize_dashboard(redis_client, analytics_engine)
+            logger.info("✅ Real-time dashboard system initialized")
+            
+            # Initialize advanced LLM router
+            advanced_router = init_advanced_llm_router(redis_client)
+            logger.info("✅ Advanced LLM router initialized")
+            
+            # Initialize intelligent caching
+            intelligent_cache = init_intelligent_cache(redis_client)
+            logger.info("✅ Intelligent caching system initialized")
+            
+            # Initialize database pool manager
+            db_pool_mgr = init_db_pool_manager(redis_client)
+            await db_pool_mgr.add_pool(
+                name="default",
+                database_url="sqlite+aiosqlite:///./data/dharma_knowledge.db",
+                min_size=5,
+                max_size=20
+            )
+            await db_pool_mgr.start_monitoring()
+            logger.info("✅ Advanced database pool manager initialized")
+            
+            # Initialize performance monitoring
+            metrics_collector, profiler = init_performance_monitoring(redis_client)
+            await metrics_collector.start_collection()
+            logger.info("✅ Performance monitoring system initialized")
+            
+            logger.info("🚀 Enhanced observability & performance framework ready")
+        else:
+            logger.warning("⚠️ Performance features limited - Redis unavailable")
+        
+        # Initialize LLM Gateway client
+        init_llm_gateway_client()
+        logger.info("✅ LLM Gateway client initialized")
         
         # Initialize memory manager (vector DB, embeddings)
         memory_manager = MemoryManager()
@@ -254,6 +333,50 @@ app = FastAPI(
 # Security
 security = HTTPBearer()
 
+# Add enhanced middleware stack
+app.add_middleware(SecurityMiddleware)
+
+# Distributed tracing middleware
+if redis_client:
+    try:
+        from .observability.distributed_tracing import get_tracer
+        tracer = get_tracer()
+        if tracer:
+            app.add_middleware(TracingMiddleware, tracer=tracer)
+            logger.info("✅ Distributed tracing middleware added")
+    except Exception as e:
+        logger.warning(f"⚠️ Tracing middleware not available: {e}")
+
+# Performance monitoring middleware
+if redis_client:
+    try:
+        from .monitoring.performance_monitor import get_metrics_collector
+        metrics = get_metrics_collector()
+        app.add_middleware(PerformanceMiddleware, metrics_collector=metrics)
+        logger.info("✅ Performance monitoring middleware added")
+    except RuntimeError:
+        logger.warning("⚠️ Performance monitoring middleware not available")
+
+# Intelligent caching middleware
+if redis_client:
+    try:
+        from .services.intelligent_cache import get_intelligent_cache
+        cache = get_intelligent_cache()
+        app.add_middleware(CacheMiddleware, cache=cache)
+        logger.info("✅ Intelligent caching middleware added")
+    except RuntimeError:
+        logger.warning("⚠️ Caching middleware not available")
+
+# Session security middleware (if Redis is available)
+if redis_client:
+    from .security.session_middleware import get_session_security_middleware
+    try:
+        session_middleware = get_session_security_middleware()
+        app.middleware("http")(session_middleware)
+        logger.info("✅ Session security middleware added")
+    except RuntimeError:
+        logger.warning("⚠️ Session security middleware not initialized")
+
 # CORS Middleware
 app.add_middleware(
     CORSMiddleware,
@@ -279,6 +402,7 @@ app.include_router(enhanced_chat_router, prefix="/api", tags=["enhanced-chat"])
 app.include_router(darshana_router, prefix="/api/v1", tags=["philosophy"])
 app.include_router(universal_router, prefix="/api/v1", tags=["universal-guidance"])
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
+app.include_router(admin_auth_router, prefix="/api/admin", tags=["admin-authentication"])
 app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
 app.include_router(knowledge_router, tags=["spiritual-knowledge"])
 app.include_router(local_llm_router, tags=["local-llm"])
@@ -288,6 +412,17 @@ app.include_router(external_llm_router, prefix="/api/v1", tags=["external-llm"])
 # Import and include internal spiritual processing router
 from .routes.internal_spiritual import router as internal_spiritual_router
 app.include_router(internal_spiritual_router, tags=["internal-spiritual"])
+
+# Import and include security dashboard router
+from .routes.security_dashboard import router as security_dashboard_router
+app.include_router(security_dashboard_router, prefix="/api/v1", tags=["security-dashboard"])
+
+# Import and include performance dashboard router
+from .routes.performance_dashboard import router as performance_dashboard_router
+app.include_router(performance_dashboard_router, prefix="/api/v1", tags=["performance-dashboard"])
+
+# Include observability dashboard router
+app.include_router(dashboard_router, tags=["observability-dashboard"])
 
 @app.get("/", tags=["system"])
 async def root():

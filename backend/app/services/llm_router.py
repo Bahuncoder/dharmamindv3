@@ -28,10 +28,8 @@ class LLMProvider(str, Enum):
     """Available LLM providers"""
     DHARMALLM = "dharmallm"
     LOCAL_HF = "local-huggingface"  # Local Hugging Face models
-    OPENAI_GPT4 = "openai-gpt4"
-    OPENAI_GPT35 = "openai-gpt35" 
-    ANTHROPIC_CLAUDE = "anthropic-claude"
     HUGGINGFACE = "huggingface"
+    GATEWAY = "gateway"  # External LLMs via gateway service
 
 @dataclass
 class LLMResponse:
@@ -52,9 +50,7 @@ class LLMRouter:
         self.fallback_chain = [
             LLMProvider.DHARMALLM,
             LLMProvider.LOCAL_HF,  # Local models as fallback
-            LLMProvider.OPENAI_GPT4,
-            LLMProvider.ANTHROPIC_CLAUDE,
-            LLMProvider.OPENAI_GPT35
+            LLMProvider.GATEWAY   # External LLMs via gateway
         ]
         self.performance_metrics = {}
         self.local_llm_service = None
@@ -71,17 +67,12 @@ class LLMRouter:
             if settings.DHARMALLM_MODEL_PATH:
                 await self._init_dharmallm()
                 
-            # Initialize OpenAI
-            if settings.OPENAI_API_KEY:
-                await self._init_openai()
-                
-            # Initialize Anthropic
-            if settings.ANTHROPIC_API_KEY:
-                await self._init_anthropic()
-                
             # Initialize HuggingFace
             if settings.HUGGINGFACE_API_KEY:
                 await self._init_huggingface()
+                
+            # Initialize Gateway connection
+            await self._init_gateway()
                 
             logger.info(f"LLM Router initialized with {len(self.providers)} providers")
             
@@ -119,36 +110,32 @@ class LLMRouter:
         except Exception as e:
             logger.error(f"Failed to initialize DharmaLLM: {e}")
     
-    async def _init_openai(self):
-        """Initialize OpenAI provider"""
+    async def _init_gateway(self):
+        """Initialize LLM Gateway connection"""
         try:
-            # Initialize OpenAI client
-            self.providers[LLMProvider.OPENAI_GPT4] = {
-                "status": "ready",
-                "api_key": settings.OPENAI_API_KEY,
-                "model": "gpt-4"
+            # Import gateway client
+            from .llm_gateway_client import LLMGatewayClient
+            
+            gateway_client = LLMGatewayClient()
+            
+            # Test gateway connection
+            is_healthy = await gateway_client.health_check()
+            
+            self.providers[LLMProvider.GATEWAY] = {
+                "status": "ready" if is_healthy else "unavailable",
+                "client": gateway_client,
+                "available_providers": ["openai", "anthropic"] if is_healthy else []
             }
-            self.providers[LLMProvider.OPENAI_GPT35] = {
-                "status": "ready", 
-                "api_key": settings.OPENAI_API_KEY,
-                "model": "gpt-3.5-turbo"
-            }
-            logger.info("OpenAI providers initialized")
+            
+            logger.info(f"LLM Gateway initialized - {'healthy' if is_healthy else 'unavailable'}")
         except Exception as e:
-            logger.error(f"Failed to initialize OpenAI: {e}")
-    
-    async def _init_anthropic(self):
-        """Initialize Anthropic Claude"""
-        try:
-            self.providers[LLMProvider.ANTHROPIC_CLAUDE] = {
-                "status": "ready",
-                "api_key": settings.ANTHROPIC_API_KEY,
-                "model": "claude-3-opus-20240229"
+            logger.error(f"Failed to initialize LLM Gateway: {e}")
+            self.providers[LLMProvider.GATEWAY] = {
+                "status": "unavailable",
+                "client": None,
+                "available_providers": []
             }
-            logger.info("Anthropic provider initialized")
-        except Exception as e:
-            logger.error(f"Failed to initialize Anthropic: {e}")
-    
+
     async def _init_huggingface(self):
         """Initialize HuggingFace provider"""
         try:
@@ -157,6 +144,8 @@ class LLMRouter:
                 "api_key": settings.HUGGINGFACE_API_KEY
             }
             logger.info("HuggingFace provider initialized")
+        except Exception as e:
+            logger.error(f"Failed to initialize HuggingFace: {e}")
         except Exception as e:
             logger.error(f"Failed to initialize HuggingFace: {e}")
     

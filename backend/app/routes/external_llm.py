@@ -32,22 +32,9 @@ from datetime import datetime
 from ..models.subscription import SubscriptionTier
 from ..services.dharmic_llm_processor import get_dharmic_llm_processor, DharmicProcessingMode, DharmicResponse
 from ..services.subscription_service import SubscriptionService
+from ..services.llm_gateway_client import get_llm_gateway_client
 from ..middleware.security import get_current_user
 from ..config import settings
-
-# External LLM client imports (install these packages)
-# pip install openai anthropic
-try:
-    import openai
-    OPENAI_AVAILABLE = True
-except ImportError:
-    OPENAI_AVAILABLE = False
-
-try:
-    import anthropic
-    ANTHROPIC_AVAILABLE = True
-except ImportError:
-    ANTHROPIC_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/dharmic-llm", tags=["Dharmic LLM Integration"])
@@ -101,98 +88,11 @@ class DharmicLLMResponse(BaseModel):
     metadata: Dict[str, Any]
 
 # ===============================
-# EXTERNAL LLM CLIENTS
+# EXTERNAL LLM GATEWAY CLIENT
 # ===============================
 
-class ExternalLLMClient:
-    """Client for external LLM APIs"""
-    
-    def __init__(self):
-        self.openai_client = None
-        self.anthropic_client = None
-        self._initialize_clients()
-    
-    def _initialize_clients(self):
-        """Initialize external LLM clients"""
-        if OPENAI_AVAILABLE and settings.OPENAI_API_KEY:
-            openai.api_key = settings.OPENAI_API_KEY
-            self.openai_client = openai
-            logger.info("✅ OpenAI client initialized")
-        
-        if ANTHROPIC_AVAILABLE and getattr(settings, 'ANTHROPIC_API_KEY', None):
-            self.anthropic_client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
-            logger.info("✅ Anthropic client initialized")
-    
-    async def get_chatgpt_response(
-        self,
-        query: str,
-        model: str = "gpt-4",
-        system_prompt: Optional[str] = None,
-        max_tokens: int = 1000,
-        temperature: float = 0.7
-    ) -> str:
-        """Get response from ChatGPT"""
-        if not self.openai_client:
-            raise HTTPException(status_code=503, detail="OpenAI client not available")
-        
-        try:
-            messages = []
-            
-            if system_prompt:
-                messages.append({"role": "system", "content": system_prompt})
-            
-            messages.append({"role": "user", "content": query})
-            
-            response = await asyncio.to_thread(
-                self.openai_client.ChatCompletion.create,
-                model=model,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature
-            )
-            
-            return response.choices[0].message.content
-            
-        except Exception as e:
-            logger.error(f"ChatGPT API error: {e}")
-            raise HTTPException(status_code=502, detail=f"ChatGPT API error: {str(e)}")
-    
-    async def get_claude_response(
-        self,
-        query: str,
-        model: str = "claude-3-opus-20240229",
-        system_prompt: Optional[str] = None,
-        max_tokens: int = 1000
-    ) -> str:
-        """Get response from Claude"""
-        if not self.anthropic_client:
-            raise HTTPException(status_code=503, detail="Anthropic client not available")
-        
-        try:
-            messages = [{"role": "user", "content": query}]
-            
-            kwargs = {
-                "model": model,
-                "max_tokens": max_tokens,
-                "messages": messages
-            }
-            
-            if system_prompt:
-                kwargs["system"] = system_prompt
-            
-            response = await asyncio.to_thread(
-                self.anthropic_client.messages.create,
-                **kwargs
-            )
-            
-            return response.content[0].text
-            
-        except Exception as e:
-            logger.error(f"Claude API error: {e}")
-            raise HTTPException(status_code=502, detail=f"Claude API error: {str(e)}")
-
-# Global client instance
-external_llm_client = ExternalLLMClient()
+# Use the separate LLM Gateway service instead of direct API calls
+llm_gateway_client = get_llm_gateway_client()
 
 # ===============================
 # UTILITY FUNCTIONS  
@@ -217,13 +117,14 @@ async def process_chatgpt_with_dharmic_enhancement(
     current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     """
-    🤖➡️🕉️ Get ChatGPT response and process through dharmic system
+    🤖➡️🕉️ Get ChatGPT response via gateway and process through dharmic system
     
     Flow:
-    1. Send query to ChatGPT API
-    2. Get raw AI response
-    3. Process through complete dharmic backend
-    4. Return enhanced dharmic wisdom
+    1. Send request to LLM Gateway service
+    2. Gateway calls ChatGPT API
+    3. Get raw AI response from gateway
+    4. Process through complete dharmic backend
+    5. Return enhanced dharmic wisdom
     """
     try:
         # Get user subscription tier
@@ -232,29 +133,34 @@ async def process_chatgpt_with_dharmic_enhancement(
         # Get dharmic processor
         dharmic_processor = await get_dharmic_llm_processor()
         
-        # Step 1: Get ChatGPT response
-        logger.info(f"🤖 Getting ChatGPT response for user {current_user['id']}")
+        # Step 1: Get ChatGPT response via gateway
+        logger.info(f"🤖 Getting ChatGPT response via gateway for user {current_user['id']}")
         
         system_prompt = request.system_prompt or (
             "You are a helpful AI assistant. Provide clear, accurate, and helpful responses. "
             "Focus on being informative while being respectful of all perspectives."
         )
         
-        chatgpt_response = await external_llm_client.get_chatgpt_response(
+        # Use LLM Gateway client instead of direct API call
+        gateway_response = await llm_gateway_client.get_chatgpt_response(
             query=request.query,
             model=request.model,
             system_prompt=system_prompt,
             max_tokens=request.max_tokens,
-            temperature=request.temperature
+            temperature=request.temperature,
+            user_id=current_user["id"]
         )
         
-        logger.info(f"✅ ChatGPT response received: {len(chatgpt_response)} characters")
+        if not gateway_response.success:
+            raise HTTPException(status_code=502, detail="Failed to get response from LLM Gateway")
+        
+        logger.info(f"✅ ChatGPT response received via gateway: {len(gateway_response.content)} characters")
         
         # Step 2: Process through dharmic system
         logger.info(f"🕉️ Processing through dharmic system...")
         
         dharmic_response = await dharmic_processor.process_external_llm_response(
-            external_response=chatgpt_response,
+            external_response=gateway_response.content,
             original_query=request.query,
             user_id=current_user["id"],
             subscription_tier=subscription_tier,
@@ -276,7 +182,12 @@ async def process_chatgpt_with_dharmic_enhancement(
             subscription_tier=dharmic_response.subscription_tier,
             provider="openai",
             model=request.model,
-            metadata=dharmic_response.metadata
+            metadata={
+                **dharmic_response.metadata,
+                "gateway_response_time": gateway_response.response_time,
+                "gateway_cached": gateway_response.cached,
+                "gateway_request_id": gateway_response.request_id
+            }
         )
         
     except Exception as e:
@@ -289,7 +200,7 @@ async def process_claude_with_dharmic_enhancement(
     current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     """
-    🤖➡️🕉️ Get Claude response and process through dharmic system
+    🤖➡️🕉️ Get Claude response via gateway and process through dharmic system
     """
     try:
         # Get user subscription tier
@@ -298,28 +209,33 @@ async def process_claude_with_dharmic_enhancement(
         # Get dharmic processor
         dharmic_processor = await get_dharmic_llm_processor()
         
-        # Step 1: Get Claude response
-        logger.info(f"🤖 Getting Claude response for user {current_user['id']}")
+        # Step 1: Get Claude response via gateway
+        logger.info(f"🤖 Getting Claude response via gateway for user {current_user['id']}")
         
         system_prompt = request.system_prompt or (
             "You are Claude, a helpful AI assistant created by Anthropic. "
             "Provide thoughtful, nuanced responses that consider multiple perspectives."
         )
         
-        claude_response = await external_llm_client.get_claude_response(
+        # Use LLM Gateway client
+        gateway_response = await llm_gateway_client.get_claude_response(
             query=request.query,
             model=request.model,
             system_prompt=system_prompt,
-            max_tokens=request.max_tokens
+            max_tokens=request.max_tokens,
+            user_id=current_user["id"]
         )
         
-        logger.info(f"✅ Claude response received: {len(claude_response)} characters")
+        if not gateway_response.success:
+            raise HTTPException(status_code=502, detail="Failed to get response from LLM Gateway")
+        
+        logger.info(f"✅ Claude response received via gateway: {len(gateway_response.content)} characters")
         
         # Step 2: Process through dharmic system
         logger.info(f"🕉️ Processing through dharmic system...")
         
         dharmic_response = await dharmic_processor.process_external_llm_response(
-            external_response=claude_response,
+            external_response=gateway_response.content,
             original_query=request.query,
             user_id=current_user["id"],
             subscription_tier=subscription_tier,
@@ -341,7 +257,12 @@ async def process_claude_with_dharmic_enhancement(
             subscription_tier=dharmic_response.subscription_tier,
             provider="anthropic",
             model=request.model,
-            metadata=dharmic_response.metadata
+            metadata={
+                **dharmic_response.metadata,
+                "gateway_response_time": gateway_response.response_time,
+                "gateway_cached": gateway_response.cached,
+                "gateway_request_id": gateway_response.request_id
+            }
         )
         
     except Exception as e:
@@ -356,7 +277,7 @@ async def compare_multiple_llm_responses(
     current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     """
-    🔄 Compare responses from multiple LLMs processed through dharmic system
+    🔄 Compare responses from multiple LLMs processed through dharmic system via gateway
     """
     try:
         # Get user subscription tier
@@ -365,22 +286,33 @@ async def compare_multiple_llm_responses(
         # Get dharmic processor
         dharmic_processor = await get_dharmic_llm_processor()
         
+        # Check available providers from gateway
+        available_providers = await llm_gateway_client.get_available_providers()
+        
         results = {}
         
         # Process each provider
         for provider in providers:
             try:
-                if provider == "openai" and external_llm_client.openai_client:
-                    raw_response = await external_llm_client.get_chatgpt_response(query)
-                elif provider == "anthropic" and external_llm_client.anthropic_client:
-                    raw_response = await external_llm_client.get_claude_response(query)
+                if provider == "openai" and available_providers.get("providers", {}).get("openai", {}).get("available"):
+                    gateway_response = await llm_gateway_client.get_chatgpt_response(
+                        query=query, user_id=current_user["id"]
+                    )
+                elif provider == "anthropic" and available_providers.get("providers", {}).get("anthropic", {}).get("available"):
+                    gateway_response = await llm_gateway_client.get_claude_response(
+                        query=query, user_id=current_user["id"]
+                    )
                 else:
                     results[provider] = {"error": f"Provider {provider} not available"}
                     continue
                 
+                if not gateway_response.success:
+                    results[provider] = {"error": f"Gateway error for {provider}"}
+                    continue
+                
                 # Process through dharmic system
                 dharmic_response = await dharmic_processor.process_external_llm_response(
-                    external_response=raw_response,
+                    external_response=gateway_response.content,
                     original_query=query,
                     user_id=current_user["id"],
                     subscription_tier=subscription_tier,
@@ -393,7 +325,9 @@ async def compare_multiple_llm_responses(
                     "dharmic_response": dharmic_response.dharmic_response,
                     "alignment_score": dharmic_response.dharmic_alignment_score,
                     "modules_used": dharmic_response.modules_used,
-                    "processing_mode": dharmic_response.processing_mode
+                    "processing_mode": dharmic_response.processing_mode,
+                    "gateway_response_time": gateway_response.response_time,
+                    "gateway_cached": gateway_response.cached
                 }
                 
             except Exception as e:
@@ -489,20 +423,33 @@ async def dharmic_llm_health_check():
     try:
         dharmic_processor = await get_dharmic_llm_processor()
         
+        # Check LLM Gateway availability
+        gateway_health = await llm_gateway_client.health_check()
+        gateway_providers = await llm_gateway_client.get_available_providers()
+        
         health_status = {
             "dharmic_processor": await dharmic_processor.health_check(),
-            "openai_available": OPENAI_AVAILABLE and bool(external_llm_client.openai_client),
-            "anthropic_available": ANTHROPIC_AVAILABLE and bool(external_llm_client.anthropic_client),
+            "llm_gateway": gateway_health,
+            "gateway_providers": gateway_providers.get("providers", {}),
             "spiritual_modules": True,  # Always available
             "darshana_engine": True,    # Always available
             "subscription_service": True # Always available
         }
         
-        overall_health = all(health_status.values())
+        overall_health = all([
+            health_status["dharmic_processor"],
+            health_status["llm_gateway"],
+            health_status["spiritual_modules"],
+            health_status["darshana_engine"]
+        ])
         
         return {
             "status": "healthy" if overall_health else "degraded",
             "services": health_status,
+            "gateway_info": {
+                "connected": gateway_health,
+                "available_providers": list(gateway_providers.get("providers", {}).keys())
+            },
             "timestamp": datetime.utcnow().isoformat()
         }
         

@@ -744,10 +744,17 @@ def create_dharma_llm_app(
         version="2.0.0"
     )
     
-    # CORS middleware
+    # Secure CORS middleware - restrict to specific domains
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=[
+            "http://localhost:3000",
+            "http://localhost:3001", 
+            "http://localhost:3002",
+            "http://localhost:3003",
+            "https://dharmamind.ai",
+            "https://www.dharmamind.ai"
+        ],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

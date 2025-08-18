@@ -1,0 +1,10 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+httpx==0.25.2
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# Optional dependencies (install as needed)
+redis==5.0.1
+openai==1.3.5
+anthropic==0.7.8
