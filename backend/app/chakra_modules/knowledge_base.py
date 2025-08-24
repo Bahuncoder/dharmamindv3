@@ -36,6 +36,18 @@ except ImportError as e:
     logging.warning(f"Semantic search not available: {e}")
     SEMANTIC_SEARCH_AVAILABLE = False
 
+try:
+    from advanced_knowledge_enhancer import (
+        AdvancedKnowledgeEnhancer,
+        WisdomLevel,
+        TraditionType,
+        EnhancedWisdomEntry
+    )
+    ADVANCED_KNOWLEDGE_AVAILABLE = True
+except ImportError as e:
+    logging.warning(f"Advanced knowledge system not available: {e}")
+    ADVANCED_KNOWLEDGE_AVAILABLE = False
+
 class KnowledgeBase:
     """
     Central knowledge repository for universal wisdom and spiritual knowledge
@@ -49,6 +61,14 @@ class KnowledgeBase:
         self.logger = self._setup_logging()
         self.connection = None
         self.is_initialized = False
+        
+        # Initialize enhanced knowledge system
+        if ADVANCED_KNOWLEDGE_AVAILABLE:
+            self.advanced_enhancer = AdvancedKnowledgeEnhancer()
+            self.logger.info("🚀 Advanced Knowledge Enhancement System loaded")
+        else:
+            self.advanced_enhancer = None
+            self.logger.warning("⚠️ Advanced Knowledge Enhancement not available")
         
         # Ensure the data directory exists
         Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
@@ -750,6 +770,168 @@ class KnowledgeBase:
         
         search_term = emotion_keywords.get(emotion.lower(), emotion)
         return await self._keyword_search_wisdom(search_term, limit=3)
+    
+    # Enhanced Knowledge System Methods
+    async def initialize_enhanced_knowledge(self) -> bool:
+        """Initialize the enhanced knowledge system"""
+        if not self.advanced_enhancer:
+            self.logger.warning("Advanced knowledge enhancer not available")
+            return False
+        
+        try:
+            success = await self.advanced_enhancer.initialize_enhanced_system()
+            if success:
+                self.logger.info("✅ Enhanced knowledge system initialized successfully")
+            return success
+        except Exception as e:
+            self.logger.error(f"Failed to initialize enhanced knowledge: {e}")
+            return False
+    
+    async def search_advanced_wisdom(self, 
+                                   query: str,
+                                   wisdom_level: Optional[str] = None,
+                                   tradition: Optional[str] = None,
+                                   consciousness_level: Optional[str] = None,
+                                   limit: int = 10) -> List[Dict[str, Any]]:
+        """Search enhanced wisdom with advanced filtering"""
+        if not self.advanced_enhancer:
+            self.logger.warning("Advanced knowledge enhancer not available")
+            return await self._keyword_search_wisdom(query, limit)
+        
+        try:
+            # Convert string parameters to enum values if needed
+            wisdom_level_enum = None
+            tradition_enum = None
+            
+            if wisdom_level and ADVANCED_KNOWLEDGE_AVAILABLE:
+                try:
+                    wisdom_level_enum = WisdomLevel(wisdom_level.lower())
+                except ValueError:
+                    pass
+            
+            if tradition and ADVANCED_KNOWLEDGE_AVAILABLE:
+                try:
+                    tradition_enum = TraditionType(tradition.lower())
+                except ValueError:
+                    pass
+            
+            results = await self.advanced_enhancer.search_enhanced_wisdom(
+                query=query,
+                wisdom_level=wisdom_level_enum,
+                tradition=tradition_enum,
+                limit=limit
+            )
+            
+            self.logger.info(f"Found {len(results)} advanced wisdom entries for query: {query}")
+            return results
+            
+        except Exception as e:
+            self.logger.error(f"Advanced wisdom search failed: {e}")
+            return await self._keyword_search_wisdom(query, limit)
+    
+    async def get_practice_guidance(self, practice_id: str) -> Optional[Dict[str, Any]]:
+        """Get detailed practice guidance with progression information"""
+        if not self.advanced_enhancer:
+            return None
+        
+        try:
+            progression = await self.advanced_enhancer.get_practice_progression(practice_id)
+            if progression:
+                self.logger.info(f"Retrieved practice guidance for: {practice_id}")
+                return progression
+        except Exception as e:
+            self.logger.error(f"Failed to get practice guidance: {e}")
+        
+        return None
+    
+    async def get_wisdom_connections(self, wisdom_id: str) -> List[Dict[str, Any]]:
+        """Get connected wisdom entries for deeper understanding"""
+        if not self.advanced_enhancer:
+            return []
+        
+        try:
+            connections = await self.advanced_enhancer.get_wisdom_connections(wisdom_id)
+            self.logger.info(f"Found {len(connections)} connected wisdom entries for: {wisdom_id}")
+            return connections
+        except Exception as e:
+            self.logger.error(f"Failed to get wisdom connections: {e}")
+            return []
+    
+    async def get_philosophical_framework(self, tradition: str, level: str = "intermediate") -> List[Dict[str, Any]]:
+        """Get philosophical framework for specific tradition and level"""
+        if not self.advanced_enhancer:
+            return []
+        
+        try:
+            results = await self.advanced_enhancer.search_enhanced_wisdom(
+                query="philosophical framework",
+                tradition=TraditionType(tradition.lower()) if ADVANCED_KNOWLEDGE_AVAILABLE else None,
+                wisdom_level=WisdomLevel(level.lower()) if ADVANCED_KNOWLEDGE_AVAILABLE else None,
+                limit=20
+            )
+            
+            self.logger.info(f"Retrieved {len(results)} philosophical framework entries for {tradition}")
+            return results
+            
+        except Exception as e:
+            self.logger.error(f"Failed to get philosophical framework: {e}")
+            return []
+    
+    async def get_consciousness_studies_integration(self, topic: str) -> List[Dict[str, Any]]:
+        """Get integration between ancient wisdom and modern consciousness studies"""
+        if not self.advanced_enhancer:
+            return []
+        
+        try:
+            results = await self.advanced_enhancer.search_enhanced_wisdom(
+                query=f"consciousness {topic}",
+                limit=15
+            )
+            
+            # Filter for entries that have scientific correlates
+            consciousness_studies = []
+            for result in results:
+                if result.get('scientific_correlates') and result['scientific_correlates']:
+                    consciousness_studies.append(result)
+            
+            self.logger.info(f"Found {len(consciousness_studies)} consciousness studies integrations for: {topic}")
+            return consciousness_studies
+            
+        except Exception as e:
+            self.logger.error(f"Failed to get consciousness studies integration: {e}")
+            return []
+    
+    async def get_dharmic_ai_guidance(self, context: str) -> List[Dict[str, Any]]:
+        """Get dharmic principles for AI and technology contexts"""
+        if not self.advanced_enhancer:
+            return []
+        
+        try:
+            results = await self.advanced_enhancer.search_enhanced_wisdom(
+                query=f"dharmic AI technology {context}",
+                limit=10
+            )
+            
+            # Look for entries related to AI, technology, or modern applications
+            ai_guidance = []
+            for result in results:
+                modern_apps = result.get('modern_applications', [])
+                if any('AI' in app or 'technology' in app or 'digital' in app for app in modern_apps):
+                    ai_guidance.append(result)
+            
+            if not ai_guidance:
+                # Fallback to general dharmic principles
+                ai_guidance = await self.advanced_enhancer.search_enhanced_wisdom(
+                    query="dharma ethics principles",
+                    limit=5
+                )
+            
+            self.logger.info(f"Retrieved {len(ai_guidance)} dharmic AI guidance entries")
+            return ai_guidance
+            
+        except Exception as e:
+            self.logger.error(f"Failed to get dharmic AI guidance: {e}")
+            return []
 
     async def close(self):
         """Close the knowledge base connection"""
