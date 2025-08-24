@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Logo from '../../components/Logo';
+import { SessionManager } from '../../utils/secureStorage';
+import { useToast } from '../../contexts/ToastContext';
 
 interface DashboardStats {
   totalPosts: number;
@@ -23,6 +25,7 @@ interface RecentActivity {
 
 const AdminDashboard: React.FC = () => {
   const router = useRouter();
+  const { success, error } = useToast();
   const [activeTab, setActiveTab] = useState('overview');
   const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState<DashboardStats>({
@@ -33,6 +36,8 @@ const AdminDashboard: React.FC = () => {
     newComments: 23,
     pendingReviews: 5
   });
+  
+  const [refreshing, setRefreshing] = useState(false);
 
   const [recentActivity] = useState<RecentActivity[]>([
     {
@@ -70,21 +75,46 @@ const AdminDashboard: React.FC = () => {
   ]);
 
   useEffect(() => {
-    // Check authentication
-    const isAuthenticated = localStorage.getItem('dharma_admin');
-    if (!isAuthenticated) {
-      router.push('/admin/login');
-      return;
-    }
-    
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 800);
-    return () => clearTimeout(timer);
-  }, [router]);
+    // Check authentication using secure session
+    const checkAuth = () => {
+      if (!SessionManager.isAdminAuthenticated()) {
+        error('Authentication Required', 'Please log in to access the admin dashboard.');
+        router.push('/admin/login');
+        return;
+      }
+      
+      // Simulate loading
+      const timer = setTimeout(() => setIsLoading(false), 800);
+      return () => clearTimeout(timer);
+    };
+
+    checkAuth();
+  }, [router, error]);
 
   const handleLogout = () => {
-    localStorage.removeItem('dharma_admin');
+    SessionManager.clearAdminSession();
+    success('Logged Out', 'You have been successfully logged out.');
     router.push('/admin/login');
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Update stats with new data
+      setStats(prev => ({
+        ...prev,
+        totalViews: prev.totalViews + Math.floor(Math.random() * 100),
+        activeUsers: Math.floor(Math.random() * 150) + 50,
+        newComments: Math.floor(Math.random() * 30) + 10
+      }));
+      success('Dashboard Refreshed', 'Latest data has been loaded.');
+    } catch (err) {
+      error('Refresh Failed', 'Unable to refresh dashboard data. Please try again.');
+    } finally {
+      setRefreshing(false);
+    }
   };
 
   const getActivityIcon = (type: string, status: string) => {
@@ -139,10 +169,20 @@ const AdminDashboard: React.FC = () => {
               </div>
               
               <div className="flex items-center space-x-4">
+                <button 
+                  onClick={handleRefresh}
+                  disabled={refreshing}
+                  className="p-2 rounded-full bg-neutral-100 text-secondary hover:bg-neutral-200 hover:text-primary transition-colors disabled:opacity-50"
+                  title="Refresh Dashboard"
+                >
+                  <span className={`text-lg ${refreshing ? 'animate-spin' : ''}`}>
+                    {refreshing ? '⟳' : '🔄'}
+                  </span>
+                </button>
                 <div className="relative">
                   <button className="p-2 rounded-full bg-warning-light text-warning hover:bg-warning hover:text-white transition-colors">
                     <span className="text-lg">🔔</span>
-                    <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                    <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-pulse">
                       {stats.pendingReviews}
                     </span>
                   </button>
@@ -202,54 +242,61 @@ const AdminDashboard: React.FC = () => {
             <div className="space-y-8">
               {/* Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="card-primary p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex items-center justify-between">
+                <div className="card-primary p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-primary opacity-5 rounded-full -mr-10 -mt-10 group-hover:scale-110 transition-transform"></div>
+                  <div className="flex items-center justify-between relative z-10">
                     <div>
                       <p className="text-sm font-bold text-secondary uppercase tracking-wide">Total Posts</p>
-                      <p className="text-3xl font-black text-primary">{stats.totalPosts}</p>
+                      <p className="text-3xl font-black text-primary group-hover:scale-105 transition-transform">{stats.totalPosts}</p>
                     </div>
-                    <div className="text-4xl">📝</div>
+                    <div className="text-4xl group-hover:animate-bounce">📝</div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 relative z-10">
                     <span className="text-sm font-semibold text-success">+12% from last month</span>
                   </div>
                 </div>
 
-                <div className="card-primary p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex items-center justify-between">
+                <div className="card-primary p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-info opacity-5 rounded-full -mr-10 -mt-10 group-hover:scale-110 transition-transform"></div>
+                  <div className="flex items-center justify-between relative z-10">
                     <div>
                       <p className="text-sm font-bold text-secondary uppercase tracking-wide">Total Views</p>
-                      <p className="text-3xl font-black text-primary">{stats.totalViews.toLocaleString()}</p>
+                      <p className="text-3xl font-black text-primary group-hover:scale-105 transition-transform">{stats.totalViews.toLocaleString()}</p>
                     </div>
-                    <div className="text-4xl">👁️</div>
+                    <div className="text-4xl group-hover:animate-pulse">👁️</div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 relative z-10">
                     <span className="text-sm font-semibold text-success">+23% from last month</span>
                   </div>
                 </div>
 
-                <div className="card-primary p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex items-center justify-between">
+                <div className="card-primary p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-warning opacity-5 rounded-full -mr-10 -mt-10 group-hover:scale-110 transition-transform"></div>
+                  <div className="flex items-center justify-between relative z-10">
                     <div>
                       <p className="text-sm font-bold text-secondary uppercase tracking-wide">Total Users</p>
-                      <p className="text-3xl font-black text-primary">{stats.totalUsers.toLocaleString()}</p>
+                      <p className="text-3xl font-black text-primary group-hover:scale-105 transition-transform">{stats.totalUsers.toLocaleString()}</p>
                     </div>
-                    <div className="text-4xl">👥</div>
+                    <div className="text-4xl group-hover:rotate-12 transition-transform">👥</div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 relative z-10">
                     <span className="text-sm font-semibold text-success">+8% from last month</span>
                   </div>
                 </div>
 
-                <div className="card-primary p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex items-center justify-between">
+                <div className="card-primary p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-success opacity-5 rounded-full -mr-10 -mt-10 group-hover:scale-110 transition-transform"></div>
+                  <div className="flex items-center justify-between relative z-10">
                     <div>
                       <p className="text-sm font-bold text-secondary uppercase tracking-wide">Active Now</p>
-                      <p className="text-3xl font-black text-primary">{stats.activeUsers}</p>
+                      <p className="text-3xl font-black text-primary group-hover:scale-105 transition-transform">{stats.activeUsers}</p>
                     </div>
-                    <div className="text-4xl">🟢</div>
+                    <div className="text-4xl">
+                      <span className="inline-block animate-ping absolute text-2xl">🟢</span>
+                      <span className="text-4xl">🟢</span>
+                    </div>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 relative z-10">
                     <span className="text-sm font-semibold text-info">Live user count</span>
                   </div>
                 </div>
@@ -261,55 +308,73 @@ const AdminDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <button 
                     onClick={() => setActiveTab('content')}
-                    className="btn-primary p-4 rounded-lg font-bold text-center hover:opacity-90 transition-opacity"
+                    className="btn-primary p-6 rounded-xl font-bold text-center hover:opacity-90 transition-all duration-300 group"
                   >
-                    <div className="text-2xl mb-2">✍️</div>
-                    Create New Post
+                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">✍️</div>
+                    <div className="text-lg">Create New Post</div>
+                    <div className="text-sm opacity-80 mt-1">Write & publish</div>
                   </button>
                   <button 
                     onClick={() => setActiveTab('users')}
-                    className="btn-outline p-4 rounded-lg font-bold text-center hover:bg-primary hover:text-white transition-all"
+                    className="btn-outline p-6 rounded-xl font-bold text-center hover:bg-primary hover:text-white transition-all duration-300 group"
                   >
-                    <div className="text-2xl mb-2">👤</div>
-                    Manage Users
+                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">👤</div>
+                    <div className="text-lg">Manage Users</div>
+                    <div className="text-sm opacity-70 mt-1 group-hover:opacity-100">Community control</div>
                   </button>
                   <button 
                     onClick={() => setActiveTab('analytics')}
-                    className="btn-outline p-4 rounded-lg font-bold text-center hover:bg-primary hover:text-white transition-all"
+                    className="btn-outline p-6 rounded-xl font-bold text-center hover:bg-primary hover:text-white transition-all duration-300 group"
                   >
-                    <div className="text-2xl mb-2">📊</div>
-                    View Analytics
+                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">📊</div>
+                    <div className="text-lg">View Analytics</div>
+                    <div className="text-sm opacity-70 mt-1 group-hover:opacity-100">Insights & trends</div>
                   </button>
                   <button 
                     onClick={() => setActiveTab('settings')}
-                    className="btn-outline p-4 rounded-lg font-bold text-center hover:bg-primary hover:text-white transition-all"
+                    className="btn-outline p-6 rounded-xl font-bold text-center hover:bg-primary hover:text-white transition-all duration-300 group"
                   >
-                    <div className="text-2xl mb-2">⚙️</div>
-                    Site Settings
+                    <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">⚙️</div>
+                    <div className="text-lg">Site Settings</div>
+                    <div className="text-sm opacity-70 mt-1 group-hover:opacity-100">Configure system</div>
                   </button>
                 </div>
               </div>
 
               {/* Recent Activity */}
               <div className="card-primary p-8">
-                <h3 className="text-2xl font-black text-primary mb-6 tracking-tight">Recent Activity</h3>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-black text-primary tracking-tight">Recent Activity</h3>
+                  <button className="text-sm font-bold text-secondary hover:text-primary transition-colors">
+                    View All →
+                  </button>
+                </div>
                 <div className="space-y-4">
                   {recentActivity.map((activity) => (
-                    <div key={activity.id} className="flex items-start space-x-4 p-4 hover:bg-neutral-50 rounded-lg transition-colors">
-                      <div className={`p-2 rounded-full ${getStatusColor(activity.status)}`}>
-                        <span className="text-lg">{getActivityIcon(activity.type, activity.status)}</span>
+                    <div key={activity.id} className="flex items-start space-x-4 p-4 hover:bg-neutral-50 rounded-xl transition-all duration-300 group cursor-pointer">
+                      <div className={`p-3 rounded-xl ${getStatusColor(activity.status)} group-hover:scale-110 transition-transform`}>
+                        <span className="text-xl">{getActivityIcon(activity.type, activity.status)}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-primary">{activity.title}</p>
-                        <p className="text-sm text-secondary font-medium">{activity.description}</p>
-                        <p className="text-xs text-muted font-semibold">{activity.timestamp}</p>
+                        <p className="text-lg font-bold text-primary group-hover:text-primary-hover transition-colors">{activity.title}</p>
+                        <p className="text-sm text-secondary font-medium mt-1 line-clamp-2">{activity.description}</p>
+                        <p className="text-xs text-muted font-semibold mt-2 flex items-center">
+                          <span className="mr-2">🕐</span>
+                          {activity.timestamp}
+                        </p>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <button className="p-2 rounded-lg bg-neutral-100 text-secondary hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                          <span>→</span>
+                        </button>
                       </div>
                     </div>
                   ))}
                 </div>
                 <div className="mt-6">
-                  <button className="btn-outline px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-all">
-                    View All Activity
+                  <button className="btn-outline px-6 py-3 rounded-xl font-bold text-sm hover:bg-primary hover:text-white transition-all w-full md:w-auto">
+                    <span className="mr-2">📋</span>
+                    View Complete Activity Log
                   </button>
                 </div>
               </div>

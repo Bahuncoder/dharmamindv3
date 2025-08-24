@@ -20,6 +20,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.security import HTTPBearer
 from contextlib import asynccontextmanager
+import asyncio
 import uvicorn
 import logging
 from typing import Optional, Dict, Any
@@ -42,7 +43,7 @@ from .services.llm_router import LLMRouter
 from .services.module_selector import ModuleSelector
 from .services.evaluator import ResponseEvaluator
 from .services.memory_manager import MemoryManager
-from .services.llm_gateway_client import init_llm_gateway_client
+from .services.llm_gateway_client import get_llm_gateway_client
 from .db.database import DatabaseManager
 from .config import settings
 
@@ -68,7 +69,7 @@ from .security.jwt_manager import init_jwt_manager
 from .security.monitoring import init_security_monitor
 from .security.session_middleware import init_session_security_middleware
 from .middleware.rate_limiting import RateLimitMiddleware
-from .middleware.security import SecurityMiddleware
+from .middleware.security import SecurityHeadersMiddleware, BruteForceProtectionMiddleware, RequestValidationMiddleware
 
 # Import enhanced performance components
 from .services.advanced_llm_router import init_advanced_llm_router
@@ -135,7 +136,7 @@ async def lifespan(app: FastAPI):
             logger.info("🔐 Initializing enterprise security framework...")
             
             # Initialize JWT manager
-            jwt_manager = init_jwt_manager(redis_client)
+            jwt_manager = init_jwt_manager(redis_client, settings.JWT_SECRET_KEY or "dev-secret-key-for-development-only")
             logger.info("✅ JWT manager initialized")
             
             # Initialize security monitoring
@@ -156,10 +157,11 @@ async def lifespan(app: FastAPI):
             logger.info("⚡ Initializing performance enhancement framework...")
             
             # Initialize distributed tracing
+            env_value = settings.ENVIRONMENT.value if hasattr(settings.ENVIRONMENT, 'value') else str(settings.ENVIRONMENT)
             tracing_config = TracingConfig(
                 service_name="dharmamind-backend",
                 service_version="2.0.0",
-                environment=settings.ENVIRONMENT.value,
+                environment=env_value,
                 jaeger_endpoint="http://localhost:14268/api/traces"
             )
             tracer = initialize_tracing(tracing_config)
@@ -202,8 +204,8 @@ async def lifespan(app: FastAPI):
             logger.warning("⚠️ Performance features limited - Redis unavailable")
         
         # Initialize LLM Gateway client
-        init_llm_gateway_client()
-        logger.info("✅ LLM Gateway client initialized")
+        # LLM Gateway client will be initialized when first used
+        logger.info("✅ LLM Gateway client ready")
         
         # Initialize memory manager (vector DB, embeddings)
         memory_manager = MemoryManager()
@@ -217,7 +219,8 @@ async def lifespan(app: FastAPI):
         chakra_init_results = await initialize_all_modules()
         logger.info(f"🔮 Chakra modules initialization: {chakra_init_results}")
         
-        # Get all Chakra module instances
+        # Get all Chakra module instances (update global variable)
+        global chakra_modules
         chakra_modules = {
             "consciousness_core": get_consciousness_core(),
             "knowledge_base": get_knowledge_base(),
@@ -334,7 +337,9 @@ app = FastAPI(
 security = HTTPBearer()
 
 # Add enhanced middleware stack
-app.add_middleware(SecurityMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(BruteForceProtectionMiddleware)
+app.add_middleware(RequestValidationMiddleware)
 
 # Distributed tracing middleware
 if redis_client:
@@ -540,7 +545,12 @@ async def chakra_status():
         for module_name, module_instance in chakra_modules.items():
             try:
                 if hasattr(module_instance, 'get_status'):
-                    detailed_status["modules"][module_name] = module_instance.get_status()
+                    status_result = module_instance.get_status()
+                    # Handle both async and sync get_status methods
+                    if asyncio.iscoroutine(status_result):
+                        detailed_status["modules"][module_name] = await status_result
+                    else:
+                        detailed_status["modules"][module_name] = status_result
                 else:
                     detailed_status["modules"][module_name] = {
                         "status": "active",

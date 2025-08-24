@@ -10,7 +10,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 from app.security.monitoring import get_security_monitor, SecurityEventType, ThreatLevel
 from app.security.jwt_manager import get_jwt_manager
-from app.middleware.security import verify_admin_token
+from app.routes.admin_auth import verify_admin_token
 import logging
 
 logger = logging.getLogger(__name__)

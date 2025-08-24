@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import { useColors } from '../contexts/ColorContext';
+import Button from './Button';
 
 const ColorManager: React.FC = () => {
   const { currentTheme, availableThemes, changeTheme, updateColors } = useColors();
@@ -14,9 +15,18 @@ const ColorManager: React.FC = () => {
     primaryStart: currentTheme.colors.primaryStart,
     primaryEnd: currentTheme.colors.primaryEnd,
   });
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [savedSuccess, setSavedSuccess] = useState(false);
 
   const handleThemeChange = (themeName: string) => {
     changeTheme(themeName);
+    const selectedTheme = availableThemes.find(t => t.name === themeName);
+    if (selectedTheme) {
+      setCustomColors({
+        primaryStart: selectedTheme.colors.primaryStart,
+        primaryEnd: selectedTheme.colors.primaryEnd,
+      });
+    }
   };
 
   const handleCustomColorChange = (colorKey: string, value: string) => {
@@ -35,86 +45,134 @@ const ColorManager: React.FC = () => {
     });
   };
 
+  const handleSave = () => {
+    setSavedSuccess(true);
+    setTimeout(() => setSavedSuccess(false), 2000);
+  };
+
+  const getThemeDisplayName = (name: string) => {
+    return name.split('-').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+  };
+
   return (
-    <div className="color-manager p-6 bg-white dark:bg-neutral-800 rounded-lg shadow-lg max-w-md mx-auto">
-      <h3 className="text-xl font-semibold mb-6 text-neutral-900 dark:text-neutral-100">
-        Color Theme Manager
-      </h3>
+    <div className="color-manager card-elevated p-8 max-w-2xl mx-auto">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h3 className="text-3xl font-black text-primary mb-2">
+            🎨 Color Theme Manager
+          </h3>
+          <p className="text-secondary font-semibold">
+            Customize your DharmaMind experience with beautiful color themes
+          </p>
+        </div>
+        <button
+          onClick={() => setIsPreviewMode(!isPreviewMode)}
+          className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${
+            isPreviewMode 
+              ? 'bg-primary text-white' 
+              : 'bg-neutral-100 text-secondary hover:bg-neutral-200'
+          }`}
+        >
+          {isPreviewMode ? '👁️ Exit Preview' : '👀 Preview Mode'}
+        </button>
+      </div>
       
-      {/* Predefined Themes */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
-          Predefined Themes
+      {/* Theme Selection Grid */}
+      <div className="mb-8">
+        <label className="block text-xl font-black text-primary mb-4">
+          ✨ Predefined Themes
         </label>
-        <div className="grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {availableThemes.map((theme) => (
             <button
               key={theme.name}
               onClick={() => handleThemeChange(theme.name)}
-              className={`flex items-center p-3 rounded-lg border-2 transition-all ${
+              className={`group flex items-center p-5 rounded-xl border-2 transition-all duration-300 hover:shadow-lg ${
                 currentTheme.name === theme.name
-                  ? 'border-primary bg-primary bg-opacity-10'
-                  : 'border-neutral-200 dark:border-neutral-600 hover:border-primary'
+                  ? 'border-primary bg-primary-gradient bg-opacity-10 shadow-md transform scale-105'
+                  : 'border-border-light hover:border-primary hover:shadow-md'
               }`}
             >
-              <div
-                className="w-6 h-6 rounded-full mr-3"
-                style={{
-                  background: `linear-gradient(45deg, ${theme.colors.primaryStart}, ${theme.colors.primaryEnd})`
-                }}
-              />
-              <span className="text-sm font-medium capitalize text-neutral-700 dark:text-neutral-300">
-                {theme.name.replace('-', ' ')}
-              </span>
+              <div className="flex items-center space-x-4 w-full">
+                <div
+                  className="w-12 h-12 rounded-xl shadow-md group-hover:scale-110 transition-transform"
+                  style={{
+                    background: `linear-gradient(135deg, ${theme.colors.primaryStart}, ${theme.colors.primaryEnd})`
+                  }}
+                />
+                <div className="flex-1 text-left">
+                  <div className="font-bold text-primary text-lg">
+                    {getThemeDisplayName(theme.name)}
+                  </div>
+                  <div className="text-sm text-secondary font-medium">
+                    {theme.colors.primaryStart} → {theme.colors.primaryEnd}
+                  </div>
+                </div>
+                {currentTheme.name === theme.name && (
+                  <div className="text-2xl animate-pulse">✓</div>
+                )}
+              </div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Custom Colors */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
-          Custom Colors
+      {/* Custom Colors Section */}
+      <div className="mb-8">
+        <label className="block text-xl font-black text-primary mb-4">
+          🎯 Custom Colors
         </label>
         
-        <div className="space-y-4">
-          <div>
-            <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <label className="block text-sm font-bold text-secondary uppercase tracking-wide">
               Primary Start Color
             </label>
-            <div className="flex items-center space-x-2">
-              <input
-                type="color"
-                value={customColors.primaryStart}
-                onChange={(e) => handleCustomColorChange('primaryStart', e.target.value)}
-                className="w-12 h-10 rounded border-2 border-neutral-200 dark:border-neutral-600 cursor-pointer"
-              />
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <input
+                  type="color"
+                  value={customColors.primaryStart}
+                  onChange={(e) => handleCustomColorChange('primaryStart', e.target.value)}
+                  className="w-16 h-16 rounded-xl border-2 border-border-light cursor-pointer hover:border-primary transition-colors shadow-md"
+                />
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full text-white text-xs flex items-center justify-center font-bold">
+                  1
+                </div>
+              </div>
               <input
                 type="text"
                 value={customColors.primaryStart}
                 onChange={(e) => handleCustomColorChange('primaryStart', e.target.value)}
-                className="flex-1 px-3 py-2 border border-neutral-200 dark:border-neutral-600 rounded-md text-sm bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
+                className="flex-1 px-4 py-3 border-2 border-border-light rounded-xl text-sm bg-primary-bg text-primary font-bold focus:border-primary focus:ring-2 focus:ring-focus transition-all"
                 placeholder="#d97706"
               />
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1">
+          <div className="space-y-3">
+            <label className="block text-sm font-bold text-secondary uppercase tracking-wide">
               Primary End Color
             </label>
-            <div className="flex items-center space-x-2">
-              <input
-                type="color"
-                value={customColors.primaryEnd}
-                onChange={(e) => handleCustomColorChange('primaryEnd', e.target.value)}
-                className="w-12 h-10 rounded border-2 border-neutral-200 dark:border-neutral-600 cursor-pointer"
-              />
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <input
+                  type="color"
+                  value={customColors.primaryEnd}
+                  onChange={(e) => handleCustomColorChange('primaryEnd', e.target.value)}
+                  className="w-16 h-16 rounded-xl border-2 border-border-light cursor-pointer hover:border-primary transition-colors shadow-md"
+                />
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full text-white text-xs flex items-center justify-center font-bold">
+                  2
+                </div>
+              </div>
               <input
                 type="text"
                 value={customColors.primaryEnd}
                 onChange={(e) => handleCustomColorChange('primaryEnd', e.target.value)}
-                className="flex-1 px-3 py-2 border border-neutral-200 dark:border-neutral-600 rounded-md text-sm bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
+                className="flex-1 px-4 py-3 border-2 border-border-light rounded-xl text-sm bg-primary-bg text-primary font-bold focus:border-primary focus:ring-2 focus:ring-focus transition-all"
                 placeholder="#059669"
               />
             </div>
@@ -122,51 +180,105 @@ const ColorManager: React.FC = () => {
         </div>
       </div>
 
-      {/* Preview */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
-          Preview
+      {/* Live Preview */}
+      <div className="mb-8">
+        <label className="block text-xl font-black text-primary mb-4">
+          👀 Live Preview
         </label>
-        <div className="space-y-3">
-          <button className="btn-primary w-full">
-            Primary Button
-          </button>
-          <button className="btn-contact w-full">
-            Contact Sales Button
-          </button>
-          <button className="btn-enterprise w-full">
-            Enterprise Button
-          </button>
-          <div className="bg-primary-gradient p-4 rounded-lg">
-            <span className="text-white font-medium">Gradient Background</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <Button variant="primary" fullWidth>
+              <span className="mr-2">🚀</span>
+              Primary Button
+            </Button>
+            <Button variant="outline" fullWidth>
+              <span className="mr-2">📞</span>
+              Outline Button
+            </Button>
+            <Button variant="enterprise" fullWidth>
+              <span className="mr-2">💼</span>
+              Enterprise Button
+            </Button>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="avatar-primary">DM</div>
-            <span className="text-neutral-700 dark:text-neutral-300">Logo Preview</span>
+          <div className="space-y-4">
+            <div className="bg-primary-gradient p-6 rounded-xl shadow-lg">
+              <div className="text-white font-bold text-lg">🌸 DharmaMind</div>
+              <div className="text-white opacity-90 text-sm">Gradient Background</div>
+            </div>
+            <div className="flex items-center space-x-4 p-4 bg-primary-bg rounded-xl border-2 border-border-light">
+              <div className="w-12 h-12 bg-primary-gradient rounded-full flex items-center justify-center text-white font-bold text-lg">
+                DM
+              </div>
+              <div>
+                <div className="font-bold text-primary">Logo Preview</div>
+                <div className="text-sm text-secondary">Brand Identity</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Actions */}
-      <div className="flex space-x-2">
-        <button
+      {/* Action Buttons */}
+      <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
+        <Button
+          variant="outline"
           onClick={resetToDefault}
-          className="flex-1 px-4 py-2 border border-neutral-200 dark:border-neutral-600 rounded-md text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+          className="flex-1"
+          icon={<span>🔄</span>}
+          iconPosition="left"
         >
           Reset to Default
-        </button>
-        <button className="btn-primary flex-1">
-          Save Settings
-        </button>
+        </Button>
+        <Button
+          variant="primary"
+          onClick={handleSave}
+          className="flex-1"
+          icon={savedSuccess ? <span>✅</span> : <span>💾</span>}
+          iconPosition="left"
+        >
+          {savedSuccess ? 'Saved Successfully!' : 'Save Settings'}
+        </Button>
       </div>
 
       {/* Current Theme Info */}
-      <div className="mt-4 p-3 bg-neutral-50 dark:bg-neutral-700 rounded-lg">
-        <div className="text-xs text-neutral-600 dark:text-neutral-400">
-          <strong>Current Theme:</strong> {currentTheme.name}
-        </div>
-        <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
-          <strong>Colors:</strong> {currentTheme.colors.primaryStart} → {currentTheme.colors.primaryEnd}
+      <div className="mt-8 p-6 bg-neutral-50 rounded-xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div>
+            <div className="text-sm font-bold text-secondary uppercase tracking-wide">
+              Current Theme
+            </div>
+            <div className="text-lg font-black text-primary">
+              {getThemeDisplayName(currentTheme.name)}
+            </div>
+          </div>
+          <div>
+            <div className="text-sm font-bold text-secondary uppercase tracking-wide">
+              Start Color
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <div 
+                className="w-6 h-6 rounded-full shadow-sm"
+                style={{ backgroundColor: currentTheme.colors.primaryStart }}
+              />
+              <span className="text-sm font-bold text-primary">
+                {currentTheme.colors.primaryStart}
+              </span>
+            </div>
+          </div>
+          <div>
+            <div className="text-sm font-bold text-secondary uppercase tracking-wide">
+              End Color
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <div 
+                className="w-6 h-6 rounded-full shadow-sm"
+                style={{ backgroundColor: currentTheme.colors.primaryEnd }}
+              />
+              <span className="text-sm font-bold text-primary">
+                {currentTheme.colors.primaryEnd}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

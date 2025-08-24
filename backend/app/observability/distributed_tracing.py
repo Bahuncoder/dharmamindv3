@@ -99,7 +99,7 @@ class DharmaTracer:
         
         # Setup Jaeger exporter
         jaeger_exporter = JaegerExporter(
-            endpoint=self.config.jaeger_endpoint,
+            collector_endpoint=self.config.jaeger_endpoint,
         )
         
         # Add span processor
@@ -440,7 +440,7 @@ def initialize_tracing(config: TracingConfig) -> DharmaTracer:
 
 
 # Convenience decorators using global tracer
-def trace(span_name: Optional[str] = None, attributes: Optional[Dict[str, Any]] = None):
+def trace_span(span_name: Optional[str] = None, attributes: Optional[Dict[str, Any]] = None):
     """Convenience decorator for tracing using global tracer"""
     def decorator(func):
         if _global_tracer:
@@ -451,7 +451,7 @@ def trace(span_name: Optional[str] = None, attributes: Optional[Dict[str, Any]] 
 
 def trace_dharma_operation(operation_type: str):
     """Specialized decorator for dharmic operations"""
-    return trace(
+    return trace_span(
         span_name=f"dharma.{operation_type}",
         attributes={
             "dharma.operation_type": operation_type,

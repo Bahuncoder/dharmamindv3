@@ -38,6 +38,8 @@ MANIFEST
 .venv
 env/
 venv/
+venv_dharmallm/
+.venv_clean/
 ENV/
 env.bak/
 venv.bak/

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Navigation from '../components/Navigation';
+import EnhancedCommunityDashboard from '../components/EnhancedCommunityDashboard';
 
 const CommunityPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('discussions');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const categories = [
@@ -70,6 +71,16 @@ const CommunityPage: React.FC = () => {
           <section className="mb-12">
             <div className="flex flex-wrap justify-center gap-2 mb-8">
               <button
+                onClick={() => setActiveTab('dashboard')}
+                className={`px-6 py-3 rounded-lg font-bold transition-all duration-200 ${
+                  activeTab === 'dashboard'
+                    ? 'bg-primary text-white shadow-lg'
+                    : 'bg-neutral-100 text-secondary hover:bg-neutral-200'
+                }`}
+              >
+                🏠 Dashboard
+              </button>
+              <button
                 onClick={() => setActiveTab('discussions')}
                 className={`px-6 py-3 rounded-lg font-bold transition-all duration-200 ${
                   activeTab === 'discussions'
@@ -77,7 +88,7 @@ const CommunityPage: React.FC = () => {
                     : 'bg-neutral-100 text-secondary hover:bg-neutral-200'
                 }`}
               >
-                Discussions
+                💬 Discussions
               </button>
               <button
                 onClick={() => setActiveTab('events')}
@@ -87,7 +98,7 @@ const CommunityPage: React.FC = () => {
                     : 'bg-neutral-100 text-secondary hover:bg-neutral-200'
                 }`}
               >
-                Events
+                📅 Events
               </button>
               <button
                 onClick={() => setActiveTab('resources')}
@@ -97,7 +108,7 @@ const CommunityPage: React.FC = () => {
                     : 'bg-neutral-100 text-secondary hover:bg-neutral-200'
                 }`}
               >
-                Resources
+                📚 Resources
               </button>
               <button
                 onClick={() => setActiveTab('members')}
@@ -111,6 +122,13 @@ const CommunityPage: React.FC = () => {
               </button>
             </div>
           </section>
+
+          {/* Enhanced Dashboard Tab */}
+          {activeTab === 'dashboard' && (
+            <div className="-mx-4">
+              <EnhancedCommunityDashboard />
+            </div>
+          )}
 
           {/* Discussions Tab */}
           {activeTab === 'discussions' && (

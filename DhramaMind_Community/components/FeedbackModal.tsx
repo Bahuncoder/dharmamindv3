@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useToast } from '../contexts/ToastContext';
 
 interface FeedbackModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
   conversationId, 
   messageId 
 }) => {
+  const { success, error, warning } = useToast();
   const [step, setStep] = useState(1);
   const [feedbackData, setFeedbackData] = useState<FeedbackData>({
     feedback_type: 'general',
@@ -59,7 +61,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
 
   const handleSubmit = async () => {
     if (!feedbackData.title.trim() || !feedbackData.content.trim()) {
-      alert('Please fill in both title and content fields.');
+      warning('Missing Information', 'Please fill in both title and content fields.');
       return;
     }
 
@@ -84,6 +86,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
 
       if (response.ok) {
         setSubmitted(true);
+        success('Feedback Submitted', 'Thank you for your feedback! We appreciate your input.');
         setTimeout(() => {
           onClose();
           setSubmitted(false);
@@ -99,9 +102,9 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
       } else {
         throw new Error('Failed to submit feedback');
       }
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-      alert('Failed to submit feedback. Please try again.');
+    } catch (err) {
+      console.error('Error submitting feedback:', err);
+      error('Submission Failed', 'Failed to submit feedback. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

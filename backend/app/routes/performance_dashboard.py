@@ -13,7 +13,7 @@ from app.monitoring.performance_monitor import get_metrics_collector, get_perfor
 from app.services.advanced_llm_router import get_advanced_llm_router
 from app.services.intelligent_cache import get_intelligent_cache
 from app.db.advanced_pool import get_db_pool_manager
-from app.middleware.security import verify_admin_token
+from app.routes.admin_auth import verify_admin_token
 import logging
 
 logger = logging.getLogger(__name__)

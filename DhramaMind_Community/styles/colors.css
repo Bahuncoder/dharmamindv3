@@ -93,12 +93,245 @@
 /* === UTILITY CLASSES === */
 
 /* Primary gradient backgrounds */
+/* Primary gradient backgrounds */
 .bg-primary-gradient {
-  background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+  background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
 }
 
 .bg-primary-gradient:hover {
-  background: linear-gradient(to right, var(--color-primary-hover-start), var(--color-primary-hover-end));
+  background: linear-gradient(135deg, var(--color-primary-hover-start), var(--color-primary-hover-end));
+}
+
+/* Card styles */
+.card-primary {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card-primary:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-primary);
+}
+
+.card-elevated {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.card-elevated:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card-hero {
+  background: var(--color-bg-primary);
+  border: 2px solid var(--color-border-light);
+  border-radius: 20px;
+  box-shadow: var(--shadow-xl);
+  transition: all 0.3s ease;
+}
+
+.card-hero:hover {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transform: translateY(-4px);
+  border-color: var(--color-border-primary);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--color-primary-gradient, linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end)));
+  color: white;
+  border: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-hover-start), var(--color-primary-hover-end));
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-enterprise {
+  background: var(--color-enterprise);
+  color: white;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-enterprise:hover {
+  background: var(--color-enterprise-hover);
+}
+
+.btn-contact {
+  background: transparent;
+  color: var(--color-contact);
+  border: 2px solid var(--color-contact-border);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+  background: var(--color-contact-bg-hover);
+  border-color: var(--color-contact-border-hover);
+  color: var(--color-contact-hover);
+}
+
+/* Text utilities using color system */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-inverse { color: var(--color-text-inverse); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+.text-info { color: var(--color-info); }
+
+/* Background utilities */
+.bg-primary-bg { background-color: var(--color-bg-primary); }
+.bg-secondary-bg { background-color: var(--color-bg-secondary); }
+.bg-tertiary-bg { background-color: var(--color-bg-tertiary); }
+.bg-dark { background-color: var(--color-bg-dark); }
+
+.bg-success-light { background-color: var(--color-success-light); }
+.bg-warning-light { background-color: var(--color-warning-light); }
+.bg-error-light { background-color: var(--color-error-light); }
+.bg-info-light { background-color: var(--color-info-light); }
+
+/* Border utilities */
+.border-light { border-color: var(--color-border-light); }
+.border-medium { border-color: var(--color-border-medium); }
+.border-dark { border-color: var(--color-border-dark); }
+.border-primary { border-color: var(--color-border-primary); }
+
+/* Enhanced animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px var(--color-focus-ring); }
+  50% { box-shadow: 0 0 20px var(--color-focus-ring), 0 0 30px var(--color-focus-ring); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 1s ease-in-out infinite;
+}
+
+/* Utility classes for enhanced UX */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.focus-ring {
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.focus-ring:focus {
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.gradient-text {
+  background: var(--color-primary-gradient, linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--color-neutral-200) 25%, var(--color-neutral-100) 50%, var(--color-neutral-200) 75%);
+  background-size: 200% 100%;
+  animation: loading-skeleton 1.5s infinite;
+}
+
+@keyframes loading-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn-primary, .btn-secondary, .btn-enterprise {
+    border: 2px solid currentColor;
+  }
+  
+  .card-primary, .card-elevated, .card-hero {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Light gradient backgrounds for sections */

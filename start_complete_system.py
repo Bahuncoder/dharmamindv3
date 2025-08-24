@@ -41,9 +41,27 @@ class DharmaMindSystemManager:
         self.processes: Dict[str, subprocess.Popen] = {}
         self.services = {
             "backend": {"port": 8000, "health_endpoint": "/health"},
-            "frontend": {"port": 3000, "health_endpoint": "/"},
-            "vector_db": {"port": 6333, "health_endpoint": "/"},
+            "chat": {"port": 3000, "health_endpoint": "/"},
+            "brand": {"port": 3002, "health_endpoint": "/"},
         }
+        
+        # Set up Python executables for virtual environments
+        self.main_venv = self.base_path / "dharmamind_env"
+        self.backend_venv = self.base_path / "backend" / ".venv"
+        
+        if self.main_venv.exists():
+            self.python_exe = str(self.main_venv / "bin" / "python")
+            self.pip_exe = str(self.main_venv / "bin" / "pip")
+        else:
+            self.python_exe = "python3"
+            self.pip_exe = "pip3"
+            
+        if self.backend_venv.exists():
+            self.backend_python = str(self.backend_venv / "bin" / "python")
+            self.backend_pip = str(self.backend_venv / "bin" / "pip")
+        else:
+            self.backend_python = self.python_exe
+            self.backend_pip = self.pip_exe
         
     def print_banner(self):
         """Print startup banner"""
@@ -81,11 +99,12 @@ class DharmaMindSystemManager:
                     capture_output=True, 
                     text=True, 
                     check=True, 
-                    shell=True
+                    shell=False,
+                    timeout=10
                 )
                 version = result.stdout.strip()
                 logger.info(f"✅ {name}: {version}")
-            except (subprocess.CalledProcessError, FileNotFoundError):
+            except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
                 logger.error(f"❌ {name} not found or version check failed")
                 return False
                 
@@ -117,7 +136,7 @@ class DharmaMindSystemManager:
         logger.info("📦 Installing Python dependencies...")
         try:
             subprocess.run([
-                sys.executable, "-m", "pip", "install", "-r", 
+                self.pip_exe, "install", "-r", 
                 str(self.base_path / "requirements.txt")
             ], check=True, cwd=self.base_path)
             logger.info("✅ Python dependencies installed")
@@ -129,21 +148,30 @@ class DharmaMindSystemManager:
         if backend_requirements.exists():
             try:
                 subprocess.run([
-                    sys.executable, "-m", "pip", "install", "-r", str(backend_requirements)
+                    self.backend_pip, "install", "-r", str(backend_requirements)
                 ], check=True, cwd=self.base_path)
                 logger.info("✅ Backend dependencies installed")
             except subprocess.CalledProcessError as e:
                 logger.error(f"❌ Failed to install backend dependencies: {e}")
         
         # Install frontend dependencies
-        frontend_path = self.base_path / "frontend"
-        if frontend_path.exists():
-            logger.info("📦 Installing frontend dependencies...")
+        brand_path = self.base_path / "Brand_Webpage"
+        if brand_path.exists() and (brand_path / "package.json").exists():
+            logger.info("📦 Installing Brand_Webpage dependencies...")
             try:
-                subprocess.run(["npm", "install"], check=True, cwd=frontend_path)
-                logger.info("✅ Frontend dependencies installed")
+                subprocess.run(["npm", "install"], check=True, cwd=brand_path)
+                logger.info("✅ Brand_Webpage dependencies installed")
             except subprocess.CalledProcessError as e:
-                logger.error(f"❌ Failed to install frontend dependencies: {e}")
+                logger.error(f"❌ Failed to install Brand_Webpage dependencies: {e}")
+                
+        chat_path = self.base_path / "dharmamind-chat"
+        if chat_path.exists() and (chat_path / "package.json").exists():
+            logger.info("📦 Installing dharmamind-chat dependencies...")
+            try:
+                subprocess.run(["npm", "install"], check=True, cwd=chat_path)
+                logger.info("✅ dharmamind-chat dependencies installed")
+            except subprocess.CalledProcessError as e:
+                logger.error(f"❌ Failed to install dharmamind-chat dependencies: {e}")
                 
     def setup_vector_database(self):
         """Setup vector database"""
@@ -153,7 +181,7 @@ class DharmaMindSystemManager:
         if vector_setup_script.exists():
             try:
                 subprocess.run([
-                    sys.executable, str(vector_setup_script)
+                    self.python_exe, str(vector_setup_script)
                 ], check=True, cwd=self.base_path)
                 logger.info("✅ Vector database initialized")
             except subprocess.CalledProcessError as e:
@@ -177,7 +205,7 @@ class DharmaMindSystemManager:
                     preprocess_script = dharmallm_path / "data" / "preprocess_data.py"
                     if preprocess_script.exists():
                         subprocess.run([
-                            sys.executable, str(preprocess_script)
+                            self.python_exe, str(preprocess_script)
                         ], check=True, cwd=dharmallm_path)
                         logger.info("✅ Data preprocessing completed")
                 else:
@@ -199,7 +227,7 @@ class DharmaMindSystemManager:
             
         try:
             cmd = [
-                sys.executable, "-m", "uvicorn", 
+                self.backend_python, "-m", "uvicorn", 
                 "app.main:app",
                 "--host", "0.0.0.0",
                 "--port", "8000",
@@ -228,18 +256,17 @@ class DharmaMindSystemManager:
         logger.info("🎨 Starting frontend development servers...")
         
         # Start brand website on port 3002
-        brand_path = self.base_path / "dharmamind-brand"
+        brand_path = self.base_path / "Brand_Webpage"
         if brand_path.exists():
             try:
-                # Use npm.cmd for Windows compatibility
-                cmd = ["npm.cmd", "run", "dev"]
+                # Use npm for Linux/Unix systems
+                cmd = ["npm", "run", "dev"]
                 process = subprocess.Popen(
                     cmd,
                     cwd=brand_path,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
-                    universal_newlines=True,
-                    shell=True
+                    universal_newlines=True
                 )
                 self.processes["brand"] = process
                 logger.info("🚀 Brand website starting on port 3002...")
@@ -250,15 +277,14 @@ class DharmaMindSystemManager:
         chat_path = self.base_path / "dharmamind-chat"
         if chat_path.exists():
             try:
-                # Use npm.cmd for Windows compatibility
-                cmd = ["npm.cmd", "run", "dev"]
+                # Use npm for Linux/Unix systems
+                cmd = ["npm", "run", "dev"]
                 process = subprocess.Popen(
                     cmd,
                     cwd=chat_path,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
-                    universal_newlines=True,
-                    shell=True
+                    universal_newlines=True
                 )
                 self.processes["chat"] = process
                 logger.info("🚀 Chat application starting on port 3003...")
@@ -358,9 +384,9 @@ class DharmaMindSystemManager:
         if not self.start_frontend():
             return False
             
-        # Wait for frontend to be ready
-        if not self.wait_for_service("frontend"):
-            return False
+        # Wait for frontend services to be ready
+        logger.info("⏳ Waiting for frontend services...")
+        time.sleep(5)  # Give frontend time to start
             
         # Step 6: Health checks
         if not self.perform_health_checks():
@@ -370,7 +396,8 @@ class DharmaMindSystemManager:
         logger.info("=" * 70)
         logger.info("🎉 DharmaMind Complete System Successfully Started!")
         logger.info("=" * 70)
-        logger.info(f"🌐 Frontend: http://localhost:3000")
+        logger.info(f"� Brand Website: http://localhost:3002")
+        logger.info(f"💬 Chat Application: http://localhost:3000")
         logger.info(f"⚡ Backend API: http://localhost:8000")
         logger.info(f"📚 API Documentation: http://localhost:8000/docs")
         logger.info(f"🔍 System Health: http://localhost:8000/health")

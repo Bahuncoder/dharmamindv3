@@ -13,6 +13,11 @@ Components:
 May this system create truly wise and compassionate AI models.
 """
 
+__version__ = "0.1.0"
+__author__ = "DharmaMind Team"
+__email__ = "team@dharmamind.ai"
+__description__ = "AI with Soul powered by Dharma"
+
 # Import core components
 from .config.advanced_config import (
     DharmaLLMAdvancedConfig,
