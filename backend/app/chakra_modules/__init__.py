@@ -1,6 +1,22 @@
 """
 Chakra Modules - Complete Integration Package
-==========================================
+================================    # Darshana Engine
+    "DarshanaEngine",
+    "get_darshana_engine",
+    "DarshanaType",
+    "PhilosophicalResponse",
+    
+    # Spiritual Intelligence (Core Spiritual Module)
+    "SpiritualIntelligence",
+    "get_spiritual_intelligence",
+    "initialize_spiritual_intelligence",
+    "SpiritualQuery",
+    "SpiritualResponse",
+    "SpiritualQueryType",
+    "SpiritualTradition",
+    "get_spiritual_wisdom",
+    "translate_sanskrit_text",
+    "explore_consciousness_aspect",=====
 
 This module provides the complete integration of all Chakra modules
 copied and enhanced from the original DharmaMind-Charkacore project.
@@ -17,6 +33,11 @@ from .llm_engine import LLMEngine, get_llm_engine, GenerationRequest, Generation
 from .analysis_engine import AnalysisEngine, get_analysis_engine, AnalysisRequest, SystemAnalysisReport, AnalysisType
 from .darshana_engine import (
     DarshanaEngine, get_darshana_engine, DarshanaType, PhilosophicalResponse
+)
+from .spiritual_intelligence import (
+    SpiritualIntelligence, get_spiritual_intelligence, initialize_spiritual_intelligence,
+    SpiritualQuery, SpiritualResponse, SpiritualQueryType, SpiritualTradition,
+    get_spiritual_wisdom, translate_sanskrit_text, explore_consciousness_aspect
 )
 
 __version__ = "1.0.0"
