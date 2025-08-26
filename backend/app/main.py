@@ -39,6 +39,7 @@ from .routes.universal_guidance import router as universal_router
 from .routes.local_llm_test import router as local_llm_router
 from .routes.dharmic_chat import router as dharmic_chat_router
 from .routes.external_llm import router as external_llm_router
+from .routes.deep_contemplation import router as deep_contemplation_router
 from .services.llm_router import LLMRouter
 from .services.module_selector import ModuleSelector
 from .services.evaluator import ResponseEvaluator
@@ -413,6 +414,7 @@ app.include_router(knowledge_router, tags=["spiritual-knowledge"])
 app.include_router(local_llm_router, tags=["local-llm"])
 app.include_router(dharmic_chat_router, tags=["dharmic-chat"])
 app.include_router(external_llm_router, prefix="/api/v1", tags=["external-llm"])
+app.include_router(deep_contemplation_router, prefix="/api/v1", tags=["deep-contemplation"])
 
 # Import and include internal spiritual processing router
 from .routes.internal_spiritual import router as internal_spiritual_router

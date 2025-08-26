@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { 
   PaperAirplaneIcon, 
   SparklesIcon, 
@@ -47,6 +48,10 @@ interface Message {
   modules_used?: string[];
   isFavorite?: boolean;
   isSaved?: boolean;
+  isContemplation?: boolean;
+  isGuidance?: boolean;
+  isInsight?: boolean;
+  isCompletion?: boolean;
 }
 
 interface ChatInterfaceProps {
@@ -54,6 +59,9 @@ interface ChatInterfaceProps {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
+  // Router for navigation
+  const router = useRouter();
+  
   // Authentication
   const { user, isAuthenticated } = useAuth();
 
@@ -119,6 +127,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [meditationMode, setMeditationMode] = useState(false);
   const [showMessageSearch, setShowMessageSearch] = useState(false);
   const [showFloatingMenu, setShowFloatingMenu] = useState(true);
+  
+  // Deep Contemplation Integration
+  const [contemplationMode, setContemplationMode] = useState(false);
+  const [currentContemplationSession, setCurrentContemplationSession] = useState<any>(null);
+  const [contemplationGuidance, setContemplationGuidance] = useState<any>(null);
+  const [contemplationInsights, setContemplationInsights] = useState<string[]>([]);
+  const [contemplationTimer, setContemplationTimer] = useState(0);
+  const [isContemplationActive, setIsContemplationActive] = useState(false);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -147,6 +164,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     scrollToBottom();
   }, [messages]);
 
+  // Contemplation timer effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isContemplationActive && currentContemplationSession) {
+      interval = setInterval(() => {
+        setContemplationTimer(prev => {
+          if (prev >= currentContemplationSession.duration_minutes * 60) {
+            setIsContemplationActive(false);
+            completeContemplationSession();
+            return currentContemplationSession.duration_minutes * 60;
+          }
+          return prev + 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isContemplationActive, currentContemplationSession]);
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim() || isLoading) return;
 
@@ -171,6 +206,33 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     setIsLoading(true);
     setError(null);
     setUsageAlert(null);
+
+    // Check if user is asking for contemplation and suggest starting a session
+    const contemplationKeywords = ['meditate', 'meditation', 'contemplate', 'contemplation', 'mindfulness', 'breathing', 'breath work', 'spiritual practice', 'inner peace', 'reflection'];
+    const lowerInput = inputMessage.toLowerCase();
+    const isContemplationRequest = contemplationKeywords.some(keyword => lowerInput.includes(keyword));
+    
+    // Check for direct contemplation commands
+    if (lowerInput.includes('start contemplation') || lowerInput.includes('begin contemplation') || lowerInput.includes('start meditation')) {
+      startIntegratedContemplation();
+      return;
+    }
+    
+    // Check for dedicated contemplation page request
+    if (lowerInput.includes('open contemplation page') || lowerInput.includes('contemplation page') || lowerInput.includes('dedicated contemplation') || lowerInput.includes('sacred space')) {
+      router.push('/contemplation');
+      const navigationMessage: Message = {
+        id: Date.now().toString(),
+        content: `🏛️ **Opening Sacred Contemplation Space**\n\nNavigating to your dedicated contemplation sanctuary for deep, immersive practice...\n\n*May your contemplation bring you peace and wisdom.* 🕉️`,
+        role: 'assistant',
+        timestamp: new Date(),
+        confidence: 1.0,
+        dharmic_alignment: 1.0,
+        modules_used: ['contemplation']
+      };
+      setMessages(prev => [...prev, navigationMessage]);
+      return;
+    }
 
     // Call parent handler if provided
     if (onMessageSend) {
@@ -198,6 +260,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         };
 
         setMessages(prev => [...prev, assistantMessage]);
+        
+        // Suggest contemplation session if user asked about meditation/contemplation
+        if (isContemplationRequest && !contemplationMode) {
+          setTimeout(() => {
+            const contemplationSuggestion: Message = {
+              id: (Date.now() + 2).toString(),
+              content: `🌸 **Would you like to begin a guided contemplation session?**\n\nI can guide you through:\n• 🌬️ Breath awareness meditation\n• 💝 Loving-kindness practice\n• 🔮 Wisdom reflection\n• 🍃 Impermanence contemplation\n\nClick the heart icon in the floating menu to start, or simply say "start contemplation" to begin.`,
+              role: 'assistant',
+              timestamp: new Date(),
+              confidence: 1.0,
+              dharmic_alignment: 1.0,
+              modules_used: ['contemplation']
+            };
+            setMessages(prev => [...prev, contemplationSuggestion]);
+          }, 1000);
+        }
         
         // Update conversation ID for continuity
         if (response.conversation_id) {
@@ -458,6 +536,210 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     console.log('Opening community...');
   };
 
+  const handleOpenContemplation = () => {
+    // Offer users choice between integrated chat contemplation or dedicated page
+    const contemplationChoice: Message = {
+      id: Date.now().toString(),
+      content: `🕉️ **Choose Your Contemplation Experience**\n\n**Quick Integration** 💬\nStart contemplation right here in chat - perfect for guided moments during conversation.\n\n**Deep Focus** 🏛️\nOpen the dedicated contemplation space for immersive, distraction-free practice.\n\n**How would you like to contemplate?**\n• Type "start contemplation" for integrated session\n• Type "open contemplation page" for dedicated space\n• Or click the options below`,
+      role: 'assistant',
+      timestamp: new Date(),
+      confidence: 1.0,
+      dharmic_alignment: 1.0,
+      modules_used: ['contemplation']
+    };
+    
+    setMessages(prev => [...prev, contemplationChoice]);
+    
+    // Add quick action buttons in chat
+    setTimeout(() => {
+      const actionMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: `🎯 **Quick Actions:**\n\n[🚀 Start Integrated Session] - Begin contemplation in chat\n[🏛️ Open Sacred Space] - Visit dedicated contemplation page\n\n*Choose your preferred way to practice*`,
+        role: 'assistant',
+        timestamp: new Date(),
+        confidence: 1.0,
+        dharmic_alignment: 1.0,
+        modules_used: ['contemplation']
+      };
+      setMessages(prev => [...prev, actionMessage]);
+    }, 500);
+  };
+
+  // Integrated Contemplation Functions
+  const startIntegratedContemplation = async () => {
+    try {
+      const response = await fetch('/api/v1/contemplation/begin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          practice_type: 'breath_awareness',
+          tradition: 'universal',
+          duration_minutes: 10,
+          depth_level: 'focused'
+        })
+      });
+
+      if (response.ok) {
+        const session = await response.json();
+        setCurrentContemplationSession(session);
+        setContemplationMode(true);
+        setContemplationTimer(0);
+        setIsContemplationActive(true);
+        setContemplationInsights([]);
+        
+        // Add contemplation start message to chat
+        const contemplationMessage: Message = {
+          id: Date.now().toString(),
+          content: `🕉️ **Deep Contemplation Session Initiated**\n\n🌸 **Practice**: ${session.practice_type.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())}\n🏛️ **Tradition**: ${session.tradition}\n⏰ **Duration**: ${session.duration_minutes} minutes\n\n${session.guidance_text}\n\n*Click the contemplation controls below to begin your practice.*`,
+          role: 'assistant',
+          timestamp: new Date(),
+          confidence: 1.0,
+          dharmic_alignment: 1.0,
+          modules_used: ['contemplation'],
+          isContemplation: true
+        };
+        
+        setMessages(prev => [...prev, contemplationMessage]);
+      }
+    } catch (error) {
+      console.error('Failed to start contemplation:', error);
+      showError('Failed to start contemplation session', 'error');
+    }
+  };
+
+  const requestContemplationGuidance = async () => {
+    if (!currentContemplationSession) return;
+
+    try {
+      const response = await fetch('/api/v1/contemplation/guide', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: currentContemplationSession.session_id,
+          current_state: 'peaceful'
+        })
+      });
+
+      if (response.ok) {
+        const guidance = await response.json();
+        setContemplationGuidance(guidance.guidance);
+        
+        // Add guidance message to chat
+        const guidanceMessage: Message = {
+          id: Date.now().toString(),
+          content: `🙏 **Contemplation Guidance**\n\n**Instruction**: ${guidance.guidance.instruction}\n\n**Encouragement**: ${guidance.guidance.encouragement}\n\n**Technique**: ${guidance.guidance.technique}\n\n**Mantra**: ${guidance.mantra_suggestion}`,
+          role: 'assistant',
+          timestamp: new Date(),
+          confidence: 1.0,
+          dharmic_alignment: 1.0,
+          modules_used: ['contemplation'],
+          isGuidance: true
+        };
+        
+        setMessages(prev => [...prev, guidanceMessage]);
+      }
+    } catch (error) {
+      console.error('Failed to get guidance:', error);
+    }
+  };
+
+  const captureContemplationInsight = async (insight: string) => {
+    if (!currentContemplationSession || !insight.trim()) return;
+
+    try {
+      const response = await fetch('/api/v1/contemplation/insight', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: currentContemplationSession.session_id,
+          insight: insight,
+          integration_intention: ''
+        })
+      });
+
+      if (response.ok) {
+        setContemplationInsights(prev => [...prev, insight]);
+        
+        // Add insight message to chat
+        const insightMessage: Message = {
+          id: Date.now().toString(),
+          content: `💡 **Contemplation Insight Captured**\n\n"${insight}"\n\n*This insight has been saved to your spiritual journal.*`,
+          role: 'assistant',
+          timestamp: new Date(),
+          confidence: 1.0,
+          dharmic_alignment: 1.0,
+          modules_used: ['contemplation'],
+          isInsight: true
+        };
+        
+        setMessages(prev => [...prev, insightMessage]);
+      }
+    } catch (error) {
+      console.error('Failed to capture insight:', error);
+    }
+  };
+
+  const completeContemplationSession = async () => {
+    if (!currentContemplationSession) return;
+
+    try {
+      const response = await fetch('/api/v1/contemplation/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: currentContemplationSession.session_id,
+          completion_reflection: ''
+        })
+      });
+
+      if (response.ok) {
+        const summary = await response.json();
+        
+        // Add completion message to chat
+        const completionMessage: Message = {
+          id: Date.now().toString(),
+          content: `🎉 **Contemplation Session Complete**\n\n✨ **Duration**: ${Math.floor(contemplationTimer / 60)} minutes ${contemplationTimer % 60} seconds\n🌟 **Insights Captured**: ${contemplationInsights.length}\n🙏 **Spiritual Summary**: ${summary.spiritual_summary}\n\n*May the peace and wisdom from this practice continue to guide your path.*`,
+          role: 'assistant',
+          timestamp: new Date(),
+          confidence: 1.0,
+          dharmic_alignment: 1.0,
+          modules_used: ['contemplation'],
+          isCompletion: true
+        };
+        
+        setMessages(prev => [...prev, completionMessage]);
+        
+        // Reset contemplation state
+        setContemplationMode(false);
+        setCurrentContemplationSession(null);
+        setContemplationGuidance(null);
+        setContemplationInsights([]);
+        setContemplationTimer(0);
+        setIsContemplationActive(false);
+      }
+    } catch (error) {
+      console.error('Failed to complete contemplation:', error);
+    }
+  };
+
+  const pauseContemplation = () => {
+    setIsContemplationActive(false);
+  };
+
+  const resumeContemplation = () => {
+    setIsContemplationActive(true);
+  };
+
+  const stopContemplation = () => {
+    completeContemplationSession();
+  };
+
+  const formatContemplationTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
   const handleSelectMessage = (result: any) => {
     // Navigate to the specific conversation/message
     console.log('Selected message:', result);
@@ -707,6 +989,94 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         {/* Enhanced Typing indicator */}
         <TypingIndicator isVisible={isLoading} />
 
+        {/* Contemplation Controls */}
+        {contemplationMode && currentContemplationSession && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="p-4 mx-4 mb-4"
+          >
+            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-xl p-6 border border-purple-200 dark:border-purple-700 shadow-lg">
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  🕉️ Deep Contemplation Session
+                </h3>
+                <div className="text-2xl font-mono text-purple-600 dark:text-purple-400 mb-2">
+                  {formatContemplationTime(contemplationTimer)}
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                  {currentContemplationSession.practice_type.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())} • {currentContemplationSession.tradition}
+                </div>
+              </div>
+              
+              <div className="flex justify-center space-x-3 mb-4">
+                {!isContemplationActive ? (
+                  <button
+                    onClick={resumeContemplation}
+                    className="flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                    </svg>
+                    Resume
+                  </button>
+                ) : (
+                  <button
+                    onClick={pauseContemplation}
+                    className="flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    Pause
+                  </button>
+                )}
+                
+                <button
+                  onClick={requestContemplationGuidance}
+                  className="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                  </svg>
+                  Guide Me
+                </button>
+                
+                <button
+                  onClick={stopContemplation}
+                  className="flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
+                  </svg>
+                  Complete
+                </button>
+              </div>
+              
+              <div className="text-center">
+                <input
+                  type="text"
+                  placeholder="Capture an insight or realization..."
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      const target = e.target as HTMLInputElement;
+                      if (target.value.trim()) {
+                        captureContemplationInsight(target.value.trim());
+                        target.value = '';
+                      }
+                    }
+                  }}
+                />
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Press Enter to capture insight • {contemplationInsights.length} insights captured
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
 
@@ -778,6 +1148,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           onOpenJournal={handleOpenJournal}
           onOpenInsights={handleOpenInsights}
           onOpenCommunity={handleOpenCommunity}
+          onOpenContemplation={handleOpenContemplation}
         />
       )}
 

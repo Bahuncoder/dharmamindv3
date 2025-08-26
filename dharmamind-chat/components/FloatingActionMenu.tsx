@@ -20,6 +20,7 @@ interface FloatingActionMenuProps {
   onOpenJournal: () => void;
   onOpenInsights: () => void;
   onOpenCommunity: () => void;
+  onOpenContemplation: () => void;
   className?: string;
 }
 
@@ -31,6 +32,7 @@ const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
   onOpenJournal,
   onOpenInsights,
   onOpenCommunity,
+  onOpenContemplation,
   className = ''
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +65,13 @@ const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
       onClick: onOpenInsights,
       color: 'from-yellow-500 to-yellow-600',
       hoverColor: 'hover:from-yellow-600 hover:to-yellow-700'
+    },
+    {
+      icon: HeartIcon,
+      label: 'Contemplation',
+      onClick: onOpenContemplation,
+      color: 'from-rose-500 to-rose-600',
+      hoverColor: 'hover:from-rose-600 hover:to-rose-700'
     },
     {
       icon: MagnifyingGlassIcon,
