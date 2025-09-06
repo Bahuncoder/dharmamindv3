@@ -963,7 +963,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 sm:space-y-8 scroll-smooth chat-messages-enhanced chat-messages-container organic-chat-container"
         style={{
           scrollbarWidth: 'thin',
-          scrollbarColor: '#10b981 transparent'
+          scrollbarColor: 'var(--color-border-primary) transparent'
         }}
       >
         <AnimatePresence mode="popLayout">
