@@ -11,11 +11,11 @@ import UserProfileMenu from '../components/UserProfileMenu';
 import PersonalizedSuggestions from '../components/PersonalizedSuggestions';
 import FeedbackButton from '../components/FeedbackButton';
 import CentralizedSubscriptionModal from '../components/CentralizedSubscriptionModal';
-import EnhancedMessageBubble from '../components/EnhancedMessageBubble';
-import EnhancedMessageBubbleV2 from '../components/EnhancedMessageBubbleV2';
+import UnifiedEnhancedMessageBubble from '../components/UnifiedEnhancedMessageBubble';
 import EnhancedChatInput from '../components/EnhancedChatInput';
 import EnhancedMessageInput from '../components/EnhancedMessageInput';
 import FloatingActionMenu from '../components/FloatingActionMenu';
+import { RishiModeToggle, RishiSelector } from '../components/RishiModeToggle';
 
 interface Message {
   id: string;
@@ -55,6 +55,13 @@ const ChatPage: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  
+  // Rishi Mode state
+  const [currentMode, setCurrentMode] = useState<'regular' | 'rishi'>('regular');
+  const [selectedRishi, setSelectedRishi] = useState<string>('');
+  const [availableRishis, setAvailableRishis] = useState<any[]>([]);
+  const [showRishiSelector, setShowRishiSelector] = useState(false);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -481,31 +488,67 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: userMessage.content,
-          user: user
-        })
-      });
+      let response;
+      
+      if (currentMode === 'rishi' && selectedRishi) {
+        // Use Rishi API
+        response = await fetch('/api/rishi/guidance', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query: userMessage.content,
+            rishi_name: selectedRishi,
+            context: messages.length > 0 ? `Previous conversation context with ${messages.length} messages` : null
+          })
+        });
+      } else {
+        // Use regular chat API
+        response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: userMessage.content,
+            user: user
+          })
+        });
+      }
 
       if (!response.ok) throw new Error('Failed to get response');
 
       const data = await response.json();
       
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        content: data.response,
-        timestamp: new Date(),
-        dharmic_alignment: data.dharmic_alignment || 0.8,
-        isFavorite: false,
-        isSaved: false,
-        reactions: {}
-      };
+      let botMessage: Message;
+      
+      if (currentMode === 'rishi' && selectedRishi) {
+        // Format Rishi response
+        const rishiData = availableRishis.find(r => r.id === selectedRishi);
+        botMessage = {
+          id: (Date.now() + 1).toString(),
+          sender: 'ai',
+          content: data.wisdom_synthesis || data.guidance?.message || data.response,
+          timestamp: new Date(),
+          dharmic_alignment: data.dharmic_foundation ? 0.95 : 0.8,
+          isFavorite: false,
+          isSaved: false,
+          reactions: {}
+        };
+      } else {
+        // Regular response format
+        botMessage = {
+          id: (Date.now() + 1).toString(),
+          sender: 'ai',
+          content: data.response,
+          timestamp: new Date(),
+          dharmic_alignment: data.dharmic_alignment || 0.8,
+          isFavorite: false,
+          isSaved: false,
+          reactions: {}
+        };
+      }
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
@@ -525,6 +568,54 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
     }
   };
 
+  // Rishi Mode Functions
+  const fetchAvailableRishis = async () => {
+    try {
+      const response = await fetch('/api/rishi/available');
+      const data = await response.json();
+      setAvailableRishis(data.available_rishis || []);
+    } catch (error) {
+      console.error('Error fetching Rishis:', error);
+    }
+  };
+
+  const handleModeChange = (mode: 'regular' | 'rishi') => {
+    setCurrentMode(mode);
+    if (mode === 'rishi' && availableRishis.length === 0) {
+      fetchAvailableRishis();
+    }
+    if (mode === 'rishi' && !selectedRishi) {
+      setShowRishiSelector(true);
+    }
+  };
+
+  const handleSelectRishi = (rishiId: string) => {
+    setSelectedRishi(rishiId);
+    setShowRishiSelector(false);
+    
+    // Add a greeting message from the selected Rishi
+    const selectedRishiData = availableRishis.find(r => r.id === rishiId);
+    if (selectedRishiData) {
+      const greetingMessage: Message = {
+        id: Date.now().toString(),
+        sender: 'ai',
+        content: selectedRishiData.greeting || `🕉️ Namaste! I am ${selectedRishiData.name}. How may I guide you on your spiritual path today?`,
+        timestamp: new Date(),
+        isFavorite: false,
+        isSaved: false,
+        reactions: {}
+      };
+      setMessages(prev => [...prev, greetingMessage]);
+    }
+  };
+
+  // Load available Rishis on component mount
+  useEffect(() => {
+    if (session && user) {
+      fetchAvailableRishis();
+    }
+  }, [session, user]);
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center" 
@@ -543,7 +634,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="h-screen flex bg-gradient-to-br from-gray-50 to-emerald-50/30">
+      <div className="h-screen flex" style={{background: 'var(--color-background, #f8fafc)'}}>
         
         {/* Fixed Sidebar */}
         <div className="hidden md:flex md:w-64 md:flex-col bg-white/80 backdrop-blur-xl border-r border-gray-200/50 relative z-10">
@@ -554,7 +645,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               <div className="flex items-center space-x-3 w-full">
                 <Logo size="sm" />
                 {router.query.demo === 'true' && (
-                  <div className="flex items-center space-x-1 px-2 py-1 rounded-lg flex-1 border border-emerald-500 text-emerald-600 bg-transparent shadow-sm">
+                  <div className="flex items-center space-x-1 px-2 py-1 rounded-lg flex-1 bg-transparent shadow-sm" style={{border: '1px solid var(--color-border-primary, #10b981)', color: 'var(--color-text-primary, #1f2937)'}}>
                     <span className="text-xs">🚀</span>
                     <span className="text-xs font-medium">Demo Mode</span>
                   </div>
@@ -575,7 +666,21 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                       timestamp: new Date()
                     }]);
                   }}
-                  className="btn-enhanced w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 border border-emerald-500 text-emerald-600 bg-transparent hover:border-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 shadow-sm hover:shadow-md"
+                  className="btn-enhanced w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 bg-transparent shadow-sm hover:shadow-md"
+                  style={{
+                    border: '1px solid var(--color-border-primary, #10b981)',
+                    color: 'var(--color-text-primary, #1f2937)',
+                    '--hover-bg': 'var(--color-background-secondary, #ffffff)',
+                    '--hover-border': 'var(--color-border-primary, #10b981)'
+                  } as React.CSSProperties}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-background-secondary, #ffffff)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-primary, #10b981)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.borderColor = 'var(--color-border-primary, #10b981)';
+                  }}
                 >
                   <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -600,14 +705,30 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         onClick={() => loadChat(chat.id)}
                         className={`chat-history-item w-full text-left px-3 py-3 text-sm rounded-xl transition-all duration-200 group relative ${
                           currentChatId === chat.id 
-                            ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 shadow-sm' 
-                            : 'hover:bg-gray-50 hover:shadow-sm'
+                            ? '' 
+                            : 'hover:shadow-sm'
                         }`}
+                        style={currentChatId === chat.id ? {
+                          background: 'var(--color-background-secondary, #ffffff)',
+                          border: '1px solid var(--color-border-primary, #10b981)',
+                          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
+                        } : {}}
+                        onMouseEnter={(e) => {
+                          if (currentChatId !== chat.id) {
+                            e.currentTarget.style.backgroundColor = 'var(--color-background, #f8fafc)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (currentChatId !== chat.id) {
+                            e.currentTarget.style.backgroundColor = '';
+                          }
+                        }}
                       >
                         <div className="flex items-center justify-between">
                           <span className={`truncate flex-1 font-medium ${
-                            currentChatId === chat.id ? 'text-emerald-700' : 'text-gray-700'
-                          }`}>
+                            currentChatId === chat.id ? '' : 'text-gray-700'
+                          }`}
+                          style={{color: currentChatId === chat.id ? 'var(--color-text-primary, #1f2937)' : ''}}>
                             {chat.title || 'Untitled Chat'}
                           </span>
                           <button
@@ -727,7 +848,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                       }}
                     >
                       <div className="relative">
-                        <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-emerald-600 rounded-full flex items-center justify-center shadow-sm">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm" style={{background: 'linear-gradient(135deg, var(--color-border-primary, #10b981), var(--color-background, #f8fafc))'}}>
                           <span className="text-white text-sm font-semibold">
                             {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                           </span>
@@ -792,7 +913,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
             <div className="flex items-center space-x-3">
               <Logo size="sm" />
               {router.query.demo === 'true' && (
-                <div className="flex items-center space-x-1 px-2 py-1 rounded-md border border-emerald-500 text-emerald-600 bg-transparent">
+                <div className="flex items-center space-x-1 px-2 py-1 rounded-md bg-transparent" style={{border: '1px solid var(--color-border-primary, #10b981)', color: 'var(--color-text-primary, #1f2937)'}}>
                   <span className="text-xs">🚀</span>
                   <span className="text-xs font-medium">Demo</span>
                 </div>
@@ -866,6 +987,20 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               </div>
             )}
 
+            {/* Rishi Mode Toggle */}
+            {(session || router.query.demo === 'true') && (
+              <div className="flex-shrink-0 px-4 py-3 border-b border-gray-200/50 bg-white/60 backdrop-blur-sm">
+                <div className="max-w-6xl mx-auto">
+                  <RishiModeToggle
+                    currentMode={currentMode}
+                    onModeChange={handleModeChange}
+                    userSubscription={user?.plan || 'basic'}
+                    isDemo={router.query.demo === 'true'}
+                  />
+                </div>
+              </div>
+            )}
+
             {/* Enhanced Messages Area with Modern Background */}
             <div className="flex-1 overflow-y-auto relative enhanced-messages-container">
               {/* Modern Background */}
@@ -906,12 +1041,12 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
 
                 {/* Enhanced Messages */}
                 {messages.slice(1).map((message, index) => (
-                  <EnhancedMessageBubbleV2
+                  <UnifiedEnhancedMessageBubble
                     key={message.id}
                     message={{
                       id: message.id,
                       content: message.content,
-                      role: message.sender === 'user' ? 'user' : 'assistant',
+                      sender: message.sender,
                       timestamp: message.timestamp,
                       confidence: message.sender === 'ai' ? 0.9 : undefined,
                       dharmic_alignment: message.dharmic_alignment || 0.8,
@@ -1016,37 +1151,42 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               </div>
             </div>
 
-            {/* Floating Action Menu */}
-            <FloatingActionMenu
-              onNewChat={() => {
-                // Reset chat
-                setMessages([{
-                  id: 'welcome',
-                  sender: 'ai',
-                  content: 'Welcome to DharmaMind! How can I guide you on your spiritual journey today?',
-                  timestamp: new Date()
-                }]);
-                setInputValue('');
-              }}
-              onOpenNotes={() => {
-                console.log('Notes opened');
-              }}
-              onSearchHistory={() => {
-                console.log('Search opened');
-              }}
-              onOpenSettings={() => {
-                router.push('/settings');
-              }}
-              onOpenJournal={() => {
-                console.log('Journal opened');
-              }}
-              onOpenInsights={() => {
-                console.log('Insights opened');
-              }}
-              onOpenCommunity={() => {
-                console.log('Community opened');
-              }}
-            />
+            {/* Floating Action Menu - Hidden in demo mode */}
+            {router.query.demo !== 'true' && (
+              <FloatingActionMenu
+                onNewChat={() => {
+                  // Reset chat
+                  setMessages([{
+                    id: 'welcome',
+                    sender: 'ai',
+                    content: 'Welcome to DharmaMind! How can I guide you on your spiritual journey today?',
+                    timestamp: new Date()
+                  }]);
+                  setInputValue('');
+                }}
+                onOpenNotes={() => {
+                  console.log('Notes opened');
+                }}
+                onSearchHistory={() => {
+                  console.log('Search opened');
+                }}
+                onOpenSettings={() => {
+                  router.push('/settings');
+                }}
+                onOpenJournal={() => {
+                  console.log('Journal opened');
+                }}
+                onOpenInsights={() => {
+                  console.log('Insights opened');
+                }}
+                onOpenCommunity={() => {
+                  console.log('Community opened');
+                }}
+                onOpenContemplation={() => {
+                  console.log('Contemplation opened');
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -1062,6 +1202,30 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
         isOpen={showSubscriptionModal}
         onClose={() => setShowSubscriptionModal(false)}
       />
+
+      {/* Rishi Selector Modal */}
+      {showRishiSelector && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Choose Your Spiritual Guide</h2>
+              <button
+                onClick={() => setShowRishiSelector(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <RishiSelector
+              onSelectRishi={handleSelectRishi}
+              availableRishis={availableRishis}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };

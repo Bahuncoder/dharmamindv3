@@ -131,8 +131,8 @@
   bottom: 0;
   background: linear-gradient(
     135deg,
-    var(--color-focus-ring) 0%,      /* using your centralized focus ring */
-    var(--color-focus-ring) 100%     /* using your centralized focus ring */
+    var(--color-background, #f8fafc) 0%,      /* using centralized background */
+    var(--color-background-secondary, #ffffff) 100%     /* using centralized secondary background */
   );
   pointer-events: none;
 }
@@ -178,7 +178,7 @@
   margin-right: 0;
   max-width: 75%;
   border: 2px solid var(--color-border-primary, #10b981);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 2px 8px var(--color-shadow-light, rgba(0, 0, 0, 0.1));
 }
 
 .message-user-enhanced::before {
@@ -284,7 +284,7 @@
 .enhanced-input-field:focus {
   outline: none;
   border-color: var(--color-border-primary, #10b981);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 0 3px var(--color-shadow-light, rgba(0, 0, 0, 0.1));
   background: var(--color-background-secondary, #ffffff);
 }
 
@@ -306,14 +306,14 @@
   color: var(--color-background-secondary, #ffffff);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 2px 8px var(--color-shadow-medium, rgba(0, 0, 0, 0.2));
   position: relative;
   overflow: hidden;
 }
 
 .enhanced-send-button:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px var(--color-shadow-medium, rgba(0, 0, 0, 0.3));
   opacity: 0.9;
 }
 
@@ -354,9 +354,9 @@
 }
 
 .enhanced-action-button:hover {
-  background: rgba(52, 211, 153, 0.08);  /* very soft emerald hover */
-  border-color: rgba(52, 211, 153, 0.3);  /* soft emerald border */
-  color: rgba(52, 211, 153, 0.8);  /* soft emerald text */
+  background: var(--color-background-secondary, #ffffff);
+  border-color: var(--color-border-primary, #10b981);
+  color: var(--color-border-primary, #10b981);
 }
 
 /* Typing Indicator */
@@ -382,7 +382,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(52, 211, 153, 0.6);  /* soft emerald dots */
+  background: var(--color-border-primary, #10b981);
   animation: typingDotEnhanced 1.4s infinite ease-in-out;
 }
 
@@ -419,10 +419,7 @@
 .enhanced-welcome-title {
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.8) 0%, rgba(251, 191, 36, 0.8) 100%);  /* soft emerald to soft saffron */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-text-primary, #1f2937);
   margin-bottom: 16px;
   line-height: 1.2;
 }
@@ -457,8 +454,8 @@
 .enhanced-suggestion-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-  border-color: #10b981;  /* emerald border on hover */
-  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-border-primary, #10b981);
+  background: var(--color-background-secondary, #ffffff);
 }
 
 .enhanced-suggestion-icon {
@@ -517,19 +514,19 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(16, 185, 129, 0.1);  /* emerald background */
+  background: var(--color-background, #f8fafc);
   padding: 2px 8px;
   border-radius: 12px;
-  color: #10b981;  /* emerald text */
+  color: var(--color-border-primary, #10b981);
   font-weight: 500;
 }
 
-/* Floating Action Button - Brand colors */
+/* Floating Action Button - Using centralized colors */
 .enhanced-fab {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: linear-gradient(135deg, #10b981 0%, #fbbf24 100%);  /* emerald to saffron */
+  background: var(--color-border-primary, #10b981);
   border: none;
   border-radius: 50%;
   width: 56px;
@@ -539,14 +536,14 @@
   justify-content: center;
   color: white;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);  /* emerald shadow */
+  box-shadow: 0 8px 25px var(--color-shadow-strong, rgba(0, 0, 0, 0.4));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
 }
 
 .enhanced-fab:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);  /* emerald shadow */
+  box-shadow: 0 12px 35px var(--color-shadow-strong, rgba(0, 0, 0, 0.5));
 }
 
 /* Responsive Design */

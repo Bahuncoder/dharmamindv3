@@ -112,7 +112,7 @@
 
 /* Focus States Enhancement */
 .focus-enhanced:focus {
-  outline: 2px solid #10b981;
+  outline: 2px solid var(--color-border-primary, #10b981);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }

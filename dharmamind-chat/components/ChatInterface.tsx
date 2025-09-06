@@ -19,7 +19,7 @@ import remarkGfm from 'remark-gfm';
 import { apiService, ChatMessage, ChatResponse } from '../utils/apiService';
 import { chatService } from '../services/chatService';
 import { useSubscription } from '../hooks/useSubscription';
-import { useColors } from '../contexts/ColorContext';
+import { useColor } from '../contexts/ColorContext';
 import { useAuth } from '../contexts/AuthContext';
 import { UpgradePrompt, MiniUpgradeBanner, UsageProgress } from './UpgradePrompt';
 import CentralizedSubscriptionModal from './CentralizedSubscriptionModal';
@@ -31,7 +31,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 import ConversationInsights from './ConversationInsights';
 import EnhancedMessageInput from './EnhancedMessageInput';
-import EnhancedMessageBubble from './EnhancedMessageBubble';
+import UnifiedEnhancedMessageBubble from './UnifiedEnhancedMessageBubble';
 import ScrollToBottom from './ScrollToBottom';
 import FloatingActionMenu from './FloatingActionMenu';
 import TypingIndicator from './TypingIndicator';
@@ -73,7 +73,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     isFreePlan
   } = useSubscription();
 
-  const { currentTheme } = useColors();
+  const { currentTheme } = useColor();
 
   // Toast notifications
   const {
@@ -937,8 +937,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               <div 
                 className="px-2 sm:px-3 py-1 rounded-full text-xs"
                 style={{
-                  backgroundColor: `#fef2f2`,
-                  color: `#991b1b`,
+                  backgroundColor: 'var(--color-error-background, #fef2f2)',
+                  color: 'var(--color-error-text, #991b1b)',
                   border: `1px solid var(--color-border-primary)`
                 }}
               >
@@ -983,7 +983,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               className="animate-fade-in-scale"
             >
               <div className={`organic-bubble ${message.role === 'user' ? 'user' : 'ai'} fade-in-up`}>
-                <EnhancedMessageBubble
+                <UnifiedEnhancedMessageBubble
                   key={message.id}
                   message={message}
                   isHovered={hoveredMessageId === message.id}
@@ -1089,7 +1089,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   onClick={stopContemplation}
                   className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
                   style={{
-                    backgroundColor: `#ef4444`,
+                    backgroundColor: 'var(--color-error, #dc2626)',
                     border: `2px solid var(--color-border-primary)`
                   }}
                 >

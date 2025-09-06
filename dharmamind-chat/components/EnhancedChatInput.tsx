@@ -73,12 +73,15 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
         <motion.div
           className={`enhanced-input-wrapper ${isFocused ? 'focused' : ''}`}
           animate={{
-            scale: isFocused ? 1.02 : 1,
-            boxShadow: isFocused 
-              ? '0 0 0 3px rgba(102, 126, 234, 0.1), 0 8px 25px rgba(0, 0, 0, 0.1)'
-              : '0 2px 10px rgba(0, 0, 0, 0.05)'
+            scale: isFocused ? 1.02 : 1
           }}
           transition={{ duration: 0.2 }}
+          style={{
+            border: '2px solid var(--color-border-primary, #10b981)',
+            boxShadow: isFocused 
+              ? '0 0 0 3px var(--color-shadow-light, rgba(0, 0, 0, 0.1)), 0 8px 25px var(--color-shadow-medium, rgba(0, 0, 0, 0.1))'
+              : '0 2px 10px var(--color-shadow-light, rgba(0, 0, 0, 0.05))'
+          }}
         >
           {/* Action Buttons - Left Side */}
           <div className="input-actions-left">
