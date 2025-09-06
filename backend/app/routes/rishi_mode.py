@@ -15,7 +15,7 @@ from datetime import datetime
 
 from ..services.universal_dharmic_engine import get_universal_dharmic_engine, DharmicEngine
 from ..services.auth_service import get_current_user
-from ..models.user import User
+from ..models.user_profile import UserProfile
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class RishiResponse(BaseModel):
 
 @router.get("/rishi/available")
 async def get_available_rishis(
-    current_user: User = Depends(get_current_user),
+    current_user: UserProfile = Depends(get_current_user),
     dharmic_engine: DharmicEngine = Depends(get_universal_dharmic_engine)
 ):
     """Get list of available Rishis based on subscription"""
@@ -80,7 +80,7 @@ async def get_available_rishis(
 async def get_rishi_guidance(
     request: RishiQuery,
     background_tasks: BackgroundTasks,
-    current_user: User = Depends(get_current_user),
+    current_user: UserProfile = Depends(get_current_user),
     dharmic_engine: DharmicEngine = Depends(get_universal_dharmic_engine)
 ):
     """Get guidance from specific Rishi"""

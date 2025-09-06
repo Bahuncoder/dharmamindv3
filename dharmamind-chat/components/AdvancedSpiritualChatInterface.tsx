@@ -403,12 +403,13 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                       }}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     >
-                      <ReactMarkdown 
-                        remarkPlugins={[remarkGfm]} 
-                        className="prose prose-sm max-w-none text-white/90"
-                      >
-                        {message.content}
-                      </ReactMarkdown>
+                      <div className="prose prose-sm max-w-none text-white/90">
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkGfm]} 
+                        >
+                          {message.content}
+                        </ReactMarkdown>
+                      </div>
                       
                       {/* Message Metadata */}
                       {message.role === 'assistant' && (

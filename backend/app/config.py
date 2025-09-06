@@ -35,6 +35,10 @@ from pydantic import field_validator, model_validator, Field
 from pathlib import Path
 from enum import Enum
 import json
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class Environment(str, Enum):
     """Environment types"""

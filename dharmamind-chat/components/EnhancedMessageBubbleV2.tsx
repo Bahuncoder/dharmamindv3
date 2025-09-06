@@ -162,32 +162,33 @@ const EnhancedMessageBubbleV2: React.FC<EnhancedMessageBubbleV2Props> = ({
               {isUser ? (
                 <p className="user-message-text">{message.content}</p>
               ) : (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  className="ai-message-markdown"
-                  components={{
-                    p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                    ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
-                    ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
-                    code: ({ children }) => (
-                      <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono">
-                        {children}
-                      </code>
-                    ),
-                    pre: ({ children }) => (
-                      <pre className="bg-gray-50 p-3 rounded-lg overflow-x-auto mb-2">
-                        {children}
-                      </pre>
-                    ),
-                    blockquote: ({ children }) => (
-                      <blockquote className="border-l-4 border-blue-300 pl-4 italic text-gray-700 mb-2">
-                        {children}
-                      </blockquote>
-                    ),
-                  }}
-                >
-                  {message.content}
-                </ReactMarkdown>
+                <div className="ai-message-markdown">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                      ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
+                      ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
+                      code: ({ children }) => (
+                        <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono">
+                          {children}
+                        </code>
+                      ),
+                      pre: ({ children }) => (
+                        <pre className="bg-gray-50 p-3 rounded-lg overflow-x-auto mb-2">
+                          {children}
+                        </pre>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="border-l-4 border-blue-300 pl-4 italic text-gray-700 mb-2">
+                          {children}
+                        </blockquote>
+                      ),
+                    }}
+                  >
+                    {message.content}
+                  </ReactMarkdown>
+                </div>
               )}
             </div>
 

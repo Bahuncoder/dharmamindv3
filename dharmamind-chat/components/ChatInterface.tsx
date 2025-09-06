@@ -15,7 +15,6 @@ import {
   ChartBarIcon
 } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { apiService, ChatMessage, ChatResponse } from '../utils/apiService';
 import { chatService } from '../services/chatService';
@@ -925,7 +924,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             )}
             
             {error && (
-              <div className="bg-red-100 text-red-800 px-2 sm:px-3 py-1 rounded-full text-xs">
+              <div 
+                className="px-2 sm:px-3 py-1 rounded-full text-xs"
+                style={{
+                  backgroundColor: `#fef2f2`,
+                  color: `#991b1b`,
+                  border: `1px solid var(--color-border-primary)`
+                }}
+              >
                 <span className="hidden sm:inline">Connection issue</span>
                 <span className="sm:hidden">!</span>
               </div>
@@ -997,7 +1003,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             exit={{ opacity: 0, y: 20 }}
             className="p-4 mx-4 mb-4"
           >
-            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-xl p-6 border border-purple-200 dark:border-purple-700 shadow-lg">
+            <div 
+              className="rounded-xl p-6 shadow-lg"
+              style={{
+                background: `var(--color-background-secondary)`,
+                border: `1px solid var(--color-border-primary)`,
+                color: `var(--color-text-primary)`
+              }}
+            >
               <div className="text-center mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   🕉️ Deep Contemplation Session
@@ -1014,7 +1027,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 {!isContemplationActive ? (
                   <button
                     onClick={resumeContemplation}
-                    className="flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                    className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
+                    style={{
+                      backgroundColor: `var(--color-border-primary)`,
+                      border: `2px solid var(--color-border-primary)`
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor = `var(--color-border-secondary)`;
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor = `var(--color-border-primary)`;
+                    }}
                   >
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
@@ -1024,7 +1047,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 ) : (
                   <button
                     onClick={pauseContemplation}
-                    className="flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors"
+                    className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
+                    style={{
+                      backgroundColor: `var(--color-border-secondary)`,
+                      border: `2px solid var(--color-border-secondary)`
+                    }}
                   >
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -1035,7 +1062,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 
                 <button
                   onClick={requestContemplationGuidance}
-                  className="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                  className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
+                  style={{
+                    backgroundColor: `var(--color-primary)`,
+                    border: `2px solid var(--color-border-primary)`,
+                    color: `var(--color-text-primary)`
+                  }}
                 >
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
@@ -1045,7 +1077,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 
                 <button
                   onClick={stopContemplation}
-                  className="flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+                  className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
+                  style={{
+                    backgroundColor: `#ef4444`,
+                    border: `2px solid var(--color-border-primary)`
+                  }}
                 >
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
@@ -1058,7 +1094,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 <input
                   type="text"
                   placeholder="Capture an insight or realization..."
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:border-transparent"
+                  style={{
+                    backgroundColor: `var(--color-background)`,
+                    border: `2px solid var(--color-border-primary)`,
+                    color: `var(--color-text-primary)`,
+                    '--placeholder-color': `var(--color-text-secondary)`
+                  } as React.CSSProperties}
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       const target = e.target as HTMLInputElement;

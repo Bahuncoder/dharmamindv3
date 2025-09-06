@@ -11,7 +11,7 @@ Features:
 """
 
 from fastapi import Request, Response, HTTPException, status
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from typing import Dict, Set, Optional, Tuple
 import time
 import json

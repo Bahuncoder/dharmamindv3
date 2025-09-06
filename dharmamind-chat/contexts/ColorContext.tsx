@@ -16,7 +16,12 @@ interface ColorTheme {
     primaryHoverEnd: string;
     primary: string;
     primaryHover: string;
-    // Add more color properties as needed
+    borderPrimary: string;      // Emerald border color
+    borderSecondary: string;    // Secondary border color
+    textPrimary: string;        // Text colors
+    textSecondary: string;      // Secondary text color
+    background: string;         // Background color
+    backgroundSecondary: string; // Secondary background
   };
 }
 
@@ -30,69 +35,105 @@ interface ColorContextType {
 // Predefined themes
 const themes: ColorTheme[] = [
   {
-    name: 'dharma-light-gray',
+    name: 'light-gray-emerald', // New default theme
     colors: {
-      primaryStart: '#f3f4f6',    // Light gray
-      primaryEnd: '#e5e7eb',      // Slightly darker light gray
-      primaryHoverStart: '#e5e7eb', // Darker light gray
-      primaryHoverEnd: '#d1d5db',   // Medium gray
-      primary: '#f3f4f6',         /* Light gray backgrounds */
-      primaryHover: '#e5e7eb',    /* Darker light gray on hover */
+      primaryStart: '#f8fafc',        // Very light gray
+      primaryEnd: '#f1f5f9',          // Light gray
+      primaryHoverStart: '#e2e8f0',   // Medium light gray
+      primaryHoverEnd: '#cbd5e1',     // Medium gray
+      primary: '#f8fafc',             // Very light gray backgrounds
+      primaryHover: '#e2e8f0',        // Medium light gray on hover
+      borderPrimary: '#10b981',       // Emerald green for borders
+      borderSecondary: '#6ee7b7',     // Light emerald for secondary borders
+      textPrimary: '#1f2937',         // Dark gray text
+      textSecondary: '#6b7280',       // Medium gray text
+      background: '#ffffff',          // White background
+      backgroundSecondary: '#f9fafb', // Very light background
     }
   },
   {
-    name: 'emerald-borders-only',
+    name: 'dharma-light-gray', // Renamed old theme
     colors: {
-      primaryStart: '#f3f4f6',    // Light gray for content (never emerald inside)
-      primaryEnd: '#e5e7eb',      // Darker light gray
-      primaryHoverStart: '#e5e7eb', // Darker light gray
-      primaryHoverEnd: '#d1d5db',   // Medium gray
-      primary: '#f3f4f6',         // Light gray backgrounds only
-      primaryHover: '#e5e7eb',    // Light gray hover only
+      primaryStart: '#f3f4f6',        // Light gray
+      primaryEnd: '#e5e7eb',          // Slightly darker light gray
+      primaryHoverStart: '#e5e7eb',   // Darker light gray
+      primaryHoverEnd: '#d1d5db',     // Medium gray
+      primary: '#f3f4f6',             // Light gray backgrounds
+      primaryHover: '#e5e7eb',        // Darker light gray on hover
+      borderPrimary: '#10b981',       // Emerald green borders
+      borderSecondary: '#6ee7b7',     // Light emerald borders
+      textPrimary: '#1f2937',         // Dark gray text
+      textSecondary: '#6b7280',       // Medium gray text
+      background: '#ffffff',          // White background
+      backgroundSecondary: '#f9fafb', // Very light background
     }
   },
   {
     name: 'ocean-blue',
     colors: {
-      primaryStart: '#007BFF',    // Blue
-      primaryEnd: '#0056B3',      // Darker blue
-      primaryHoverStart: '#0056B3', // Darker blue
-      primaryHoverEnd: '#004085',   // Even darker blue
+      primaryStart: '#007BFF',        // Blue
+      primaryEnd: '#0056B3',          // Darker blue
+      primaryHoverStart: '#0056B3',   // Darker blue
+      primaryHoverEnd: '#004085',     // Even darker blue
       primary: '#007BFF',
       primaryHover: '#0056B3',
+      borderPrimary: '#007BFF',       // Blue borders
+      borderSecondary: '#66b3ff',     // Light blue borders
+      textPrimary: '#ffffff',         // White text
+      textSecondary: '#e6f3ff',       // Light blue text
+      background: '#f0f8ff',          // Light blue background
+      backgroundSecondary: '#e6f3ff', // Very light blue
     }
   },
   {
     name: 'forest-emerald',
     colors: {
-      primaryStart: '#32A370',    // Emerald green
-      primaryEnd: '#2D8B5F',      // Darker emerald
-      primaryHoverStart: '#2D8B5F', // Darker emerald
-      primaryHoverEnd: '#28784F',   // Even darker emerald
+      primaryStart: '#32A370',        // Emerald green
+      primaryEnd: '#2D8B5F',          // Darker emerald
+      primaryHoverStart: '#2D8B5F',   // Darker emerald
+      primaryHoverEnd: '#28784F',     // Even darker emerald
       primary: '#32A370',
       primaryHover: '#2D8B5F',
+      borderPrimary: '#32A370',       // Emerald borders
+      borderSecondary: '#7dd3a0',     // Light emerald borders
+      textPrimary: '#ffffff',         // White text
+      textSecondary: '#ecfdf5',       // Light green text
+      background: '#f0fdf4',          // Light green background
+      backgroundSecondary: '#ecfdf5', // Very light green
     }
   },
   {
     name: 'royal-purple',
     colors: {
-      primaryStart: '#8B5CF6',    // Purple
-      primaryEnd: '#7C3AED',      // Darker purple
-      primaryHoverStart: '#7C3AED', // Darker purple
-      primaryHoverEnd: '#6D28D9',   // Even darker purple
+      primaryStart: '#8B5CF6',        // Purple
+      primaryEnd: '#7C3AED',          // Darker purple
+      primaryHoverStart: '#7C3AED',   // Darker purple
+      primaryHoverEnd: '#6D28D9',     // Even darker purple
       primary: '#8B5CF6',
       primaryHover: '#7C3AED',
+      borderPrimary: '#8B5CF6',       // Purple borders
+      borderSecondary: '#c4b5fd',     // Light purple borders
+      textPrimary: '#ffffff',         // White text
+      textSecondary: '#f3f0ff',       // Light purple text
+      background: '#faf5ff',          // Light purple background
+      backgroundSecondary: '#f3f0ff', // Very light purple
     }
   },
   {
     name: 'sunset-saffron',
     colors: {
-      primaryStart: '#F2A300',    // Saffron orange
-      primaryEnd: '#D4910A',      // Darker saffron
-      primaryHoverStart: '#D4910A', // Darker saffron
-      primaryHoverEnd: '#B8860B',   // Even darker saffron
+      primaryStart: '#F2A300',        // Saffron orange
+      primaryEnd: '#D4910A',          // Darker saffron
+      primaryHoverStart: '#D4910A',   // Darker saffron
+      primaryHoverEnd: '#B8860B',     // Even darker saffron
       primary: '#F2A300',
       primaryHover: '#D4910A',
+      borderPrimary: '#F2A300',       // Saffron borders
+      borderSecondary: '#fcd34d',     // Light saffron borders
+      textPrimary: '#ffffff',         // White text
+      textSecondary: '#fffbeb',       // Light yellow text
+      background: '#fffbeb',          // Light yellow background
+      backgroundSecondary: '#fef3c7', // Very light yellow
     }
   }
 ];
@@ -112,11 +153,23 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.style.setProperty('--color-primary', colors.primary);
     root.style.setProperty('--color-primary-hover', colors.primaryHover);
     
-    // Update focus ring color to match primary
-    const primaryRgb = hexToRgb(colors.primary);
-    if (primaryRgb) {
-      root.style.setProperty('--color-focus', colors.primary);
-      root.style.setProperty('--color-focus-ring', `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.2)`);
+    // Border colors - Emerald green for borders
+    root.style.setProperty('--color-border-primary', colors.borderPrimary);
+    root.style.setProperty('--color-border-secondary', colors.borderSecondary);
+    
+    // Text colors
+    root.style.setProperty('--color-text-primary', colors.textPrimary);
+    root.style.setProperty('--color-text-secondary', colors.textSecondary);
+    
+    // Background colors
+    root.style.setProperty('--color-background', colors.background);
+    root.style.setProperty('--color-background-secondary', colors.backgroundSecondary);
+    
+    // Update focus ring color to use emerald border color
+    root.style.setProperty('--color-focus', colors.borderPrimary);
+    const borderRgb = hexToRgb(colors.borderPrimary);
+    if (borderRgb) {
+      root.style.setProperty('--color-focus-ring', `rgba(${borderRgb.r}, ${borderRgb.g}, ${borderRgb.b}, 0.2)`);
     }
   };
 

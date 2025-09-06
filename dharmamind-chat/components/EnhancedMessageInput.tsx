@@ -224,7 +224,7 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
         className={`relative rounded-2xl border-2 transition-all duration-300 ${
           isFocused
             ? 'border-emerald-400 shadow-lg shadow-emerald-500/20 bg-white'
-            : 'border-gray-200 bg-white/80 backdrop-blur-sm'
+            : 'border-gray-200 bg-gray-50 backdrop-blur-sm'
         } ${isDragOver ? 'border-emerald-500 bg-emerald-50/50' : ''} ${
           disabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}

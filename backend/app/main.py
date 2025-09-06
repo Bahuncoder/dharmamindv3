@@ -36,7 +36,7 @@ from .routes.spiritual_knowledge import router as knowledge_router
 from .routes.enhanced_chat import router as enhanced_chat_router
 from .routes.darshana import router as darshana_router
 from .routes.universal_guidance import router as universal_router
-from .routes.local_llm_test import router as local_llm_router
+# from .routes.local_llm_test import router as local_llm_router  # Missing file
 from .routes.dharmic_chat import router as dharmic_chat_router
 from .routes.external_llm import router as external_llm_router
 from .routes.deep_contemplation import router as deep_contemplation_router
@@ -121,8 +121,8 @@ async def lifespan(app: FastAPI):
             logger.warning(f"⚠️ Real Redis not available: {e}")
             logger.info("� Using FakeRedis for development...")
             try:
-                import fakeredis.aioredis
-                redis_client = fakeredis.aioredis.FakeRedis()
+                import fakeredis
+                redis_client = fakeredis.FakeRedis()
                 await redis_client.ping()  # Test fake connection
                 logger.info("✅ FakeRedis client initialized")
             except Exception as fake_e:
@@ -421,7 +421,7 @@ app.include_router(mfa_router, prefix="/api/v1/mfa", tags=["multi-factor-auth"])
 app.include_router(admin_auth_router, prefix="/api/admin", tags=["admin-authentication"])
 app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
 app.include_router(knowledge_router, tags=["spiritual-knowledge"])
-app.include_router(local_llm_router, tags=["local-llm"])
+# app.include_router(local_llm_router, tags=["local-llm"])  # Missing file
 app.include_router(dharmic_chat_router, tags=["dharmic-chat"])
 app.include_router(external_llm_router, prefix="/api/v1", tags=["external-llm"])
 app.include_router(deep_contemplation_router, prefix="/api/v1", tags=["deep-contemplation"])

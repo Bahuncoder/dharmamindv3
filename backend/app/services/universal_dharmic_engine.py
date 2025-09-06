@@ -78,6 +78,15 @@ class DharmicPrinciple(Enum):
     COURAGE_STRENGTH = "courage_strength"         # Vira
     HUMILITY_SURRENDER = "humility_surrender"     # Namrata
 
+class UniversalPrinciple(Enum):
+    """Universal principles for cross-cultural wisdom"""
+    WISDOM_KNOWLEDGE = "wisdom_knowledge"
+    INNER_PEACE = "inner_peace"
+    COMPASSION_LOVE = "compassion_love"
+    TRUTH_HONESTY = "truth_honesty"
+    SERVICE_OTHERS = "service_others"
+    PERSONAL_GROWTH = "personal_growth"
+
 @dataclass
 class LifeContext:
     """Complete context about user's life situation"""
@@ -104,6 +113,17 @@ class DharmicGuidance:
     scriptural_source: str  # Original Hindu source
     dharmic_translation: str  # Dharmic presentation
     global_examples: List[str]  # How this applies across cultures
+
+@dataclass
+class UniversalGuidance:
+    """Universal guidance structure for cross-cultural wisdom"""
+    primary_message: str
+    cultural_context: str
+    practical_steps: List[str]
+    wisdom_principle: str
+    dharmic_foundation: str
+    universal_application: str
+    confidence_score: float
 
 @dataclass
 class ComprehensiveLifeResponse:
@@ -681,6 +701,9 @@ class DharmicEngine:
             dharmic_foundation_explained="Based on universal principles found in all wisdom traditions",
             global_applicability="These principles apply across all cultures and contexts"
         )
+
+# Alias for compatibility
+UniversalDharmicEngine = DharmicEngine
 
 # Global instance
 _universal_engine = None

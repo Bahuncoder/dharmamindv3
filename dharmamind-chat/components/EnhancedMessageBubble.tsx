@@ -159,30 +159,31 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
           {/* Content */}
           <div className="relative z-10">
             {message.role === 'assistant' ? (
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className="prose prose-sm max-w-none prose-gray dark:prose-invert"
-                components={{
-                  p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
-                  ul: ({ children }) => <ul className="ml-4 mb-2 space-y-1">{children}</ul>,
-                  ol: ({ children }) => <ol className="ml-4 mb-2 space-y-1">{children}</ol>,
-                  li: ({ children }) => <li className="text-sm">{children}</li>,
-                  strong: ({ children }) => <strong className="font-semibold text-emerald-700">{children}</strong>,
-                  em: ({ children }) => <em className="italic text-emerald-600">{children}</em>,
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-emerald-300 pl-4 italic bg-emerald-50/50 py-2 rounded-r-lg">
-                      {children}
-                    </blockquote>
-                  ),
-                  code: ({ children }) => (
-                    <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono text-emerald-700">
-                      {children}
-                    </code>
-                  ),
-                }}
-              >
-                {message.content}
-              </ReactMarkdown>
+              <div className="prose prose-sm max-w-none prose-gray dark:prose-invert">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
+                    ul: ({ children }) => <ul className="ml-4 mb-2 space-y-1">{children}</ul>,
+                    ol: ({ children }) => <ol className="ml-4 mb-2 space-y-1">{children}</ol>,
+                    li: ({ children }) => <li className="text-sm">{children}</li>,
+                    strong: ({ children }) => <strong className="font-semibold text-emerald-700">{children}</strong>,
+                    em: ({ children }) => <em className="italic text-emerald-600">{children}</em>,
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-4 border-emerald-300 pl-4 italic bg-emerald-50/50 py-2 rounded-r-lg">
+                        {children}
+                      </blockquote>
+                    ),
+                    code: ({ children }) => (
+                      <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono text-emerald-700">
+                        {children}
+                      </code>
+                    ),
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </div>
             ) : (
               <p className="leading-relaxed">{message.content}</p>
             )}

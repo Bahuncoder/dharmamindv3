@@ -599,6 +599,24 @@ def create_auth_service() -> AuthenticationService:
     return AuthenticationService()
 
 
+
+async def get_current_user(token: str) -> Optional[Dict[str, Any]]:
+    """
+    Get current user from JWT token
+    
+    Args:
+        token: JWT token string
+        
+    Returns:
+        User information if valid, None if invalid
+    """
+    try:
+        auth_service = get_auth_service()
+        return await auth_service.verify_token(token)
+    except Exception as e:
+        logger.error(f"Failed to get current user: {e}")
+        return None
+
 # Global instance
 _auth_service = None
 
