@@ -1,0 +1,501 @@
+# 🌟 Kubernetes Deployment Manifests for DharmaMind
+# Production-ready Kubernetes configurations
+
+# ================================
+# 🏷️ NAMESPACE
+# ================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dharmamind-production
+  labels:
+    name: dharmamind-production
+    environment: production
+---
+# ================================
+# 🔐 SERVICE ACCOUNT
+# ================================
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dharmamind-sa
+  namespace: dharmamind-production
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/dharmamind-service-role
+---
+# ================================
+# 🗝️ SECRETS
+# ================================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dharmamind-secrets
+  namespace: dharmamind-production
+type: Opaque
+data:
+  # These will be populated by CI/CD pipeline
+  jwt-secret: ""
+  openai-api-key: ""
+  anthropic-api-key: ""
+  google-api-key: ""
+  db-password: ""
+  redis-password: ""
+---
+# ================================
+# ⚙️ CONFIGMAP
+# ================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dharmamind-config
+  namespace: dharmamind-production
+data:
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  CORS_ORIGINS: "https://dharmamind.ai,https://www.dharmamind.ai"
+  ALLOWED_HOSTS: "dharmamind.ai,www.dharmamind.ai,api.dharmamind.ai"
+  DB_HOST: "dharmamind-db.cxxxxxx.us-east-1.rds.amazonaws.com"
+  DB_PORT: "5432"
+  DB_NAME: "dharmamind"
+  DB_USER: "postgres"
+  REDIS_HOST: "dharmamind-redis.xxxxxx.cache.amazonaws.com"
+  REDIS_PORT: "6379"
+  MAX_WORKERS: "4"
+  WORKER_MEMORY_LIMIT: "512Mi"
+  ENABLE_METRICS: "true"
+  ENABLE_TRACING: "true"
+---
+# ================================
+# 🐍 BACKEND DEPLOYMENT
+# ================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dharmamind-backend
+  namespace: dharmamind-production
+  labels:
+    app: dharmamind-backend
+    version: v1
+    component: backend
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: dharmamind-backend
+  template:
+    metadata:
+      labels:
+        app: dharmamind-backend
+        version: v1
+        component: backend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: dharmamind-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: backend
+        image: ghcr.io/dharmamind/dharmamind-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        env:
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: ENVIRONMENT
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: LOG_LEVEL
+        - name: DATABASE_URL
+          value: "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+        - name: REDIS_URL
+          value: "redis://:$(REDIS_PASSWORD)@$(REDIS_HOST):$(REDIS_PORT)/0"
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: DB_NAME
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dharmamind-secrets
+              key: db-password
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: dharmamind-config
+              key: REDIS_PORT
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dharmamind-secrets
+              key: redis-password
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: dharmamind-secrets
+              key: jwt-secret
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: dharmamind-secrets
+              key: openai-api-key
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: dharmamind-secrets
+              key: anthropic-api-key
+        - name: GOOGLE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: dharmamind-secrets
+              key: google-api-key
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+        volumeMounts:
+        - name: app-logs
+          mountPath: /app/logs
+        - name: app-data
+          mountPath: /app/data
+      volumes:
+      - name: app-logs
+        emptyDir: {}
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: dharmamind-backend-pvc
+      nodeSelector:
+        role: general
+      tolerations:
+      - key: "kubernetes.io/arch"
+        operator: "Equal"
+        value: "amd64"
+        effect: "NoSchedule"
+---
+# ================================
+# ⚛️ FRONTEND DEPLOYMENT
+# ================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dharmamind-frontend
+  namespace: dharmamind-production
+  labels:
+    app: dharmamind-frontend
+    version: v1
+    component: frontend
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: dharmamind-frontend
+  template:
+    metadata:
+      labels:
+        app: dharmamind-frontend
+        version: v1
+        component: frontend
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: frontend
+        image: ghcr.io/dharmamind/dharmamind-frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: NEXT_PUBLIC_API_URL
+          value: "https://api.dharmamind.ai"
+        - name: NEXT_PUBLIC_APP_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+      nodeSelector:
+        role: general
+---
+# ================================
+# 🌐 BACKEND SERVICE
+# ================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: dharmamind-backend-service
+  namespace: dharmamind-production
+  labels:
+    app: dharmamind-backend
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: dharmamind-backend
+---
+# ================================
+# 🌐 FRONTEND SERVICE
+# ================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: dharmamind-frontend-service
+  namespace: dharmamind-production
+  labels:
+    app: dharmamind-frontend
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  selector:
+    app: dharmamind-frontend
+---
+# ================================
+# 💾 PERSISTENT VOLUME CLAIM
+# ================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dharmamind-backend-pvc
+  namespace: dharmamind-production
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: gp3
+---
+# ================================
+# 🔄 HORIZONTAL POD AUTOSCALER
+# ================================
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dharmamind-backend-hpa
+  namespace: dharmamind-production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dharmamind-backend
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dharmamind-frontend-hpa
+  namespace: dharmamind-production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dharmamind-frontend
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+---
+# ================================
+# 🔐 NETWORK POLICY
+# ================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: dharmamind-network-policy
+  namespace: dharmamind-production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+  - from: []
+    ports:
+    - protocol: TCP
+      port: 8000
+    - protocol: TCP
+      port: 3000
+  egress:
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 443
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 5432  # PostgreSQL
+    - protocol: TCP
+      port: 6379  # Redis
+---
+# ================================
+# 🛡️ POD DISRUPTION BUDGET
+# ================================
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: dharmamind-backend-pdb
+  namespace: dharmamind-production
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: dharmamind-backend
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: dharmamind-frontend-pdb
+  namespace: dharmamind-production
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: dharmamind-frontend
