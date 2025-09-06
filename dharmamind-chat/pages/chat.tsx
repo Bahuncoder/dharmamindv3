@@ -812,13 +812,20 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
           <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
             {/* Demo Banner */}
             {router.query.demo === 'true' && (
-              <div className="flex-shrink-0 px-4 py-3 border border-emerald-500 text-emerald-600 bg-emerald-50 border-b">
+              <div 
+                className="flex-shrink-0 px-4 py-3 border-b"
+                style={{
+                  border: `1px solid var(--color-border-primary, #10b981)`,
+                  color: 'var(--color-text-primary, #1f2937)',
+                  background: 'var(--color-background, #f8fafc)'
+                }}
+              >
                 <div className="flex items-center justify-between max-w-6xl mx-auto">
                   <div className="flex items-center space-x-2">
                     <span className="text-lg">🚀</span>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-                      <span className="font-medium text-emerald-700">Demo Mode</span>
-                      <span className="text-sm text-emerald-600">- Experience DharmaMind's AI wisdom</span>
+                      <span className="font-medium" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Demo Mode</span>
+                      <span className="text-sm" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>- Experience DharmaMind's AI wisdom</span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -827,7 +834,14 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         const currentUrl = router.asPath;
                         router.push(`/auth?mode=login&returnUrl=${encodeURIComponent(currentUrl)}`);
                       }}
-                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 border border-emerald-500 text-emerald-600 bg-transparent hover:bg-emerald-50"
+                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200"
+                      style={{
+                        border: `1px solid var(--color-border-primary, #10b981)`,
+                        color: 'var(--color-text-primary, #1f2937)',
+                        background: 'transparent'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-background-secondary, #ffffff)'}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                     >
                       Sign In
                     </button>
@@ -836,7 +850,14 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                         const currentUrl = router.asPath;
                         router.push(`/auth?mode=signup&returnUrl=${encodeURIComponent(currentUrl)}`);
                       }}
-                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 border border-emerald-500 bg-white text-emerald-600 hover:bg-emerald-50"
+                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200"
+                      style={{
+                        border: `1px solid var(--color-border-primary, #10b981)`,
+                        background: 'var(--color-background-secondary, #ffffff)',
+                        color: 'var(--color-text-primary, #1f2937)'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-background, #f8fafc)'}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'var(--color-background-secondary, #ffffff)'}
                     >
                       Sign Up Free
                     </button>
@@ -922,7 +943,12 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                   <div className="px-6 py-4">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+                        <div 
+                          className="w-10 h-10 rounded-full flex items-center justify-center"
+                          style={{
+                            background: `linear-gradient(135deg, var(--color-border-primary, #10b981), var(--color-background, #f8fafc))`
+                          }}
+                        >
                           <Logo size="avatar" showText={false} />
                         </div>
                       </div>
@@ -934,7 +960,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                               <div className="typing-dot"></div>
                               <div className="typing-dot"></div>
                             </div>
-                            <span className="text-sm text-emerald-600 font-medium">
+                            <span className="text-sm font-medium" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
                               Contemplating your question...
                             </span>
                           </div>
