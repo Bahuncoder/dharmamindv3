@@ -101,8 +101,8 @@ const EnhancedMessageBubbleV2: React.FC<EnhancedMessageBubbleV2Props> = ({
 
   const getAlignmentColor = (alignment?: number) => {
     if (!alignment) return 'text-gray-400';
-    if (alignment >= 0.9) return 'text-emerald-500';
-    if (alignment >= 0.7) return 'text-emerald-400';
+    if (alignment >= 0.9) return 'text-primary';
+    if (alignment >= 0.7) return 'text-primary opacity-80';
     if (alignment >= 0.5) return 'text-yellow-400';
     return 'text-red-400';
   };

@@ -83,8 +83,8 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
 
   const getAlignmentColor = (alignment?: number) => {
     if (!alignment) return 'text-gray-400';
-    if (alignment >= 0.9) return 'text-emerald-500';
-    if (alignment >= 0.7) return 'text-emerald-400';
+    if (alignment >= 0.9) return 'text-primary';
+    if (alignment >= 0.7) return 'text-primary opacity-80';
     if (alignment >= 0.5) return 'text-yellow-400';
     return 'text-red-400';
   };
@@ -135,7 +135,11 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
         {/* Avatar for AI messages */}
         {message.role === 'assistant' && (
           <motion.div 
-            className="flex items-center justify-center w-8 h-8 mb-2 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-lg"
+            className="flex items-center justify-center w-8 h-8 mb-2 rounded-full text-white shadow-lg"
+            style={{
+              backgroundColor: 'var(--color-border-primary)',
+              border: `2px solid var(--color-border-primary)`
+            }}
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
@@ -147,9 +151,14 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
         <motion.div
           className={`relative rounded-2xl px-4 py-3 shadow-lg ${
             message.role === 'user'
-              ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white ml-4'
-              : 'bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-800 mr-4'
+              ? 'text-gray-800 ml-4'
+              : 'text-gray-800 mr-4'
           } ${expandedView ? 'transform scale-105' : ''}`}
+          style={{
+            backgroundColor: message.role === 'user' ? 'var(--color-background)' : 'var(--color-background)',
+            border: `1px solid var(--color-border-primary)`,
+            backdropFilter: 'blur(8px)'
+          }}
           whileHover={{ 
             scale: message.role === 'assistant' ? 1.02 : 1.01,
             boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
@@ -167,15 +176,38 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                     ul: ({ children }) => <ul className="ml-4 mb-2 space-y-1">{children}</ul>,
                     ol: ({ children }) => <ol className="ml-4 mb-2 space-y-1">{children}</ol>,
                     li: ({ children }) => <li className="text-sm">{children}</li>,
-                    strong: ({ children }) => <strong className="font-semibold text-emerald-700">{children}</strong>,
-                    em: ({ children }) => <em className="italic text-emerald-600">{children}</em>,
+                    strong: ({ children }) => (
+                      <strong 
+                        className="font-semibold"
+                        style={{ color: 'var(--color-primary)' }}
+                      >
+                        {children}
+                      </strong>
+                    ),
+                    em: ({ children }) => (
+                      <em 
+                        className="italic"
+                        style={{ color: 'var(--color-primary)' }}
+                      >
+                        {children}
+                      </em>
+                    ),
                     blockquote: ({ children }) => (
-                      <blockquote className="border-l-4 border-emerald-300 pl-4 italic bg-emerald-50/50 py-2 rounded-r-lg">
+                      <blockquote className="border-l-4 pl-4 italic py-2 rounded-r-lg" style={{ 
+                        borderLeftColor: 'var(--color-border-primary)', 
+                        backgroundColor: 'var(--color-background-secondary)' 
+                      }}>
                         {children}
                       </blockquote>
                     ),
                     code: ({ children }) => (
-                      <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono text-emerald-700">
+                      <code 
+                        className="px-2 py-1 rounded text-xs font-mono"
+                        style={{ 
+                          backgroundColor: 'var(--color-background-secondary)',
+                          color: 'var(--color-primary)'
+                        }}
+                      >
                         {children}
                       </code>
                     ),
@@ -225,7 +257,7 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
 
           {/* User message timestamp */}
           {message.role === 'user' && (
-            <div className="text-xs text-emerald-100 mt-2 text-right opacity-75">
+            <div className="text-xs mt-2 text-right opacity-75" style={{ color: 'var(--color-text-secondary)' }}>
               {formatTimestamp(message.timestamp)}
             </div>
           )}
@@ -236,7 +268,12 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
               {message.modules_used.map((module, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 capitalize"
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium capitalize"
+                  style={{
+                    backgroundColor: 'var(--color-background-secondary)',
+                    color: 'var(--color-text-secondary)',
+                    border: `1px solid var(--color-border-primary)`
+                  }}
                 >
                   {module}
                 </span>
@@ -262,14 +299,20 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={handleCopy}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-emerald-600 hover:border-emerald-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full backdrop-blur-sm border transition-all duration-200 shadow-sm"
+                style={{
+                  backgroundColor: 'var(--color-background)',
+                  borderColor: 'var(--color-border-primary)',
+                  color: 'var(--color-text-secondary)'
+                }}
                 title={copied ? 'Copied!' : 'Copy message'}
               >
                 {copied ? (
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="w-4 h-4 text-emerald-600"
+                    className="w-4 h-4"
+                    style={{ color: 'var(--color-border-primary)' }}
                   >
                     ✓
                   </motion.div>
@@ -283,7 +326,12 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onToggleFavorite(message.id)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-yellow-500 hover:border-yellow-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full backdrop-blur-sm border transition-all duration-200 shadow-sm"
+                style={{
+                  backgroundColor: 'var(--color-background)',
+                  borderColor: 'var(--color-border-primary)',
+                  color: 'var(--color-text-secondary)'
+                }}
                 title={message.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >
                 {message.isFavorite ? (
@@ -298,7 +346,12 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onToggleSaved(message.id)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full backdrop-blur-sm border transition-all duration-200 shadow-sm"
+                style={{
+                  backgroundColor: 'var(--color-background)',
+                  borderColor: 'var(--color-border-primary)',
+                  color: 'var(--color-text-secondary)'
+                }}
                 title={message.isSaved ? 'Remove from saved' : 'Save message'}
               >
                 {message.isSaved ? (
@@ -313,7 +366,12 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onSpeak(message.content, message.id)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-purple-600 hover:border-purple-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full backdrop-blur-sm border transition-all duration-200 shadow-sm"
+                style={{
+                  backgroundColor: 'var(--color-background)',
+                  borderColor: 'var(--color-border-primary)',
+                  color: 'var(--color-text-secondary)'
+                }}
                 title={isPlaying ? 'Stop speaking' : 'Read aloud'}
               >
                 {isPlaying ? (
@@ -329,7 +387,12 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => onRegenerate(message.id)}
-                  className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-emerald-600 hover:border-emerald-300 transition-all duration-200 shadow-sm"
+                  className="p-2 rounded-full backdrop-blur-sm border transition-all duration-200 shadow-sm"
+                  style={{
+                    backgroundColor: 'var(--color-background)',
+                    borderColor: 'var(--color-border-primary)',
+                    color: 'var(--color-text-secondary)'
+                  }}
                   title="Regenerate response"
                 >
                   <ArrowPathIcon className="w-4 h-4" />
@@ -341,7 +404,12 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onShare(message.content)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-green-600 hover:border-green-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full backdrop-blur-sm border transition-all duration-200 shadow-sm"
+                style={{
+                  backgroundColor: 'var(--color-background)',
+                  borderColor: 'var(--color-border-primary)',
+                  color: 'var(--color-text-secondary)'
+                }}
                 title="Share message"
               >
                 <ShareIcon className="w-4 h-4" />

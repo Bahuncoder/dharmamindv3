@@ -223,11 +223,18 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
       <div
         className={`relative rounded-2xl border-2 transition-all duration-300 ${
           isFocused
-            ? 'border-emerald-400 shadow-lg shadow-emerald-500/20 bg-white'
-            : 'border-gray-200 bg-gray-50 backdrop-blur-sm'
-        } ${isDragOver ? 'border-emerald-500 bg-emerald-50/50' : ''} ${
+            ? 'shadow-lg'
+            : ''
+        } ${
           disabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}
+        style={{
+          borderColor: 'var(--color-border-primary)',
+          backgroundColor: 'var(--color-background)',
+          ...(isDragOver && {
+            backgroundColor: 'var(--color-background-secondary)'
+          })
+        }}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -239,9 +246,13 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 border-dashed flex items-center justify-center z-10"
+              className="absolute inset-0 rounded-2xl border-2 border-dashed flex items-center justify-center z-10"
+              style={{
+                backgroundColor: 'var(--color-background-secondary)',
+                borderColor: 'var(--color-border-primary)'
+              }}
             >
-              <div className="text-center text-emerald-600">
+              <div className="text-center" style={{ color: 'var(--color-primary)' }}>
                 <DocumentIcon className="w-8 h-8 mx-auto mb-2" />
                 <p className="text-sm font-medium">Drop files here</p>
               </div>
@@ -257,7 +268,12 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               whileTap={{ scale: 0.9 }}
               onClick={() => fileInputRef.current?.click()}
               disabled={disabled}
-              className="flex-shrink-0 p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-emerald-600 transition-all duration-200 disabled:opacity-50"
+              className="flex-shrink-0 p-2 rounded-xl transition-all duration-200 disabled:opacity-50"
+              style={{
+                backgroundColor: 'var(--color-background-secondary)',
+                color: 'var(--color-text-secondary)',
+                border: `1px solid var(--color-border-primary)`
+              }}
               title="Attach files (PDF, Images, Documents)"
             >
               <PaperClipIcon className="w-5 h-5" />
@@ -351,7 +367,11 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               whileTap={{ scale: 0.95 }}
               onClick={onSend}
               disabled={!value.trim() || isLoading || disabled || characterInfo.isOverLimit}
-              className="p-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg hover:shadow-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg"
+              className="p-3 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg"
+              style={{
+                backgroundColor: 'var(--color-border-primary)',
+                border: `2px solid var(--color-border-primary)`
+              }}
               title={isLoading ? 'Sending...' : 'Send message'}
             >
               {isLoading ? (
@@ -372,10 +392,10 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
           className="absolute inset-0 rounded-2xl pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ 
-            opacity: isFocused ? 1 : 0,
-            background: isFocused 
-              ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%)'
-              : 'transparent'
+            opacity: isFocused ? 0.3 : 0
+          }}
+          style={{
+            background: 'var(--color-border-primary)'
           }}
           transition={{ duration: 0.3 }}
         />

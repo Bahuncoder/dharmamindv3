@@ -329,7 +329,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const getAlignmentColor = (alignment?: number) => {
     if (!alignment) return 'text-gray-400';
     if (alignment >= 0.8) return 'text-green-500';
-    if (alignment >= 0.6) return 'text-emerald-400';
+    if (alignment >= 0.6) return 'text-primary';
     return 'text-red-500';
   };
 
@@ -851,9 +851,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 onClick={() => setShowBreathingGuide(!showBreathingGuide)}
                 className={`p-2 rounded-full transition-all duration-300 ${
                   showBreathingGuide 
-                    ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' 
+                    ? '' 
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
                 }`}
+                style={{
+                  ...(showBreathingGuide && {
+                    backgroundColor: 'var(--color-background-secondary)',
+                    color: 'var(--color-primary)',
+                    border: `1px solid var(--color-border-primary)`
+                  })
+                }}
                 title="Toggle Breathing Guide"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -907,7 +914,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   />
                   {/* Mobile upgrade indicator */}
                   {isFreePlan() && (
-                    <span className="md:hidden w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse-emerald"></span>
+                    <span 
+                      className="md:hidden w-2.5 h-2.5 rounded-full animate-pulse"
+                      style={{ backgroundColor: 'var(--color-border-primary)' }}
+                    ></span>
                   )}
                 </button>
 
