@@ -862,13 +862,13 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <Logo size="lg" showText={false} />
-                        <div className="absolute inset-0 animate-pulse bg-emerald-200/30 rounded-full blur-xl"></div>
+                        <div className="absolute inset-0 animate-pulse bg-gray-200/30 rounded-full blur-xl" style={{ background: 'var(--color-background-secondary, #f8fafc)/30' }}></div>
                       </div>
                     </div>
-                    <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    <h2 className="text-3xl font-bold mb-3" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
                       What part of your journey would you like to explore right now?
                     </h2>
-                    <p className="text-lg text-gray-600 mb-8">
+                    <p className="text-lg mb-8" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
                       DharmaMind is here to help you grow — with calm, clarity, and purpose.
                     </p>
                     
