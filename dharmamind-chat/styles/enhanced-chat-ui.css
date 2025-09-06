@@ -170,14 +170,15 @@
   box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-/* User Message Styling - Soft, gentle colors */
+/* User Message Styling - Using centralized colors */
 .message-user-enhanced {
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.8) 0%, rgba(251, 191, 36, 0.7) 100%);  /* soft emerald to soft saffron */
-  color: white;
+  background: var(--color-background, #f1f5f9);
+  color: var(--color-text-primary, #1f2937);
   margin-left: auto;
   margin-right: 0;
   max-width: 75%;
-  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.1);  /* very soft emerald shadow */
+  border: 2px solid var(--color-border-primary, #10b981);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
 }
 
 .message-user-enhanced::before {
@@ -188,19 +189,19 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 12px solid rgba(251, 191, 36, 0.7);  /* soft saffron tail */
+  border-left: 12px solid var(--color-background, #f1f5f9);
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
 
-/* AI Message Styling */
+/* AI Message Styling - Using centralized colors */
 .message-ai-enhanced {
-  background: rgba(255, 255, 255, 0.9);
-  color: #1f2937;
+  background: var(--color-background-secondary, #ffffff);
+  color: var(--color-text-primary, #1f2937);
   margin-left: 0;
   margin-right: auto;
   max-width: 80%;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid var(--color-border-primary, #10b981);
   box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.08);
   position: relative;
 }
@@ -213,7 +214,7 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-right: 12px solid rgba(255, 255, 255, 0.9);
+  border-right: 12px solid var(--color-background-secondary, #ffffff);
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -233,13 +234,13 @@
 }
 
 .avatar-user {
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.9) 0%, rgba(251, 191, 36, 0.8) 100%);  /* soft emerald to soft saffron */
-  color: white;
+  background: linear-gradient(135deg, var(--color-background, #f1f5f9) 0%, var(--color-border-primary, #10b981) 100%);
+  color: var(--color-text-primary, #1f2937);
 }
 
 .avatar-ai {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.8) 0%, rgba(52, 211, 153, 0.9) 100%);  /* soft saffron to soft emerald */
-  color: white;
+  background: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-background-secondary, #ffffff) 100%);
+  color: var(--color-text-primary, #1f2937);
 }
 
 .enhanced-avatar::after {
@@ -249,7 +250,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, rgba(52, 211, 153, 0.3), rgba(251, 191, 36, 0.3), rgba(255, 255, 255, 0.2), rgba(52, 211, 153, 0.3));  /* very soft cycle */
+  background: linear-gradient(45deg, var(--color-border-primary, #10b981), var(--color-background, #f1f5f9), var(--color-background-secondary, #ffffff), var(--color-border-primary, #10b981));
   border-radius: 50%;
   z-index: -1;
   opacity: 0;
@@ -262,29 +263,29 @@
 
 /* Enhanced Input Area */
 .enhanced-input-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--color-background, #f8fafc);
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  border-top: 1px solid var(--color-border-primary, #10b981);
   padding: 20px;
   border-radius: 0 0 24px 24px;
 }
 
 .enhanced-input-field {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(148, 163, 184, 0.2);
+  background: var(--color-background-secondary, #ffffff);
+  border: 2px solid var(--color-border-primary, #10b981);
   border-radius: 20px;
   padding: 16px 20px;
   font-size: 16px;
-  color: #1f2937;
+  color: var(--color-text-primary, #1f2937);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .enhanced-input-field:focus {
   outline: none;
-  border-color: rgba(52, 211, 153, 0.4);  /* soft emerald focus */
-  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.05);  /* very soft emerald focus ring */
-  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-border-primary, #10b981);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  background: var(--color-background-secondary, #ffffff);
 }
 
 .enhanced-input-field::placeholder {
@@ -292,9 +293,9 @@
   font-weight: 400;
 }
 
-/* Enhanced Send Button - Soft colors */
+/* Enhanced Send Button - Using centralized colors */
 .enhanced-send-button {
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.85) 0%, rgba(251, 191, 36, 0.8) 100%);  /* soft emerald to soft saffron */
+  background: var(--color-border-primary, #10b981);
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -302,17 +303,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-background-secondary, #ffffff);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);  /* soft emerald shadow */
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
   position: relative;
   overflow: hidden;
 }
 
 .enhanced-send-button:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(52, 211, 153, 0.25);  /* soft emerald shadow */
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  opacity: 0.9;
 }
 
 .enhanced-send-button:active {
