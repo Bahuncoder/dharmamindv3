@@ -47,8 +47,8 @@ const themes: ColorTheme[] = [
       borderSecondary: '#6ee7b7',     // Light emerald for secondary borders
       textPrimary: '#1f2937',         // Dark gray text
       textSecondary: '#6b7280',       // Medium gray text
-      background: '#ffffff',          // White background
-      backgroundSecondary: '#f9fafb', // Very light background
+      background: '#f1f5f9',          // Light gray background for user messages
+      backgroundSecondary: '#ffffff', // White background for AI messages
     }
   },
   {
@@ -64,8 +64,8 @@ const themes: ColorTheme[] = [
       borderSecondary: '#6ee7b7',     // Light emerald borders
       textPrimary: '#1f2937',         // Dark gray text
       textSecondary: '#6b7280',       // Medium gray text
-      background: '#ffffff',          // White background
-      backgroundSecondary: '#f9fafb', // Very light background
+      background: '#e5e7eb',          // Medium light gray for user messages
+      backgroundSecondary: '#ffffff', // White background for AI messages
     }
   },
   {
