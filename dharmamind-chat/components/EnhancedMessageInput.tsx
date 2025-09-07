@@ -211,8 +211,6 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
                     <XMarkIcon className="w-4 h-4" />
                   </button>
                 </div>
-                  </button>
-                </div>
               ))}
             </div>
           </motion.div>

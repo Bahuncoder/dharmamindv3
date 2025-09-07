@@ -27,17 +27,21 @@ from app.spiritual_modules.spiritual_router import get_spiritual_router, Spiritu
 # Import knowledge base from parent directory
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent.parent.parent / "knowledge_base"))
 
+# Try to import knowledge base, fall back to mock if not available
 try:
+    sys.path.append(str(Path(__file__).parent.parent.parent.parent / "knowledge_base"))
     from spiritual_knowledge_retrieval import get_knowledge_base
+    KNOWLEDGE_BASE_AVAILABLE = True
 except ImportError:
-    logger = logging.getLogger(__name__)
-    logger.warning("Knowledge base not available - using mock implementation")
+    KNOWLEDGE_BASE_AVAILABLE = False
     
-    def get_knowledge_base():
+    async def get_knowledge_base():
         """Mock knowledge base implementation"""
         class MockKnowledgeBase:
+            async def search(self, query, **kwargs):
+                return {"results": [], "total": 0}
+            
             async def search_wisdom(self, query, **kwargs):
                 return {"results": [], "total": 0}
         return MockKnowledgeBase()
@@ -117,13 +121,18 @@ class DharmicGuidance:
 @dataclass
 class UniversalGuidance:
     """Universal guidance structure for cross-cultural wisdom"""
-    primary_message: str
-    cultural_context: str
-    practical_steps: List[str]
-    wisdom_principle: str
+    primary_guidance: str
     dharmic_foundation: str
     universal_application: str
-    confidence_score: float
+    practical_steps: List[str]
+    deeper_wisdom: str
+    life_integration: str
+    preventive_guidance: str
+    advanced_practices: List[str]
+    supporting_principles: List[str]
+    scriptural_source: str
+    universal_translation: str
+    global_examples: List[str]
 
 @dataclass
 class ComprehensiveLifeResponse:
@@ -306,7 +315,7 @@ class DharmicEngine:
             response = ComprehensiveLifeResponse(
                 immediate_guidance=universal_guidance,
                 holistic_perspective=holistic_perspective,
-                long_term_development=practical_roadmap['long_term'],
+                universal_principles_applied=self.identify_supporting_principles(dharmic_responses),
                 wisdom_synthesis=await self.synthesize_wisdom(dharmic_responses),
                 practical_roadmap=practical_roadmap['immediate'],
                 crisis_prevention=practical_roadmap['prevention'],
@@ -781,16 +790,60 @@ async def get_universal_life_guidance(
     def extract_scriptural_source(self, dharmic_responses: Dict[str, Any]) -> str:
         """Extract scriptural source"""
         return "Universal wisdom traditions"
-    
-    async def create_universal_translation(self, dharmic_responses: Dict[str, Any]) -> str:
-        """Create universal translation"""
-        return "These principles apply across all cultures and contexts"
-    
     async def generate_global_examples(self, dharmic_foundation: Dict[str, str], cultural_background: str) -> List[str]:
         """Generate global examples"""
         return [f"Successfully adapted for {cultural_background} context"]
+    
+    def explain_dharmic_foundation(self, dharmic_responses: Dict[str, Any]) -> str:
+        """Explain the dharmic foundation"""
+        return "Based on universal principles found in all wisdom traditions"
+    
+    def demonstrate_global_applicability(self, universal_guidance: UniversalGuidance, cultural_background: str) -> str:
+        """Demonstrate global applicability"""
+        return f"These principles apply across all cultures including {cultural_background} context"
+    
+    async def synthesize_wisdom(self, dharmic_responses: Dict[str, Any]) -> str:
+        """Synthesize wisdom from all responses"""
+        return "All wisdom traditions point toward the same fundamental truths about human flourishing."
+    
+    async def create_practical_roadmap(self, universal_guidance: UniversalGuidance, context: LifeContext, depth_level: str) -> Dict[str, List[str]]:
+        """Create practical roadmap"""
+        return {
+            'immediate': universal_guidance.practical_steps,
+            'long_term': ["Continue growing in wisdom and compassion", "Practice regular self-reflection"],
+            'prevention': ["Regular self-reflection and mindful living", "Maintain healthy relationships"],
+            'growth': ["Every experience offers opportunities for learning", "Seek wisdom from multiple sources"]
+        }
 
     def _initialize_rishi_personalities(self) -> Dict[str, Dict[str, Any]]:
+        """Initialize Rishi personalities - leverages existing systems"""
+        return {
+            'patanjali': {
+                'name': 'Maharishi Patanjali',
+                'sanskrit': 'महर्षि पतञ्जलि',
+                'specialization': ['yoga', 'meditation', 'mind_control'],
+                'greeting': 'Greetings, seeker. Let us explore the path of yoga and mind mastery.',
+                'available_free': True  # Available in free tier
+            },
+            'vyasa': {
+                'name': 'Sage Vyasa',
+                'sanskrit': 'व्यास', 
+                'specialization': ['life_wisdom', 'dharma', 'vedas'],
+                'greeting': 'Welcome, dear soul. Through wisdom and dharma, all challenges find resolution.',
+                'available_free': False  # Premium only
+            },
+            'valmiki': {
+                'name': 'Sage Valmiki', 
+                'sanskrit': 'वाल्मीकि',
+                'specialization': ['devotion', 'transformation', 'bhakti'],
+                'greeting': 'Blessed child, transformation awaits through devotion.',
+                'available_free': False  # Premium only
+            }
+        }
+
+    async def generate_global_examples(self, dharmic_foundation: Dict[str, str], cultural_background: str) -> List[str]:
+        """Generate global examples"""
+        return [f"Successfully adapted for {cultural_background} context"]
         """Initialize Rishi personalities - leverages existing systems"""
         return {
             'patanjali': {

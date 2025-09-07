@@ -96,13 +96,32 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
     }
   };
 
-  const reactions = ['👍', '❤️', '😊', '🤔', '🙏'];
+  // Enhanced reaction emojis from V1 and V2
+  const reactions = ['👍', '❤️', '😊', '🤔', '🙏', '✨', '💡', '🌸'];
+
+  // Helper functions from V1 and V2
+  const getAlignmentColor = (alignment?: number) => {
+    if (!alignment) return 'text-gray-400';
+    if (alignment >= 0.9) return 'text-emerald-500';
+    if (alignment >= 0.7) return 'text-emerald-400';
+    if (alignment >= 0.5) return 'text-yellow-400';
+    return 'text-red-400';
+  };
+
+  const getConfidenceIndicator = (confidence?: number) => {
+    if (!confidence) return '🤔';
+    if (confidence >= 0.9) return '🧘‍♂️';
+    if (confidence >= 0.7) return '🕉️';
+    if (confidence >= 0.5) return '🌸';
+    return '🤔';
+  };
 
   const formatTimestamp = (timestamp: Date) => {
-    return timestamp.toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
+    return new Intl.DateTimeFormat('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }).format(timestamp);
   };
 
   const renderMessageContent = () => {
@@ -185,15 +204,17 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
             
             {message.confidence && (
               <div className="flex items-center gap-1">
-                <ChartBarIcon className="w-3 h-3" />
-                <span>{Math.round(message.confidence * 100)}%</span>
+                <span className={getAlignmentColor(message.confidence)}>
+                  {getConfidenceIndicator(message.confidence)}
+                </span>
+                <span>{Math.round(message.confidence * 100)}% confident</span>
               </div>
             )}
             
             {message.dharmic_alignment && (
               <div className="flex items-center gap-1">
-                <span className="text-emerald-600">🕉</span>
-                <span>{Math.round(message.dharmic_alignment * 100)}%</span>
+                <span className={getAlignmentColor(message.dharmic_alignment)}>🕉️</span>
+                <span>Dharmic: {Math.round(message.dharmic_alignment * 100)}%</span>
               </div>
             )}
           </div>
@@ -204,12 +225,21 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
           {renderMessageContent()}
         </div>
 
-        {/* Modules Used */}
-        {userRole === 'assistant' && message.modules_used && (
+        {/* Modules Used - Enhanced Display */}
+        {userRole === 'assistant' && message.modules_used && message.modules_used.length > 0 && (
           <div className="mt-3 pt-2 border-t border-gray-200 dark:border-gray-700">
-            <div className="text-xs text-gray-500 dark:text-gray-400">
-              <span className="font-medium">Modules: </span>
-              {message.modules_used.join(' • ')}
+            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <span className="font-medium">🧠 Wisdom Sources:</span>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {message.modules_used.map((module, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 capitalize"
+                >
+                  {module}
+                </span>
+              ))}
             </div>
           </div>
         )}
