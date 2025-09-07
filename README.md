@@ -1,33 +1,88 @@
-# DharmaMind - Univers```
-dharmamind/
-├── ```
-dharmamind/
-├── 🎨 dharmamind-chat/        # Next.js PWA chat interface (Port 3000)
-├── 🌐 Brand_Webpage/          # Enterprise marketing website (Port 3001) 
-├── ⚡ backend/                # FastAPI backend services (Port 8007)
-│   ├── 🧠 chakra_modules/     # 39+ consciousness modules
-│   ├── 🔐 security/           # Enterprise security framework
-│   │   ├── mfa_manager.py     # Multi-Factor Authentication system
-│   │   ├── advanced_middleware.py # AI threat detection
-│   │   ├── jwt_manager.py     # Token management & blacklisting
-│   │   └── monitoring.py      # Real-time security monitoring
-│   └── 🚀 services/           # Microservice integrations
-├── 🌉 external-llm-gateway/   # External LLM microservice (Port 8003)
-├── 🧠 dharmallm/              # Custom LLM training system
-├── ☸️ k8s/                    # Kubernetes deployment configs
-├── 🔧 scripts/                # Management and utility scripts
-├── 📊 monitoring/             # Grafana/Prometheus observability
-└── 🔒 security/               # Security auditing and hardening
+# 🧘 DharmaMind AI - Current Working State
+
+> **� Current State:** Brand_Webpage fully functional on port 3001  
+> **🛡️ Protection:** Multiple restore points available  
+> **📅 Last Updated:** September 7, 2025
+
+## 🚀 Quick Start (Current Working State)
+
+### Start Brand Website (Recommended)
+```bash
+cd Brand_Webpage && npm run dev
+```
+**Opens at:** http://localhost:3001
+
+### Start Chat App
+```bash
+cd dharmamind-chat && npm run dev
+```
+**Opens at:** http://localhost:3000
+
+## 🛡️ IMPORTANT: Working State Protection
+
+**✅ Your current working state is PROTECTED at commit:** `7551da5`
+
+### 🔒 If Something Goes Wrong - RESTORE OPTIONS:
+
+#### Option 1: Use Restore Script (RECOMMENDED)
+```bash
+./restore_working_state.sh
 ```
 
-## ✨ **Advanced Features**
+#### Option 2: From Git Tag
+```bash
+git checkout v1.0-brand-webpage-working
+```
 
-### 🔐 **Enterprise Security Suite (9.5/10)**
-- **Multi-Factor Authentication (MFA)**: TOTP with encrypted backup codes and trusted devices
-- **Advanced Threat Detection**: AI-powered middleware with real-time IP reputation checking
-- **Intelligent Rate Limiting**: Context-aware protection against brute force attacks
-- **Malicious Pattern Detection**: XSS, SQL injection, and directory traversal prevention
-- **JWT Token Management**: Advanced blacklisting, rotation, and session control
+#### Option 3: From Backup Branch
+```bash
+git checkout backup-working-brand-webpage
+```
+
+#### Option 4: From Commit Hash
+```bash
+git checkout 7551da5
+```
+
+## 📦 Working Dependencies (Brand_Webpage)
+- ✅ @tailwindcss/forms
+- ✅ @tailwindcss/typography
+- ✅ framer-motion
+- ✅ next-auth
+- ✅ clsx
+- ✅ tailwind-merge
+- ✅ next-seo
+
+## 🎯 VS Code Tasks Available
+
+Press `Ctrl+Shift+P` and type "Tasks: Run Task" to access:
+
+- � **Start Brand Website (Port 3001)** - Main working site
+- 💬 **Start Chat App (Port 3000)** - Chat interface
+- 🛡️ **RESTORE Working State** - Emergency restore
+- 📦 **Install Brand Website Dependencies** - Fix dependencies
+- 🔄 **Git Status Check** - Check current state
+- 🔒 **Verify Protection State** - Confirm protection
+
+## ⚠️ NEVER DO THESE:
+- ❌ `git reset --hard` to older commits (before 7551da5)
+- ❌ Delete Brand_Webpage/package.json
+- ❌ Checkout commits before 6a13c2a (Rishi mode integration)
+
+## 🎯 Current Architecture
+```
+├── Brand_Webpage/          ← 🎯 MAIN WORKING SITE (Port 3001)
+├── dharmamind-chat/        ← Chat interface (Port 3000)
+├── backend/                ← API backend
+├── dharmallm/              ← AI model
+└── restore_working_state.sh ← 🛡️ EMERGENCY RESTORE
+```
+
+---
+**🔗 Quick Links:**
+- Brand Website: http://localhost:3001
+- Chat App: http://localhost:3000
+- Repository: https://github.com/Bahuncoder/dharmamindaifinal
 - **Security Headers Suite**: Complete CSP, HSTS, and anti-clickjacking protection
 - **Automated Security Setup**: One-command secure deployment with cryptographic secrets
 - **Real-time Monitoring**: Comprehensive threat analytics and incident response-chat/        # Next.js PWA chat interface (Port 3000)
