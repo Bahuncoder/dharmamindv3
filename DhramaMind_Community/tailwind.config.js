@@ -9,44 +9,45 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // PRIMARY: Light Gray (main backgrounds, cards, etc.)
+        primary: {
+          50: '#f9fafb',   // Lightest gray
+          100: '#f3f4f6',  // Main primary color (light gray)
+          200: '#e5e7eb',  // Hover states
+          300: '#d1d5db',  // Darker gray
+          400: '#9ca3af',  // Medium gray
+          500: '#6b7280',  // Text gray
+          600: '#4b5563',  // Secondary text
+          700: '#374151',  // Dark text
+          800: '#1f2937',  // Main text
+          900: '#111827',  // Darkest
+        },
+
+        // ACCENT: Emerald (ONLY for borders and highlights)
+        accent: {
+          50: '#ecfdf5',   // Lightest emerald
+          100: '#d1fae5',  // Light emerald borders
+          200: '#a7f3d0',  // 
+          300: '#6ee7b7',  //
+          400: '#34d399',  //
+          500: '#10b981',  // Main accent color (emerald for borders)
+          600: '#059669',  // Border hover
+          700: '#047857',  // Dark borders
+          800: '#065f46',  //
+          900: '#064e3b',  //
+          950: '#022c22',  // Darkest
+        },
+
+        // Keep dharma, lotus, peace for backward compatibility but simplified
         dharma: {
-          50: '#fdf8f0',
-          100: '#faf0e1',
-          200: '#f4dfc2',
-          300: '#ebc899',
-          400: '#e0aa6e',
-          500: '#d69143',
-          600: '#c87d39',
-          700: '#a66730',
-          800: '#85532c',
-          900: '#6e4528',
-          950: '#3b2213',
+          500: '#10b981',  // Just emerald for borders
         },
         lotus: {
-          50: '#fef7f0',
-          100: '#fdede0',
-          200: '#fad9c0',
-          300: '#f6bf95',
-          400: '#f09968',
-          500: '#ea7944',
-          600: '#db5f2a',
-          700: '#b64920',
-          800: '#913b1f',
-          900: '#74331e',
-          950: '#3e170d',
+          100: '#f3f4f6',  // Just light gray
+          500: '#6b7280',  // Just medium gray for text
         },
         peace: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          100: '#f3f4f6',  // Map to light gray
         }
       },
       fontFamily: {

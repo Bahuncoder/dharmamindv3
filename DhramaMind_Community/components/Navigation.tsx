@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Logo from './Logo';
 import Button from './Button';
+import NotificationCenter from './NotificationCenter';
 import communityAuth from '../services/communityAuth';
 import type { DharmaMindUser } from '../services/communityAuth';
 
@@ -52,13 +53,13 @@ const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link 
+          <Link
             href="/"
             className="hover:opacity-80 transition-all duration-300 hover:scale-105"
           >
             <Logo size="md" showText={true} />
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navigationLinks.map((link) => (
@@ -77,11 +78,10 @@ const Navigation: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center space-x-2 transition-all duration-300 font-bold group relative ${
-                    isActiveLink(link.href)
+                  className={`flex items-center space-x-2 transition-all duration-300 font-bold group relative ${isActiveLink(link.href)
                       ? 'text-primary'
                       : 'text-secondary hover:text-primary'
-                  }`}
+                    }`}
                 >
                   <span className="group-hover:scale-110 transition-transform">{link.icon}</span>
                   <span>{link.label}</span>
@@ -91,23 +91,26 @@ const Navigation: React.FC = () => {
                 </Link>
               )
             ))}
-            
+
             {/* AI Chat Button */}
-            <a 
-              href="https://dharmamind.ai" 
-              target="_blank" 
+            <a
+              href="https://dharmamind.ai"
+              target="_blank"
               rel="noopener noreferrer"
               className="btn-outline px-4 py-2 rounded-lg font-bold hover:bg-primary hover:text-white transition-all duration-300 group"
             >
               <span className="mr-2 group-hover:scale-110 transition-transform">🤖</span>
               AI Chat
             </a>
-            
+
             {/* Authentication Section */}
             {!isLoading && (
               <>
                 {user ? (
                   <div className="flex items-center space-x-4">
+                    {/* Notifications */}
+                    <NotificationCenter />
+
                     {/* User Profile */}
                     <div className="flex items-center space-x-3 p-2 rounded-lg hover:bg-neutral-100 transition-all duration-300 cursor-pointer group">
                       <div className="relative">
@@ -125,7 +128,7 @@ const Navigation: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Logout Button */}
                     <Button
                       variant="ghost"
@@ -171,9 +174,8 @@ const Navigation: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Menu */}
-        <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 pb-6' : 'max-h-0'
-        }`}>
+        <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isMobileMenuOpen ? 'max-h-96 pb-6' : 'max-h-0'
+          }`}>
           <div className="space-y-4 pt-4 border-t border-border-light">
             {navigationLinks.map((link) => (
               link.external ? (
@@ -192,11 +194,10 @@ const Navigation: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
-                    isActiveLink(link.href)
+                  className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${isActiveLink(link.href)
                       ? 'bg-primary-gradient text-white'
                       : 'hover:bg-neutral-100'
-                  }`}
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="text-xl group-hover:scale-110 transition-transform">{link.icon}</span>
@@ -206,11 +207,11 @@ const Navigation: React.FC = () => {
                 </Link>
               )
             ))}
-            
+
             {/* Mobile AI Chat Button */}
-            <a 
-              href="https://dharmamind.ai" 
-              target="_blank" 
+            <a
+              href="https://dharmamind.ai"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-3 p-3 rounded-lg border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 group"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -218,7 +219,7 @@ const Navigation: React.FC = () => {
               <span className="text-xl group-hover:scale-110 transition-transform">🤖</span>
               <span className="font-bold">AI Chat</span>
             </a>
-            
+
             {/* Mobile Authentication */}
             {!isLoading && (
               <div className="pt-4 border-t border-border-light">

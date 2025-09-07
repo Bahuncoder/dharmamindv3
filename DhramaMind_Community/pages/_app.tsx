@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { ColorProvider } from '../contexts/ColorContext';
 import { ToastProvider } from '../contexts/ToastContext';
+import { NotificationProvider } from '../contexts/NotificationContext';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { useSessionCleanup } from '../utils/secureStorage';
 import '../styles/globals.css';
@@ -12,17 +13,19 @@ const SessionManager: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
-export default function App({ 
-  Component, 
-  pageProps 
+export default function App({
+  Component,
+  pageProps
 }: AppProps) {
   return (
     <ErrorBoundary>
       <ColorProvider>
         <ToastProvider>
-          <SessionManager>
-            <Component {...pageProps} />
-          </SessionManager>
+          <NotificationProvider>
+            <SessionManager>
+              <Component {...pageProps} />
+            </SessionManager>
+          </NotificationProvider>
         </ToastProvider>
       </ColorProvider>
     </ErrorBoundary>
