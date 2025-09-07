@@ -56,9 +56,9 @@ const SecurityPage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-section-light">
         {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
+        <header className="border-b border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <button 
@@ -71,20 +71,20 @@ const SecurityPage: React.FC = () => {
               <nav className="flex items-center space-x-8">
                 <button 
                   onClick={() => router.push('/')}
-                  className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+                  className="text-secondary hover:text-primary text-sm font-medium"
                 >
                   Home
                 </button>
                 <button 
                   onClick={() => router.push('/privacy')}
-                  className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+                  className="text-secondary hover:text-primary text-sm font-medium"
                 >
                   Privacy
                 </button>
                 <ContactButton 
                   variant="link"
                   prefillCategory="general"
-                  className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+                  className="text-secondary hover:text-primary text-sm font-medium"
                 >
                   Contact
                 </ContactButton>
@@ -105,17 +105,17 @@ const SecurityPage: React.FC = () => {
             <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-full flex items-center justify-center">
               <span className="text-white text-2xl">🛡️</span>
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-primary mb-4">
               Enterprise-Grade Security
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-secondary mb-8">
               Your spiritual journey deserves the highest level of privacy and protection. 
               Learn how we safeguard your conversations and data.
             </p>
             
-            <div className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-sm border border-light">
               <span className="text-green-600 mr-2">✅</span>
-              <span className="font-medium text-gray-900">
+              <span className="font-medium text-primary">
                 Zero security incidents in our history
               </span>
             </div>
@@ -124,27 +124,27 @@ const SecurityPage: React.FC = () => {
 
         {/* Security Features */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-3xl font-bold text-primary mb-12 text-center">
             Built with Security First
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {securityFeatures.map((feature, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-light p-6 hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 mb-4 bg-gradient-to-r from-amber-100 to-emerald-100 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">{feature.icon}</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold text-primary mb-3">{feature.title}</h3>
+                <p className="text-secondary leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Technical Details */}
-        <div className="bg-white border-y border-gray-200">
+        <div className="bg-white border-y border-light">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-primary mb-12 text-center">
               Technical Security Details
             </h2>
             
@@ -152,34 +152,34 @@ const SecurityPage: React.FC = () => {
               
               {/* Data Protection */}
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">🔒 Data Protection</h3>
+                <h3 className="text-xl font-semibold text-primary mb-6">🔒 Data Protection</h3>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Encryption at Rest</div>
-                      <div className="text-gray-600 text-sm">AES-256 encryption for all stored data</div>
+                      <div className="font-medium text-primary">Encryption at Rest</div>
+                      <div className="text-secondary text-sm">AES-256 encryption for all stored data</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Encryption in Transit</div>
-                      <div className="text-gray-600 text-sm">TLS 1.3 for all data transmission</div>
+                      <div className="font-medium text-primary">Encryption in Transit</div>
+                      <div className="text-secondary text-sm">TLS 1.3 for all data transmission</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Key Management</div>
-                      <div className="text-gray-600 text-sm">Hardware Security Modules (HSMs)</div>
+                      <div className="font-medium text-primary">Key Management</div>
+                      <div className="text-secondary text-sm">Hardware Security Modules (HSMs)</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Data Retention</div>
-                      <div className="text-gray-600 text-sm">Configurable retention policies</div>
+                      <div className="font-medium text-primary">Data Retention</div>
+                      <div className="text-secondary text-sm">Configurable retention policies</div>
                     </div>
                   </div>
                 </div>
@@ -187,34 +187,34 @@ const SecurityPage: React.FC = () => {
 
               {/* Infrastructure Security */}
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">🏗️ Infrastructure Security</h3>
+                <h3 className="text-xl font-semibold text-primary mb-6">🏗️ Infrastructure Security</h3>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Network Security</div>
-                      <div className="text-gray-600 text-sm">VPC isolation, firewalls, DDoS protection</div>
+                      <div className="font-medium text-primary">Network Security</div>
+                      <div className="text-secondary text-sm">VPC isolation, firewalls, DDoS protection</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Access Control</div>
-                      <div className="text-gray-600 text-sm">Role-based access with principle of least privilege</div>
+                      <div className="font-medium text-primary">Access Control</div>
+                      <div className="text-secondary text-sm">Role-based access with principle of least privilege</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Monitoring</div>
-                      <div className="text-gray-600 text-sm">24/7 security monitoring and alerting</div>
+                      <div className="font-medium text-primary">Monitoring</div>
+                      <div className="text-secondary text-sm">24/7 security monitoring and alerting</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
-                      <div className="font-medium text-gray-900">Backups</div>
-                      <div className="text-gray-600 text-sm">Encrypted, geographically distributed backups</div>
+                      <div className="font-medium text-primary">Backups</div>
+                      <div className="text-secondary text-sm">Encrypted, geographically distributed backups</div>
                     </div>
                   </div>
                 </div>
@@ -225,15 +225,15 @@ const SecurityPage: React.FC = () => {
 
         {/* Compliance & Certifications */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-3xl font-bold text-primary mb-12 text-center">
             Compliance & Certifications
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {certifications.map((cert, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-3xl mb-3">{cert.icon}</div>
-                <h3 className="font-semibold text-gray-900 mb-2">{cert.name}</h3>
+                <h3 className="font-semibold text-primary mb-2">{cert.name}</h3>
                 <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                   cert.status === 'Certified' || cert.status === 'Compliant'
                     ? 'bg-green-100 text-green-800'
@@ -246,17 +246,17 @@ const SecurityPage: React.FC = () => {
           </div>
 
           <div className="bg-gradient-to-r from-amber-50 to-emerald-50 rounded-lg p-8 text-center">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-primary mb-4">
               Transparency Report
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-secondary mb-6">
               We believe in transparency. View our latest security audit results and compliance reports.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300">
                 View Audit Reports
               </button>
-              <button className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+              <button className="border border-brand-accent text-primary px-6 py-3 rounded-lg font-medium hover:bg-section-light transition-colors">
                 Download Certificates
               </button>
             </div>
@@ -273,9 +273,9 @@ const SecurityPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
               {/* Development Security */}
-              <div className="bg-gray-800 rounded-lg p-8">
+              <div className="bg-primary-background rounded-lg p-8">
                 <h3 className="text-xl font-semibold mb-6 text-emerald-400">🔧 Development Security</h3>
-                <ul className="space-y-3 text-gray-300">
+                <ul className="space-y-3 text-secondary">
                   <li className="flex items-start space-x-2">
                     <span className="text-emerald-400 mt-1">•</span>
                     <span>Secure coding practices and code reviews</span>
@@ -296,9 +296,9 @@ const SecurityPage: React.FC = () => {
               </div>
 
               {/* Operational Security */}
-              <div className="bg-gray-800 rounded-lg p-8">
+              <div className="bg-primary-background rounded-lg p-8">
                 <h3 className="text-xl font-semibold mb-6 text-blue-400">🛡️ Operational Security</h3>
-                <ul className="space-y-3 text-gray-300">
+                <ul className="space-y-3 text-secondary">
                   <li className="flex items-start space-x-2">
                     <span className="text-blue-400 mt-1">•</span>
                     <span>24/7 security operations center (SOC)</span>
@@ -323,10 +323,10 @@ const SecurityPage: React.FC = () => {
 
         {/* Contact Security */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-primary mb-4">
             Have Security Questions? 🔒
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-secondary mb-8">
             Our security team is here to address any concerns or questions you may have.
           </p>
           
@@ -338,12 +338,12 @@ const SecurityPage: React.FC = () => {
             >
               Contact Security Team
             </ContactButton>
-            <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+            <button className="border border-brand-accent text-primary px-8 py-3 rounded-lg font-medium hover:bg-section-light transition-colors">
               Report Security Issue
             </button>
           </div>
           
-          <div className="mt-8 text-sm text-gray-500">
+          <div className="mt-8 text-sm text-secondary">
             <p>🔐 security@dharmamind.com</p>
             <p className="mt-2">
               For urgent security matters, please encrypt your message using our PGP key.
@@ -352,7 +352,7 @@ const SecurityPage: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 bg-white">
+        <footer className="border-t border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">
               <button 
@@ -361,7 +361,7 @@ const SecurityPage: React.FC = () => {
               >
                 <Logo size="sm" showText={true} />
               </button>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary">
                 © 2025 DharmaMind. All rights reserved.
               </p>
             </div>

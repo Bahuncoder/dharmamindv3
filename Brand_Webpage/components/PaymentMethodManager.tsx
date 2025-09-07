@@ -301,7 +301,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
       {!formOnly && (
         <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Payment Methods</h3>
+          <h3 className="text-lg font-semibold text-primary">Payment Methods</h3>
           {!showForm && (
             <button
               onClick={() => setShowForm(true)}
@@ -315,7 +315,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
         {loading ? (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-600 mx-auto"></div>
-            <p className="text-gray-600 mt-2">Loading payment methods...</p>
+            <p className="text-secondary mt-2">Loading payment methods...</p>
           </div>
         ) : paymentMethods.length > 0 ? (
           <div className="space-y-3">
@@ -323,14 +323,14 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
               <div
                 key={method.id}
                 className={`flex items-center justify-between p-4 border rounded-lg ${
-                  method.default ? 'border-emerald-300 bg-emerald-50' : 'border-gray-200 bg-white'
+                  method.default ? 'border-emerald-300 bg-emerald-50' : 'border-brand-accent bg-white'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className="text-2xl">{getCardIcon(method.brand || '')}</div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-primary">
                         {method.brand} •••• {method.last_four}
                       </p>
                       {method.default && (
@@ -344,7 +344,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-secondary">
                       {method.exp_month && method.exp_year && `Expires ${method.exp_month}/${method.exp_year}`}
                     </p>
                   </div>
@@ -369,12 +369,12 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
             ))}
           </div>
         ) : (
-          <div className="text-center py-8 border border-gray-200 rounded-lg">
-            <svg className="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="text-center py-8 border border-brand-accent rounded-lg">
+            <svg className="w-12 h-12 text-secondary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
             </svg>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No payment methods</h3>
-            <p className="text-gray-600 mb-4">Add a payment method to manage your subscription</p>
+            <h3 className="text-lg font-medium text-primary mb-2">No payment methods</h3>
+            <p className="text-secondary mb-4">Add a payment method to manage your subscription</p>
             <button
               onClick={() => setShowForm(true)}
               className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:from-amber-700 hover:to-emerald-700 transition-colors"
@@ -388,13 +388,13 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
 
       {/* Add Payment Method Form */}
       {(showForm || formOnly) && (
-        <div className={`bg-white ${formOnly ? '' : 'border border-gray-200 rounded-lg p-6'}`}>
+        <div className={`bg-white ${formOnly ? '' : 'border border-brand-accent rounded-lg p-6'}`}>
           {!formOnly && (
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-gray-900">Add Payment Method</h3>
+              <h3 className="text-lg font-semibold text-primary">Add Payment Method</h3>
               <button
                 onClick={() => setShowForm(false)}
-                className="text-gray-400 hover:text-gray-600"
+                className="text-secondary hover:text-secondary"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -406,10 +406,10 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Card Information */}
             <div>
-              <h4 className="font-medium text-gray-900 mb-4">Card Information</h4>
+              <h4 className="font-medium text-primary mb-4">Card Information</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Cardholder Name *
                   </label>
                   <input
@@ -417,12 +417,12 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.cardholderName}
                     onChange={(e) => handleInputChange('cardholderName', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="John Doe"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Card Number *
                   </label>
                   <input
@@ -430,13 +430,13 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.cardNumber}
                     onChange={(e) => handleInputChange('cardNumber', formatCardNumber(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="1234 5678 9012 3456"
                     maxLength={19}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Expiry Date *
                   </label>
                   <input
@@ -444,13 +444,13 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.expiryDate}
                     onChange={(e) => handleInputChange('expiryDate', formatExpiryDate(e.target.value))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="MM/YY"
                     maxLength={5}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     CVC *
                   </label>
                   <input
@@ -458,7 +458,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.cvc}
                     onChange={(e) => handleInputChange('cvc', e.target.value.replace(/\D/g, ''))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="123"
                     maxLength={4}
                   />
@@ -468,10 +468,10 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
 
             {/* Billing Address */}
             <div>
-              <h4 className="font-medium text-gray-900 mb-4">Billing Address</h4>
+              <h4 className="font-medium text-primary mb-4">Billing Address</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Address Line 1 *
                   </label>
                   <input
@@ -479,24 +479,24 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.billingAddress.line1}
                     onChange={(e) => handleInputChange('billingAddress.line1', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="123 Main St"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Address Line 2
                   </label>
                   <input
                     type="text"
                     value={formData.billingAddress.line2}
                     onChange={(e) => handleInputChange('billingAddress.line2', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="Apt, suite, etc."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     City *
                   </label>
                   <input
@@ -504,12 +504,12 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.billingAddress.city}
                     onChange={(e) => handleInputChange('billingAddress.city', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="New York"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     State *
                   </label>
                   <input
@@ -517,12 +517,12 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.billingAddress.state}
                     onChange={(e) => handleInputChange('billingAddress.state', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="NY"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Postal Code *
                   </label>
                   <input
@@ -530,19 +530,19 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                     required
                     value={formData.billingAddress.postal_code}
                     onChange={(e) => handleInputChange('billingAddress.postal_code', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="10001"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Country *
                   </label>
                   <select
                     required
                     value={formData.billingAddress.country}
                     onChange={(e) => handleInputChange('billingAddress.country', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   >
                     <option value="US">United States</option>
                     <option value="CA">Canada</option>
@@ -565,9 +565,9 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                   id="saveForFuture"
                   checked={formData.saveForFuture}
                   onChange={(e) => handleInputChange('saveForFuture', e.target.checked.toString())}
-                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-brand-accent rounded"
                 />
-                <label htmlFor="saveForFuture" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="saveForFuture" className="ml-2 block text-sm text-primary">
                   Save this payment method for future use
                 </label>
               </div>
@@ -577,20 +577,20 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({
                   id="setAsDefault"
                   checked={formData.setAsDefault}
                   onChange={(e) => handleInputChange('setAsDefault', e.target.checked.toString())}
-                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-brand-accent rounded"
                 />
-                <label htmlFor="setAsDefault" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="setAsDefault" className="ml-2 block text-sm text-primary">
                   Set as default payment method
                 </label>
               </div>
             </div>
 
             {/* Submit Buttons */}
-            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+            <div className="flex justify-end space-x-3 pt-6 border-t border-brand-accent">
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className="px-6 py-2 border border-brand-accent text-primary rounded-lg hover:bg-section-light transition-colors"
               >
                 Cancel
               </button>

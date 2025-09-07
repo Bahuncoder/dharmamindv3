@@ -194,7 +194,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
       <div className="fixed inset-0 bg-stone-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
         <div className="bg-white rounded-xl p-8 max-w-md w-full text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading subscription plans...</p>
+          <p className="text-secondary">Loading subscription plans...</p>
         </div>
       </div>
     );

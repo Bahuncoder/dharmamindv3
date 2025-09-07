@@ -141,7 +141,7 @@ const SpiritualQuotes: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 p-8 mx-4"
+          className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-brand-accent p-8 mx-4"
         >
           <div className="flex items-start space-x-4">
             <div className="flex-shrink-0">
@@ -151,12 +151,12 @@ const SpiritualQuotes: React.FC = () => {
             </div>
             
             <div className="flex-1 min-w-0">
-              <blockquote className="text-lg md:text-xl text-gray-800 font-medium leading-relaxed mb-4 italic">
+              <blockquote className="text-lg md:text-xl text-primary font-medium leading-relaxed mb-4 italic">
                 "{currentQuote.text}"
               </blockquote>
               
               <div className="flex items-center justify-between">
-                <cite className="text-sm md:text-base text-gray-600 font-semibold not-italic">
+                <cite className="text-sm md:text-base text-secondary font-semibold not-italic">
                   — {currentQuote.source}
                 </cite>
                 
@@ -168,7 +168,7 @@ const SpiritualQuotes: React.FC = () => {
           </div>
           
           {/* Progress indicator */}
-          <div className="mt-6 w-full bg-gray-200 rounded-full h-1">
+          <div className="mt-6 w-full bg-primary-background rounded-full h-1">
             <motion.div
               className={`h-1 rounded-full bg-gradient-to-r ${getCategoryColor(currentQuote.category)}`}
               initial={{ width: "0%" }}
@@ -191,7 +191,7 @@ const SpiritualQuotes: React.FC = () => {
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === quoteIndex 
                 ? `bg-gradient-to-r ${getCategoryColor(currentQuote.category)}` 
-                : 'bg-gray-300 hover:bg-gray-400'
+                : 'bg-primary-background hover:bg-brand-primary'
             }`}
           />
         ))}

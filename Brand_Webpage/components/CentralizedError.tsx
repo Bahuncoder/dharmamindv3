@@ -141,19 +141,19 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   resetError
 }) => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-section-light px-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center">
         <div className="mb-4">
           <span className="text-6xl">😵</span>
         </div>
-        <h1 className="text-xl font-bold text-gray-900 mb-2">
+        <h1 className="text-xl font-bold text-primary mb-2">
           Oops! Something went wrong
         </h1>
-        <p className="text-gray-600 mb-4">
+        <p className="text-secondary mb-4">
           An unexpected error occurred. Please try refreshing the page.
         </p>
-        <details className="text-left mb-4 bg-gray-50 p-3 rounded border">
-          <summary className="cursor-pointer text-sm font-medium text-gray-700 mb-2">
+        <details className="text-left mb-4 bg-section-light p-3 rounded border">
+          <summary className="cursor-pointer text-sm font-medium text-primary mb-2">
             Error Details
           </summary>
           <pre className="text-xs text-red-600 whitespace-pre-wrap">
@@ -169,7 +169,7 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
           </button>
           <button
             onClick={() => window.location.reload()}
-            className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors"
+            className="w-full bg-brand-primary text-white py-2 px-4 rounded-lg hover:bg-primary-background transition-colors"
           >
             Refresh Page
           </button>
@@ -316,8 +316,8 @@ export const EmptyStateError: React.FC<EmptyStateErrorProps> = ({
   return (
     <div className={`text-center py-12 ${className}`}>
       <div className="text-6xl mb-4">{icon}</div>
-      <h3 className="text-lg font-medium text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600 mb-6">{description}</p>
+      <h3 className="text-lg font-medium text-primary mb-2">{title}</h3>
+      <p className="text-secondary mb-6">{description}</p>
       {action && (
         <button
           onClick={action.onClick}

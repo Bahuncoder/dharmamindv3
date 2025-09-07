@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import Logo from '../components/Logo';
+import BrandHeader from '../components/BrandHeader';
 import Footer from '../components/Footer';
 import { useCentralizedSystem } from '../components/CentralizedSystem';
 import { useSubscription } from '../hooks/useSubscription';
@@ -41,37 +42,13 @@ const PricingPage: React.FC = () => {
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-white via-brand-accent/5 to-white">
-        {/* Header */}
-        <header className="relative z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
-              <Logo />
-              <nav className="hidden md:flex space-x-8">
-                <button onClick={() => router.push('/')} className="text-secondary hover:text-primary transition-colors">
-                  Home
-                </button>
-                <button onClick={() => router.push('/features')} className="text-secondary hover:text-primary transition-colors">
-                  Features
-                </button>
-                <button onClick={() => router.push('/about')} className="text-secondary hover:text-primary transition-colors">
-                  About
-                </button>
-              </nav>
-              <div className="flex items-center space-x-4">
-                {isAuthenticated ? (
-                  <span className="text-secondary">Welcome, {user?.first_name || 'User'}</span>
-                ) : (
-                  <button 
-                    onClick={() => toggleAuthModal(true)}
-                    className="btn-outline"
-                  >
-                    Sign In
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </header>
+        {/* Professional Brand Header with Breadcrumbs */}
+        <BrandHeader
+          breadcrumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Pricing', href: '/pricing' }
+          ]}
+        />
 
         {/* Hero Section */}
         <section className="py-20">
@@ -81,7 +58,7 @@ const PricingPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center space-x-3 bg-white/80 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-200 shadow-lg mb-8">
+              <div className="inline-flex items-center space-x-3 bg-white/80 backdrop-blur-xl rounded-full px-6 py-3 border border-light shadow-lg mb-8">
                 <span className="text-2xl">💎</span>
                 <span className="text-lg font-semibold text-primary">Pricing</span>
               </div>
@@ -106,9 +83,8 @@ const PricingPage: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: index * 0.1 }}
-                    className={`relative bg-white rounded-3xl p-8 shadow-xl border transition-all duration-300 hover:shadow-2xl hover:scale-105 ${
-                      plan.popular ? 'border-brand-accent border-2' : 'border-gray-200'
-                    }`}
+                    className={`relative bg-white rounded-3xl p-8 shadow-xl border transition-all duration-300 hover:shadow-2xl hover:scale-105 ${plan.popular ? 'border-brand-accent border-2' : 'border-light'
+                      }`}
                   >
                     {plan.popular && (
                       <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -117,7 +93,7 @@ const PricingPage: React.FC = () => {
                         </span>
                       </div>
                     )}
-                    
+
                     <div className="text-center mb-8">
                       <div className="w-16 h-16 bg-brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <span className="text-white text-2xl">
@@ -151,11 +127,10 @@ const PricingPage: React.FC = () => {
 
                     <button
                       onClick={() => handleSelectPlan(plan.id)}
-                      className={`w-full py-3 rounded-xl font-medium transition-all duration-300 ${
-                        plan.popular
+                      className={`w-full py-3 rounded-xl font-medium transition-all duration-300 ${plan.popular
                           ? 'bg-brand-gradient text-white hover:shadow-lg'
                           : 'border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white'
-                      }`}
+                        }`}
                     >
                       {plan.tier === 'basic' ? 'Get Started Free' : `Choose ${plan.name}`}
                     </button>

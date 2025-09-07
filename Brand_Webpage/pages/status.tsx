@@ -131,7 +131,7 @@ const StatusPage: React.FC = () => {
       case 'maintenance':
         return 'text-blue-600 bg-blue-100';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-secondary bg-brand-primary';
     }
   };
 
@@ -161,7 +161,7 @@ const StatusPage: React.FC = () => {
       case 'critical':
         return 'text-red-600 bg-red-100';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-secondary bg-brand-primary';
     }
   };
 
@@ -184,9 +184,9 @@ const StatusPage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-section-light">
         {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
+        <header className="border-b border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <button 
@@ -234,7 +234,7 @@ const StatusPage: React.FC = () => {
               <span className="text-3xl">
                 {overallStatus === 'operational' ? '✅' : overallStatus === 'degraded' ? '⚠️' : '❌'}
               </span>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-primary">
                 {overallStatus === 'operational' 
                   ? 'All Systems Operational' 
                   : overallStatus === 'degraded'
@@ -243,7 +243,7 @@ const StatusPage: React.FC = () => {
                 }
               </h1>
             </div>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-secondary">
               {overallStatus === 'operational' 
                 ? 'DharmaMind is running smoothly. All services are functioning normally.' 
                 : overallStatus === 'degraded'
@@ -251,7 +251,7 @@ const StatusPage: React.FC = () => {
                 : 'We are experiencing service disruptions and working to restore normal operation.'
               }
             </p>
-            <div className="mt-4 text-sm text-gray-500">
+            <div className="mt-4 text-sm text-secondary">
               Last updated: {new Date().toLocaleString()}
             </div>
           </div>
@@ -259,28 +259,28 @@ const StatusPage: React.FC = () => {
 
         {/* Services Status */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Service Status</h2>
+          <h2 className="text-2xl font-bold text-primary mb-8">Service Status</h2>
           
           <div className="space-y-4">
             {services.map((service, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-light p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <span className="text-2xl">{getStatusIcon(service.status)}</span>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{service.name}</h3>
-                      <p className="text-sm text-gray-600">{service.description}</p>
+                      <h3 className="font-semibold text-primary">{service.name}</h3>
+                      <p className="text-sm text-secondary">{service.description}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-6">
                     <div className="text-center">
-                      <div className="text-sm font-medium text-gray-900">{service.uptime}</div>
-                      <div className="text-xs text-gray-500">Uptime</div>
+                      <div className="text-sm font-medium text-primary">{service.uptime}</div>
+                      <div className="text-xs text-secondary">Uptime</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-sm font-medium text-gray-900">{service.responseTime}</div>
-                      <div className="text-xs text-gray-500">Response</div>
+                      <div className="text-sm font-medium text-primary">{service.responseTime}</div>
+                      <div className="text-xs text-secondary">Response</div>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${getStatusColor(service.status)}`}>
                       {service.status}
@@ -294,24 +294,24 @@ const StatusPage: React.FC = () => {
 
         {/* Incidents */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Recent Incidents</h2>
+          <h2 className="text-2xl font-bold text-primary mb-8">Recent Incidents</h2>
           
           {incidents.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+            <div className="bg-white rounded-lg shadow-sm border border-light p-8 text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-2xl">✅</span>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No Recent Incidents</h3>
-              <p className="text-gray-600">All systems have been running smoothly with no reported incidents in the last 30 days.</p>
+              <h3 className="text-lg font-medium text-primary mb-2">No Recent Incidents</h3>
+              <p className="text-secondary">All systems have been running smoothly with no reported incidents in the last 30 days.</p>
             </div>
           ) : (
             <div className="space-y-6">
               {incidents.map((incident) => (
-                <div key={incident.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div key={incident.id} className="bg-white rounded-lg shadow-sm border border-light p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="font-semibold text-gray-900">{incident.title}</h3>
+                        <h3 className="font-semibold text-primary">{incident.title}</h3>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${getSeverityColor(incident.severity)}`}>
                           {incident.severity}
                         </span>
@@ -319,8 +319,8 @@ const StatusPage: React.FC = () => {
                           {incident.status}
                         </span>
                       </div>
-                      <p className="text-gray-600 mb-3">{incident.description}</p>
-                      <div className="text-sm text-gray-500">
+                      <p className="text-secondary mb-3">{incident.description}</p>
+                      <div className="text-sm text-secondary">
                         Created: {formatDate(incident.createdAt)} • 
                         Updated: {formatDate(incident.updatedAt)}
                       </div>
@@ -328,15 +328,15 @@ const StatusPage: React.FC = () => {
                   </div>
                   
                   {/* Incident Updates */}
-                  <div className="border-t border-gray-200 pt-4">
-                    <h4 className="font-medium text-gray-900 mb-3">Updates</h4>
+                  <div className="border-t border-light pt-4">
+                    <h4 className="font-medium text-primary mb-3">Updates</h4>
                     <div className="space-y-3">
                       {incident.updates.map((update, updateIndex) => (
                         <div key={updateIndex} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
+                          <div className="w-2 h-2 bg-section-light rounded-full mt-2"></div>
                           <div className="flex-1">
-                            <div className="text-sm text-gray-900">{update.message}</div>
-                            <div className="text-xs text-gray-500">{formatDate(update.timestamp)}</div>
+                            <div className="text-sm text-primary">{update.message}</div>
+                            <div className="text-xs text-secondary">{formatDate(update.timestamp)}</div>
                           </div>
                         </div>
                       ))}
@@ -349,29 +349,29 @@ const StatusPage: React.FC = () => {
         </div>
 
         {/* Historical Uptime */}
-        <div className="bg-white border-t border-gray-200">
+        <div className="bg-white border-t border-light">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">90-Day Uptime History</h2>
+            <h2 className="text-2xl font-bold text-primary mb-8">90-Day Uptime History</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600 mb-2">99.9%</div>
-                <div className="text-gray-600">Overall Uptime</div>
+                <div className="text-secondary">Overall Uptime</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600 mb-2">1.2s</div>
-                <div className="text-gray-600">Avg Response Time</div>
+                <div className="text-secondary">Avg Response Time</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600 mb-2">0</div>
-                <div className="text-gray-600">Critical Incidents</div>
+                <div className="text-secondary">Critical Incidents</div>
               </div>
             </div>
 
-            <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+            <div className="mt-8 p-6 bg-section-light rounded-lg">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-medium text-gray-700">Past 90 days</span>
-                <div className="flex items-center space-x-4 text-xs text-gray-500">
+                <span className="text-sm font-medium text-primary">Past 90 days</span>
+                <div className="flex items-center space-x-4 text-xs text-secondary">
                   <div className="flex items-center space-x-1">
                     <div className="w-3 h-3 bg-green-500 rounded"></div>
                     <span>Operational</span>
@@ -402,7 +402,7 @@ const StatusPage: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 bg-white">
+        <footer className="border-t border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">
               <button 
@@ -411,7 +411,7 @@ const StatusPage: React.FC = () => {
               >
                 <Logo size="sm" showText={true} />
               </button>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-secondary">
                 © 2025 DharmaMind. All rights reserved.
               </p>
             </div>

@@ -63,7 +63,7 @@ const Logo: React.FC<LogoProps> = ({
   
   const LogoContent = () => (
     <>
-      <div className={`${currentSize.container} rounded-${size === 'avatar' ? 'full' : 'lg'} overflow-hidden shadow-lg bg-white border border-gray-200 relative`}>
+      <div className={`${currentSize.container} rounded-${size === 'avatar' ? 'full' : 'lg'} overflow-hidden shadow-lg bg-white border border-brand-accent relative`}>
         <Image
           src="/logo.jpeg"
           alt="DharmaMind Logo"

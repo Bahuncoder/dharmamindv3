@@ -48,13 +48,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 text-center">
           <div className="mb-6">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-section-light rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H10m4-4V9a4 4 0 00-8 0v2m0 0V9a2 2 0 012-2h2a2 2 0 012 2v2" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Premium Feature</h2>
-            <p className="text-gray-600">
+            <h2 className="text-2xl font-bold text-primary mb-2">Premium Feature</h2>
+            <p className="text-secondary">
               This feature requires a paid subscription plan.
             </p>
           </div>
@@ -68,7 +68,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
             </button>
             <button
               onClick={() => window.location.href = '/'}
-              className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-200 transition-all duration-200 font-medium"
+              className="w-full bg-section-light text-primary py-3 px-4 rounded-lg hover:bg-brand-primary transition-all duration-200 font-medium"
             >
               Back to Home
             </button>

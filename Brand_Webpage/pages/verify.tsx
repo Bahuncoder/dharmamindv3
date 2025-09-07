@@ -77,8 +77,8 @@ export default function VerifyAccount() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Logo size="lg" />
-          <h1 className="text-3xl font-bold text-gray-900 mt-4">Verify Your Account</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-primary mt-4">Verify Your Account</h1>
+          <p className="text-secondary mt-2">
             We've sent a verification code to your email
           </p>
         </div>
@@ -88,14 +88,14 @@ export default function VerifyAccount() {
           <form onSubmit={handleVerify} className="space-y-6">
             {/* Email Display */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Email Address
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-gray-50"
+                className="w-full px-4 py-3 border border-brand-accent rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-section-light"
                 placeholder="your.email@example.com"
                 required
                 readOnly={!!router.query.email}
@@ -104,19 +104,19 @@ export default function VerifyAccount() {
 
             {/* Verification Code */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Verification Code
               </label>
               <input
                 type="text"
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\\D/g, '').slice(0, 6))}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-center text-2xl font-mono tracking-widest"
+                className="w-full px-4 py-3 border border-brand-accent rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-center text-2xl font-mono tracking-widest"
                 placeholder="000000"
                 maxLength={6}
                 required
               />
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-secondary mt-1">
                 Enter the 6-digit code sent to your email
               </p>
             </div>
@@ -161,10 +161,10 @@ export default function VerifyAccount() {
           </form>
 
           {/* Back to Login */}
-          <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+          <div className="mt-8 pt-6 border-t border-light text-center">
             <button
               onClick={() => router.push('/auth?mode=login')}
-              className="text-gray-600 hover:text-gray-800 text-sm"
+              className="text-secondary hover:text-primary text-sm"
             >
               ← Back to Login
             </button>
@@ -173,7 +173,7 @@ export default function VerifyAccount() {
 
         {/* Security Note */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-secondary">
             🔒 Your verification code expires in 10 minutes for security
           </p>
         </div>

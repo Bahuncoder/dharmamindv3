@@ -53,7 +53,7 @@ const DocsPage: React.FC = () => {
 
       <div className="min-h-screen bg-primary-background">
         {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
+        <header className="border-b border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <button 
@@ -106,15 +106,15 @@ const DocsPage: React.FC = () => {
             
             {/* Quick Links */}
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-light hover:shadow-md transition-shadow">
                 <div className="text-primary font-medium">Quick Start</div>
                 <div className="text-sm text-secondary">Get started in 5 minutes</div>
               </button>
-              <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-light hover:shadow-md transition-shadow">
                 <div className="text-primary font-medium">API Reference</div>
                 <div className="text-sm text-secondary">Complete API docs</div>
               </button>
-              <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-light hover:shadow-md transition-shadow">
                 <div className="text-primary font-medium">Examples</div>
                 <div className="text-sm text-secondary">Code samples & tutorials</div>
               </button>
@@ -132,7 +132,7 @@ const DocsPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-primary mb-8">{section.title}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {section.items.map((item, itemIndex) => (
-                    <div key={itemIndex} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer">
+                    <div key={itemIndex} className="bg-white rounded-lg shadow-sm border border-light p-6 hover:shadow-md transition-shadow cursor-pointer">
                       <h3 className="font-semibold text-primary mb-2">{item.title}</h3>
                       <p className="text-secondary text-sm mb-4">{item.description}</p>
                       <div className="flex items-center text-primary text-sm font-medium">
@@ -149,18 +149,18 @@ const DocsPage: React.FC = () => {
           </div>
 
           {/* API Quick Reference */}
-          <div className="mt-16 bg-primary-clean rounded-lg p-8 border border-gray-200">
+          <div className="mt-16 bg-primary-clean rounded-lg p-8 border border-light">
             <h2 className="text-2xl font-bold mb-6 text-primary">🔗 API Quick Reference</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               
               {/* Authentication */}
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-primary">Authentication</h3>
-                <div className="bg-gray-800 rounded-lg p-4">
+                <div className="bg-primary-background rounded-lg p-4">
                   <code className="text-sm">
-                    <div className="text-gray-400">// JWT Token Authentication</div>
+                    <div className="text-secondary">// JWT Token Authentication</div>
                     <div className="text-white">headers: {`{`}</div>
-                    <div className="text-gray-300 ml-4">'Authorization': 'Bearer YOUR_JWT_TOKEN'</div>
+                    <div className="text-secondary ml-4">'Authorization': 'Bearer YOUR_JWT_TOKEN'</div>
                     <div className="text-white">{`}`}</div>
                   </code>
                 </div>
@@ -169,12 +169,12 @@ const DocsPage: React.FC = () => {
               {/* Chat Endpoint */}
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-primary">Chat Endpoint</h3>
-                <div className="bg-gray-800 rounded-lg p-4">
+                <div className="bg-primary-background rounded-lg p-4">
                   <code className="text-sm">
-                    <div className="text-gray-400">// Send message to DharmaMind</div>
+                    <div className="text-secondary">// Send message to DharmaMind</div>
                     <div className="text-green-400">POST</div>
                     <div className="text-white">/api/chat</div>
-                    <div className="text-gray-300 mt-2">{`{ "message": "Your question" }`}</div>
+                    <div className="text-secondary mt-2">{`{ "message": "Your question" }`}</div>
                   </code>
                 </div>
               </div>
@@ -196,8 +196,8 @@ const DocsPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               
               {/* JavaScript SDK */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-primary-clean rounded-lg flex items-center justify-center border border-gray-200">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-primary-clean rounded-lg flex items-center justify-center border border-light">
                   <span className="text-2xl">📜</span>
                 </div>
                 <h3 className="font-semibold text-primary mb-2">JavaScript</h3>
@@ -208,7 +208,7 @@ const DocsPage: React.FC = () => {
               </div>
 
               {/* Python SDK */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">🐍</span>
                 </div>
@@ -220,7 +220,7 @@ const DocsPage: React.FC = () => {
               </div>
 
               {/* React Components */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 bg-cyan-100 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">⚛️</span>
                 </div>
@@ -232,7 +232,7 @@ const DocsPage: React.FC = () => {
               </div>
 
               {/* REST API */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="w-12 h-12 mx-auto mb-4 bg-green-100 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">🔌</span>
                 </div>
@@ -246,7 +246,7 @@ const DocsPage: React.FC = () => {
           </div>
 
           {/* Support Section */}
-          <div className="mt-16 bg-primary-clean rounded-lg p-8 text-center border border-gray-200">
+          <div className="mt-16 bg-primary-clean rounded-lg p-8 text-center border border-light">
             <h3 className="text-xl font-semibold text-primary mb-4">
               Need help with integration? 🤝
             </h3>
@@ -263,7 +263,7 @@ const DocsPage: React.FC = () => {
               </ContactButton>
               <button
                 onClick={() => router.push('/help')}
-                className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                className="border border-brand-accent text-primary px-6 py-3 rounded-lg font-medium hover:bg-section-light transition-colors"
               >
                 Browse Help Center
               </button>
@@ -272,7 +272,7 @@ const DocsPage: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 bg-white">
+        <footer className="border-t border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">
               <button 

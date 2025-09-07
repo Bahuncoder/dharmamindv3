@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
-import NavigationHeader from '../components/NavigationHeader';
+import BrandHeader from '../components/BrandHeader';
 
 const FeaturesPage: React.FC = () => {
   const router = useRouter();
@@ -175,11 +175,12 @@ const FeaturesPage: React.FC = () => {
       </Head>
 
       <div className="min-h-screen bg-section-light">
-        {/* Professional Navigation Header */}
-        <NavigationHeader 
-          title="Features"
-          showBackButton={true}
-          showHomeButton={false}
+        {/* Professional Brand Header with Breadcrumbs */}
+        <BrandHeader
+          breadcrumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Features', href: '/features' }
+          ]}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -191,7 +192,7 @@ const FeaturesPage: React.FC = () => {
               </h1>
               <div className="w-24 h-1 bg-brand-gradient mx-auto mb-8"></div>
               <p className="text-xl md:text-2xl text-secondary max-w-4xl mx-auto mb-12 leading-relaxed">
-                Discover comprehensive tools and features designed to guide you on your spiritual path, 
+                Discover comprehensive tools and features designed to guide you on your spiritual path,
                 combining ancient wisdom with modern technology for a transformative experience.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -226,9 +227,8 @@ const FeaturesPage: React.FC = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                    index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-                  }`}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                    }`}
                 >
                   <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''} animate-slide-in-left`}>
                     <div className="flex items-center space-x-4 mb-6">
@@ -238,7 +238,7 @@ const FeaturesPage: React.FC = () => {
                     <p className="text-lg text-secondary leading-relaxed mb-8">
                       {feature.description}
                     </p>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <h4 className="text-lg font-semibold text-primary mb-4">Key Benefits</h4>
@@ -251,7 +251,7 @@ const FeaturesPage: React.FC = () => {
                           ))}
                         </ul>
                       </div>
-                      
+
                       <div>
                         <h4 className="text-lg font-semibold text-primary mb-4">Use Cases</h4>
                         <ul className="space-y-2">
@@ -265,7 +265,7 @@ const FeaturesPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} animate-slide-in-right`}>
                     <div className="content-card text-center bg-gradient-to-br from-brand-primary/5 to-brand-accent/10">
                       <div className="text-8xl mb-6">{feature.icon}</div>
@@ -305,7 +305,7 @@ const FeaturesPage: React.FC = () => {
                 Our platform leverages the latest advances in AI and technology to deliver an exceptional spiritual experience.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {technologies.map((tech, index) => (
                 <div
@@ -336,7 +336,7 @@ const FeaturesPage: React.FC = () => {
                 Real experiences from people who have transformed their spiritual journey with DharmaMind.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
                 <div
@@ -368,7 +368,7 @@ const FeaturesPage: React.FC = () => {
                   See how DharmaMind compares to traditional spiritual guidance methods.
                 </p>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -420,7 +420,7 @@ const FeaturesPage: React.FC = () => {
             <div className="content-card-featured">
               <h2 className="text-4xl font-bold text-primary mb-6">Ready to Transform Your Spiritual Journey?</h2>
               <p className="text-xl text-secondary mb-8 max-w-3xl mx-auto leading-relaxed">
-                Join thousands of seekers who have discovered the power of AI-enhanced spiritual guidance. 
+                Join thousands of seekers who have discovered the power of AI-enhanced spiritual guidance.
                 Start your journey today with our comprehensive feature set.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">

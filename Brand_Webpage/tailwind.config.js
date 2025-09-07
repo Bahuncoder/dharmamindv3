@@ -9,58 +9,45 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Override Tailwind's default primary color to emerald green
+        // PRIMARY: Light Gray (main backgrounds, cards, etc.)
         primary: {
-          50: '#ecfdf5',
-          100: '#d1fae5',
-          200: '#a7f3d0',
-          300: '#6ee7b7',
-          400: '#34d399',
-          500: '#10b981',  // Our main emerald green
-          600: '#059669',
-          700: '#047857',
-          800: '#065f46',
-          900: '#064e3b',
-          950: '#022c22',
+          50: '#f9fafb',   // Lightest gray
+          100: '#f3f4f6',  // Main primary color (light gray)
+          200: '#e5e7eb',  // Hover states
+          300: '#d1d5db',  // Darker gray
+          400: '#9ca3af',  // Medium gray
+          500: '#6b7280',  // Text gray
+          600: '#4b5563',  // Secondary text
+          700: '#374151',  // Dark text
+          800: '#1f2937',  // Main text
+          900: '#111827',  // Darkest
         },
+
+        // ACCENT: Emerald (ONLY for borders and highlights)
+        accent: {
+          50: '#ecfdf5',   // Lightest emerald
+          100: '#d1fae5',  // Light emerald borders
+          200: '#a7f3d0',  // 
+          300: '#6ee7b7',  //
+          400: '#34d399',  //
+          500: '#10b981',  // Main accent color (emerald for borders)
+          600: '#059669',  // Border hover
+          700: '#047857',  // Dark borders
+          800: '#065f46',  //
+          900: '#064e3b',  //
+          950: '#022c22',  // Darkest
+        },
+
+        // Keep dharma, lotus, peace for backward compatibility but simplified
         dharma: {
-          50: '#f0fdf4',  // emerald-50
-          100: '#dcfce7', // emerald-100
-          200: '#bbf7d0', // emerald-200
-          300: '#86efac', // emerald-300
-          400: '#4ade80', // emerald-400
-          500: '#22c55e', // emerald-500
-          600: '#16a34a', // emerald-600
-          700: '#15803d', // emerald-700
-          800: '#166534', // emerald-800
-          900: '#14532d', // emerald-900
-          950: '#052e16', // emerald-950
+          500: '#10b981',  // Just emerald for borders
         },
         lotus: {
-          50: '#f9fafb',  // gray-50
-          100: '#f3f4f6', // gray-100
-          200: '#e5e7eb', // gray-200
-          300: '#d1d5db', // gray-300
-          400: '#9ca3af', // gray-400
-          500: '#6b7280', // gray-500
-          600: '#4b5563', // gray-600
-          700: '#374151', // gray-700
-          800: '#1f2937', // gray-800
-          900: '#111827', // gray-900
-          950: '#030712', // gray-950
+          100: '#f3f4f6',  // Just light gray
+          500: '#6b7280',  // Just medium gray for text
         },
         peace: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          100: '#f3f4f6',  // Map to light gray
         }
       },
       fontFamily: {

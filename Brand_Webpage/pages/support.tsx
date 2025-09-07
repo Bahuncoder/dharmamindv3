@@ -10,7 +10,7 @@ const SupportPage: React.FC = () => (
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-section-light">
       <SupportSection 
         title="Support"
         subtitle="Get help, contact support, or browse our help center."

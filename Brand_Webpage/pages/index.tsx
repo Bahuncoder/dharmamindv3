@@ -1280,7 +1280,7 @@ const WelcomePage: React.FC = () => {
           </section>
 
           {/* Enterprise Roadmap Section */}
-          <section className="py-20 bg-gray-50">
+          <section className="py-20 bg-section-light">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -1303,7 +1303,7 @@ const WelcomePage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-xl p-6 border border-gray-200"
+                  className="bg-white rounded-xl p-6 border border-light"
                 >
                   <div className="text-2xl mb-4">🏢</div>
                   <h3 className="text-lg font-semibold text-primary mb-3">Enterprise Integration</h3>
@@ -1317,7 +1317,7 @@ const WelcomePage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-xl p-6 border border-gray-200"
+                  className="bg-white rounded-xl p-6 border border-light"
                 >
                   <div className="text-2xl mb-4">📊</div>
                   <h3 className="text-lg font-semibold text-primary mb-3">Analytics Dashboard</h3>
@@ -1331,7 +1331,7 @@ const WelcomePage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-xl p-6 border border-gray-200"
+                  className="bg-white rounded-xl p-6 border border-light"
                 >
                   <div className="text-2xl mb-4">🎓</div>
                   <h3 className="text-lg font-semibold text-primary mb-3">Training Programs</h3>

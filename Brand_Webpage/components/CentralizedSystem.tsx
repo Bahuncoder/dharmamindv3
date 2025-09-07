@@ -269,9 +269,9 @@ export const CentralizedFooter: React.FC<{
 
   if (variant === 'minimal') {
     return (
-      <footer className="border-t border-gray-200 bg-white py-4">
+      <footer className="border-t border-brand-accent bg-white py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-secondary">
             © 2025 DharmaMind. All rights reserved.
           </p>
         </div>
@@ -280,18 +280,18 @@ export const CentralizedFooter: React.FC<{
   }
 
   return (
-    <footer className="border-t border-gray-200 bg-white">
+    <footer className="border-t border-brand-accent bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <Logo size="sm" onClick={goToHome} />
-            <p className="text-sm text-gray-600 mt-4">
+            <p className="text-sm text-secondary mt-4">
               Your AI wisdom companion for spiritual growth and conscious decision-making.
             </p>
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Support</h3>
+            <h3 className="text-sm font-semibold text-primary mb-4">Support</h3>
             <div className="space-y-2">
               <ContactButton type="help" variant="link" size="sm">
                 Help Center
@@ -303,17 +303,17 @@ export const CentralizedFooter: React.FC<{
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-4">Account</h3>
+            <h3 className="text-sm font-semibold text-primary mb-4">Account</h3>
             <div className="space-y-2">
               <button 
                 onClick={() => goToAuth('login')}
-                className="block text-sm text-gray-600 hover:text-gray-900"
+                className="block text-sm text-secondary hover:text-primary"
               >
                 Sign In
               </button>
               <button 
                 onClick={() => goToAuth('signup')}
-                className="block text-sm text-gray-600 hover:text-gray-900"
+                className="block text-sm text-secondary hover:text-primary"
               >
                 Sign Up
               </button>
@@ -321,8 +321,8 @@ export const CentralizedFooter: React.FC<{
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-gray-200 text-center">
-          <p className="text-sm text-gray-600">
+        <div className="mt-8 pt-8 border-t border-brand-accent text-center">
+          <p className="text-sm text-secondary">
             © 2025 DharmaMind. All rights reserved.
           </p>
         </div>
@@ -357,7 +357,7 @@ export const CentralizedLayout: React.FC<{
         {title && (
           <div className="bg-gradient-to-br from-amber-50 to-emerald-50 py-8">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+              <h1 className="text-3xl font-bold text-primary">{title}</h1>
             </div>
           </div>
         )}

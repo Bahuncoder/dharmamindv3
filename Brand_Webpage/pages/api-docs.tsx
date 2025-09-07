@@ -43,15 +43,15 @@ const ApiDocsPage: React.FC = () => {
   const getMethodColor = (method: string) => {
     switch (method) {
       case 'GET':
-        return 'bg-primary-clean text-primary border border-gray-200';
+        return 'bg-primary-clean text-primary border border-light';
       case 'POST':
-        return 'bg-primary-clean text-primary border border-gray-200';
+        return 'bg-primary-clean text-primary border border-light';
       case 'PUT':
-        return 'bg-primary-clean text-primary border border-gray-200';
+        return 'bg-primary-clean text-primary border border-light';
       case 'DELETE':
-        return 'bg-primary-clean text-primary border border-gray-200';
+        return 'bg-primary-clean text-primary border border-light';
       default:
-        return 'bg-primary-clean text-primary border border-gray-200';
+        return 'bg-primary-clean text-primary border border-light';
     }
   };
 
@@ -66,7 +66,7 @@ const ApiDocsPage: React.FC = () => {
 
       <div className="min-h-screen bg-primary-background">
         {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
+        <header className="border-b border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-3">
@@ -120,7 +120,7 @@ const ApiDocsPage: React.FC = () => {
               Integrate dharmic AI wisdom into your applications with our REST API
             </p>
             
-            <div className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-sm border border-light">
               <span className="text-secondary mr-2">Base URL:</span>
               <code className="font-mono text-primary font-medium">
                 https://api.dharmamind.com/v1
@@ -136,7 +136,7 @@ const ApiDocsPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             
             {/* Authentication */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-lg shadow-sm border border-light p-6">
               <h3 className="text-xl font-semibold text-primary mb-4">1. Authentication</h3>
               <p className="text-secondary mb-4">
                 First, authenticate to receive a JWT token:
@@ -145,25 +145,25 @@ const ApiDocsPage: React.FC = () => {
                 <code className="text-primary text-sm">
                   <div className="text-secondary">POST</div>
                   <div className="text-white">/api/auth/login</div>
-                  <div className="mt-2 text-gray-300">{`{`}</div>
-                  <div className="text-gray-300 ml-4">"email": "user@example.com",</div>
-                  <div className="text-gray-300 ml-4">"password": "your_password"</div>
-                  <div className="text-gray-300">{`}`}</div>
+                  <div className="mt-2 text-secondary">{`{`}</div>
+                  <div className="text-secondary ml-4">"email": "user@example.com",</div>
+                  <div className="text-secondary ml-4">"password": "your_password"</div>
+                  <div className="text-secondary">{`}`}</div>
                 </code>
               </div>
             </div>
 
             {/* Making Requests */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-lg shadow-sm border border-light p-6">
               <h3 className="text-xl font-semibold text-primary mb-4">2. Making Requests</h3>
               <p className="text-secondary mb-4">
                 Include the JWT token in your requests:
               </p>
               <div className="bg-stone-800 rounded-lg p-4 overflow-x-auto">
                 <code className="text-sm">
-                  <div className="text-gray-400">// Headers</div>
-                  <div className="text-gray-300">Authorization: Bearer YOUR_JWT_TOKEN</div>
-                  <div className="text-gray-300">Content-Type: application/json</div>
+                  <div className="text-secondary">// Headers</div>
+                  <div className="text-secondary">Authorization: Bearer YOUR_JWT_TOKEN</div>
+                  <div className="text-secondary">Content-Type: application/json</div>
                 </code>
               </div>
             </div>
@@ -174,7 +174,7 @@ const ApiDocsPage: React.FC = () => {
           
           <div className="space-y-6">
             {endpoints.map((endpoint, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-light p-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getMethodColor(endpoint.method)}`}>
                     {endpoint.method}
@@ -189,7 +189,7 @@ const ApiDocsPage: React.FC = () => {
                     <h4 className="font-medium text-primary mb-2">Parameters:</h4>
                     <div className="flex flex-wrap gap-2">
                       {endpoint.params.map((param, paramIndex) => (
-                        <code key={paramIndex} className="px-2 py-1 bg-primary-clean text-primary border border-gray-200 rounded text-sm">
+                        <code key={paramIndex} className="px-2 py-1 bg-primary-clean text-primary border border-light rounded text-sm">
                           {param}
                         </code>
                       ))}
@@ -204,23 +204,23 @@ const ApiDocsPage: React.FC = () => {
           <div className="mt-16">
             <h2 className="text-3xl font-bold text-primary mb-8">📄 Example Response</h2>
             
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-lg shadow-sm border border-light p-6">
               <h3 className="text-xl font-semibold text-primary mb-4">Chat API Response</h3>
               <div className="bg-stone-800 rounded-lg p-6 overflow-x-auto">
                 <code className="text-sm">
-                  <div className="text-gray-300">{`{`}</div>
-                  <div className="text-gray-300 ml-4">"success": true,</div>
-                  <div className="text-gray-300 ml-4">"conversation_id": "conv_123456",</div>
-                  <div className="text-gray-300 ml-4">"response": {`{`}</div>
-                  <div className="text-gray-300 ml-8">"message": "Thank you for your question about finding inner peace...",</div>
-                  <div className="text-gray-300 ml-8">"wisdom_modules": ["moksha", "viveka", "ahimsa"],</div>
-                  <div className="text-gray-300 ml-8">"timestamp": "2025-01-29T10:30:00Z"</div>
-                  <div className="text-gray-300 ml-4">{`},`}</div>
-                  <div className="text-gray-300 ml-4">"usage": {`{`}</div>
-                  <div className="text-gray-300 ml-8">"tokens_used": 150,</div>
-                  <div className="text-gray-300 ml-8">"remaining_quota": 850</div>
-                  <div className="text-gray-300 ml-4">{`}`}</div>
-                  <div className="text-gray-300">{`}`}</div>
+                  <div className="text-secondary">{`{`}</div>
+                  <div className="text-secondary ml-4">"success": true,</div>
+                  <div className="text-secondary ml-4">"conversation_id": "conv_123456",</div>
+                  <div className="text-secondary ml-4">"response": {`{`}</div>
+                  <div className="text-secondary ml-8">"message": "Thank you for your question about finding inner peace...",</div>
+                  <div className="text-secondary ml-8">"wisdom_modules": ["moksha", "viveka", "ahimsa"],</div>
+                  <div className="text-secondary ml-8">"timestamp": "2025-01-29T10:30:00Z"</div>
+                  <div className="text-secondary ml-4">{`},`}</div>
+                  <div className="text-secondary ml-4">"usage": {`{`}</div>
+                  <div className="text-secondary ml-8">"tokens_used": 150,</div>
+                  <div className="text-secondary ml-8">"remaining_quota": 850</div>
+                  <div className="text-secondary ml-4">{`}`}</div>
+                  <div className="text-secondary">{`}`}</div>
                 </code>
               </div>
             </div>
@@ -231,21 +231,21 @@ const ApiDocsPage: React.FC = () => {
             <h2 className="text-3xl font-bold text-primary mb-8">⚡ Rate Limits</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-3xl mb-3">🆓</div>
                 <h3 className="text-lg font-semibold text-primary mb-2">Free Tier</h3>
                 <div className="text-2xl font-bold text-primary mb-1">100</div>
                 <div className="text-secondary text-sm">requests/hour</div>
               </div>
               
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-3xl mb-3">💼</div>
                 <h3 className="text-lg font-semibold text-primary mb-2">Professional</h3>
                 <div className="text-2xl font-bold text-primary mb-1">1,000</div>
                 <div className="text-secondary text-sm">requests/hour</div>
               </div>
               
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-3xl mb-3">🏢</div>
                 <h3 className="text-lg font-semibold text-primary mb-2">Enterprise</h3>
                 <div className="text-2xl font-bold text-primary mb-1">Custom</div>
@@ -258,13 +258,13 @@ const ApiDocsPage: React.FC = () => {
           <div className="mt-16">
             <h2 className="text-3xl font-bold text-primary mb-8">🚨 Error Codes</h2>
             
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div className="bg-white rounded-lg shadow-sm border border-light overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-section-light">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Solution</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Code</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Description</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider">Solution</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -299,7 +299,7 @@ const ApiDocsPage: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-4xl mb-4">📜</div>
                 <h3 className="font-semibold text-primary mb-2">JavaScript</h3>
                 <code className="text-sm text-secondary mb-4 block">npm install dharmamind</code>
@@ -308,7 +308,7 @@ const ApiDocsPage: React.FC = () => {
                 </button>
               </div>
 
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-4xl mb-4">🐍</div>
                 <h3 className="font-semibold text-primary mb-2">Python</h3>
                 <code className="text-sm text-secondary mb-4 block">pip install dharmamind</code>
@@ -317,7 +317,7 @@ const ApiDocsPage: React.FC = () => {
                 </button>
               </div>
 
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-4xl mb-4">💎</div>
                 <h3 className="font-semibold text-primary mb-2">Ruby</h3>
                 <code className="text-sm text-secondary mb-4 block">gem install dharmamind</code>
@@ -326,7 +326,7 @@ const ApiDocsPage: React.FC = () => {
                 </button>
               </div>
 
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
+              <div className="bg-white rounded-lg shadow-sm border border-light p-6 text-center">
                 <div className="text-4xl mb-4">🔌</div>
                 <h3 className="font-semibold text-primary mb-2">cURL</h3>
                 <code className="text-sm text-secondary mb-4 block">Direct HTTP calls</code>
@@ -338,7 +338,7 @@ const ApiDocsPage: React.FC = () => {
           </div>
 
           {/* Support */}
-          <div className="mt-16 bg-primary-clean rounded-lg p-8 text-center border border-gray-200">
+          <div className="mt-16 bg-primary-clean rounded-lg p-8 text-center border border-light">
             <h3 className="text-xl font-semibold text-primary mb-4">
               Need API Support? 🤝
             </h3>
@@ -355,7 +355,7 @@ const ApiDocsPage: React.FC = () => {
               </ContactButton>
               <button
                 onClick={() => router.push('/docs')}
-                className="border border-gray-300 text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                className="border border-brand-accent text-primary px-6 py-3 rounded-lg font-medium hover:bg-section-light transition-colors"
               >
                 View Full Docs
               </button>
@@ -364,7 +364,7 @@ const ApiDocsPage: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 bg-white">
+        <footer className="border-t border-light bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">
               <Logo 

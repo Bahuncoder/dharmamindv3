@@ -194,7 +194,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
       case 'unpaid':
         return 'bg-red-100 text-red-800';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-section-light text-primary';
     }
   };
 
@@ -212,7 +212,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
     return (
       <div className="text-center py-12">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
-        <p className="text-gray-600 mt-4">Loading subscription information...</p>
+        <p className="text-secondary mt-4">Loading subscription information...</p>
       </div>
     );
   }
@@ -244,9 +244,9 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
 
       {/* Current Subscription */}
       {subscription ? (
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-brand-accent rounded-lg p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Current Subscription</h2>
+            <h2 className="text-xl font-semibold text-primary">Current Subscription</h2>
             <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(subscription.status)}`}>
               {subscription.status.charAt(0).toUpperCase() + subscription.status.slice(1)}
             </span>
@@ -254,34 +254,34 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">Plan Details</h3>
+              <h3 className="font-medium text-primary mb-2">Plan Details</h3>
               <div className="space-y-2 text-sm">
-                <p><span className="text-gray-600">Plan:</span> <span className="font-medium">{subscription.plan_name}</span></p>
-                <p><span className="text-gray-600">Price:</span> <span className="font-medium">{formatPrice(subscription.amount || 0)} / {subscription.billing_interval}</span></p>
-                <p><span className="text-gray-600">Started:</span> {formatDate(subscription.created_at)}</p>
+                <p><span className="text-secondary">Plan:</span> <span className="font-medium">{subscription.plan_name}</span></p>
+                <p><span className="text-secondary">Price:</span> <span className="font-medium">{formatPrice(subscription.amount || 0)} / {subscription.billing_interval}</span></p>
+                <p><span className="text-secondary">Started:</span> {formatDate(subscription.created_at)}</p>
                 {subscription.current_period_end && (
-                  <p><span className="text-gray-600">Next billing:</span> {formatDate(subscription.current_period_end)}</p>
+                  <p><span className="text-secondary">Next billing:</span> {formatDate(subscription.current_period_end)}</p>
                 )}
               </div>
             </div>
 
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">Usage & Limits</h3>
+              <h3 className="font-medium text-primary mb-2">Usage & Limits</h3>
               <div className="space-y-2 text-sm">
                 {subscription.usage_data && (
                   <>
-                    <p><span className="text-gray-600">Sessions used:</span> <span className="font-medium">{subscription.usage_data.sessions_used || 0}</span></p>
-                    <p><span className="text-gray-600">Sessions limit:</span> <span className="font-medium">{subscription.usage_data.sessions_limit || 'Unlimited'}</span></p>
+                    <p><span className="text-secondary">Sessions used:</span> <span className="font-medium">{subscription.usage_data.sessions_used || 0}</span></p>
+                    <p><span className="text-secondary">Sessions limit:</span> <span className="font-medium">{subscription.usage_data.sessions_limit || 'Unlimited'}</span></p>
                   </>
                 )}
                 {subscription.trial_end && new Date(subscription.trial_end) > new Date() && (
-                  <p><span className="text-gray-600">Trial ends:</span> {formatDate(subscription.trial_end)}</p>
+                  <p><span className="text-secondary">Trial ends:</span> {formatDate(subscription.trial_end)}</p>
                 )}
               </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3 mt-6 pt-6 border-t border-gray-200">
+          <div className="flex flex-wrap gap-3 mt-6 pt-6 border-t border-brand-accent">
             <button
               onClick={() => setShowPlanSelection(true)}
               className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-4 py-2 rounded-lg hover:from-amber-700 hover:to-emerald-700 transition-colors text-sm font-medium"
@@ -290,7 +290,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
             </button>
             <button
               onClick={() => setShowPaymentMethods(true)}
-              className="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
+              className="border border-brand-accent text-primary px-4 py-2 rounded-lg hover:bg-section-light transition-colors text-sm font-medium"
             >
               Manage Payment Methods
             </button>
@@ -309,11 +309,11 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
         /* No Subscription - Show Plans */
         <div className="text-center py-12">
           <div className="max-w-md mx-auto">
-            <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-16 h-16 text-secondary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
             </svg>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-2">No Active Subscription</h2>
-            <p className="text-gray-600 mb-6">Choose a plan to unlock all features and start your spiritual journey</p>
+            <h2 className="text-2xl font-semibold text-primary mb-2">No Active Subscription</h2>
+            <p className="text-secondary mb-6">Choose a plan to unlock all features and start your spiritual journey</p>
             <button
               onClick={() => setShowPlanSelection(true)}
               className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-3 rounded-lg hover:from-amber-700 hover:to-emerald-700 transition-colors font-medium"
@@ -328,14 +328,14 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
       {showPlanSelection && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-6 border-b border-brand-accent">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-gray-900">
+                <h2 className="text-xl font-semibold text-primary">
                   {subscription ? 'Upgrade Your Plan' : 'Choose Your Plan'}
                 </h2>
                 <button
                   onClick={() => setShowPlanSelection(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-secondary hover:text-secondary"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -354,7 +354,7 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
                     <div
                       key={plan.id}
                       className={`relative border rounded-lg p-6 ${
-                        recommendation ? 'border-emerald-300 bg-emerald-50' : 'border-gray-200 bg-white'
+                        recommendation ? 'border-emerald-300 bg-emerald-50' : 'border-brand-accent bg-white'
                       } ${isCurrentPlan ? 'ring-2 ring-emerald-500' : ''}`}
                     >
                       {recommendation && (
@@ -374,15 +374,15 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
                       )}
 
                       <div className="text-center mb-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{plan.name}</h3>
-                        <div className="text-3xl font-bold text-gray-900 mb-1">
+                        <h3 className="text-lg font-semibold text-primary mb-2">{plan.name}</h3>
+                        <div className="text-3xl font-bold text-primary mb-1">
                           {formatPrice(plan.price)}
                         </div>
-                        <p className="text-gray-600">per {plan.billing_interval}</p>
+                        <p className="text-secondary">per {plan.billing_interval}</p>
                       </div>
 
                       {plan.description && (
-                        <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                        <p className="text-secondary text-sm mb-4">{plan.description}</p>
                       )}
 
                       {plan.features && plan.features.length > 0 && (
@@ -409,10 +409,10 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
                         disabled={submitting || isCurrentPlan}
                         className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
                           isCurrentPlan
-                            ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                            ? 'bg-section-light text-secondary cursor-not-allowed'
                             : recommendation
                             ? 'bg-gradient-to-r from-amber-600 to-emerald-600 text-white hover:from-amber-700 hover:to-emerald-700'
-                            : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                            : 'border border-brand-accent text-primary hover:bg-section-light'
                         } disabled:opacity-50`}
                       >
                         {submitting 
@@ -445,12 +445,12 @@ const SubscriptionManager: React.FC<SubscriptionManagerProps> = ({
       {showPaymentMethods && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-6 border-b border-brand-accent">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-gray-900">Manage Payment Methods</h2>
+                <h2 className="text-xl font-semibold text-primary">Manage Payment Methods</h2>
                 <button
                   onClick={() => setShowPaymentMethods(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-secondary hover:text-secondary"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

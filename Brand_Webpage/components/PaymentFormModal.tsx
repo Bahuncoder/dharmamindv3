@@ -381,10 +381,10 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
             {/* Bank Transfer Information */}
             {formData.paymentType === 'bank_transfer' && (
               <div>
-                <h3 className="font-medium text-gray-900 mb-4">Bank Transfer Information</h3>
+                <h3 className="font-medium text-primary mb-4">Bank Transfer Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Bank Name *
                     </label>
                     <input
@@ -392,12 +392,12 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                       required
                       value={formData.bankName}
                       onChange={(e) => handleInputChange('bankName', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="Chase Bank, Wells Fargo, etc."
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Account Holder Name *
                     </label>
                     <input
@@ -405,26 +405,26 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                       required
                       value={formData.accountHolderName}
                       onChange={(e) => handleInputChange('accountHolderName', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Account Type *
                     </label>
                     <select
                       required
                       value={formData.accountType}
                       onChange={(e) => handleInputChange('accountType', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     >
                       <option value="checking">Checking Account</option>
                       <option value="savings">Savings Account</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Routing Number *
                     </label>
                     <input
@@ -432,13 +432,13 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                       required
                       value={formData.routingNumber}
                       onChange={(e) => handleInputChange('routingNumber', e.target.value.replace(/\D/g, '').substring(0, 9))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="123456789"
                       maxLength={9}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Account Number *
                     </label>
                     <input
@@ -446,7 +446,7 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                       required
                       value={formData.accountNumber}
                       onChange={(e) => handleInputChange('accountNumber', e.target.value.replace(/\D/g, ''))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="1234567890"
                     />
                   </div>
@@ -470,9 +470,9 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
             {/* PayPal Information */}
             {formData.paymentType === 'paypal' && (
               <div>
-                <h3 className="font-medium text-gray-900 mb-4">PayPal Information</h3>
+                <h3 className="font-medium text-primary mb-4">PayPal Information</h3>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     PayPal Email Address *
                   </label>
                   <input
@@ -480,7 +480,7 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                     required
                     value={formData.paypalEmail}
                     onChange={(e) => handleInputChange('paypalEmail', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="your-email@example.com"
                   />
                 </div>
@@ -503,9 +503,9 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
             {/* Stripe Information */}
             {formData.paymentType === 'stripe' && (
               <div>
-                <h3 className="font-medium text-gray-900 mb-4">Stripe Connect Account</h3>
+                <h3 className="font-medium text-primary mb-4">Stripe Connect Account</h3>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Stripe Account ID *
                   </label>
                   <input
@@ -513,7 +513,7 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                     required
                     value={formData.stripeAccountId}
                     onChange={(e) => handleInputChange('stripeAccountId', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="acct_xxxxxxxxxx"
                   />
                 </div>
@@ -535,10 +535,10 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
 
             {/* Billing Address */}
             <div>
-              <h3 className="font-medium text-gray-900 mb-4">Billing Address</h3>
+              <h3 className="font-medium text-primary mb-4">Billing Address</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Address Line 1 *
                   </label>
                   <input
@@ -546,24 +546,24 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                     required
                     value={formData.billingAddress.line1}
                     onChange={(e) => handleInputChange('billingAddress.line1', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="123 Main St"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Address Line 2
                   </label>
                   <input
                     type="text"
                     value={formData.billingAddress.line2}
                     onChange={(e) => handleInputChange('billingAddress.line2', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="Apt, suite, etc."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     City *
                   </label>
                   <input
@@ -571,12 +571,12 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                     required
                     value={formData.billingAddress.city}
                     onChange={(e) => handleInputChange('billingAddress.city', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="New York"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     State *
                   </label>
                   <input
@@ -584,12 +584,12 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                     required
                     value={formData.billingAddress.state}
                     onChange={(e) => handleInputChange('billingAddress.state', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="NY"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Postal Code *
                   </label>
                   <input
@@ -597,19 +597,19 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                     required
                     value={formData.billingAddress.postal_code}
                     onChange={(e) => handleInputChange('billingAddress.postal_code', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="10001"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Country *
                   </label>
                   <select
                     required
                     value={formData.billingAddress.country}
                     onChange={(e) => handleInputChange('billingAddress.country', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   >
                     <option value="US">United States</option>
                     <option value="CA">Canada</option>
@@ -632,9 +632,9 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                   id="saveForFuture"
                   checked={formData.saveForFuture}
                   onChange={(e) => handleInputChange('saveForFuture', e.target.checked)}
-                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-brand-accent rounded"
                 />
-                <label htmlFor="saveForFuture" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="saveForFuture" className="ml-2 block text-sm text-primary">
                   Save this payment method for future use
                 </label>
               </div>
@@ -644,9 +644,9 @@ const PaymentFormModal: React.FC<PaymentFormModalProps> = ({
                   id="setAsDefault"
                   checked={formData.setAsDefault}
                   onChange={(e) => handleInputChange('setAsDefault', e.target.checked)}
-                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-brand-accent rounded"
                 />
-                <label htmlFor="setAsDefault" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="setAsDefault" className="ml-2 block text-sm text-primary">
                   Set as default payment method
                 </label>
               </div>

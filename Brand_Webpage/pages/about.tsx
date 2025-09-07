@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
 import SEOHead from '../components/SEOHead';
-import NavigationHeader from '../components/NavigationHeader';
+import BrandHeader from '../components/BrandHeader';
 
 const AboutPage: React.FC = () => {
   const router = useRouter();
@@ -138,18 +138,19 @@ const AboutPage: React.FC = () => {
 
   return (
     <>
-      <SEOHead 
+      <SEOHead
         title="About DharmaMind - Ethical AI for Personal Growth & Finding Purpose"
         description="Learn how DharmaMind combines AI technology with wisdom traditions to help you find life purpose, make ethical decisions, and live consciously. Join our community of growth-minded individuals."
         keywords="DharmaMind AI, ethical AI companion, purpose-driven AI guide, conversational philosophy AI, AI for personal ethics, meaningful life AI, conscious living community, personal transformation, finding life purpose"
       />
 
       <div className="min-h-screen bg-section-light">
-        {/* Professional Navigation Header */}
-        <NavigationHeader 
-          title="About DharmaMind"
-          showBackButton={true}
-          showHomeButton={false}
+        {/* Professional Brand Header with Breadcrumbs */}
+        <BrandHeader
+          breadcrumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'About', href: '/about' }
+          ]}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -161,7 +162,7 @@ const AboutPage: React.FC = () => {
               </h1>
               <div className="w-24 h-1 bg-brand-gradient mx-auto mb-8"></div>
               <p className="text-xl md:text-2xl text-secondary max-w-4xl mx-auto mb-8 leading-relaxed">
-                We're on a mission to make ancient spiritual wisdom accessible to everyone through 
+                We're on a mission to make ancient spiritual wisdom accessible to everyone through
                 ethical AI technology, bridging the gap between timeless teachings and modern life.
               </p>
               <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -182,12 +183,12 @@ const AboutPage: React.FC = () => {
               <div className="animate-slide-in-left">
                 <h2 className="text-4xl font-bold text-primary mb-6">Our Mission</h2>
                 <p className="text-secondary text-lg leading-relaxed mb-6">
-                  In an increasingly complex world, we believe that ancient wisdom holds the keys to inner peace, 
-                  purposeful living, and spiritual growth. DharmaMind was created to make these profound teachings 
+                  In an increasingly complex world, we believe that ancient wisdom holds the keys to inner peace,
+                  purposeful living, and spiritual growth. DharmaMind was created to make these profound teachings
                   accessible to anyone seeking guidance on their spiritual journey.
                 </p>
                 <p className="text-secondary text-lg leading-relaxed mb-8">
-                  Through our AI platform, we preserve and share the timeless wisdom of the Vedas, Upanishads, 
+                  Through our AI platform, we preserve and share the timeless wisdom of the Vedas, Upanishads,
                   Bhagavad Gita, and other sacred texts, helping modern seekers apply these teachings to their daily lives.
                 </p>
                 <div className="space-y-4">
@@ -209,7 +210,7 @@ const AboutPage: React.FC = () => {
                 <div className="text-8xl mb-6">🧘‍♀️</div>
                 <h3 className="text-2xl font-bold text-primary mb-4">Ancient Wisdom, Modern Technology</h3>
                 <p className="text-secondary">
-                  We combine the profound insights of ancient spiritual traditions with cutting-edge AI 
+                  We combine the profound insights of ancient spiritual traditions with cutting-edge AI
                   to create a personalized spiritual companion for the digital age.
                 </p>
               </div>
@@ -249,7 +250,7 @@ const AboutPage: React.FC = () => {
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-primary mb-4">Meet Our Team</h2>
               <p className="text-xl text-secondary max-w-3xl mx-auto">
-                A diverse team of technologists, spiritual practitioners, and scholars working together 
+                A diverse team of technologists, spiritual practitioners, and scholars working together
                 to bridge ancient wisdom with modern technology.
               </p>
             </div>
@@ -291,7 +292,7 @@ const AboutPage: React.FC = () => {
               <div className="relative">
                 {/* Timeline line */}
                 <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border-light hidden md:block"></div>
-                
+
                 {milestones.map((milestone, index) => (
                   <div
                     key={index}
@@ -332,8 +333,8 @@ const AboutPage: React.FC = () => {
                 </div>
                 <div className="animate-slide-in-right">
                   <p className="text-secondary text-lg leading-relaxed mb-6">
-                    Our AI is trained on authentic Sanskrit texts, scholarly translations, and commentaries from 
-                    renowned spiritual teachers. We use advanced natural language processing to understand context 
+                    Our AI is trained on authentic Sanskrit texts, scholarly translations, and commentaries from
+                    renowned spiritual teachers. We use advanced natural language processing to understand context
                     and provide relevant, personalized guidance.
                   </p>
                   <div className="space-y-4">
@@ -368,7 +369,7 @@ const AboutPage: React.FC = () => {
             <div className="content-card-featured">
               <h2 className="text-4xl font-bold text-primary mb-6">Join Our Mission</h2>
               <p className="text-xl text-secondary mb-8 max-w-3xl mx-auto leading-relaxed">
-                Whether you're beginning your spiritual journey or seeking deeper understanding, 
+                Whether you're beginning your spiritual journey or seeking deeper understanding,
                 DharmaMind is here to guide you with wisdom from the ages.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

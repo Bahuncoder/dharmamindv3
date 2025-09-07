@@ -7,7 +7,7 @@ export default function SignIn() {
       <Head>
         <title>Sign In - DharmaMind</title>
       </Head>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-brand-primary flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-md">
           <h1 className="text-2xl font-bold mb-4">Sign In Test Page</h1>
           <p>This is a test sign-in page to verify routing works.</p>

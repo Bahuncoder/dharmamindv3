@@ -64,7 +64,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     primary: 'border-amber-600 border-t-transparent',
     secondary: 'border-emerald-600 border-t-transparent', 
     white: 'border-white border-t-transparent',
-    gray: 'border-gray-300 border-t-gray-600'
+    gray: 'border-brand-accent border-t-gray-600'
   };
 
   return (
@@ -126,24 +126,24 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
         <div className={`absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 z-50 ${
           blur ? 'backdrop-blur-sm' : ''
         }`}>
-          <div className="flex flex-col items-center space-y-4 p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+          <div className="flex flex-col items-center space-y-4 p-6 bg-white rounded-lg shadow-lg border border-brand-accent">
             <LoadingSpinner size="lg" color="primary" />
             
             {message && (
-              <p className="text-sm font-medium text-gray-700 text-center">
+              <p className="text-sm font-medium text-primary text-center">
                 {message}
               </p>
             )}
             
             {progress !== undefined && (
               <div className="w-48">
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-primary-background rounded-full h-2">
                   <div 
                     className="bg-gradient-to-r from-amber-600 to-emerald-600 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
                   />
                 </div>
-                <p className="text-xs text-gray-500 text-center mt-1">
+                <p className="text-xs text-secondary text-center mt-1">
                   {Math.round(progress)}% complete
                 </p>
               </div>
@@ -221,10 +221,10 @@ export const LoadingCard: React.FC<{
   className = ''
 }) => {
   return (
-    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 p-8 ${className}`}>
+    <div className={`bg-white rounded-lg shadow-sm border border-brand-accent p-8 ${className}`}>
       <div className="flex flex-col items-center space-y-4">
         <LoadingSpinner size="lg" color="primary" />
-        <p className="text-sm font-medium text-gray-600">{message}</p>
+        <p className="text-sm font-medium text-secondary">{message}</p>
       </div>
     </div>
   );
@@ -247,10 +247,10 @@ export const LoadingSkeleton: React.FC<{
     <div className={`animate-pulse ${className}`}>
       {avatar && (
         <div className="flex items-center space-x-4 mb-4">
-          <div className="w-10 h-10 bg-gray-300 rounded-full" />
+          <div className="w-10 h-10 bg-primary-background rounded-full" />
           <div className="flex-1 space-y-2">
-            <div className="h-4 bg-gray-300 rounded w-1/4" />
-            <div className="h-3 bg-gray-300 rounded w-1/3" />
+            <div className="h-4 bg-primary-background rounded w-1/4" />
+            <div className="h-3 bg-primary-background rounded w-1/3" />
           </div>
         </div>
       )}
@@ -259,7 +259,7 @@ export const LoadingSkeleton: React.FC<{
         {Array.from({ length: lines }, (_, i) => (
           <div 
             key={i}
-            className={`h-4 bg-gray-300 rounded ${
+            className={`h-4 bg-primary-background rounded ${
               i === lines - 1 ? 'w-2/3' : 'w-full'
             }`}
           />
@@ -285,7 +285,7 @@ export const InlineLoading: React.FC<{
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       <LoadingSpinner size={size} color="primary" />
-      <span className={`${size === 'sm' ? 'text-sm' : 'text-base'} text-gray-600`}>
+      <span className={`${size === 'sm' ? 'text-sm' : 'text-base'} text-secondary`}>
         {message}
       </span>
     </div>

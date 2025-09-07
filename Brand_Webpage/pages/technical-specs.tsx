@@ -160,10 +160,10 @@ const TechnicalSpecsPage: React.FC = () => {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-primary mb-4">
             📚 Technical Specifications & Documentation
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-secondary max-w-3xl mx-auto">
             Access comprehensive technical documentation, API references, security whitepapers, 
             and integration guides for DharmaMind Enterprise.
           </p>
@@ -189,7 +189,7 @@ const TechnicalSpecsPage: React.FC = () => {
 
               <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Full Name *
                   </label>
                   <input
@@ -198,11 +198,11 @@ const TechnicalSpecsPage: React.FC = () => {
                     required
                     value={contactInfo.name}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Business Email *
                   </label>
                   <input
@@ -211,11 +211,11 @@ const TechnicalSpecsPage: React.FC = () => {
                     required
                     value={contactInfo.email}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-primary mb-2">
                     Company Name *
                   </label>
                   <input
@@ -224,7 +224,7 @@ const TechnicalSpecsPage: React.FC = () => {
                     required
                     value={contactInfo.company}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-brand-accent rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                 </div>
                 <button
@@ -247,9 +247,9 @@ const TechnicalSpecsPage: React.FC = () => {
                 </button>
               </form>
 
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-2">What's included:</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
+              <div className="mt-6 p-4 bg-section-light rounded-lg">
+                <h3 className="font-semibold text-primary mb-2">What's included:</h3>
+                <ul className="text-sm text-secondary space-y-1">
                   <li>• Complete API documentation and SDKs</li>
                   <li>• Security architecture and compliance reports</li>
                   <li>• Integration guides for enterprise systems</li>
@@ -269,7 +269,7 @@ const TechnicalSpecsPage: React.FC = () => {
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                     filter === 'all' 
                       ? 'bg-emerald-600 text-white' 
-                      : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                      : 'bg-white text-primary border border-light hover:bg-section-light'
                   }`}
                 >
                   {filter === 'all' ? 'All Documents' : filter.charAt(0).toUpperCase() + filter.slice(1)}
@@ -288,11 +288,11 @@ const TechnicalSpecsPage: React.FC = () => {
                     </span>
                   </div>
                   
-                  <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">{item.description}</p>
+                  <h3 className="font-semibold text-primary mb-2">{item.title}</h3>
+                  <p className="text-sm text-secondary mb-4 line-clamp-2">{item.description}</p>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">{item.fileSize}</span>
+                    <span className="text-xs text-secondary">{item.fileSize}</span>
                     <button
                       onClick={() => handleDownload(item)}
                       className="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-all duration-300"
@@ -306,7 +306,7 @@ const TechnicalSpecsPage: React.FC = () => {
 
             {/* Additional Resources */}
             <div className="mt-12 bg-white rounded-lg border border-stone-200 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              <h2 className="text-2xl font-bold text-primary mb-6 text-center">
                 🚀 Ready to Get Started?
               </h2>
               

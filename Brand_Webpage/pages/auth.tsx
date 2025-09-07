@@ -67,7 +67,7 @@ export default function Auth() {
         {/* Background decoration - same as chat app */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-10 left-10 w-72 h-72 bg-emerald-100/30 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute top-0 right-4 w-72 h-72 bg-gray-100/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+          <div className="absolute top-0 right-4 w-72 h-72 bg-brand-primary/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
           <div className="absolute -bottom-8 left-20 w-72 h-72 bg-emerald-50/50 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
         </div>
 
@@ -96,10 +96,10 @@ export default function Auth() {
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-900 via-emerald-800 to-gray-900 bg-clip-text text-transparent mb-4">
                   Connecting to DharmaMind
                 </h2>
-                <p className="text-lg text-gray-600 font-medium mb-6">
+                <p className="text-lg text-secondary font-medium mb-6">
                   Redirecting you to secure authentication...
                 </p>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-secondary">
                   <p className="mb-2">✨ Single sign-on across all platforms</p>
                   <p className="mb-2">🔒 Secure authentication</p>
                   <p>🌟 Seamless experience</p>
@@ -115,7 +115,7 @@ export default function Auth() {
                   Continue to Login
                 </button>
                 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-secondary">
                   Don't have an account?{' '}
                   <button
                     onClick={handleRegisterRedirect}
@@ -127,12 +127,12 @@ export default function Auth() {
               </div>
 
               {/* Platform indicator */}
-              <div className="mt-8 pt-6 border-t border-gray-200/50">
-                <p className="text-xs text-gray-500 mb-2">DharmaMind Ecosystem:</p>
+              <div className="mt-8 pt-6 border-t border-light/50">
+                <p className="text-xs text-secondary mb-2">DharmaMind Ecosystem:</p>
                 <div className="flex justify-center gap-2 text-xs">
                   <span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full">Main Site</span>
-                  <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full">AI Chat</span>
-                  <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full">Community</span>
+                  <span className="px-2 py-1 bg-brand-primary text-secondary rounded-full">AI Chat</span>
+                  <span className="px-2 py-1 bg-brand-primary text-secondary rounded-full">Community</span>
                 </div>
               </div>
             </div>
