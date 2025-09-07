@@ -5,6 +5,7 @@ import { useNavigation } from '../hooks/useNavigation';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
 import { ContactForm } from '../components/CentralizedSupport';
+import NavigationHeader from '../components/NavigationHeader';
 
 const HelpAndSupportPage: React.FC = () => {
   const router = useRouter();
@@ -91,32 +92,12 @@ const HelpAndSupportPage: React.FC = () => {
       </Head>
 
       <div className="min-h-screen bg-primary-background">
-        {/* Header */}
-        <header className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => router.back()}
-                  className="flex items-center space-x-2 text-secondary hover:text-primary transition-colors"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  <span className="font-medium">Back</span>
-                </button>
-                
-                <div className="h-6 w-px bg-gray-300"></div>
-                
-                <Logo 
-                  size="sm"
-                  onClick={() => router.push('/')}
-                  className="cursor-pointer"
-                />
-              </div>
-            </div>
-          </div>
-        </header>
+        {/* Professional Navigation Header */}
+        <NavigationHeader 
+          title="Help & Support"
+          showBackButton={true}
+          showHomeButton={false}
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Hero Section */}

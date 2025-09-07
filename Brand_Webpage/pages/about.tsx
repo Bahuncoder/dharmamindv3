@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
 import SEOHead from '../components/SEOHead';
+import NavigationHeader from '../components/NavigationHeader';
 
 const AboutPage: React.FC = () => {
   const router = useRouter();
@@ -144,54 +145,12 @@ const AboutPage: React.FC = () => {
       />
 
       <div className="min-h-screen bg-section-light">
-        {/* Header */}
-        <header className="bg-white border-b border-light sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => router.back()}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  <span className="font-medium">Back</span>
-                </button>
-                
-                <div className="h-6 w-px bg-border-medium"></div>
-                
-                <Logo 
-                  size="sm"
-                  onClick={() => router.push('/')}
-                  className="cursor-pointer"
-                />
-              </div>
-
-              <nav className="hidden md:flex items-center space-x-6">
-                <button
-                  onClick={() => router.push('/features')}
-                  className="text-secondary hover:text-primary text-sm font-medium transition-colors"
-                >
-                  Features
-                </button>
-                <button
-                  onClick={() => router.push('/pricing')}
-                  className="text-secondary hover:text-primary text-sm font-medium transition-colors"
-                >
-                  Pricing
-                </button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => router.push('/contact')}
-                >
-                  Contact Us
-                </Button>
-              </nav>
-            </div>
-          </div>
-        </header>
+        {/* Professional Navigation Header */}
+        <NavigationHeader 
+          title="About DharmaMind"
+          showBackButton={true}
+          showHomeButton={false}
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Hero Section */}

@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Logo from '../components/Logo';
+import NavigationHeader from '../components/NavigationHeader';
 
 const TermsPage: React.FC = () => {
   const router = useRouter();
@@ -16,48 +17,12 @@ const TermsPage: React.FC = () => {
       </Head>
 
       <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => router.back()}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  <span className="font-medium">Back</span>
-                </button>
-                
-                <div className="h-6 w-px bg-gray-300"></div>
-                
-                <Logo 
-                  size="sm"
-                  showText={true}
-                  onClick={() => router.push('/')}
-                  className="cursor-pointer"
-                />
-              </div>
-
-              <nav className="flex items-center space-x-8">
-                <button 
-                  onClick={() => router.push('/')}
-                  className="text-gray-600 hover:text-gray-900 text-sm font-medium"
-                >
-                  Home
-                </button>
-                <button 
-                  onClick={() => router.push('/privacy')}
-                  className="text-gray-600 hover:text-gray-900 text-sm font-medium"
-                >
-                  Privacy
-                </button>
-              </nav>
-            </div>
-          </div>
-        </header>
+        {/* Professional Navigation Header */}
+        <NavigationHeader 
+          title="Terms of Service"
+          showBackButton={true}
+          showHomeButton={false}
+        />
 
         {/* Content */}
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
