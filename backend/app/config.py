@@ -30,12 +30,42 @@ Uses environment variables with sensible defaults and advanced features:
 import os
 import logging
 from typing import List, Optional, Dict, Any, Union
-from pydantic_settings import BaseSettings
-from pydantic import field_validator, model_validator, Field
+try:
+    from pydantic_settings import BaseSettings
+    from pydantic import field_validator, model_validator, Field
+    PYDANTIC_AVAILABLE = True
+except ImportError:
+    # Create mock classes for when pydantic_settings is not installed
+    class BaseSettings:
+        def __init__(self, **kwargs):
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+    
+    def field_validator(*args, **kwargs):
+        def decorator(func):
+            return func
+        return decorator
+    
+    def model_validator(*args, **kwargs):
+        def decorator(func):
+            return func
+        return decorator
+    
+    def Field(*args, **kwargs):
+        return None
+    
+    PYDANTIC_AVAILABLE = False
+
 from pathlib import Path
 from enum import Enum
 import json
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    DOTENV_AVAILABLE = True
+except ImportError:
+    def load_dotenv(*args, **kwargs):
+        pass
+    DOTENV_AVAILABLE = False
 
 # Load environment variables from .env file
 load_dotenv()

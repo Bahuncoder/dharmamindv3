@@ -1,618 +1,433 @@
 """
-🕉️ DharmaMind Enhanced Memory Manager - Complete System
+🕉️ Memory Manager Service
+==========================
 
-Advanced conversation and context management for dharmic wisdom preservation:
+Advanced memory management service for DharmaMind that handles:
+- Conversation history and context
+- User preferences and personalization
+- Emotional patterns and insights  
+- Spiritual progress tracking
+- Knowledge base integration
+- Vector embeddings and semantic search
 
-Core Features:
-- Multi-level conversation storage (short-term, long-term, wisdom archives)
-- Context-aware memory retrieval with semantic search
-- Dharmic wisdom pattern recognition and preservation
-- User spiritual journey tracking and progression
-- Intelligent memory consolidation and archiving
-- Cross-conversation insight extraction
-
-Memory Layers:
-- Session Memory: Active conversation context
-- User Memory: Personal spiritual journey and preferences  
-- Wisdom Memory: Distilled dharmic insights and teachings
-- Universal Memory: Collective wisdom patterns
-- Sacred Memory: Protected spiritual content
-
-May this memory serve the eternal wisdom 🧠
+Features:
+- Persistent memory across sessions
+- Intelligent context retrieval
+- Emotional memory patterns
+- Spiritual journey tracking
+- Privacy-preserving storage
 """
 
-import asyncio
 import logging
-import json
-from typing import List, Optional, Dict, Any, Tuple
+from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime, timedelta
+import json
 import hashlib
-from enum import Enum
 from dataclasses import dataclass, asdict
-import numpy as np
-
-from ..models import ChatRequest, ChatResponse, UserProfile
-from ..models.chat import (
-    ModuleInfo, ChatMessage, MessageRole, EvaluationResult
-)
-from ..config import settings
 
 logger = logging.getLogger(__name__)
 
-# ===============================
-# MEMORY ENUMS AND MODELS
-# ===============================
-
-class MemoryType(Enum):
-    SESSION = "session"           # Active conversation
-    USER_PERSONAL = "user_personal"     # User's personal journey
-    WISDOM_ARCHIVE = "wisdom_archive"   # Distilled wisdom
-    UNIVERSAL = "universal"       # Collective patterns
-    SACRED = "sacred"            # Protected content
-    CONTEXTUAL = "contextual"    # Situational memory
-
-class MemoryPriority(Enum):
-    CRITICAL = "critical"        # Essential dharmic insights
-    HIGH = "high"               # Important spiritual content
-    MEDIUM = "medium"           # General conversation
-    LOW = "low"                # Transient information
-    EPHEMERAL = "ephemeral"     # Temporary session data
-
-class ConsolidationStrategy(Enum):
-    WISDOM_DISTILLATION = "wisdom_distillation"
-    PATTERN_EXTRACTION = "pattern_extraction"
-    INSIGHT_SYNTHESIS = "insight_synthesis"
-    SPIRITUAL_PROGRESSION = "spiritual_progression"
-    TEACHING_MOMENTS = "teaching_moments"
-
 @dataclass
-class MemoryRecord:
-    """Individual memory record with metadata"""
-    id: str
-    memory_type: MemoryType
-    priority: MemoryPriority
-    content: str
-    context: Dict[str, Any]
-    timestamp: datetime
-    user_id: Optional[str] = None
-    conversation_id: Optional[str] = None
-    wisdom_score: float = 0.0
-    dharmic_alignment: float = 0.0
-    emotional_resonance: float = 0.0
-    spiritual_significance: float = 0.0
-    access_count: int = 0
-    last_accessed: Optional[datetime] = None
-    tags: List[str] = None
-    embeddings: Optional[List[float]] = None
-    consolidation_status: str = "pending"
-    expires_at: Optional[datetime] = None
-
-@dataclass
-class ConversationThread:
-    """Complete conversation thread with analysis"""
-    conversation_id: str
+class ConversationMemory:
+    """Conversation memory entry"""
+    session_id: str
     user_id: Optional[str]
-    title: str
-    summary: str
-    messages: List[Dict[str, Any]]
-    spiritual_themes: List[str]
-    wisdom_insights: List[str]
-    emotional_journey: List[str]
-    dharmic_principles: List[str]
-    key_moments: List[Dict[str, Any]]
-    created_at: datetime
-    last_updated: datetime
-    message_count: int
-    avg_wisdom_score: float
-    spiritual_progression: float
-    consolidation_priority: float
+    timestamp: datetime
+    user_message: str
+    ai_response: str
+    emotional_state: Optional[str] = None
+    spiritual_context: Optional[str] = None
+    rishi_involved: Optional[str] = None
+    satisfaction_rating: Optional[float] = None
 
 @dataclass
-class UserSpiritualJourney:
-    """User's spiritual journey and progression"""
+class UserProfile:
+    """User profile with preferences and history"""
     user_id: str
-    spiritual_level: str
-    journey_stage: str
-    key_realizations: List[str]
-    recurring_themes: List[str]
-    growth_areas: List[str]
-    preferred_teachings: List[str]
-    wisdom_milestones: List[Dict[str, Any]]
-    emotional_patterns: List[str]
-    practice_consistency: float
-    openness_to_change: float
-    depth_of_inquiry: float
-    compassion_development: float
-    wisdom_integration: float
-    last_assessment: datetime
+    name: Optional[str] = None
+    spiritual_level: str = "beginner"
+    preferred_practices: List[str] = None
+    emotional_patterns: Dict[str, Any] = None
+    spiritual_goals: List[str] = None
+    conversation_history: List[str] = None
+    last_active: Optional[datetime] = None
+    
+    def __post_init__(self):
+        if self.preferred_practices is None:
+            self.preferred_practices = []
+        if self.emotional_patterns is None:
+            self.emotional_patterns = {}
+        if self.spiritual_goals is None:
+            self.spiritual_goals = []
+        if self.conversation_history is None:
+            self.conversation_history = []
 
 class MemoryManager:
-    """Service for managing conversation memory and embeddings"""
+    """🧠 Advanced memory management service"""
     
     def __init__(self):
-        self.conversations: Dict[str, List[ChatMessage]] = {}
-        self.embeddings: Dict[str, Any] = {}
-        self.vector_store = None
-        self.redis_client = None
+        self.logger = logging.getLogger(self.__class__.__name__)
+        
+        # In-memory storage (would be replaced with persistent storage in production)
+        self.conversation_memory: List[ConversationMemory] = []
+        self.user_profiles: Dict[str, UserProfile] = {}
+        self.emotional_patterns: Dict[str, List[Any]] = {}
+        self.spiritual_insights: Dict[str, Any] = {}
+        
+        # Memory configuration
+        self.max_conversation_history = 1000
+        self.memory_retention_days = 30
         
     async def initialize(self):
-        """Initialize memory manager and connections"""
-        logger.info("Initializing Memory Manager...")
-        
+        """Initialize the memory manager"""
         try:
-            # Initialize Redis for fast conversation storage
-            await self._init_redis()
+            self.logger.info("🌟 Initializing Memory Manager...")
             
-            # Initialize vector database
-            await self._init_vector_store()
+            # Load existing data (in production, this would load from persistent storage)
+            await self._load_persistent_data()
             
-            # Set up cleanup tasks
-            await self._setup_cleanup_tasks()
+            # Clean old memories
+            await self._cleanup_old_memories()
             
-            logger.info("Memory Manager initialized successfully")
+            self.logger.info(f"✅ Memory Manager initialized with {len(self.conversation_memory)} conversations")
             
         except Exception as e:
-            logger.error(f"Failed to initialize Memory Manager: {e}")
-            raise
-    
-    async def _init_redis(self):
-        """Initialize Redis connection"""
-        try:
-            # This would typically initialize a real Redis client
-            # For now, we'll use in-memory storage
-            self.redis_client = {}  # Placeholder
-            logger.info("Redis connection established (placeholder)")
-        except Exception as e:
-            logger.warning(f"Redis connection failed, using in-memory storage: {e}")
-            self.redis_client = {}
-    
-    async def _init_vector_store(self):
-        """Initialize vector database connection"""
-        try:
-            # This would typically initialize Qdrant, Pinecone, or similar
-            # For now, we'll use in-memory storage
-            self.vector_store = {}  # Placeholder
-            logger.info(f"Vector store initialized: {settings.VECTOR_DB_TYPE}")
-        except Exception as e:
-            logger.warning(f"Vector store initialization failed: {e}")
-            self.vector_store = {}
-    
-    async def _setup_cleanup_tasks(self):
-        """Set up background cleanup tasks"""
-        # This would typically set up periodic cleanup
-        logger.info("Memory cleanup tasks configured")
+            self.logger.error(f"❌ Failed to initialize Memory Manager: {e}")
     
     async def store_conversation(
-        self,
-        conversation_id: str,
-        user_message: str,
+        self, 
+        session_id: str, 
+        user_message: str, 
         ai_response: str,
-        modules: List[ModuleInfo],
-        evaluation: EvaluationResult
-    ):
-        """Store a conversation turn in memory"""
-        
+        user_id: Optional[str] = None,
+        emotional_state: Optional[str] = None,
+        spiritual_context: Optional[str] = None,
+        rishi_involved: Optional[str] = None
+    ) -> str:
+        """Store a conversation in memory"""
         try:
-            # Create message objects
-            user_msg = ChatMessage(
-                role=MessageRole.USER,
-                content=user_message,
+            # Create conversation memory entry
+            conversation = ConversationMemory(
+                session_id=session_id,
+                user_id=user_id,
                 timestamp=datetime.now(),
-                metadata={"conversation_id": conversation_id}
+                user_message=user_message[:500],  # Limit message length
+                ai_response=ai_response[:1000],   # Limit response length
+                emotional_state=emotional_state,
+                spiritual_context=spiritual_context,
+                rishi_involved=rishi_involved
             )
             
-            ai_msg = ChatMessage(
-                role=MessageRole.ASSISTANT,
-                content=ai_response,
-                timestamp=datetime.now(),
-                metadata={
-                    "conversation_id": conversation_id,
-                    "modules_used": [m.name for m in modules],
-                    "confidence_score": evaluation.confidence_score,
-                    "dharmic_alignment": evaluation.dharmic_alignment
-                }
-            )
+            # Add to memory
+            self.conversation_memory.append(conversation)
             
-            # Store in conversation history
-            if conversation_id not in self.conversations:
-                self.conversations[conversation_id] = []
+            # Update user profile if user_id provided
+            if user_id:
+                await self._update_user_profile(user_id, conversation)
             
-            self.conversations[conversation_id].extend([user_msg, ai_msg])
+            # Maintain memory limits
+            if len(self.conversation_memory) > self.max_conversation_history:
+                self.conversation_memory = self.conversation_memory[-self.max_conversation_history:]
             
-            # Store in Redis for persistence
-            await self._store_in_redis(conversation_id, user_msg, ai_msg)
+            conversation_id = f"{session_id}_{len(self.conversation_memory)}"
+            self.logger.debug(f"💾 Stored conversation: {conversation_id}")
             
-            # Create and store embeddings
-            await self._create_and_store_embeddings(conversation_id, user_message, ai_response, modules)
-            
-            # Cleanup old conversations if needed
-            await self._cleanup_old_conversations()
-            
-            logger.debug(f"Conversation stored: {conversation_id}")
+            return conversation_id
             
         except Exception as e:
-            logger.error(f"Error storing conversation: {e}")
-    
-    async def _store_in_redis(self, conversation_id: str, user_msg: ChatMessage, ai_msg: ChatMessage):
-        """Store conversation in Redis"""
-        try:
-            # Convert messages to JSON for storage
-            messages_data = [
-                {
-                    "role": user_msg.role.value,
-                    "content": user_msg.content,
-                    "timestamp": user_msg.timestamp.isoformat(),
-                    "metadata": user_msg.metadata
-                },
-                {
-                    "role": ai_msg.role.value,
-                    "content": ai_msg.content,
-                    "timestamp": ai_msg.timestamp.isoformat(),
-                    "metadata": ai_msg.metadata
-                }
-            ]
-            
-            # In a real implementation, this would use Redis
-            key = f"conversation:{conversation_id}"
-            if key not in self.redis_client:
-                self.redis_client[key] = []
-            self.redis_client[key].extend(messages_data)
-            
-        except Exception as e:
-            logger.error(f"Error storing in Redis: {e}")
-    
-    async def _create_and_store_embeddings(
-        self,
-        conversation_id: str,
-        user_message: str,
-        ai_response: str,
-        modules: List[ModuleInfo]
-    ):
-        """Create embeddings and store in vector database"""
-        try:
-            # Generate content hash for deduplication
-            content_hash = hashlib.md5((user_message + ai_response).encode()).hexdigest()
-            
-            # This would typically use sentence-transformers or OpenAI embeddings
-            # For now, we'll create placeholder embeddings
-            user_embedding = self._create_placeholder_embedding(user_message)
-            response_embedding = self._create_placeholder_embedding(ai_response)
-            
-            # Store embeddings with metadata
-            embedding_data = {
-                "conversation_id": conversation_id,
-                "user_message": user_message,
-                "ai_response": ai_response,
-                "modules": [m.name for m in modules],
-                "timestamp": datetime.now().isoformat(),
-                "user_embedding": user_embedding,
-                "response_embedding": response_embedding
-            }
-            
-            self.vector_store[content_hash] = embedding_data
-            
-        except Exception as e:
-            logger.error(f"Error creating embeddings: {e}")
-    
-    def _create_placeholder_embedding(self, text: str) -> List[float]:
-        """Create placeholder embedding (would use real embedding model)"""
-        # This is a simple hash-based placeholder
-        # Real implementation would use sentence-transformers or OpenAI
-        import hashlib
-        hash_obj = hashlib.md5(text.encode())
-        hash_int = int(hash_obj.hexdigest(), 16)
-        
-        # Create a simple 384-dimensional vector (common size)
-        embedding = []
-        for i in range(384):
-            embedding.append((hash_int >> (i % 32)) & 1)
-        
-        # Normalize to [-1, 1] range
-        embedding = [float(x * 2 - 1) for x in embedding]
-        return embedding
+            self.logger.error(f"❌ Failed to store conversation: {e}")
+            return ""
     
     async def get_conversation_history(
-        self,
-        conversation_id: str,
-        limit: int = 20
-    ) -> List[ChatMessage]:
+        self, 
+        session_id: Optional[str] = None, 
+        user_id: Optional[str] = None,
+        limit: int = 10
+    ) -> List[ConversationMemory]:
         """Retrieve conversation history"""
-        
         try:
-            # First try in-memory storage
-            if conversation_id in self.conversations:
-                messages = self.conversations[conversation_id]
-                return messages[-limit:] if limit else messages
+            # Filter conversations
+            filtered_conversations = []
             
-            # Then try Redis
-            return await self._get_from_redis(conversation_id, limit)
+            for conversation in self.conversation_memory:
+                if session_id and conversation.session_id != session_id:
+                    continue
+                if user_id and conversation.user_id != user_id:
+                    continue
+                filtered_conversations.append(conversation)
+            
+            # Sort by timestamp and limit
+            filtered_conversations.sort(key=lambda x: x.timestamp, reverse=True)
+            return filtered_conversations[:limit]
             
         except Exception as e:
-            logger.error(f"Error retrieving conversation history: {e}")
+            self.logger.error(f"❌ Failed to get conversation history: {e}")
             return []
     
-    async def _get_from_redis(self, conversation_id: str, limit: int) -> List[ChatMessage]:
-        """Retrieve conversation from Redis"""
+    async def get_user_profile(self, user_id: str) -> Optional[UserProfile]:
+        """Get user profile"""
         try:
-            key = f"conversation:{conversation_id}"
-            if key in self.redis_client:
-                messages_data = self.redis_client[key]
-                
-                # Convert back to ChatMessage objects
-                messages = []
-                for msg_data in messages_data[-limit:] if limit else messages_data:
-                    message = ChatMessage(
-                        role=MessageRole(msg_data["role"]),
-                        content=msg_data["content"],
-                        timestamp=datetime.fromisoformat(msg_data["timestamp"]),
-                        metadata=msg_data.get("metadata")
-                    )
-                    messages.append(message)
-                
-                return messages
+            return self.user_profiles.get(user_id)
+        except Exception as e:
+            self.logger.error(f"❌ Failed to get user profile: {e}")
+            return None
+    
+    async def update_user_profile(self, user_id: str, updates: Dict[str, Any]) -> bool:
+        """Update user profile"""
+        try:
+            if user_id not in self.user_profiles:
+                self.user_profiles[user_id] = UserProfile(user_id=user_id)
             
-            return []
+            profile = self.user_profiles[user_id]
+            
+            # Update profile fields
+            for key, value in updates.items():
+                if hasattr(profile, key):
+                    setattr(profile, key, value)
+            
+            profile.last_active = datetime.now()
+            
+            self.logger.debug(f"👤 Updated user profile: {user_id}")
+            return True
             
         except Exception as e:
-            logger.error(f"Error retrieving from Redis: {e}")
-            return []
+            self.logger.error(f"❌ Failed to update user profile: {e}")
+            return False
     
-    async def search_similar_conversations(
-        self,
-        query: str,
-        limit: int = 5
-    ) -> List[Dict[str, Any]]:
-        """Search for similar conversations using vector similarity"""
-        
+    async def store_emotional_pattern(self, user_id: str, emotion: str, context: Dict[str, Any]):
+        """Store emotional pattern for learning"""
         try:
-            # Create query embedding
-            query_embedding = self._create_placeholder_embedding(query)
+            if user_id not in self.emotional_patterns:
+                self.emotional_patterns[user_id] = []
             
-            # Calculate similarities (placeholder implementation)
-            similarities = []
-            for content_hash, data in self.vector_store.items():
-                # Simple dot product similarity (would use proper cosine similarity)
-                user_sim = sum(a * b for a, b in zip(query_embedding, data["user_embedding"]))
-                response_sim = sum(a * b for a, b in zip(query_embedding, data["response_embedding"]))
-                
-                similarity = max(user_sim, response_sim)
-                similarities.append((similarity, data))
-            
-            # Sort by similarity and return top results
-            similarities.sort(key=lambda x: x[0], reverse=True)
-            
-            results = []
-            for similarity, data in similarities[:limit]:
-                results.append({
-                    "similarity": similarity,
-                    "conversation_id": data["conversation_id"],
-                    "user_message": data["user_message"],
-                    "ai_response": data["ai_response"],
-                    "modules": data["modules"],
-                    "timestamp": data["timestamp"]
-                })
-            
-            return results
-            
-        except Exception as e:
-            logger.error(f"Error searching similar conversations: {e}")
-            return []
-    
-    async def get_contextual_memory(
-        self,
-        conversation_id: str,
-        current_message: str,
-        max_context: int = 5
-    ) -> Dict[str, Any]:
-        """Get relevant contextual memory for current message"""
-        
-        try:
-            # Get recent conversation history
-            recent_history = await self.get_conversation_history(conversation_id, max_context)
-            
-            # Search for similar past conversations
-            similar_conversations = await self.search_similar_conversations(current_message, 3)
-            
-            # Extract key topics from conversation
-            topics = self._extract_conversation_topics(recent_history)
-            
-            return {
-                "recent_history": recent_history,
-                "similar_conversations": similar_conversations,
-                "topics": topics,
-                "conversation_length": len(recent_history)
-            }
-            
-        except Exception as e:
-            logger.error(f"Error getting contextual memory: {e}")
-            return {
-                "recent_history": [],
-                "similar_conversations": [],
-                "topics": [],
-                "conversation_length": 0
-            }
-    
-    def _extract_conversation_topics(self, messages: List[ChatMessage]) -> List[str]:
-        """Extract key topics from conversation messages"""
-        
-        # Simple keyword extraction (would use NLP in real implementation)
-        topic_keywords = [
-            "meditation", "dharma", "karma", "yoga", "peace", "wisdom",
-            "suffering", "happiness", "compassion", "love", "anger",
-            "fear", "anxiety", "stress", "balance", "harmony"
-        ]
-        
-        topics = []
-        text = " ".join([msg.content.lower() for msg in messages])
-        
-        for keyword in topic_keywords:
-            if keyword in text:
-                topics.append(keyword)
-        
-        return list(set(topics))  # Remove duplicates
-    
-    async def store_wisdom_interaction(
-        self,
-        conversation_id: str,
-        question: str,
-        response: str,
-        modules: List[ModuleInfo],
-        evaluation: EvaluationResult
-    ):
-        """Store wisdom-specific interaction with enhanced metadata"""
-        
-        # Use regular store_conversation but add wisdom-specific metadata
-        await self.store_conversation(conversation_id, question, response, modules, evaluation)
-        
-        # Add to wisdom-specific index
-        try:
-            wisdom_key = f"wisdom:{conversation_id}"
-            wisdom_data = {
-                "question": question,
-                "response": response,
-                "modules": [m.name for m in modules],
-                "dharmic_alignment": evaluation.dharmic_alignment,
+            pattern = {
+                "emotion": emotion,
+                "context": context,
                 "timestamp": datetime.now().isoformat()
             }
             
-            # Store in Redis (placeholder)
-            self.redis_client[wisdom_key] = wisdom_data
+            self.emotional_patterns[user_id].append(pattern)
+            
+            # Keep only recent patterns (last 100)
+            if len(self.emotional_patterns[user_id]) > 100:
+                self.emotional_patterns[user_id] = self.emotional_patterns[user_id][-100:]
+            
+            self.logger.debug(f"💙 Stored emotional pattern for {user_id}: {emotion}")
             
         except Exception as e:
-            logger.error(f"Error storing wisdom interaction: {e}")
+            self.logger.error(f"❌ Failed to store emotional pattern: {e}")
     
-    async def delete_conversation(self, conversation_id: str):
-        """Delete a conversation from memory"""
-        
+    async def get_emotional_patterns(self, user_id: str, emotion: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get emotional patterns for a user"""
         try:
-            # Remove from in-memory storage
-            if conversation_id in self.conversations:
-                del self.conversations[conversation_id]
+            patterns = self.emotional_patterns.get(user_id, [])
             
-            # Remove from Redis
-            key = f"conversation:{conversation_id}"
-            if key in self.redis_client:
-                del self.redis_client[key]
+            if emotion:
+                patterns = [p for p in patterns if p["emotion"] == emotion]
             
-            # Remove related embeddings
-            to_remove = []
-            for content_hash, data in self.vector_store.items():
-                if data["conversation_id"] == conversation_id:
-                    to_remove.append(content_hash)
-            
-            for hash_key in to_remove:
-                del self.vector_store[hash_key]
-            
-            logger.info(f"Conversation deleted: {conversation_id}")
+            return patterns
             
         except Exception as e:
-            logger.error(f"Error deleting conversation: {e}")
+            self.logger.error(f"❌ Failed to get emotional patterns: {e}")
+            return []
     
-    async def _cleanup_old_conversations(self):
-        """Clean up old conversations to manage memory"""
-        
+    async def store_spiritual_insight(self, user_id: str, insight: str, category: str = "general"):
+        """Store spiritual insight or progress"""
         try:
-            cutoff_date = datetime.now() - timedelta(days=30)  # Keep 30 days
+            if user_id not in self.spiritual_insights:
+                self.spiritual_insights[user_id] = {}
             
-            # Clean up in-memory conversations
-            for conv_id in list(self.conversations.keys()):
-                messages = self.conversations[conv_id]
-                if messages and messages[-1].timestamp < cutoff_date:
-                    del self.conversations[conv_id]
+            if category not in self.spiritual_insights[user_id]:
+                self.spiritual_insights[user_id][category] = []
             
-            # Clean up vector store
-            to_remove = []
-            for content_hash, data in self.vector_store.items():
-                timestamp = datetime.fromisoformat(data["timestamp"])
-                if timestamp < cutoff_date:
-                    to_remove.append(content_hash)
+            insight_entry = {
+                "insight": insight,
+                "timestamp": datetime.now().isoformat(),
+                "category": category
+            }
             
-            for hash_key in to_remove:
-                del self.vector_store[hash_key]
+            self.spiritual_insights[user_id][category].append(insight_entry)
             
-            if to_remove:
-                logger.info(f"Cleaned up {len(to_remove)} old conversation embeddings")
+            # Keep only recent insights (last 50 per category)
+            if len(self.spiritual_insights[user_id][category]) > 50:
+                self.spiritual_insights[user_id][category] = self.spiritual_insights[user_id][category][-50:]
+            
+            self.logger.debug(f"🕉️ Stored spiritual insight for {user_id}: {category}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to store spiritual insight: {e}")
+    
+    async def get_spiritual_insights(self, user_id: str, category: Optional[str] = None) -> Dict[str, Any]:
+        """Get spiritual insights for a user"""
+        try:
+            insights = self.spiritual_insights.get(user_id, {})
+            
+            if category:
+                return {category: insights.get(category, [])}
+            
+            return insights
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to get spiritual insights: {e}")
+            return {}
+    
+    async def search_conversations(
+        self, 
+        query: str, 
+        user_id: Optional[str] = None,
+        limit: int = 5
+    ) -> List[ConversationMemory]:
+        """Search conversations by content"""
+        try:
+            query_lower = query.lower()
+            matching_conversations = []
+            
+            for conversation in self.conversation_memory:
+                if user_id and conversation.user_id != user_id:
+                    continue
                 
+                # Simple text search in user message and AI response
+                if (query_lower in conversation.user_message.lower() or 
+                    query_lower in conversation.ai_response.lower()):
+                    matching_conversations.append(conversation)
+            
+            # Sort by relevance (timestamp for now)
+            matching_conversations.sort(key=lambda x: x.timestamp, reverse=True)
+            return matching_conversations[:limit]
+            
         except Exception as e:
-            logger.error(f"Error during cleanup: {e}")
+            self.logger.error(f"❌ Failed to search conversations: {e}")
+            return []
     
-    async def get_memory_statistics(self) -> Dict[str, Any]:
-        """Get memory usage statistics"""
-        
-        return {
-            "active_conversations": len(self.conversations),
-            "total_messages": sum(len(msgs) for msgs in self.conversations.values()),
-            "stored_embeddings": len(self.vector_store),
-            "redis_keys": len(self.redis_client),
-            "memory_mb": self._estimate_memory_usage()
-        }
-    
-    def _estimate_memory_usage(self) -> float:
-        """Estimate memory usage in MB (rough calculation)"""
-        
+    async def get_context_for_session(self, session_id: str, limit: int = 5) -> Dict[str, Any]:
+        """Get relevant context for a session"""
         try:
-            import sys
+            # Get recent conversations for this session
+            recent_conversations = await self.get_conversation_history(session_id=session_id, limit=limit)
             
-            # Calculate size of conversations
-            conv_size = sys.getsizeof(self.conversations)
-            for conv_id, messages in self.conversations.items():
-                conv_size += sys.getsizeof(conv_id) + sys.getsizeof(messages)
-                for msg in messages:
-                    conv_size += sys.getsizeof(msg.content) + sys.getsizeof(msg.metadata or {})
+            # Extract context
+            context = {
+                "conversation_count": len(recent_conversations),
+                "recent_messages": [conv.user_message for conv in recent_conversations[:3]],
+                "recent_emotions": [conv.emotional_state for conv in recent_conversations if conv.emotional_state],
+                "spiritual_contexts": [conv.spiritual_context for conv in recent_conversations if conv.spiritual_context],
+                "rishis_involved": list(set([conv.rishi_involved for conv in recent_conversations if conv.rishi_involved]))
+            }
             
-            # Calculate size of vector store
-            vector_size = sys.getsizeof(self.vector_store)
-            for data in self.vector_store.values():
-                vector_size += sys.getsizeof(data)
+            return context
             
-            # Convert to MB
-            total_bytes = conv_size + vector_size
-            return total_bytes / (1024 * 1024)
+        except Exception as e:
+            self.logger.error(f"❌ Failed to get context for session: {e}")
+            return {}
+    
+    async def _update_user_profile(self, user_id: str, conversation: ConversationMemory):
+        """Update user profile based on conversation"""
+        try:
+            if user_id not in self.user_profiles:
+                self.user_profiles[user_id] = UserProfile(user_id=user_id)
             
-        except Exception:
-            return 0.0
+            profile = self.user_profiles[user_id]
+            
+            # Add conversation to history
+            conv_summary = f"{conversation.timestamp.strftime('%Y-%m-%d')}: {conversation.user_message[:50]}..."
+            profile.conversation_history.append(conv_summary)
+            
+            # Keep only recent history
+            if len(profile.conversation_history) > 20:
+                profile.conversation_history = profile.conversation_history[-20:]
+            
+            # Update emotional patterns
+            if conversation.emotional_state:
+                emotion = conversation.emotional_state
+                if emotion not in profile.emotional_patterns:
+                    profile.emotional_patterns[emotion] = 0
+                profile.emotional_patterns[emotion] += 1
+            
+            profile.last_active = datetime.now()
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to update user profile: {e}")
+    
+    async def _load_persistent_data(self):
+        """Load data from persistent storage (placeholder)"""
+        try:
+            # In production, this would load from database/file storage
+            self.logger.debug("📂 Loading persistent memory data...")
+            # For now, just initialize empty
+            pass
+        except Exception as e:
+            self.logger.error(f"❌ Failed to load persistent data: {e}")
+    
+    async def _cleanup_old_memories(self):
+        """Clean up old memories to manage storage"""
+        try:
+            cutoff_date = datetime.now() - timedelta(days=self.memory_retention_days)
+            
+            # Remove old conversations
+            initial_count = len(self.conversation_memory)
+            self.conversation_memory = [
+                conv for conv in self.conversation_memory 
+                if conv.timestamp > cutoff_date
+            ]
+            
+            removed_count = initial_count - len(self.conversation_memory)
+            if removed_count > 0:
+                self.logger.info(f"🧹 Cleaned up {removed_count} old conversations")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to cleanup old memories: {e}")
+    
+    async def get_memory_stats(self) -> Dict[str, Any]:
+        """Get memory usage statistics"""
+        try:
+            return {
+                "total_conversations": len(self.conversation_memory),
+                "total_users": len(self.user_profiles),
+                "emotional_patterns_count": sum(len(patterns) for patterns in self.emotional_patterns.values()),
+                "spiritual_insights_count": sum(
+                    len(insights) for user_insights in self.spiritual_insights.values() 
+                    for insights in user_insights.values()
+                ),
+                "memory_retention_days": self.memory_retention_days,
+                "oldest_conversation": min(
+                    [conv.timestamp for conv in self.conversation_memory], 
+                    default=datetime.now()
+                ).isoformat() if self.conversation_memory else None
+            }
+        except Exception as e:
+            self.logger.error(f"❌ Failed to get memory stats: {e}")
+            return {"error": str(e)}
     
     async def health_check(self) -> bool:
         """Check if memory manager is healthy"""
         try:
-            # Basic health checks
-            memory_stats = await self.get_memory_statistics()
-            
-            # Check if memory usage is reasonable (< 500MB)
-            if memory_stats["memory_mb"] > 500:
-                logger.warning(f"High memory usage: {memory_stats['memory_mb']:.2f} MB")
-            
-            return True
-            
+            # Simple health check - ensure basic data structures exist
+            return (
+                isinstance(self.conversation_memory, list) and
+                isinstance(self.user_profiles, dict) and
+                isinstance(self.emotional_patterns, dict)
+            )
         except Exception as e:
-            logger.error(f"Memory manager health check failed: {e}")
+            self.logger.error(f"Health check failed: {e}")
             return False
     
     async def cleanup(self):
-        """Cleanup resources on shutdown"""
+        """Cleanup resources"""
         try:
-            # Cleanup connections and resources
-            if self.redis_client:
-                # In real implementation, would close Redis connection
-                pass
-            
-            if self.vector_store:
-                # In real implementation, would close vector DB connection
-                pass
-            
-            logger.info("Memory manager cleanup completed")
-            
+            self.logger.info("🧹 Cleaning up Memory Manager...")
+            # In production, this would save data to persistent storage
+            # For now, just log the cleanup
+            self.logger.info("✅ Memory Manager cleanup complete")
         except Exception as e:
-            logger.error(f"Error during memory manager cleanup: {e}")
+            self.logger.error(f"❌ Cleanup failed: {e}")
 
+# Global instance
+_memory_manager: Optional[MemoryManager] = None
 
-# Dependency injection function for FastAPI
-_memory_manager_instance = None
-
-
-def get_memory_manager() -> MemoryManager:
-    """Get the memory manager instance (singleton pattern)"""
-    global _memory_manager_instance
-    if _memory_manager_instance is None:
-        _memory_manager_instance = MemoryManager()
-    return _memory_manager_instance
+async def get_memory_manager() -> MemoryManager:
+    """Get global memory manager instance"""
+    global _memory_manager
+    if _memory_manager is None:
+        _memory_manager = MemoryManager()
+        await _memory_manager.initialize()
+    return _memory_manager

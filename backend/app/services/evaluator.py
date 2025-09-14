@@ -1,470 +1,389 @@
 """
-Response Evaluator Service
+🕉️ Response Evaluator Service
+==============================
 
-Evaluates AI responses for quality, dharmic alignment, and relevance.
-Provides confidence scores and suggestions for improvement.
+Advanced response evaluation service that assesses the quality, relevance,
+and dharmic alignment of generated responses.
 
-Ensures responses align with dharmic principles and provide value to users.
+Features:
+- Multi-dimensional response scoring
+- Dharmic compliance validation
+- Emotional appropriateness assessment
+- Content quality analysis
+- User satisfaction prediction
 """
 
-import asyncio
 import logging
+from typing import Dict, List, Optional, Any, Tuple
+from datetime import datetime
+from enum import Enum
 import re
-from typing import List, Optional, Dict, Any
-from dataclasses import dataclass
-
-from ..models.chat import ModuleInfo, EvaluationResult
-from ..config import settings
 
 logger = logging.getLogger(__name__)
 
-@dataclass
-class QualityMetrics:
-    """Quality metrics for response evaluation"""
-    relevance: float
-    completeness: float
-    clarity: float
-    helpfulness: float
-    dharmic_alignment: float
-    accuracy: float
+class EvaluationDimension(Enum):
+    """Response evaluation dimensions"""
+    RELEVANCE = "relevance"
+    DHARMIC_ALIGNMENT = "dharmic_alignment"
+    EMOTIONAL_APPROPRIATENESS = "emotional_appropriateness"
+    CONTENT_QUALITY = "content_quality"
+    HELPFULNESS = "helpfulness"
+    COMPASSION = "compassion"
 
 class ResponseEvaluator:
-    """Service for evaluating AI response quality and dharmic alignment"""
+    """📊 Advanced response evaluation service"""
     
     def __init__(self):
-        self.dharmic_principles = [
-            "ahimsa",      # non-violence
-            "satya",       # truthfulness  
-            "asteya",      # non-stealing
-            "brahmacharya", # continence
-            "aparigraha",  # non-possessiveness
-            "compassion",
-            "wisdom",
-            "peace",
-            "dharma",
-            "karma"
-        ]
-        self.negative_indicators = [
-            "violence", "hatred", "discrimination", "harm", "anger",
-            "greed", "attachment", "ego", "pride", "jealousy"
-        ]
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.evaluation_criteria = {}
+        self.dharmic_principles = []
+        self.evaluation_history = []
         
     async def initialize(self):
-        """Initialize response evaluator"""
-        logger.info("Initializing Response Evaluator...")
-        
+        """Initialize the response evaluator"""
         try:
-            # Load evaluation models/criteria
-            await self._load_evaluation_criteria()
-            logger.info("Response Evaluator initialized successfully")
+            self.logger.info("🌟 Initializing Response Evaluator...")
+            
+            # Set up evaluation criteria
+            self._setup_evaluation_criteria()
+            
+            # Set up dharmic principles
+            self._setup_dharmic_principles()
+            
+            self.logger.info("✅ Response Evaluator initialized successfully")
             
         except Exception as e:
-            logger.error(f"Failed to initialize Response Evaluator: {e}")
-            raise
+            self.logger.error(f"❌ Failed to initialize Response Evaluator: {e}")
     
-    async def _load_evaluation_criteria(self):
-        """Load evaluation criteria and models"""
-        # This would typically load ML models for quality assessment
-        # For now, we'll use rule-based evaluation
-        pass
+    def _setup_evaluation_criteria(self):
+        """Set up evaluation criteria for each dimension"""
+        self.evaluation_criteria = {
+            EvaluationDimension.RELEVANCE: {
+                "keywords_match": 0.3,
+                "context_awareness": 0.3,
+                "topic_consistency": 0.4
+            },
+            EvaluationDimension.DHARMIC_ALIGNMENT: {
+                "non_violence": 0.3,
+                "truthfulness": 0.3,
+                "compassion": 0.4
+            },
+            EvaluationDimension.EMOTIONAL_APPROPRIATENESS: {
+                "tone_matching": 0.4,
+                "empathy_level": 0.3,
+                "emotional_intelligence": 0.3
+            },
+            EvaluationDimension.CONTENT_QUALITY: {
+                "clarity": 0.3,
+                "coherence": 0.3,
+                "wisdom_depth": 0.4
+            },
+            EvaluationDimension.HELPFULNESS: {
+                "actionable_guidance": 0.4,
+                "practical_wisdom": 0.3,
+                "solution_orientation": 0.3
+            },
+            EvaluationDimension.COMPASSION: {
+                "empathetic_language": 0.4,
+                "non_judgmental": 0.3,
+                "healing_intent": 0.3
+            }
+        }
+    
+    def _setup_dharmic_principles(self):
+        """Set up dharmic principles for validation"""
+        self.dharmic_principles = [
+            "ahimsa",  # Non-violence
+            "satya",   # Truthfulness
+            "karuna",  # Compassion
+            "daya",    # Mercy
+            "shanti",  # Peace
+            "seva",    # Service
+            "dharma"   # Righteousness
+        ]
     
     async def evaluate_response(
-        self,
-        question: str,
-        response: str,
-        modules: List[ModuleInfo],
-        context: Optional[str] = None
-    ) -> EvaluationResult:
-        """Evaluate a response comprehensively"""
-        
+        self, 
+        response: str, 
+        user_message: str, 
+        context: Dict[str, Any] = None
+    ) -> Dict[str, Any]:
+        """Evaluate a response across all dimensions"""
         try:
-            logger.debug("Evaluating response quality and alignment...")
+            context = context or {}
             
-            # Calculate quality metrics
-            metrics = await self._calculate_quality_metrics(question, response, modules, context)
+            evaluation_results = {}
+            overall_scores = []
             
-            # Generate suggestions
-            suggestions = await self._generate_suggestions(question, response, metrics)
+            # Evaluate each dimension
+            for dimension in EvaluationDimension:
+                score = await self._evaluate_dimension(dimension, response, user_message, context)
+                evaluation_results[dimension.value] = score
+                overall_scores.append(score)
             
-            # Extract sources/references
-            sources = self._extract_sources(response)
+            # Calculate overall score
+            overall_score = sum(overall_scores) / len(overall_scores)
             
-            # Calculate overall scores
-            confidence_score = self._calculate_confidence_score(metrics)
-            dharmic_alignment = metrics.dharmic_alignment
-            relevance_score = metrics.relevance
+            # Determine quality level
+            quality_level = self._determine_quality_level(overall_score)
             
-            return EvaluationResult(
-                confidence_score=confidence_score,
-                dharmic_alignment=dharmic_alignment,
-                relevance_score=relevance_score,
-                sources=sources,
-                suggestions=suggestions,
-                explanation=f"Response evaluated with {confidence_score:.2f} confidence"
-            )
+            # Generate recommendations
+            recommendations = self._generate_recommendations(evaluation_results)
+            
+            # Record evaluation
+            evaluation_record = {
+                "timestamp": datetime.now(),
+                "response": response[:200],  # First 200 chars
+                "user_message": user_message[:100],  # First 100 chars
+                "scores": evaluation_results,
+                "overall_score": overall_score,
+                "quality_level": quality_level
+            }
+            self.evaluation_history.append(evaluation_record)
+            
+            self.logger.info(f"📊 Response evaluated: {quality_level} (score: {overall_score:.2f})")
+            
+            return {
+                "overall_score": overall_score,
+                "quality_level": quality_level,
+                "dimension_scores": evaluation_results,
+                "recommendations": recommendations,
+                "dharmic_compliance": evaluation_results[EvaluationDimension.DHARMIC_ALIGNMENT.value],
+                "evaluation_id": len(self.evaluation_history)
+            }
             
         except Exception as e:
-            logger.error(f"Error evaluating response: {e}")
-            # Return default evaluation if evaluation fails
-            return EvaluationResult(
-                confidence_score=0.5,
-                dharmic_alignment=0.7,
-                relevance_score=0.6,
-                sources=[],
-                suggestions=["Consider seeking guidance from multiple perspectives"],
-                explanation="Evaluation service encountered an error"
-            )
+            self.logger.error(f"❌ Response evaluation failed: {e}")
+            return {
+                "overall_score": 0.5,
+                "quality_level": "unknown",
+                "dimension_scores": {},
+                "recommendations": ["Unable to evaluate response"],
+                "error": str(e)
+            }
     
-    async def _calculate_quality_metrics(
-        self,
-        question: str,
-        response: str,
-        modules: List[ModuleInfo],
-        context: Optional[str] = None
-    ) -> QualityMetrics:
-        """Calculate detailed quality metrics"""
-        
-        # Relevance: How well does response address the question
-        relevance = await self._assess_relevance(question, response, context)
-        
-        # Completeness: How complete is the response
-        completeness = self._assess_completeness(question, response)
-        
-        # Clarity: How clear and understandable is the response
-        clarity = self._assess_clarity(response)
-        
-        # Helpfulness: How helpful is the response to the user
-        helpfulness = self._assess_helpfulness(response, modules)
-        
-        # Dharmic alignment: How well does it align with dharmic principles
-        dharmic_alignment = self._assess_dharmic_alignment(response)
-        
-        # Accuracy: How accurate is the information (basic checks)
-        accuracy = self._assess_accuracy(response)
-        
-        return QualityMetrics(
-            relevance=relevance,
-            completeness=completeness,
-            clarity=clarity,
-            helpfulness=helpfulness,
-            dharmic_alignment=dharmic_alignment,
-            accuracy=accuracy
-        )
+    async def _evaluate_dimension(
+        self, 
+        dimension: EvaluationDimension, 
+        response: str, 
+        user_message: str, 
+        context: Dict[str, Any]
+    ) -> float:
+        """Evaluate a specific dimension"""
+        try:
+            if dimension == EvaluationDimension.RELEVANCE:
+                return self._evaluate_relevance(response, user_message, context)
+            elif dimension == EvaluationDimension.DHARMIC_ALIGNMENT:
+                return self._evaluate_dharmic_alignment(response)
+            elif dimension == EvaluationDimension.EMOTIONAL_APPROPRIATENESS:
+                return self._evaluate_emotional_appropriateness(response, context)
+            elif dimension == EvaluationDimension.CONTENT_QUALITY:
+                return self._evaluate_content_quality(response)
+            elif dimension == EvaluationDimension.HELPFULNESS:
+                return self._evaluate_helpfulness(response, user_message)
+            elif dimension == EvaluationDimension.COMPASSION:
+                return self._evaluate_compassion(response)
+            else:
+                return 0.5  # Default score
+                
+        except Exception as e:
+            self.logger.error(f"❌ Failed to evaluate {dimension}: {e}")
+            return 0.5
     
-    async def _assess_relevance(self, question: str, response: str, context: Optional[str] = None) -> float:
-        """Assess how relevant the response is to the question"""
-        
-        # Extract key terms from question
-        question_words = set(question.lower().split())
+    def _evaluate_relevance(self, response: str, user_message: str, context: Dict[str, Any]) -> float:
+        """Evaluate response relevance"""
+        # Simple keyword matching
+        user_words = set(user_message.lower().split())
         response_words = set(response.lower().split())
         
         # Calculate word overlap
-        common_words = question_words.intersection(response_words)
-        relevance_score = len(common_words) / max(len(question_words), 1)
+        overlap = len(user_words.intersection(response_words))
+        relevance_score = min(overlap / max(len(user_words), 1), 1.0)
         
-        # Check for direct question answering patterns
-        if "?" in question:
-            # Look for answer patterns
-            answer_patterns = [
-                "the answer is", "yes,", "no,", "because", "due to",
-                "this is", "it means", "you can", "you should"
-            ]
-            
-            if any(pattern in response.lower() for pattern in answer_patterns):
-                relevance_score += 0.2
-        
-        # Check for contextual relevance if context provided
-        if context:
-            context_words = set(context.lower().split())
-            context_overlap = context_words.intersection(response_words)
-            context_relevance = len(context_overlap) / max(len(context_words), 1)
-            relevance_score = (relevance_score + context_relevance) / 2
+        # Boost for context awareness
+        if context.get("emotional_state") and any(emotion in response.lower() for emotion in ["feel", "emotion", "understand"]):
+            relevance_score += 0.2
         
         return min(relevance_score, 1.0)
     
-    def _assess_completeness(self, question: str, response: str) -> float:
-        """Assess how complete the response is"""
+    def _evaluate_dharmic_alignment(self, response: str) -> float:
+        """Evaluate dharmic alignment"""
+        response_lower = response.lower()
         
-        # Basic length-based assessment
-        response_length = len(response.split())
+        # Check for positive dharmic indicators
+        positive_indicators = [
+            "compassion", "kindness", "wisdom", "peace", "love", "understanding",
+            "namaste", "dharma", "service", "truth", "non-violence", "harmony"
+        ]
+        positive_score = sum(1 for indicator in positive_indicators if indicator in response_lower)
         
-        # Consider question complexity
-        question_complexity = 1.0
-        if "?" in question:
-            question_complexity += 0.2
-        if any(word in question.lower() for word in ["how", "why", "explain", "describe"]):
-            question_complexity += 0.3
-        if any(word in question.lower() for word in ["multiple", "various", "different", "compare"]):
-            question_complexity += 0.4
+        # Check for negative indicators
+        negative_indicators = [
+            "violence", "hatred", "anger", "revenge", "harm", "hurt", "destroy"
+        ]
+        negative_score = sum(1 for indicator in negative_indicators if indicator in response_lower)
         
-        # Expected length based on complexity
-        expected_length = 50 * question_complexity
-        
-        # Calculate completeness score
-        if response_length >= expected_length:
-            completeness = 1.0
-        else:
-            completeness = response_length / expected_length
-        
-        # Bonus for structured responses
-        if any(marker in response for marker in ["1.", "2.", "•", "-", "First", "Second"]):
-            completeness += 0.1
-        
-        return min(completeness, 1.0)
+        # Calculate dharmic score
+        dharmic_score = min((positive_score - negative_score) / max(len(positive_indicators), 1), 1.0)
+        return max(dharmic_score, 0.0)
     
-    def _assess_clarity(self, response: str) -> float:
-        """Assess how clear and readable the response is"""
+    def _evaluate_emotional_appropriateness(self, response: str, context: Dict[str, Any]) -> float:
+        """Evaluate emotional appropriateness"""
+        response_lower = response.lower()
         
-        clarity_score = 0.8  # Base score
+        # Check for empathetic language
+        empathy_indicators = [
+            "understand", "feel", "sorry", "support", "here for you", 
+            "i hear you", "validate", "acknowledge"
+        ]
+        empathy_score = sum(1 for indicator in empathy_indicators if indicator in response_lower)
         
-        # Check sentence structure
+        # Normalize score
+        emotional_score = min(empathy_score / max(len(empathy_indicators), 1), 1.0)
+        
+        # Consider emotional context if available
+        if context.get("emotional_state") == "sadness" and any(comfort in response_lower for comfort in ["comfort", "peace", "healing"]):
+            emotional_score += 0.3
+        
+        return min(emotional_score, 1.0)
+    
+    def _evaluate_content_quality(self, response: str) -> float:
+        """Evaluate content quality"""
+        # Length appropriateness (not too short, not too long)
+        length_score = 1.0 if 50 <= len(response) <= 500 else 0.7
+        
+        # Sentence structure
         sentences = response.split('.')
-        avg_sentence_length = sum(len(s.split()) for s in sentences) / max(len(sentences), 1)
+        structure_score = 1.0 if 2 <= len(sentences) <= 8 else 0.7
         
-        # Prefer moderate sentence length (10-25 words)
-        if 10 <= avg_sentence_length <= 25:
-            clarity_score += 0.1
-        elif avg_sentence_length > 35:
-            clarity_score -= 0.2
+        # Wisdom indicators
+        wisdom_indicators = ["wisdom", "teaching", "guidance", "insight", "understanding", "enlightenment"]
+        wisdom_score = min(sum(1 for indicator in wisdom_indicators if indicator in response.lower()) / 3, 1.0)
         
-        # Check for clear structure
-        structure_indicators = ["first", "second", "third", "finally", "however", "therefore", "because"]
-        structure_count = sum(1 for indicator in structure_indicators if indicator in response.lower())
-        clarity_score += min(structure_count * 0.05, 0.2)
-        
-        # Penalize excessive jargon (very basic check)
-        complex_words = ["aforementioned", "subsequently", "furthermore", "nevertheless", "notwithstanding"]
-        jargon_count = sum(1 for word in complex_words if word in response.lower())
-        clarity_score -= min(jargon_count * 0.1, 0.3)
-        
-        return max(min(clarity_score, 1.0), 0.1)
+        return (length_score + structure_score + wisdom_score) / 3
     
-    def _assess_helpfulness(self, response: str, modules: List[ModuleInfo]) -> float:
-        """Assess how helpful the response is"""
+    def _evaluate_helpfulness(self, response: str, user_message: str) -> float:
+        """Evaluate helpfulness"""
+        response_lower = response.lower()
         
-        helpfulness = 0.5  # Base score
-        
-        # Check for actionable advice
-        action_words = ["try", "practice", "consider", "meditate", "reflect", "focus", "breathe"]
-        action_count = sum(1 for word in action_words if word in response.lower())
-        helpfulness += min(action_count * 0.1, 0.3)
-        
-        # Check for encouragement
-        encouraging_words = ["can", "will", "possible", "achieve", "overcome", "grow", "learn"]
-        encouragement_count = sum(1 for word in encouraging_words if word in response.lower())
-        helpfulness += min(encouragement_count * 0.05, 0.2)
-        
-        # Bonus for using module expertise
-        module_terms = []
-        for module in modules:
-            module_terms.extend(module.expertise_areas)
-        
-        module_usage = sum(1 for term in module_terms if term.replace("_", " ") in response.lower())
-        helpfulness += min(module_usage * 0.05, 0.2)
-        
-        # Check for practical guidance
-        if any(phrase in response.lower() for phrase in ["you can", "try this", "practice", "daily", "routine"]):
-            helpfulness += 0.1
-        
-        return min(helpfulness, 1.0)
-    
-    def _assess_dharmic_alignment(self, response: str) -> float:
-        """Assess how well the response aligns with dharmic principles"""
-        
-        alignment_score = 0.7  # Base score (assume generally positive)
-        
-        # Check for dharmic principles
-        dharmic_mentions = 0
-        for principle in self.dharmic_principles:
-            if principle in response.lower():
-                dharmic_mentions += 1
-        
-        alignment_score += min(dharmic_mentions * 0.05, 0.2)
-        
-        # Check for positive values
-        positive_values = [
-            "compassion", "kindness", "love", "peace", "harmony", "wisdom",
-            "understanding", "patience", "forgiveness", "gratitude", "mindfulness"
+        # Check for actionable guidance
+        action_indicators = [
+            "try", "practice", "consider", "begin", "start", "focus on",
+            "breathe", "meditate", "reflect", "journal", "explore"
         ]
+        action_score = sum(1 for indicator in action_indicators if indicator in response_lower)
         
-        positive_count = sum(1 for value in positive_values if value in response.lower())
-        alignment_score += min(positive_count * 0.03, 0.15)
-        
-        # Penalize negative indicators
-        negative_count = sum(1 for indicator in self.negative_indicators if indicator in response.lower())
-        alignment_score -= min(negative_count * 0.1, 0.3)
-        
-        # Bonus for wisdom quotes or references
-        if any(indicator in response for indicator in ["scripture", "vedas", "upanishads", "gita", "puranas", "ancient wisdom"]):
-            alignment_score += 0.1
-        
-        # Check for non-judgmental language
-        judgmental_words = ["should always", "must", "never", "wrong", "bad", "evil"]
-        judgmental_count = sum(1 for word in judgmental_words if word in response.lower())
-        alignment_score -= min(judgmental_count * 0.05, 0.2)
-        
-        return max(min(alignment_score, 1.0), 0.0)
-    
-    def _assess_accuracy(self, response: str) -> float:
-        """Basic accuracy assessment (fact-checking would require external sources)"""
-        
-        accuracy = 0.8  # Base assumption of accuracy
-        
-        # Check for cautious language (indicates awareness of limitations)
-        cautious_phrases = ["may", "might", "possibly", "generally", "often", "typically", "consider"]
-        cautious_count = sum(1 for phrase in cautious_phrases if phrase in response.lower())
-        if cautious_count > 0:
-            accuracy += 0.1
-        
-        # Penalize absolute statements without qualification
-        absolute_words = ["always", "never", "all", "none", "every", "impossible"]
-        absolute_count = sum(1 for word in absolute_words if word in response.lower())
-        accuracy -= min(absolute_count * 0.05, 0.2)
-        
-        # Bonus for citing limitations or encouraging further exploration
-        if any(phrase in response.lower() for phrase in ["learn more", "consult", "personal experience", "individual"]):
-            accuracy += 0.1
-        
-        return max(min(accuracy, 1.0), 0.1)
-    
-    def _calculate_confidence_score(self, metrics: QualityMetrics) -> float:
-        """Calculate overall confidence score from metrics"""
-        
-        # Weighted average of all metrics
-        weights = {
-            "relevance": 0.25,
-            "completeness": 0.15,
-            "clarity": 0.15,
-            "helpfulness": 0.20,
-            "dharmic_alignment": 0.15,
-            "accuracy": 0.10
-        }
-        
-        confidence = (
-            metrics.relevance * weights["relevance"] +
-            metrics.completeness * weights["completeness"] +
-            metrics.clarity * weights["clarity"] +
-            metrics.helpfulness * weights["helpfulness"] +
-            metrics.dharmic_alignment * weights["dharmic_alignment"] +
-            metrics.accuracy * weights["accuracy"]
-        )
-        
-        return min(max(confidence, 0.0), 1.0)
-    
-    async def _generate_suggestions(
-        self,
-        question: str,
-        response: str,
-        metrics: QualityMetrics
-    ) -> List[str]:
-        """Generate suggestions for improvement or follow-up"""
-        
-        suggestions = []
-        
-        # Suggestions based on quality metrics
-        if metrics.relevance < 0.7:
-            suggestions.append("Consider asking a more specific question for a more targeted response")
-        
-        if metrics.completeness < 0.6:
-            suggestions.append("Ask follow-up questions to explore this topic more deeply")
-        
-        if metrics.dharmic_alignment < 0.8:
-            suggestions.append("Explore how dharmic principles might apply to your situation")
-        
-        if metrics.helpfulness < 0.7:
-            suggestions.append("Consider how you might practically apply this guidance in daily life")
-        
-        # Content-based suggestions
-        if "meditation" in response.lower():
-            suggestions.append("Try incorporating a brief meditation practice to experience these insights")
-        
-        if "compassion" in response.lower():
-            suggestions.append("Practice loving-kindness meditation to cultivate compassion")
-        
-        if "wisdom" in response.lower():
-            suggestions.append("Reflect on how this wisdom applies to your current circumstances")
-        
-        # Question-based suggestions
-        if "?" in question and "how" in question.lower():
-            suggestions.append("Practice the suggested approaches gradually and mindfully")
-        
-        if any(word in question.lower() for word in ["problem", "difficulty", "struggle"]):
-            suggestions.append("Remember that challenges are opportunities for growth and learning")
-        
-        # Limit to most relevant suggestions
-        return suggestions[:3]
-    
-    def _extract_sources(self, response: str) -> List[str]:
-        """Extract potential sources or references from response"""
-        
-        sources = []
-        
-        # Look for scripture references
-        scripture_patterns = [
-            r"Bhagavad Gita (\d+\.\d+)",
-            r"Upanishads?",
-            r"Vedas?",
-            r"Yoga Sutras? (\d+\.\d+)",
-            r"Puranic texts?",
-            r"ancient wisdom"
+        # Check for solution orientation
+        solution_indicators = [
+            "solution", "way", "path", "approach", "method", "technique",
+            "practice", "exercise", "step"
         ]
+        solution_score = sum(1 for indicator in solution_indicators if indicator in response_lower)
         
-        for pattern in scripture_patterns:
-            matches = re.findall(pattern, response, re.IGNORECASE)
-            sources.extend(matches)
-        
-        # Look for general source indicators
-        source_indicators = [
-            "according to", "as mentioned in", "traditional wisdom",
-            "ancient teachings", "scriptural guidance", "dharmic principles"
-        ]
-        
-        for indicator in source_indicators:
-            if indicator in response.lower():
-                sources.append(indicator)
-        
-        # Remove duplicates and limit
-        return list(set(sources))[:5]
+        helpfulness_score = (action_score + solution_score) / max(len(action_indicators + solution_indicators), 1)
+        return min(helpfulness_score, 1.0)
     
-    async def evaluate_wisdom_response(
-        self,
-        question: str,
-        response: str,
-        modules: List[ModuleInfo]
-    ) -> EvaluationResult:
-        """Specialized evaluation for wisdom responses"""
+    def _evaluate_compassion(self, response: str) -> float:
+        """Evaluate compassion level"""
+        response_lower = response.lower()
         
-        # Use standard evaluation but with higher weight on dharmic alignment
-        result = await self.evaluate_response(question, response, modules)
-        
-        # Adjust scores for wisdom content
-        if result.dharmic_alignment > 0.8:
-            result.confidence_score = min(result.confidence_score + 0.1, 1.0)
-        
-        # Add wisdom-specific suggestions
-        wisdom_suggestions = [
-            "Contemplate how this wisdom relates to your personal journey",
-            "Consider sharing this insight with others who might benefit",
-            "Practice integrating this understanding into daily life"
+        # Compassionate language indicators
+        compassion_indicators = [
+            "love", "care", "gentle", "kind", "warm", "embrace",
+            "support", "heal", "comfort", "peace", "blessing"
         ]
+        compassion_score = sum(1 for indicator in compassion_indicators if indicator in response_lower)
         
-        result.suggestions.extend(wisdom_suggestions[:1])
-        result.suggestions = result.suggestions[:3]  # Limit total suggestions
+        # Non-judgmental language
+        non_judgmental = not any(word in response_lower for word in ["wrong", "bad", "should not", "never"])
         
-        return result
+        compassion_level = compassion_score / max(len(compassion_indicators), 1)
+        if non_judgmental:
+            compassion_level += 0.2
+        
+        return min(compassion_level, 1.0)
+    
+    def _determine_quality_level(self, overall_score: float) -> str:
+        """Determine quality level based on overall score"""
+        if overall_score >= 0.9:
+            return "excellent"
+        elif overall_score >= 0.8:
+            return "very_good"
+        elif overall_score >= 0.7:
+            return "good"
+        elif overall_score >= 0.6:
+            return "fair"
+        elif overall_score >= 0.5:
+            return "needs_improvement"
+        else:
+            return "poor"
+    
+    def _generate_recommendations(self, scores: Dict[str, float]) -> List[str]:
+        """Generate improvement recommendations"""
+        recommendations = []
+        
+        for dimension, score in scores.items():
+            if score < 0.6:
+                if dimension == "relevance":
+                    recommendations.append("Improve response relevance to user query")
+                elif dimension == "dharmic_alignment":
+                    recommendations.append("Strengthen dharmic principles in response")
+                elif dimension == "emotional_appropriateness":
+                    recommendations.append("Enhance emotional intelligence and empathy")
+                elif dimension == "content_quality":
+                    recommendations.append("Improve content clarity and wisdom depth")
+                elif dimension == "helpfulness":
+                    recommendations.append("Provide more actionable guidance")
+                elif dimension == "compassion":
+                    recommendations.append("Increase compassionate and loving language")
+        
+        if not recommendations:
+            recommendations.append("Response quality is good - maintain current approach")
+        
+        return recommendations
+    
+    async def get_evaluation_stats(self) -> Dict[str, Any]:
+        """Get evaluation statistics"""
+        try:
+            if not self.evaluation_history:
+                return {"message": "No evaluations recorded yet"}
+            
+            # Calculate average scores
+            total_evaluations = len(self.evaluation_history)
+            avg_overall_score = sum(record["overall_score"] for record in self.evaluation_history) / total_evaluations
+            
+            # Calculate quality distribution
+            quality_distribution = {}
+            for record in self.evaluation_history:
+                level = record["quality_level"]
+                quality_distribution[level] = quality_distribution.get(level, 0) + 1
+            
+            return {
+                "total_evaluations": total_evaluations,
+                "average_overall_score": avg_overall_score,
+                "quality_distribution": quality_distribution,
+                "recent_evaluations": self.evaluation_history[-5:]  # Last 5 evaluations
+            }
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to get evaluation stats: {e}")
+            return {"error": str(e)}
     
     async def health_check(self) -> bool:
         """Check if evaluator is healthy"""
-        return True  # Simple health check
+        try:
+            return len(self.evaluation_criteria) > 0
+        except Exception as e:
+            self.logger.error(f"Health check failed: {e}")
+            return False
 
+# Global instance
+_response_evaluator: Optional[ResponseEvaluator] = None
 
-# Dependency injection function for FastAPI
-_response_evaluator_instance = None
-
-
-def get_response_evaluator() -> ResponseEvaluator:
-    """Get the response evaluator instance (singleton pattern)"""
-    global _response_evaluator_instance
-    if _response_evaluator_instance is None:
-        _response_evaluator_instance = ResponseEvaluator()
-    return _response_evaluator_instance
+async def get_response_evaluator() -> ResponseEvaluator:
+    """Get global response evaluator instance"""
+    global _response_evaluator
+    if _response_evaluator is None:
+        _response_evaluator = ResponseEvaluator()
+        await _response_evaluator.initialize()
+    return _response_evaluator

@@ -1,515 +1,315 @@
 """
-🕉️ Dharmic LLM Response Processor
+🕉️ Dharmic LLM Processor
+========================
 
-This service processes external LLM responses (ChatGPT, Claude, etc.) through 
-our complete Dharmic backend system to ensure all responses are:
-
-1. Aligned with dharmic principles
-2. Enhanced with spiritual wisdom
-3. Filtered through appropriate spiritual modules
-4. Validated against subscription limits
-5. Enriched with scriptural references
-
-The system ensures that any external AI response is transformed into 
-dharmic guidance that serves the user's spiritual growth.
-
-Features:
-- External LLM response processing
-- Dharmic alignment and enhancement
-- Spiritual module integration
-- Subscription-aware processing
-- Knowledge base integration
-- Response validation and filtering
-
-May this service transform all AI responses into dharmic wisdom 🕉️
+Processes LLM responses through a dharmic lens to ensure spiritual alignment.
 """
 
-import asyncio
 import logging
-from typing import Dict, Any, List, Optional, Union
-from datetime import datetime
-from dataclasses import dataclass
+from typing import Dict, Any, Optional, List
 from enum import Enum
-
-from ..models.chat import ChatMessage, ModuleInfo
-from ..models.subscription import SubscriptionTier
-from ..services.llm_router import LLMRouter, LLMResponse, LLMProvider
-from ..chakra_modules.darshana_engine import get_darshana_engine
-from ..chakra_modules.system_orchestrator import SystemOrchestrator
-from ..spiritual_modules import get_spiritual_router
-from ..services.subscription_service import SubscriptionService
-from ..config import settings
+from datetime import datetime
+import warnings
 
 logger = logging.getLogger(__name__)
 
 class DharmicProcessingMode(str, Enum):
-    """Dharmic processing modes"""
-    LIGHT = "light"          # Basic dharmic alignment
-    STANDARD = "standard"    # Full spiritual module processing  
-    DEEP = "deep"           # Complete dharmic transformation
-    PREMIUM = "premium"      # Advanced features with all modules
+    """Modes for dharmic processing"""
+    STRICT = "strict"        # Strict dharmic alignment
+    BALANCED = "balanced"    # Balance modern and traditional
+    GENTLE = "gentle"        # Gentle spiritual guidance
+    ACADEMIC = "academic"    # Academic/scholarly approach
 
-@dataclass
 class DharmicResponse:
-    """Enhanced dharmic response"""
-    original_response: str
-    dharmic_response: str
-    spiritual_insights: List[str]
-    scriptural_references: List[Dict[str, str]]
-    dharmic_alignment_score: float
-    processing_mode: DharmicProcessingMode
-    modules_used: List[str]
-    subscription_tier: SubscriptionTier
-    metadata: Dict[str, Any]
+    """Response after dharmic processing"""
+    
+    def __init__(
+        self,
+        original_response: str,
+        processed_response: str,
+        dharmic_alignment_score: float,
+        spiritual_insights: List[str],
+        sanskrit_references: Optional[List[str]] = None,
+        rishi_guidance: Optional[str] = None,
+        processing_mode: DharmicProcessingMode = DharmicProcessingMode.BALANCED
+    ):
+        self.original_response = original_response
+        self.processed_response = processed_response
+        self.dharmic_alignment_score = dharmic_alignment_score
+        self.spiritual_insights = spiritual_insights
+        self.sanskrit_references = sanskrit_references or []
+        self.rishi_guidance = rishi_guidance
+        self.processing_mode = processing_mode
+        self.timestamp = datetime.now()
 
 class DharmicLLMProcessor:
-    """Main service for processing external LLM responses through dharmic system"""
+    """🕉️ Dharmic LLM Response Processor"""
     
     def __init__(self):
-        self.llm_router = None
-        self.darshana_engine = None
-        self.system_orchestrator = None
-        self.spiritual_router = None
-        self.subscription_service = None
-        self.is_initialized = False
+        self.logger = logging.getLogger(self.__class__.__name__)
         
-    async def initialize(self):
-        """Initialize all dharmic processing components"""
-        try:
-            logger.info("🕉️ Initializing Dharmic LLM Processor...")
-            
-            # Initialize core components
-            self.llm_router = LLMRouter()
-            await self.llm_router.initialize()
-            
-            self.darshana_engine = get_darshana_engine()
-            self.system_orchestrator = SystemOrchestrator()
-            self.spiritual_router = get_spiritual_router()
-            self.subscription_service = SubscriptionService()
-            
-            self.is_initialized = True
-            logger.info("✅ Dharmic LLM Processor initialized successfully")
-            
-        except Exception as e:
-            logger.error(f"❌ Failed to initialize Dharmic LLM Processor: {e}")
-            raise
-    
-    async def process_external_llm_response(
-        self,
-        external_response: str,
-        original_query: str,
-        user_id: str,
-        subscription_tier: SubscriptionTier = SubscriptionTier.FREE,
-        processing_mode: Optional[DharmicProcessingMode] = None,
-        user_context: Optional[Dict[str, Any]] = None
-    ) -> DharmicResponse:
-        """
-        Process external LLM response through complete dharmic system
-        
-        Flow:
-        1. Validate subscription and determine processing mode
-        2. Analyze response for dharmic content and spiritual themes
-        3. Route through appropriate spiritual modules
-        4. Enhance with darshana engine philosophical framework
-        5. Add scriptural references and spiritual insights
-        6. Generate final dharmic response
-        """
-        
-        if not self.is_initialized:
-            await self.initialize()
-            
-        # Step 1: Determine processing mode based on subscription
-        actual_mode = await self._determine_processing_mode(subscription_tier, processing_mode)
-        
-        # Step 2: Check subscription limits
-        await self._validate_subscription_usage(user_id, subscription_tier, actual_mode)
-        
-        # Step 3: Analyze spiritual content in the response
-        spiritual_analysis = await self._analyze_spiritual_content(
-            external_response, original_query, user_context
-        )
-        
-        # Step 4: Route through spiritual modules based on analysis
-        spiritual_enhancement = await self._process_through_spiritual_modules(
-            external_response, original_query, spiritual_analysis, actual_mode
-        )
-        
-        # Step 5: Apply darshana engine philosophical framework
-        philosophical_enhancement = await self._apply_darshana_framework(
-            spiritual_enhancement, spiritual_analysis, actual_mode
-        )
-        
-        # Step 6: Generate final dharmic response
-        final_response = await self._generate_dharmic_response(
-            original_response=external_response,
-            spiritual_enhancement=spiritual_enhancement,
-            philosophical_enhancement=philosophical_enhancement,
-            spiritual_analysis=spiritual_analysis,
-            processing_mode=actual_mode,
-            subscription_tier=subscription_tier
-        )
-        
-        # Step 7: Log usage for subscription tracking
-        await self._log_usage(user_id, actual_mode, len(final_response.dharmic_response))
-        
-        return final_response
-    
-    async def _determine_processing_mode(
-        self,
-        subscription_tier: SubscriptionTier,
-        requested_mode: Optional[DharmicProcessingMode]
-    ) -> DharmicProcessingMode:
-        """Determine actual processing mode based on subscription"""
-        
-        # Map subscription tiers to maximum processing modes
-        tier_to_max_mode = {
-            SubscriptionTier.FREE: DharmicProcessingMode.LIGHT,
-            SubscriptionTier.PRO: DharmicProcessingMode.STANDARD,
-            SubscriptionTier.MAX: DharmicProcessingMode.DEEP,
-            SubscriptionTier.ENTERPRISE: DharmicProcessingMode.PREMIUM
-        }
-        
-        max_allowed = tier_to_max_mode.get(subscription_tier, DharmicProcessingMode.LIGHT)
-        
-        # If no mode requested, use maximum allowed
-        if not requested_mode:
-            return max_allowed
-            
-        # Return the minimum of requested and allowed
-        mode_hierarchy = [
-            DharmicProcessingMode.LIGHT,
-            DharmicProcessingMode.STANDARD, 
-            DharmicProcessingMode.DEEP,
-            DharmicProcessingMode.PREMIUM
+        # Dharmic principles and values
+        self.dharmic_principles = [
+            "ahimsa",           # Non-violence
+            "satya",            # Truthfulness  
+            "asteya",           # Non-stealing
+            "brahmacharya",     # Spiritual discipline
+            "aparigraha",       # Non-possessiveness
+            "dharma",           # Righteous duty
+            "karma",            # Action and consequence
+            "moksha",           # Liberation
+            "bhakti",           # Devotion
+            "seva",             # Selfless service
         ]
         
-        requested_level = mode_hierarchy.index(requested_mode)
-        max_level = mode_hierarchy.index(max_allowed)
-        
-        return mode_hierarchy[min(requested_level, max_level)]
-    
-    async def _validate_subscription_usage(
-        self,
-        user_id: str,
-        subscription_tier: SubscriptionTier,
-        processing_mode: DharmicProcessingMode
-    ):
-        """Validate subscription usage limits"""
-        
-        # Check monthly chat limits
-        monthly_usage = await self.subscription_service.get_current_usage(
-            user_id, "dharmic_processing"
-        )
-        
-        # Get limits based on subscription tier
-        limits = {
-            SubscriptionTier.FREE: 50,
-            SubscriptionTier.PRO: -1,  # Unlimited
-            SubscriptionTier.MAX: -1,  # Unlimited  
-            SubscriptionTier.ENTERPRISE: -1  # Unlimited
+        # Sanskrit wisdom phrases
+        self.sanskrit_wisdom = {
+            "truth": ["सत्यमेव जयते (Satyameva Jayate) - Truth alone triumphs"],
+            "peace": ["शान्ति शान्ति शान्ति (Shanti Shanti Shanti) - Peace, peace, peace"],
+            "wisdom": ["विद्या ददाति विनयं (Vidya Dadati Vinayam) - Knowledge gives humility"],
+            "dharma": ["धर्मो रक्षति रक्षितः (Dharmo Rakshati Rakshitah) - Dharma protects those who protect it"],
+            "love": ["वसुधैव कुटुम्बकम् (Vasudhaiva Kutumbakam) - The world is one family"],
         }
         
-        limit = limits.get(subscription_tier, 50)
-        
-        if limit > 0 and monthly_usage >= limit:
-            raise Exception(f"Monthly dharmic processing limit ({limit}) exceeded")
+        self.logger.info("🕉️ Dharmic LLM Processor initialized")
     
-    async def _analyze_spiritual_content(
+    async def process_response(
         self,
         response: str,
-        query: str,
-        user_context: Optional[Dict[str, Any]]
-    ) -> Dict[str, Any]:
-        """Analyze spiritual content in response and query"""
+        context: Dict[str, Any],
+        mode: DharmicProcessingMode = DharmicProcessingMode.BALANCED
+    ) -> DharmicResponse:
+        """Process LLM response through dharmic lens"""
         
-        # Spiritual keywords and themes
-        spiritual_themes = {
-            'dharma': ['dharma', 'duty', 'righteousness', 'purpose'],
-            'karma': ['karma', 'action', 'consequences', 'cause'],
-            'yoga': ['yoga', 'meditation', 'practice', 'union'],
-            'jnana': ['knowledge', 'wisdom', 'understanding', 'awareness'],
-            'bhakti': ['devotion', 'love', 'surrender', 'faith'],
-            'moksha': ['liberation', 'freedom', 'enlightenment', 'release'],
-            'seva': ['service', 'helping', 'selfless', 'giving'],
-            'ahimsa': ['non-violence', 'peace', 'compassion', 'kindness']
-        }
-        
-        # Analyze both query and response
-        combined_text = f"{query} {response}".lower()
-        
-        detected_themes = {}
-        for theme, keywords in spiritual_themes.items():
-            count = sum(1 for keyword in keywords if keyword in combined_text)
-            if count > 0:
-                detected_themes[theme] = count
-        
-        # Determine primary spiritual path
-        primary_path = max(detected_themes.items(), key=lambda x: x[1])[0] if detected_themes else 'general'
-        
-        # Check for life stage indicators
-        life_stages = {
-            'brahmacharya': ['student', 'learning', 'study', 'young'],
-            'grihastha': ['family', 'work', 'responsibility', 'marriage'],
-            'vanaprastha': ['midlife', 'guidance', 'mentoring', 'wisdom'],
-            'sannyasa': ['retirement', 'spiritual', 'detachment', 'elderly']
-        }
-        
-        detected_stage = None
-        for stage, indicators in life_stages.items():
-            if any(indicator in combined_text for indicator in indicators):
-                detected_stage = stage
-                break
-        
-        return {
-            'spiritual_themes': detected_themes,
-            'primary_path': primary_path,
-            'life_stage': detected_stage,
-            'dharmic_content_score': len(detected_themes) / len(spiritual_themes),
-            'needs_enhancement': len(detected_themes) < 2  # Low spiritual content
-        }
-    
-    async def _process_through_spiritual_modules(
-        self,
-        response: str,
-        query: str,
-        spiritual_analysis: Dict[str, Any],
-        processing_mode: DharmicProcessingMode
-    ) -> Dict[str, Any]:
-        """Process through appropriate spiritual modules"""
-        
-        enhancement = {
-            'spiritual_insights': [],
-            'practical_guidance': [],
-            'modules_used': [],
-            'dharmic_principles': []
-        }
-        
-        # Determine which modules to use based on processing mode
-        if processing_mode == DharmicProcessingMode.LIGHT:
-            # Basic dharmic alignment only
-            primary_path = spiritual_analysis['primary_path']
-            if primary_path != 'general':
-                enhancement['modules_used'].append(f"{primary_path}_module")
-                enhancement['spiritual_insights'].append(
-                    f"From the path of {primary_path.title()}: {self._get_basic_insight(primary_path)}"
-                )
-        
-        elif processing_mode in [DharmicProcessingMode.STANDARD, DharmicProcessingMode.DEEP, DharmicProcessingMode.PREMIUM]:
-            # Use spiritual router for comprehensive processing
-            spiritual_response = await self.spiritual_router.analyze_and_guide(
-                query, response, spiritual_analysis
+        try:
+            # Analyze dharmic alignment
+            alignment_score = self._calculate_dharmic_alignment(response)
+            
+            # Extract spiritual insights
+            spiritual_insights = self._extract_spiritual_insights(response, context)
+            
+            # Add Sanskrit references if appropriate
+            sanskrit_refs = self._add_sanskrit_references(response, context)
+            
+            # Get Rishi guidance if needed
+            rishi_guidance = self._get_rishi_guidance(response, context, mode)
+            
+            # Process and enhance the response
+            processed_response = self._enhance_response(
+                response, spiritual_insights, sanskrit_refs, rishi_guidance, mode
             )
             
-            enhancement['spiritual_insights'] = spiritual_response.get('insights', [])
-            enhancement['practical_guidance'] = spiritual_response.get('guidance', [])
-            enhancement['modules_used'] = spiritual_response.get('modules_used', [])
-            enhancement['dharmic_principles'] = spiritual_response.get('principles', [])
-        
-        return enhancement
-    
-    async def _apply_darshana_framework(
-        self,
-        spiritual_enhancement: Dict[str, Any],
-        spiritual_analysis: Dict[str, Any],
-        processing_mode: DharmicProcessingMode
-    ) -> Dict[str, Any]:
-        """Apply darshana engine philosophical framework"""
-        
-        if processing_mode == DharmicProcessingMode.LIGHT:
-            # Skip philosophical processing for light mode
-            return {'philosophical_framework': 'Basic dharmic principles applied'}
-        
-        # Use darshana engine for philosophical analysis
-        philosophical_analysis = await self.darshana_engine.analyze_query(
-            spiritual_analysis.get('primary_path', 'general'),
-            spiritual_enhancement
-        )
-        
-        return {
-            'philosophical_framework': philosophical_analysis.get('framework', ''),
-            'scriptural_context': philosophical_analysis.get('scriptures', []),
-            'philosophical_principles': philosophical_analysis.get('principles', [])
-        }
-    
-    async def _generate_dharmic_response(
-        self,
-        original_response: str,
-        spiritual_enhancement: Dict[str, Any],
-        philosophical_enhancement: Dict[str, Any],
-        spiritual_analysis: Dict[str, Any],
-        processing_mode: DharmicProcessingMode,
-        subscription_tier: SubscriptionTier
-    ) -> DharmicResponse:
-        """Generate final dharmic response"""
-        
-        # Build enhanced response based on processing mode
-        if processing_mode == DharmicProcessingMode.LIGHT:
-            dharmic_response = await self._build_light_response(
-                original_response, spiritual_enhancement
+            return DharmicResponse(
+                original_response=response,
+                processed_response=processed_response,
+                dharmic_alignment_score=alignment_score,
+                spiritual_insights=spiritual_insights,
+                sanskrit_references=sanskrit_refs,
+                rishi_guidance=rishi_guidance,
+                processing_mode=mode
             )
-        else:
-            dharmic_response = await self._build_enhanced_response(
-                original_response, spiritual_enhancement, philosophical_enhancement, processing_mode
+            
+        except Exception as e:
+            self.logger.error(f"Error processing dharmic response: {e}")
+            # Return original response on error
+            return DharmicResponse(
+                original_response=response,
+                processed_response=response,
+                dharmic_alignment_score=0.5,
+                spiritual_insights=["Error in processing - using original response"],
+                processing_mode=mode
             )
-        
-        # Calculate dharmic alignment score
-        alignment_score = self._calculate_alignment_score(
-            spiritual_analysis, spiritual_enhancement, processing_mode
-        )
-        
-        # Compile scriptural references
-        scriptural_refs = philosophical_enhancement.get('scriptural_context', [])
-        
-        return DharmicResponse(
-            original_response=original_response,
-            dharmic_response=dharmic_response,
-            spiritual_insights=spiritual_enhancement.get('spiritual_insights', []),
-            scriptural_references=scriptural_refs,
-            dharmic_alignment_score=alignment_score,
-            processing_mode=processing_mode,
-            modules_used=spiritual_enhancement.get('modules_used', []),
-            subscription_tier=subscription_tier,
-            metadata={
-                'processed_at': datetime.utcnow().isoformat(),
-                'spiritual_analysis': spiritual_analysis,
-                'processing_mode': processing_mode,
-                'enhancement_applied': True
-            }
-        )
     
-    async def _build_light_response(
-        self,
-        original_response: str,
-        spiritual_enhancement: Dict[str, Any]
-    ) -> str:
-        """Build light dharmic response (Free tier)"""
-        
-        dharmic_addition = ""
-        
-        if spiritual_enhancement.get('spiritual_insights'):
-            dharmic_addition += f"\n\n🕉️ **Dharmic Perspective:**\n"
-            dharmic_addition += spiritual_enhancement['spiritual_insights'][0]
-        
-        return original_response + dharmic_addition
-    
-    async def _build_enhanced_response(
-        self,
-        original_response: str,
-        spiritual_enhancement: Dict[str, Any],
-        philosophical_enhancement: Dict[str, Any],
-        processing_mode: DharmicProcessingMode
-    ) -> str:
-        """Build enhanced dharmic response (Pro+ tiers)"""
-        
-        enhanced_response = original_response
-        
-        # Add spiritual insights
-        if spiritual_enhancement.get('spiritual_insights'):
-            enhanced_response += f"\n\n🕉️ **Spiritual Wisdom:**\n"
-            for insight in spiritual_enhancement['spiritual_insights'][:3]:
-                enhanced_response += f"• {insight}\n"
-        
-        # Add practical guidance
-        if spiritual_enhancement.get('practical_guidance'):
-            enhanced_response += f"\n🌟 **Dharmic Guidance:**\n"
-            for guidance in spiritual_enhancement['practical_guidance'][:3]:
-                enhanced_response += f"• {guidance}\n"
-        
-        # Add philosophical framework (Deep+ modes)
-        if processing_mode in [DharmicProcessingMode.DEEP, DharmicProcessingMode.PREMIUM]:
-            if philosophical_enhancement.get('philosophical_framework'):
-                enhanced_response += f"\n📚 **Philosophical Foundation:**\n"
-                enhanced_response += philosophical_enhancement['philosophical_framework']
-        
-        # Add scriptural references (Premium mode)
-        if processing_mode == DharmicProcessingMode.PREMIUM:
-            if philosophical_enhancement.get('scriptural_context'):
-                enhanced_response += f"\n📖 **Sacred Texts:**\n"
-                for ref in philosophical_enhancement['scriptural_context'][:2]:
-                    enhanced_response += f"• {ref.get('text', '')}\n"
-        
-        return enhanced_response
-    
-    def _calculate_alignment_score(
-        self,
-        spiritual_analysis: Dict[str, Any],
-        spiritual_enhancement: Dict[str, Any],
-        processing_mode: DharmicProcessingMode
-    ) -> float:
-        """Calculate dharmic alignment score"""
-        
-        base_score = spiritual_analysis.get('dharmic_content_score', 0.0)
-        
-        # Boost based on enhancement
-        enhancement_boost = len(spiritual_enhancement.get('spiritual_insights', [])) * 0.1
-        
-        # Boost based on processing mode
-        mode_boosts = {
-            DharmicProcessingMode.LIGHT: 0.1,
-            DharmicProcessingMode.STANDARD: 0.2,
-            DharmicProcessingMode.DEEP: 0.3,
-            DharmicProcessingMode.PREMIUM: 0.4
-        }
-        
-        mode_boost = mode_boosts.get(processing_mode, 0.1)
-        
-        return min(1.0, base_score + enhancement_boost + mode_boost)
-    
-    def _get_basic_insight(self, spiritual_path: str) -> str:
-        """Get basic insight for spiritual path"""
-        
-        insights = {
-            'dharma': "Consider how your actions align with your life purpose and duty to others.",
-            'karma': "Remember that every action creates consequences - choose mindfully.",
-            'yoga': "Integration of mind, body, and spirit leads to inner harmony.",
-            'jnana': "True wisdom comes from understanding the nature of reality and self.",
-            'bhakti': "Devotion and love transform the heart and open spiritual doors.",
-            'moksha': "Ultimate freedom comes from releasing attachment to temporary things.",
-            'seva': "Selfless service purifies the heart and connects us to the divine.",
-            'ahimsa': "Non-violence in thought, word, and deed creates lasting peace."
-        }
-        
-        return insights.get(spiritual_path, "Apply dharmic principles of righteousness and compassion.")
-    
-    async def _log_usage(
-        self,
-        user_id: str,
-        processing_mode: DharmicProcessingMode,
-        response_length: int
-    ):
-        """Log usage for subscription tracking"""
-        
-        # Log dharmic processing usage
-        await self.subscription_service.log_feature_usage(
-            user_id,
-            "dharmic_processing",
-            metadata={
-                'processing_mode': processing_mode,
-                'response_length': response_length,
-                'timestamp': datetime.utcnow().isoformat()
-            }
-        )
-    
-    async def health_check(self) -> bool:
-        """Health check for dharmic processor"""
+    def _calculate_dharmic_alignment(self, response: str) -> float:
+        """Calculate how well response aligns with dharmic principles"""
         try:
-            return (
-                self.is_initialized and
-                self.llm_router and
-                self.darshana_engine and
-                self.system_orchestrator and
-                self.spiritual_router
-            )
-        except:
-            return False
+            response_lower = response.lower()
+            
+            # Check for dharmic principles
+            principle_matches = 0
+            total_principles = len(self.dharmic_principles)
+            
+            for principle in self.dharmic_principles:
+                if principle in response_lower:
+                    principle_matches += 1
+            
+            # Check for positive spiritual concepts
+            positive_concepts = [
+                "compassion", "wisdom", "peace", "love", "truth", "mindfulness",
+                "meditation", "spiritual", "dharma", "karma", "enlightenment",
+                "consciousness", "awareness", "harmony", "balance", "unity"
+            ]
+            
+            concept_matches = 0
+            for concept in positive_concepts:
+                if concept in response_lower:
+                    concept_matches += 1
+            
+            # Check for negative concepts that reduce alignment
+            negative_concepts = [
+                "violence", "hatred", "greed", "anger", "ignorance",
+                "attachment", "ego", "materialism", "suffering"
+            ]
+            
+            negative_matches = 0
+            for concept in negative_concepts:
+                if concept in response_lower:
+                    negative_matches += 1
+            
+            # Calculate score (0.0 to 1.0)
+            base_score = 0.5  # Neutral starting point
+            principle_boost = (principle_matches / total_principles) * 0.3
+            concept_boost = min(concept_matches * 0.05, 0.3)
+            negative_penalty = min(negative_matches * 0.1, 0.2)
+            
+            final_score = base_score + principle_boost + concept_boost - negative_penalty
+            return max(0.0, min(1.0, final_score))
+            
+        except Exception as e:
+            self.logger.error(f"Error calculating dharmic alignment: {e}")
+            return 0.5
+    
+    def _extract_spiritual_insights(self, response: str, context: Dict[str, Any]) -> List[str]:
+        """Extract spiritual insights from the response"""
+        insights = []
+        
+        try:
+            response_lower = response.lower()
+            
+            # Map keywords to insights
+            insight_map = {
+                "meditation": "Consider deepening your meditation practice for greater awareness",
+                "mindfulness": "Mindful awareness is the foundation of spiritual growth",
+                "compassion": "Compassion toward all beings is the essence of dharma",
+                "wisdom": "True wisdom comes from understanding the interconnectedness of all",
+                "peace": "Inner peace is reflected in outer harmony",
+                "dharma": "Living according to dharma brings lasting fulfillment",
+                "karma": "Understanding karma helps us make conscious choices",
+                "consciousness": "Expanding consciousness leads to spiritual evolution",
+                "love": "Universal love transcends all boundaries and differences",
+                "truth": "Seeking truth is the path to liberation"
+            }
+            
+            for keyword, insight in insight_map.items():
+                if keyword in response_lower and insight not in insights:
+                    insights.append(insight)
+            
+            # Add general spiritual insight if none found
+            if not insights:
+                insights.append("Every moment offers an opportunity for spiritual growth")
+            
+            return insights[:3]  # Limit to 3 insights
+            
+        except Exception as e:
+            self.logger.error(f"Error extracting spiritual insights: {e}")
+            return ["Spiritual wisdom emerges through mindful reflection"]
+    
+    def _add_sanskrit_references(self, response: str, context: Dict[str, Any]) -> List[str]:
+        """Add relevant Sanskrit references"""
+        try:
+            response_lower = response.lower()
+            references = []
+            
+            # Map concepts to Sanskrit
+            concept_to_sanskrit = {
+                "truth": "सत्यमेव जयते (Satyameva Jayate) - Truth alone triumphs",
+                "peace": "शान्ति शान्ति शान्ति (Shanti Shanti Shanti) - Peace, peace, peace", 
+                "wisdom": "विद्या ददाति विनयं (Vidya Dadati Vinayam) - Knowledge gives humility",
+                "dharma": "धर्मो रक्षति रक्षितः (Dharmo Rakshati Rakshitah) - Dharma protects those who protect it",
+                "love": "वसुधैव कुटुम्बकम् (Vasudhaiva Kutumbakam) - The world is one family",
+                "consciousness": "अहं ब्रह्मास्मि (Aham Brahmasmi) - I am Brahman",
+                "unity": "सर्वं खल्विदं ब्रह्म (Sarvam Khalvidam Brahma) - All this is indeed Brahman"
+            }
+            
+            for concept, sanskrit in concept_to_sanskrit.items():
+                if concept in response_lower and sanskrit not in references:
+                    references.append(sanskrit)
+            
+            return references[:2]  # Limit to 2 references
+            
+        except Exception as e:
+            self.logger.error(f"Error adding Sanskrit references: {e}")
+            return []
+    
+    def _get_rishi_guidance(
+        self, 
+        response: str, 
+        context: Dict[str, Any], 
+        mode: DharmicProcessingMode
+    ) -> Optional[str]:
+        """Get appropriate Rishi guidance"""
+        try:
+            if mode == DharmicProcessingMode.ACADEMIC:
+                return None  # No Rishi guidance in academic mode
+            
+            # Simple guidance based on context
+            user_emotion = context.get("emotional_state", "neutral")
+            
+            guidance_map = {
+                "sadness": "As Sage Vasishtha teaches, suffering is the gateway to compassion - honor your feelings while remembering your eternal nature.",
+                "anger": "Channel this energy like Sage Jamadagni - with purpose and controlled power, transforming anger into righteous action.",
+                "fear": "Trust in the cosmic order as Sage Atri reminds us - you are protected by the divine consciousness that flows through all.",
+                "joy": "Celebrate this blessing while remaining detached, as Sage Bharadwaja teaches - joy shared is joy multiplied.",
+                "confusion": "In uncertainty, return to your breath and inner knowing, as Sage Gautama guides - clarity comes through stillness.",
+                "neutral": "Stay present and aware, as all the Rishis teach - each moment contains infinite wisdom."
+            }
+            
+            return guidance_map.get(user_emotion, guidance_map["neutral"])
+            
+        except Exception as e:
+            self.logger.error(f"Error getting Rishi guidance: {e}")
+            return None
+    
+    def _enhance_response(
+        self,
+        response: str,
+        insights: List[str],
+        sanskrit_refs: List[str],
+        rishi_guidance: Optional[str],
+        mode: DharmicProcessingMode
+    ) -> str:
+        """Enhance response with dharmic elements"""
+        
+        try:
+            enhanced = response
+            
+            # Add spiritual insights if mode allows
+            if insights and mode != DharmicProcessingMode.ACADEMIC:
+                enhanced += "\n\n🌟 Spiritual Insight: " + insights[0]
+            
+            # Add Sanskrit reference if available
+            if sanskrit_refs and mode in [DharmicProcessingMode.BALANCED, DharmicProcessingMode.STRICT]:
+                enhanced += "\n\n📿 " + sanskrit_refs[0]
+            
+            # Add Rishi guidance if available
+            if rishi_guidance and mode in [DharmicProcessingMode.BALANCED, DharmicProcessingMode.STRICT]:
+                enhanced += "\n\n🧘 " + rishi_guidance
+            
+            return enhanced
+            
+        except Exception as e:
+            self.logger.error(f"Error enhancing response: {e}")
+            return response
 
-# Singleton instance
-_dharmic_processor = None
+# Global processor instance
+_dharmic_processor: Optional[DharmicLLMProcessor] = None
 
-async def get_dharmic_llm_processor() -> DharmicLLMProcessor:
-    """Get singleton dharmic LLM processor"""
+def get_dharmic_llm_processor() -> DharmicLLMProcessor:
+    """Get global dharmic LLM processor instance"""
     global _dharmic_processor
     if _dharmic_processor is None:
         _dharmic_processor = DharmicLLMProcessor()
-        await _dharmic_processor.initialize()
     return _dharmic_processor
+
+def create_dharmic_llm_processor() -> DharmicLLMProcessor:
+    """Create new dharmic LLM processor instance"""
+    return DharmicLLMProcessor()
+
+# Export commonly used classes and functions
+__all__ = [
+    'DharmicLLMProcessor',
+    'DharmicResponse',
+    'DharmicProcessingMode',
+    'get_dharmic_llm_processor',
+    'create_dharmic_llm_processor'
+]

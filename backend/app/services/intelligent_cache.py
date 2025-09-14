@@ -1,616 +1,444 @@
 """
-⚡ Intelligent API Response Caching System
+🧠 Intelligent Cache System
+===========================
 
-Advanced caching with compression, invalidation strategies, and performance optimization
-for high-throughput API responses.
+Advanced caching system with AI-powered cache optimization, predictive caching,
+and intelligent eviction policies.
 """
 
-import asyncio
-import time
-import gzip
-import pickle
-import hashlib
-import json
 import logging
-from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Any, Union, Callable
-from dataclasses import dataclass, asdict
+import asyncio
+from typing import Dict, Any, Optional, List, Tuple
 from enum import Enum
-import redis
-from pydantic import BaseModel
-from fastapi import Request, Response
-from fastapi.responses import JSONResponse
-import zlib
+from datetime import datetime, timedelta
+import json
+import hashlib
+import pickle
+from collections import defaultdict
+import warnings
+
+try:
+    from fastapi import Request, Response
+    from starlette.middleware.base import BaseHTTPMiddleware
+except ImportError as e:
+    warnings.warn(f"FastAPI not available for middleware: {e}")
+    BaseHTTPMiddleware = object
 
 logger = logging.getLogger(__name__)
 
-class CacheStrategy(str, Enum):
-    """Cache strategy types"""
+class CachePolicy(str, Enum):
+    """Cache eviction policies"""
     LRU = "lru"  # Least Recently Used
-    LFU = "lfu"  # Least Frequently Used  
+    LFU = "lfu"  # Least Frequently Used
     TTL = "ttl"  # Time To Live
-    ADAPTIVE = "adaptive"  # Adaptive based on usage patterns
+    INTELLIGENT = "intelligent"  # AI-powered eviction
 
-class CompressionType(str, Enum):
-    """Compression types"""
-    NONE = "none"
-    GZIP = "gzip"
-    ZLIB = "zlib"
-    LZMA = "lzma"
+class CachePriority(str, Enum):
+    """Cache entry priorities"""
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+    CRITICAL = "critical"
 
-@dataclass
-class CacheEntry:
-    """Cache entry metadata"""
-    key: str
-    size: int
-    created_at: datetime
-    last_accessed: datetime
-    access_count: int
-    ttl: int
-    compressed: bool
-    compression_type: CompressionType
-    content_type: str
-    etag: str
-    tags: List[str] = None
-
-@dataclass
-class CacheMetrics:
-    """Cache performance metrics"""
-    total_requests: int = 0
-    cache_hits: int = 0
-    cache_misses: int = 0
-    total_size: int = 0
-    entries_count: int = 0
-    hit_rate: float = 0.0
-    average_response_time: float = 0.0
-    compression_ratio: float = 0.0
-    evictions: int = 0
-
-class CacheKeyGenerator:
-    """Intelligent cache key generation"""
+class IntelligentCacheEntry:
+    """Enhanced cache entry with intelligence metrics"""
     
-    @staticmethod
-    def generate_key(
-        endpoint: str,
-        method: str,
-        params: Dict[str, Any] = None,
-        headers: Dict[str, str] = None,
-        user_context: Dict[str, Any] = None
-    ) -> str:
-        """Generate cache key from request components"""
+    def __init__(self, key: str, value: Any, ttl_seconds: Optional[int] = None, priority: CachePriority = CachePriority.MEDIUM):
+        self.key = key
+        self.value = value
+        self.created_at = datetime.now()
+        self.expires_at = datetime.now() + timedelta(seconds=ttl_seconds) if ttl_seconds else None
+        self.priority = priority
         
-        key_components = {
-            "endpoint": endpoint,
-            "method": method,
-            "params": params or {},
-            "relevant_headers": CacheKeyGenerator._extract_relevant_headers(headers or {}),
-            "user_context": user_context or {}
+        # Intelligence metrics
+        self.access_count = 0
+        self.last_accessed = datetime.now()
+        self.access_pattern = []
+        self.compute_cost = 1.0  # Relative cost to regenerate
+        self.popularity_score = 0.0
+        
+    def access(self):
+        """Record cache access"""
+        self.access_count += 1
+        self.last_accessed = datetime.now()
+        self.access_pattern.append(datetime.now())
+        
+        # Keep only last 100 accesses for pattern analysis
+        if len(self.access_pattern) > 100:
+            self.access_pattern = self.access_pattern[-100:]
+        
+        self._update_popularity_score()
+    
+    def _update_popularity_score(self):
+        """Update popularity score based on access patterns"""
+        now = datetime.now()
+        
+        # Recent access weight (last hour gets more weight)
+        recent_accesses = sum(1 for access_time in self.access_pattern 
+                            if (now - access_time).total_seconds() < 3600)
+        
+        # Frequency component
+        frequency_score = min(self.access_count / 100.0, 1.0)
+        
+        # Recency component
+        recency_score = max(0, 1.0 - (now - self.last_accessed).total_seconds() / 3600)
+        
+        # Priority component
+        priority_weights = {
+            CachePriority.CRITICAL: 1.0,
+            CachePriority.HIGH: 0.8,
+            CachePriority.MEDIUM: 0.5,
+            CachePriority.LOW: 0.2
         }
+        priority_score = priority_weights[self.priority]
         
-        # Sort for consistency
-        key_string = json.dumps(key_components, sort_keys=True)
-        return hashlib.sha256(key_string.encode()).hexdigest()
+        self.popularity_score = (frequency_score * 0.4 + 
+                               recency_score * 0.4 + 
+                               priority_score * 0.2 +
+                               min(recent_accesses / 10.0, 0.3))
     
-    @staticmethod
-    def _extract_relevant_headers(headers: Dict[str, str]) -> Dict[str, str]:
-        """Extract only caching-relevant headers"""
-        relevant = ["accept", "accept-language", "authorization"]
-        return {k.lower(): v for k, v in headers.items() if k.lower() in relevant}
+    def is_expired(self) -> bool:
+        """Check if entry is expired"""
+        if self.expires_at is None:
+            return False
+        return datetime.now() > self.expires_at
     
-    @staticmethod
-    def generate_tag_key(tag: str) -> str:
-        """Generate tag-based key for cache invalidation"""
-        return f"tag:{hashlib.sha256(tag.encode()).hexdigest()}"
-
-class ResponseCompressor:
-    """Advanced response compression"""
-    
-    @staticmethod
-    async def compress(data: bytes, compression_type: CompressionType) -> bytes:
-        """Compress data using specified algorithm"""
-        
-        if compression_type == CompressionType.NONE:
-            return data
-        elif compression_type == CompressionType.GZIP:
-            return gzip.compress(data)
-        elif compression_type == CompressionType.ZLIB:
-            return zlib.compress(data)
-        elif compression_type == CompressionType.LZMA:
-            import lzma
-            return lzma.compress(data)
+    def should_evict(self, policy: CachePolicy) -> float:
+        """Calculate eviction score (higher = more likely to evict)"""
+        if policy == CachePolicy.LRU:
+            return (datetime.now() - self.last_accessed).total_seconds()
+        elif policy == CachePolicy.LFU:
+            return 1.0 / max(self.access_count, 1)
+        elif policy == CachePolicy.TTL:
+            if self.expires_at:
+                return max(0, (datetime.now() - self.expires_at).total_seconds())
+            return 0
+        elif policy == CachePolicy.INTELLIGENT:
+            return 1.0 - self.popularity_score
         else:
-            raise ValueError(f"Unsupported compression type: {compression_type}")
-    
-    @staticmethod
-    async def decompress(data: bytes, compression_type: CompressionType) -> bytes:
-        """Decompress data using specified algorithm"""
-        
-        if compression_type == CompressionType.NONE:
-            return data
-        elif compression_type == CompressionType.GZIP:
-            return gzip.decompress(data)
-        elif compression_type == CompressionType.ZLIB:
-            return zlib.decompress(data)
-        elif compression_type == CompressionType.LZMA:
-            import lzma
-            return lzma.decompress(data)
-        else:
-            raise ValueError(f"Unsupported compression type: {compression_type}")
-    
-    @staticmethod
-    def choose_compression(data_size: int, content_type: str) -> CompressionType:
-        """Choose optimal compression based on data characteristics"""
-        
-        # Don't compress small data or binary content
-        if data_size < 1024:  # Less than 1KB
-            return CompressionType.NONE
-        
-        # JSON and text compress well with gzip
-        if any(ct in content_type.lower() for ct in ["json", "text", "xml", "html"]):
-            if data_size > 10240:  # Greater than 10KB
-                return CompressionType.GZIP
-            else:
-                return CompressionType.ZLIB
-        
-        # Default to no compression for unknown types
-        return CompressionType.NONE
-
-class CacheInvalidator:
-    """Cache invalidation strategies"""
-    
-    def __init__(self, redis_client: redis.Redis):
-        self.redis = redis_client
-        self.tag_prefix = "cache_tag:"
-        self.entry_prefix = "cache_entry:"
-    
-    async def invalidate_by_tag(self, tag: str):
-        """Invalidate all cache entries with specific tag"""
-        
-        tag_key = f"{self.tag_prefix}{tag}"
-        
-        # Get all entries with this tag
-        entry_keys = self.redis.smembers(tag_key)
-        
-        if entry_keys:
-            # Delete all entries
-            pipeline = self.redis.pipeline()
-            for entry_key in entry_keys:
-                pipeline.delete(f"{self.entry_prefix}{entry_key}")
-                
-            # Remove tag set
-            pipeline.delete(tag_key)
-            pipeline.execute()
-            
-            logger.info(f"Invalidated {len(entry_keys)} cache entries with tag: {tag}")
-    
-    async def invalidate_by_pattern(self, pattern: str):
-        """Invalidate cache entries matching pattern"""
-        
-        matching_keys = []
-        for key in self.redis.scan_iter(match=f"{self.entry_prefix}{pattern}"):
-            matching_keys.append(key)
-        
-        if matching_keys:
-            self.redis.delete(*matching_keys)
-            logger.info(f"Invalidated {len(matching_keys)} cache entries matching pattern: {pattern}")
-    
-    async def invalidate_expired(self):
-        """Remove expired cache entries"""
-        
-        current_time = datetime.utcnow()
-        expired_keys = []
-        
-        # Scan all cache entries
-        for key in self.redis.scan_iter(match=f"{self.entry_prefix}*"):
-            try:
-                entry_data = self.redis.get(key)
-                if entry_data:
-                    entry = pickle.loads(entry_data)
-                    if isinstance(entry, dict) and "expires_at" in entry:
-                        expires_at = datetime.fromisoformat(entry["expires_at"])
-                        if expires_at < current_time:
-                            expired_keys.append(key)
-            except:
-                # Invalid entry, mark for deletion
-                expired_keys.append(key)
-        
-        if expired_keys:
-            self.redis.delete(*expired_keys)
-            logger.info(f"Removed {len(expired_keys)} expired cache entries")
+            return 0
 
 class IntelligentCache:
-    """Intelligent API response caching system"""
+    """🧠 Intelligent caching system with AI optimization"""
     
-    def __init__(
-        self,
-        redis_client: redis.Redis,
-        default_ttl: int = 3600,
-        max_size: int = 1000000000,  # 1GB
-        compression_threshold: int = 1024,
-        strategy: CacheStrategy = CacheStrategy.ADAPTIVE
-    ):
-        self.redis = redis_client
-        self.default_ttl = default_ttl
+    def __init__(self, redis_client=None, max_size: int = 10000):
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.redis_client = redis_client
         self.max_size = max_size
-        self.compression_threshold = compression_threshold
-        self.strategy = strategy
         
-        self.cache_prefix = "api_cache:"
-        self.meta_prefix = "cache_meta:"
-        self.metrics_key = "cache_metrics"
+        # Cache storage
+        self.cache: Dict[str, IntelligentCacheEntry] = {}
+        self.access_patterns: Dict[str, List[datetime]] = defaultdict(list)
         
-        self.compressor = ResponseCompressor()
-        self.invalidator = CacheInvalidator(redis_client)
-        self.key_generator = CacheKeyGenerator()
+        # Configuration
+        self.policy = CachePolicy.INTELLIGENT
+        self.hit_threshold = 0.8  # Target hit rate
         
-        # Performance tracking
-        self.metrics = CacheMetrics()
+        # Statistics
+        self.stats = {
+            "hits": 0,
+            "misses": 0,
+            "evictions": 0,
+            "predictions_made": 0,
+            "predictions_correct": 0
+        }
         
-    async def get(
-        self,
-        key: str,
-        request_context: Dict[str, Any] = None
-    ) -> Optional[Dict[str, Any]]:
-        """Get cached response"""
+        self.logger.info("🧠 Intelligent cache system initialized")
+    
+    async def get(self, key: str) -> Optional[Any]:
+        """Get value from cache with intelligence tracking"""
         
-        start_time = time.time()
-        self.metrics.total_requests += 1
-        
-        try:
-            cache_key = f"{self.cache_prefix}{key}"
+        if key in self.cache:
+            entry = self.cache[key]
             
-            # Get cache entry
-            cached_data = self.redis.get(cache_key)
-            if not cached_data:
-                self.metrics.cache_misses += 1
+            if entry.is_expired():
+                del self.cache[key]
+                self.stats["misses"] += 1
                 return None
             
-            # Deserialize entry
-            entry = pickle.loads(cached_data)
+            entry.access()
+            self.stats["hits"] += 1
             
-            # Check expiration
-            if entry.get("expires_at"):
-                expires_at = datetime.fromisoformat(entry["expires_at"])
-                if expires_at < datetime.utcnow():
-                    await self._delete_entry(cache_key, key)
-                    self.metrics.cache_misses += 1
-                    return None
+            # Predictive caching based on access patterns
+            await self._trigger_predictive_caching(key)
             
-            # Update access metrics
-            await self._update_access_metrics(key, entry)
-            
-            # Decompress if needed
-            response_data = entry["data"]
-            if entry.get("compressed", False):
-                compression_type = CompressionType(entry.get("compression_type", "none"))
-                response_data = await self.compressor.decompress(response_data, compression_type)
-            
-            # Deserialize response
-            if entry.get("content_type", "").startswith("application/json"):
-                response = json.loads(response_data.decode())
-            else:
-                response = response_data
-            
-            self.metrics.cache_hits += 1
-            self.metrics.average_response_time = (
-                (self.metrics.average_response_time * (self.metrics.total_requests - 1) + 
-                 (time.time() - start_time)) / self.metrics.total_requests
-            )
-            
-            logger.debug(f"Cache hit for key: {key[:16]}...")
-            return {
-                "data": response,
-                "metadata": {
-                    "cached": True,
-                    "cache_key": key,
-                    "created_at": entry.get("created_at"),
-                    "etag": entry.get("etag")
-                }
-            }
-            
-        except Exception as e:
-            logger.error(f"Cache get error for key {key}: {e}")
-            self.metrics.cache_misses += 1
+            return entry.value
+        else:
+            self.stats["misses"] += 1
             return None
     
     async def set(
-        self,
-        key: str,
-        data: Any,
-        ttl: int = None,
-        tags: List[str] = None,
-        content_type: str = "application/json",
-        compression: CompressionType = None
-    ):
-        """Cache response data"""
+        self, 
+        key: str, 
+        value: Any, 
+        ttl_seconds: Optional[int] = None,
+        priority: CachePriority = CachePriority.MEDIUM,
+        compute_cost: float = 1.0
+    ) -> bool:
+        """Set value in cache with intelligent management"""
         
         try:
-            # Serialize data
-            if content_type.startswith("application/json"):
-                serialized_data = json.dumps(data, default=str).encode()
-            else:
-                serialized_data = data if isinstance(data, bytes) else str(data).encode()
-            
-            # Choose compression
-            if compression is None:
-                compression = self.compressor.choose_compression(
-                    len(serialized_data), content_type
-                )
-            
-            # Compress if needed
-            compressed_data = serialized_data
-            if compression != CompressionType.NONE:
-                compressed_data = await self.compressor.compress(serialized_data, compression)
+            # Check if we need to evict entries
+            if len(self.cache) >= self.max_size:
+                await self._intelligent_eviction()
             
             # Create cache entry
-            cache_ttl = ttl or self.default_ttl
-            expires_at = datetime.utcnow() + timedelta(seconds=cache_ttl)
+            entry = IntelligentCacheEntry(key, value, ttl_seconds, priority)
+            entry.compute_cost = compute_cost
             
-            entry = {
-                "data": compressed_data,
-                "created_at": datetime.utcnow().isoformat(),
-                "expires_at": expires_at.isoformat(),
-                "content_type": content_type,
-                "compressed": compression != CompressionType.NONE,
-                "compression_type": compression.value,
-                "original_size": len(serialized_data),
-                "compressed_size": len(compressed_data),
-                "access_count": 0,
-                "last_accessed": datetime.utcnow().isoformat(),
-                "tags": tags or [],
-                "etag": hashlib.md5(serialized_data).hexdigest()
-            }
+            self.cache[key] = entry
             
-            # Store in Redis
-            cache_key = f"{self.cache_prefix}{key}"
-            self.redis.setex(cache_key, cache_ttl, pickle.dumps(entry))
+            # Update access patterns
+            self.access_patterns[key].append(datetime.now())
+            if len(self.access_patterns[key]) > 1000:
+                self.access_patterns[key] = self.access_patterns[key][-1000:]
             
-            # Update tag associations
-            if tags:
-                for tag in tags:
-                    tag_key = f"cache_tag:{tag}"
-                    self.redis.sadd(tag_key, key)
-                    self.redis.expire(tag_key, cache_ttl)
-            
-            # Update metrics
-            self.metrics.entries_count += 1
-            self.metrics.total_size += len(compressed_data)
-            
-            if len(serialized_data) > 0:
-                compression_ratio = len(compressed_data) / len(serialized_data)
-                self.metrics.compression_ratio = (
-                    (self.metrics.compression_ratio * (self.metrics.entries_count - 1) + 
-                     compression_ratio) / self.metrics.entries_count
-                )
-            
-            # Check size limits
-            await self._enforce_size_limits()
-            
-            logger.debug(f"Cached response for key: {key[:16]}... (compression: {compression.value})")
+            return True
             
         except Exception as e:
-            logger.error(f"Cache set error for key {key}: {e}")
+            self.logger.error(f"Cache set error: {e}")
+            return False
     
-    async def delete(self, key: str):
-        """Delete cached entry"""
-        
-        cache_key = f"{self.cache_prefix}{key}"
-        
-        # Get entry for metrics update
-        cached_data = self.redis.get(cache_key)
-        if cached_data:
-            try:
-                entry = pickle.loads(cached_data)
-                self.metrics.total_size -= entry.get("compressed_size", 0)
-                self.metrics.entries_count -= 1
-            except:
-                pass
-        
-        await self._delete_entry(cache_key, key)
-    
-    async def _delete_entry(self, cache_key: str, original_key: str):
-        """Internal method to delete cache entry"""
-        
-        # Delete from Redis
-        self.redis.delete(cache_key)
-        
-        # Remove from tag associations
-        for tag_key in self.redis.scan_iter(match="cache_tag:*"):
-            self.redis.srem(tag_key, original_key)
-    
-    async def _update_access_metrics(self, key: str, entry: Dict[str, Any]):
-        """Update access metrics for cache entry"""
-        
+    async def delete(self, key: str) -> bool:
+        """Delete value from cache"""
         try:
-            entry["access_count"] = entry.get("access_count", 0) + 1
-            entry["last_accessed"] = datetime.utcnow().isoformat()
-            
-            cache_key = f"{self.cache_prefix}{key}"
-            
-            # Get current TTL and preserve it
-            ttl = self.redis.ttl(cache_key)
-            if ttl > 0:
-                self.redis.setex(cache_key, ttl, pickle.dumps(entry))
-            
+            if key in self.cache:
+                del self.cache[key]
+                if key in self.access_patterns:
+                    del self.access_patterns[key]
+                return True
+            return False
         except Exception as e:
-            logger.error(f"Error updating access metrics: {e}")
+            self.logger.error(f"Cache delete error: {e}")
+            return False
     
-    async def _enforce_size_limits(self):
-        """Enforce cache size limits using eviction strategy"""
+    async def _intelligent_eviction(self):
+        """Intelligent cache eviction based on multiple factors"""
         
-        if self.metrics.total_size <= self.max_size:
+        if not self.cache:
             return
         
-        # Get all cache entries for eviction analysis
-        entries_for_eviction = []
+        # Calculate eviction scores for all entries
+        eviction_candidates = []
         
-        for key in self.redis.scan_iter(match=f"{self.cache_prefix}*"):
-            try:
-                entry_data = self.redis.get(key)
-                if entry_data:
-                    entry = pickle.loads(entry_data)
-                    original_key = key.decode().replace(self.cache_prefix, "")
-                    
-                    entries_for_eviction.append({
-                        "key": original_key,
-                        "cache_key": key,
-                        "size": entry.get("compressed_size", 0),
-                        "last_accessed": datetime.fromisoformat(entry.get("last_accessed")),
-                        "access_count": entry.get("access_count", 0),
-                        "created_at": datetime.fromisoformat(entry.get("created_at"))
-                    })
-            except:
-                continue
-        
-        # Sort by eviction strategy
-        if self.strategy == CacheStrategy.LRU:
-            entries_for_eviction.sort(key=lambda x: x["last_accessed"])
-        elif self.strategy == CacheStrategy.LFU:
-            entries_for_eviction.sort(key=lambda x: x["access_count"])
-        elif self.strategy == CacheStrategy.TTL:
-            entries_for_eviction.sort(key=lambda x: x["created_at"])
-        else:  # ADAPTIVE
-            # Combine multiple factors
-            for entry in entries_for_eviction:
-                age_score = (datetime.utcnow() - entry["created_at"]).total_seconds()
-                access_score = 1.0 / (entry["access_count"] + 1)
-                recency_score = (datetime.utcnow() - entry["last_accessed"]).total_seconds()
-                
-                entry["eviction_score"] = age_score * 0.3 + access_score * 0.4 + recency_score * 0.3
+        for key, entry in self.cache.items():
+            eviction_score = entry.should_evict(self.policy)
             
-            entries_for_eviction.sort(key=lambda x: x["eviction_score"], reverse=True)
-        
-        # Evict entries until under size limit
-        target_size = self.max_size * 0.8  # Evict to 80% capacity
-        current_size = self.metrics.total_size
-        
-        for entry in entries_for_eviction:
-            if current_size <= target_size:
-                break
+            # Adjust score based on compute cost (harder to recreate = lower eviction score)
+            adjusted_score = eviction_score / max(entry.compute_cost, 0.1)
             
-            await self._delete_entry(entry["cache_key"], entry["key"])
-            current_size -= entry["size"]
-            self.metrics.evictions += 1
+            eviction_candidates.append((key, adjusted_score))
         
-        logger.info(f"Evicted {self.metrics.evictions} cache entries to enforce size limits")
+        # Sort by eviction score (highest first)
+        eviction_candidates.sort(key=lambda x: x[1], reverse=True)
+        
+        # Evict 10% of cache or at least 1 entry
+        evict_count = max(1, int(len(self.cache) * 0.1))
+        
+        for i in range(min(evict_count, len(eviction_candidates))):
+            key_to_evict = eviction_candidates[i][0]
+            del self.cache[key_to_evict]
+            if key_to_evict in self.access_patterns:
+                del self.access_patterns[key_to_evict]
+            
+            self.stats["evictions"] += 1
+        
+        self.logger.debug(f"Evicted {evict_count} cache entries using intelligent policy")
     
-    async def get_cache_stats(self) -> Dict[str, Any]:
+    async def _trigger_predictive_caching(self, accessed_key: str):
+        """Trigger predictive caching based on access patterns"""
+        
+        # Simple pattern: if someone accesses A, they often access B next
+        # In a real implementation, this would use ML models
+        
+        patterns = self.access_patterns.get(accessed_key, [])
+        if len(patterns) < 5:
+            return
+        
+        # Example predictive logic (simplified)
+        predicted_keys = await self._predict_next_access(accessed_key)
+        
+        for predicted_key in predicted_keys:
+            if predicted_key not in self.cache:
+                # In real implementation, this would trigger background cache warming
+                self.stats["predictions_made"] += 1
+                self.logger.debug(f"Predicted next access: {predicted_key}")
+    
+    async def _predict_next_access(self, current_key: str) -> List[str]:
+        """Predict next likely cache accesses (simplified implementation)"""
+        
+        # This is a simplified implementation
+        # Real implementation would use ML models trained on access patterns
+        
+        predicted = []
+        
+        # Pattern-based prediction
+        if "user:" in current_key:
+            user_id = current_key.split(":")[1]
+            predicted.extend([
+                f"user:{user_id}:preferences",
+                f"user:{user_id}:spiritual_profile",
+                f"user:{user_id}:recent_sessions"
+            ])
+        elif "rishi:" in current_key:
+            predicted.extend([
+                "spiritual:wisdom:daily",
+                "meditation:guidance",
+                "emotional:healing"
+            ])
+        
+        return predicted[:3]  # Limit predictions
+    
+    async def warm_cache(self, keys_and_values: List[Tuple[str, Any]]):
+        """Warm cache with predicted entries"""
+        
+        for key, value in keys_and_values:
+            await self.set(key, value, priority=CachePriority.LOW)
+        
+        self.logger.info(f"Cache warmed with {len(keys_and_values)} entries")
+    
+    def get_cache_stats(self) -> Dict[str, Any]:
         """Get comprehensive cache statistics"""
         
-        # Update hit rate
-        if self.metrics.total_requests > 0:
-            self.metrics.hit_rate = self.metrics.cache_hits / self.metrics.total_requests
+        total_requests = self.stats["hits"] + self.stats["misses"]
+        hit_rate = (self.stats["hits"] / total_requests * 100) if total_requests > 0 else 0
+        
+        prediction_accuracy = 0
+        if self.stats["predictions_made"] > 0:
+            prediction_accuracy = (self.stats["predictions_correct"] / 
+                                 self.stats["predictions_made"] * 100)
+        
+        # Cache distribution by priority
+        priority_distribution = defaultdict(int)
+        for entry in self.cache.values():
+            priority_distribution[entry.priority.value] += 1
         
         return {
-            "metrics": asdict(self.metrics),
-            "configuration": {
-                "default_ttl": self.default_ttl,
-                "max_size": self.max_size,
-                "compression_threshold": self.compression_threshold,
-                "strategy": self.strategy.value
-            },
-            "redis_info": {
-                "memory_usage": self.redis.memory_usage(self.cache_prefix + "*") if hasattr(self.redis, 'memory_usage') else 0,
-                "key_count": len(list(self.redis.scan_iter(match=f"{self.cache_prefix}*")))
-            }
+            "total_entries": len(self.cache),
+            "max_size": self.max_size,
+            "hit_rate_percent": round(hit_rate, 2),
+            "total_requests": total_requests,
+            "evictions": self.stats["evictions"],
+            "predictions_made": self.stats["predictions_made"],
+            "prediction_accuracy_percent": round(prediction_accuracy, 2),
+            "priority_distribution": dict(priority_distribution),
+            **self.stats
         }
     
-    async def clear_all(self):
-        """Clear all cached entries"""
+    async def optimize_performance(self):
+        """Optimize cache performance based on metrics"""
         
-        keys_to_delete = list(self.redis.scan_iter(match=f"{self.cache_prefix}*"))
-        if keys_to_delete:
-            self.redis.delete(*keys_to_delete)
+        hit_rate = self.get_cache_stats()["hit_rate_percent"]
         
-        # Clear tag associations
-        tag_keys = list(self.redis.scan_iter(match="cache_tag:*"))
-        if tag_keys:
-            self.redis.delete(*tag_keys)
+        if hit_rate < self.hit_threshold * 100:
+            # Increase cache size if hit rate is low
+            if self.max_size < 50000:
+                self.max_size = int(self.max_size * 1.2)
+                self.logger.info(f"Increased cache size to {self.max_size}")
         
-        # Reset metrics
-        self.metrics = CacheMetrics()
+        # Clean expired entries
+        expired_keys = [key for key, entry in self.cache.items() if entry.is_expired()]
+        for key in expired_keys:
+            await self.delete(key)
         
-        logger.info("All cache entries cleared")
+        if expired_keys:
+            self.logger.info(f"Cleaned {len(expired_keys)} expired cache entries")
 
-# Cache middleware for FastAPI
-class CacheMiddleware:
-    """FastAPI middleware for automatic response caching"""
+class CacheMiddleware(BaseHTTPMiddleware):
+    """HTTP cache middleware for automatic response caching"""
     
-    def __init__(self, cache: IntelligentCache):
+    def __init__(self, app, cache: IntelligentCache):
+        super().__init__(app)
         self.cache = cache
-        self.cacheable_methods = {"GET", "HEAD"}
-        self.cacheable_status_codes = {200, 201, 202, 203, 204, 300, 301, 302, 303, 304, 307, 308}
+        self.cacheable_methods = {"GET"}
+        self.cacheable_paths = {"/api/v1/spiritual", "/api/v1/rishi", "/api/v1/knowledge"}
     
-    async def __call__(self, request: Request, call_next):
-        """Process request through cache middleware"""
-        
+    async def dispatch(self, request: Request, call_next):
         # Skip caching for non-cacheable methods
         if request.method not in self.cacheable_methods:
             return await call_next(request)
         
+        # Skip caching for non-cacheable paths
+        if not any(request.url.path.startswith(path) for path in self.cacheable_paths):
+            return await call_next(request)
+        
         # Generate cache key
-        cache_key = self.cache.key_generator.generate_key(
-            endpoint=str(request.url.path),
-            method=request.method,
-            params=dict(request.query_params),
-            headers=dict(request.headers)
-        )
+        cache_key = self._generate_cache_key(request)
         
         # Try to get from cache
         cached_response = await self.cache.get(cache_key)
         if cached_response:
-            return JSONResponse(
-                content=cached_response["data"],
-                headers={
-                    "X-Cache": "HIT",
-                    "X-Cache-Key": cache_key[:16],
-                    "ETag": cached_response["metadata"]["etag"]
-                }
+            return Response(
+                content=cached_response["content"],
+                status_code=cached_response["status_code"],
+                headers=cached_response["headers"]
             )
         
         # Process request
         response = await call_next(request)
         
-        # Cache response if cacheable
-        if (response.status_code in self.cacheable_status_codes and
-            hasattr(response, 'body')):
+        # Cache successful responses
+        if response.status_code == 200:
+            response_body = b""
+            async for chunk in response.body_iterator:
+                response_body += chunk
             
-            try:
-                # Extract response data
-                response_body = response.body
-                content_type = response.headers.get("content-type", "application/json")
-                
-                # Cache the response
-                await self.cache.set(
-                    key=cache_key,
-                    data=response_body,
-                    content_type=content_type,
-                    tags=[f"endpoint:{request.url.path}", f"method:{request.method}"]
-                )
-                
-                # Add cache headers
-                response.headers["X-Cache"] = "MISS"
-                response.headers["X-Cache-Key"] = cache_key[:16]
-                
-            except Exception as e:
-                logger.error(f"Error caching response: {e}")
+            cached_data = {
+                "content": response_body,
+                "status_code": response.status_code,
+                "headers": dict(response.headers)
+            }
+            
+            await self.cache.set(
+                cache_key, 
+                cached_data, 
+                ttl_seconds=300,  # 5 minutes
+                priority=CachePriority.MEDIUM
+            )
+            
+            return Response(
+                content=response_body,
+                status_code=response.status_code,
+                headers=response.headers
+            )
         
         return response
+    
+    def _generate_cache_key(self, request: Request) -> str:
+        """Generate cache key for request"""
+        key_parts = [
+            request.method,
+            str(request.url),
+            str(sorted(request.query_params.items()))
+        ]
+        
+        key_string = "|".join(key_parts)
+        return f"http_cache:{hashlib.md5(key_string.encode()).hexdigest()}"
 
 # Global cache instance
-intelligent_cache: Optional[IntelligentCache] = None
+_intelligent_cache: Optional[IntelligentCache] = None
+
+def init_intelligent_cache(redis_client=None, max_size: int = 10000) -> IntelligentCache:
+    """Initialize intelligent cache"""
+    global _intelligent_cache
+    if _intelligent_cache is None:
+        _intelligent_cache = IntelligentCache(redis_client, max_size)
+    return _intelligent_cache
 
 def get_intelligent_cache() -> IntelligentCache:
-    """Get the global intelligent cache instance"""
-    if intelligent_cache is None:
-        raise RuntimeError("Intelligent cache not initialized")
-    return intelligent_cache
+    """Get intelligent cache instance"""
+    global _intelligent_cache
+    if _intelligent_cache is None:
+        _intelligent_cache = IntelligentCache()
+    return _intelligent_cache
 
-def init_intelligent_cache(
-    redis_client: redis.Redis,
-    **kwargs
-) -> IntelligentCache:
-    """Initialize the global intelligent cache"""
-    global intelligent_cache
-    intelligent_cache = IntelligentCache(redis_client, **kwargs)
-    return intelligent_cache
+# Export commonly used classes and functions
+__all__ = [
+    'IntelligentCache',
+    'IntelligentCacheEntry',
+    'CachePolicy',
+    'CachePriority',
+    'CacheMiddleware',
+    'init_intelligent_cache',
+    'get_intelligent_cache'
+]

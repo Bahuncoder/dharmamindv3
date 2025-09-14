@@ -1,0 +1,320 @@
+# 🐳 DharmaMind Complete Docker Compose Stack
+# Production-ready deployment with all services
+
+version: '3.8'
+
+services:
+  # ================================
+  # 🗄️ DATABASE SERVICES
+  # ================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: dharmamind_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: dharmamind
+      POSTGRES_USER: dharmamind
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-dharmamind_secure_pass}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - dharmamind_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dharmamind"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: dharmamind_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_secure_pass}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - dharmamind_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ================================
+  # 🐍 BACKEND SERVICES
+  # ================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-}
+        VCS_REF: ${VCS_REF:-}
+        VERSION: ${VERSION:-latest}
+    container_name: dharmamind_backend
+    restart: unless-stopped
+    environment:
+      # Database
+      DATABASE_URL: postgresql://dharmamind:${DATABASE_PASSWORD:-dharmamind_secure_pass}@postgres:5432/dharmamind
+      REDIS_URL: redis://:${REDIS_PASSWORD:-redis_secure_pass}@redis:6379/0
+      
+      # Application
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      DEBUG: "false"
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      SECRET_KEY: ${SECRET_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      
+      # API Keys
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      
+      # Security
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,https://dharmamind.ai}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,dharmamind.ai,api.dharmamind.ai}
+      
+      # Monitoring
+      ENABLE_METRICS: "true"
+      ENABLE_TRACING: "true"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dharmamind_network
+    volumes:
+      - ./backend/logs:/app/logs
+      - ./backend/uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ================================
+  # 🌐 FRONTEND SERVICES
+  # ================================
+  brand_website:
+    build:
+      context: ./Brand_Webpage
+      dockerfile: Dockerfile
+    container_name: dharmamind_brand_website
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
+      NEXT_PUBLIC_ENVIRONMENT: ${ENVIRONMENT:-production}
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - dharmamind_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  community:
+    build:
+      context: ./DhramaMind_Community
+      dockerfile: Dockerfile
+    container_name: dharmamind_community
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
+      NEXT_PUBLIC_ENVIRONMENT: ${ENVIRONMENT:-production}
+      NODE_ENV: production
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    networks:
+      - dharmamind_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ================================
+  # 🤖 AI SERVICES
+  # ================================
+  dharmallm:
+    build:
+      context: ./dharmallm
+      dockerfile: Dockerfile
+    container_name: dharmamind_llm
+    restart: unless-stopped
+    environment:
+      MODEL_PATH: /app/models
+      DEVICE: ${LLM_DEVICE:-cpu}
+      MAX_TOKENS: ${LLM_MAX_TOKENS:-2048}
+    volumes:
+      - ./dharmallm/models:/app/models
+      - llm_cache:/app/cache
+    ports:
+      - "8001:8000"
+    networks:
+      - dharmamind_network
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+
+  # ================================
+  # 📊 MONITORING SERVICES
+  # ================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: dharmamind_prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alert_rules.yml:/etc/prometheus/alert_rules.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - dharmamind_network
+    depends_on:
+      - backend
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: dharmamind_grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_INSTALL_PLUGINS: "grafana-piechart-panel,grafana-worldmap-panel"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    ports:
+      - "3100:3000"
+    networks:
+      - dharmamind_network
+    depends_on:
+      - prometheus
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: dharmamind_alertmanager
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+      - '--web.external-url=http://localhost:9093'
+    volumes:
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/config.yml:ro
+      - alertmanager_data:/alertmanager
+    ports:
+      - "9093:9093"
+    networks:
+      - dharmamind_network
+
+  # ================================
+  # 🔍 OBSERVABILITY SERVICES
+  # ================================
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: dharmamind_jaeger
+    restart: unless-stopped
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14268:14268"  # HTTP collector
+      - "14250:14250"  # gRPC collector
+    networks:
+      - dharmamind_network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
+    container_name: dharmamind_elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - dharmamind_network
+
+  # ================================
+  # 🔄 REVERSE PROXY
+  # ================================
+  nginx:
+    image: nginx:alpine
+    container_name: dharmamind_nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+      - brand_website
+      - community
+    networks:
+      - dharmamind_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# ================================
+# 📦 VOLUMES
+# ================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  alertmanager_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  llm_cache:
+    driver: local
+
+# ================================
+# 🌐 NETWORKS
+# ================================
+networks:
+  dharmamind_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

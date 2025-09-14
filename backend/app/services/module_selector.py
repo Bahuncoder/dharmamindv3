@@ -1,439 +1,259 @@
 """
-Module Selector Service
+🕉️ Module Selector Service
+===========================
 
-Selects the best-fit Dharma modules for a given query.
-Analyzes user input and conversation context to determine which
-spiritual/philosophical modules should be engaged.
+Intelligent module selection service that chooses the most appropriate 
+processing module based on user input, context, and system state.
 
-Modules are defined in YAML files with expertise areas and capabilities.
+Features:
+- Context-aware module selection
+- Multi-modal processing support
+- Dynamic priority adjustment
+- Performance-based routing
+- Dharmic content validation
 """
 
-import asyncio
 import logging
-import os
-import yaml
-from typing import List, Optional, Dict, Any
-from pathlib import Path
-
-from ..models.chat import ChatMessage, ModuleInfo
-from ..config import settings
+from typing import Dict, List, Optional, Any, Tuple
+from datetime import datetime
+from enum import Enum
 
 logger = logging.getLogger(__name__)
 
+class ModuleType(Enum):
+    """Available processing modules"""
+    EMOTIONAL_INTELLIGENCE = "emotional_intelligence"
+    SPIRITUAL_GUIDANCE = "spiritual_guidance"
+    KNOWLEDGE_BASE = "knowledge_base"
+    MEDITATION_GUIDE = "meditation_guide"
+    DHARMIC_VALIDATION = "dharmic_validation"
+    GENERAL_CHAT = "general_chat"
+
 class ModuleSelector:
-    """Service for selecting appropriate Dharma modules"""
+    """🎯 Intelligent module selection service"""
     
     def __init__(self):
-        self.modules: Dict[str, ModuleInfo] = {}
-        self.module_embeddings: Dict[str, Any] = {}
-        self.expertise_map: Dict[str, List[str]] = {}
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.module_priorities = {}
+        self.performance_metrics = {}
+        self.selection_history = []
         
     async def initialize(self):
-        """Initialize module selector with available modules"""
-        logger.info("Initializing Module Selector...")
-        
+        """Initialize the module selector"""
         try:
-            await self._load_modules()
-            await self._build_expertise_map()
-            logger.info(f"Module Selector initialized with {len(self.modules)} modules")
+            self.logger.info("🌟 Initializing Module Selector...")
             
-        except Exception as e:
-            logger.error(f"Failed to initialize Module Selector: {e}")
-            raise
-    
-    async def _load_modules(self):
-        """Load module definitions from YAML files"""
-        module_path = Path(settings.MODULE_CONFIG_PATH)
-        
-        if not module_path.exists():
-            logger.warning(f"Module path does not exist: {module_path}")
-            await self._create_default_modules()
-            return
-            
-        # Load YAML module definitions
-        for yaml_file in module_path.glob("*.yaml"):
-            try:
-                with open(yaml_file, 'r', encoding='utf-8') as f:
-                    module_data = yaml.safe_load(f)
-                    
-                module_info = ModuleInfo(
-                    name=module_data['name'],
-                    description=module_data['description'],
-                    category=module_data.get('category', 'general'),
-                    expertise_areas=module_data.get('expertise_areas', []),
-                    confidence=1.0,
-                    yaml_path=str(yaml_file)
-                )
-                
-                self.modules[module_info.name] = module_info
-                logger.debug(f"Loaded module: {module_info.name}")
-                
-            except Exception as e:
-                logger.error(f"Error loading module from {yaml_file}: {e}")
-    
-    async def _create_default_modules(self):
-        """Create default Dharma modules if none exist"""
-        logger.info("Creating default Dharma modules...")
-        
-        default_modules = [
-            {
-                "name": "karma",
-                "description": "Understanding of karma, action, and consequence",
-                "category": "dharmic_principles",
-                "expertise_areas": ["action", "consequence", "ethics", "moral_responsibility", "past_actions", "future_outcomes"]
-            },
-            {
-                "name": "dharma",
-                "description": "Righteous living and ethical conduct",
-                "category": "dharmic_principles", 
-                "expertise_areas": ["righteousness", "duty", "ethics", "moral_conduct", "life_purpose", "social_responsibility"]
-            },
-            {
-                "name": "meditation",
-                "description": "Mindfulness, meditation, and inner peace practices",
-                "category": "spiritual_practice",
-                "expertise_areas": ["mindfulness", "meditation", "inner_peace", "concentration", "awareness", "mental_training"]
-            },
-            {
-                "name": "yoga",
-                "description": "Unity of mind, body, and spirit through yogic practices",
-                "category": "spiritual_practice",
-                "expertise_areas": ["unity", "physical_practice", "spiritual_discipline", "mind_body_connection", "pranayama", "asanas"]
-            },
-            {
-                "name": "wisdom",
-                "description": "Ancient wisdom and timeless spiritual insights",
-                "category": "knowledge",
-                "expertise_areas": ["wisdom", "spiritual_insight", "ancient_knowledge", "life_guidance", "understanding", "enlightenment"]
-            },
-            {
-                "name": "compassion",
-                "description": "Loving-kindness and compassion for all beings",
-                "category": "virtues",
-                "expertise_areas": ["compassion", "loving_kindness", "empathy", "care", "understanding", "universal_love"]
-            },
-            {
-                "name": "peace", 
-                "description": "Inner peace and harmony in daily life",
-                "category": "virtues",
-                "expertise_areas": ["peace", "harmony", "tranquility", "calm", "serenity", "balance"]
-            },
-            {
-                "name": "scripture",
-                "description": "Insights from sacred texts and scriptures",
-                "category": "knowledge",
-                "expertise_areas": ["sacred_texts", "scriptures", "vedas", "upanishads", "bhagavad_gita", "ancient_wisdom"]
+            # Set default module priorities
+            self.module_priorities = {
+                ModuleType.EMOTIONAL_INTELLIGENCE: 0.8,
+                ModuleType.SPIRITUAL_GUIDANCE: 0.9,
+                ModuleType.KNOWLEDGE_BASE: 0.7,
+                ModuleType.MEDITATION_GUIDE: 0.6,
+                ModuleType.DHARMIC_VALIDATION: 0.8,
+                ModuleType.GENERAL_CHAT: 0.5
             }
-        ]
-        
-        for module_data in default_modules:
-            module_info = ModuleInfo(
-                name=module_data['name'],
-                description=module_data['description'],
-                category=module_data['category'],
-                expertise_areas=module_data['expertise_areas'],
-                confidence=1.0
-            )
-            self.modules[module_info.name] = module_info
-    
-    async def _build_expertise_map(self):
-        """Build reverse map from expertise areas to modules"""
-        self.expertise_map = {}
-        
-        for module_name, module_info in self.modules.items():
-            for expertise in module_info.expertise_areas:
-                if expertise not in self.expertise_map:
-                    self.expertise_map[expertise] = []
-                self.expertise_map[expertise].append(module_name)
-    
-    async def select_modules(
-        self,
-        message: str,
-        context: Optional[str] = None,
-        history: Optional[List[ChatMessage]] = None,
-        max_modules: int = 3
-    ) -> List[ModuleInfo]:
-        """Select best-fit modules for a message"""
-        
-        try:
-            # Analyze message content
-            message_analysis = await self._analyze_message(message, context, history)
             
-            # Score modules based on relevance
-            module_scores = await self._score_modules(message_analysis)
+            # Initialize performance metrics
+            for module_type in ModuleType:
+                self.performance_metrics[module_type] = {
+                    "success_rate": 0.8,
+                    "avg_response_time": 1.0,
+                    "user_satisfaction": 0.7,
+                    "last_updated": datetime.now()
+                }
             
-            # Select top modules
-            selected = self._select_top_modules(module_scores, max_modules)
-            
-            logger.info(f"Selected modules for message: {[m.name for m in selected]}")
-            return selected
+            self.logger.info("✅ Module Selector initialized successfully")
             
         except Exception as e:
-            logger.error(f"Error selecting modules: {e}")
-            # Return default modules if selection fails
-            return await self._get_default_modules()
+            self.logger.error(f"❌ Failed to initialize Module Selector: {e}")
     
-    async def _analyze_message(
-        self,
-        message: str,
-        context: Optional[str] = None,
-        history: Optional[List[ChatMessage]] = None
-    ) -> Dict[str, Any]:
-        """Analyze message to understand intent and topics"""
-        
-        # Convert to lowercase for analysis
-        text = message.lower()
-        if context:
-            text += " " + context.lower()
-        
-        # Add recent history context
-        if history:
-            recent_messages = " ".join([msg.content.lower() for msg in history[-3:]])
-            text += " " + recent_messages
-        
-        # Extract keywords and themes
-        keywords = self._extract_keywords(text)
-        themes = self._identify_themes(keywords)
-        intent = self._classify_intent(text)
-        emotional_tone = self._analyze_emotional_tone(text)
-        
-        return {
-            "keywords": keywords,
-            "themes": themes,
-            "intent": intent,
-            "emotional_tone": emotional_tone,
-            "message_length": len(message),
-            "has_question": "?" in message
-        }
+    async def select_module(self, message: str, context: Dict[str, Any] = None) -> Tuple[ModuleType, float]:
+        """Select the most appropriate module for processing"""
+        try:
+            context = context or {}
+            
+            # Analyze message content
+            content_scores = self._analyze_content(message)
+            
+            # Consider context factors
+            context_scores = self._analyze_context(context)
+            
+            # Apply performance metrics
+            performance_scores = self._apply_performance_metrics()
+            
+            # Calculate final scores
+            final_scores = {}
+            for module_type in ModuleType:
+                final_score = (
+                    content_scores.get(module_type, 0.0) * 0.5 +
+                    context_scores.get(module_type, 0.0) * 0.3 +
+                    performance_scores.get(module_type, 0.0) * 0.2
+                )
+                final_scores[module_type] = final_score
+            
+            # Select best module
+            best_module = max(final_scores.items(), key=lambda x: x[1])
+            selected_module, confidence = best_module
+            
+            # Record selection
+            self.selection_history.append({
+                "module": selected_module,
+                "confidence": confidence,
+                "message": message[:100],  # First 100 chars
+                "timestamp": datetime.now()
+            })
+            
+            self.logger.info(f"📌 Selected {selected_module.value} with confidence {confidence:.2f}")
+            
+            return selected_module, confidence
+            
+        except Exception as e:
+            self.logger.error(f"❌ Module selection failed: {e}")
+            return ModuleType.GENERAL_CHAT, 0.5
     
-    def _extract_keywords(self, text: str) -> List[str]:
-        """Extract relevant keywords from text"""
-        # Simple keyword extraction (could be enhanced with NLP)
-        dharmic_keywords = [
-            "dharma", "karma", "yoga", "meditation", "peace", "wisdom", "compassion",
-            "suffering", "happiness", "enlightenment", "consciousness", "mindfulness",
-            "balance", "harmony", "truth", "love", "kindness", "anger", "fear",
-            "worry", "stress", "anxiety", "depression", "joy", "gratitude",
-            "purpose", "meaning", "life", "death", "rebirth", "moksha", "nirvana",
-            "scripture", "vedas", "upanishads", "gita", "spiritual", "divine",
-            "god", "universe", "soul", "self", "ego", "attachment", "detachment"
-        ]
-        
-        found_keywords = []
-        for keyword in dharmic_keywords:
-            if keyword in text:
-                found_keywords.append(keyword)
-                
-        return found_keywords
-    
-    def _identify_themes(self, keywords: List[str]) -> List[str]:
-        """Identify themes from keywords"""
-        theme_mapping = {
-            "spiritual_practice": ["meditation", "yoga", "mindfulness", "spiritual"],
-            "life_challenges": ["suffering", "anxiety", "stress", "worry", "fear", "depression"],
-            "virtues": ["compassion", "love", "kindness", "peace", "harmony"],
-            "philosophy": ["dharma", "karma", "truth", "wisdom", "consciousness"],
-            "emotions": ["anger", "joy", "happiness", "gratitude"],
-            "life_purpose": ["purpose", "meaning", "enlightenment", "moksha"],
-            "sacred_knowledge": ["scripture", "vedas", "upanishads", "gita"]
-        }
-        
-        themes = []
-        for theme, theme_keywords in theme_mapping.items():
-            if any(keyword in keywords for keyword in theme_keywords):
-                themes.append(theme)
-                
-        return themes
-    
-    def _classify_intent(self, text: str) -> str:
-        """Classify the intent of the message"""
-        if any(word in text for word in ["how", "what", "why", "when", "where"]):
-            return "question"
-        elif any(word in text for word in ["help", "guidance", "advice", "suggest"]):
-            return "seeking_guidance"
-        elif any(word in text for word in ["sad", "depressed", "anxious", "worried", "suffering"]):
-            return "emotional_support"
-        elif any(word in text for word in ["learn", "understand", "know", "explain"]):
-            return "learning"
-        elif any(word in text for word in ["meditate", "practice", "spiritual", "peace"]):
-            return "spiritual_practice"
-        else:
-            return "general_conversation"
-    
-    def _analyze_emotional_tone(self, text: str) -> str:
-        """Analyze emotional tone of the message"""
-        positive_words = ["happy", "joy", "grateful", "peace", "love", "wonderful", "great", "good"]
-        negative_words = ["sad", "angry", "frustrated", "worried", "anxious", "depressed", "suffering"]
-        neutral_words = ["question", "wonder", "think", "consider", "understand"]
-        
-        positive_count = sum(1 for word in positive_words if word in text)
-        negative_count = sum(1 for word in negative_words if word in text)
-        
-        if negative_count > positive_count:
-            return "negative"
-        elif positive_count > negative_count:
-            return "positive"
-        else:
-            return "neutral"
-    
-    async def _score_modules(self, analysis: Dict[str, Any]) -> Dict[str, float]:
-        """Score modules based on message analysis"""
+    def _analyze_content(self, message: str) -> Dict[ModuleType, float]:
+        """Analyze message content for module relevance"""
         scores = {}
+        message_lower = message.lower()
         
-        for module_name, module_info in self.modules.items():
-            score = 0.0
-            
-            # Score based on keyword matches
-            keyword_matches = 0
-            for keyword in analysis["keywords"]:
-                if keyword in module_info.expertise_areas or keyword in module_info.name.lower():
-                    keyword_matches += 1
-            
-            score += keyword_matches * 0.3
-            
-            # Score based on theme matches
-            theme_matches = 0
-            for theme in analysis["themes"]:
-                if theme in module_info.category or any(theme in area for area in module_info.expertise_areas):
-                    theme_matches += 1
-            
-            score += theme_matches * 0.4
-            
-            # Intent-based scoring
-            intent_score = self._score_by_intent(analysis["intent"], module_info)
-            score += intent_score * 0.2
-            
-            # Emotional tone adjustment
-            tone_adjustment = self._adjust_for_emotional_tone(analysis["emotional_tone"], module_info)
-            score += tone_adjustment * 0.1
-            
-            scores[module_name] = score
-            
+        # Emotional intelligence keywords
+        emotional_keywords = ["feel", "emotion", "sad", "happy", "angry", "anxious", "peaceful", "depressed", "joyful"]
+        emotional_score = sum(1 for word in emotional_keywords if word in message_lower) / len(emotional_keywords)
+        scores[ModuleType.EMOTIONAL_INTELLIGENCE] = min(emotional_score * 2, 1.0)
+        
+        # Spiritual guidance keywords
+        spiritual_keywords = ["dharma", "karma", "moksha", "enlightenment", "wisdom", "spiritual", "divine", "sacred"]
+        spiritual_score = sum(1 for word in spiritual_keywords if word in message_lower) / len(spiritual_keywords)
+        scores[ModuleType.SPIRITUAL_GUIDANCE] = min(spiritual_score * 2, 1.0)
+        
+        # Knowledge base keywords
+        knowledge_keywords = ["what", "how", "why", "explain", "tell me", "definition", "meaning", "understand"]
+        knowledge_score = sum(1 for word in knowledge_keywords if word in message_lower) / len(knowledge_keywords)
+        scores[ModuleType.KNOWLEDGE_BASE] = min(knowledge_score * 2, 1.0)
+        
+        # Meditation guide keywords
+        meditation_keywords = ["meditate", "meditation", "breathe", "mindfulness", "awareness", "concentration", "focus"]
+        meditation_score = sum(1 for word in meditation_keywords if word in message_lower) / len(meditation_keywords)
+        scores[ModuleType.MEDITATION_GUIDE] = min(meditation_score * 2, 1.0)
+        
+        # Dharmic validation keywords
+        dharmic_keywords = ["right", "wrong", "ethical", "moral", "righteous", "dharmic", "virtue", "sin"]
+        dharmic_score = sum(1 for word in dharmic_keywords if word in message_lower) / len(dharmic_keywords)
+        scores[ModuleType.DHARMIC_VALIDATION] = min(dharmic_score * 2, 1.0)
+        
+        # General chat (default baseline)
+        scores[ModuleType.GENERAL_CHAT] = 0.3
+        
         return scores
     
-    def _score_by_intent(self, intent: str, module_info: ModuleInfo) -> float:
-        """Score module based on message intent"""
-        intent_module_mapping = {
-            "emotional_support": ["compassion", "peace", "wisdom"],
-            "spiritual_practice": ["meditation", "yoga", "peace"],
-            "learning": ["wisdom", "scripture", "dharma"],
-            "seeking_guidance": ["dharma", "karma", "wisdom"],
-            "question": ["wisdom", "scripture"]
-        }
+    def _analyze_context(self, context: Dict[str, Any]) -> Dict[ModuleType, float]:
+        """Analyze context for module relevance"""
+        scores = {module_type: 0.0 for module_type in ModuleType}
         
-        if intent in intent_module_mapping:
-            if module_info.name in intent_module_mapping[intent]:
-                return 1.0
+        # User emotional state
+        if context.get("emotional_state"):
+            scores[ModuleType.EMOTIONAL_INTELLIGENCE] += 0.5
         
-        return 0.0
+        # Session type
+        session_type = context.get("session_type", "")
+        if session_type == "spiritual_guidance":
+            scores[ModuleType.SPIRITUAL_GUIDANCE] += 0.6
+        elif session_type == "meditation":
+            scores[ModuleType.MEDITATION_GUIDE] += 0.6
+        elif session_type == "learning":
+            scores[ModuleType.KNOWLEDGE_BASE] += 0.6
+        
+        # User preferences
+        preferences = context.get("user_preferences", {})
+        if preferences.get("prefer_emotional_support"):
+            scores[ModuleType.EMOTIONAL_INTELLIGENCE] += 0.3
+        if preferences.get("prefer_spiritual_guidance"):
+            scores[ModuleType.SPIRITUAL_GUIDANCE] += 0.3
+        
+        return scores
     
-    def _adjust_for_emotional_tone(self, tone: str, module_info: ModuleInfo) -> float:
-        """Adjust score based on emotional tone"""
-        tone_adjustments = {
-            "negative": {
-                "compassion": 0.3,
-                "peace": 0.3,
-                "meditation": 0.2
-            },
-            "positive": {
-                "wisdom": 0.1,
-                "dharma": 0.1
-            }
-        }
+    def _apply_performance_metrics(self) -> Dict[ModuleType, float]:
+        """Apply performance-based scoring"""
+        scores = {}
         
-        if tone in tone_adjustments and module_info.name in tone_adjustments[tone]:
-            return tone_adjustments[tone][module_info.name]
+        for module_type, metrics in self.performance_metrics.items():
+            # Combine success rate and user satisfaction
+            performance_score = (
+                metrics["success_rate"] * 0.6 +
+                metrics["user_satisfaction"] * 0.4
+            )
+            scores[module_type] = performance_score
         
-        return 0.0
+        return scores
     
-    def _select_top_modules(self, scores: Dict[str, float], max_modules: int) -> List[ModuleInfo]:
-        """Select top scoring modules"""
-        # Sort by score descending
-        sorted_modules = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-        
-        # Get top modules with non-zero scores
-        selected = []
-        for module_name, score in sorted_modules[:max_modules]:
-            if score > 0:
-                module_info = self.modules[module_name]
-                # Update confidence based on score
-                module_info.confidence = min(score, 1.0)
-                selected.append(module_info)
-        
-        # Ensure at least one module is selected
-        if not selected and self.modules:
-            default_module = list(self.modules.values())[0]
-            default_module.confidence = 0.5
-            selected.append(default_module)
+    async def update_performance(self, module_type: ModuleType, success: bool, response_time: float, user_rating: Optional[float] = None):
+        """Update performance metrics for a module"""
+        try:
+            metrics = self.performance_metrics[module_type]
             
-        return selected
+            # Update success rate (exponential moving average)
+            current_success = 1.0 if success else 0.0
+            metrics["success_rate"] = 0.9 * metrics["success_rate"] + 0.1 * current_success
+            
+            # Update response time
+            metrics["avg_response_time"] = 0.9 * metrics["avg_response_time"] + 0.1 * response_time
+            
+            # Update user satisfaction if provided
+            if user_rating is not None:
+                metrics["user_satisfaction"] = 0.9 * metrics["user_satisfaction"] + 0.1 * user_rating
+            
+            metrics["last_updated"] = datetime.now()
+            
+            self.logger.debug(f"📊 Updated metrics for {module_type.value}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to update performance for {module_type}: {e}")
     
-    async def select_wisdom_modules(
-        self,
-        question: str,
-        category: Optional[str] = None,
-        urgency: str = "normal"
-    ) -> List[ModuleInfo]:
-        """Select modules specifically for wisdom requests"""
-        
-        # Prioritize wisdom-related modules
-        wisdom_modules = ["wisdom", "scripture", "dharma", "meditation"]
-        
-        if category:
-            # Add category-specific modules
-            category_modules = {
-                "dharma": ["dharma", "karma", "scripture"],
-                "meditation": ["meditation", "peace", "yoga"],
-                "life": ["wisdom", "dharma", "compassion"],
-                "relationships": ["compassion", "love", "dharma"],
-                "suffering": ["compassion", "peace", "wisdom"]
+    async def get_module_stats(self) -> Dict[str, Any]:
+        """Get module selection statistics"""
+        try:
+            # Calculate selection frequency
+            total_selections = len(self.selection_history)
+            if total_selections == 0:
+                return {"message": "No selections recorded yet"}
+            
+            frequency = {}
+            for record in self.selection_history:
+                module_name = record["module"].value
+                frequency[module_name] = frequency.get(module_name, 0) + 1
+            
+            # Calculate percentages
+            percentages = {k: (v / total_selections) * 100 for k, v in frequency.items()}
+            
+            return {
+                "total_selections": total_selections,
+                "frequency": frequency,
+                "percentages": percentages,
+                "performance_metrics": {
+                    module_type.value: metrics 
+                    for module_type, metrics in self.performance_metrics.items()
+                }
             }
             
-            if category in category_modules:
-                wisdom_modules.extend(category_modules[category])
-        
-        # Remove duplicates while preserving order
-        wisdom_modules = list(dict.fromkeys(wisdom_modules))
-        
-        # Return available modules
-        selected = []
-        for module_name in wisdom_modules[:3]:  # Max 3 modules
-            if module_name in self.modules:
-                module = self.modules[module_name]
-                module.confidence = 0.9  # High confidence for wisdom requests
-                selected.append(module)
-        
-        return selected
-    
-    async def get_available_modules(self) -> List[ModuleInfo]:
-        """Get all available modules"""
-        return list(self.modules.values())
-    
-    async def _get_default_modules(self) -> List[ModuleInfo]:
-        """Get default modules when selection fails"""
-        default_names = ["wisdom", "dharma", "compassion"]
-        defaults = []
-        
-        for name in default_names:
-            if name in self.modules:
-                module = self.modules[name]
-                module.confidence = 0.5
-                defaults.append(module)
-        
-        return defaults if defaults else list(self.modules.values())[:1]
+        except Exception as e:
+            self.logger.error(f"❌ Failed to get module stats: {e}")
+            return {"error": str(e)}
     
     async def health_check(self) -> bool:
         """Check if module selector is healthy"""
-        return len(self.modules) > 0
+        try:
+            return len(self.module_priorities) > 0
+        except Exception as e:
+            self.logger.error(f"Health check failed: {e}")
+            return False
 
+# Global instance
+_module_selector: Optional[ModuleSelector] = None
 
-# Dependency injection function for FastAPI
-_module_selector_instance = None
-
-
-def get_module_selector() -> ModuleSelector:
-    """Get the module selector instance (singleton pattern)"""
-    global _module_selector_instance
-    if _module_selector_instance is None:
-        _module_selector_instance = ModuleSelector()
-    return _module_selector_instance
+async def get_module_selector() -> ModuleSelector:
+    """Get global module selector instance"""
+    global _module_selector
+    if _module_selector is None:
+        _module_selector = ModuleSelector()
+        await _module_selector.initialize()
+    return _module_selector

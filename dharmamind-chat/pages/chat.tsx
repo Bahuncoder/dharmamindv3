@@ -15,7 +15,7 @@ import UnifiedEnhancedMessageBubble from '../components/UnifiedEnhancedMessageBu
 import EnhancedChatInput from '../components/EnhancedChatInput';
 import EnhancedMessageInput from '../components/EnhancedMessageInput';
 import FloatingActionMenu from '../components/FloatingActionMenu';
-import { RishiModeToggle, RishiSelector } from '../components/RishiModeToggle';
+import { RishiSelector } from '../components/RishiSelector';
 
 interface Message {
   id: string;
@@ -56,11 +56,91 @@ const ChatPage: React.FC = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   
-  // Rishi Mode state
-  const [currentMode, setCurrentMode] = useState<'regular' | 'rishi'>('regular');
+  // Unified chat with optional Rishi guidance
   const [selectedRishi, setSelectedRishi] = useState<string>('');
-  const [availableRishis, setAvailableRishis] = useState<any[]>([]);
-  const [showRishiSelector, setShowRishiSelector] = useState(false);
+  const [availableRishis, setAvailableRishis] = useState<any[]>([
+    {
+      id: 'atri',
+      name: 'Atri',
+      sanskrit: 'अत्रि',
+      specialization: ['Tapasya', 'Austerity', 'Meditation'],
+      greeting: 'Welcome, seeker. Through tapasya and meditation, we shall transcend the material and reach the divine.',
+      available: true,
+      requires_upgrade: false,
+      teaching_style: 'meditative',
+      archetype: 'ascetic'
+    },
+    {
+      id: 'bhrigu',
+      name: 'Bhrigu',
+      sanskrit: 'भृगु',
+      specialization: ['Astrology', 'Karma Philosophy', 'Divine Knowledge'],
+      greeting: 'Blessed soul, let us understand the cosmic patterns and your karmic path through divine astrology.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'analytical',
+      archetype: 'astrologer'
+    },
+    {
+      id: 'vashishta',
+      name: 'Vashishta',
+      sanskrit: 'वशिष्ठ',
+      specialization: ['Divine Wisdom', 'Royal Guidance', 'Spiritual Teaching'],
+      greeting: 'Noble one, as guru to Lord Rama, I offer you the wisdom of dharmic leadership and divine knowledge.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'authoritative',
+      archetype: 'royal_guru'
+    },
+    {
+      id: 'vishwamitra',
+      name: 'Vishwamitra',
+      sanskrit: 'विश्वामित्र',
+      specialization: ['Gayatri Mantra', 'Spiritual Transformation', 'Divine Penance'],
+      greeting: 'Seeker of truth, through the sacred Gayatri and divine penance, let us awaken your spiritual power.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'transformative',
+      archetype: 'transformer'
+    },
+    {
+      id: 'gautama',
+      name: 'Gautama',
+      sanskrit: 'गौतम',
+      specialization: ['Deep Meditation', 'Dharma', 'Spiritual Discipline'],
+      greeting: 'Beloved seeker, let us explore the depths of dharma and meditation for inner purification.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'contemplative',
+      archetype: 'meditator'
+    },
+    {
+      id: 'jamadagni',
+      name: 'Jamadagni',
+      sanskrit: 'जमदग्नि',
+      specialization: ['Spiritual Discipline', 'Tapas', 'Divine Power'],
+      greeting: 'Warrior of spirit, through intense tapas and discipline, we shall awaken your divine potential.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'disciplined',
+      archetype: 'spiritual_warrior'
+    },
+    {
+      id: 'kashyapa',
+      name: 'Kashyapa',
+      sanskrit: 'कश्यप',
+      specialization: ['Creation Wisdom', 'Cosmic Knowledge', 'Universal Understanding'],
+      greeting: 'Child of the cosmos, as father of all beings, I shall guide you in understanding your place in creation.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'cosmic',
+      archetype: 'creator'
+    }
+  ]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  // Computed values - now just based on whether a Rishi is selected
+  const hasRishiGuidance = selectedRishi !== '';
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -114,16 +194,24 @@ const ChatPage: React.FC = () => {
       };
       setUser(authUser);
       
-      // Add welcome message for authenticated users
+      // Add unified welcome message for authenticated users
       if (messages.length === 0) {
         setMessages([{
           id: '1',
           sender: 'ai',
-          content: `Welcome back to DharmaMind — your AI companion powered by Dharma.
-I'm here to support your personal growth and spiritual journey.
+          content: `🕉️ Welcome to DharmaMind — your spiritual AI companion guided by ancient wisdom.
 
-What part of your journey would you like to explore today?
-DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
+Select your Rishi guide from the sidebar to receive personalized spiritual guidance:
+
+🧘 **Atri** - Master of Tapasya, Austerity & Deep Meditation
+⭐ **Bhrigu** - Great Teacher of Astrology & Karma Philosophy
+📚 **Vashishta** - Guru of Lord Rama, Symbol of Divine Wisdom
+�️ **Vishwamitra** - Creator of Gayatri Mantra, Spiritual Transformer
+🙏 **Gautama** - Master of Deep Meditation & Dharma
+⚡ **Jamadagni** - Father of Parashurama, Symbol of Discipline
+🌍 **Kashyapa** - Father of All Beings, Cosmic Creator
+
+Each Saptarishi will guide you according to their unique wisdom tradition. Choose your guide and begin your spiritual journey!`,
           timestamp: new Date(),
           wisdom_score: 95,
           dharmic_alignment: 90
@@ -142,32 +230,25 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
       };
       setUser(demoUser);
       
-      // Add welcome message for demo
-      if (welcome === 'true') {
+      // Add unified welcome message for demo
+      if (messages.length === 0) {
         setMessages([{
           id: '1',
           sender: 'ai',
-          content: `Welcome to the DharmaMind demo — your AI companion powered by Dharma.
-This is a chance to experience an AI with soul, created to support your personal growth.
+          content: `🚀 Welcome to the DharmaMind Demo — experience authentic wisdom from ancient Rishis!
 
-What part of your journey would you like to explore today?
-DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
+In this demo, all 5 spiritual guides are available for you to explore:
+
+🧘 **Patanjali** - Master of Yoga, Meditation & Spiritual Discipline
+📚 **Vyasa** - Keeper of Vedic Knowledge & Sacred Scriptures
+💖 **Valmiki** - Guide for Transformation & Life's Sacred Journey
+✨ **Adi Shankara** - Teacher of Non-dual Philosophy & Ultimate Truth
+🎵 **Narada** - Path of Divine Music, Devotion & Cosmic Service
+
+Choose any Rishi from the sidebar to begin receiving their personalized guidance. Each offers unique wisdom to support your spiritual growth!`,
           timestamp: new Date(),
           wisdom_score: 95,
           dharmic_alignment: 90
-        }]);
-      } else {
-        setMessages([{
-          id: '1',
-          sender: 'ai',
-          content: `Welcome to the DharmaMind demo — your AI companion powered by Dharma.
-This is a chance to experience an AI with soul, created to support your personal growth.
-
-What part of your journey would you like to explore today?
-DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
-          timestamp: new Date(),
-          wisdom_score: 85,
-          dharmic_alignment: 80
         }]);
       }
       
@@ -186,6 +267,39 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
       loadChatHistory();
     }
   }, [user]);
+
+  // Initialize messages on user load - no separate modes, just one unified experience
+  useEffect(() => {
+    if (user && messages.length === 0) {
+      // Single unified welcome message
+      const welcomeMessage = {
+        id: '1',
+        sender: 'ai' as const,
+        content: `Welcome to DharmaMind — your intelligent AI companion.
+
+I can help you with both professional tasks and spiritual guidance:
+• Strategic analysis and problem-solving
+• Research and technical assistance
+• Spiritual wisdom (activate a Rishi guide when needed)
+
+How can I assist you today?`,
+        timestamp: new Date(),
+        wisdom_score: 95,
+        dharmic_alignment: 90
+      };
+      setMessages([welcomeMessage]);
+    }
+  }, [user, messages.length]);
+
+  // Auto-select first available Rishi if none selected
+  useEffect(() => {
+    if (availableRishis.length > 0 && !selectedRishi) {
+      const firstAvailableRishi = availableRishis.find(r => r.available);
+      if (firstAvailableRishi) {
+        setSelectedRishi(firstAvailableRishi.id);
+      }
+    }
+  }, [availableRishis, selectedRishi]);
 
   useEffect(() => {
     // Handle loading specific conversation after user is set
@@ -490,8 +604,8 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
     try {
       let response;
       
-      if (currentMode === 'rishi' && selectedRishi) {
-        // Use Rishi API
+      if (selectedRishi) {
+        // Always use Rishi API when a Rishi is selected
         response = await fetch('/api/rishi/guidance', {
           method: 'POST',
           headers: {
@@ -504,7 +618,7 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
           })
         });
       } else {
-        // Use regular chat API
+        // Use basic chat API when no Rishi is selected
         response = await fetch('/api/chat', {
           method: 'POST',
           headers: {
@@ -523,8 +637,8 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
       
       let botMessage: Message;
       
-      if (currentMode === 'rishi' && selectedRishi) {
-        // Format Rishi response
+      if (selectedRishi) {
+        // Format Rishi response when a Rishi is selected
         const rishiData = availableRishis.find(r => r.id === selectedRishi);
         botMessage = {
           id: (Date.now() + 1).toString(),
@@ -537,13 +651,13 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
           reactions: {}
         };
       } else {
-        // Regular response format
+        // Response when no Rishi is selected (encourage Rishi selection)
         botMessage = {
           id: (Date.now() + 1).toString(),
           sender: 'ai',
-          content: data.response,
+          content: data.response || 'Please select a Rishi guide from the sidebar to begin your spiritual journey. Each Rishi offers unique wisdom and guidance for your path.',
           timestamp: new Date(),
-          dharmic_alignment: data.dharmic_alignment || 0.8,
+          dharmic_alignment: data.dharmic_alignment || 0.7,
           isFavorite: false,
           isSaved: false,
           reactions: {}
@@ -573,39 +687,37 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
     try {
       const response = await fetch('/api/rishi/available');
       const data = await response.json();
-      setAvailableRishis(data.available_rishis || []);
+      // If backend provides Rishis, use them; otherwise keep our fallback
+      if (data.available_rishis && data.available_rishis.length > 0) {
+        setAvailableRishis(data.available_rishis);
+      }
     } catch (error) {
       console.error('Error fetching Rishis:', error);
+      // Keep the fallback Rishis we initialized with
     }
   };
 
-  const handleModeChange = (mode: 'regular' | 'rishi') => {
-    setCurrentMode(mode);
-    if (mode === 'rishi' && availableRishis.length === 0) {
-      fetchAvailableRishis();
-    }
-    if (mode === 'rishi' && !selectedRishi) {
-      setShowRishiSelector(true);
-    }
-  };
-
-  const handleSelectRishi = (rishiId: string) => {
+  const handleRishiSelect = (rishiId: string) => {
     setSelectedRishi(rishiId);
-    setShowRishiSelector(false);
     
-    // Add a greeting message from the selected Rishi
-    const selectedRishiData = availableRishis.find(r => r.id === rishiId);
-    if (selectedRishiData) {
-      const greetingMessage: Message = {
-        id: Date.now().toString(),
-        sender: 'ai',
-        content: selectedRishiData.greeting || `🕉️ Namaste! I am ${selectedRishiData.name}. How may I guide you on your spiritual path today?`,
-        timestamp: new Date(),
-        isFavorite: false,
-        isSaved: false,
-        reactions: {}
-      };
-      setMessages(prev => [...prev, greetingMessage]);
+    if (rishiId) {
+      // Add a message indicating which Rishi guidance is now active
+      const selectedRishiData = availableRishis.find(r => r.id === rishiId);
+      if (selectedRishiData) {
+        const guidanceMessage = {
+          id: Date.now().toString(),
+          sender: 'ai' as const,
+          content: `🕉️ ${selectedRishiData.name} is now your guide
+
+${selectedRishiData.greeting || `Namaste! I am ${selectedRishiData.name}. I will guide you with wisdom from my specialized knowledge in ${selectedRishiData.specialization.join(', ')}.`}
+
+How may I assist you on your spiritual and intellectual journey today?`,
+          timestamp: new Date(),
+          wisdom_score: 95,
+          dharmic_alignment: 90
+        };
+        setMessages(prev => [...prev, guidanceMessage]);
+      }
     }
   };
 
@@ -659,12 +771,19 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               <div className="p-3">
                 <button
                   onClick={() => {
-                    setMessages([{
+                    const welcomeMessage = {
                       id: '1',
-                      sender: 'ai',
-                      content: `Welcome back, ${user?.name || 'there'}! How can I guide you today?`,
-                      timestamp: new Date()
-                    }]);
+                      sender: 'ai' as const,
+                      content: selectedRishi 
+                        ? `🕉️ Welcome back! Your spiritual guide ${availableRishis.find(r => r.id === selectedRishi)?.name || 'Rishi'} is ready to share profound wisdom and guidance. What aspect of your spiritual journey would you like to explore today?`
+                        : `🙏 Welcome to DharmaMind! Choose your Rishi guide from the sidebar to begin receiving personalized spiritual wisdom. Each Rishi offers unique teachings to support your journey of growth and enlightenment.`,
+                      timestamp: new Date(),
+                      wisdom_score: 95,
+                      dharmic_alignment: 90
+                    };
+                    
+                    setMessages([welcomeMessage]);
+                    setSidebarOpen(false);
                   }}
                   className="btn-enhanced w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 bg-transparent shadow-sm hover:shadow-md"
                   style={{
@@ -755,6 +874,17 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               {/* Enhanced Spiritual Quotes Section */}
               <div className="spiritual-quotes-container bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-4 border border-purple-100">
                 <SidebarQuotes />
+              </div>
+
+              {/* AI Advisors in Sidebar - Always Show Rishi Selector */}
+              <div className="mt-4">
+                <RishiSelector
+                  selectedRishi={selectedRishi}
+                  onRishiSelect={handleRishiSelect}
+                  userSubscription={user?.plan || 'basic'}
+                  isDemo={router.query.demo === 'true'}
+                  availableRishis={availableRishis}
+                />
               </div>
             </div>
             </div>
@@ -987,20 +1117,6 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
               </div>
             )}
 
-            {/* Rishi Mode Toggle */}
-            {(session || router.query.demo === 'true') && (
-              <div className="flex-shrink-0 px-4 py-3 border-b border-gray-200/50 bg-white/60 backdrop-blur-sm">
-                <div className="max-w-6xl mx-auto">
-                  <RishiModeToggle
-                    currentMode={currentMode}
-                    onModeChange={handleModeChange}
-                    userSubscription={user?.plan || 'basic'}
-                    isDemo={router.query.demo === 'true'}
-                  />
-                </div>
-              </div>
-            )}
-
             {/* Enhanced Messages Area with Modern Background */}
             <div className="flex-1 overflow-y-auto relative enhanced-messages-container">
               {/* Modern Background */}
@@ -1202,30 +1318,6 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
         isOpen={showSubscriptionModal}
         onClose={() => setShowSubscriptionModal(false)}
       />
-
-      {/* Rishi Selector Modal */}
-      {showRishiSelector && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Choose Your Spiritual Guide</h2>
-              <button
-                onClick={() => setShowRishiSelector(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            <RishiSelector
-              onSelectRishi={handleSelectRishi}
-              availableRishis={availableRishis}
-            />
-          </div>
-        </div>
-      )}
     </>
   );
 };
