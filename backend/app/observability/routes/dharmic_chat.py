@@ -18,8 +18,8 @@ import logging
 import time
 from datetime import datetime
 
-from ...services.llm_router import get_llm_router
-from ...chakra_modules import (
+from ..services.llm_router import get_llm_router
+from ..chakra_modules import (
     get_consciousness_core, get_knowledge_base, get_emotional_intelligence,
     get_dharma_engine, get_ai_core
 )
@@ -82,7 +82,7 @@ class DharmicConversationalAI:
             )
             
             # Step 5: Generate response using local LLM with dharmic context
-            from ...services.local_llm import get_local_llm_service
+            from ..services.local_llm import get_local_llm_service
             local_llm = await get_local_llm_service()
             
             response_data = await local_llm.generate_response(

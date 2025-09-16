@@ -18,7 +18,7 @@ aioredis==2.0.1
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0
 python-multipart==0.0.6
-cryptography==42.0.2
+cryptography==41.0.7
 
 # Data validation and serialization
 pydantic==2.5.0
@@ -51,6 +51,7 @@ python-dotenv==1.0.0
 # Multi-Factor Authentication (MFA)
 pyotp==2.9.0
 qrcode[pil]==7.4.2
+cryptography==42.0.2
 
 # Security enhancements
 bleach==6.1.0
@@ -78,3 +79,4 @@ pytest-asyncio==0.21.1
 # Additional utilities
 python-slugify==8.0.1
 shortuuid==1.0.11
+qrcode[pil]==7.4.2

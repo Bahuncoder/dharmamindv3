@@ -17,7 +17,7 @@ from app.engines.dharmic.universal_dharmic_engine import (
     LifeAspect,
     UniversalPrinciple
 )
-from .auth import get_current_user
+from app.routes.auth import get_current_user
 from app.cache.memory_manager import get_memory_manager
 
 logger = logging.getLogger(__name__)

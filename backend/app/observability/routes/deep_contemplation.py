@@ -13,8 +13,8 @@ from typing import Dict, List, Any, Optional
 from datetime import datetime
 import logging
 
-from ...services.deep_contemplation_system import (
-    get_contemplation_system as get_deep_contemplation_system,
+from ..services.deep_contemplation_system import (
+    get_deep_contemplation_system,
     begin_contemplation_session,
     guide_contemplation_deepening,
     complete_contemplation_session,

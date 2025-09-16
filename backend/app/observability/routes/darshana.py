@@ -19,10 +19,10 @@ from datetime import datetime
 import logging
 import uuid
 
-from ...chakra_modules.darshana_engine import (
+from ..chakra_modules.darshana_engine import (
     DarshanaEngine, get_darshana_engine, DarshanaType, PhilosophicalResponse
 )
-from ...services.memory_manager import MemoryManager, get_memory_manager
+from ..services.memory_manager import MemoryManager, get_memory_manager
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

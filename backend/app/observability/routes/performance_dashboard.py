@@ -13,13 +13,7 @@ from app.monitoring.performance_monitor import get_metrics_collector, get_perfor
 from app.engines.llm.advanced_llm_router import get_advanced_llm_router
 from app.cache.intelligent_cache import get_intelligent_cache
 from app.db.advanced_pool import get_db_pool_manager
-try:
-    from ...services.auth_service import verify_admin_token
-except ImportError:
-    # Fallback admin token verification
-    async def verify_admin_token(token: str) -> bool:
-        """Fallback admin token verification"""
-        return token == "admin_token_placeholder"
+from app.routes.admin_auth import verify_admin_token
 import logging
 
 logger = logging.getLogger(__name__)

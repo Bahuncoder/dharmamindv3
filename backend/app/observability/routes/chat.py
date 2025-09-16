@@ -17,41 +17,11 @@ from datetime import datetime
 import logging
 import uuid
 
-# Import services with fallbacks
-try:
-    from ...services.llm_router import get_llm_router, LLMRouter
-    from ...services.module_selector import get_module_selector, ModuleSelector
-    from ...services.evaluator import get_response_evaluator, ResponseEvaluator
-    from ...services.memory_manager import get_memory_manager, MemoryManager
-    from ...engines.rishi import create_authentic_rishi_engine
-    from ...engines.emotional import create_emotional_engine
-except ImportError as e:
-    logging.warning(f"Service imports failed: {e}")
-    
-    # Fallback classes
-    class LLMRouter:
-        pass
-    class ModuleSelector:
-        pass  
-    class ResponseEvaluator:
-        pass
-    class MemoryManager:
-        pass
-    
-    def get_llm_router():
-        return LLMRouter()
-    def get_module_selector():
-        return ModuleSelector()
-    def get_response_evaluator():
-        return ResponseEvaluator()
-    def get_memory_manager():
-        return MemoryManager()
-    def create_authentic_rishi_engine():
-        return None
-    def create_emotional_engine():
-        return None
-
-from ..models import ChatRequest, ChatResponse
+from ..services.llm_router import LLMRouter, get_llm_router
+from ..services.module_selector import ModuleSelector, get_module_selector
+from ..services.evaluator import ResponseEvaluator, get_response_evaluator
+from ..services.memory_manager import MemoryManager, get_memory_manager
+from ..models.chat import ChatRequest, ChatResponse, ConversationHistory
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -63,21 +33,14 @@ class ChatMessage(BaseModel):
     user_id: Optional[str] = Field(default=None, description="User identifier")
     conversation_id: Optional[str] = Field(default=None, description="Conversation identifier")
     language: str = Field(default="en", description="Response language preference")
-    category: Optional[str] = Field(default=None, description="Wisdom category (dharma, karma, etc.)")
-    urgency: str = Field(default="normal", description="Request urgency: low, normal, high")
-    user_context: Optional[Dict[str, Any]] = Field(default=None, description="User context")
-
-class ConversationHistory(BaseModel):
-    """Conversation history model"""
-    conversation_id: str
-    messages: List[Dict[str, Any]]
-    created_at: datetime
-    updated_at: datetime
-    total_messages: int
     
 class WisdomRequest(BaseModel):
     """Request for dharmic wisdom"""
     question: str = Field(..., description="Wisdom question", min_length=1)
+    category: Optional[str] = Field(default=None, description="Wisdom category (dharma, karma, etc.)")
+    urgency: str = Field(default="normal", description="Request urgency: low, normal, high")
+    user_context: Optional[Dict[str, Any]] = Field(default=None, description="User context")
+
 @router.post("/chat", response_model=ChatResponse)
 async def chat_message(
     chat_request: ChatMessage,

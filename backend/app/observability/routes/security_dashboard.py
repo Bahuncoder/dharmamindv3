@@ -10,13 +10,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 from app.security.monitoring import get_security_monitor, SecurityEventType, ThreatLevel
 from app.security.jwt_manager import get_jwt_manager
-try:
-    from ...services.auth_service import verify_admin_token
-except ImportError:
-    # Fallback admin token verification
-    async def verify_admin_token(token: str) -> bool:
-        """Fallback admin token verification"""
-        return token == "admin_token_placeholder"
+from app.routes.admin_auth import verify_admin_token
 import logging
 
 logger = logging.getLogger(__name__)

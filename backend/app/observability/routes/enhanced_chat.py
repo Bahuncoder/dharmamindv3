@@ -35,7 +35,7 @@ except ImportError as e:
     logging.warning(f"DharmaLLM not available: {e}")
     DHARMALLM_AVAILABLE = False
 
-from ..models import ChatResponse
+from ..models.chat import ChatResponse
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

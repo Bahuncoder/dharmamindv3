@@ -27,42 +27,23 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 import redis.asyncio as redis
 
-# Set up logging first
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 # Import our application modules
-# Import routes with fallback handling
-try:
-    from .observability.routes.health import router as health_router
-    health_available = True
-except ImportError as e:
-    logger.warning(f"Health routes not available: {e}")
-    health_available = False
+from .routes.chat import router as chat_router
+from .routes.auth import router as auth_router
+from .routes.admin_auth import router as admin_auth_router
+from .routes.feedback import router as feedback_router
+from .routes.spiritual_knowledge import router as knowledge_router
+from .routes.enhanced_chat import router as enhanced_chat_router
+from .routes.darshana import router as darshana_router
+from .routes.universal_guidance import router as universal_router
+# from .routes.local_llm_test import router as local_llm_router  # Missing file
+from .routes.dharmic_chat import router as dharmic_chat_router
+from .routes.external_llm import router as external_llm_router
+from .routes.deep_contemplation import router as deep_contemplation_router
+from .routes.mfa_auth import router as mfa_router
 
-try:
-    from .engines.rishi import create_authentic_rishi_engine
-    from .engines.emotional import create_emotional_engine
-    rishi_engine = create_authentic_rishi_engine()
-    emotional_engine = create_emotional_engine()
-    engines_available = True
-except ImportError as e:
-    logger.warning(f"Engines not available: {e}")
-    engines_available = False
-
-# Import observability routes
-from .observability.routes.chat import router as chat_router
-from .observability.routes.auth import router as auth_router
-from .observability.routes.admin_auth import router as admin_auth_router
-from .observability.routes.feedback import router as feedback_router
-from .observability.routes.spiritual_knowledge import router as knowledge_router
-from .observability.routes.enhanced_chat import router as enhanced_chat_router
-from .observability.routes.darshana import router as darshana_router
-from .observability.routes.universal_guidance import router as universal_router
-from .observability.routes.dharmic_chat import router as dharmic_chat_router
-from .observability.routes.external_llm import router as external_llm_router
-from .observability.routes.deep_contemplation import router as deep_contemplation_router
-from .observability.routes.mfa_auth import router as mfa_router
+# Import Vision module
+from .vision.routes.vision_routes import router as vision_router
 from .services.llm_router import LLMRouter
 from .services.module_selector import ModuleSelector
 from .services.evaluator import ResponseEvaluator
@@ -449,23 +430,26 @@ app.include_router(external_llm_router, prefix="/api/v1", tags=["external-llm"])
 app.include_router(deep_contemplation_router, prefix="/api/v1", tags=["deep-contemplation"])
 
 # Import and include internal spiritual processing router
-from .observability.routes.internal_spiritual import router as internal_spiritual_router
+from .routes.internal_spiritual import router as internal_spiritual_router
 app.include_router(internal_spiritual_router, tags=["internal-spiritual"])
 
 # Import and include security dashboard router
-from .observability.routes.security_dashboard import router as security_dashboard_router
+from .routes.security_dashboard import router as security_dashboard_router
 app.include_router(security_dashboard_router, prefix="/api/v1", tags=["security-dashboard"])
 
 # Import and include performance dashboard router
-from .observability.routes.performance_dashboard import router as performance_dashboard_router
+from .routes.performance_dashboard import router as performance_dashboard_router
 app.include_router(performance_dashboard_router, prefix="/api/v1", tags=["performance-dashboard"])
 
 # Import and include Rishi Mode router
-from .observability.routes.rishi_mode import router as rishi_mode_router
+from .routes.rishi_mode import router as rishi_mode_router
 app.include_router(rishi_mode_router, prefix="/api/v1", tags=["rishi-mode"])
 
 # Include observability dashboard router
 app.include_router(dashboard_router, tags=["observability-dashboard"])
+
+# Include DharmaMind Vision router
+app.include_router(vision_router, prefix="/api/v1", tags=["🕉️ Traditional Yoga Vision"])
 
 @app.get("/", tags=["system"])
 async def root():

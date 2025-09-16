@@ -38,29 +38,12 @@ from ..models import (
     ChatRequest, ChatResponse, UserProfile, UserPreferences,
     SystemMetrics, DharmicAnalytics, SystemHealth, ModelConfiguration
 )
-from ...services.auth_service import get_auth_service, Role, PermissionScope
-from ...services.cache_service import get_cache_service, CacheCategory
-from ...services.notification_service import get_notification_service
-from ...config import settings
-
-# Import optional services with fallbacks
-try:
-    from ...services.llm_gateway_client import get_llm_router
-except ImportError:
-    def get_llm_router():
-        return None
-
-try:
-    from ...services.memory_manager import get_memory_manager
-except ImportError:
-    def get_memory_manager():
-        return None
-
-try:
-    from ...services.response_evaluator import get_response_evaluator
-except ImportError:
-    def get_response_evaluator():
-        return None
+from ..services.auth_service import get_auth_service, Role, PermissionScope
+from ..services.cache_service import get_cache_service, CacheCategory
+from ..services.llm_router import get_llm_router
+from ..services.memory_manager import get_memory_manager
+from ..services.evaluator import get_response_evaluator
+from ..config import settings
 
 logger = logging.getLogger(__name__)
 

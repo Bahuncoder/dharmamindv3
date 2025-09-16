@@ -34,9 +34,9 @@ from ..models import (
     FeedbackRequest, FeedbackResponse, FeedbackAnalytics,
     FeedbackType, FeedbackSentiment
 )
-from ...db.database import DatabaseManager
-from ...services.llm_router import LLMRouter
-from ...config import settings
+from ..db.database import DatabaseManager
+from ..services.llm_router import LLMRouter
+from ..config import settings
 
 # Initialize components
 router = APIRouter(prefix="/api/feedback", tags=["feedback"])

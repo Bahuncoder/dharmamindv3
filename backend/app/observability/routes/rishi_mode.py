@@ -13,35 +13,9 @@ from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
 
-try:
-    from ...services.universal_dharmic_engine import get_universal_dharmic_engine, DharmicEngine
-except ImportError:
-    # Fallback dharmic engine
-    class DharmicEngine:
-        def __init__(self):
-            self.name = "Universal Dharmic Engine"
-        
-        async def get_dharmic_guidance(self, query: str) -> dict:
-            return {
-                "guidance": "Universal dharmic wisdom: Seek truth, practice compassion, and live righteously.",
-                "principle": "dharma",
-                "wisdom": "Every action has consequences. Choose with awareness."
-            }
-    
-    def get_universal_dharmic_engine() -> DharmicEngine:
-        return DharmicEngine()
-try:
-    from ...services.auth_service import get_current_user
-except ImportError:
-    # Fallback user authentication
-    async def get_current_user(token: str = None):
-        """Fallback current user getter"""
-        return {
-            "id": "user_placeholder",
-            "email": "user@example.com",
-            "name": "Anonymous User"
-        }
-from ..models import UserProfile
+from ..services.universal_dharmic_engine import get_universal_dharmic_engine, DharmicEngine
+from ..services.auth_service import get_current_user
+from ..models.user_profile import UserProfile
 
 logger = logging.getLogger(__name__)
 

@@ -53,9 +53,9 @@ from .intelligent_feedback_engine import (
 )
 
 # Core vision processing
-from .pose_estimation import PoseEstimator, PoseQuality
-from .breath_detection import BreathDetector
-from .meditation_detection import MeditationDetector
+from .core.pose_estimation import PoseEstimator, PoseQuality
+from .core.breath_detection import BreathDetector
+from .core.meditation_detection import MeditationDetector
 
 @dataclass 
 class DharmaVisionState:

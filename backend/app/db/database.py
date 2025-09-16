@@ -29,34 +29,15 @@ from enum import Enum
 # For production, these would be actual database drivers
 try:
     import asyncpg
+    import motor.motor_asyncio
+    import redis.asyncio as redis
     import sqlalchemy
     from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
     from sqlalchemy.orm import sessionmaker
-    import redis.asyncio as redis
-    HAS_ASYNC_DRIVERS = True
+    HAS_DB_DRIVERS = True
 except ImportError:
-    HAS_ASYNC_DRIVERS = False
-
-try:
-    import motor.motor_asyncio
-    HAS_MOTOR = True
-except ImportError:
-    HAS_MOTOR = False
-
-# Check all required drivers
-HAS_DB_DRIVERS = HAS_ASYNC_DRIVERS and HAS_MOTOR
-
-if not HAS_DB_DRIVERS:
-    import logging
-    missing_drivers = []
-    if not HAS_ASYNC_DRIVERS:
-        missing_drivers.append("asyncpg/sqlalchemy[asyncio]/redis")
-    if not HAS_MOTOR:
-        missing_drivers.append("motor")
-    logging.warning(f"Some database drivers not installed: {', '.join(missing_drivers)} - using fallback implementations")
-else:
-    import logging
-    logging.info("✅ All database drivers successfully loaded")
+    HAS_DB_DRIVERS = False
+    logging.warning("Database drivers not installed - using mock implementations")
 
 from ..config import settings
 

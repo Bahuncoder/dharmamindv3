@@ -18,11 +18,11 @@ from datetime import datetime
 import asyncio
 
 # Import Chakra modules
-from ...chakra_modules.consciousness_core import get_consciousness_core, ConsciousnessLevel
-from ...chakra_modules.knowledge_base import get_knowledge_base
-from ...chakra_modules.dharma_engine import get_dharma_engine
-from ...chakra_modules.emotional_intelligence import get_emotional_intelligence
-from ...chakra_modules.ai_core import get_ai_core
+from ..chakra_modules.consciousness_core import get_consciousness_core, ConsciousnessLevel
+from ..chakra_modules.knowledge_base import get_knowledge_base
+from ..chakra_modules.dharma_engine import get_dharma_engine
+from ..chakra_modules.emotional_intelligence import get_emotional_intelligence
+from ..chakra_modules.ai_core import get_ai_core
 
 logger = logging.getLogger(__name__)
 

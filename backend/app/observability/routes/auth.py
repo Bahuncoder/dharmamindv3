@@ -14,7 +14,7 @@ import secrets
 import json
 import os
 
-from ...services.notification_service import send_verification_code
+from ..services.notification_service import send_verification_code
 
 router = APIRouter()
 security = HTTPBearer()
