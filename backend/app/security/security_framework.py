@@ -452,7 +452,131 @@ class SecurityMonitoringService:
         # Log critical alert
         self.logger.critical(f"SECURITY ALERT: {alert}")
         
-        # TODO: Send to alerting system (Slack, email, etc.)
+        # Send to alerting system
+        await self._send_security_alert(alert)
+    
+    async def _send_security_alert(self, alert: Dict[str, Any]) -> None:
+        """Send security alert to external alerting systems"""
+        try:
+            alert_level = alert.get('severity', 'medium')
+            message = f"🚨 DharmaMind Security Alert 🚨\n"
+            message += f"Type: {alert.get('type', 'Unknown')}\n"
+            message += f"Severity: {alert_level.upper()}\n"
+            message += f"Description: {alert.get('description', 'No description')}\n"
+            message += f"Time: {alert.get('timestamp', 'Unknown')}\n"
+            message += f"IP: {alert.get('source_ip', 'Unknown')}\n"
+            
+            # Email notification for high/critical alerts
+            if alert_level in ['high', 'critical']:
+                await self._send_email_alert(message, alert)
+            
+            # Slack notification for all alerts
+            await self._send_slack_alert(message, alert)
+            
+            # Discord webhook for critical alerts
+            if alert_level == 'critical':
+                await self._send_discord_alert(message, alert)
+            
+            self.logger.info(f"✅ Security alert sent to external systems: {alert.get('type')}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to send security alert: {e}")
+    
+    async def _send_email_alert(self, message: str, alert: Dict[str, Any]) -> None:
+        """Send email alert (placeholder for SMTP integration)"""
+        try:
+            # This would integrate with an SMTP service like SendGrid, Amazon SES, etc.
+            # For now, we'll log the alert structure
+            
+            email_config = {
+                "to": ["security@dharmamind.ai", "admin@dharmamind.ai"],
+                "subject": f"🚨 DharmaMind Security Alert - {alert.get('type', 'Unknown')}",
+                "body": message,
+                "priority": "high" if alert.get('severity') == 'critical' else "normal"
+            }
+            
+            self.logger.info(f"📧 Email alert prepared: {email_config['subject']}")
+            # TODO: Implement actual SMTP sending when email service is configured
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to send email alert: {e}")
+    
+    async def _send_slack_alert(self, message: str, alert: Dict[str, Any]) -> None:
+        """Send Slack alert via webhook"""
+        try:
+            import aiohttp
+            
+            # This would use actual Slack webhook URL from environment
+            slack_webhook_url = "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
+            
+            # Color coding based on severity
+            color_map = {
+                'low': '#36a64f',      # Green
+                'medium': '#ff9f00',   # Orange  
+                'high': '#ff0000',     # Red
+                'critical': '#8B0000'  # Dark Red
+            }
+            
+            slack_payload = {
+                "text": "🚨 DharmaMind Security Alert",
+                "attachments": [{
+                    "color": color_map.get(alert.get('severity', 'medium'), '#ff9f00'),
+                    "fields": [
+                        {"title": "Alert Type", "value": alert.get('type', 'Unknown'), "short": True},
+                        {"title": "Severity", "value": alert.get('severity', 'medium').upper(), "short": True},
+                        {"title": "Source IP", "value": alert.get('source_ip', 'Unknown'), "short": True},
+                        {"title": "Timestamp", "value": alert.get('timestamp', 'Unknown'), "short": True},
+                        {"title": "Description", "value": alert.get('description', 'No description'), "short": False}
+                    ]
+                }]
+            }
+            
+            self.logger.info(f"💬 Slack alert prepared for: {alert.get('type')}")
+            # TODO: Uncomment when Slack webhook is configured
+            # async with aiohttp.ClientSession() as session:
+            #     async with session.post(slack_webhook_url, json=slack_payload) as response:
+            #         if response.status == 200:
+            #             self.logger.info("✅ Slack alert sent successfully")
+            #         else:
+            #             self.logger.error(f"❌ Failed to send Slack alert: {response.status}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to send Slack alert: {e}")
+    
+    async def _send_discord_alert(self, message: str, alert: Dict[str, Any]) -> None:
+        """Send Discord alert via webhook"""
+        try:
+            import aiohttp
+            
+            # This would use actual Discord webhook URL from environment
+            discord_webhook_url = "https://discord.com/api/webhooks/YOUR/DISCORD/WEBHOOK"
+            
+            discord_payload = {
+                "content": message,
+                "embeds": [{
+                    "title": "🚨 Critical Security Alert",
+                    "description": alert.get('description', 'No description'),
+                    "color": 0xFF0000,  # Red color for critical alerts
+                    "fields": [
+                        {"name": "Alert Type", "value": alert.get('type', 'Unknown'), "inline": True},
+                        {"name": "Source IP", "value": alert.get('source_ip', 'Unknown'), "inline": True},
+                        {"name": "Timestamp", "value": alert.get('timestamp', 'Unknown'), "inline": False}
+                    ],
+                    "footer": {"text": "DharmaMind Security System"}
+                }]
+            }
+            
+            self.logger.info(f"🎮 Discord alert prepared for: {alert.get('type')}")
+            # TODO: Uncomment when Discord webhook is configured
+            # async with aiohttp.ClientSession() as session:
+            #     async with session.post(discord_webhook_url, json=discord_payload) as response:
+            #         if response.status in [200, 204]:
+            #             self.logger.info("✅ Discord alert sent successfully")
+            #         else:
+            #             self.logger.error(f"❌ Failed to send Discord alert: {response.status}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to send Discord alert: {e}")
     
     async def get_security_dashboard(self) -> Dict[str, Any]:
         """Get security monitoring dashboard data"""

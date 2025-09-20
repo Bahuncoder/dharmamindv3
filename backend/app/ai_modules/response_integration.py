@@ -19,11 +19,11 @@ from dataclasses import dataclass
 import asyncio
 from datetime import datetime
 
-from .emotional_intelligence import (
-    EmotionalIntelligenceEngine,
+from .revolutionary_emotional_intelligence import (
+    RevolutionaryEmotionalIntelligence,
     EmotionalState,
     EmotionalProfile,
-    emotional_intelligence
+    revolutionary_emotional_intelligence
 )
 from .tone_analysis import (
     AdvancedToneAnalyzer,
@@ -64,7 +64,7 @@ class ResponseIntegrationEngine:
     """🌟 Unified system for transformative response generation"""
     
     def __init__(self):
-        self.emotional_engine = emotional_intelligence
+        self.emotional_engine = revolutionary_emotional_intelligence
         self.tone_analyzer = tone_analyzer
         
         # Response enhancement templates
