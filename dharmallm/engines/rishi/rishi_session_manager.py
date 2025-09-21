@@ -51,7 +51,7 @@ class RishiSessionManager:
     """Manages ongoing relationships between users and Rishis"""
     
     def __init__(self, storage_path: Optional[str] = None):
-        self.storage_path = storage_path or "data/rishi_sessions"
+        self.storage_path = storage_path or "backend/data/sessions/rishi_sessions"
         Path(self.storage_path).mkdir(parents=True, exist_ok=True)
         self.db_path = Path(self.storage_path) / "rishi_sessions.db"
         self.logger = logging.getLogger(__name__)

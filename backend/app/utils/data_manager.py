@@ -145,7 +145,7 @@ class DataManager:
     """🗄️ Comprehensive data management system"""
     
     def __init__(self):
-        self.storage_path = Path("data/user_data")
+        self.storage_path = Path("backend/data/user_data")
         self.storage_path.mkdir(parents=True, exist_ok=True)
         
         # In-memory caches for performance
