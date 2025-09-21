@@ -19,6 +19,9 @@
 /* Import enhanced chat interface styles */
 @import './chat-interface-enhanced.css';
 
+/* Import advanced analytics dashboard styles */
+@import './analytics-dashboard.css';
+
 /* Import advanced spiritual design styles */
 @import './advanced-spiritual-design.css';
 

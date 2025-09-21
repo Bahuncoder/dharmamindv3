@@ -13,6 +13,13 @@ import cv2
 import time
 from pathlib import Path
 
+# Import the required classes
+from core.advanced_pose_detector import AdvancedPoseDetector
+from core.ultimate_vision_engine import UltimateVisionEngine  
+from core.vision_engine import VisionEngine
+from core.pose_detector import HathaYogaPoseDetector
+from dharma_mind_vision_master import DharmaMindVisionMaster as DharmaMindVisionEngine
+
 # Add current directory to path for imports
 current_dir = Path(__file__).parent
 sys.path.insert(0, str(current_dir))

@@ -28,22 +28,19 @@ from datetime import datetime
 import redis.asyncio as redis
 
 # Import our application modules
-from .routes.chat import router as chat_router
 from .routes.auth import router as auth_router
 from .routes.admin_auth import router as admin_auth_router
 from .routes.feedback import router as feedback_router
 from .routes.spiritual_knowledge import router as knowledge_router
-from .routes.enhanced_chat import router as enhanced_chat_router
 from .routes.darshana import router as darshana_router
 from .routes.universal_guidance import router as universal_router
 # from .routes.local_llm_test import router as local_llm_router  # Missing file
-from .routes.dharmic_chat import router as dharmic_chat_router
 from .routes.external_llm import router as external_llm_router
 from .routes.deep_contemplation import router as deep_contemplation_router
 from .routes.mfa_auth import router as mfa_router
 
-# Import Vision module
-from .vision.routes.vision_routes import router as vision_router
+# Import Vision module - currently disabled due to missing implementation
+# from .vision.routes.vision_routes import router as vision_router
 from .services.llm_router import LLMRouter
 from .services.module_selector import ModuleSelector
 from .services.evaluator import ResponseEvaluator
@@ -415,8 +412,6 @@ if redis_client:
     app.add_middleware(RateLimitMiddleware, redis_client=redis_client)
 
 # Include routers
-app.include_router(chat_router, prefix="/api/v1", tags=["chat"])
-app.include_router(enhanced_chat_router, prefix="/api", tags=["enhanced-chat"])
 app.include_router(darshana_router, prefix="/api/v1", tags=["philosophy"])
 app.include_router(universal_router, prefix="/api/v1", tags=["universal-guidance"])
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
@@ -425,7 +420,6 @@ app.include_router(admin_auth_router, prefix="/api/admin", tags=["admin-authenti
 app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
 app.include_router(knowledge_router, tags=["spiritual-knowledge"])
 # app.include_router(local_llm_router, tags=["local-llm"])  # Missing file
-app.include_router(dharmic_chat_router, tags=["dharmic-chat"])
 app.include_router(external_llm_router, prefix="/api/v1", tags=["external-llm"])
 app.include_router(deep_contemplation_router, prefix="/api/v1", tags=["deep-contemplation"])
 
@@ -448,8 +442,8 @@ app.include_router(rishi_mode_router, prefix="/api/v1", tags=["rishi-mode"])
 # Include observability dashboard router
 app.include_router(dashboard_router, tags=["observability-dashboard"])
 
-# Include DharmaMind Vision router
-app.include_router(vision_router, prefix="/api/v1", tags=["🕉️ Traditional Yoga Vision"])
+# Include DharmaMind Vision router - currently disabled
+# app.include_router(vision_router, prefix="/api/v1", tags=["🕉️ Traditional Yoga Vision"])
 
 @app.get("/", tags=["system"])
 async def root():

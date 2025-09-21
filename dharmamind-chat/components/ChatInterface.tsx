@@ -97,11 +97,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
   // UI State
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  
+  // Enhanced UI State for better UX
+  const [isMobile, setIsMobile] = useState(false);
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const [lastReadMessageId, setLastReadMessageId] = useState<string | null>(null);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: '🕉️ Namaste! I am DharmaMind, your companion on the path of wisdom. How may I serve you today?',
+      content: '🕉️ Namaste! I am DharmaMind, your companion on the path of wisdom. How may I serve you today? I\'m here to provide spiritual guidance, answer questions about dharma, and support your journey of self-discovery.',
       role: 'assistant',
       timestamp: new Date(),
       confidence: 1.0,
@@ -118,6 +125,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [hoveredMessageId, setHoveredMessageId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState<string | null>(null);
   const [savedMessages, setSavedMessages] = useState<string[]>([]);
+  
+  // Enhanced Accessibility State
+  const [focusedMessageId, setFocusedMessageId] = useState<string | null>(null);
+  const [announceMessage, setAnnounceMessage] = useState<string>('');
+  const [isHighContrast, setIsHighContrast] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const [favoriteMessages, setFavoriteMessages] = useState<string[]>([]);
   const [showInsightsModal, setShowInsightsModal] = useState(false);
   const [currentTags, setCurrentTags] = useState<string[]>([]);
@@ -156,12 +169,90 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   }, [showUserDropdown]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (shouldAutoScroll) {
+      messagesEndRef.current?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, shouldAutoScroll, reduceMotion]);
+
+  // Enhanced Mobile Detection and Responsive Features
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth <= 768 || 
+        ('ontouchstart' in window) || 
+        (navigator.maxTouchPoints > 0);
+      setIsMobile(isMobileDevice);
+    };
+
+    const handleResize = () => {
+      checkMobile();
+      // Handle virtual keyboard on mobile
+      if (isMobile) {
+        const viewportHeight = window.visualViewport?.height || window.innerHeight;
+        const isKeyboard = window.innerHeight - viewportHeight > 150;
+        setIsKeyboardVisible(isKeyboard);
+      }
+    };
+
+    // Detect accessibility preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersHighContrast = window.matchMedia('(prefers-contrast: high)').matches;
+    
+    setReduceMotion(prefersReducedMotion);
+    setIsHighContrast(prefersHighContrast);
+    
+    checkMobile();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    
+    // Listen for viewport changes (mobile keyboard)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleResize);
+      }
+    };
+  }, [isMobile]);
+
+  // Enhanced Scroll Management
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+      setShouldAutoScroll(isNearBottom);
+      
+      // Update read status
+      if (isNearBottom && messages.length > 0) {
+        const lastMessage = messages[messages.length - 1];
+        if (lastMessage.id !== lastReadMessageId && lastMessage.role === 'assistant') {
+          setLastReadMessageId(lastMessage.id);
+          setUnreadCount(0);
+        }
+      }
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [messages, lastReadMessageId]);
+
+  // Announcement for Screen Readers
+  useEffect(() => {
+    if (announceMessage) {
+      const timer = setTimeout(() => setAnnounceMessage(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [announceMessage]);
 
   // Contemplation timer effect
   useEffect(() => {
@@ -184,6 +275,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const handleSendMessage = async () => {
     if (!inputMessage.trim() || isLoading) return;
 
+    // Enhanced message validation
+    const messageContent = inputMessage.trim();
+    if (messageContent.length > 4000) {
+      showError('Message Too Long', 'Please keep your message under 4000 characters for optimal processing.');
+      setAnnounceMessage('Message too long. Please shorten your message.');
+      return;
+    }
+
     // Check message usage before proceeding (subscription feature)
     const canSendMessage = await trackUsage('messages');
     if (!canSendMessage) {
@@ -195,7 +294,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: inputMessage,
+      content: messageContent,
       role: 'user',
       timestamp: new Date()
     };
@@ -205,6 +304,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     setIsLoading(true);
     setError(null);
     setUsageAlert(null);
+    
+    // Enhanced UX feedback
+    setShouldAutoScroll(true);
+    setUnreadCount(0);
+    setAnnounceMessage(`Sending message: ${messageContent.substring(0, 50)}${messageContent.length > 50 ? '...' : ''}`);
+
+    // Haptic feedback on mobile
+    if (isMobile && 'vibrate' in navigator) {
+      navigator.vibrate(50);
+    }
 
     // Check if user is asking for contemplation and suggest starting a session
     const contemplationKeywords = ['meditate', 'meditation', 'contemplate', 'contemplation', 'mindfulness', 'breathing', 'breath work', 'spiritual practice', 'inner peace', 'reflection'];
@@ -260,6 +369,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
         setMessages(prev => [...prev, assistantMessage]);
         
+        // Enhanced accessibility announcement
+        setAnnounceMessage(`DharmaMind responded with ${assistantMessage.content.length < 100 ? assistantMessage.content : 'a detailed response'}`);
+        
+        // Update unread count for better UX
+        if (!shouldAutoScroll) {
+          setUnreadCount(prev => prev + 1);
+        }
+        
         // Suggest contemplation session if user asked about meditation/contemplation
         if (isContemplationRequest && !contemplationMode) {
           setTimeout(() => {
@@ -302,6 +419,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         };
         setMessages(prev => [...prev, errorMessage]);
         setError('Failed to get response from dharmic chat service');
+        setAnnounceMessage('Sorry, I encountered a technical issue. Please try again.');
       }
     } catch (error) {
       console.error('Chat error:', error);
@@ -314,15 +432,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       };
       setMessages(prev => [...prev, errorMessage]);
       setError('Network error occurred');
+      setAnnounceMessage('Connection error. Please check your internet and try again.');
+      
+      // Haptic feedback for error on mobile
+      if (isMobile && 'vibrate' in navigator) {
+        navigator.vibrate([100, 50, 100]);
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Enhanced keyboard handling with accessibility
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
+    if (e.key === 'Enter') {
+      if (e.shiftKey) {
+        // Allow shift+enter for new lines
+        return;
+      } else {
+        e.preventDefault();
+        handleSendMessage();
+      }
+    }
+    // Add Escape key handling
+    if (e.key === 'Escape') {
+      setInputMessage('');
+      setAnnounceMessage('Message cleared');
     }
   };
 
@@ -746,32 +881,60 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   };
 
   return (
-    <div className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''}`}>
-      {/* Advanced Spiritual Background */}
-      <div className="floating-orbs-container">
-        <div className="floating-orb large" style={{ top: '10%', left: '20%', animationDelay: '0s' }}></div>
-        <div className="floating-orb medium" style={{ top: '60%', right: '15%', animationDelay: '2s' }}></div>
-        <div className="floating-orb small" style={{ top: '30%', left: '70%', animationDelay: '4s' }}></div>
-        <div className="floating-orb medium" style={{ bottom: '20%', left: '10%', animationDelay: '6s' }}></div>
-        <div className="floating-orb small" style={{ top: '80%', right: '40%', animationDelay: '8s' }}></div>
+    <div 
+      className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''} ${isMobile ? 'mobile-optimized' : ''} ${isKeyboardVisible ? 'keyboard-visible' : ''} ${reduceMotion ? 'reduce-motion' : ''} ${isHighContrast ? 'high-contrast' : ''}`}
+      aria-label="DharmaMind spiritual guidance chat interface"
+    >
+      {/* Screen Reader Announcements */}
+      <div 
+        aria-live="polite" 
+        aria-atomic="true" 
+        className="sr-only"
+        role="status"
+      >
+        {announceMessage}
       </div>
       
-      {/* Sacred Geometry Background */}
-      <div className="sacred-geometry-bg"></div>
-      
-      {/* Lotus Patterns */}
-      <div className="lotus-pattern" style={{ top: '15%', right: '5%', animationDelay: '0s' }}></div>
-      <div className="lotus-pattern" style={{ bottom: '25%', left: '3%', animationDelay: '10s' }}></div>
+      {/* Skip to main content link for accessibility */}
+      <a 
+        href="#chat-messages" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md"
+      >
+        Skip to chat messages
+      </a>
+      {/* Advanced Spiritual Background - Hidden for reduce motion */}
+      {!reduceMotion && (
+        <>
+          <div className="floating-orbs-container" aria-hidden="true">
+            <div className="floating-orb large" style={{ top: '10%', left: '20%', animationDelay: '0s' }}></div>
+            <div className="floating-orb medium" style={{ top: '60%', right: '15%', animationDelay: '2s' }}></div>
+            <div className="floating-orb small" style={{ top: '30%', left: '70%', animationDelay: '4s' }}></div>
+            <div className="floating-orb medium" style={{ bottom: '20%', left: '10%', animationDelay: '6s' }}></div>
+            <div className="floating-orb small" style={{ top: '80%', right: '40%', animationDelay: '8s' }}></div>
+          </div>
+          
+          {/* Sacred Geometry Background */}
+          <div className="sacred-geometry-bg" aria-hidden="true"></div>
+          
+          {/* Lotus Patterns */}
+          <div className="lotus-pattern" style={{ top: '15%', right: '5%', animationDelay: '0s' }} aria-hidden="true"></div>
+          <div className="lotus-pattern" style={{ bottom: '25%', left: '3%', animationDelay: '10s' }} aria-hidden="true"></div>
+        </>
+      )}
       
       {/* Breathing Guide */}
       {showBreathingGuide && (
         <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0, opacity: 0 }}
+          initial={reduceMotion ? {} : { scale: 0, opacity: 0 }}
+          animate={reduceMotion ? {} : { scale: 1, opacity: 1 }}
+          exit={reduceMotion ? {} : { scale: 0, opacity: 0 }}
           className="breathing-guide"
           onClick={() => setShowBreathingGuide(false)}
+          onKeyDown={(e) => e.key === 'Enter' && setShowBreathingGuide(false)}
           title="Click to hide breathing guide"
+          role="button"
+          tabIndex={0}
+          aria-label="Breathing guide visualization. Press Enter or click to hide."
         >
           <div className="breathing-circle"></div>
         </motion.div>
@@ -784,7 +947,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       )}
       
       {/* Header */}
-      <div className="flex-shrink-0 p-4 sm:p-6 chat-header-enhanced animate-slide-in-down relative z-10">
+      <header 
+        className="flex-shrink-0 p-4 sm:p-6 chat-header-enhanced animate-slide-in-down relative z-10"
+        role="banner"
+      >
         <div className="organic-chat-container">
           <div className="flex items-center space-x-3 sm:space-x-4">
             <div className="interactive-element spiritual-glow">
@@ -797,11 +963,37 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               <p className="text-sm sm:text-base typography-caption text-gray-600 hidden sm:block mt-1">
                 Your spiritual wisdom companion
               </p>
+              {/* Mobile subtitle - shorter */}
+              <p className="text-sm typography-caption text-gray-600 sm:hidden mt-1">
+                Spiritual wisdom guide
+              </p>
             </div>
+            
+            {/* Unread Message Indicator */}
+            {unreadCount > 0 && (
+              <div 
+                className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                role="status"
+                aria-label={`${unreadCount} unread message${unreadCount > 1 ? 's' : ''}`}
+              >
+                <span>{unreadCount} new</span>
+                <button 
+                  onClick={() => scrollToBottom()}
+                  className="text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  aria-label="Scroll to latest message"
+                >
+                  ↓
+                </button>
+              </div>
+            )}
             
             {/* Current Tags Display */}
             {currentTags.length > 0 && (
-              <div className="hidden md:flex items-center space-x-1">
+              <div 
+                className="hidden md:flex items-center space-x-1"
+                role="region"
+                aria-label="Conversation tags"
+              >
                 {currentTags.slice(0, 2).map(tagId => {
                   const tag = availableTags.find(t => t.id === tagId);
                   return tag ? (
@@ -809,8 +1001,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                       key={tagId}
                       className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                       style={{ backgroundColor: tag.color + '20', color: tag.color }}
+                      aria-label={`Tagged as ${tag.name}`}
                     >
-                      <span className="mr-1">{tag.icon}</span>
+                      <span className="mr-1" aria-hidden="true">{tag.icon}</span>
                       {tag.name}
                     </span>
                   ) : null;
@@ -955,12 +1148,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             </div>
           )}
         </div>
-      </div>
+      </header>
 
       {/* Messages Container */}
-      <div 
+      <main 
+        id="chat-messages"
         ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 sm:space-y-8 scroll-smooth chat-messages-enhanced chat-messages-container organic-chat-container"
+        role="log"
+        aria-label="Chat conversation"
+        aria-live="polite"
         style={{
           scrollbarWidth: 'thin',
           scrollbarColor: 'var(--color-border-primary) transparent'
@@ -1130,7 +1327,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         )}
 
         <div ref={messagesEndRef} />
-      </div>
+      </main>
 
       <ScrollToBottom 
         messagesContainerRef={messagesContainerRef}

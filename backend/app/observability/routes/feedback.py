@@ -30,13 +30,13 @@ from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks, Query
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-from ..models import (
+from ...models import (
     FeedbackRequest, FeedbackResponse, FeedbackAnalytics,
     FeedbackType, FeedbackSentiment
 )
-from ..db.database import DatabaseManager
-from ..services.llm_router import LLMRouter
-from ..config import settings
+from ...db.database import DatabaseManager
+from ...services.llm_router import LLMRouter
+from ...config import settings
 
 # Initialize components
 router = APIRouter(prefix="/api/feedback", tags=["feedback"])

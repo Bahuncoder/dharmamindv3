@@ -15,7 +15,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Optional
 import json
 
-from ..security.mfa_manager import (
+from ...security.mfa_manager import (
     MFAManager,
     MFASetupRequest,
     MFAVerificationRequest,

@@ -87,7 +87,7 @@ class ComprehensiveSanatanaDharmaEnhancer:
     """
     
     def __init__(self):
-        self.output_dir = Path("enhanced_sanatana_knowledge")
+        self.output_dir = Path("knowledge_base")
         self.output_dir.mkdir(exist_ok=True)
         
         logger.info("🕉️ Initializing Comprehensive Sanatana Dharma Enhancer")

@@ -126,7 +126,7 @@ dharmamind-chat/
 #### **A. Traditional Wisdom Repository**
 
 ```
-enhanced_sanatana_knowledge/
+knowledge_base/ (Unified Dharmic Knowledge Repository)
 ├── 📜 complete_vedic_corpus.json    # Four Vedas with mantras
 ├── 🏛️ six_darshanas_complete.json   # Six philosophical schools
 ├── 🎭 spiritual_practices_guide.json # Traditional sadhana

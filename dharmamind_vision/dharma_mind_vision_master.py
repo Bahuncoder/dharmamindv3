@@ -18,6 +18,7 @@ import numpy as np
 import cv2
 import time
 import json
+import statistics
 from typing import Dict, List, Tuple, Optional, Any, Union
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
@@ -27,27 +28,27 @@ import logging
 from pathlib import Path
 
 # Import all revolutionary systems
-from .realtime_posture_corrector import (
+from .core.realtime_posture_corrector import (
     RealTimePostureCorrector, PostureCorrection, CorrectionPriority,
     BiomechanicalAnalyzer, CulturalIntegrationEngine
 )
-from .dhyana_state_analyzer import (
+from .core.dhyana_state_analyzer import (
     DhyanaStateAnalyzer, MeditationDepth, MindfulnessState,
     BreathingPattern, ContemplationState
 )
-from .progressive_learning_system import (
+from .core.progressive_learning_system import (
     ProgressivelearningPathSystem, SkillLevel, CompetencyArea,
     LearningObjective, SkillAssessment
 )
-from .dharmamind_map_integration import (
+from .core.dharmamind_map_integration import (
     DharmaMindMapIntegration, PracticeLifeCorrelation,
     PredictiveInsights, LifestyleRecommendation
 )
-from .session_manager import (
+from .core.session_manager import (
     SessionManager, UserProfile, SessionPlan, SessionSummary,
     ProgressTracking, GoalsAchievements
 )
-from .intelligent_feedback_engine import (
+from .core.intelligent_feedback_engine import (
     IntelligentFeedbackEngine, FeedbackMessage, FeedbackModality,
     CommunicationStyle, EmotionalTone, UserFeedbackProfile
 )

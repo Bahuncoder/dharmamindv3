@@ -29,12 +29,12 @@ import logging
 import asyncio
 from datetime import datetime
 
-from ..models.subscription import SubscriptionTier
-from ..services.dharmic_llm_processor import get_dharmic_llm_processor, DharmicProcessingMode, DharmicResponse
-from ..services.subscription_service import SubscriptionService
-from ..services.llm_gateway_client import get_llm_gateway_client
+from ...models.subscription import SubscriptionTier
+from ...services.dharmic_llm_processor import get_dharmic_llm_processor, DharmicProcessingMode, DharmicResponse
+from ...services.subscription_service import SubscriptionService
+from ...services.llm_gateway_client import get_llm_gateway_client
 from ..routes.auth import get_current_user
-from ..config import settings
+from ...config import settings
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/dharmic-llm", tags=["Dharmic LLM Integration"])

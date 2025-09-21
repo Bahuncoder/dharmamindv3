@@ -215,7 +215,7 @@ class AdvancedEmbeddingGenerator:
 class EnhancedSpiritualKnowledgeBase:
     """Enhanced spiritual knowledge base with advanced search and retrieval capabilities."""
     
-    def __init__(self, knowledge_dir: str = "enhanced_sanatana_knowledge"):
+    def __init__(self, knowledge_dir: str = "knowledge_base"):
         self.knowledge_dir = Path(knowledge_dir)
         self.knowledge_items: List[KnowledgeItem] = []
         self.embedding_generator = AdvancedEmbeddingGenerator()

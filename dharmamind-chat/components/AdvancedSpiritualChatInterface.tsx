@@ -25,6 +25,7 @@ import remarkGfm from 'remark-gfm';
 import SpiritualBackground from './SpiritualBackground';
 import BreathingGuide from './BreathingGuide';
 import VoiceWaveVisualization from './VoiceWaveVisualization';
+import { chatService } from '../services/chatService';
 
 interface Message {
   id: string;
@@ -38,6 +39,9 @@ interface Message {
   isSaved?: boolean;
   category?: string;
   emotional_tone?: string;
+  dharmic_insights?: string[];
+  growth_suggestions?: string[];
+  spiritual_context?: string;
 }
 
 interface LifeAspect {
@@ -164,22 +168,58 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
     }
 
     try {
-      // Simulate API response for demo
-      setTimeout(() => {
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          content: `Thank you for sharing your thoughts about ${selectedAspect?.name.toLowerCase() || 'life'}. Here's some wisdom to consider:\n\n**Mindful Approach**: Every challenge is an opportunity for growth and deeper understanding.\n\n**Practical Steps**:\n- Practice daily mindfulness meditation\n- Reflect on your core values\n- Take aligned action with compassion\n\n*Remember: The journey of consciousness is unique to each soul. Trust your inner wisdom.*`,
-          role: 'assistant',
-          timestamp: new Date(),
-          confidence: 0.92,
-          dharmic_alignment: 0.87,
-          category: selectedAspect?.id || 'general'
-        };
-        setMessages(prev => [...prev, aiResponse]);
-        setIsLoading(false);
-      }, 2000);
+      // Use the enhanced chatService for comprehensive dharmic wisdom
+      const response = await chatService.sendMessage(
+        inputValue,
+        `conversation_${Date.now()}`,
+        'user_spiritual_seeker'
+      );
+
+      const aiResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        content: response.response,
+        role: 'assistant',
+        timestamp: new Date(),
+        confidence: response.confidence_score || 0.88,
+        dharmic_alignment: response.dharmic_alignment || 0.90,
+        modules_used: response.modules_used || ['comprehensive_dharmic_wisdom'],
+        category: selectedAspect?.id || 'general',
+        emotional_tone: response.metadata?.emotional_tone || 'wise and compassionate',
+        dharmic_insights: response.dharmic_insights,
+        growth_suggestions: response.growth_suggestions,
+        spiritual_context: response.spiritual_context
+      };
+      
+      setMessages(prev => [...prev, aiResponse]);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      // Enhanced fallback response
+      const fallbackResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        content: `🌟 Thank you for sharing your spiritual inquiry about ${selectedAspect?.name.toLowerCase() || 'life'}. While I process your question deeply, here's some immediate wisdom:\n\n**Mindful Reflection**: Every question you ask is a sacred step on your path of awakening. The very act of seeking guidance shows your commitment to growth and conscious living.\n\n**Universal Principle**: ${selectedAspect?.description || 'Life unfolds in perfect divine timing, offering exactly what we need for our spiritual evolution.'}\n\n**Practical Integration**:\n- Take three conscious breaths and connect with your heart center\n- Ask yourself: "What would love do in this situation?"\n- Trust your inner wisdom—it knows the way forward\n\n*Remember: You are a spiritual being having a human experience. Every challenge is curriculum, every joy is celebration, and every moment is an opportunity for deeper awakening.*`,
+        role: 'assistant',
+        timestamp: new Date(),
+        confidence: 0.85,
+        dharmic_alignment: 0.88,
+        category: selectedAspect?.id || 'general',
+        emotional_tone: 'compassionate and uplifting',
+        dharmic_insights: [
+          'Every question is a step toward spiritual awakening',
+          'Inner wisdom is your most reliable guidance system',
+          'Challenges are opportunities for growth and learning'
+        ],
+        growth_suggestions: [
+          'Practice daily meditation or mindfulness',
+          'Trust your intuition and inner knowing',
+          'Connect with like-minded spiritual seekers',
+          'Study wisdom teachings that resonate with your heart'
+        ],
+        spiritual_context: `This guidance relates to ${selectedAspect?.name.toLowerCase() || 'universal spiritual principles'} and supports your journey of conscious living and personal transformation.`
+      };
+      
+      setMessages(prev => [...prev, fallbackResponse]);
       setIsLoading(false);
     }
   };
@@ -410,6 +450,58 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                           {message.content}
                         </ReactMarkdown>
                       </div>
+                      
+                      {/* Enhanced Dharmic Insights and Growth Suggestions */}
+                      {message.role === 'assistant' && (message.dharmic_insights || message.growth_suggestions || message.spiritual_context) && (
+                        <div className="mt-6 space-y-4">
+                          {/* Dharmic Insights */}
+                          {message.dharmic_insights && message.dharmic_insights.length > 0 && (
+                            <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-lg p-4 border border-amber-400/30">
+                              <div className="flex items-center space-x-2 mb-3">
+                                <SparklesIcon className="h-5 w-5 text-amber-400" />
+                                <h4 className="text-sm font-semibold text-amber-300">Dharmic Insights</h4>
+                              </div>
+                              <ul className="space-y-2">
+                                {message.dharmic_insights.map((insight, idx) => (
+                                  <li key={idx} className="text-xs text-white/80 flex items-start space-x-2">
+                                    <span className="text-amber-400 mt-1">•</span>
+                                    <span>{insight}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                          
+                          {/* Growth Suggestions */}
+                          {message.growth_suggestions && message.growth_suggestions.length > 0 && (
+                            <div className="bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-lg p-4 border border-emerald-400/30">
+                              <div className="flex items-center space-x-2 mb-3">
+                                <LightBulbIcon className="h-5 w-5 text-emerald-400" />
+                                <h4 className="text-sm font-semibold text-emerald-300">Growth Suggestions</h4>
+                              </div>
+                              <ul className="space-y-2">
+                                {message.growth_suggestions.map((suggestion, idx) => (
+                                  <li key={idx} className="text-xs text-white/80 flex items-start space-x-2">
+                                    <span className="text-emerald-400 mt-1">→</span>
+                                    <span>{suggestion}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                          
+                          {/* Spiritual Context */}
+                          {message.spiritual_context && (
+                            <div className="bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-lg p-4 border border-purple-400/30">
+                              <div className="flex items-center space-x-2 mb-2">
+                                <AcademicCapIcon className="h-5 w-5 text-purple-400" />
+                                <h4 className="text-sm font-semibold text-purple-300">Spiritual Context</h4>
+                              </div>
+                              <p className="text-xs text-white/80">{message.spiritual_context}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
                       
                       {/* Message Metadata */}
                       {message.role === 'assistant' && (

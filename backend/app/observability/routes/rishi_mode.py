@@ -13,9 +13,9 @@ from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
 
-from ..services.universal_dharmic_engine import get_universal_dharmic_engine, DharmicEngine
-from ..services.auth_service import get_current_user
-from ..models.user_profile import UserProfile
+from ...services.universal_dharmic_engine import get_universal_dharmic_engine, DharmicEngine
+from ...services.auth_service import get_current_user
+from ...models.user_profile import UserProfile
 
 logger = logging.getLogger(__name__)
 

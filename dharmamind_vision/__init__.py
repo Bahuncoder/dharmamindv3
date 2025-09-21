@@ -80,12 +80,12 @@ except ImportError as e:
 # Revolutionary subsystems - lazy loading
 try:
     def _lazy_import_revolutionary():
-        from .advanced_posture_correction import AdvancedPostureCorrection
-        from .meditation_analysis import MeditationAnalysis  
-        from .progressive_learning import ProgressiveLearning
-        from .life_integration import LifeIntegration
-        from .session_management import SessionManagement
-        from .intelligent_feedback import IntelligentFeedback
+        from .core.realtime_posture_corrector import RealTimePostureCorrector as AdvancedPostureCorrection
+        from .core.meditation_detection import MeditationDetector as MeditationAnalysis  
+        from .core.progressive_learning_system import ProgressiveLearningSystem as ProgressiveLearning
+        from .core.dharmamind_map_integration import DharmaMindMapIntegration as LifeIntegration
+        from .core.session_manager import SessionManager as SessionManagement
+        from .core.intelligent_feedback_engine import IntelligentFeedbackEngine as IntelligentFeedback
         from .dharma_mind_vision_master import DharmaMindVisionMaster
         return (AdvancedPostureCorrection, MeditationAnalysis, ProgressiveLearning,
                 LifeIntegration, SessionManagement, IntelligentFeedback, DharmaMindVisionMaster)

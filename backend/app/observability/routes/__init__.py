@@ -34,16 +34,16 @@ from datetime import datetime
 import logging
 
 # Import models and services
-from ..models import (
-    ChatRequest, ChatResponse, UserProfile, UserPreferences,
+from ...models import (
+    UserProfile, UserPreferences,
     SystemMetrics, DharmicAnalytics, SystemHealth, ModelConfiguration
 )
-from ..services.auth_service import get_auth_service, Role, PermissionScope
-from ..services.cache_service import get_cache_service, CacheCategory
-from ..services.llm_router import get_llm_router
-from ..services.memory_manager import get_memory_manager
-from ..services.evaluator import get_response_evaluator
-from ..config import settings
+from ...services.auth_service import get_auth_service, Role, PermissionScope
+from ...services.cache_service import get_cache_service, CacheCategory
+from ...services.llm_router import get_llm_router
+from ...services.memory_manager import get_memory_manager
+from ...services.evaluator import get_response_evaluator
+from ...config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -123,9 +123,6 @@ router = APIRouter()
 
 # Authentication router
 auth_router = APIRouter(prefix="/auth", tags=["authentication"])
-
-# Chat router  
-chat_router = APIRouter(prefix="/chat", tags=["chat"])
 
 # User router
 user_router = APIRouter(prefix="/users", tags=["users"])
@@ -241,112 +238,6 @@ async def generate_api_key(
     except Exception as e:
         logger.error(f"API key generation error: {e}")
         raise HTTPException(status_code=500, detail="API key generation failed")
-
-
-# ===============================
-# CHAT ROUTES
-# ===============================
-
-@chat_router.post("/message", response_model=ChatResponse)
-async def send_message(
-    request_data: ChatRequest,
-    background_tasks: BackgroundTasks,
-    current_user = Depends(get_current_user_optional),
-    llm_router = Depends(get_llm_router),
-    cache_service = Depends(get_cache_service),
-    memory_manager = Depends(get_memory_manager),
-    evaluator = Depends(get_response_evaluator)
-):
-    """Send chat message and get AI response"""
-    try:
-        start_time = datetime.now()
-        user_id = current_user["user_id"] if current_user else None
-        
-        # Check cache first for similar queries
-        cache_key = f"response_{hash(request_data.message)}"
-        cached_response = await cache_service.get(cache_key, CacheCategory.RESPONSES)
-        
-        if cached_response and settings.ENABLE_RESPONSE_CACHE:
-            logger.info("Returning cached response")
-            return cached_response
-        
-        # Generate AI response
-        response = await llm_router.process_chat_request(request_data, user_id)
-        
-        # Evaluate response quality
-        evaluation = await evaluator.evaluate_response(
-            request_data.message,
-            response.response,
-            response.modules_used
-        )
-        
-        # Update response with evaluation scores
-        response.confidence_score = evaluation.confidence_score
-        response.dharmic_alignment = evaluation.dharmic_alignment
-        response.relevance_score = evaluation.relevance_score
-        
-        # Cache high-quality responses
-        if response.dharmic_alignment > 0.8 and response.confidence_score > 0.7:
-            await cache_service.set(
-                cache_key,
-                response,
-                category=CacheCategory.RESPONSES,
-                wisdom_score=response.dharmic_alignment,
-                tags=["high_quality", "dharmic"]
-            )
-        
-        # Store conversation in memory
-        if user_id and request_data.save_conversation:
-            background_tasks.add_task(
-                memory_manager.store_conversation_turn,
-                request_data.conversation_id or "anonymous",
-                user_id,
-                request_data.message,
-                response.response
-            )
-        
-        # Calculate processing time
-        processing_time = (datetime.now() - start_time).total_seconds()
-        response.processing_time = processing_time
-        
-        return response
-        
-    except Exception as e:
-        logger.error(f"Chat message error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to process message")
-
-
-@chat_router.get("/history/{conversation_id}")
-async def get_conversation_history(
-    conversation_id: str,
-    limit: int = 20,
-    current_user = Depends(get_current_user),
-    memory_manager = Depends(get_memory_manager)
-):
-    """Get conversation history for user"""
-    try:
-        # Verify user owns the conversation
-        conversation = await memory_manager.get_conversation(conversation_id)
-        
-        if not conversation or conversation.get("user_id") != current_user["user_id"]:
-            raise HTTPException(status_code=404, detail="Conversation not found")
-        
-        history = await memory_manager.get_conversation_history(
-            conversation_id, 
-            limit
-        )
-        
-        return {
-            "conversation_id": conversation_id,
-            "messages": history,
-            "total_messages": len(history)
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"History retrieval error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to retrieve history")
 
 
 # ===============================
@@ -506,7 +397,7 @@ async def get_system_health(
     try:
         # This would integrate with all service health checks
         # Mock implementation for now
-        from ..models import ComponentHealth, HealthStatus
+        from ...models import ComponentHealth, HealthStatus
         
         components = [
             ComponentHealth(
@@ -668,7 +559,6 @@ async def get_current_admin(
 
 # Include all sub-routers
 router.include_router(auth_router)
-router.include_router(chat_router)
 router.include_router(user_router)
 router.include_router(analytics_router)
 router.include_router(admin_router)
@@ -685,7 +575,6 @@ async def api_root():
         "status": "active",
         "endpoints": {
             "authentication": "/auth",
-            "chat": "/chat", 
             "users": "/users",
             "analytics": "/analytics",
             "administration": "/admin",

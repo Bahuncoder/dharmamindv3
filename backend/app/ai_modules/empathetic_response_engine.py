@@ -295,17 +295,17 @@ class EmpatheticResponseEngine:
         return {
             CulturalEmotionalPattern.DHARMIC_WISDOM.value: {
                 "preferred_concepts": ["dharma", "karma", "moksha", "ahimsa", "seva"],
-                "communication_style": "respectful", "formal", "wisdom-oriented",
+                "communication_style": ["respectful", "formal", "wisdom-oriented"],
                 "healing_approaches": ["meditation", "yoga", "chanting", "service", "scripture_study"]
             },
             CulturalEmotionalPattern.BUDDHIST_COMPASSION.value: {
                 "preferred_concepts": ["compassion", "mindfulness", "impermanence", "interdependence"],
-                "communication_style": "gentle", "non-attachment", "present-moment",
+                "communication_style": ["gentle", "non-attachment", "present-moment"],
                 "healing_approaches": ["meditation", "loving_kindness", "mindfulness", "middle_way"]
             },
             CulturalEmotionalPattern.WESTERN_INDIVIDUALISTIC.value: {
                 "preferred_concepts": ["personal_growth", "self_actualization", "autonomy", "achievement"],
-                "communication_style": "direct", "goal-oriented", "solution-focused",
+                "communication_style": ["direct", "goal-oriented", "solution-focused"],
                 "healing_approaches": ["therapy", "self_help", "goal_setting", "empowerment"]
             }
             # Additional cultural patterns would be included here...

@@ -44,7 +44,7 @@ except ImportError:
 
 from pydantic import BaseModel, Field, validator
 from ..config import settings
-from ..models import UserProfile, Priority
+from ..models import UserProfile
 
 logger = logging.getLogger(__name__)
 

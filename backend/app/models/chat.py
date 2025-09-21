@@ -1,0 +1,183 @@
+"""
+Chat models for DharmaMind API
+
+These models define the structure of chat-related data exchanges
+between the frontend and backend systems.
+"""
+
+from pydantic import BaseModel, Field
+from typing import List, Optional, Dict, Any, Union
+from datetime import datetime
+from enum import Enum
+
+class MessageRole(str, Enum):
+    """Message role in conversation"""
+    USER = "user"
+    ASSISTANT = "assistant"
+    SYSTEM = "system"
+
+class MessageType(str, Enum):
+    """Type of message content"""
+    TEXT = "text"
+    IMAGE = "image"
+    AUDIO = "audio"
+    MULTIMODAL = "multimodal"
+
+class ChatMessage(BaseModel):
+    """Individual chat message in a conversation"""
+    id: Optional[str] = Field(default=None, description="Message unique identifier")
+    role: MessageRole = Field(..., description="Message role")
+    content: str = Field(..., description="Message content")
+    timestamp: Optional[datetime] = Field(default=None, description="Message timestamp")
+    metadata: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Additional metadata")
+
+class ChatRequest(BaseModel):
+    """Request for chat completion"""
+    message: str = Field(..., description="User message", min_length=1, max_length=10000)
+    conversation_id: Optional[str] = Field(default=None, description="Conversation identifier")
+    user_id: Optional[str] = Field(default=None, description="User identifier")
+    context: Optional[str] = Field(default=None, description="Additional context")
+    language: str = Field(default="en", description="Response language preference")
+    message_type: MessageType = Field(default=MessageType.TEXT, description="Message content type")
+    stream: bool = Field(default=False, description="Whether to stream the response")
+    
+    # Advanced options
+    temperature: Optional[float] = Field(default=0.7, ge=0.0, le=2.0, description="Response creativity")
+    max_tokens: Optional[int] = Field(default=2000, ge=1, le=8000, description="Maximum response length")
+    dharmic_guidance: bool = Field(default=True, description="Apply dharmic principles")
+    spiritual_context: bool = Field(default=True, description="Include spiritual wisdom")
+
+class ChatResponse(BaseModel):
+    """Enhanced response from chat completion with dharmic features"""
+    message: str = Field(..., description="Assistant response")
+    conversation_id: str = Field(..., description="Conversation identifier")
+    message_id: str = Field(..., description="Message unique identifier")
+    timestamp: datetime = Field(default_factory=datetime.now, description="Response timestamp")
+    
+    # Metadata
+    processing_time: Optional[float] = Field(default=None, description="Processing time in seconds")
+    model_used: Optional[str] = Field(default=None, description="AI model used for response")
+    modules_used: Optional[List[str]] = Field(default=None, description="Chakra modules used")
+    
+    # Standard metrics
+    confidence: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Response confidence")
+    dharmic_alignment: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Dharmic alignment score")
+    relevance: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Response relevance")
+    
+    # Dharmic Features
+    dharmic_insights: Optional[List[str]] = Field(default=None, description="Dharmic insights provided")
+    growth_suggestions: Optional[List[str]] = Field(default=None, description="Personal growth suggestions")
+    spiritual_context: Optional[str] = Field(default=None, description="Spiritual context")
+    ethical_guidance: Optional[str] = Field(default=None, description="Ethical guidance")
+    response_style: Optional[str] = Field(default=None, description="Response style used")
+    
+    # Enhanced Enterprise Features
+    cultural_sensitivity: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Cultural sensitivity score")
+    compassion_score: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Compassion score")
+    wisdom_assessment: Optional[Dict[str, float]] = Field(default=None, description="Wisdom assessment metrics")
+    safety_score: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Safety score")
+    tradition_alignment: Optional[float] = Field(default=None, ge=0.0, le=1.0, description="Tradition alignment score")
+    
+    # Quality indicators
+    quality_gates_passed: Optional[bool] = Field(default=True, description="Whether quality gates passed")
+    evaluation_details: Optional[Dict[str, Any]] = Field(default=None, description="Detailed evaluation metrics")
+    
+    # Backward compatibility
+    spiritual_insights: Optional[List[str]] = Field(default=None, description="Spiritual insights (legacy)")
+    wisdom_level: Optional[str] = Field(default=None, description="Wisdom level category")
+
+class ConversationSummary(BaseModel):
+    """Summary of a conversation"""
+    conversation_id: str = Field(..., description="Conversation identifier")
+    title: Optional[str] = Field(default=None, description="Conversation title")
+    summary: Optional[str] = Field(default=None, description="Conversation summary")
+    key_topics: Optional[List[str]] = Field(default=None, description="Key topics discussed")
+    spiritual_themes: Optional[List[str]] = Field(default=None, description="Spiritual themes explored")
+    start_time: Optional[datetime] = Field(default=None, description="Conversation start time")
+    end_time: Optional[datetime] = Field(default=None, description="Conversation end time")
+    message_count: int = Field(default=0, description="Total messages in conversation")
+
+class ConversationHistory(BaseModel):
+    """Complete conversation history"""
+    conversation_id: str = Field(..., description="Conversation identifier")
+    user_id: Optional[str] = Field(default=None, description="User identifier")
+    messages: List[ChatMessage] = Field(default_factory=list, description="All messages in conversation")
+    summary: Optional[ConversationSummary] = Field(default=None, description="Conversation summary")
+    created_at: datetime = Field(default_factory=datetime.now, description="Creation timestamp")
+    updated_at: datetime = Field(default_factory=datetime.now, description="Last update timestamp")
+    
+    # Conversation metadata
+    total_tokens: Optional[int] = Field(default=None, description="Total tokens used")
+    spiritual_journey_progress: Optional[Dict[str, Any]] = Field(default=None, description="Spiritual progress")
+    wisdom_gained: Optional[List[str]] = Field(default=None, description="Wisdom insights gained")
+
+class StreamingChunk(BaseModel):
+    """Chunk of streaming response"""
+    chunk_id: str = Field(..., description="Chunk identifier")
+    conversation_id: str = Field(..., description="Conversation identifier")
+    content: str = Field(..., description="Chunk content")
+    is_final: bool = Field(default=False, description="Whether this is the final chunk")
+    metadata: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Chunk metadata")
+
+class WisdomRequest(BaseModel):
+    """Request for spiritual wisdom"""
+    question: str = Field(..., description="Wisdom question", min_length=1, max_length=5000)
+    category: Optional[str] = Field(default=None, description="Wisdom category")
+    tradition: Optional[str] = Field(default=None, description="Spiritual tradition preference")
+    depth: Optional[str] = Field(default="medium", description="Depth of wisdom (basic, medium, deep)")
+    context: Optional[str] = Field(default=None, description="Personal context for wisdom")
+
+class WisdomResponse(BaseModel):
+    """Response containing spiritual wisdom"""
+    wisdom: str = Field(..., description="Wisdom content")
+    source: Optional[str] = Field(default=None, description="Source of wisdom")
+    tradition: Optional[str] = Field(default=None, description="Spiritual tradition")
+    category: Optional[str] = Field(default=None, description="Wisdom category")
+    related_concepts: Optional[List[str]] = Field(default=None, description="Related spiritual concepts")
+    practical_application: Optional[str] = Field(default=None, description="How to apply this wisdom")
+    depth_level: Optional[str] = Field(default=None, description="Depth level of wisdom")
+
+class ModuleInfo(BaseModel):
+    """Information about system modules"""
+    module_name: str = Field(..., description="Module name")
+    module_type: str = Field(..., description="Module type")
+    version: str = Field(default="1.0.0", description="Module version")
+    status: str = Field(default="active", description="Module status")
+    capabilities: List[str] = Field(default_factory=list, description="Module capabilities")
+    description: Optional[str] = Field(default=None, description="Module description")
+    health_score: float = Field(default=1.0, ge=0.0, le=1.0, description="Module health score")
+    last_updated: datetime = Field(default_factory=datetime.now, description="Last update timestamp")
+    
+    class Config:
+        """Pydantic configuration"""
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda dt: dt.isoformat()
+        }
+
+class EvaluationResult(BaseModel):
+    """Result of response evaluation"""
+    evaluation_id: str = Field(..., description="Evaluation identifier")
+    response_quality: float = Field(..., ge=0.0, le=1.0, description="Response quality score")
+    dharmic_alignment: float = Field(..., ge=0.0, le=1.0, description="Dharmic alignment score")
+    spiritual_depth: float = Field(..., ge=0.0, le=1.0, description="Spiritual depth score")
+    accuracy: float = Field(..., ge=0.0, le=1.0, description="Accuracy score")
+    relevance: float = Field(..., ge=0.0, le=1.0, description="Relevance score")
+    compassion_level: float = Field(..., ge=0.0, le=1.0, description="Compassion level score")
+    
+    # Qualitative assessments
+    strengths: List[str] = Field(default_factory=list, description="Response strengths")
+    improvements: List[str] = Field(default_factory=list, description="Areas for improvement")
+    spiritual_insights: List[str] = Field(default_factory=list, description="Spiritual insights")
+    
+    # Overall evaluation
+    overall_score: float = Field(..., ge=0.0, le=1.0, description="Overall evaluation score")
+    recommendation: str = Field(..., description="Evaluation recommendation")
+    evaluation_timestamp: datetime = Field(default_factory=datetime.now, description="Evaluation timestamp")
+    
+    class Config:
+        """Pydantic configuration"""
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda dt: dt.isoformat()
+        }

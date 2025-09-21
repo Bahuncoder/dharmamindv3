@@ -26,15 +26,15 @@ from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, Request, BackgroundTasks
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-from ..models.subscription import (
+from ...models.subscription import (
     SubscriptionCreateRequest, SubscriptionUpdateRequest,
     PaymentMethodCreateRequest, SubscriptionResponse,
     PaymentResponse, SubscriptionPlan, PaymentMethodInfo,
     UsageSummary, Invoice
 )
-from ..services.subscription_service import get_subscription_service
-from ..services.auth_service import get_auth_service
-from ..config import settings
+from ...services.subscription_service import get_subscription_service
+from ...services.auth_service import get_auth_service
+from ...config import settings
 
 logger = logging.getLogger(__name__)
 
