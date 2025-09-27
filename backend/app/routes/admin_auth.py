@@ -80,47 +80,84 @@ def verify_admin_token(credentials: HTTPAuthorizationCredentials = Depends(secur
             detail="Invalid admin token"
         )
 
-@router.post("/auth", response_model=AdminLoginResponse)
-async def admin_login(login_data: AdminLoginRequest):
-    """Secure admin authentication endpoint"""
-    admin_users = load_admin_users()
+@router.post("/login", response_model=AdminLoginResponse, summary="Admin Login")
+async def admin_login(credentials: AdminLoginRequest):
+    """
+    Authenticate admin user and return access token
     
-    # Check if admin user exists
-    if login_data.email not in admin_users:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid admin credentials"
+    - **email**: Admin email address
+    - **password**: Admin password
+    
+    Returns access token for authenticated admin
+    """
+    try:
+        admin_users = load_admin_users()
+        
+        # Initialize admin users if none exist
+        if not admin_users:
+            initialize_admin_users()
+            admin_users = load_admin_users()
+        
+        # Check if user exists and is active
+        if credentials.email not in admin_users:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials",
+                headers={"WWW-Authenticate": "Bearer"}
+            )
+        
+        admin_user = admin_users[credentials.email]
+        
+        if not admin_user.get("active", True):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Account is deactivated",
+                headers={"WWW-Authenticate": "Bearer"}
+            )
+        
+        # Verify password
+        if not pwd_context.verify(credentials.password, admin_user["password_hash"]):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials",
+                headers={"WWW-Authenticate": "Bearer"}
+            )
+        
+        # Create JWT token
+        access_token_expires = timedelta(hours=JWT_EXPIRY_HOURS)
+        token_data = {
+            "sub": credentials.email,
+            "email": credentials.email,
+            "name": admin_user.get("name", "Administrator"),
+            "role": admin_user.get("role", "admin"),
+            "exp": datetime.utcnow() + access_token_expires
+        }
+        
+        access_token = jwt.encode(token_data, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+        
+        # Update last login
+        admin_user["last_login"] = datetime.now().isoformat()
+        admin_users[credentials.email] = admin_user
+        save_admin_users(admin_users)
+        
+        return AdminLoginResponse(
+            access_token=access_token,
+            token_type="bearer",
+            expires_in=int(access_token_expires.total_seconds()),
+            admin_info=AdminInfo(
+                email=credentials.email,
+                name=admin_user.get("name", "Administrator"),
+                role=admin_user.get("role", "admin")
+            )
         )
-    
-    admin_user = admin_users[login_data.email]
-    
-    # Verify password using secure bcrypt verification
-    if not pwd_context.verify(login_data.password, admin_user["password_hash"]):
+        
+    except HTTPException:
+        raise
+    except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid admin credentials"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Authentication error: {str(e)}"
         )
-    
-    # Check if admin account is active
-    if not admin_user.get("active", True):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Admin account is deactivated"
-        )
-    
-    # Generate secure admin token
-    token = create_admin_token(login_data.email)
-    
-    # Update last login
-    admin_users[login_data.email]["last_login"] = datetime.now().isoformat()
-    save_admin_users(admin_users)
-    
-    return AdminLoginResponse(
-        success=True,
-        token=token,
-        message="Admin authentication successful",
-        expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60  # seconds
-    )
 
 @router.get("/verify")
 async def verify_admin_session(current_admin: dict = Depends(verify_admin_token)):
@@ -149,10 +186,11 @@ def initialize_admin_users():
     admin_users = load_admin_users()
     
     if not admin_users:
-        # Create default admin with secure password
+        # Create default admin with secure password (truncate to 72 bytes for bcrypt)
+        secure_password = "SecureAdminPassword2025!"[:72]  # Truncate for bcrypt compatibility
         default_admin = {
             "admin@dharmamind.com": {
-                "password_hash": pwd_context.hash("SecureAdminPassword2025!"),
+                "password_hash": pwd_context.hash(secure_password),
                 "name": "System Administrator",
                 "role": "admin",
                 "active": True,
@@ -166,5 +204,4 @@ def initialize_admin_users():
         print("🔑 Password: SecureAdminPassword2025!")
         print("⚠️  Please change this password immediately after first login")
 
-# Initialize admin users on import
-initialize_admin_users()
+# Note: Admin users will be initialized on first login attempt

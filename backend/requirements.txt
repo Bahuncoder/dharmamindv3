@@ -1,4 +1,4 @@
-# DharmaMind Enterprise Authentication - Production Requirements
+# DharmaMind Enterprise Authentication & AI - Production Requirements
 
 # Core FastAPI and ASGI
 fastapi==0.104.1
@@ -18,7 +18,7 @@ aioredis==2.0.1
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0
 python-multipart==0.0.6
-cryptography==41.0.7
+cryptography==42.0.2
 
 # Data validation and serialization
 pydantic==2.5.0
@@ -47,6 +47,21 @@ pillow==10.1.0
 
 # Environment and configuration
 python-dotenv==1.0.0
+
+# AI/ML Dependencies for DharmaLLM Integration
+torch>=2.1.0
+transformers>=4.35.0
+tokenizers>=0.15.0
+numpy>=1.24.3
+scikit-learn>=1.3.2
+pandas>=2.1.4
+nltk>=3.8.1
+spacy>=3.7.2
+tqdm>=4.66.0
+pyyaml>=6.0.1
+loguru>=0.7.2
+aiofiles>=23.2.1
+psutil>=5.9.6
 
 # Multi-Factor Authentication (MFA)
 pyotp==2.9.0

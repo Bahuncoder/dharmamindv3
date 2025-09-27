@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SparklesIcon } from '@heroicons/react/24/outline';
-import { useColors } from '../contexts/ColorContext';
+import { useColor } from '../contexts/ColorContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { useRouter } from 'next/router';
@@ -16,7 +16,7 @@ interface UserProfileMenuProps {
 }
 
 const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, user: propUser, isDemo = false, onLogout: customLogout }) => {
-  const { currentTheme } = useColors();
+  const { currentTheme } = useColor();
   const { user: authUser, isAuthenticated, logout } = useAuth();
   const { upgradePlan } = useSubscription();
   const router = useRouter();

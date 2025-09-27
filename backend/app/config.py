@@ -253,7 +253,11 @@ class Settings(BaseSettings):
     HUGGINGFACE_MODEL: str = "microsoft/DialoGPT-large"
     HUGGINGFACE_ENDPOINT: Optional[str] = None
     
-    # DharmaLLM Configuration (Local Model)
+    # DharmaLLM Service Configuration (Microservice)
+    DHARMALLM_SERVICE_URL: str = "http://localhost:8001"
+    DHARMALLM_SERVICE_TIMEOUT: int = 30
+    
+    # Legacy DharmaLLM Configuration (Deprecated - moved to microservice)
     DHARMALLM_MODEL_PATH: str = "./models/dharmallm-7b"
     DHARMALLM_MAX_LENGTH: int = 2048
     DHARMALLM_TEMPERATURE: float = 0.7

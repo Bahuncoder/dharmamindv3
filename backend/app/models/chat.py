@@ -181,3 +181,110 @@ class EvaluationResult(BaseModel):
         json_encoders = {
             datetime: lambda dt: dt.isoformat()
         }
+
+class DharmicChatRequest(BaseModel):
+    """Request for dharmic chat with enhanced spiritual processing"""
+    message: str = Field(..., description="User message", min_length=1, max_length=10000)
+    conversation_id: Optional[str] = Field(default=None, description="Conversation identifier")
+    user_id: Optional[str] = Field(default="seeker", description="User identifier")
+    
+    # Dharmic enhancement options
+    include_personal_growth: bool = Field(default=True, description="Include personal growth insights")
+    include_spiritual_guidance: bool = Field(default=True, description="Include spiritual guidance")
+    include_ethical_guidance: bool = Field(default=True, description="Include ethical guidance")
+    response_style: str = Field(default="conversational", description="Response style: conversational, wise, practical")
+
+class DharmicChatResponse(BaseModel):
+    """Response from dharmic chat with spiritual enhancements"""
+    response: str = Field(..., description="Generated response")
+    conversation_id: str = Field(..., description="Conversation identifier")
+    
+    # Dharmic enhancements
+    dharmic_insights: List[str] = Field(default_factory=list, description="Dharmic insights")
+    growth_suggestions: List[str] = Field(default_factory=list, description="Personal growth suggestions")
+    spiritual_context: str = Field(default="", description="Spiritual context")
+    ethical_guidance: str = Field(default="", description="Ethical guidance")
+    conversation_style: str = Field(default="conversational", description="Applied conversation style")
+    
+    # Processing information
+    processing_info: Dict[str, Any] = Field(default_factory=dict, description="Processing metadata")
+    
+    class Config:
+        """Pydantic configuration"""
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda dt: dt.isoformat()
+        }
+
+# ===============================
+# RISHI PERSONA MODELS
+# ===============================
+
+class RishiType(str, Enum):
+    """Available Rishi personas"""
+    VALMIKI = "valmiki"
+    VYASA = "vyasa" 
+    NARADA = "narada"
+    VASISHTA = "vasishta"
+    PATANJALI = "patanjali"
+
+class ConversationType(str, Enum):
+    """Types of conversations"""
+    RISHI_GUIDANCE = "rishi_guidance"
+    GENERAL_SPIRITUAL = "general_spiritual"
+    MEDITATION_SUPPORT = "meditation_support"
+    SCRIPTURAL_STUDY = "scriptural_study"
+
+class RishiChatRequest(BaseModel):
+    """Chat request with specific Rishi"""
+    message: str = Field(..., min_length=1, max_length=2000, description="User message")
+    rishi_id: RishiType = Field(..., description="Selected Rishi persona")
+    conversation_id: str = Field(..., description="Conversation identifier")
+    context: Optional[Dict[str, Any]] = Field(default=None, description="Additional context")
+    guidance_level: Optional[str] = Field(default="balanced", description="Guidance depth: light, balanced, deep")
+
+class RishiSelectionRequest(BaseModel):
+    """Request to select a Rishi for conversation"""
+    rishi_id: RishiType = Field(..., description="Selected Rishi persona")
+    context: Optional[Dict[str, Any]] = Field(default=None, description="Initial context")
+    conversation_goal: Optional[str] = Field(default=None, description="Goal for the conversation")
+
+class RishiInfo(BaseModel):
+    """Information about a Rishi persona"""
+    id: RishiType
+    name: str
+    specialty: str
+    description: str
+    style: str
+    context: str
+    avatar_url: Optional[str] = None
+    premium_only: bool = False
+    
+class UserChatPreferences(BaseModel):
+    """User's chat preferences"""
+    preferred_rishis: List[RishiType] = Field(default_factory=list, description="Preferred Rishi personas")
+    conversation_style: str = Field(default="balanced", description="Conversation style: casual, balanced, formal")
+    spiritual_background: str = Field(default="general", description="Spiritual background")
+    language_preference: str = Field(default="english", description="Language preference")
+    guidance_depth: str = Field(default="balanced", description="Guidance depth preference")
+    topics_of_interest: List[str] = Field(default_factory=list, description="Topics of interest")
+
+class ChatHistoryResponse(BaseModel):
+    """Conversation history response"""
+    conversation_id: str
+    conversation_type: ConversationType
+    rishi_name: Optional[str] = None
+    started_at: datetime
+    last_message_at: datetime
+    message_count: int
+    messages: List[ChatMessage]
+    summary: Optional[str] = None
+
+class ChatUsageStats(BaseModel):
+    """User's chat usage statistics"""
+    user_id: str
+    current_period_usage: Dict[str, int] = Field(default_factory=dict, description="Current period usage by feature")
+    total_usage: Dict[str, int] = Field(default_factory=dict, description="Total usage by feature")
+    favorite_rishi: Optional[str] = Field(default=None, description="Most used Rishi")
+    most_discussed_topics: List[str] = Field(default_factory=list, description="Most discussed topics")
+    average_session_length: Optional[float] = Field(default=None, description="Average session length in minutes")

@@ -10,7 +10,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import { useColors } from '../contexts/ColorContext';
+import { useColor } from '../contexts/ColorContext';
 import SubscriptionDashboard from '../components/SubscriptionDashboard';
 import { useNavigation } from '../hooks/useNavigation';
 import Logo from '../components/Logo';
@@ -22,7 +22,7 @@ import Logo from '../components/Logo';
 const SubscriptionAnalyticsPage: React.FC = () => {
   const { data: session } = useSession();
   const { goToAuth } = useNavigation();
-  const { currentTheme } = useColors();
+  const { currentTheme } = useColor();
 
   // Redirect to auth if not logged in (optional, can allow demo mode)
   if (!session) {

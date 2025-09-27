@@ -1,7 +1,7 @@
 # 🐳 DharmaMind Complete Docker Compose Stack
 # Production-ready deployment with all services
 
-version: '3.8'
+version: "3.8"
 
 services:
   # ================================
@@ -63,23 +63,25 @@ services:
       # Database
       DATABASE_URL: postgresql://dharmamind:${DATABASE_PASSWORD:-dharmamind_secure_pass}@postgres:5432/dharmamind
       REDIS_URL: redis://:${REDIS_PASSWORD:-redis_secure_pass}@redis:6379/0
-      
+
       # Application
       ENVIRONMENT: ${ENVIRONMENT:-production}
       DEBUG: "false"
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       SECRET_KEY: ${SECRET_KEY}
       JWT_SECRET: ${JWT_SECRET}
-      
-      # API Keys
+
+      # API Keys (kept for potential future integrations)
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       GOOGLE_API_KEY: ${GOOGLE_API_KEY}
-      
+
+      # Note: DharmaLLM integration removed - chat handled by frontend
+
       # Security
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,https://dharmamind.ai}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,dharmamind.ai,api.dharmamind.ai}
-      
+
       # Monitoring
       ENABLE_METRICS: "true"
       ENABLE_TRACING: "true"
@@ -90,6 +92,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      # Note: dharmallm dependency removed - chat is frontend-only
     networks:
       - dharmamind_network
     volumes:
@@ -155,19 +158,34 @@ services:
     build:
       context: ./dharmallm
       dockerfile: Dockerfile
-    container_name: dharmamind_llm
+    container_name: dharmamind_dharmallm
     restart: unless-stopped
     environment:
+      # Application environment
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      HOST: "0.0.0.0"
+      PORT: "8001"
+
+      # Model configuration
       MODEL_PATH: /app/models
       DEVICE: ${LLM_DEVICE:-cpu}
       MAX_TOKENS: ${LLM_MAX_TOKENS:-2048}
+
+      # Logging
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     volumes:
       - ./dharmallm/models:/app/models
-      - llm_cache:/app/cache
+      - ./dharmallm/cache:/app/cache
+      - ./dharmallm/logs:/app/logs
     ports:
-      - "8001:8000"
+      - "8001:8001"
     networks:
       - dharmamind_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     deploy:
       resources:
         limits:
@@ -183,12 +201,12 @@ services:
     container_name: dharmamind_prometheus
     restart: unless-stopped
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--web.enable-lifecycle'
-      - '--web.enable-admin-api'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle"
+      - "--web.enable-admin-api"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ./monitoring/alert_rules.yml:/etc/prometheus/alert_rules.yml:ro
@@ -223,9 +241,9 @@ services:
     container_name: dharmamind_alertmanager
     restart: unless-stopped
     command:
-      - '--config.file=/etc/alertmanager/config.yml'
-      - '--storage.path=/alertmanager'
-      - '--web.external-url=http://localhost:9093'
+      - "--config.file=/etc/alertmanager/config.yml"
+      - "--storage.path=/alertmanager"
+      - "--web.external-url=http://localhost:9093"
     volumes:
       - ./monitoring/alertmanager.yml:/etc/alertmanager/config.yml:ro
       - alertmanager_data:/alertmanager
@@ -244,9 +262,9 @@ services:
     environment:
       COLLECTOR_OTLP_ENABLED: "true"
     ports:
-      - "16686:16686"  # Jaeger UI
-      - "14268:14268"  # HTTP collector
-      - "14250:14250"  # gRPC collector
+      - "16686:16686" # Jaeger UI
+      - "14268:14268" # HTTP collector
+      - "14250:14250" # gRPC collector
     networks:
       - dharmamind_network
 

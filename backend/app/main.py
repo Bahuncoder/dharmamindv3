@@ -16,19 +16,20 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-# Import our application modules - Authentication Only
+# Import routers
 from .routes.auth import router as auth_router
+from .routes.mfa_auth import router as mfa_router  
 from .routes.admin_auth import router as admin_auth_router
 from .routes.feedback import router as feedback_router
-from .routes.mfa_auth import router as mfa_router
 from .routes.health import router as health_router
+from .routes.llm_router import router as llm_router  # Simple LLM routing
 
 # Import database and config
 from .db.database import DatabaseManager
 from .config import settings
 
 # Import security middleware
-from .middleware.security_middleware import SecurityMiddleware
+from .middleware.security import setup_security_middleware
 
 # Configure logging
 logging.basicConfig(
@@ -78,7 +79,7 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
@@ -90,15 +91,19 @@ app.add_middleware(
     allowed_hosts=settings.ALLOWED_HOSTS
 )
 
-# Add security middleware
-app.add_middleware(SecurityMiddleware)
+# Setup security middleware
+setup_security_middleware(app)
 
-# Include routers - Authentication and Admin Only
+# Include routers - Authentication, Chat, and Admin
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
 app.include_router(mfa_router, prefix="/api/v1/mfa", tags=["multi-factor-auth"])
 app.include_router(admin_auth_router, prefix="/api/admin", tags=["admin-authentication"])
 app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
+app.include_router(llm_router, tags=["llm-routing"])  # Simple authenticated LLM routing
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
+
+# Note: Chat functionality now handled entirely by frontend
+# Note: Wisdom functionality also handled by frontend with comprehensive fallback responses
 
 # Import and include security dashboard router
 from .routes.security_dashboard import router as security_dashboard_router
@@ -108,11 +113,12 @@ app.include_router(security_dashboard_router, prefix="/api/v1", tags=["security-
 async def root():
     """Root endpoint."""
     return {
-        "service": "DharmaMind Authentication Backend",
+        "service": "DharmaMind Complete Backend",
         "version": "2.0.0",
         "status": "operational",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "purpose": "Clean authentication and user management service"
+        "purpose": "Authentication, chat, and AI-powered spiritual guidance",
+        "features": ["authentication", "dharmic_chat", "spiritual_ai", "user_management"]
     }
 
 @app.get("/api/v1/status")
@@ -123,11 +129,12 @@ async def status():
         db_status = "connected" if database_manager and await database_manager.health_check() else "disconnected"
         
         return {
-            "service": "authentication",
+            "service": "dharmic_chat_complete",
             "status": "healthy",
             "database": db_status,
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "version": "2.0.0"
+            "version": "2.0.0",
+            "features": ["authentication", "dharmic_chat", "spiritual_ai", "dharmallm_integration"]
         }
     except Exception as e:
         logger.error(f"Status check failed: {e}")

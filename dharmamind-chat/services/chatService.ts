@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-// Use the backend API URL - port 8000 where the comprehensive backend is running
+// DharmaLLM API URL - Direct connection to AI service
+const DHARMALLM_API_URL = process.env.NEXT_PUBLIC_DHARMALLM_API_URL || 'http://localhost:8001';
+
+// Backend API URL - for authentication and other services  
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export interface ChatMessage {
@@ -139,7 +142,7 @@ class ChatService {
   }
 
   /**
-   * Send a chat message - Using comprehensive internal spiritual processing
+   * Send a chat message - Try DharmaLLM AI first, then backend, then fallback
    */
   async sendMessage(
     message: string,
@@ -147,33 +150,131 @@ class ChatService {
     userId?: string
   ): Promise<ChatResponse> {
     try {
-      // Use comprehensive internal spiritual processing
-      console.log('Using comprehensive internal spiritual processing...');
-      const spiritualResponse = await this.getComprehensiveDharmicWisdom(message, userId);
+      // CORRECT ARCHITECTURE: Backend first (with auth), then DharmaLLM fallback
+      console.log('🔐 Routing through authenticated backend...');
       
-      return {
-        response: spiritualResponse.response,
-        conversation_id: conversationId || 'internal-spiritual',
-        message_id: `spiritual-${Date.now()}`,
-        timestamp: spiritualResponse.timestamp,
-        dharmic_insights: spiritualResponse.dharmic_insights,
-        growth_suggestions: spiritualResponse.growth_suggestions,
-        spiritual_context: spiritualResponse.spiritual_context,
-        metadata: {
-          source: 'comprehensive-dharmic-wisdom',
-          wisdom_source: spiritualResponse.wisdom_source,
-          consciousness_level: spiritualResponse.consciousness_level,
-          dharma_assessment: spiritualResponse.dharma_assessment,
-          confidence: spiritualResponse.confidence,
-          emotional_tone: spiritualResponse.emotional_tone
-        }
-      };
+      const response = await axios.post(`${BACKEND_URL}/api/v1/chat`, {
+        message: message,
+        conversation_id: conversationId,
+        user_id: userId
+      }, {
+        timeout: 15000,
+        headers: this.getHeaders()
+      });
+
+      if (response.status === 200) {
+        const result = response.data;
+        console.log('✅ Authenticated backend route successful');
+        
+        return {
+          response: result.message,
+          conversation_id: result.conversation_id,
+          message_id: result.message_id,
+          timestamp: result.timestamp,
+          confidence_score: result.confidence,
+          dharmic_alignment: result.dharmic_alignment,
+          processing_time: result.processing_time,
+          sources: result.modules_used || ['DharmaLLM via Backend'],
+          model_used: result.model_used,
+          metadata: {
+            source: 'authenticated_backend',
+            service_url: BACKEND_URL,
+            user_authenticated: true,
+            ...result.evaluation_details
+          }
+        };
+      } else {
+        throw new Error(`Backend returned status ${response.status}`);
+      }
 
     } catch (error) {
-      console.error('Error sending chat message:', error);
+      console.error('❌ Backend route failed:', error);
       
-      // Return enhanced fallback response
-      return this.generateEnhancedFallbackResponse(message);
+      // Fallback 1: Try DharmaLLM directly (unauthenticated)
+      try {
+        console.log('⚠️ Trying DharmaLLM directly (unauthenticated)...');
+        
+        const response = await axios.post(`${DHARMALLM_API_URL}/api/v1/chat`, {
+          message: message,
+          session_id: conversationId,
+          user_id: userId,
+          temperature: 0.8,
+          max_tokens: 1024
+        }, {
+          timeout: 15000,
+          headers: this.getHeaders()
+        });
+
+        if (response.status === 200) {
+          const result = response.data;
+          console.log('⚠️ DharmaLLM direct connection (unauthenticated)');
+          
+          return {
+            response: result.response,
+            conversation_id: result.session_id || conversationId || 'direct-session',
+            message_id: `direct-${Date.now()}`,
+            timestamp: result.timestamp,
+            confidence_score: result.confidence,
+            dharmic_alignment: result.dharmic_alignment,
+            processing_time: result.processing_time,
+            sources: result.sources || ['DharmaLLM Direct'],
+            model_used: 'DharmaLLM-Direct',
+            metadata: {
+              source: 'dharmallm-direct',
+              service_url: DHARMALLM_API_URL,
+              user_authenticated: false,
+              warning: 'Unauthenticated access - limited features'
+            }
+          };
+        } else {
+          throw new Error(`DharmaLLM service returned status ${response.status}`);
+        }
+
+      } catch (dharmallmError) {
+        console.error('❌ DharmaLLM direct also failed:', dharmallmError);
+        
+        // Final fallback: Internal responses
+        return this.getFallbackResponse(message, conversationId);
+      }
+    }
+  }
+            model_used: result.model_used || 'Backend API',
+            metadata: {
+              source: 'backend-api-fallback',
+              service_url: BACKEND_URL,
+              fallback_reason: 'DharmaLLM service unavailable'
+            }
+          };
+        } else {
+          throw new Error(`Backend API returned status ${response.status}`);
+        }
+        
+      } catch (backendError) {
+        console.error('❌ Backend API also failed:', backendError);
+        console.log('🔄 Using comprehensive internal spiritual processing...');
+        
+        // Final fallback to comprehensive internal spiritual processing
+        const spiritualResponse = await this.getComprehensiveDharmicWisdom(message, userId);
+        
+        return {
+          response: spiritualResponse.response,
+          conversation_id: conversationId || 'internal-spiritual',
+          message_id: `spiritual-${Date.now()}`,
+          timestamp: spiritualResponse.timestamp,
+          dharmic_insights: spiritualResponse.dharmic_insights,
+          growth_suggestions: spiritualResponse.growth_suggestions,
+          spiritual_context: spiritualResponse.spiritual_context,
+          metadata: {
+            source: 'comprehensive-dharmic-wisdom-fallback',
+            wisdom_source: spiritualResponse.wisdom_source,
+            consciousness_level: spiritualResponse.consciousness_level,
+            dharma_assessment: spiritualResponse.dharma_assessment,
+            confidence: spiritualResponse.confidence,
+            emotional_tone: spiritualResponse.emotional_tone,
+            fallback_reason: 'All external services unavailable'
+          }
+        };
+      }
     }
   }
 
