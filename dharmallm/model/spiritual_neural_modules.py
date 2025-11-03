@@ -1033,25 +1033,365 @@ class SankalpaNeuralModule(BaseSpiritualModule):
 
 
 # ===============================
+# MISSING MODULES - PHASE 5
+# ===============================
+
+class ArthaNeuralModule(nn.Module):
+    """
+    Artha (Wealth/Prosperity) Neural Module - CRITICAL MODULE!
+    
+    Completes the 4 Purusharthas (life goals):
+    1. Dharma (righteousness)
+    2. Artha (wealth) - THIS MODULE
+    3. Kama (desire)
+    4. Moksha (liberation)
+    
+    Learns dharmic wealth, prosperity consciousness, and material success
+    aligned with spiritual growth.
+    """
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        hidden_size = config.hidden_size
+        
+        # Multi-head attention for contextual understanding
+        self.attention = nn.MultiheadAttention(
+            embed_dim=hidden_size,
+            num_heads=config.num_attention_heads,
+            dropout=config.dropout,
+            batch_first=True
+        )
+        
+        self.attention_norm = nn.LayerNorm(hidden_size)
+        
+        # Feed-forward network
+        self.feed_forward = nn.Sequential(
+            nn.Linear(hidden_size, config.intermediate_size),
+            nn.GELU(),
+            nn.Dropout(config.dropout),
+            nn.Linear(config.intermediate_size, hidden_size),
+            nn.Dropout(config.dropout)
+        )
+        
+        self.ff_norm = nn.LayerNorm(hidden_size)
+        
+        # Artha-specific insight detectors
+        self.dharmic_wealth_detector = nn.Linear(hidden_size, 1)
+        self.abundance_detector = nn.Linear(hidden_size, 1)
+        self.prosperity_consciousness_detector = nn.Linear(hidden_size, 1)
+        self.resource_wisdom_detector = nn.Linear(hidden_size, 1)
+        self.wealth_responsibility_detector = nn.Linear(hidden_size, 1)
+        
+        self.insight_projection = nn.Linear(hidden_size, hidden_size)
+    
+    def forward(self, hidden_states: torch.Tensor) -> tuple:
+        """Forward pass for Artha module"""
+        # Multi-head attention
+        attn_output, _ = self.attention(
+            hidden_states, hidden_states, hidden_states
+        )
+        hidden_states = self.attention_norm(hidden_states + attn_output)
+        
+        # Feed-forward
+        ff_output = self.feed_forward(hidden_states)
+        hidden_states = self.ff_norm(hidden_states + ff_output)
+        
+        # Compute Artha insights
+        pooled = hidden_states.mean(dim=1)
+        
+        insights = {
+            'artha_dharmic_wealth': torch.sigmoid(
+                self.dharmic_wealth_detector(pooled)
+            ).squeeze(-1),
+            'artha_abundance': torch.sigmoid(
+                self.abundance_detector(pooled)
+            ).squeeze(-1),
+            'artha_prosperity_consciousness': torch.sigmoid(
+                self.prosperity_consciousness_detector(pooled)
+            ).squeeze(-1),
+            'artha_resource_wisdom': torch.sigmoid(
+                self.resource_wisdom_detector(pooled)
+            ).squeeze(-1),
+            'artha_wealth_responsibility': torch.sigmoid(
+                self.wealth_responsibility_detector(pooled)
+            ).squeeze(-1),
+        }
+        
+        # Enhanced hidden states with Artha understanding
+        enhanced = hidden_states + self.insight_projection(hidden_states) * 0.1
+        
+        return enhanced, insights
+
+
+class RakshaNeuralModule(nn.Module):
+    """
+    Raksha (Protection) Neural Module
+    
+    Spiritual protection, divine shields, protective mantras and practices.
+    Essential for spiritual safety and energetic boundaries.
+    """
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        hidden_size = config.hidden_size
+        
+        # Multi-head attention
+        self.attention = nn.MultiheadAttention(
+            embed_dim=hidden_size,
+            num_heads=config.num_attention_heads,
+            dropout=config.dropout,
+            batch_first=True
+        )
+        
+        self.attention_norm = nn.LayerNorm(hidden_size)
+        
+        # Feed-forward network
+        self.feed_forward = nn.Sequential(
+            nn.Linear(hidden_size, config.intermediate_size),
+            nn.GELU(),
+            nn.Dropout(config.dropout),
+            nn.Linear(config.intermediate_size, hidden_size),
+            nn.Dropout(config.dropout)
+        )
+        
+        self.ff_norm = nn.LayerNorm(hidden_size)
+        
+        # Raksha-specific insight detectors
+        self.protection_need_detector = nn.Linear(hidden_size, 1)
+        self.mantra_shield_detector = nn.Linear(hidden_size, 1)
+        self.energy_boundary_detector = nn.Linear(hidden_size, 1)
+        self.divine_protection_detector = nn.Linear(hidden_size, 1)
+        self.spiritual_safety_detector = nn.Linear(hidden_size, 1)
+        
+        self.insight_projection = nn.Linear(hidden_size, hidden_size)
+    
+    def forward(self, hidden_states: torch.Tensor) -> tuple:
+        """Forward pass for Raksha module"""
+        # Attention
+        attn_output, _ = self.attention(
+            hidden_states, hidden_states, hidden_states
+        )
+        hidden_states = self.attention_norm(hidden_states + attn_output)
+        
+        # Feed-forward
+        ff_output = self.feed_forward(hidden_states)
+        hidden_states = self.ff_norm(hidden_states + ff_output)
+        
+        # Compute Raksha insights
+        pooled = hidden_states.mean(dim=1)
+        
+        insights = {
+            'raksha_protection_need': torch.sigmoid(
+                self.protection_need_detector(pooled)
+            ).squeeze(-1),
+            'raksha_mantra_shield': torch.sigmoid(
+                self.mantra_shield_detector(pooled)
+            ).squeeze(-1),
+            'raksha_energy_boundary': torch.sigmoid(
+                self.energy_boundary_detector(pooled)
+            ).squeeze(-1),
+            'raksha_divine_protection': torch.sigmoid(
+                self.divine_protection_detector(pooled)
+            ).squeeze(-1),
+            'raksha_spiritual_safety': torch.sigmoid(
+                self.spiritual_safety_detector(pooled)
+            ).squeeze(-1),
+        }
+        
+        # Enhanced with protection understanding
+        enhanced = hidden_states + self.insight_projection(hidden_states) * 0.1
+        
+        return enhanced, insights
+
+
+class RaashiNeuralModule(nn.Module):
+    """
+    Raashi (Vedic Astrology) Neural Module
+    
+    Vedic astrology, birth charts (kundali), planetary influences,
+    and cosmic timing. A specialized Hindu science.
+    """
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        hidden_size = config.hidden_size
+        
+        # Multi-head attention
+        self.attention = nn.MultiheadAttention(
+            embed_dim=hidden_size,
+            num_heads=config.num_attention_heads,
+            dropout=config.dropout,
+            batch_first=True
+        )
+        
+        self.attention_norm = nn.LayerNorm(hidden_size)
+        
+        # Feed-forward network
+        self.feed_forward = nn.Sequential(
+            nn.Linear(hidden_size, config.intermediate_size),
+            nn.GELU(),
+            nn.Dropout(config.dropout),
+            nn.Linear(config.intermediate_size, hidden_size),
+            nn.Dropout(config.dropout)
+        )
+        
+        self.ff_norm = nn.LayerNorm(hidden_size)
+        
+        # Raashi-specific insight detectors
+        self.astrological_inquiry_detector = nn.Linear(hidden_size, 1)
+        self.planetary_influence_detector = nn.Linear(hidden_size, 1)
+        self.nakshatra_wisdom_detector = nn.Linear(hidden_size, 1)
+        self.timing_consciousness_detector = nn.Linear(hidden_size, 1)
+        self.karmic_pattern_detector = nn.Linear(hidden_size, 1)
+        
+        self.insight_projection = nn.Linear(hidden_size, hidden_size)
+    
+    def forward(self, hidden_states: torch.Tensor) -> tuple:
+        """Forward pass for Raashi module"""
+        # Attention
+        attn_output, _ = self.attention(
+            hidden_states, hidden_states, hidden_states
+        )
+        hidden_states = self.attention_norm(hidden_states + attn_output)
+        
+        # Feed-forward
+        ff_output = self.feed_forward(hidden_states)
+        hidden_states = self.ff_norm(hidden_states + ff_output)
+        
+        # Compute Raashi insights
+        pooled = hidden_states.mean(dim=1)
+        
+        insights = {
+            'raashi_astrological_inquiry': torch.sigmoid(
+                self.astrological_inquiry_detector(pooled)
+            ).squeeze(-1),
+            'raashi_planetary_influence': torch.sigmoid(
+                self.planetary_influence_detector(pooled)
+            ).squeeze(-1),
+            'raashi_nakshatra_wisdom': torch.sigmoid(
+                self.nakshatra_wisdom_detector(pooled)
+            ).squeeze(-1),
+            'raashi_timing_consciousness': torch.sigmoid(
+                self.timing_consciousness_detector(pooled)
+            ).squeeze(-1),
+            'raashi_karmic_pattern': torch.sigmoid(
+                self.karmic_pattern_detector(pooled)
+            ).squeeze(-1),
+        }
+        
+        # Enhanced with astrological understanding
+        enhanced = hidden_states + self.insight_projection(hidden_states) * 0.1
+        
+        return enhanced, insights
+
+
+class SatsangNeuralModule(nn.Module):
+    """
+    Satsang (Community/Gathering) Neural Module
+    
+    Spiritual community, collective wisdom, group practices,
+    and the power of gathering with like-minded seekers.
+    """
+    
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        hidden_size = config.hidden_size
+        
+        # Multi-head attention
+        self.attention = nn.MultiheadAttention(
+            embed_dim=hidden_size,
+            num_heads=config.num_attention_heads,
+            dropout=config.dropout,
+            batch_first=True
+        )
+        
+        self.attention_norm = nn.LayerNorm(hidden_size)
+        
+        # Feed-forward network
+        self.feed_forward = nn.Sequential(
+            nn.Linear(hidden_size, config.intermediate_size),
+            nn.GELU(),
+            nn.Dropout(config.dropout),
+            nn.Linear(config.intermediate_size, hidden_size),
+            nn.Dropout(config.dropout)
+        )
+        
+        self.ff_norm = nn.LayerNorm(hidden_size)
+        
+        # Satsang-specific insight detectors
+        self.community_need_detector = nn.Linear(hidden_size, 1)
+        self.collective_practice_detector = nn.Linear(hidden_size, 1)
+        self.wisdom_sharing_detector = nn.Linear(hidden_size, 1)
+        self.spiritual_friendship_detector = nn.Linear(hidden_size, 1)
+        self.group_energy_detector = nn.Linear(hidden_size, 1)
+        
+        self.insight_projection = nn.Linear(hidden_size, hidden_size)
+    
+    def forward(self, hidden_states: torch.Tensor) -> tuple:
+        """Forward pass for Satsang module"""
+        # Attention
+        attn_output, _ = self.attention(
+            hidden_states, hidden_states, hidden_states
+        )
+        hidden_states = self.attention_norm(hidden_states + attn_output)
+        
+        # Feed-forward
+        ff_output = self.feed_forward(hidden_states)
+        hidden_states = self.ff_norm(hidden_states + ff_output)
+        
+        # Compute Satsang insights
+        pooled = hidden_states.mean(dim=1)
+        
+        insights = {
+            'satsang_community_need': torch.sigmoid(
+                self.community_need_detector(pooled)
+            ).squeeze(-1),
+            'satsang_collective_practice': torch.sigmoid(
+                self.collective_practice_detector(pooled)
+            ).squeeze(-1),
+            'satsang_wisdom_sharing': torch.sigmoid(
+                self.wisdom_sharing_detector(pooled)
+            ).squeeze(-1),
+            'satsang_spiritual_friendship': torch.sigmoid(
+                self.spiritual_friendship_detector(pooled)
+            ).squeeze(-1),
+            'satsang_group_energy': torch.sigmoid(
+                self.group_energy_detector(pooled)
+            ).squeeze(-1),
+        }
+        
+        # Enhanced with community understanding
+        enhanced = hidden_states + self.insight_projection(hidden_states) * 0.1
+        
+        return enhanced, insights
+
+
+# ===============================
 # SPIRITUAL MODULES CONTAINER
 # ===============================
 
 class AllSpiritualModules(nn.Module):
     """
-    Container for all 37 spiritual neural modules - COMPLETE DHARMIC SYSTEM!
+    Container for all 41 spiritual neural modules - COMPLETE DHARMIC SYSTEM!
     
     This class holds all spiritual modules and provides
     unified interface for integration into the LLM.
     
-    MODULES (37 total - FULL SPIRITUAL + PHILOSOPHICAL INTELLIGENCE):
+    MODULES (41 total - FULL SPIRITUAL + PHILOSOPHICAL INTELLIGENCE):
     - Core Spiritual Paths (8): Dharma, Karma, Moksha, Bhakti, Jnana,
       Ahimsa, Seva, Yoga
     - Consciousness (8): Atman, Chitta, Manas, Ahamkara, Ananda,
       Dhyana, Smarana, Sankalpa
     - Crisis (6): Career, Financial, Health, Clarity, Leadership, Wellness
-    - Life Path (5): Grihastha, Varna, Kama, Tapas, Shraddha
+    - Life Path (9): Grihastha, Varna, Kama, Tapas, Shraddha, Artha, Raksha, Raashi, Satsang
     - Energy & Protection (4): Shakti, Shanti, Satya, Guru
     - Darshana/Philosophy (6): Vedanta, Yoga, Samkhya, Nyaya, Vaisheshika, Mimamsa
+    
+    NOTE: Artha completes the 4 Purusharthas (Dharma, Artha, Kama, Moksha)!
     """
     
     def __init__(self, hidden_size: int, dropout: float = 0.1):
@@ -1095,7 +1435,7 @@ class AllSpiritualModules(nn.Module):
         self.leadership = LeadershipNeuralModule(hidden_size, dropout)
         self.wellness = WellnessNeuralModule(hidden_size, dropout)
         
-        # Life Path modules (5) - Phase 2
+        # Life Path modules (9) - Phase 2 + Phase 5 (missing modules added)
         from model.life_path_neural_modules import (
             GrihasthaModule,
             VarnaNeuralModule,
@@ -1108,6 +1448,21 @@ class AllSpiritualModules(nn.Module):
         self.kama = KamaNeuralModule(hidden_size, dropout)
         self.tapas = TapasNeuralModule(hidden_size, dropout)
         self.shraddha = ShraddhaNeuralModule(hidden_size, dropout)
+        
+        # Missing modules (4) - Phase 5 CRITICAL: Completes 4 Purusharthas!
+        # Now defined directly in this file above!
+        class SimpleConfig:
+            def __init__(self, h, heads, intermediate, drop):
+                self.hidden_size = h
+                self.num_attention_heads = heads
+                self.intermediate_size = intermediate
+                self.dropout = drop
+        
+        missing_config = SimpleConfig(hidden_size, 8, 2048, dropout)
+        self.artha = ArthaNeuralModule(missing_config)
+        self.raksha = RakshaNeuralModule(missing_config)
+        self.raashi = RaashiNeuralModule(missing_config)
+        self.satsang = SatsangNeuralModule(missing_config)
         
         # Energy & Protection modules (4) - Phase 3 Final
         from model.energy_protection_neural_modules import (
@@ -1148,7 +1503,7 @@ class AllSpiritualModules(nn.Module):
         self.module_router = nn.Sequential(
             nn.Linear(hidden_size, 64),
             nn.ReLU(),
-            nn.Linear(64, 37),  # 37 modules - COMPLETE SYSTEM! (16+6+5+4+6)
+            nn.Linear(64, 41),  # 41 modules - COMPLETE SYSTEM! (8+8+6+9+4+6)
             nn.Sigmoid()
         )
         
@@ -1179,7 +1534,7 @@ class AllSpiritualModules(nn.Module):
         
         # Route to appropriate modules
         if apply_all:
-            # Apply all modules sequentially (37 total - COMPLETE SYSTEM!)
+            # Apply all modules sequentially (41 total - COMPLETE SYSTEM!)
             modules = [
                 # Core spiritual paths (8)
                 self.dharma, self.karma, self.moksha, self.bhakti,
@@ -1190,9 +1545,10 @@ class AllSpiritualModules(nn.Module):
                 # Crisis modules (6)
                 self.career_crisis, self.financial_crisis, self.health_crisis,
                 self.clarity, self.leadership, self.wellness,
-                # Life path modules (5)
+                # Life path modules (9) - includes 4 MISSING modules from Phase 5!
                 self.grihastha, self.varna, self.kama,
                 self.tapas, self.shraddha,
+                self.artha, self.raksha, self.raashi, self.satsang,  # Phase 5!
                 # Energy & protection modules (4)
                 self.shakti, self.shanti, self.satya, self.guru,
                 # Darshana (Philosophy) modules (6) - PHASE 4!
