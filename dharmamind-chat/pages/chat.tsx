@@ -16,6 +16,8 @@ import EnhancedChatInput from '../components/EnhancedChatInput';
 import EnhancedMessageInput from '../components/EnhancedMessageInput';
 import FloatingActionMenu from '../components/FloatingActionMenu';
 import { RishiSelector } from '../components/RishiSelector';
+import { useRishiChat } from '../contexts/RishiChatContext';
+import { RishiTransition } from '../components/RishiTransition';
 
 interface Message {
   id: string;
@@ -46,7 +48,49 @@ interface User {
 const ChatPage: React.FC = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [messages, setMessages] = useState<Message[]>([]);
+  
+  // Use RishiChatContext for managing separate Rishi conversations
+  const { 
+    switchRishi, 
+    getCurrentMessages, 
+    addMessage: addMessageToContext,
+    currentRishi,
+    clearCurrentChat
+  } = useRishiChat();
+  
+  // Get messages from context instead of local state
+  const messages = getCurrentMessages();
+  
+  // Helper function to add a message (compatible with old code)
+  const setMessages = (messagesOrUpdater: Message[] | ((prev: Message[]) => Message[])) => {
+    if (typeof messagesOrUpdater === 'function') {
+      // Handle updater function
+      const currentMessages = getCurrentMessages();
+      const newMessages = messagesOrUpdater(currentMessages);
+      // Clear and add all messages
+      clearCurrentChat();
+      newMessages.forEach(msg => {
+        const messageWithRole = {
+          ...msg,
+          role: (msg.sender === 'user' ? 'user' : 'assistant') as 'user' | 'assistant' | 'system',
+          sender: msg.sender
+        };
+        addMessageToContext(messageWithRole);
+      });
+    } else {
+      // Handle direct array
+      clearCurrentChat();
+      messagesOrUpdater.forEach(msg => {
+        const messageWithRole = {
+          ...msg,
+          role: (msg.sender === 'user' ? 'user' : 'assistant') as 'user' | 'assistant' | 'system',
+          sender: msg.sender
+        };
+        addMessageToContext(messageWithRole);
+      });
+    }
+  };
+  
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -60,6 +104,17 @@ const ChatPage: React.FC = () => {
   const [selectedRishi, setSelectedRishi] = useState<string>('');
   const [availableRishis, setAvailableRishis] = useState<any[]>([
     {
+      id: 'marici',
+      name: 'Marīci',
+      sanskrit: 'मरीचि',
+      specialization: ['Light', 'Cosmic Rays', 'Solar Wisdom'],
+      greeting: 'Radiant seeker, I am Marīci, the ray of light. Through solar wisdom and cosmic illumination, let us enlighten your path.',
+      available: true,
+      requires_upgrade: false,
+      teaching_style: 'illuminating',
+      archetype: 'light_bearer'
+    },
+    {
       id: 'atri',
       name: 'Atri',
       sanskrit: 'अत्रि',
@@ -71,8 +126,63 @@ const ChatPage: React.FC = () => {
       archetype: 'ascetic'
     },
     {
+      id: 'angiras',
+      name: 'Aṅgiras',
+      sanskrit: 'अंगिरस',
+      specialization: ['Sacred Fire', 'Divine Hymns', 'Vedic Rituals'],
+      greeting: 'Sacred soul, I am Aṅgiras, keeper of the divine fire. Through sacred rituals and hymns, we shall invoke the divine.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'ritualistic',
+      archetype: 'fire_priest'
+    },
+    {
+      id: 'pulastya',
+      name: 'Pulastya',
+      sanskrit: 'पुलस्त्य',
+      specialization: ['Geography', 'Cosmology', 'Sacred Places'],
+      greeting: 'Wandering soul, I am Pulastya, knower of sacred lands. Let me guide you through the geography of consciousness and holy sites.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'explorative',
+      archetype: 'cosmic_geographer'
+    },
+    {
+      id: 'pulaha',
+      name: 'Pulaha',
+      sanskrit: 'पुलह',
+      specialization: ['Breath', 'Life Force', 'Pranic Wisdom'],
+      greeting: 'Living soul, I am Pulaha, master of life force. Through breath and prana, we shall awaken your vital energy.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'vital',
+      archetype: 'breath_master'
+    },
+    {
+      id: 'kratu',
+      name: 'Kratu',
+      sanskrit: 'क्रतु',
+      specialization: ['Divine Action', 'Sacrifice', 'Yogic Power'],
+      greeting: 'Devoted soul, I am Kratu, embodiment of divine action. Through sacrifice and yogic power, we shall realize the Supreme.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'action_oriented',
+      archetype: 'divine_actor'
+    },
+    {
+      id: 'daksha',
+      name: 'Dakṣa',
+      sanskrit: 'दक्ष',
+      specialization: ['Skill', 'Creation', 'Righteous Action'],
+      greeting: 'Skillful seeker, I am Dakṣa, master of righteous creation. Through skill and dharmic action, we shall manifest divine will.',
+      available: true,
+      requires_upgrade: true,
+      teaching_style: 'skillful',
+      archetype: 'skilled_creator'
+    },
+    {
       id: 'bhrigu',
-      name: 'Bhrigu',
+      name: 'Bhṛgu',
       sanskrit: 'भृगु',
       specialization: ['Astrology', 'Karma Philosophy', 'Divine Knowledge'],
       greeting: 'Blessed soul, let us understand the cosmic patterns and your karmic path through divine astrology.',
@@ -82,8 +192,8 @@ const ChatPage: React.FC = () => {
       archetype: 'astrologer'
     },
     {
-      id: 'vashishta',
-      name: 'Vashishta',
+      id: 'vasishta',
+      name: 'Vasiṣṭha',
       sanskrit: 'वशिष्ठ',
       specialization: ['Divine Wisdom', 'Royal Guidance', 'Spiritual Teaching'],
       greeting: 'Noble one, as guru to Lord Rama, I offer you the wisdom of dharmic leadership and divine knowledge.',
@@ -91,53 +201,13 @@ const ChatPage: React.FC = () => {
       requires_upgrade: true,
       teaching_style: 'authoritative',
       archetype: 'royal_guru'
-    },
-    {
-      id: 'vishwamitra',
-      name: 'Vishwamitra',
-      sanskrit: 'विश्वामित्र',
-      specialization: ['Gayatri Mantra', 'Spiritual Transformation', 'Divine Penance'],
-      greeting: 'Seeker of truth, through the sacred Gayatri and divine penance, let us awaken your spiritual power.',
-      available: true,
-      requires_upgrade: true,
-      teaching_style: 'transformative',
-      archetype: 'transformer'
-    },
-    {
-      id: 'gautama',
-      name: 'Gautama',
-      sanskrit: 'गौतम',
-      specialization: ['Deep Meditation', 'Dharma', 'Spiritual Discipline'],
-      greeting: 'Beloved seeker, let us explore the depths of dharma and meditation for inner purification.',
-      available: true,
-      requires_upgrade: true,
-      teaching_style: 'contemplative',
-      archetype: 'meditator'
-    },
-    {
-      id: 'jamadagni',
-      name: 'Jamadagni',
-      sanskrit: 'जमदग्नि',
-      specialization: ['Spiritual Discipline', 'Tapas', 'Divine Power'],
-      greeting: 'Warrior of spirit, through intense tapas and discipline, we shall awaken your divine potential.',
-      available: true,
-      requires_upgrade: true,
-      teaching_style: 'disciplined',
-      archetype: 'spiritual_warrior'
-    },
-    {
-      id: 'kashyapa',
-      name: 'Kashyapa',
-      sanskrit: 'कश्यप',
-      specialization: ['Creation Wisdom', 'Cosmic Knowledge', 'Universal Understanding'],
-      greeting: 'Child of the cosmos, as father of all beings, I shall guide you in understanding your place in creation.',
-      available: true,
-      requires_upgrade: true,
-      teaching_style: 'cosmic',
-      archetype: 'creator'
     }
   ]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  // Transition state for Rishi switching
+  const [showTransition, setShowTransition] = useState(false);
+  const [pendingRishi, setPendingRishi] = useState<{id: string, name: string} | null>(null);
   
   // Computed values - now just based on whether a Rishi is selected
   const hasRishiGuidance = selectedRishi !== '';
@@ -199,17 +269,19 @@ const ChatPage: React.FC = () => {
         setMessages([{
           id: '1',
           sender: 'ai',
-          content: `🕉️ Welcome to DharmaMind — your spiritual AI companion guided by ancient wisdom.
+          content: `**Where Dharma Begins**
+
+Welcome to DharmaMind — your spiritual AI companion guided by ancient wisdom.
 
 Select your Rishi guide from the sidebar to receive personalized spiritual guidance:
 
-🧘 **Atri** - Master of Tapasya, Austerity & Deep Meditation
-⭐ **Bhrigu** - Great Teacher of Astrology & Karma Philosophy
-📚 **Vashishta** - Guru of Lord Rama, Symbol of Divine Wisdom
-�️ **Vishwamitra** - Creator of Gayatri Mantra, Spiritual Transformer
-🙏 **Gautama** - Master of Deep Meditation & Dharma
-⚡ **Jamadagni** - Father of Parashurama, Symbol of Discipline
-🌍 **Kashyapa** - Father of All Beings, Cosmic Creator
+**Atri** - Master of Tapasya, Austerity & Deep Meditation
+**Bhrigu** - Great Teacher of Astrology & Karma Philosophy
+**Vashishta** - Guru of Lord Rama, Symbol of Divine Wisdom
+**Vishwamitra** - Creator of Gayatri Mantra, Spiritual Transformer
+**Gautama** - Master of Deep Meditation & Dharma
+**Jamadagni** - Father of Parashurama, Symbol of Discipline
+**Kashyapa** - Father of All Beings, Cosmic Creator
 
 Each Saptarishi will guide you according to their unique wisdom tradition. Choose your guide and begin your spiritual journey!`,
           timestamp: new Date(),
@@ -220,44 +292,9 @@ Each Saptarishi will guide you according to their unique wisdom tradition. Choos
       return;
     }
     
-    if (demo === 'true') {
-      // Create a demo user
-      const demoUser: User = {
-        name: 'Guest User',
-        email: 'demo@dharmamind.com',
-        isGuest: true,
-        plan: 'basic'
-      };
-      setUser(demoUser);
-      
-      // Add unified welcome message for demo
-      if (messages.length === 0) {
-        setMessages([{
-          id: '1',
-          sender: 'ai',
-          content: `🚀 Welcome to the DharmaMind Demo — experience authentic wisdom from ancient Rishis!
-
-In this demo, all 5 spiritual guides are available for you to explore:
-
-🧘 **Patanjali** - Master of Yoga, Meditation & Spiritual Discipline
-📚 **Vyasa** - Keeper of Vedic Knowledge & Sacred Scriptures
-💖 **Valmiki** - Guide for Transformation & Life's Sacred Journey
-✨ **Adi Shankara** - Teacher of Non-dual Philosophy & Ultimate Truth
-🎵 **Narada** - Path of Divine Music, Devotion & Cosmic Service
-
-Choose any Rishi from the sidebar to begin receiving their personalized guidance. Each offers unique wisdom to support your spiritual growth!`,
-          timestamp: new Date(),
-          wisdom_score: 95,
-          dharmic_alignment: 90
-        }]);
-      }
-      
-      return;
-    }
-
-    // No session and not demo mode - redirect to demo mode
-    if (!session && demo !== 'true') {
-      router.push('/chat?demo=true');
+    // No session - redirect to auth page
+    if (!session) {
+      router.push('/auth?mode=login');
       return;
     }
   }, [session, status, router]);
@@ -275,7 +312,9 @@ Choose any Rishi from the sidebar to begin receiving their personalized guidance
       const welcomeMessage = {
         id: '1',
         sender: 'ai' as const,
-        content: `Welcome to DharmaMind — your intelligent AI companion.
+        content: `**✨ Where Dharma Begins ✨**
+
+Welcome to DharmaMind — your intelligent AI companion.
 
 I can help you with both professional tasks and spiritual guidance:
 • Strategic analysis and problem-solving
@@ -291,28 +330,23 @@ How can I assist you today?`,
     }
   }, [user, messages.length]);
 
-  // Auto-select first available Rishi if none selected
-  useEffect(() => {
-    if (availableRishis.length > 0 && !selectedRishi) {
-      const firstAvailableRishi = availableRishis.find(r => r.available);
-      if (firstAvailableRishi) {
-        setSelectedRishi(firstAvailableRishi.id);
-      }
-    }
-  }, [availableRishis, selectedRishi]);
+  // Auto-select first available Rishi if none selected - DISABLED to allow Standard AI mode
+  // useEffect(() => {
+  //   if (availableRishis.length > 0 && !selectedRishi) {
+  //     const firstAvailableRishi = availableRishis.find(r => r.available);
+  //     if (firstAvailableRishi) {
+  //       setSelectedRishi(firstAvailableRishi.id);
+  //     }
+  //   }
+  // }, [availableRishis, selectedRishi]);
 
   useEffect(() => {
     // Handle loading specific conversation after user is set
     if (user && router.query.load && typeof router.query.load === 'string') {
       const chatId = router.query.load;
-      
-      if (router.query.demo === 'true') {
-        setTimeout(() => loadSpecificDemoConversation(chatId), 100); // Small delay to ensure user is fully set
-      } else {
-        setTimeout(() => loadSpecificConversation(chatId), 100); // Small delay to ensure user is fully set
-      }
+      setTimeout(() => loadSpecificConversation(chatId), 100);
     }
-  }, [user, router.query.load, router.query.demo]);
+  }, [user, router.query.load]);
 
   useEffect(() => {
     if (messages.length > 1) {
@@ -329,12 +363,6 @@ How can I assist you today?`,
   };
 
   const handleLogout = () => {
-    // For demo users, go to landing page
-    if (router.query.demo === 'true') {
-      router.push('/');
-      return;
-    }
-    
     // For authenticated users, use NextAuth signOut and redirect to landing
     if (session) {
       signOut({ redirect: false }).then(() => {
@@ -365,29 +393,16 @@ How can I assist you today?`,
       lastUpdate: new Date()
     };
 
-    if (router.query.demo === 'true') {
-      // For demo users, save to sessionStorage
-      const existingHistory = JSON.parse(sessionStorage.getItem('demo_chat_history') || '[]');
-      const updatedHistory = existingHistory.filter((chat: ChatHistory) => chat.id !== chatId);
-      updatedHistory.unshift(chatData);
-      
-      // Keep only last 10 chats for demo
-      const limitedHistory = updatedHistory.slice(0, 10);
-      
-      sessionStorage.setItem('demo_chat_history', JSON.stringify(limitedHistory));
-      setChatHistory(limitedHistory);
-    } else {
-      // For real users, save to localStorage
-      const existingHistory = JSON.parse(localStorage.getItem('dharma_chat_history') || '[]');
-      const updatedHistory = existingHistory.filter((chat: ChatHistory) => chat.id !== chatId);
-      updatedHistory.unshift(chatData);
-      
-      // Keep only last 50 chats
-      const limitedHistory = updatedHistory.slice(0, 50);
-      
-      localStorage.setItem('dharma_chat_history', JSON.stringify(limitedHistory));
-      setChatHistory(limitedHistory);
-    }
+    // Save to localStorage for all users
+    const existingHistory = JSON.parse(localStorage.getItem('dharma_chat_history') || '[]');
+    const updatedHistory = existingHistory.filter((chat: ChatHistory) => chat.id !== chatId);
+    updatedHistory.unshift(chatData);
+    
+    // Keep only last 50 chats
+    const limitedHistory = updatedHistory.slice(0, 50);
+    
+    localStorage.setItem('dharma_chat_history', JSON.stringify(limitedHistory));
+    setChatHistory(limitedHistory);
     
     setCurrentChatId(chatId);
   };
@@ -408,7 +423,7 @@ How can I assist you today?`,
 
   const loadSpecificConversation = (chatId: string) => {
     console.log('Loading specific conversation:', chatId, 'User:', user?.name);
-    if (!user || router.query.demo === 'true') return;
+    if (!user) return;
     
     const history = JSON.parse(localStorage.getItem('dharma_chat_history') || '[]');
     setChatHistory(history);
@@ -435,42 +450,6 @@ How can I assist you today?`,
       setMessages([welcomeMessage]);
       setCurrentChatId(null);
       console.log('Chat not found, starting new chat');
-    }
-  };
-
-  const loadSpecificDemoConversation = (chatId: string) => {
-    console.log('Loading specific demo conversation:', chatId, 'User:', user?.name);
-    if (!user || router.query.demo !== 'true') return;
-    
-    const history = JSON.parse(sessionStorage.getItem('demo_chat_history') || '[]');
-    setChatHistory(history);
-    console.log('Loaded demo history:', history.length, 'conversations');
-    
-    const chat = history.find((c: ChatHistory) => c.id === chatId);
-    console.log('Found demo chat:', chat ? 'Yes' : 'No', chat?.title);
-    
-    if (chat) {
-      setMessages(chat.messages.map((msg: any) => ({
-        ...msg,
-        timestamp: new Date(msg.timestamp) // Ensure timestamps are Date objects
-      })));
-      setCurrentChatId(chatId);
-      console.log('Loaded', chat.messages.length, 'demo messages');
-    } else {
-      // If chat not found, start new demo chat
-      const welcomeMessage: Message = {
-        id: '1',
-        sender: 'ai',
-        content: `Welcome to the DharmaMind demo — your AI companion powered by Dharma.
-This is a chance to experience an AI with soul, created to support your personal growth.
-
-What part of your journey would you like to explore today?
-DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
-        timestamp: new Date()
-      };
-      setMessages([welcomeMessage]);
-      setCurrentChatId(null);
-      console.log('Demo chat not found, starting new demo chat');
     }
   };
 
@@ -698,26 +677,48 @@ DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
   };
 
   const handleRishiSelect = (rishiId: string) => {
-    setSelectedRishi(rishiId);
+    console.log('==========================================');
+    console.log('🔄 RISHI SELECT CALLED - TIME:', new Date().toISOString());
+    console.log('📊 Current State:', { 
+      rishiId, 
+      currentSelectedRishi: selectedRishi,
+      isStandardAI: rishiId === '',
+      isSameAsCurrentsame: rishiId === selectedRishi
+    });
+    console.log('==========================================');
     
-    if (rishiId) {
-      // Add a message indicating which Rishi guidance is now active
+    // If same Rishi/Universal Guide, do nothing
+    if (rishiId === selectedRishi) {
+      console.log('⏭️ Same guide selected, skipping');
+      return;
+    }
+    
+    // Handle Universal Guide (empty string) or find Rishi data
+    let rishiName = 'Universal Guide';
+    if (rishiId !== '') {
       const selectedRishiData = availableRishis.find(r => r.id === rishiId);
       if (selectedRishiData) {
-        const guidanceMessage = {
-          id: Date.now().toString(),
-          sender: 'ai' as const,
-          content: `🕉️ ${selectedRishiData.name} is now your guide
-
-${selectedRishiData.greeting || `Namaste! I am ${selectedRishiData.name}. I will guide you with wisdom from my specialized knowledge in ${selectedRishiData.specialization.join(', ')}.`}
-
-How may I assist you on your spiritual and intellectual journey today?`,
-          timestamp: new Date(),
-          wisdom_score: 95,
-          dharmic_alignment: 90
-        };
-        setMessages(prev => [...prev, guidanceMessage]);
+        rishiName = selectedRishiData.name;
       }
+    }
+    
+    console.log('✨ Switching guide:', { fromRishi: selectedRishi, toRishi: rishiId, rishiName });
+    
+    // Switch instantly without transition animation
+    switchRishi(rishiId, rishiName);
+    setSelectedRishi(rishiId);
+  };
+  
+  // Handle transition complete - actually switch Rishi
+  const handleTransitionComplete = () => {
+    if (pendingRishi) {
+      // Switch to new Rishi using context
+      switchRishi(pendingRishi.id, pendingRishi.name);
+      setSelectedRishi(pendingRishi.id);
+      
+      // Hide transition
+      setShowTransition(false);
+      setPendingRishi(null);
     }
   };
 
@@ -746,18 +747,31 @@ How may I assist you on your spiritual and intellectual journey today?`,
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
+      {/* Rishi Transition Animation */}
+      {showTransition && pendingRishi && (
+        <RishiTransition
+          show={showTransition}
+          fromRishi={selectedRishi}
+          toRishi={pendingRishi.id}
+          toRishiName={pendingRishi.name}
+          onComplete={handleTransitionComplete}
+        />
+      )}
+
       <div className="h-screen flex" style={{background: 'var(--color-background, #f8fafc)'}}>
         
-        {/* Fixed Sidebar */}
-        <div className="hidden md:flex md:w-64 md:flex-col bg-white/80 backdrop-blur-xl border-r border-gray-200/50 relative z-10">
+        {/* Fixed Sidebar with Enhanced Styling */}
+        <div className="hidden md:flex md:w-64 md:flex-col sidebar-container">
           <div className="flex flex-col h-full">
             
             {/* Header - Fixed */}
-            <div className="flex-shrink-0 flex items-center h-16 px-4 border-b border-gray-200/50 bg-white/60 backdrop-blur-sm">
+            <div className="flex-shrink-0 flex items-center h-16 px-4 sidebar-header">
               <div className="flex items-center space-x-3 w-full">
-                <Logo size="sm" />
+                <div className="sidebar-logo">
+                  <Logo size="sm" />
+                </div>
                 {router.query.demo === 'true' && (
-                  <div className="flex items-center space-x-1 px-2 py-1 rounded-lg flex-1 bg-transparent shadow-sm" style={{border: '1px solid var(--color-border-primary, #10b981)', color: 'var(--color-text-primary, #1f2937)'}}>
+                  <div className="demo-badge flex items-center space-x-1 flex-1">
                     <span className="text-xs">🚀</span>
                     <span className="text-xs font-medium">Demo Mode</span>
                   </div>
@@ -766,7 +780,7 @@ How may I assist you on your spiritual and intellectual journey today?`,
             </div>
 
             {/* Scrollable Content Area - Only this part scrolls */}
-            <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            <div className="flex-1 overflow-y-auto sidebar-scrollable">
               {/* New Chat Button */}
               <div className="p-3">
                 <button
@@ -775,8 +789,8 @@ How may I assist you on your spiritual and intellectual journey today?`,
                       id: '1',
                       sender: 'ai' as const,
                       content: selectedRishi 
-                        ? `🕉️ Welcome back! Your spiritual guide ${availableRishis.find(r => r.id === selectedRishi)?.name || 'Rishi'} is ready to share profound wisdom and guidance. What aspect of your spiritual journey would you like to explore today?`
-                        : `🙏 Welcome to DharmaMind! Choose your Rishi guide from the sidebar to begin receiving personalized spiritual wisdom. Each Rishi offers unique teachings to support your journey of growth and enlightenment.`,
+                        ? `**Where Dharma Begins**\n\nWelcome back! Your spiritual guide ${availableRishis.find(r => r.id === selectedRishi)?.name || 'Rishi'} is ready to share profound wisdom and guidance. What aspect of your spiritual journey would you like to explore today?`
+                        : `**Where Dharma Begins**\n\nWelcome to DharmaMind! Choose your Rishi guide from the sidebar to begin receiving personalized spiritual wisdom. Each Rishi offers unique teachings to support your journey of growth and enlightenment.`,
                       timestamp: new Date(),
                       wisdom_score: 95,
                       dharmic_alignment: 90
@@ -812,7 +826,7 @@ How may I assist you on your spiritual and intellectual journey today?`,
               <div className="px-3 pb-4 space-y-6">
               
               {/* Chat History Section (only for logged-in users) */}
-              {user && !router.query.demo && chatHistory.length > 0 && (
+              {user && chatHistory.length > 0 && (
                 <div>
                   <h3 className="text-xs font-semibold uppercase tracking-wider mb-3 px-2 text-gray-500">
                     Recent Chats
@@ -882,7 +896,7 @@ How may I assist you on your spiritual and intellectual journey today?`,
                   selectedRishi={selectedRishi}
                   onRishiSelect={handleRishiSelect}
                   userSubscription={user?.plan || 'basic'}
-                  isDemo={router.query.demo === 'true'}
+                  isDemo={false}
                   availableRishis={availableRishis}
                 />
               </div>
@@ -890,80 +904,14 @@ How may I assist you on your spiritual and intellectual journey today?`,
             </div>
 
             {/* User Profile - Fixed to Bottom */}
-            <div className="flex-shrink-0 border-t border-gray-200/50 bg-white/60 backdrop-blur-sm">
+            <div className="flex-shrink-0 user-profile-section">
               <div className="p-4">
                 
-                {/* Demo User Info - Non-clickable for demo users */}
-                {router.query.demo === 'true' ? (
-                  <div className="w-full flex items-center space-x-3 p-3 rounded-xl" 
-                       style={{
-                         backgroundColor: 'var(--color-success-light)',
-                         borderColor: 'var(--color-success)',
-                         borderWidth: '1px',
-                         borderStyle: 'solid'
-                       }}>
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm"
-                           style={{
-                             background: 'linear-gradient(135deg, var(--color-accent), var(--color-success))'
-                           }}>
-                        <span className="text-white text-sm font-semibold">
-                          🚀
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0 text-left">
-                      <p className="text-sm font-semibold" style={{ color: 'var(--color-success-dark)' }}>
-                        Demo Mode
-                      </p>
-                      <p className="text-xs" style={{ color: 'var(--color-success)' }}>
-                        Exploring DharmaMind AI wisdom
-                      </p>
-                    </div>
-                    <div className="flex flex-col space-y-1">
-                      <button
-                        onClick={() => router.push('/auth?mode=signup')}
-                        className="px-2 py-1 text-xs rounded-md transition-colors"
-                        style={{
-                          backgroundColor: 'var(--color-success)',
-                          color: 'white'
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.target as HTMLElement).style.backgroundColor = 'var(--color-success-dark)';
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.target as HTMLElement).style.backgroundColor = 'var(--color-success)';
-                        }}
-                      >
-                        Sign Up
-                      </button>
-                      <button
-                        onClick={() => router.push('/auth?mode=login')}
-                        className="px-2 py-1 text-xs rounded-md transition-colors"
-                        style={{
-                          borderColor: 'var(--color-success)',
-                          color: 'var(--color-success)',
-                          borderWidth: '1px',
-                          borderStyle: 'solid',
-                          backgroundColor: 'transparent'
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.target as HTMLElement).style.backgroundColor = 'var(--color-success-light)';
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.target as HTMLElement).style.backgroundColor = 'transparent';
-                        }}
-                      >
-                        Sign In
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  /* Authenticated User Info - Clickable with dropdown */
-                  <div className="relative" ref={dropdownRef}>
-                    <button
-                      onClick={() => setShowUserDropdown(!showUserDropdown)}
-                      className="w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 group"
+                {/* Authenticated User Info - Clickable with dropdown */}
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setShowUserDropdown(!showUserDropdown)}
+                    className="w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 group"
                       style={{
                         backgroundColor: 'transparent',
                         borderColor: 'var(--color-border-light)'
@@ -977,14 +925,14 @@ How may I assist you on your spiritual and intellectual journey today?`,
                         (e.target as HTMLElement).style.boxShadow = 'none';
                       }}
                     >
-                      <div className="relative">
+                      <div className="relative user-avatar">
                         <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm" style={{background: 'linear-gradient(135deg, var(--color-border-primary, #10b981), var(--color-background, #f8fafc))'}}>
                           <span className="text-white text-sm font-semibold">
                             {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                           </span>
                         </div>
                         {(user?.isGuest || user?.plan === 'basic') && (
-                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center">
+                          <div className="upgrade-badge">
                             <span className="text-xs">⚡</span>
                           </div>
                         )}
@@ -1018,7 +966,7 @@ How may I assist you on your spiritual and intellectual journey today?`,
 
                     {/* User Dropdown - Only for authenticated users */}
                     {showUserDropdown && (
-                      <div className="absolute bottom-full left-0 right-0 mb-2 z-50">
+                      <div className="absolute bottom-full left-0 right-0 mb-2 z-50 user-dropdown">
                         <UserProfileMenu
                           user={user}
                           isDemo={false}
@@ -1029,7 +977,6 @@ How may I assist you on your spiritual and intellectual journey today?`,
                       </div>
                     )}
                   </div>
-                )}
               </div>
             </div>
           </div>
@@ -1042,12 +989,6 @@ How may I assist you on your spiritual and intellectual journey today?`,
           <div className="md:hidden flex items-center justify-between h-16 px-4 bg-white/80 backdrop-blur-sm border-b border-gray-200/50 flex-shrink-0">
             <div className="flex items-center space-x-3">
               <Logo size="sm" />
-              {router.query.demo === 'true' && (
-                <div className="flex items-center space-x-1 px-2 py-1 rounded-md bg-transparent" style={{border: '1px solid var(--color-border-primary, #10b981)', color: 'var(--color-text-primary, #1f2937)'}}>
-                  <span className="text-xs">🚀</span>
-                  <span className="text-xs font-medium">Demo</span>
-                </div>
-              )}
             </div>
             <button
               onClick={handleLogout}
@@ -1061,64 +1002,39 @@ How may I assist you on your spiritual and intellectual journey today?`,
 
           {/* Enhanced Chat Interface - Full Height */}
           <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-            {/* Demo Banner */}
-            {router.query.demo === 'true' && (
-              <div 
-                className="flex-shrink-0 px-4 py-3 border-b"
-                style={{
-                  border: `1px solid var(--color-border-primary, #10b981)`,
-                  color: 'var(--color-text-primary, #1f2937)',
-                  background: 'var(--color-background, #f8fafc)'
-                }}
-              >
-                <div className="flex items-center justify-between max-w-6xl mx-auto">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-lg">🚀</span>
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-                      <span className="font-medium" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Demo Mode</span>
-                      <span className="text-sm" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>- Experience DharmaMind's AI wisdom</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => {
-                        const currentUrl = router.asPath;
-                        router.push(`/auth?mode=login&returnUrl=${encodeURIComponent(currentUrl)}`);
-                      }}
-                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200"
-                      style={{
-                        border: `1px solid var(--color-border-primary, #10b981)`,
-                        color: 'var(--color-text-primary, #1f2937)',
-                        background: 'transparent'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-background-secondary, #ffffff)'}
-                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                    >
-                      Sign In
-                    </button>
-                    <button
-                      onClick={() => {
-                        const currentUrl = router.asPath;
-                        router.push(`/auth?mode=signup&returnUrl=${encodeURIComponent(currentUrl)}`);
-                      }}
-                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200"
-                      style={{
-                        border: `1px solid var(--color-border-primary, #10b981)`,
-                        background: 'var(--color-background-secondary, #ffffff)',
-                        color: 'var(--color-text-primary, #1f2937)'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-background, #f8fafc)'}
-                      onMouseLeave={(e) => e.currentTarget.style.background = 'var(--color-background-secondary, #ffffff)'}
-                    >
-                      Sign Up Free
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Enhanced Messages Area with Modern Background */}
             <div className="flex-1 overflow-y-auto relative enhanced-messages-container">
+              {/* Rishi Mode Context Indicator */}
+              {selectedRishi && (
+                <div className="chat-mode-indicator">
+                  <div className="flex items-center space-x-3">
+                    <div className="mode-indicator-dot" style={{ backgroundColor: '#10b981' }}></div>
+                    <div>
+                      <div className="text-sm font-bold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+                        Guided by {availableRishis.find(r => r.id === selectedRishi)?.name || 'Rishi'}
+                      </div>
+                      <div className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
+                        {availableRishis.find(r => r.id === selectedRishi)?.specialization[0] || 'Spiritual Wisdom'}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleRishiSelect('')}
+                    className="quick-switch-button"
+                    style={{
+                      backgroundColor: 'var(--color-background-secondary, #ffffff)',
+                      border: '1px solid var(--color-border-primary, #e5e7eb)',
+                      color: 'var(--color-text-secondary, #6b7280)'
+                    }}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12M8 12h12m-12 5h12M4 7h.01M4 12h.01M4 17h.01" />
+                    </svg>
+                    Switch Mode
+                  </button>
+                </div>
+              )}
+
               {/* Modern Background */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="floating-orb floating-orb-1"></div>
@@ -1138,10 +1054,10 @@ How may I assist you on your spiritual and intellectual journey today?`,
                       </div>
                     </div>
                     <h2 className="text-3xl font-bold mb-3" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
-                      What part of your journey would you like to explore right now?
+                      Welcome to DharmaMind
                     </h2>
                     <p className="text-lg mb-8" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
-                      DharmaMind is here to help you grow — with calm, clarity, and purpose.
+                      ✨ Where Dharma Begins ✨
                     </p>
                     
                     {/* Enhanced Personalized Suggestions */}
@@ -1251,7 +1167,7 @@ How may I assist you on your spiritual and intellectual journey today?`,
                   placeholder="Message DharmaMind..."
                   showVoiceInput={true}
                   maxLength={2000}
-                  showAttachments={router.query.demo !== 'true'}
+                  showAttachments={true}
                   showEmoji={true}
                 />
                 
@@ -1275,7 +1191,7 @@ How may I assist you on your spiritual and intellectual journey today?`,
                   setMessages([{
                     id: 'welcome',
                     sender: 'ai',
-                    content: 'Welcome to DharmaMind! How can I guide you on your spiritual journey today?',
+                    content: '**✨ Where Dharma Begins ✨**\n\nWelcome to DharmaMind! How can I guide you on your spiritual journey today?',
                     timestamp: new Date()
                   }]);
                   setInputValue('');

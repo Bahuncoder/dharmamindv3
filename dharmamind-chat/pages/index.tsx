@@ -52,7 +52,7 @@ const HomePage: React.FC = () => {
       
       // Immediate redirect - no waiting
       setTimeout(() => {
-        router.replace('/chat?demo=true');
+        router.replace('/auth?mode=login');
       }, 100);
     }, 200);
   }, [router]);

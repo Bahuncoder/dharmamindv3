@@ -350,6 +350,41 @@ export default function Auth() {
               </button>
             </div>
 
+            {/* Demo Credentials Banner - Only show in development */}
+            {process.env.NODE_ENV === 'development' && mode === 'login' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 rounded-xl border-2 border-blue-200 bg-blue-50/80"
+              >
+                <div className="flex items-start">
+                  <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div className="flex-1">
+                    <h4 className="text-sm font-semibold text-blue-900 mb-2">🧪 Demo Test Accounts</h4>
+                    <div className="space-y-1.5 text-xs text-blue-800">
+                      <div className="flex items-center justify-between bg-white/60 rounded px-2 py-1.5">
+                        <span className="font-medium">Basic:</span>
+                        <code className="text-blue-600">demo@dharmamind.com</code>
+                      </div>
+                      <div className="flex items-center justify-between bg-white/60 rounded px-2 py-1.5">
+                        <span className="font-medium">Pro:</span>
+                        <code className="text-blue-600">pro@dharmamind.com</code>
+                      </div>
+                      <div className="flex items-center justify-between bg-white/60 rounded px-2 py-1.5">
+                        <span className="font-medium">Max:</span>
+                        <code className="text-blue-600">max@dharmamind.com</code>
+                      </div>
+                      <div className="text-center pt-1 border-t border-blue-200 mt-2">
+                        <span className="font-medium">Password (all):</span> <code className="text-blue-600 font-mono">test1234 / pro12345 / max12345</code>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             {/* Error Messages */}
             <ErrorMessage 
               error={formError.error} 
