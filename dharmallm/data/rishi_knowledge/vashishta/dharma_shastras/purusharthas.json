@@ -1,0 +1,63 @@
+{
+  "title": "The Four Purusharthas - Goals of Human Life",
+  "description": "The four legitimate aims that give meaning to human existence",
+  "goals": [
+    {
+      "name": "Dharma (धर्म)",
+      "meaning": "Righteousness, Duty, Ethics",
+      "description": "Living according to moral law and cosmic order",
+      "importance": "Foundation for all other goals. Without dharma, other pursuits lead to suffering.",
+      "how_to_pursue": [
+        "Study scriptures and learn ethical principles",
+        "Practice the ten universal virtues",
+        "Fulfill your duties according to your stage of life",
+        "Act with integrity in all situations",
+        "Serve others selflessly"
+      ],
+      "vashishta_teaching": "Dharma is not a burden but the path to true freedom. When you live righteously, the universe supports you."
+    },
+    {
+      "name": "Artha (अर्थ)",
+      "meaning": "Wealth, Material Prosperity, Security",
+      "description": "Earning livelihood and creating material wellbeing through righteous means",
+      "importance": "Necessary for survival and supporting family. But must be earned ethically.",
+      "how_to_pursue": [
+        "Develop skills and work diligently",
+        "Earn through honest means only",
+        "Save and invest wisely for future security",
+        "Share wealth through charity",
+        "Never sacrifice dharma for wealth"
+      ],
+      "vashishta_teaching": "Wealth earned through dharma brings peace; wealth earned through adharma brings anxiety. The truly wealthy person is content with enough."
+    },
+    {
+      "name": "Kama (काम)",
+      "meaning": "Desire, Pleasure, Enjoyment",
+      "description": "Legitimate enjoyment of life's pleasures within dharmic boundaries",
+      "importance": "Life is meant to be enjoyed. Denying natural desires creates suppression. But enjoyment must be balanced.",
+      "how_to_pursue": [
+        "Enjoy sensory pleasures without attachment",
+        "Practice moderation in all things",
+        "Respect boundaries of dharma in relationships",
+        "Appreciate beauty in nature, art, music",
+        "Cultivate refined tastes and aesthetic sense"
+      ],
+      "vashishta_teaching": "Pleasure pursued with awareness becomes a spiritual practice. Pleasure pursued with greed becomes bondage. The wise enjoy without being enslaved."
+    },
+    {
+      "name": "Moksha (मोक्ष)",
+      "meaning": "Liberation, Self-Realization, Freedom",
+      "description": "Ultimate goal - freedom from the cycle of birth and death, union with the Divine",
+      "importance": "The highest aim. All other goals ultimately serve this purpose.",
+      "how_to_pursue": [
+        "Practice meditation and self-inquiry",
+        "Study with a genuine guru",
+        "Renounce attachment (not things, but clinging)",
+        "Realize your true nature beyond body-mind",
+        "Live in awareness of the Divine in all"
+      ],
+      "vashishta_teaching": "Moksha is not somewhere to reach - it is what you already are. Remove ignorance, and liberation shines forth naturally."
+    }
+  ],
+  "balance_teaching": "The Four Purusharthas must be balanced. Pursue artha and kama within dharma, and let all three lead you toward moksha. This is the art of dharmic living."
+}

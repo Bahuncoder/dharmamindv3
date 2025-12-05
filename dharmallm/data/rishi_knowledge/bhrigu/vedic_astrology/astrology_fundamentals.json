@@ -1,0 +1,39 @@
+{
+  "title": "Vedic Astrology Fundamentals",
+  "source": "Brihat Parashara Hora Shastra",
+  "sage": "Maharishi Parashara (Bhrigu lineage)",
+  "fundamentals": [
+    {
+      "concept": "Jyotish - The Science of Light",
+      "sanskrit": "ज्योतिष",
+      "description": "Vedic astrology (Jyotish) means 'science of light'. It reveals the karmic patterns written in the cosmic blueprint at birth.",
+      "purpose": "To understand one's dharma, karma, and life path through celestial influences"
+    },
+    {
+      "concept": "The Three Pillars",
+      "pillars": {
+        "1_Rashi": "The 12 zodiac signs representing different energies",
+        "2_Graha": "The 9 planets (including Rahu & Ketu) as karmic forces",
+        "3_Bhava": "The 12 houses representing life areas"
+      }
+    },
+    {
+      "concept": "Birth Chart (Kundali)",
+      "sanskrit": "कुण्डली",
+      "description": "The cosmic snapshot at the moment of birth, showing planetary positions in signs and houses",
+      "significance": "This chart is the map of one's karma from past lives and potential in this life"
+    },
+    {
+      "concept": "Ascendant (Lagna)",
+      "sanskrit": "लग्न",
+      "description": "The zodiac sign rising on the eastern horizon at birth",
+      "importance": "The Lagna represents the self, physical body, and life's overall direction"
+    }
+  ],
+  "core_teachings": [
+    "The planets do not cause events; they indicate karmic patterns",
+    "Free will exists within the framework of karma",
+    "Jyotish is a tool for self-awareness, not fatalism",
+    "Remedies can mitigate negative karma and enhance positive karma"
+  ]
+}

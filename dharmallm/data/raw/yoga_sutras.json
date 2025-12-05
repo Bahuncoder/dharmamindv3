@@ -1,0 +1,92 @@
+[
+  {
+    "id": "yoga_sutra_p1_s1",
+    "source": "Yoga Sutras of Patanjali",
+    "category": "yoga_sutra",
+    "pada": 1,
+    "sutra": 1,
+    "sanskrit": "अथ योगानुशासनम्॥",
+    "transliteration": "atha yogānuśāsanam",
+    "english": "Now, the exposition of Yoga.",
+    "commentary": "The opening sutra introducing the study of Yoga.",
+    "tags": [
+      "yoga",
+      "patanjali",
+      "meditation",
+      "samadhi"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477219"
+  },
+  {
+    "id": "yoga_sutra_p1_s2",
+    "source": "Yoga Sutras of Patanjali",
+    "category": "yoga_sutra",
+    "pada": 1,
+    "sutra": 2,
+    "sanskrit": "योगश्चित्तवृत्तिनिरोधः॥",
+    "transliteration": "yogaś-citta-vṛtti-nirodhaḥ",
+    "english": "Yoga is the cessation of the modifications of the mind.",
+    "commentary": "The most famous definition of Yoga - stilling the mind.",
+    "tags": [
+      "yoga",
+      "patanjali",
+      "meditation",
+      "samadhi"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477226"
+  },
+  {
+    "id": "yoga_sutra_p1_s3",
+    "source": "Yoga Sutras of Patanjali",
+    "category": "yoga_sutra",
+    "pada": 1,
+    "sutra": 3,
+    "sanskrit": "तदा द्रष्टुः स्वरूपेऽवस्थानम्॥",
+    "transliteration": "tadā draṣṭuḥ svarūpe 'vasthānam",
+    "english": "Then the Seer abides in its own true nature.",
+    "commentary": "The result of Yoga - experiencing one's true Self.",
+    "tags": [
+      "yoga",
+      "patanjali",
+      "meditation",
+      "samadhi"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477231"
+  },
+  {
+    "id": "yoga_sutra_p2_s1",
+    "source": "Yoga Sutras of Patanjali",
+    "category": "yoga_sutra",
+    "pada": 2,
+    "sutra": 1,
+    "sanskrit": "तपःस्वाध्यायेश्वरप्रणिधानानि क्रियायोगः॥",
+    "transliteration": "tapaḥ-svādhyāyeśvara-praṇidhānāni kriyā-yogaḥ",
+    "english": "Kriya Yoga consists of austerity, self-study, and surrender to God.",
+    "commentary": "The three components of practical Yoga.",
+    "tags": [
+      "yoga",
+      "patanjali",
+      "meditation",
+      "samadhi"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477235"
+  },
+  {
+    "id": "yoga_sutra_p2_s29",
+    "source": "Yoga Sutras of Patanjali",
+    "category": "yoga_sutra",
+    "pada": 2,
+    "sutra": 29,
+    "sanskrit": "यमनियमासनप्राणायामप्रत्याहारधारणाध्यानसमाधयोऽष्टावङ्गानि॥",
+    "transliteration": "yama-niyamāsana-prāṇāyāma-pratyāhāra-dhāraṇā-dhyāna-samādhayo 'ṣṭāv aṅgāni",
+    "english": "The eight limbs of Yoga are: yama, niyama, asana, pranayama, pratyahara, dharana, dhyana, and samadhi.",
+    "commentary": "The famous Ashtanga (eight-limbed) Yoga system.",
+    "tags": [
+      "yoga",
+      "patanjali",
+      "meditation",
+      "samadhi"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477240"
+  }
+]

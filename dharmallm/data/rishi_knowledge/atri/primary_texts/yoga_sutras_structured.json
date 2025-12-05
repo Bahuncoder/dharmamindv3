@@ -1,0 +1,103 @@
+{
+  "book_1_samadhi_pada": {
+    "title": "Book 1: Samadhi Pada (On Contemplations)",
+    "total_sutras": 51,
+    "sutras": [
+      {
+        "number": "1.1",
+        "sanskrit": "अथ योगानुशासनम्",
+        "transliteration": "atha yogānuśāsanam",
+        "translation": "Now, the teachings of yoga",
+        "commentary": "This sutra marks the beginning of the formal instruction in yoga."
+      },
+      {
+        "number": "1.2",
+        "sanskrit": "योगश्चित्तवृत्तिनिरोधः",
+        "transliteration": "yogaś-citta-vṛtti-nirodhaḥ",
+        "translation": "Yoga is the cessation of the modifications of the mind",
+        "commentary": "The most famous definition of yoga. Citta = mind-stuff, Vritti = modifications/fluctuations, Nirodha = cessation/restraint."
+      },
+      {
+        "number": "1.3",
+        "sanskrit": "तदा द्रष्टुः स्वरूपेऽवस्थानम्",
+        "transliteration": "tadā draṣṭuḥ svarūpe-'vasthānam",
+        "translation": "Then the seer abides in their own true nature",
+        "commentary": "When the mind is still, consciousness rests in its pure state."
+      },
+      {
+        "number": "1.4",
+        "sanskrit": "वृत्तिसारूप्यमितरत्र",
+        "transliteration": "vṛtti-sārūpyam-itaratra",
+        "translation": "At other times, the seer identifies with the modifications",
+        "commentary": "When the mind is active, we mistake mental fluctuations for our true self."
+      },
+      {
+        "number": "1.5",
+        "sanskrit": "वृत्तयः पञ्चतय्यः क्लिष्टाक्लिष्टाः",
+        "transliteration": "vṛttayaḥ pañcatayyaḥ kliṣṭākliṣṭāḥ",
+        "translation": "The modifications are five-fold, and are either afflicted or non-afflicted",
+        "commentary": "Five types of mental modifications exist, some causing suffering, others not."
+      }
+    ]
+  },
+  "book_2_sadhana_pada": {
+    "title": "Book 2: Sadhana Pada (On Practice)",
+    "total_sutras": 55,
+    "sutras": [
+      {
+        "number": "2.1",
+        "sanskrit": "तपःस्वाध्यायेश्वरप्रणिधानानि क्रियायोगः",
+        "transliteration": "tapaḥ-svādhyāya-īśvara-praṇidhānāni kriyā-yogaḥ",
+        "translation": "Austerity, self-study, and surrender to the divine constitute the yoga of action",
+        "commentary": "The three components of Kriya Yoga for practical spiritual development."
+      },
+      {
+        "number": "2.29",
+        "sanskrit": "यम नियमासन प्राणायाम प्रत्याहार धारणा ध्यान समाधयोऽष्टावङ्गानि",
+        "transliteration": "yama-niyama-āsana-prāṇāyāma-pratyāhāra-dhāraṇā-dhyāna-samādhayo-'ṣṭāv-aṅgāni",
+        "translation": "The eight limbs are: restraints, observances, posture, breath control, sense withdrawal, concentration, meditation, and absorption",
+        "commentary": "The famous Ashtanga (8-limbed) path of yoga."
+      }
+    ]
+  },
+  "book_3_vibhuti_pada": {
+    "title": "Book 3: Vibhuti Pada (On Powers)",
+    "total_sutras": 56,
+    "sutras": [
+      {
+        "number": "3.1",
+        "sanskrit": "देशबन्धश्चित्तस्य धारणा",
+        "transliteration": "deśa-bandhaś-cittasya dhāraṇā",
+        "translation": "Concentration is binding consciousness to a single point",
+        "commentary": "The practice of dharana - sustained focus on one object."
+      },
+      {
+        "number": "3.2",
+        "sanskrit": "तत्र प्रत्ययैकतानता ध्यानम्",
+        "transliteration": "tatra pratyaya-ikatānatā dhyānam",
+        "translation": "Meditation is the continuous flow of awareness on that point",
+        "commentary": "Dhyana is when concentration becomes effortless and continuous."
+      },
+      {
+        "number": "3.3",
+        "sanskrit": "तदेवार्थमात्रनिर्भासं स्वरूपशून्यमिव समाधिः",
+        "transliteration": "tad-eva-artha-mātra-nirbhāsaṃ svarūpa-śūnyam-iva samādhiḥ",
+        "translation": "Samadhi is when consciousness becomes absorbed in the object, losing self-awareness",
+        "commentary": "The highest state where subject and object merge."
+      }
+    ]
+  },
+  "book_4_kaivalya_pada": {
+    "title": "Book 4: Kaivalya Pada (On Liberation)",
+    "total_sutras": 34,
+    "sutras": [
+      {
+        "number": "4.1",
+        "sanskrit": "जन्मौषधिमन्त्रतपःसमाधिजाः सिद्धयः",
+        "transliteration": "janma-auṣadhi-mantra-tapaḥ-samādhi-jāḥ siddhayaḥ",
+        "translation": "Siddhis (powers) are attained by birth, herbs, mantras, austerities, or samadhi",
+        "commentary": "Five ways spiritual powers can manifest."
+      }
+    ]
+  }
+}

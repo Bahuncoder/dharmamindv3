@@ -1,0 +1,26 @@
+{
+  "total_texts": 12,
+  "total_chunks": 6276,
+  "total_chars": 0,
+  "by_category": {
+    "vedas": 0,
+    "upanishads": 264,
+    "bhagavad_gita": 0,
+    "gita": 430,
+    "puranas": 258,
+    "itihasas": 0,
+    "mahabharata": 0,
+    "ramayana": 0,
+    "yoga_sutras": 5324,
+    "dharma_shastras": 0,
+    "smritis": 0,
+    "vedanta": 0,
+    "mass_download": 13313
+  },
+  "by_format": {
+    "txt": 1289,
+    "json": 5588,
+    "pdf": 0,
+    "html": 12712
+  }
+}

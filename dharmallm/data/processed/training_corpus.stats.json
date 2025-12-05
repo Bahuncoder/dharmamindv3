@@ -1,0 +1,13 @@
+{
+  "total_texts": 63292,
+  "total_chars": 31161733,
+  "sources": {
+    "filtered": 12813,
+    "txt_files": 1973,
+    "total": 63292,
+    "duplicates": 10124,
+    "json_files": 14077,
+    "jsonl_files": 47220,
+    "templates": 22
+  }
+}

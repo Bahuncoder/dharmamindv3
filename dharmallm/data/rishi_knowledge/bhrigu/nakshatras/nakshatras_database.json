@@ -1,0 +1,124 @@
+{
+  "title": "27 Nakshatras - Lunar Mansions",
+  "description": "The 27 divisions of the zodiac, each ruled by a deity and planet",
+  "nakshatras": [
+    {
+      "number": 1,
+      "name": "Ashwini",
+      "sanskrit": "अश्विनी",
+      "range": "0°00' - 13°20' Aries",
+      "deity": "Ashwini Kumaras (Divine Physicians)",
+      "ruler": "Ketu",
+      "symbol": "Horse's Head",
+      "qualities": "Swift action, healing ability, pioneering spirit, new beginnings",
+      "characteristics": "Quick to act, energetic, natural healers, love adventure"
+    },
+    {
+      "number": 2,
+      "name": "Bharani",
+      "sanskrit": "भरणी",
+      "range": "13°20' - 26°40' Aries",
+      "deity": "Yama (God of Death)",
+      "ruler": "Venus",
+      "symbol": "Yoni (Womb)",
+      "qualities": "Transformation, restraint, nourishment, creative power",
+      "characteristics": "Strong will, creative, can handle extremes, transformative"
+    },
+    {
+      "number": 3,
+      "name": "Krittika",
+      "sanskrit": "कृत्तिका",
+      "range": "26°40' Aries - 10°00' Taurus",
+      "deity": "Agni (Fire God)",
+      "ruler": "Sun",
+      "symbol": "Razor/Flame",
+      "qualities": "Purification, sharp intellect, cutting through illusion",
+      "characteristics": "Sharp mind, purifying nature, direct communication, leadership"
+    },
+    {
+      "number": 4,
+      "name": "Rohini",
+      "sanskrit": "रोहिणी",
+      "range": "10°00' - 23°20' Taurus",
+      "deity": "Brahma (Creator)",
+      "ruler": "Moon",
+      "symbol": "Ox Cart/Chariot",
+      "qualities": "Growth, fertility, beauty, material abundance",
+      "characteristics": "Attractive, creative, love beauty and comfort, sensual"
+    },
+    {
+      "number": 5,
+      "name": "Mrigashira",
+      "sanskrit": "मृगशिरा",
+      "range": "23°20' Taurus - 6°40' Gemini",
+      "deity": "Soma (Moon God)",
+      "ruler": "Mars",
+      "symbol": "Deer's Head",
+      "qualities": "Seeking, searching, gentle strength, curiosity",
+      "characteristics": "Seekers of knowledge, gentle yet strong, love travel"
+    },
+    {
+      "number": 6,
+      "name": "Ardra",
+      "sanskrit": "आर्द्रा",
+      "range": "6°40' - 20°00' Gemini",
+      "deity": "Rudra (Storm God)",
+      "ruler": "Rahu",
+      "symbol": "Teardrop/Diamond",
+      "qualities": "Transformation through storms, deep emotion, renewal",
+      "characteristics": "Intense emotions, transformative, can weather any storm"
+    },
+    {
+      "number": 7,
+      "name": "Punarvasu",
+      "sanskrit": "पुनर्वसु",
+      "range": "20°00' Gemini - 3°20' Cancer",
+      "deity": "Aditi (Mother of Gods)",
+      "ruler": "Jupiter",
+      "symbol": "Bow and Quiver",
+      "qualities": "Return to light, renewal, abundance, protection",
+      "characteristics": "Optimistic, philosophical, ability to bounce back, nurturing"
+    },
+    {
+      "number": 8,
+      "name": "Pushya",
+      "sanskrit": "पुष्य",
+      "range": "3°20' - 16°40' Cancer",
+      "deity": "Brihaspati (Jupiter)",
+      "ruler": "Saturn",
+      "symbol": "Cow's Udder/Lotus",
+      "qualities": "Nourishment, spiritual growth, auspiciousness",
+      "characteristics": "Nurturing, spiritual, disciplined, brings good fortune"
+    },
+    {
+      "number": 9,
+      "name": "Ashlesha",
+      "sanskrit": "आश्लेषा",
+      "range": "16°40' - 30°00' Cancer",
+      "deity": "Nagas (Serpent Deities)",
+      "ruler": "Mercury",
+      "symbol": "Coiled Serpent",
+      "qualities": "Mystical wisdom, kundalini energy, penetrating insight",
+      "characteristics": "Intuitive, mystical, hypnotic, can see hidden truths"
+    },
+    {
+      "number": 10,
+      "name": "Magha",
+      "sanskrit": "मघा",
+      "range": "0°00' - 13°20' Leo",
+      "deity": "Pitris (Ancestors)",
+      "ruler": "Ketu",
+      "symbol": "Throne Room",
+      "qualities": "Royal authority, ancestral legacy, respect for tradition",
+      "characteristics": "Regal bearing, respect tradition, connection to ancestors"
+    }
+  ],
+  "usage": "Nakshatras are used for:",
+  "applications": [
+    "Determining personality traits and life patterns",
+    "Muhurta (electional astrology) for choosing auspicious times",
+    "Matching charts for marriage compatibility",
+    "Understanding karmic patterns from past lives",
+    "Timing of events (Dasha system)"
+  ]
+}

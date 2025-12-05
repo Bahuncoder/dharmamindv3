@@ -1,0 +1,63 @@
+# Virtual Environments
+**/venv/
+**/*_env/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Node
+**/node_modules/
+.next/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.secure.template
+
+# Logs and databases
+*.log
+*.db
+*.sqlite3
+logs/
+
+# Coverage and testing
+htmlcov/
+.coverage
+coverage.xml
+.pytest_cache/
+.benchmarks/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+checkpoints/
+outputs/
+trained_models/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Cache
+cache/
+.history/

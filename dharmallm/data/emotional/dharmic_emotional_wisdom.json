@@ -1,0 +1,299 @@
+{
+  "version": "1.0",
+  "description": "Emotional healing wisdom from Hindu scriptures",
+  "sources": [
+    "Bhagavad Gita",
+    "Upanishads (Taittiriya, etc.)",
+    "Yoga Sutras of Patanjali",
+    "Brahma Samhita",
+    "Bhagavata Purana",
+    "Traditional Dharmic teachings"
+  ],
+  "emotions": {
+    "sadness": {
+      "teachings": [
+        {
+          "verse": "देहिनोऽस्मिन्यथा देहे कौमारं यौवनं जरा। तथा देहान्तरप्राप्तिर्धीरस्तत्र न मुह्यति॥",
+          "translation": "As the embodied soul continuously passes through childhood, youth and old age, so does it pass into another body at death. The wise are not deluded by this.",
+          "source": "Bhagavad Gita 2.13",
+          "context": "grief, loss, impermanence",
+          "practice": "Meditate on the eternal nature of the Self (Atman). Recognize that what grieves is the ego, not your true Self. Practice Atma-Vichara (self-inquiry): 'Who is sad?'"
+        },
+        {
+          "verse": "नासतो विद्यते भावो नाभावो विद्यते सतः। उभयोरपि दृष्टोऽन्तस्त्वनयोस्तत्त्वदर्शिभिः॥",
+          "translation": "The unreal has no existence; the Real never ceases to be. The truth about both has been realized by seers of Truth.",
+          "source": "Bhagavad Gita 2.16",
+          "context": "sorrow, suffering",
+          "practice": "Contemplate the difference between the passing (body, emotions) and the eternal (Atman). Practice Sat-Asatविवeka (discrimination between Real and unreal)."
+        },
+        {
+          "verse": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः। आगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+          "translation": "O son of Kunti, the contact between the senses and sense objects gives rise to fleeting sensations of heat and cold, pleasure and pain. They come and go; they are impermanent. Endure them bravely.",
+          "source": "Bhagavad Gita 2.14",
+          "context": "emotional pain, suffering",
+          "practice": "Practice Titiksha (forbearance). Witness sadness as a passing wave. Use the mantra: 'This too shall pass' (इदम् अपि गच्छति)."
+        }
+      ],
+      "practices": [
+        "Japa meditation with 'ॐ शान्तिः' (Om Shanti) - 108 times to invoke peace",
+        "Atma-Vichara: Inquire 'Who is experiencing this sadness?' to transcend identification with emotion",
+        "Read Chapter 2 of Bhagavad Gita (Sankhya Yoga) on the nature of the eternal Self",
+        "Surrender practice: Offer your sorrow to the Divine with 'ईश्वरार्पणं' (Ishvararpana)",
+        "Remember: 'अहं ब्रह्मास्मि' (Aham Brahmasmi) - I am Brahman, not this temporary sadness"
+      ]
+    },
+    "anger": {
+      "teachings": [
+        {
+          "verse": "क्रोधाद्भवति सम्मोहः सम्मोहात्स्मृतिविभ्रमः। स्मृतिभ्रंशाद् बुद्धिनाशो बुद्धिनाशात्प्रणश्यति॥",
+          "translation": "From anger arises delusion; from delusion, confusion of memory; from confusion of memory, loss of intelligence; and from loss of intelligence, one is ruined.",
+          "source": "Bhagavad Gita 2.63",
+          "context": "anger, rage, fury",
+          "practice": "When anger arises, immediately chant 'ॐ शान्ति' (Om Shanti) three times. Recognize anger as the thief of wisdom. Practice Pratipaksha Bhavana (cultivating opposite thoughts)."
+        },
+        {
+          "verse": "कामः क्रोधः तथा लोभः स्वर्गद्वारस्य पातनम्",
+          "translation": "Lust, anger, and greed - these are the three gates to hell that destroy the soul.",
+          "source": "Bhagavad Gita 16.21",
+          "context": "anger, destructive emotions",
+          "practice": "See anger as a demon (Asura) within. Practice Krodha-Nirodha (anger restraint) through witnessing without acting."
+        },
+        {
+          "verse": "समत्वं योग उच्यते",
+          "translation": "Equanimity is called Yoga.",
+          "source": "Bhagavad Gita 2.48",
+          "context": "emotional balance, anger management",
+          "practice": "Cultivate Samatva (equanimity). Practice seeing both praise and blame, gain and loss as equal. This destroys anger at its root."
+        }
+      ],
+      "practices": [
+        "Shama practice: Cultivate calmness through pranayama - Sheetali (cooling breath)",
+        "Kshama Bhavana: Practice forgiveness meditation - 'I forgive all, I seek forgiveness from all'",
+        "Pratipaksha Bhavana: When anger arises, immediately cultivate love (Priti) and compassion (Karuna)",
+        "Chant 'ॐ शं शान्ताय नमः' (Om Sham Shantaya Namah) - salutations to peace",
+        "Remember: Anger is Rajas (passion/agitation). Return to Sattva (purity/peace) through meditation"
+      ]
+    },
+    "fear": {
+      "teachings": [
+        {
+          "verse": "अभयं सत्त्वसंशुद्धिर्ज्ञानयोगव्यवस्थितिः",
+          "translation": "Fearlessness, purity of heart, steadfastness in knowledge and yoga...",
+          "source": "Bhagavad Gita 16.1",
+          "context": "fearlessness, courage",
+          "practice": "Cultivate Abhaya (fearlessness) through remembrance of your divine nature. You are immortal Atman, beyond all harm."
+        },
+        {
+          "verse": "न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः। अजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥",
+          "translation": "The soul is never born nor does it ever die; nor having once existed, does it ever cease to be. The soul is without birth, eternal, immortal and ageless. It is not destroyed when the body is destroyed.",
+          "source": "Bhagavad Gita 2.20",
+          "context": "fear of death, existential fear",
+          "practice": "Meditate on your immortal nature. Chant 'अजोऽहम्' (Ajo'ham) - I am unborn, I am deathless."
+        },
+        {
+          "verse": "ईश्वरः सर्वभूतानां हृद्देशेऽर्जुन तिष्ठति",
+          "translation": "The Lord dwells in the hearts of all beings, O Arjuna.",
+          "source": "Bhagavad Gita 18.61",
+          "context": "divine protection, safety",
+          "practice": "Remember the Divine resides within you. You are never alone. Practice Ishvara Pranidhana (surrender to the Divine)."
+        }
+      ],
+      "practices": [
+        "Abhaya Mudra: Practice the gesture of fearlessness while chanting 'अभयं सर्वभूतेभ्यो मत्तः' (Abhayam sarvabhutebhyo mattah)",
+        "Hanuman Chalisa: Chant this powerful hymn for courage and protection",
+        "Mrityunjaya Mantra: 'ॐ त्र्यम्बकं यजामहे...' for protection and fearlessness",
+        "Contemplate: 'यो मां पश्यति सर्वत्र' (Yo mam pashyati sarvatra) - He who sees Me everywhere",
+        "Practice Vairagya (non-attachment): Fear arises from attachment; detachment brings fearlessness"
+      ]
+    },
+    "anxiety": {
+      "teachings": [
+        {
+          "verse": "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय। सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते॥",
+          "translation": "Perform your duty with equanimity, abandoning attachment to success or failure. Such equanimity is called Yoga.",
+          "source": "Bhagavad Gita 2.48",
+          "context": "anxiety, worry about results",
+          "practice": "Practice Nishkama Karma (action without attachment to fruits). Do your dharma and surrender results to the Divine."
+        },
+        {
+          "verse": "तस्मात्सर्वेषु कालेषु मामनुस्मर युध्य च। मय्यर्पितमनोबुद्धिर्मामेवैष्यस्यसंशयः॥",
+          "translation": "Therefore, remember Me at all times and fight. With mind and intellect surrendered to Me, you will surely attain Me.",
+          "source": "Bhagavad Gita 8.7",
+          "context": "constant worry, mental agitation",
+          "practice": "Practice Anusmriti (constant remembrance). Replace anxious thoughts with divine remembrance: 'ॐ नमो नारायणाय'."
+        },
+        {
+          "verse": "चित्तवृत्तिनिरोधः योगः",
+          "translation": "Yoga is the restraint of mental modifications.",
+          "source": "Yoga Sutras 1.2 (Patanjali)",
+          "context": "mental agitation, restlessness",
+          "practice": "Practice Chitta Vritti Nirodha: Observe thoughts without engaging. They are clouds passing through the sky of consciousness."
+        }
+      ],
+      "practices": [
+        "Pratiprasava: Reverse the anxiety by tracing it to its source through meditation",
+        "Nadi Shodhana (alternate nostril breathing): Balances Ida and Pingala nadis, calming the mind",
+        "Japa of 'ॐ नमः शिवाय' (Om Namah Shivaya): Destroys mental agitation",
+        "Practice Ishvara Pranidhana: Surrender all worries to the Divine with trust (Shraddha)",
+        "Remember: The present moment is all there is. Past and future are Maya (illusion)."
+      ]
+    },
+    "confusion": {
+      "teachings": [
+        {
+          "verse": "तदेव मे दर्शय देव रूपम्",
+          "translation": "Show me Your cosmic form, O Lord, so that I may see the truth clearly.",
+          "source": "Bhagavad Gita 11.3 (context)",
+          "context": "confusion, seeking clarity",
+          "practice": "When confused, seek higher vision through prayer and meditation. Ask the Divine within for guidance."
+        },
+        {
+          "verse": "श्रद्धावाँल्लभते ज्ञानं तत्परः संयतेन्द्रियः। ज्ञानं लब्ध्वा परां शान्तिमचिरेणाधिगच्छति॥",
+          "translation": "One who has faith, is sincere, and has mastery over the senses, attains knowledge. Having attained knowledge, one quickly attains supreme peace.",
+          "source": "Bhagavad Gita 4.39",
+          "context": "confusion, seeking wisdom",
+          "practice": "Cultivate Shraddha (faith) and practice Indriya Nigraha (sense control). Confusion arises from scattered attention."
+        },
+        {
+          "verse": "तत्त्वं पद देशं गुरुरेव शो",
+          "translation": "The Guru alone reveals the truth and shows the way.",
+          "source": "Traditional teaching",
+          "context": "confusion, need for guidance",
+          "practice": "Seek guidance from a Sat-Guru (true teacher) or from the Guru within. Practice Guru-dhyana (meditation on the teacher)."
+        }
+      ],
+      "practices": [
+        "Viveka (discrimination): Practice discerning the Real from the unreal, eternal from temporary",
+        "Svadhyaya (self-study): Study sacred texts like Bhagavad Gita for clarity and wisdom",
+        "Antarmukhi Sadhana: Turn attention inward through meditation - answers come from within",
+        "Mantra for clarity: 'ॐ गं गणपतये नमः' (Om Gam Ganapataye Namah) - removes obstacles",
+        "Practice Nididhyasana: Deep contemplation on spiritual truths until clarity dawns"
+      ]
+    },
+    "joy": {
+      "teachings": [
+        {
+          "verse": "सुखदुःखे समे कृत्वा लाभालाभौ जयाजयौ",
+          "translation": "Treating pleasure and pain, gain and loss, victory and defeat alike...",
+          "source": "Bhagavad Gita 2.38",
+          "context": "balanced joy, not getting attached",
+          "practice": "Enjoy joy but don't cling to it. Recognize it as a temporary wave in the ocean of consciousness."
+        },
+        {
+          "verse": "आनन्दमयोऽभ्यासात्",
+          "translation": "One becomes full of bliss through practice.",
+          "source": "Taittiriya Upanishad",
+          "context": "divine bliss, true joy",
+          "practice": "True Ananda (bliss) comes from within, not from external objects. Practice meditation to access eternal joy."
+        }
+      ],
+      "practices": [
+        "Practice Santosha (contentment) - a form of sustainable joy not dependent on externals",
+        "Offer your joy to the Divine: 'सर्वं ब्रह्मार्पणं' (Sarvam Brahmarpanam)",
+        "Share your joy with others (Dana) - joy multiplies when shared",
+        "Remember: External joys are Preyas (pleasant); inner joy is Shreyas (good/beneficial)",
+        "Meditate on Sat-Chit-Ananda: Existence-Consciousness-Bliss - your true nature"
+      ]
+    },
+    "love": {
+      "teachings": [
+        {
+          "verse": "सर्वभूतेषु यः पश्येद्भगवद्भावमात्मनः। भूतानि भगवत्यात्मन्येष भागवतोत्तमः॥",
+          "translation": "One who sees the Divine in all beings and all beings in the Divine is the best among devotees.",
+          "source": "Bhagavata Purana 11.2.45",
+          "context": "divine love, universal love",
+          "practice": "See the Divine in all. Practice Vishva-Prema (universal love): 'सर्वे भवन्तु सुखिनः' (May all beings be happy)."
+        },
+        {
+          "verse": "प्रेमाञ्जनच्छुरितभक्तिविलोचनेन सन्तः सदैव हृदयेषु विलोकयन्ति",
+          "translation": "Devotees, whose eyes are anointed with the love of God, constantly see the Divine within their hearts.",
+          "source": "Brahma Samhita 5.38",
+          "context": "devotional love, bhakti",
+          "practice": "Cultivate Bhakti (devotion). See love as divine energy. Practice Hridaya-Dhyana (meditation on the heart)."
+        }
+      ],
+      "practices": [
+        "Practice Maitri Bhavana: Cultivate friendliness and love toward all beings",
+        "Chant 'ॐ प्रेमाय नमः' (Om Premaya Namah) - salutations to divine love",
+        "Remember: True love is selfless (Nishkama Prema), not possessive",
+        "Practice Atma-Drishti: See the same Self in all - this is the foundation of true love",
+        "Offer love as worship: 'सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः' (May all be happy, may all be free from illness)"
+      ]
+    },
+    "peace": {
+      "teachings": [
+        {
+          "verse": "ॐ शान्तिः शान्तिः शान्तिः",
+          "translation": "Om, peace, peace, peace (in the physical, mental, and spiritual realms)",
+          "source": "Upanishadic Shanti Mantra",
+          "context": "peace, tranquility",
+          "practice": "Chant this mantra to invoke peace at all three levels: Adhibhautika, Adhidaivika, Adhyatmika."
+        },
+        {
+          "verse": "लोकाः समस्ताः सुखिनो भवन्तु",
+          "translation": "May all the worlds be happy.",
+          "source": "Traditional peace prayer",
+          "context": "universal peace, harmony",
+          "practice": "Cultivate Loka-Kalyana Bhavana (well-wishing for all). Your inner peace radiates outward."
+        }
+      ],
+      "practices": [
+        "Practice Shama (tranquility of mind) through regular meditation",
+        "Upasana of the formless Brahman: Meditate on 'शान्तं शिवं अद्वैतम्' (Peace, auspiciousness, non-duality)",
+        "Sandhya Vandana: Practice morning and evening prayers for sustained peace",
+        "Japa of Om: The sound of peace itself",
+        "Live by Ahimsa (non-violence), Satya (truth), and Asteya (non-stealing) - foundations of peace"
+      ]
+    },
+    "gratitude": {
+      "teachings": [
+        {
+          "verse": "ईश्वरः सर्वभूतानां हृद्देशेऽर्जुन तिष्ठति",
+          "translation": "The Lord dwells in the hearts of all beings. Be grateful for this divine presence.",
+          "source": "Bhagavad Gita 18.61 (adapted)",
+          "context": "gratitude, divine presence",
+          "practice": "Practice Kritagyata (gratitude). Begin and end each day thanking the Divine for all blessings."
+        },
+        {
+          "verse": "अन्नं ब्रह्म",
+          "translation": "Food is Brahman (Divine).",
+          "source": "Taittiriya Upanishad",
+          "context": "gratitude for sustenance",
+          "practice": "Be grateful for everything - food, air, water. Offer gratitude before eating: 'ब्रह्मार्पणं ब्रह्म हविः'."
+        }
+      ],
+      "practices": [
+        "Practice Prasada Buddhi: See everything as divine grace (Prasad)",
+        "Daily Kritagyata practice: List 10 things you're grateful for each morning",
+        "Chant 'ॐ नमो भगवते वासुदेवाय' (Om Namo Bhagavate Vasudevaya) with gratitude",
+        "Practice Dana (giving): Gratitude expressed through generosity",
+        "Remember: Everything is Ishvara Prasada (divine blessing) - even challenges teach us"
+      ]
+    },
+    "compassion": {
+      "teachings": [
+        {
+          "verse": "आत्मवत् सर्वभूतेषु यः पश्यति स पश्यति",
+          "translation": "One who sees the Self in all beings truly sees.",
+          "source": "Bhagavad Gita 6.29 (adapted)",
+          "context": "compassion, universal vision",
+          "practice": "Practice Atma-Drishti: See your own Self in all beings. Compassion arises naturally from this vision."
+        },
+        {
+          "verse": "परोपकाराय सतां विभूतयः",
+          "translation": "The wealth of the good is for helping others.",
+          "source": "Traditional saying",
+          "context": "compassion, service",
+          "practice": "Practice Seva (selfless service). Serving others is serving the Divine."
+        }
+      ],
+      "practices": [
+        "Karuna Bhavana: Cultivate compassion meditation - wish relief from suffering for all",
+        "Practice Paropakara (helping others) as worship",
+        "Ahimsa in thought, word, and deed: Non-harm is the foundation of compassion",
+        "Chant 'ॐ सर्वे भद्राणि पश्यन्तु' (May all see auspiciousness)",
+        "Remember: 'वसुधैव कुटुम्बकम्' (Vasudhaiva Kutumbakam) - The world is one family"
+      ]
+    }
+  }
+}

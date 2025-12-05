@@ -1,0 +1,87 @@
+[
+  {
+    "id": "upanishad_isha_v1",
+    "source": "Isha Upanishad",
+    "category": "upanishad",
+    "verse": 1,
+    "sanskrit": "ईशावास्यमिदं सर्वं यत्किञ्च जगत्यां जगत्। तेन त्यक्तेन भुञ्जीथा मा गृधः कस्यस्विद्धनम्॥",
+    "transliteration": "īśāvāsyam idaṁ sarvaṁ yat kiñca jagatyāṁ jagat tena tyaktena bhuñjīthā mā gṛdhaḥ kasyasvid dhanam",
+    "english": "All this, whatever moves in this moving world, is pervaded by the Lord. Therefore find your enjoyment in renunciation; do not covet what belongs to others.",
+    "commentary": "The opening verse teaching that everything is pervaded by the divine.",
+    "tags": [
+      "upanishad",
+      "vedanta",
+      "wisdom",
+      "isha"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477140"
+  },
+  {
+    "id": "upanishad_kena_v1",
+    "source": "Kena Upanishad",
+    "category": "upanishad",
+    "verse": 1,
+    "sanskrit": "केनेषितं पतति प्रेषितं मनः केन प्राणः प्रथमः प्रैति युक्तः। केनेषितां वाचमिमां वदन्ति चक्षुः श्रोत्रं क उ देवो युनक्ति॥",
+    "transliteration": "keneṣitaṁ patati preṣitaṁ manaḥ kena prāṇaḥ prathamaḥ praiti yuktaḥ keneṣitāṁ vācam imāṁ vadanti cakṣuḥ śrotraṁ ka u devo yunakti",
+    "english": "By whom willed does the mind go toward its object? By whom commanded does the life-force move? At whose will do people utter speech? What power directs the eye and ear?",
+    "commentary": "Profound questions about the ultimate cause behind all functions.",
+    "tags": [
+      "upanishad",
+      "vedanta",
+      "wisdom",
+      "kena"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477149"
+  },
+  {
+    "id": "upanishad_katha_v1.2.18",
+    "source": "Katha Upanishad",
+    "category": "upanishad",
+    "verse": "1.2.18",
+    "sanskrit": "न जायते म्रियते वा कदाचिन् नायं भूत्वा भविता वा न भूयः। अजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥",
+    "transliteration": "na jāyate mriyate vā kadācin nāyaṁ bhūtvā bhavitā vā na bhūyaḥ ajo nityaḥ śāśvato 'yaṁ purāṇo na hanyate hanyamāne śarīre",
+    "english": "The soul is never born nor does it die. It has not come into being, does not come into being, and will not come into being. It is unborn, eternal, ever-existing, undying and primeval. It is not slain when the body is slain.",
+    "commentary": "Famous verse about the eternal nature of the soul (similar to Gita 2.20).",
+    "tags": [
+      "upanishad",
+      "vedanta",
+      "wisdom",
+      "katha"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477154"
+  },
+  {
+    "id": "upanishad_mundaka_v1.1.3",
+    "source": "Mundaka Upanishad",
+    "category": "upanishad",
+    "verse": "1.1.3",
+    "sanskrit": "तपःश्रद्धे ये ह्युपवसन्त्यरण्ये शान्ता विद्वांसो भैक्ष्यचर्यां चरन्तः। सूर्यद्वारेण ते विरजाः प्रयान्ति यत्रामृतः स पुरुषो ह्यव्ययात्मा॥",
+    "transliteration": "tapaḥ-śraddhē ye hy upavasanty araṇye śāntā vidvāṁso bhaikṣya-caryāṁ carantaḥ sūrya-dvāreṇa te virajāḥ prayānti yatrāmṛtaḥ sa puruṣo hy avyayātmā",
+    "english": "Those who practice austerities and faith in the forest, the peaceful knowers who live on alms, depart freed from impurities through the gate of the sun to where dwells that immortal, imperishable Person.",
+    "commentary": "Description of the path of renunciation and its ultimate goal.",
+    "tags": [
+      "upanishad",
+      "vedanta",
+      "wisdom",
+      "mundaka"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477159"
+  },
+  {
+    "id": "upanishad_mandukya_v1",
+    "source": "Mandukya Upanishad",
+    "category": "upanishad",
+    "verse": 1,
+    "sanskrit": "ॐ इत्येतदक्षरमिदं सर्वं तस्योपव्याख्यानम्। भूतं भवद्भविष्यदिति सर्वमोङ्कार एव॥",
+    "transliteration": "oṁ ity etad akṣaram idaṁ sarvaṁ tasyopavyākhyānam bhūtaṁ bhavad bhaviṣyad iti sarvam oṅkāra eva",
+    "english": "Om - this syllable is all this. Its explanation is as follows: All that is past, present and future is, indeed, Om. And whatever transcends the three times, that too is Om.",
+    "commentary": "The mystical significance of Om encompassing all of existence.",
+    "tags": [
+      "upanishad",
+      "vedanta",
+      "wisdom",
+      "mandukya"
+    ],
+    "timestamp": "2025-10-04T14:17:22.477164"
+  }
+]

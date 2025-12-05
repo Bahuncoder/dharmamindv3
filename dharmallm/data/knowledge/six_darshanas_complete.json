@@ -1,0 +1,78 @@
+{
+  "six_classical_schools": {
+    "sankhya": {
+      "founder": "Sage Kapila",
+      "core_philosophy": "Dualistic system recognizing Purusha (consciousness) and Prakriti (matter)",
+      "key_concepts": [
+        "25 Tattvas (principles of existence)",
+        "Purusha (pure consciousness)",
+        "Prakriti (primordial matter)",
+        "Three Gunas (qualities): Sattva, Rajas, Tamas"
+      ],
+      "practical_application": "Understanding the relationship between spirit and matter"
+    },
+    "yoga": {
+      "founder": "Sage Patanjali",
+      "core_philosophy": "Eight-limbed path for spiritual realization",
+      "ashtanga_yoga": [
+        "Yama (ethical restraints)",
+        "Niyama (observances)",
+        "Asana (postures)",
+        "Pranayama (breath control)",
+        "Pratyahara (withdrawal of senses)",
+        "Dharana (concentration)",
+        "Dhyana (meditation)",
+        "Samadhi (absorption)"
+      ],
+      "goal": "Kaivalya (isolation of pure consciousness)"
+    },
+    "nyaya": {
+      "founder": "Sage Gautama",
+      "core_philosophy": "System of logic and reasoning for valid knowledge",
+      "pramanas": [
+        "Pratyaksha (direct perception)",
+        "Anumana (inference)",
+        "Upamana (comparison)",
+        "Shabda (verbal testimony)"
+      ],
+      "contribution": "Logical methodology for spiritual inquiry"
+    },
+    "vaisheshika": {
+      "founder": "Sage Kanada",
+      "core_philosophy": "Atomic theory and categories of existence",
+      "key_concepts": [
+        "Paramanu (atoms)",
+        "Six categories of reality",
+        "Dharma and Adharma as cosmic principles"
+      ],
+      "significance": "Scientific approach to understanding reality"
+    },
+    "mimamsa": {
+      "founder": "Sage Jaimini",
+      "core_philosophy": "Interpretation of Vedic rituals and dharma",
+      "focus": "Karma-kanda (ritual portion of Vedas)",
+      "contribution": "Preservation of Vedic tradition and ritual science"
+    },
+    "vedanta": {
+      "founder": "Sage Vyasa (Brahma Sutras)",
+      "core_philosophy": "Ultimate reality and liberation",
+      "major_sub_schools": [
+        {
+          "name": "Advaita",
+          "teacher": "Adi Shankara",
+          "philosophy": "Non-dualism - Brahman alone is real"
+        },
+        {
+          "name": "Vishishtadvaita",
+          "teacher": "Ramanuja",
+          "philosophy": "Qualified non-dualism - Unity with attributes"
+        },
+        {
+          "name": "Dvaita",
+          "teacher": "Madhva",
+          "philosophy": "Dualism - Eternal distinction between soul and God"
+        }
+      ]
+    }
+  }
+}

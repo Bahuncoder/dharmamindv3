@@ -1,0 +1,979 @@
+/* Mobile Optimization Styles for DharmaMind */
+/* Responsive design, touch-friendly interfaces, and mobile-first approach */
+
+/* Mobile-first breakpoints */
+:root {
+  --mobile-sm: 320px;
+  --mobile-md: 375px;
+  --mobile-lg: 414px;
+  --tablet: 768px;
+  --desktop: 1024px;
+  --desktop-lg: 1440px;
+  
+  /* Mobile-specific spacing */
+  --mobile-padding: 1rem;
+  --mobile-margin: 0.75rem;
+  --touch-target-size: 44px;
+  --mobile-border-radius: 12px;
+}
+
+/* Enhanced Safe Area Support */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-area-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Base mobile styles */
+@media (max-width: 768px) {
+  /* Enhanced Typography for mobile readability */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.3;
+    margin-bottom: 0.875rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Improved body text */
+  body {
+    font-size: 16px; /* Prevents zoom on iOS */
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Container adjustments */
+  .container {
+    padding-left: var(--mobile-padding);
+    padding-right: var(--mobile-padding);
+    max-width: 100%;
+  }
+  
+  /* Enhanced Chat interface mobile optimization */
+  .chat-container {
+    padding: var(--mobile-padding) 0.75rem;
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mobile-optimized {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .chat-messages-container {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem;
+  }
+  
+  .message-bubble {
+    max-width: 90%;
+    padding: 0.875rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: var(--mobile-margin);
+    border-radius: var(--mobile-border-radius);
+  }
+  
+  /* Enhanced Message bubble accessibility for mobile */
+  .high-contrast-message {
+    border: 2px solid currentColor;
+    font-weight: 500;
+  }
+  
+  .high-contrast-bubble {
+    background-color: var(--bg-high-contrast, #ffffff) !important;
+    color: var(--text-high-contrast, #000000) !important;
+    border: 2px solid currentColor;
+  }
+  
+  /* Enhanced Touch-friendly buttons */
+  .btn, .action-button, .mobile-touch {
+    min-height: var(--touch-target-size);
+    min-width: var(--touch-target-size);
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: var(--mobile-border-radius);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn::before, .action-button::before, .mobile-touch::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  .btn:active::before, .action-button:active::before, .mobile-touch:active::before {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .btn-sm {
+    min-height: 40px;
+    min-width: 40px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .btn-lg {
+    min-height: 50px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+  }
+  
+  /* High contrast button support */
+  .high-contrast-button {
+    border: 2px solid currentColor !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+    background: var(--bg-high-contrast, #ffffff) !important;
+    color: var(--text-high-contrast, #000000) !important;
+  }
+  
+  .high-contrast-button:hover, .high-contrast-button:focus {
+    outline: 3px solid #0066cc !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Enhanced Input fields mobile optimization */
+  .input-field, .enhanced-textarea, .mobile-optimized input, .mobile-optimized textarea {
+    min-height: var(--touch-target-size);
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: var(--mobile-border-radius);
+    border: 2px solid #e5e7eb;
+    transition: border-color 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .input-field:focus, .enhanced-textarea:focus {
+    border-color: #10b981;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+  
+  /* Touch-friendly spacing for inputs */
+  .touch-friendly-spacing {
+    padding: 1rem !important;
+  }
+  
+  /* Keyboard-visible adjustments */
+  .keyboard-visible {
+    padding-bottom: 0 !important;
+  }
+  
+  .keyboard-visible .chat-input-area {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1001 !important;
+  }
+  
+  /* Enhanced Navigation mobile */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 4px;
+  }
+  
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    min-height: var(--touch-target-size);
+    color: #666;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mobile-nav-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  .mobile-nav-item:active::before {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .mobile-nav-item.active {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+  }
+  
+  .mobile-nav-item:hover, .mobile-nav-item:focus {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+    outline: none;
+  }
+  
+  /* Enhanced Header mobile optimization */
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 16px max(8px, env(safe-area-inset-top));
+    z-index: 999;
+  }
+  
+  .mobile-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--touch-target-size);
+  }
+  
+  .mobile-menu-button {
+    min-height: var(--touch-target-size);
+    min-width: var(--touch-target-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #374151;
+    cursor: pointer;
+    border-radius: 8px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .mobile-menu-button:hover, .mobile-menu-button:focus {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    outline: none;
+  }
+  
+  /* Enhanced Chat input area mobile */
+  .chat-input-area, .enhanced-input-container {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+    z-index: 100;
+  }
+  
+  .chat-input-container, .enhanced-input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    max-width: 100%;
+    border-radius: var(--mobile-border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-input, .enhanced-textarea {
+    flex: 1;
+    min-height: var(--touch-target-size);
+    max-height: 120px;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border: 2px solid #e2e8f0;
+    border-radius: 22px;
+    resize: none;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .chat-input:focus, .enhanced-textarea:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+  
+  .chat-send-btn, .send-button, .voice-button {
+    min-width: var(--touch-target-size);
+    min-height: var(--touch-target-size);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: #10b981;
+    color: white;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .chat-send-btn::before, .send-button::before, .voice-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  .chat-send-btn:active::before, .send-button:active::before, .voice-button:active::before {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .chat-send-btn:disabled, .send-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  /* Voice recording enhancements */
+  .recording-indicator {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(220, 38, 38, 0.95);
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--mobile-border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+  }
+  
+  .mobile-recording .recording-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 24px;
+    border-radius: 16px;
+    z-index: 1001;
+    min-width: 200px;
+    text-align: center;
+  }
+  
+  .recording-animation {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .recording-dot {
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: recording-pulse 1.5s ease-in-out infinite;
+  }
+  
+  .recording-pulse {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: rgba(239, 68, 68, 0.3);
+    border-radius: 50%;
+    animation: recording-pulse-ring 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes recording-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  @keyframes recording-pulse-ring {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  
+  .recording-stop-mobile {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .chat-send-btn:disabled {
+    background: #cbd5e0;
+    color: #a0aec0;
+  }
+  
+  /* Voice input button */
+  .voice-input-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #48bb78;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .voice-input-btn.recording {
+    background: #e53e3e;
+    animation: pulse 1.5s infinite;
+  }
+  
+  .voice-input-btn.processing {
+    background: #ed8936;
+  }
+  
+  /* Safe area adjustments for iPhone */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  /* Gesture-friendly spacing */
+  .gesture-area {
+    padding: 16px 0;
+  }
+  
+  /* Loading states for mobile */
+  .mobile-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .mobile-loading .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+  }
+  
+  /* Floating action button */
+  .fab {
+    position: fixed;
+    bottom: calc(80px + env(safe-area-inset-bottom));
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #667eea;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 998;
+  }
+  
+  /* Modal mobile optimization */
+  .mobile-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .mobile-modal-content {
+    width: 100%;
+    max-height: 90vh;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+  }
+  
+  .mobile-modal.open .mobile-modal-content {
+    transform: translateY(0);
+  }
+  
+  /* Pull-to-refresh indicator */
+  .pull-to-refresh {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 0.9rem;
+    transform: translateY(-60px);
+    transition: transform 0.2s ease;
+  }
+  
+  .pull-to-refresh.visible {
+    transform: translateY(0);
+  }
+  
+  /* Swipe gestures */
+  .swipeable {
+    touch-action: pan-y;
+  }
+  
+  .swipe-indicator {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #cbd5e0;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .tablet-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Touch feedback */
+.touch-feedback:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Accessibility improvements for mobile */
+@media (prefers-reduced-motion: reduce) {
+  .voice-input-btn.recording {
+    animation: none;
+  }
+  
+  .mobile-loading .spinner {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .btn {
+    border: 2px solid currentColor;
+  }
+  
+  .input-field {
+    border: 2px solid #000;
+  }
+  
+  .mobile-nav-item {
+    border: 1px solid transparent;
+  }
+  
+  .mobile-nav-item:focus {
+    border-color: #000;
+  }
+}
+
+/* Dark mode mobile adjustments */
+@media (prefers-color-scheme: dark) {
+  .mobile-nav {
+    background: rgba(31, 41, 55, 0.95);
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mobile-header {
+    background: rgba(31, 41, 55, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .chat-input-area {
+    background: rgba(31, 41, 55, 0.95);
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .chat-input {
+    background: #374151;
+    border-color: #4b5563;
+    color: white;
+  }
+  
+  .mobile-modal-content {
+    background: #1f2937;
+    color: white;
+  }
+}
+
+/* Print styles */
+@media print {
+  .mobile-nav,
+  .mobile-header,
+  .chat-input-area,
+  .fab,
+  .voice-input-btn {
+    display: none !important;
+  }
+}
+
+/* Enhanced Accessibility and Mobile Features */
+/* Accessibility enhancements for mobile */
+.high-contrast {
+  background: var(--bg-high-contrast, #ffffff) !important;
+  color: var(--text-high-contrast, #000000) !important;
+  border: 2px solid currentColor !important;
+}
+
+.high-contrast-reaction {
+  background: var(--bg-high-contrast, #ffffff) !important;
+  color: var(--text-high-contrast, #000000) !important;
+  border: 2px solid currentColor !important;
+  font-weight: 600 !important;
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .reduce-motion,
+  .reduce-motion *,
+  .reduce-motion *::before,
+  .reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Loading states for mobile */
+.mobile-loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.mobile-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #10b981;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: mobile-spin 1s linear infinite;
+}
+
+@keyframes mobile-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile gesture support */
+.mobile-swipe-area {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+.mobile-pull-to-refresh {
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-pull-indicator {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-pull-active .mobile-pull-indicator {
+  top: 10px;
+  opacity: 1;
+}
+
+/* Performance optimizations for mobile */
+.mobile-optimized * {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Haptic feedback classes */
+.haptic-light {
+  /* Used with navigator.vibrate(50) */
+  user-select: none;
+}
+
+.haptic-medium {
+  /* Used with navigator.vibrate(100) */
+  user-select: none;
+}
+
+.haptic-heavy {
+  /* Used with navigator.vibrate([100, 50, 100]) */
+  user-select: none;
+}
+
+/* ================================
+   TYPING INDICATOR ENHANCEMENTS
+   ================================ */
+
+.mobile-typing {
+  margin: 0.25rem 0;
+  touch-action: manipulation;
+}
+
+.mobile-typing .touch-feedback {
+  transition: transform 0.1s ease;
+}
+
+.mobile-typing .touch-feedback:active {
+  transform: scale(0.98);
+}
+
+/* Reduced motion for typing animations */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-typing * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast typing indicator */
+.high-contrast .mobile-typing {
+  filter: contrast(1.5);
+  font-weight: 600;
+}
+
+/* Connection status indicators */
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.connection-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.connection-connected {
+  background-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.connection-connecting {
+  background-color: #f59e0b;
+  animation: pulse 1.5s infinite;
+}
+
+.connection-disconnected {
+  background-color: #ef4444;
+  animation: flash 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes flash {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+
+/* Progress bar styling */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.progress-bar {
+  height: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.125rem;
+  overflow: hidden;
+  min-width: 3rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 0.125rem;
+  transition: width 0.3s ease;
+}
+
+.high-contrast .progress-bar {
+  background-color: #000;
+  border: 1px solid #000;
+}
+
+.high-contrast .progress-fill {
+  background: #000;
+}
+
+/* Elapsed time display */
+.elapsed-time {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+
+.high-contrast .elapsed-time {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Real-time typing indicators for mobile */
+@media (max-width: 768px) {
+  .mobile-typing {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .mobile-typing .connection-status {
+    font-size: 0.7rem;
+  }
+  
+  .mobile-typing .progress-container {
+    gap: 0.25rem;
+  }
+  
+  .mobile-typing .progress-bar {
+    min-width: 2rem;
+    height: 0.2rem;
+  }
+}

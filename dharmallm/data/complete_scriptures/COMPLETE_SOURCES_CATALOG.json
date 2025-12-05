@@ -1,0 +1,131 @@
+{
+  "vedas": [
+    {
+      "name": "Rig Veda Complete",
+      "archive_id": "rigvedaenglish",
+      "url": "https://archive.org/download/rigvedaenglish/rigveda.txt",
+      "description": "Complete Rig Veda - All 10 Mandalas, 10,552 verses",
+      "size": "~15 MB"
+    },
+    {
+      "name": "Sama Veda Complete",
+      "archive_id": "sama-veda",
+      "url": "https://archive.org/download/sama-veda/SamaVeda.txt",
+      "description": "Complete Sama Veda - 1,875 verses",
+      "size": "~3 MB"
+    },
+    {
+      "name": "Yajur Veda Complete",
+      "archive_id": "yajurveda",
+      "url": "https://archive.org/download/yajurveda/YajurVeda.txt",
+      "description": "Complete Yajur Veda (White/Black)",
+      "size": "~5 MB"
+    },
+    {
+      "name": "Atharva Veda Complete",
+      "archive_id": "atharva-veda-samhita",
+      "url": "https://archive.org/download/atharva-veda-samhita/AtharvaVeda.txt",
+      "description": "Complete Atharva Veda - 20 books, 730 hymns",
+      "size": "~8 MB"
+    }
+  ],
+  "puranas": [
+    {
+      "name": "Vishnu Purana Complete",
+      "archive_id": "vishnu-purana",
+      "url": "https://archive.org/download/vishnu-purana/VishnuPurana.txt",
+      "description": "Complete Vishnu Purana - 6 Books",
+      "size": "~3 MB"
+    },
+    {
+      "name": "Shiva Purana Complete",
+      "archive_id": "shiva-purana-english",
+      "url": "https://archive.org/download/shiva-purana-english/ShivaPurana.txt",
+      "description": "Complete Shiva Purana",
+      "size": "~5 MB"
+    },
+    {
+      "name": "Bhagavata Purana Complete",
+      "archive_id": "SrimadBhagavatamEnglish",
+      "url": "https://archive.org/download/SrimadBhagavatamEnglish/SrimadBhagavatam.txt",
+      "description": "Complete Bhagavata Purana - 12 Cantos, 18,000 verses",
+      "size": "~10 MB"
+    },
+    {
+      "name": "Garuda Purana Complete",
+      "archive_id": "garuda-purana",
+      "url": "https://archive.org/download/garuda-purana/GarudaPurana.txt",
+      "description": "Complete Garuda Purana",
+      "size": "~3 MB"
+    },
+    {
+      "name": "Brahma Purana Complete",
+      "archive_id": "brahma-purana",
+      "url": "https://archive.org/download/brahma-purana/BrahmaPurana.txt",
+      "description": "Complete Brahma Purana",
+      "size": "~2 MB"
+    },
+    {
+      "name": "Brahmanda Purana Complete",
+      "archive_id": "brahmanda-purana",
+      "url": "https://archive.org/download/brahmanda-purana/BrahmandaPurana.txt",
+      "description": "Complete Brahmanda Purana",
+      "size": "~3 MB"
+    },
+    {
+      "name": "Markandeya Purana Complete",
+      "archive_id": "markandeya-purana",
+      "url": "https://archive.org/download/markandeya-purana/MarkandeyaPurana.txt",
+      "description": "Complete Markandeya Purana",
+      "size": "~2 MB"
+    },
+    {
+      "name": "Kurma Purana Complete",
+      "archive_id": "kurma-purana",
+      "url": "https://archive.org/download/kurma-purana/KurmaPurana.txt",
+      "description": "Complete Kurma Purana",
+      "size": "~2 MB"
+    }
+  ],
+  "smritis": [
+    {
+      "name": "Manu Smriti Complete",
+      "archive_id": "manu-smriti",
+      "url": "https://archive.org/download/manu-smriti/ManuSmriti.txt",
+      "description": "Complete Manu Smriti - Laws of Manu",
+      "size": "~1 MB"
+    },
+    {
+      "name": "Yajnavalkya Smriti Complete",
+      "archive_id": "yajnavalkya-smriti",
+      "url": "https://archive.org/download/yajnavalkya-smriti/YajnavalkyaSmriti.txt",
+      "description": "Complete Yajnavalkya Smriti",
+      "size": "~800 KB"
+    }
+  ],
+  "itihasas": [
+    {
+      "name": "Mahabharata Complete (Critical Edition)",
+      "archive_id": "mahabharata-complete",
+      "url": "https://archive.org/download/mahabharata-complete/Mahabharata.txt",
+      "description": "Complete Mahabharata - All 18 Parvas",
+      "size": "~30 MB (very large!)"
+    },
+    {
+      "name": "Ramayana Complete (Valmiki)",
+      "archive_id": "valmiki-ramayana",
+      "url": "https://archive.org/download/valmiki-ramayana/Ramayana.txt",
+      "description": "Complete Ramayana - All 7 Kandas, 24,000 verses",
+      "size": "~8 MB"
+    }
+  ],
+  "gita": [
+    {
+      "name": "Bhagavad Gita Complete (Multiple Translations)",
+      "archive_id": "bhagavad-gita-all",
+      "url": "https://archive.org/download/bhagavad-gita-all/BhagavadGita.txt",
+      "description": "Complete Bhagavad Gita - All 18 chapters, 700 verses",
+      "size": "~1 MB"
+    }
+  ]
+}

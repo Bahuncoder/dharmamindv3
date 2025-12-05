@@ -1,0 +1,114 @@
+{
+  "title": "The Nine Grahas - Planetary Forces",
+  "description": "In Vedic astrology, grahas are not just physical planets but karmic forces",
+  "planets": [
+    {
+      "name": "Sun (Surya)",
+      "sanskrit": "सूर्य",
+      "represents": "Soul, father, authority, government, ego, vitality",
+      "deity": "Surya Deva",
+      "element": "Fire",
+      "exalted_in": "Aries 10°",
+      "debilitated_in": "Libra 10°",
+      "positive_traits": "Leadership, confidence, nobility, generosity, vitality",
+      "negative_traits": "Ego, arrogance, domination, harsh speech",
+      "bhrigu_teaching": "The Sun reveals your soul's purpose. A strong Sun gives leadership and self-confidence. Honor your father and authorities to strengthen Sun."
+    },
+    {
+      "name": "Moon (Chandra)",
+      "sanskrit": "चन्द्र",
+      "represents": "Mind, mother, emotions, public, comfort, nurturing",
+      "deity": "Soma",
+      "element": "Water",
+      "exalted_in": "Taurus 3°",
+      "debilitated_in": "Scorpio 3°",
+      "positive_traits": "Emotional intelligence, nurturing, intuitive, adaptable",
+      "negative_traits": "Moodiness, over-sensitivity, dependency, fluctuation",
+      "bhrigu_teaching": "The Moon governs your mind and emotions. A strong Moon gives mental peace and emotional stability. Honor your mother to strengthen Moon."
+    },
+    {
+      "name": "Mars (Mangala)",
+      "sanskrit": "मंगल",
+      "represents": "Energy, courage, siblings, property, sports, anger",
+      "deity": "Kartikeya (Skanda)",
+      "element": "Fire",
+      "exalted_in": "Capricorn 28°",
+      "debilitated_in": "Cancer 28°",
+      "positive_traits": "Courage, energy, determination, technical skill",
+      "negative_traits": "Anger, aggression, impatience, accidents",
+      "bhrigu_teaching": "Mars gives warrior spirit and courage. Channel this energy through exercise, sports, or service. Control anger through discipline."
+    },
+    {
+      "name": "Mercury (Budha)",
+      "sanskrit": "बुध",
+      "represents": "Intelligence, communication, business, learning, logic",
+      "deity": "Vishnu",
+      "element": "Earth",
+      "exalted_in": "Virgo 15°",
+      "debilitated_in": "Pisces 15°",
+      "positive_traits": "Intelligence, wit, communication skill, business acumen",
+      "negative_traits": "Nervousness, over-analysis, restlessness, cunning",
+      "bhrigu_teaching": "Mercury rules the intellect. A strong Mercury gives sharp mind and communication skills. Study scriptures to elevate Mercury."
+    },
+    {
+      "name": "Jupiter (Guru)",
+      "sanskrit": "गुरु",
+      "represents": "Wisdom, teacher, children, fortune, dharma, expansion",
+      "deity": "Brihaspati",
+      "element": "Ether/Space",
+      "exalted_in": "Cancer 5°",
+      "debilitated_in": "Capricorn 5°",
+      "positive_traits": "Wisdom, optimism, generosity, dharmic living",
+      "negative_traits": "Over-optimism, indulgence, laziness, preachiness",
+      "bhrigu_teaching": "Jupiter is the great benefic, bringing wisdom and fortune. Respect teachers and elders. Study philosophy to strengthen Jupiter."
+    },
+    {
+      "name": "Venus (Shukra)",
+      "sanskrit": "शुक्र",
+      "represents": "Love, beauty, luxury, arts, marriage, pleasure",
+      "deity": "Shukracharya",
+      "element": "Water",
+      "exalted_in": "Pisces 27°",
+      "debilitated_in": "Virgo 27°",
+      "positive_traits": "Artistic talent, charm, diplomacy, refined taste",
+      "negative_traits": "Vanity, laziness, overindulgence, materialism",
+      "bhrigu_teaching": "Venus brings beauty and harmony. A strong Venus gives artistic talents and happy marriage. Practice moderation in pleasures."
+    },
+    {
+      "name": "Saturn (Shani)",
+      "sanskrit": "शनि",
+      "represents": "Karma, discipline, delays, servants, sorrow, longevity",
+      "deity": "Yama",
+      "element": "Air",
+      "exalted_in": "Libra 20°",
+      "debilitated_in": "Aries 20°",
+      "positive_traits": "Discipline, patience, hard work, justice, longevity",
+      "negative_traits": "Delays, pessimism, fear, restrictions, suffering",
+      "bhrigu_teaching": "Saturn is the great teacher through discipline. Accept delays as lessons. Serve the poor and elderly to appease Saturn."
+    },
+    {
+      "name": "Rahu (North Node)",
+      "sanskrit": "राहु",
+      "represents": "Desires, illusion, foreign lands, sudden events, materialism",
+      "deity": "Durga",
+      "nature": "Shadow planet (lunar node)",
+      "exalted_in": "Taurus/Gemini",
+      "debilitated_in": "Scorpio/Sagittarius",
+      "positive_traits": "Ambition, innovation, foreign success, unique perspective",
+      "negative_traits": "Obsession, confusion, deception, addictions",
+      "bhrigu_teaching": "Rahu creates intense desires and illusions. It can give sudden rise or confusion. Practice meditation to calm Rahu's restless energy."
+    },
+    {
+      "name": "Ketu (South Node)",
+      "sanskrit": "केतु",
+      "represents": "Spirituality, detachment, past lives, liberation, mysticism",
+      "deity": "Ganesha",
+      "nature": "Shadow planet (lunar node)",
+      "exalted_in": "Scorpio/Sagittarius",
+      "debilitated_in": "Taurus/Gemini",
+      "positive_traits": "Spiritual insight, intuition, moksha, detachment",
+      "negative_traits": "Confusion, isolation, sudden losses, lack of clarity",
+      "bhrigu_teaching": "Ketu brings spiritual liberation through detachment. It shows past life karma. Embrace spirituality to work with Ketu positively."
+    }
+  ]
+}

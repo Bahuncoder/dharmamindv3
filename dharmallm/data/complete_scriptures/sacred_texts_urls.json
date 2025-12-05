@@ -1,0 +1,20 @@
+{
+  "bhagavad_gita": [
+    "https://www.sacred-texts.com/hin/gita/index.htm",
+    "https://www.sacred-texts.com/hin/rigveda/index.htm"
+  ],
+  "upanishads": [
+    "https://www.sacred-texts.com/hin/upan/index.htm",
+    "https://www.sacred-texts.com/hin/sbe01/index.htm",
+    "https://www.sacred-texts.com/hin/sbe15/index.htm"
+  ],
+  "puranas": [
+    "https://www.sacred-texts.com/hin/vp/index.htm",
+    "https://www.sacred-texts.com/hin/m01/index.htm"
+  ],
+  "vedas": [
+    "https://www.sacred-texts.com/hin/rigveda/index.htm",
+    "https://www.sacred-texts.com/hin/yv/index.htm",
+    "https://www.sacred-texts.com/hin/sv.htm"
+  ]
+}

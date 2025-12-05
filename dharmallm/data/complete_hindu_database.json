@@ -1,0 +1,658 @@
+{
+  "metadata": {
+    "creation_date": "2025-08-30T23:18:09.506583",
+    "total_categories": 8,
+    "total_texts": 59,
+    "total_verses": 59,
+    "description": "Complete database of original Hindu texts"
+  },
+  "texts": [
+    {
+      "id": "verse_1",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः",
+      "english": "On the sacred field of Kurukshetra, assembled for battle",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 1,
+        "verse": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.505709"
+    },
+    {
+      "id": "verse_2",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय",
+      "english": "What did my sons and the Pandavas do, O Sanjaya?",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 1,
+        "verse": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.505732"
+    },
+    {
+      "id": "verse_3",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन",
+      "english": "You have a right to perform your duty, but never to the fruits of action",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 2,
+        "verse": 47
+      },
+      "timestamp": "2025-08-30T23:18:09.505744"
+    },
+    {
+      "id": "verse_4",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय",
+      "english": "Perform your duty equipoised, abandoning all attachment",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 2,
+        "verse": 48
+      },
+      "timestamp": "2025-08-30T23:18:09.505755"
+    },
+    {
+      "id": "verse_5",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "बुद्धियुक्तो जहातीह उभे सुकृतदुष्कृते",
+      "english": "The wise person abandons both good and bad karma",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 2,
+        "verse": 50
+      },
+      "timestamp": "2025-08-30T23:18:09.505763"
+    },
+    {
+      "id": "verse_6",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत",
+      "english": "Whenever there is decline of dharma, O Bharata",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 4,
+        "verse": 7
+      },
+      "timestamp": "2025-08-30T23:18:09.505773"
+    },
+    {
+      "id": "verse_7",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्",
+      "english": "And rise of adharma, then I manifest Myself",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 4,
+        "verse": 7
+      },
+      "timestamp": "2025-08-30T23:18:09.505782"
+    },
+    {
+      "id": "verse_8",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "परित्राणाय साधूनां विनाशाय च दुष्कृताम्",
+      "english": "For the protection of the good and destruction of evil",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 4,
+        "verse": 8
+      },
+      "timestamp": "2025-08-30T23:18:09.505790"
+    },
+    {
+      "id": "verse_9",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज",
+      "english": "Abandon all varieties of dharma and surrender unto Me alone",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 18,
+        "verse": 66
+      },
+      "timestamp": "2025-08-30T23:18:09.505798"
+    },
+    {
+      "id": "verse_10",
+      "category": "bhagavad_gita_complete",
+      "sanskrit": "अहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः",
+      "english": "I shall liberate you from all sins; do not grieve",
+      "source": "श्रीमद्भगवद्गीता - Complete",
+      "metadata": {
+        "chapter": 18,
+        "verse": 66
+      },
+      "timestamp": "2025-08-30T23:18:09.505807"
+    },
+    {
+      "id": "verse_11",
+      "category": "upanishads_major",
+      "sanskrit": "ईशावास्यमिदं सर्वं यत्किञ्च जगत्यां जगत्",
+      "english": "The entire universe is pervaded by the Lord",
+      "source": "Isha Upanishad",
+      "metadata": {
+        "verse": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.505837"
+    },
+    {
+      "id": "verse_12",
+      "category": "upanishads_major",
+      "sanskrit": "तेन त्यक्तेन भुञ्जीथा मा गृधः कस्यस्विद्धनम्",
+      "english": "Enjoy through renunciation; do not covet anyone's wealth",
+      "source": "Isha Upanishad",
+      "metadata": {
+        "verse": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.505846"
+    },
+    {
+      "id": "verse_13",
+      "category": "upanishads_major",
+      "sanskrit": "केनेषितं पतति प्रेषितं मनः",
+      "english": "By whom is the mind directed to fall on its objects?",
+      "source": "Kena Upanishad",
+      "metadata": {
+        "verse": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.505856"
+    },
+    {
+      "id": "verse_14",
+      "category": "upanishads_major",
+      "sanskrit": "उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत",
+      "english": "Arise, awake, and learn by approaching the excellent ones",
+      "source": "Katha Upanishad",
+      "metadata": {
+        "verse": "1.3.14"
+      },
+      "timestamp": "2025-08-30T23:18:09.505867"
+    },
+    {
+      "id": "verse_15",
+      "category": "upanishads_major",
+      "sanskrit": "क्षुरस्य धारा निशिता दुरत्यया",
+      "english": "Sharp like the edge of a razor, hard to traverse",
+      "source": "Katha Upanishad",
+      "metadata": {
+        "verse": "1.3.14"
+      },
+      "timestamp": "2025-08-30T23:18:09.505877"
+    },
+    {
+      "id": "verse_16",
+      "category": "upanishads_major",
+      "sanskrit": "ॐ इत्येतदक्षरमिदं सर्वं तस्योपव्याख्यानम्",
+      "english": "Om - this syllable is all this; its explanation is this",
+      "source": "Prashna Upanishad",
+      "metadata": {
+        "verse": "5.2"
+      },
+      "timestamp": "2025-08-30T23:18:09.505886"
+    },
+    {
+      "id": "verse_17",
+      "category": "upanishads_major",
+      "sanskrit": "सत्यमेव जयते नानृतम्",
+      "english": "Truth alone triumphs, not falsehood",
+      "source": "Mundaka Upanishad",
+      "metadata": {
+        "verse": "3.1.6"
+      },
+      "timestamp": "2025-08-30T23:18:09.505896"
+    },
+    {
+      "id": "verse_18",
+      "category": "upanishads_major",
+      "sanskrit": "सत्येन पन्था विततो देवयानः",
+      "english": "By truth is laid out the path of the gods",
+      "source": "Mundaka Upanishad",
+      "metadata": {
+        "verse": "3.1.6"
+      },
+      "timestamp": "2025-08-30T23:18:09.505909"
+    },
+    {
+      "id": "verse_19",
+      "category": "upanishads_major",
+      "sanskrit": "सर्वं ह्येतद् ब्रह्म",
+      "english": "All this is indeed Brahman",
+      "source": "Mandukya Upanishad",
+      "metadata": {
+        "verse": "2"
+      },
+      "timestamp": "2025-08-30T23:18:09.505921"
+    },
+    {
+      "id": "verse_20",
+      "category": "upanishads_major",
+      "sanskrit": "सत्यं ज्ञानमनन्तं ब्रह्म",
+      "english": "Brahman is Truth, Knowledge, and Infinite",
+      "source": "Taittiriya Upanishad",
+      "metadata": {
+        "verse": "2.1.1"
+      },
+      "timestamp": "2025-08-30T23:18:09.505932"
+    },
+    {
+      "id": "verse_21",
+      "category": "upanishads_major",
+      "sanskrit": "आनन्दो ब्रह्मेति व्यजानात्",
+      "english": "He realized that Bliss is Brahman",
+      "source": "Taittiriya Upanishad",
+      "metadata": {
+        "verse": "3.6.1"
+      },
+      "timestamp": "2025-08-30T23:18:09.505945"
+    },
+    {
+      "id": "verse_22",
+      "category": "upanishads_major",
+      "sanskrit": "तत्त्वमसि श्वेतकेतो",
+      "english": "That thou art, O Svetaketu",
+      "source": "Chandogya Upanishad",
+      "metadata": {
+        "verse": "6.8.7"
+      },
+      "timestamp": "2025-08-30T23:18:09.505956"
+    },
+    {
+      "id": "verse_23",
+      "category": "upanishads_major",
+      "sanskrit": "सर्वं खल्विदं ब्रह्म",
+      "english": "All this is indeed Brahman",
+      "source": "Chandogya Upanishad",
+      "metadata": {
+        "verse": "3.14.1"
+      },
+      "timestamp": "2025-08-30T23:18:09.505966"
+    },
+    {
+      "id": "verse_24",
+      "category": "upanishads_major",
+      "sanskrit": "अहं ब्रह्मास्मि",
+      "english": "I am Brahman",
+      "source": "Brihadaranyaka Upanishad",
+      "metadata": {
+        "verse": "1.4.10"
+      },
+      "timestamp": "2025-08-30T23:18:09.505976"
+    },
+    {
+      "id": "verse_25",
+      "category": "upanishads_major",
+      "sanskrit": "सो ऽहम्",
+      "english": "I am That",
+      "source": "Brihadaranyaka Upanishad",
+      "metadata": {
+        "verse": "1.4.10"
+      },
+      "timestamp": "2025-08-30T23:18:09.505985"
+    },
+    {
+      "id": "verse_26",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्",
+      "english": "We meditate on the divine light of the Sun that illuminates our intellect",
+      "source": "Rig Veda",
+      "metadata": {
+        "purpose": "Supreme enlightenment"
+      },
+      "timestamp": "2025-08-30T23:18:09.506018"
+    },
+    {
+      "id": "verse_27",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "ॐ गं गणपतये नमः",
+      "english": "Salutations to Lord Ganesha",
+      "source": "Ganapati Upanishad",
+      "metadata": {
+        "purpose": "Removing obstacles"
+      },
+      "timestamp": "2025-08-30T23:18:09.506030"
+    },
+    {
+      "id": "verse_28",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "ॐ नमो भगवते वासुदेवाय",
+      "english": "Salutations to Lord Vasudeva",
+      "source": "Vishnu Sahasranama",
+      "metadata": {
+        "purpose": "Divine protection"
+      },
+      "timestamp": "2025-08-30T23:18:09.506040"
+    },
+    {
+      "id": "verse_29",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "ॐ नमः शिवाय",
+      "english": "Salutations to Lord Shiva",
+      "source": "Yajur Veda",
+      "metadata": {
+        "purpose": "Inner transformation"
+      },
+      "timestamp": "2025-08-30T23:18:09.506050"
+    },
+    {
+      "id": "verse_30",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "ॐ शान्ति शान्ति शान्तिः",
+      "english": "Om Peace Peace Peace",
+      "source": "All Upanishads",
+      "metadata": {
+        "purpose": "Universal peace"
+      },
+      "timestamp": "2025-08-30T23:18:09.506060"
+    },
+    {
+      "id": "verse_31",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः",
+      "english": "May all beings be happy, may all be free from disease",
+      "source": "Traditional",
+      "metadata": {
+        "purpose": "Universal welfare"
+      },
+      "timestamp": "2025-08-30T23:18:09.506070"
+    },
+    {
+      "id": "verse_32",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "असतो मा सद्गमय तमसो मा ज्योतिर्गमय मृत्योर्मा अमृतं गमय",
+      "english": "Lead me from unreal to real, from darkness to light, from death to immortality",
+      "source": "Brihadaranyaka Upanishad",
+      "metadata": {
+        "purpose": "Spiritual progress"
+      },
+      "timestamp": "2025-08-30T23:18:09.506165"
+    },
+    {
+      "id": "verse_33",
+      "category": "vedic_mantras_complete",
+      "sanskrit": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्",
+      "english": "We worship the three-eyed one (Shiva) who is fragrant and nourishes",
+      "source": "Rig Veda",
+      "metadata": {
+        "purpose": "Health and longevity"
+      },
+      "timestamp": "2025-08-30T23:18:09.506178"
+    },
+    {
+      "id": "verse_34",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "अथ योगानुशासनम्",
+      "english": "Now begins the instruction of yoga",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 1,
+        "sutra": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.506213"
+    },
+    {
+      "id": "verse_35",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "योगश्चित्तवृत्तिनिरोधः",
+      "english": "Yoga is the cessation of fluctuations of the mind",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 1,
+        "sutra": 2
+      },
+      "timestamp": "2025-08-30T23:18:09.506224"
+    },
+    {
+      "id": "verse_36",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "तदा द्रष्टुः स्वरूपेऽवस्थानम्",
+      "english": "Then the seer abides in his own nature",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 1,
+        "sutra": 3
+      },
+      "timestamp": "2025-08-30T23:18:09.506234"
+    },
+    {
+      "id": "verse_37",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "वृत्तिसारूप्यमितरत्र",
+      "english": "At other times, the seer is identified with the mental fluctuations",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 1,
+        "sutra": 4
+      },
+      "timestamp": "2025-08-30T23:18:09.506249"
+    },
+    {
+      "id": "verse_38",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "अभ्यासवैराग्याभ्यां तन्निरोधः",
+      "english": "Their cessation comes through practice and detachment",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 1,
+        "sutra": 12
+      },
+      "timestamp": "2025-08-30T23:18:09.506259"
+    },
+    {
+      "id": "verse_39",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "यमनियमासनप्राणायामप्रत्याहारधारणाध्यानसमाधयोऽष्टावङ्गानि",
+      "english": "The eight limbs are: restraints, observances, postures, breath control, withdrawal, concentration, meditation, absorption",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 2,
+        "sutra": 29
+      },
+      "timestamp": "2025-08-30T23:18:09.506269"
+    },
+    {
+      "id": "verse_40",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "अहिंसासत्यास्तेयब्रह्मचर्यापरिग्रहा यमाः",
+      "english": "The restraints are: non-violence, truthfulness, non-stealing, celibacy, non-possessiveness",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 2,
+        "sutra": 30
+      },
+      "timestamp": "2025-08-30T23:18:09.506280"
+    },
+    {
+      "id": "verse_41",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "देशबन्धश्चित्तस्य धारणा",
+      "english": "Concentration is binding the mind to one place",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 3,
+        "sutra": 1
+      },
+      "timestamp": "2025-08-30T23:18:09.506293"
+    },
+    {
+      "id": "verse_42",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "तत्र प्रत्ययैकतानता ध्यानम्",
+      "english": "Meditation is the continuous flow of the same thought",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 3,
+        "sutra": 2
+      },
+      "timestamp": "2025-08-30T23:18:09.506304"
+    },
+    {
+      "id": "verse_43",
+      "category": "yoga_sutras_complete",
+      "sanskrit": "पुरुषार्थशून्यानां गुणानां प्रतिप्रसवः कैवल्यम्",
+      "english": "Kaivalya is the return of the gunas to their source when they have no purpose for the soul",
+      "source": "पातञ्जल योगसूत्र - Complete Yoga Sutras",
+      "metadata": {
+        "pada": 4,
+        "sutra": 34
+      },
+      "timestamp": "2025-08-30T23:18:09.506314"
+    },
+    {
+      "id": "verse_44",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "धर्मो रक्षति रक्षितः",
+      "english": "Dharma protects those who protect it",
+      "source": "Manusmriti",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506346"
+    },
+    {
+      "id": "verse_45",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "सत्यं ब्रूयात् प्रियं ब्रूयात् न ब्रूयात् सत्यमप्रियम्",
+      "english": "Speak truth, speak pleasantly; do not speak unpleasant truth",
+      "source": "Manusmriti",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506356"
+    },
+    {
+      "id": "verse_46",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "प्रियं च नानृतं ब्रूयात् एष धर्मः सनातनः",
+      "english": "Do not speak pleasant falsehood; this is eternal dharma",
+      "source": "Manusmriti",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506366"
+    },
+    {
+      "id": "verse_47",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "आचारः प्रभवो धर्मः",
+      "english": "Good conduct is the source of dharma",
+      "source": "Manusmriti",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506376"
+    },
+    {
+      "id": "verse_48",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "शिष्टाचारः परो धर्मः",
+      "english": "The conduct of the noble is the highest dharma",
+      "source": "Yajnavalkya Smriti",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506386"
+    },
+    {
+      "id": "verse_49",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "अहिंसा परमो धर्मः",
+      "english": "Non-violence is the highest dharma",
+      "source": "Mahabharata",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506396"
+    },
+    {
+      "id": "verse_50",
+      "category": "dharma_shastras_complete",
+      "sanskrit": "धर्मे च अर्थे च कामे च मोक्षे च भरतर्षभ",
+      "english": "In dharma, artha, kama, and moksha, O best of Bharatas",
+      "source": "Mahabharata",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506405"
+    },
+    {
+      "id": "verse_51",
+      "category": "ramayana_essence",
+      "sanskrit": "रामो विग्रहवान् धर्मः",
+      "english": "Rama is dharma incarnate",
+      "source": "Valmiki Ramayana",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506436"
+    },
+    {
+      "id": "verse_52",
+      "category": "ramayana_essence",
+      "sanskrit": "आर्ये अस्मिन् कार्ये नियुक्तासि",
+      "english": "O noble one, you are engaged in this righteous task",
+      "source": "Valmiki Ramayana",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506447"
+    },
+    {
+      "id": "verse_53",
+      "category": "ramayana_essence",
+      "sanskrit": "सत्यं वद धर्मं चर",
+      "english": "Speak truth, practice dharma",
+      "source": "Ramayana tradition",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506457"
+    },
+    {
+      "id": "verse_54",
+      "category": "mahabharata_essence",
+      "sanskrit": "धर्मार्थकामोक्षणाम् सिद्धिः",
+      "english": "Success in dharma, artha, kama, and moksha",
+      "source": "Mahabharata",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506489"
+    },
+    {
+      "id": "verse_55",
+      "category": "mahabharata_essence",
+      "sanskrit": "यद्यदाचरति श्रेष्ठस्तत्तदेवेतरो जनः",
+      "english": "Whatever the noble person does, common people follow",
+      "source": "Mahabharata",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506499"
+    },
+    {
+      "id": "verse_56",
+      "category": "mahabharata_essence",
+      "sanskrit": "अनुकूलस्य संकल्पः प्रतिकूलस्य वर्जनम्",
+      "english": "Acceptance of the favorable, rejection of the unfavorable",
+      "source": "Mahabharata",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506509"
+    },
+    {
+      "id": "verse_57",
+      "category": "puranas_essence",
+      "sanskrit": "हरिः ओम्",
+      "english": "Lord Hari (Vishnu) is Om",
+      "source": "Vishnu Purana",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506544"
+    },
+    {
+      "id": "verse_58",
+      "category": "puranas_essence",
+      "sanskrit": "शिवाय विष्णुरूपाय शिवरूपाय विष्णवे",
+      "english": "To Shiva in the form of Vishnu, to Vishnu in the form of Shiva",
+      "source": "Skanda Purana",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506555"
+    },
+    {
+      "id": "verse_59",
+      "category": "puranas_essence",
+      "sanskrit": "सर्वं शिवमयं जगत्",
+      "english": "The entire world is pervaded by Shiva",
+      "source": "Shiva Purana",
+      "metadata": {},
+      "timestamp": "2025-08-30T23:18:09.506566"
+    }
+  ],
+  "categories": [
+    "bhagavad_gita_complete",
+    "upanishads_major",
+    "vedic_mantras_complete",
+    "yoga_sutras_complete",
+    "dharma_shastras_complete",
+    "ramayana_essence",
+    "mahabharata_essence",
+    "puranas_essence"
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "compilation_date": "2025-09-09T00:39:10.408937",
+    "authenticity": "100%_traditional_sources",
+    "scope": "complete_sanatana_dharma_corpus",
+    "languages": [
+      "sanskrit",
+      "transliteration",
+      "english"
+    ]
+  },
+  "four_vedas": {
+    "rig_veda": {
+      "description": "Veda of hymns and praises",
+      "essential_mantras": [
+        {
+          "mantra": "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्",
+          "transliteration": "Om bhur bhuvah svah tat savitur varenyam bhargo devasya dhimahi dhiyo yo nah prachodayat",
+          "translation": "Om, earth, atmosphere, heaven. We meditate on the adorable light of the divine Sun. May it inspire our thoughts.",
+          "name": "Gayatri Mantra",
+          "significance": "Most sacred Vedic mantra for enlightenment",
+          "rishi": "Vishwamitra",
+          "devata": "Savitri (Sun)",
+          "chanda": "Gayatri"
+        },
+        {
+          "mantra": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् उर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय मामृतात्",
+          "transliteration": "Om tryambakam yajamahe sugandhim pushtivardhanam urvarukamiva bandhanan mrityor mukshiya mamritat",
+          "translation": "We worship the three-eyed Lord Shiva who is fragrant and nourishes. Like a cucumber from its vine, may we be liberated from death, not from immortality.",
+          "name": "Mahamrityunjaya Mantra",
+          "significance": "Mantra for health, healing, and overcoming death",
+          "rishi": "Rishi Markandeya",
+          "devata": "Shiva",
+          "purpose": "Protection from diseases and premature death"
+        }
+      ]
+    },
+    "sama_veda": {
+      "description": "Veda of melodies and chants",
+      "essential_mantras": [
+        {
+          "mantra": "ॐ नमो भगवते वासुदेवाय",
+          "transliteration": "Om namo bhagavate vasudevaya",
+          "translation": "Om, salutations to Lord Vasudeva (Krishna)",
+          "name": "Krishna Mantra",
+          "significance": "Devotional mantra for Krishna consciousness"
+        }
+      ]
+    },
+    "yajur_veda": {
+      "description": "Veda of sacrificial formulas",
+      "essential_mantras": [
+        {
+          "mantra": "ॐ पूर्णमदः पूर्णमिदं पूर्णात्पूर्णमुदच्यते पूर्णस्य पूर्णमादाय पूर्णमेवावशिष्यते",
+          "transliteration": "Om purnamadah purnamidam purnat purnamudachyate purnasya purnamadaya purnamevavashishyate",
+          "translation": "Om, that is whole, this is whole. From wholeness emerges wholeness. Taking wholeness from wholeness, wholeness remains.",
+          "name": "Purna Mantra",
+          "significance": "Invocation of completeness and infinity",
+          "source": "Isha Upanishad"
+        }
+      ]
+    },
+    "atharva_veda": {
+      "description": "Veda of practical knowledge",
+      "essential_mantras": [
+        {
+          "mantra": "सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः सर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत्",
+          "transliteration": "Sarve bhavantu sukhinah sarve santu niramayah sarve bhadrani pashyantu ma kashchid dukha bhag bhavet",
+          "translation": "May all be happy, may all be healthy, may all see auspiciousness, may none suffer",
+          "name": "Universal Peace Mantra",
+          "significance": "Prayer for universal welfare"
+        }
+      ]
+    }
+  },
+  "principal_upanishads": {
+    "isha_upanishad": {
+      "key_teachings": [
+        {
+          "sanskrit": "ईशावास्यमिदं सर्वं यत्किञ्च जगत्यां जगत्",
+          "transliteration": "Ishavasyam idam sarvam yat kincha jagatyam jagat",
+          "translation": "All this is pervaded by the Lord - whatever moves in this moving world",
+          "significance": "Opening verse establishing divine presence in everything"
+        }
+      ]
+    },
+    "kena_upanishad": {
+      "key_teachings": [
+        {
+          "sanskrit": "केनेषितं पतति प्रेषितं मनः",
+          "transliteration": "Keneshitam patati preshitam manah",
+          "translation": "By whom willed does the mind fall to its object?",
+          "significance": "Inquiry into the source of consciousness"
+        }
+      ]
+    },
+    "katha_upanishad": {
+      "key_teachings": [
+        {
+          "sanskrit": "उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत",
+          "transliteration": "Uttishthata jagrata prapya varan nibodhata",
+          "translation": "Arise, awake, approach the great teachers and learn",
+          "significance": "Call to spiritual awakening and learning"
+        }
+      ]
+    },
+    "mundaka_upanishad": {
+      "key_teachings": [
+        {
+          "sanskrit": "सत्यमेव जयते नानृतम्",
+          "transliteration": "Satyameva jayate nanritam",
+          "translation": "Truth alone triumphs, not falsehood",
+          "significance": "India's national motto - triumph of truth"
+        }
+      ]
+    }
+  },
+  "bhagavad_gita_complete": {
+    "essence_verses": [
+      {
+        "chapter": 2,
+        "verse": 47,
+        "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन",
+        "translation": "You have the right to perform actions, but never to the fruits of action",
+        "significance": "Core principle of Karma Yoga"
+      },
+      {
+        "chapter": 4,
+        "verse": 7,
+        "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत",
+        "translation": "Whenever dharma declines and adharma rises, I incarnate myself",
+        "significance": "Divine incarnation principle"
+      },
+      {
+        "chapter": 9,
+        "verse": 22,
+        "sanskrit": "अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते",
+        "translation": "Those who worship Me with exclusive devotion, I carry what they lack and preserve what they have",
+        "significance": "Divine providence for devotees"
+      }
+    ]
+  }
+}

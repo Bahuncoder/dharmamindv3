@@ -1,0 +1,97 @@
+# DharmaMind Enterprise Authentication & AI - Production Requirements
+
+# Core FastAPI and ASGI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+httptools==0.6.1
+
+# Database and ORM
+asyncpg==0.29.0
+sqlalchemy[asyncio]==2.0.23
+alembic==1.12.1
+
+# Redis for caching and sessions
+redis[hiredis]==4.6.0
+aioredis==2.0.1
+
+# Authentication and Security
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.6
+cryptography==42.0.2
+
+# Data validation and serialization
+pydantic==2.5.0
+pydantic-settings==2.0.3
+email-validator==2.1.0
+
+# HTTP client for external APIs
+httpx==0.25.2
+aiohttp==3.9.0
+
+# OAuth providers
+google-auth==2.23.4
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.2.0
+
+# Payment processing
+stripe==7.7.0
+
+# Email services
+aiosmtplib==2.0.2
+jinja2==3.1.2
+
+# File handling and validation
+python-magic==0.4.27
+pillow==10.1.0
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# AI/ML Dependencies for DharmaLLM Integration
+torch>=2.1.0
+transformers>=4.35.0
+tokenizers>=0.15.0
+numpy>=1.24.3
+scikit-learn>=1.3.2
+pandas>=2.1.4
+nltk>=3.8.1
+spacy>=3.7.2
+tqdm>=4.66.0
+pyyaml>=6.0.1
+loguru>=0.7.2
+aiofiles>=23.2.1
+psutil>=5.9.6
+
+# Multi-Factor Authentication (MFA)
+pyotp==2.9.0
+qrcode[pil]==7.4.2
+cryptography==42.0.2
+
+# Security enhancements
+bleach==6.1.0
+html5lib==1.1
+
+# Monitoring and logging
+prometheus-client==0.19.0
+structlog==23.2.0
+sentry-sdk[fastapi]==1.38.0
+
+# Background tasks
+celery[redis]==5.3.0
+flower==2.0.1
+
+# Rate limiting
+slowapi==0.1.9
+
+# Timezone handling
+pytz==2023.3
+
+# Testing and development
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Additional utilities
+python-slugify==8.0.1
+shortuuid==1.0.11
+qrcode[pil]==7.4.2

@@ -1,0 +1,169 @@
+{
+  "breath_meditation": {
+    "name": "Anapanasati - Breath Awareness",
+    "category": "Foundational",
+    "difficulty": "Beginner",
+    "duration": "5-60 minutes",
+    "description": "Focus on the natural breath",
+    "steps": [
+      "1. Sit comfortably with back straight",
+      "2. Close eyes gently",
+      "3. Bring attention to the breath",
+      "4. Notice breath entering and leaving nostrils",
+      "5. Don't control - just observe",
+      "6. When mind wanders, gently return to breath",
+      "7. Continue for desired duration"
+    ],
+    "benefits": [
+      "Calms the mind",
+      "Develops concentration",
+      "Reduces stress and anxiety",
+      "Foundation for all meditation"
+    ],
+    "variations": [
+      "Count breaths (1-10, repeat)",
+      "Follow full breath cycle",
+      "Notice pause between breaths",
+      "Observe sensations in nostrils"
+    ]
+  },
+  "so_ham": {
+    "name": "So'ham Meditation - I Am That",
+    "category": "Mantra",
+    "difficulty": "Beginner to Intermediate",
+    "duration": "10-30 minutes",
+    "description": "Coordinate breath with 'So'ham' mantra",
+    "steps": [
+      "1. Sit in meditation posture",
+      "2. Close eyes and relax",
+      "3. Inhale thinking 'So' (That)",
+      "4. Exhale thinking 'Ham' (I am)",
+      "5. Let breath be natural",
+      "6. Merge awareness with the mantra",
+      "7. Experience unity consciousness"
+    ],
+    "benefits": [
+      "Realizes unity with universal consciousness",
+      "Transcends ego identification",
+      "Deep sense of peace",
+      "Self-realization practice"
+    ],
+    "philosophy": "So'ham means 'I am That' - recognition that individual consciousness is identical with universal consciousness (Brahman)."
+  },
+  "trataka": {
+    "name": "Trataka - Candle Gazing",
+    "category": "Concentration",
+    "difficulty": "Intermediate",
+    "duration": "5-20 minutes",
+    "description": "Steady gaze on a candle flame",
+    "steps": [
+      "1. Sit 2-3 feet from lit candle at eye level",
+      "2. Relax body and mind",
+      "3. Gaze steadily at flame without blinking",
+      "4. Keep gaze soft, not strained",
+      "5. When eyes water, close them",
+      "6. Visualize flame at eyebrow center",
+      "7. When image fades, open eyes and repeat"
+    ],
+    "benefits": [
+      "Powerful concentration development",
+      "Strengthens eyes",
+      "Activates ajna chakra (third eye)",
+      "Develops inner vision",
+      "Improves memory and focus"
+    ],
+    "precautions": [
+      "Don't strain eyes",
+      "Start with short durations",
+      "Not for eye conditions",
+      "Practice in draft-free room"
+    ]
+  },
+  "vipassana": {
+    "name": "Vipassana - Insight Meditation",
+    "category": "Mindfulness",
+    "difficulty": "Intermediate to Advanced",
+    "duration": "30-120 minutes",
+    "description": "Observe bodily sensations with equanimity",
+    "steps": [
+      "1. Sit comfortably, back straight",
+      "2. Begin with breath awareness (10 minutes)",
+      "3. Expand awareness to body sensations",
+      "4. Systematically scan entire body",
+      "5. Observe all sensations without reaction",
+      "6. Notice arising and passing of sensations",
+      "7. Maintain equanimity throughout"
+    ],
+    "benefits": [
+      "Deep insight into impermanence",
+      "Liberation from suffering",
+      "Profound equanimity",
+      "Eradication of deep conditioning"
+    ],
+    "key_principles": [
+      "Anicca (impermanence) - all sensations arise and pass",
+      "Dukkha (suffering) - attachment to sensations causes suffering",
+      "Anatta (non-self) - realize sensations are not 'mine'",
+      "Equanimity - observe without craving or aversion"
+    ]
+  },
+  "chakra_meditation": {
+    "name": "Chakra Meditation",
+    "category": "Energy Work",
+    "difficulty": "Intermediate",
+    "duration": "20-45 minutes",
+    "description": "Activate and balance the seven chakras",
+    "chakras": [
+      {
+        "name": "Muladhara (Root)",
+        "location": "Base of spine",
+        "color": "Red",
+        "mantra": "LAM",
+        "focus": "Grounding, survival, stability"
+      },
+      {
+        "name": "Svadhisthana (Sacral)",
+        "location": "Below navel",
+        "color": "Orange",
+        "mantra": "VAM",
+        "focus": "Creativity, sexuality, emotions"
+      },
+      {
+        "name": "Manipura (Solar Plexus)",
+        "location": "Above navel",
+        "color": "Yellow",
+        "mantra": "RAM",
+        "focus": "Power, will, confidence"
+      },
+      {
+        "name": "Anahata (Heart)",
+        "location": "Center of chest",
+        "color": "Green",
+        "mantra": "YAM",
+        "focus": "Love, compassion, connection"
+      },
+      {
+        "name": "Vishuddha (Throat)",
+        "location": "Throat",
+        "color": "Blue",
+        "mantra": "HAM",
+        "focus": "Communication, expression, truth"
+      },
+      {
+        "name": "Ajna (Third Eye)",
+        "location": "Between eyebrows",
+        "color": "Indigo",
+        "mantra": "OM",
+        "focus": "Intuition, wisdom, vision"
+      },
+      {
+        "name": "Sahasrara (Crown)",
+        "location": "Top of head",
+        "color": "Violet/White",
+        "mantra": "AUM or Silence",
+        "focus": "Unity, enlightenment, divine connection"
+      }
+    ],
+    "practice": "Focus on each chakra, visualize its color, chant its mantra, feel its energy activate."
+  }
+}

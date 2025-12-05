@@ -1,0 +1,59 @@
+{
+    "name": "dharmamind-community",
+    "version": "1.0.0",
+    "description": "DharmaMind Community Platform - Connect, Learn, and Grow Together",
+    "private": true,
+    "scripts": {
+        "dev": "next dev -p 3002",
+        "build": "next build",
+        "start": "next start -p 3002",
+        "lint": "next lint",
+        "type-check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "next": "^14.2.13",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "@types/node": "^20.16.10",
+        "@types/react": "^18.3.8",
+        "@types/react-dom": "^18.3.0",
+        "typescript": "^5.6.2",
+        "tailwindcss": "^3.4.12",
+        "@tailwindcss/forms": "^0.5.9",
+        "@tailwindcss/typography": "^0.5.15",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.47",
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.445.0",
+        "@heroicons/react": "^2.1.5",
+        "framer-motion": "^11.9.0",
+        "axios": "^1.7.7"
+    },
+    "devDependencies": {
+        "eslint": "^8.57.1",
+        "eslint-config-next": "^14.2.13",
+        "@typescript-eslint/eslint-plugin": "^8.7.0",
+        "@typescript-eslint/parser": "^8.7.0"
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=8.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Bahuncoder/dharmamindaifinal.git"
+    },
+    "keywords": [
+        "dharmamind",
+        "ai",
+        "dharma",
+        "spirituality",
+        "community",
+        "nextjs",
+        "typescript",
+        "meditation",
+        "mindfulness"
+    ],
+    "author": "DharmaMind Team",
+    "license": "MIT"
+}

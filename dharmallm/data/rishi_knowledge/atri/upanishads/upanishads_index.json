@@ -1,0 +1,22 @@
+{
+  "mandukya": {
+    "title": "Mandukya Upanishad",
+    "focus": "Om meditation and consciousness states"
+  },
+  "katha": {
+    "title": "Katha Upanishad",
+    "focus": "Death, immortality, and inner journey"
+  },
+  "isha": {
+    "title": "Isha Upanishad",
+    "focus": "Seeing divine in all, renunciation in action"
+  },
+  "svetasvatara": {
+    "title": "Svetasvatara Upanishad",
+    "focus": "Meditation techniques and cosmic vision"
+  },
+  "kaivalya": {
+    "title": "Kaivalya Upanishad",
+    "focus": "Path to liberation through meditation"
+  }
+}

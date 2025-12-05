@@ -1,0 +1,169 @@
+% Text title            : aitareyopanishhat.h
+% File name             : aitareya.itx
+% Category              : upanishhat
+% Location              : doc\_upanishhat
+% Author                : Vedic Rishis
+% Transliterated by     : Sunder Hattangadi
+% Proofread by          : Sunder Hattangadi, John Manetta
+% Description-comments  : 8/108; RigVeda, Mukhyopanishad
+% Latest update         : July 20, 1999, January 17, 2023
+% Send corrections to   : sanskrit at cheerful dot c om
+%
+% This text is prepared by volunteers and is to be used for personal study 
+% and research. The file is not to be copied or reposted for promotion of 
+% any website or individuals or for commercial purpose without permission. 
+% Please help to maintain respect for volunteer spirit.
+%
+\documentstyle[11pt,multicol,itrans]{article}
+#include=ijag.inc
+#endwordvowel=.h
+\portraitwide
+\parindent=100pt                
+\let\usedvng=\Largedvng      % for 1 column     
+\pagenumbering{itrans} 
+\def\engtitle#1{\hrule\medskip\centerline{\LARGE #1}}
+\def\itxtitle#1{\medskip\centerline{\LARGEdvng #1}\medskip\hrule}
+\def\endtitles{\medskip\obeyspaceslines}
+%%
+\begin{document}
+\engtitle{.. Aitareya Upanishad ..}##
+\itxtitle{.. aitareyopaniShat ..}##\endtitles ##
+vA~N me manasi pratiShThitA mano me vAchi pratiShThitamAvirAvIrma edhi ||
+vedasya ma ANIsthaH shrutaM me mA prahAsIranenAdhItenAhorAtrAn
+sandadhAmyR^itaM vadiShyAmi satyaM vadiShyAmi || tanmAmavatu
+tadvaktAramavatvavatu mAmavatu vaktAramavatu vaktAram ||
+        || OM shAntiH shAntiH shAntiH||
+
+          || atha aitareyopaniShadi prathamAdhyAye prathamaH khaNDaH ||
+OM AtmA vA idameka evAgra AsInnAnyatki~nchana miShat | sa IkShata
+lokAnnu sR^ijA iti || 1||
+sa imA.N llokAnasR^ijata | ambho marIchIrmaramApo.ado.ambhaH pareNa divaM
+dyauH pratiShThA.antarikShaM marIchayaH |
+pR^ithivI maro yA adhastAtta ApaH || 2||
+sa IkShateme nu lokA lokapAlAnnu sR^ijA iti || so.adbhya eva puruShaM
+samuddhR^ityAmUrChayat || 3||
+tamabhyatapattasyAbhitaptasya mukhaM nirabhidyata yathA.aNDaM
+mukhAdvAgvAcho.agnirnAsike nirabhidyetaM nAsikAbhyAM prANaH |
+prANAdvAyurakShiNI nirabhidyetamakShIbhyAM chakShushchakShuSha
+AdityaH karNau nirabhidyetAM karNAbhyAM shrotraM
+shrotraddishastva~Nnirabhidyata tvacho lomAni lomabhya oShadhivanaspatayo
+hR^idayaM nirabhidyata hR^idayAnmano manasashchandramA nAbhirnirabhidyata
+nAbhyA apAno.apAnAnmR^ityuH
+shishnaM nirabhidyata shishnAdreto retasa ApaH || 4||
+        || ityaitareyopaniShadi prathamAdhyAye prathamaH khaNDaH ||
+
+        || atha aitareyopaniShadi prathamAdhyAye dvitIyaH khaNDaH ||
+tA etA devatAH sR^iShTA asminmahatyarNave prApatan
+. tamashanApipAsAbhyAmanvavArjat | tA
+enamabruvannAyatanaM naH prajAnIhi yasminpratiShThitA annamadAmeti || 1||
+tAbhyo gAmAnayattA abruvanna vai no.ayamalamiti |
+tAbhyo.ashvamAnayattA abruvanna vai no.ayamalamiti || 2||
+tAbhyaH puruShamAnayattA abruvan sukR^itaM bateti puruSho vAva sukR^itam |
+tA abravIdyathAyatanaM pravishateti || 3||
+agnirvAgbhUtvA mukhaM prAvishadvAyuH prANo bhUtvA nAsike
+prAvishadAdityashchakShurbhUtvA.akShiNI prAvishAddishaH
+shrotraM bhUtvA karNau prAvishannoShadhivanaspatayo lomAni bhUtvA
+tvachaMprAvisha.nshchandramA mano bhUtvA hR^idayaM prAvishanmR^ityurapAno
+bhUtvA nAbhiM prAvishadApo reto bhUtvA shishnaM prAvishan || 4||
+tamashanAyApipAse abrUtAmAvAbhyAmabhiprajAnIhIti te abravIdetAsveva
+vAM devatAsvAbhajAmyetAsu bhAginnyau karomIti | tasmAdyasyai kasyai
+cha devatAyai havirgR^ihyate bhAginyAvevAsyAmashanAyApipAse
+bhavataH || 5||
+        || ityaitareyopaniShadi prathamAdhyAye dvitIyaH khaNDaH ||
+
+        || atha aitareyopaniShadi prathamAdhyAye tR^itIyaH khaNDaH ||
+sa IkShateme nu lokAshcha lokapAlAshchAnnamebhyaH sR^ijA iti || 1||
+so.apo.abhyatapattAbhyo.abhitaptAbhyo mUrtirajAyata |
+yA vai sA mUrtirajAyatAnnaM vai tat || 2||
+tadenatsR^iShTaM parA~NtyajighA.nsattadvAchA.ajighR^ikShat
+tannAshaknodvAchA grahItum |
+sa yaddhainadvAchA.agrahaiShyadabhivyAhR^itya haivAnnamatrapsyat || 3||
+tatprANenAjighR^ikShat tannAshaknotprANena grahItuM sa
+yaddhainatprANenAgrahaiShyadabhiprANya
+haivAnnamatrapsyat || 4||
+tachchakShuShA.ajighR^ikShat tannAshaknochchakShuShA grahItu/n sa
+yaddhainachchakShuShA.agrahaiShyaddR^iShTvA haivAnamatrapsyat || 5||
+tachChrotreNAjighR^ikShat tannAshaknochChrotreNa grahItuM sa
+yaddhainachChroteNAgrahaiShyachChrutvA haivAnnamatrapsyat || 6||
+tattvachA.ajighR^ikShat tannAshaknottvachA grahItuM sa
+yaddhainattvachA.agrahaiShyat spR^iShTvA haivAnnamatrapsyat || 7||
+tanmanasA.ajighR^ikShat tannAshaknonmanasA grahItuM sa
+yaddhainanmanasA.agrahaiShyaddhyAtvA haivAnnamatrapsyat || 8||
+tachChishnenAjighR^ikShat tannAshaknochChishnena grahItuM sa
+yaddhainachChishnenAgrahaiShyadvitsR^ijya haivAnamatrapsyat || 9||
+tadapAnenAjighR^ikShat tadAvayat saiSho.annasya graho
+yadvAyuranAyurvA eSha yadvAyuH || 10||
+sa IkShata kathaM nvidaM madR^ite syAditi sa IkShata katareNa prapadyA iti |
+sa IkShata yadi vAchA.abhivyAhR^itaM yadi prANenAbhiprANitaM yadi
+chakShuShA dR^iShTaM yadi shrotreNa shrutaM
+yadi tvachA spR^iShTaM yadi manasA dhyAtaM yadyapAnenAbhyapAnitaM
+yadi shishnena visR^iShTamatha ko.ahamiti || 11||
+sa etameva sImAnaM vidaryaitayA dvArA prApadyata | saiShA vidR^itirnAma
+dvAstadetannA.andanam |
+tasya traya AvasathAstrayaH svapnA ayamAvasatho.ayamAvasatho.ayamAvasatha
+iti || 12||
+sa jAto bhUtAnyabhivyaikhyat kimihAnyaM vAvadiShaditi |sa etameva
+puruShaM brahma tatamamapashyat |  idamadarshanamitI 3 || 13||
+tasmAdidandro nAmedandro ha vai nAma | tamidandraM santamindra
+ityAchakShate parokSheNa |
+parokShapriyA iva hi devAH parokShapriyA iva hi devAH || 14||
+        || ityaitareyopaniShadi prathamAdhyAye tR^itIyaH khaNDaH ||
+
+        || atha aitaropaniShadi dvitIyodhyAyaH ||
+OM puruShe ha vA ayamAdito garbho bhavati yadetadretaH
+.tadetatsarvebhyo.a~NgebhyastejaH saMbhUtamAtmanyeva.a.atmAnaM bibharti
+tadyadA striyAM si~nchatyathainajjanayati tadasya prathamaM janma || 1||
+tatstriyA AtmabhUyaM gachChati yathA svama~NgaM tathA | tasmAdenAM na hinasti |
+sA.asyaitamAtmAnamatra gataM bhAvayati || 2||
+sA bhAvayitrI bhAvayitavyA bhavati | taM strI garbha bibharti | so.agra
+eva kumAraM janmano.agre.adhibhAvayati |
+sa yatkumAraM janmano.agre.adhibhAvayatyAtmAnameva tadbhAvayatyeShaM
+lokAnAM santatyA |
+evaM santatA hIme lokAstadasya dvitIyaM janma || 3||
+so.asyAyamAtmA puNyebhyaH karmabhyaH pratidhIyate | athAsyAyAmitara AtmA
+kR^itakR^ityo vayogataH praiti |
+sa itaH prayanneva punarjAyate tadasya tR^itIyaM janma || 4||
+taduktamR^iShiNA garbhe nu sannanveShAmavedamahaM devAnAM janimAni
+vishvA shataM mA pura AyasIrarakShannadhaH shyeno javasA niradIyamiti |
+garbha evaitachChayAno vAmadeva evamuvAcha || 5||
+sa evaM vidvAnasmAchCharIrabhedAdUrdhva utkramyAmuShmin svarge loke
+sarvAn kAmAnAptvA.amR^itaH samabhavat samabhavat || 6||
+        || ityaitaropaniShadi dvitIyodhyAyaH ||
+
+        || atha aitaropaniShadi tR^itIyodhyAyaH ||
+OM ko.ayamAtmeti vayamupAsmahe kataraH sa AtmA | yena vA pashyati yena
+vA shR^iNoti yena vA gandhAnAjighrati yena vA vAchaM vyAkaroti yena
+vA svAdu chAsvAdu cha vijAnAti || 1||
+yadetaddhR^idayaM manashchaitat | sa~nj~nAnamAj~nAnaM vij~nAnaM
+praj~nAnaM medhA
+dR^iShTirdhR^itimatirmanIShA jUtiH smR^itiH sa~NkalpaH kraturasuH kAmo
+vasha iti |
+sarvANyevaitAni praj~nAnasya nAmadheyAni bhavanti || 2||
+eSha brahmaiSha indra eSha prajApatirete sarve devA imAni cha
+pa~nchamahAbhUtAni pR^ithivI vAyurAkAsha Apo
+jyotI.nShItyetAnImAni cha kShudramishrANIva |
+bIjAnItarANi chetarANi chANDajAni cha jArujAni cha svedajAni chodbhijjAni
+chAshvA gAvaH puruShA hastino yatki~nchedaM prANi ja~NgamaM cha patatri
+cha yachcha sthAvaraM sarvaM tatpraj~nAnetraM praj~nAne pratiShThitaM
+praj~nAnetro lokaH praj~nA pratiShThA praj~nAnaM brahma || 3||
+sa etena prAj~nenA.a.atmanA.asmAllokAdutkramyAmuShminsvarge loke sarvAn
+kAmAnAptvA.amR^itaH samabhavat samabhavat || 4||
+        || ityaitaropaniShadi tR^itIyodhyAyaH ||
+
+OM vA~N me manasi pratiShThitA mano me vAchi pratiShThitamAvirAvIrma
+edhi vedasya ma ANIsthaH shrutaM me mA prahAsIranenAdhItenAhorAtrAn
+sandadhAmyR^itaM vadiShyAmi satyaM vadiShyAmi tanmAmavatu
+tadvaktAramavatvavatu mAmavatu vaktAramavatu vaktAram ||
+        || OM shAntiH shAntiH shAntiH||
+##
+
+Encoded by  Sunder Hattangadi
+Proofread by  Sunder Hattangadi, John Manetta
+
+\medskip\hrule\obeylines
+
+Please send corrections to sanskrit at cheerful dot c om
+Last updated \today
+https://sanskritdocuments.org
+
+\end{document}

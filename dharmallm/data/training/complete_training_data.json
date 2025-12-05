@@ -1,0 +1,502 @@
+{
+  "metadata": {
+    "created": "2025-10-04T14:17:22.487676",
+    "total_items": 26,
+    "sources": [
+      "Bhagavad Gita",
+      "Upanishads",
+      "Yoga Sutras",
+      "Q&A"
+    ]
+  },
+  "scriptures": [
+    {
+      "id": "gita_ch1_v1",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 1,
+      "verse": 1,
+      "sanskrit": "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः। मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥",
+      "transliteration": "dharma-kṣetre kuru-kṣetre samavetā yuyutsavaḥ māmakāḥ pāṇḍavāś caiva kim akurvata sañjaya",
+      "english": "O Sanjaya, after gathering on the holy field of Kurukshetra, what did my sons and the sons of Pandu do, being desirous to fight?",
+      "commentary": "The blind king Dhritarashtra asks his secretary Sanjaya about the battle preparations.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477002"
+    },
+    {
+      "id": "gita_ch1_v47",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 1,
+      "verse": 47,
+      "sanskrit": "एवमुक्त्वार्जुनः सङ्ख्ये रथोपस्थ उपाविशत्। विसृज्य सशरं चापं शोकसंविग्नमानसः॥",
+      "transliteration": "evam uktvārjunaḥ saṅkhye rathopastha upāviśat visṛjya sa-śaraṁ cāpaṁ śoka-saṁvigna-mānasaḥ",
+      "english": "Having spoken thus at the battlefield, Arjuna cast aside his bow and arrows and sat down on the chariot, his mind overwhelmed with grief.",
+      "commentary": "Arjuna's confusion and emotional breakdown before the battle begins.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477033"
+    },
+    {
+      "id": "gita_ch2_v47",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 2,
+      "verse": 47,
+      "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+      "transliteration": "karmaṇy-evādhikāras te mā phaleṣu kadācana mā karma-phala-hetur bhūr mā te saṅgo 'stvakarmaṇi",
+      "english": "You have a right to perform your prescribed duty, but you are not entitled to the fruits of action. Never consider yourself the cause of the results of your activities, and never be attached to not doing your duty.",
+      "commentary": "The most famous verse - teaching of Karma Yoga (action without attachment to results).",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477040"
+    },
+    {
+      "id": "gita_ch2_v48",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 2,
+      "verse": 48,
+      "sanskrit": "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय। सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते॥",
+      "transliteration": "yoga-sthaḥ kuru karmāṇi saṅgaṁ tyaktvā dhanañjaya siddhy-asiddhyoḥ samo bhūtvā samatvaṁ yoga ucyate",
+      "english": "Perform your duty equipoised, O Arjuna, abandoning all attachment to success or failure. Such equanimity is called Yoga.",
+      "commentary": "Definition of Yoga as equanimity in all circumstances.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477045"
+    },
+    {
+      "id": "gita_ch2_v56",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 2,
+      "verse": 56,
+      "sanskrit": "दुःखेष्वनुद्विग्नमनाः सुखेषु विगतस्पृहः। वीतरागभयक्रोधः स्थितधीर्मुनिरुच्यते॥",
+      "transliteration": "duḥkheṣv-anudvigna-manāḥ sukheṣu vigata-spṛhaḥ vīta-rāga-bhaya-krodhaḥ sthita-dhīr munir ucyate",
+      "english": "One who is not disturbed in mind even amidst the threefold miseries, who is not elated when there is happiness, and who is free from attachment, fear and anger, is called a sage of steady mind.",
+      "commentary": "Characteristics of a person with steady wisdom (sthitaprajna).",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477053"
+    },
+    {
+      "id": "gita_ch3_v3",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 3,
+      "verse": 3,
+      "sanskrit": "श्रीभगवानुवाच। लोकेऽस्मिन्द्विविधा निष्ठा पुरा प्रोक्ता मयानघ। ज्ञानयोगेन साङ्ख्यानां कर्मयोगेन योगिनाम्॥",
+      "transliteration": "śrī-bhagavān uvāca loke 'smin dvi-vidhā niṣṭhā purā proktā mayānagha jñāna-yogena sāṅkhyānāṁ karma-yogena yoginām",
+      "english": "The Supreme Lord said: In this world, O Arjuna, there are two paths - the path of knowledge for the contemplative, and the path of action for the active.",
+      "commentary": "Introduction to the two main spiritual paths.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477058"
+    },
+    {
+      "id": "gita_ch3_v21",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 3,
+      "verse": 21,
+      "sanskrit": "यद्यदाचरति श्रेष्ठस्तत्तदेवेतरो जनः। स यत्प्रमाणं कुरुते लोकस्तदनुवर्तते॥",
+      "transliteration": "yad yad ācarati śreṣṭhas tat tad evetaro janaḥ sa yat pramāṇaṁ kurute lokas tad anuvartate",
+      "english": "Whatever action a great person performs, common people follow. Whatever standards they set, all the world pursues.",
+      "commentary": "The importance of leadership by example.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477063"
+    },
+    {
+      "id": "gita_ch4_v7",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 4,
+      "verse": 7,
+      "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत। अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+      "transliteration": "yadā yadā hi dharmasya glānir bhavati bhārata abhyutthānam adharmasya tadātmānaṁ sṛjāmy aham",
+      "english": "Whenever there is a decline in righteousness and an increase in unrighteousness, O Bharata, at that time I manifest Myself on earth.",
+      "commentary": "Famous verse about divine incarnation when dharma declines.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477067"
+    },
+    {
+      "id": "gita_ch4_v8",
+      "source": "Bhagavad Gita",
+      "category": "scripture",
+      "chapter": 4,
+      "verse": 8,
+      "sanskrit": "परित्राणाय साधूनां विनाशाय च दुष्कृताम्। धर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥",
+      "transliteration": "paritrāṇāya sādhūnāṁ vināśāya ca duṣkṛtām dharma-saṁsthāpanārthāya sambhavāmi yuge yuge",
+      "english": "To deliver the pious and to annihilate the miscreants, as well as to reestablish the principles of dharma, I appear millennium after millennium.",
+      "commentary": "The purpose of divine incarnations across ages.",
+      "tags": [
+        "gita",
+        "krishna",
+        "arjuna",
+        "dharma",
+        "yoga"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477071"
+    },
+    {
+      "id": "upanishad_isha_v1",
+      "source": "Isha Upanishad",
+      "category": "upanishad",
+      "verse": 1,
+      "sanskrit": "ईशावास्यमिदं सर्वं यत्किञ्च जगत्यां जगत्। तेन त्यक्तेन भुञ्जीथा मा गृधः कस्यस्विद्धनम्॥",
+      "transliteration": "īśāvāsyam idaṁ sarvaṁ yat kiñca jagatyāṁ jagat tena tyaktena bhuñjīthā mā gṛdhaḥ kasyasvid dhanam",
+      "english": "All this, whatever moves in this moving world, is pervaded by the Lord. Therefore find your enjoyment in renunciation; do not covet what belongs to others.",
+      "commentary": "The opening verse teaching that everything is pervaded by the divine.",
+      "tags": [
+        "upanishad",
+        "vedanta",
+        "wisdom",
+        "isha"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477140"
+    },
+    {
+      "id": "upanishad_kena_v1",
+      "source": "Kena Upanishad",
+      "category": "upanishad",
+      "verse": 1,
+      "sanskrit": "केनेषितं पतति प्रेषितं मनः केन प्राणः प्रथमः प्रैति युक्तः। केनेषितां वाचमिमां वदन्ति चक्षुः श्रोत्रं क उ देवो युनक्ति॥",
+      "transliteration": "keneṣitaṁ patati preṣitaṁ manaḥ kena prāṇaḥ prathamaḥ praiti yuktaḥ keneṣitāṁ vācam imāṁ vadanti cakṣuḥ śrotraṁ ka u devo yunakti",
+      "english": "By whom willed does the mind go toward its object? By whom commanded does the life-force move? At whose will do people utter speech? What power directs the eye and ear?",
+      "commentary": "Profound questions about the ultimate cause behind all functions.",
+      "tags": [
+        "upanishad",
+        "vedanta",
+        "wisdom",
+        "kena"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477149"
+    },
+    {
+      "id": "upanishad_katha_v1.2.18",
+      "source": "Katha Upanishad",
+      "category": "upanishad",
+      "verse": "1.2.18",
+      "sanskrit": "न जायते म्रियते वा कदाचिन् नायं भूत्वा भविता वा न भूयः। अजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥",
+      "transliteration": "na jāyate mriyate vā kadācin nāyaṁ bhūtvā bhavitā vā na bhūyaḥ ajo nityaḥ śāśvato 'yaṁ purāṇo na hanyate hanyamāne śarīre",
+      "english": "The soul is never born nor does it die. It has not come into being, does not come into being, and will not come into being. It is unborn, eternal, ever-existing, undying and primeval. It is not slain when the body is slain.",
+      "commentary": "Famous verse about the eternal nature of the soul (similar to Gita 2.20).",
+      "tags": [
+        "upanishad",
+        "vedanta",
+        "wisdom",
+        "katha"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477154"
+    },
+    {
+      "id": "upanishad_mundaka_v1.1.3",
+      "source": "Mundaka Upanishad",
+      "category": "upanishad",
+      "verse": "1.1.3",
+      "sanskrit": "तपःश्रद्धे ये ह्युपवसन्त्यरण्ये शान्ता विद्वांसो भैक्ष्यचर्यां चरन्तः। सूर्यद्वारेण ते विरजाः प्रयान्ति यत्रामृतः स पुरुषो ह्यव्ययात्मा॥",
+      "transliteration": "tapaḥ-śraddhē ye hy upavasanty araṇye śāntā vidvāṁso bhaikṣya-caryāṁ carantaḥ sūrya-dvāreṇa te virajāḥ prayānti yatrāmṛtaḥ sa puruṣo hy avyayātmā",
+      "english": "Those who practice austerities and faith in the forest, the peaceful knowers who live on alms, depart freed from impurities through the gate of the sun to where dwells that immortal, imperishable Person.",
+      "commentary": "Description of the path of renunciation and its ultimate goal.",
+      "tags": [
+        "upanishad",
+        "vedanta",
+        "wisdom",
+        "mundaka"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477159"
+    },
+    {
+      "id": "upanishad_mandukya_v1",
+      "source": "Mandukya Upanishad",
+      "category": "upanishad",
+      "verse": 1,
+      "sanskrit": "ॐ इत्येतदक्षरमिदं सर्वं तस्योपव्याख्यानम्। भूतं भवद्भविष्यदिति सर्वमोङ्कार एव॥",
+      "transliteration": "oṁ ity etad akṣaram idaṁ sarvaṁ tasyopavyākhyānam bhūtaṁ bhavad bhaviṣyad iti sarvam oṅkāra eva",
+      "english": "Om - this syllable is all this. Its explanation is as follows: All that is past, present and future is, indeed, Om. And whatever transcends the three times, that too is Om.",
+      "commentary": "The mystical significance of Om encompassing all of existence.",
+      "tags": [
+        "upanishad",
+        "vedanta",
+        "wisdom",
+        "mandukya"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477164"
+    },
+    {
+      "id": "yoga_sutra_p1_s1",
+      "source": "Yoga Sutras of Patanjali",
+      "category": "yoga_sutra",
+      "pada": 1,
+      "sutra": 1,
+      "sanskrit": "अथ योगानुशासनम्॥",
+      "transliteration": "atha yogānuśāsanam",
+      "english": "Now, the exposition of Yoga.",
+      "commentary": "The opening sutra introducing the study of Yoga.",
+      "tags": [
+        "yoga",
+        "patanjali",
+        "meditation",
+        "samadhi"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477219"
+    },
+    {
+      "id": "yoga_sutra_p1_s2",
+      "source": "Yoga Sutras of Patanjali",
+      "category": "yoga_sutra",
+      "pada": 1,
+      "sutra": 2,
+      "sanskrit": "योगश्चित्तवृत्तिनिरोधः॥",
+      "transliteration": "yogaś-citta-vṛtti-nirodhaḥ",
+      "english": "Yoga is the cessation of the modifications of the mind.",
+      "commentary": "The most famous definition of Yoga - stilling the mind.",
+      "tags": [
+        "yoga",
+        "patanjali",
+        "meditation",
+        "samadhi"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477226"
+    },
+    {
+      "id": "yoga_sutra_p1_s3",
+      "source": "Yoga Sutras of Patanjali",
+      "category": "yoga_sutra",
+      "pada": 1,
+      "sutra": 3,
+      "sanskrit": "तदा द्रष्टुः स्वरूपेऽवस्थानम्॥",
+      "transliteration": "tadā draṣṭuḥ svarūpe 'vasthānam",
+      "english": "Then the Seer abides in its own true nature.",
+      "commentary": "The result of Yoga - experiencing one's true Self.",
+      "tags": [
+        "yoga",
+        "patanjali",
+        "meditation",
+        "samadhi"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477231"
+    },
+    {
+      "id": "yoga_sutra_p2_s1",
+      "source": "Yoga Sutras of Patanjali",
+      "category": "yoga_sutra",
+      "pada": 2,
+      "sutra": 1,
+      "sanskrit": "तपःस्वाध्यायेश्वरप्रणिधानानि क्रियायोगः॥",
+      "transliteration": "tapaḥ-svādhyāyeśvara-praṇidhānāni kriyā-yogaḥ",
+      "english": "Kriya Yoga consists of austerity, self-study, and surrender to God.",
+      "commentary": "The three components of practical Yoga.",
+      "tags": [
+        "yoga",
+        "patanjali",
+        "meditation",
+        "samadhi"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477235"
+    },
+    {
+      "id": "yoga_sutra_p2_s29",
+      "source": "Yoga Sutras of Patanjali",
+      "category": "yoga_sutra",
+      "pada": 2,
+      "sutra": 29,
+      "sanskrit": "यमनियमासनप्राणायामप्रत्याहारधारणाध्यानसमाधयोऽष्टावङ्गानि॥",
+      "transliteration": "yama-niyamāsana-prāṇāyāma-pratyāhāra-dhāraṇā-dhyāna-samādhayo 'ṣṭāv aṅgāni",
+      "english": "The eight limbs of Yoga are: yama, niyama, asana, pranayama, pratyahara, dharana, dhyana, and samadhi.",
+      "commentary": "The famous Ashtanga (eight-limbed) Yoga system.",
+      "tags": [
+        "yoga",
+        "patanjali",
+        "meditation",
+        "samadhi"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477240"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "conversation_1",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is dharma?"
+        },
+        {
+          "role": "assistant",
+          "content": "Dharma (धर्म) is one of the most profound concepts in Hindu philosophy. It has multiple meanings: (1) Righteousness and moral duty, (2) The cosmic law that maintains order, (3) One's personal duty based on their stage of life and position. The Bhagavad Gita teaches 'svadharma' - following one's own dharma is better than another's dharma well-performed. Dharma is what holds together society and the cosmos."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477294"
+    },
+    {
+      "id": "conversation_2",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Explain karma yoga"
+        },
+        {
+          "role": "assistant",
+          "content": "Karma Yoga is the path of selfless action taught prominently in the Bhagavad Gita. Its essence is captured in verse 2.47: 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन' - 'You have a right to perform your duty, but not to the fruits of action.' Key principles: (1) Perform your duty without attachment, (2) Don't be motivated by results, (3) Maintain equanimity in success and failure, (4) Offer all actions to the Divine. This transforms work into worship and liberates one from bondage."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477305"
+    },
+    {
+      "id": "conversation_3",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is the Atman?"
+        },
+        {
+          "role": "assistant",
+          "content": "Atman (आत्मन्) is the eternal, unchanging Self - the true essence of every being. The Katha Upanishad beautifully describes it: 'न जायते म्रियते वा कदाचिन्' - 'It is never born nor does it die.' Key teachings: (1) Atman is distinct from the body and mind, (2) It is identical with Brahman (the Absolute), (3) It is consciousness itself, (4) Realizing 'I am Atman' is liberation (moksha). The Chandogya Upanishad teaches 'Tat Tvam Asi' - 'That thou art' - affirming this identity."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477311"
+    },
+    {
+      "id": "conversation_4",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I start meditation?"
+        },
+        {
+          "role": "assistant",
+          "content": "Based on Patanjali's Yoga Sutras, here's a systematic approach: (1) **Yama & Niyama**: Practice ethical disciplines first, (2) **Asana**: Find a comfortable, steady posture, (3) **Pranayama**: Begin with simple breath awareness, (4) **Pratyahara**: Withdraw senses from external objects, (5) **Dharana**: Focus on one point (breath, mantra, or deity). Start with 5-10 minutes daily. The key sutra is 1.2: 'योगश्चित्तवृत्तिनिरोधः' - Yoga is the cessation of mental modifications. Be patient and consistent."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477315"
+    },
+    {
+      "id": "conversation_5",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is Om?"
+        },
+        {
+          "role": "assistant",
+          "content": "Om (ॐ) is the primordial sound, the cosmic vibration from which all creation emerges. The Mandukya Upanishad is devoted entirely to Om, stating: 'ॐ इत्येतदक्षरमिदं सर्वम्' - 'Om is this imperishable syllable, it is all this.' Om has three parts: (1) A (अ) - waking state, creation, Brahma, (2) U (उ) - dream state, preservation, Vishnu, (3) M (म) - deep sleep, dissolution, Shiva. The silence after represents Turiya - the fourth state of pure consciousness. Chanting Om aligns us with cosmic vibrations."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477492"
+    },
+    {
+      "id": "conversation_6",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What happens after death?"
+        },
+        {
+          "role": "assistant",
+          "content": "Hindu philosophy offers detailed teachings on death and rebirth. The Bhagavad Gita (2.22) states: 'वासांसि जीर्णानि यथा विहाय नवानि गृह्णाति नरोऽपराणि' - 'As one discards worn-out clothes and wears new ones, so the soul discards worn-out bodies and enters new ones.' Key concepts: (1) **Karma**: Actions determine next birth, (2) **Samsara**: Cycle of birth-death-rebirth, (3) **Moksha**: Liberation from the cycle, (4) **Pitr-loka**: Ancestral realm. The soul (Atman) is eternal; only the body changes."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477498"
+    },
+    {
+      "id": "conversation_7",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is Maya?"
+        },
+        {
+          "role": "assistant",
+          "content": "Maya (माया) is the cosmic illusion that makes the temporary appear permanent and the unreal appear real. Adi Shankaracharya's Advaita Vedanta explains: Maya causes us to see multiplicity where there is only Brahman (unity). It has two powers: (1) **Avarana Shakti**: Veiling power - hides the true nature of reality, (2) **Vikshepa Shakti**: Projecting power - projects the world of names and forms. Maya is neither real nor unreal - it's indescribable. Knowledge (jnana) of Brahman destroys Maya's effect."
+        }
+      ],
+      "category": "dharmic_instruction",
+      "tags": [
+        "qa",
+        "dharma",
+        "teaching"
+      ],
+      "timestamp": "2025-10-04T14:17:22.477502"
+    }
+  ]
+}

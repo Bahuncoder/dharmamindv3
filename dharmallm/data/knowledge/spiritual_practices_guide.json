@@ -1,0 +1,122 @@
+{
+  "daily_sadhana": {
+    "sandhya_vandana": {
+      "description": "Daily Vedic prayer practice performed at dawn and dusk",
+      "components": [
+        "Achamana (purification with water)",
+        "Pranayama (breath control)",
+        "Gayatri Mantra recitation",
+        "Surya Namaskara (sun salutation)",
+        "Personal prayers and gratitude"
+      ],
+      "benefits": [
+        "Spiritual purification",
+        "Mental clarity",
+        "Divine connection",
+        "Positive energy cultivation"
+      ]
+    },
+    "japa_meditation": {
+      "description": "Repetitive chanting with prayer beads (mala)",
+      "method": [
+        "Use 108-bead mala (rosary)",
+        "Choose personal mantra or Om",
+        "Sit in meditative posture",
+        "Count repetitions on beads",
+        "Maintain focused attention"
+      ],
+      "recommended_mantras": [
+        "Om Namah Shivaya",
+        "Hare Krishna Hare Krishna Krishna Krishna Hare Hare",
+        "Om Gam Ganapataye Namaha",
+        "So Hum (I am That)"
+      ]
+    },
+    "pranayama": {
+      "description": "Yogic breathing techniques for energy control",
+      "basic_techniques": [
+        {
+          "name": "Nadi Shodhana",
+          "description": "Alternate nostril breathing",
+          "benefits": [
+            "Balances nervous system",
+            "Calms mind",
+            "Purifies energy channels"
+          ]
+        },
+        {
+          "name": "Bhramari",
+          "description": "Humming bee breath",
+          "benefits": [
+            "Reduces stress",
+            "Improves concentration",
+            "Calms emotions"
+          ]
+        },
+        {
+          "name": "Ujjayi",
+          "description": "Ocean breath with slight throat constriction",
+          "benefits": [
+            "Builds internal heat",
+            "Focuses mind",
+            "Deepens practice"
+          ]
+        }
+      ]
+    }
+  },
+  "festivals_and_observances": {
+    "major_festivals": [
+      {
+        "name": "Diwali",
+        "description": "Festival of Lights celebrating victory of light over darkness",
+        "practices": [
+          "Light oil lamps",
+          "Lakshmi Puja",
+          "Sweets sharing",
+          "Fireworks",
+          "Home cleaning"
+        ],
+        "spiritual_significance": "Inner light awakening, prosperity consciousness"
+      },
+      {
+        "name": "Navaratri",
+        "description": "Nine nights celebrating Divine Mother",
+        "practices": [
+          "Fasting",
+          "Chanting",
+          "Dancing (Garba/Dandiya)",
+          "Devi Puja",
+          "Reading Devi Mahatmya"
+        ],
+        "spiritual_significance": "Transformation through Divine Feminine energy"
+      },
+      {
+        "name": "Maha Shivaratri",
+        "description": "Great night of Shiva",
+        "practices": [
+          "All-night vigil",
+          "Fasting",
+          "Shiva Puja",
+          "Om Namah Shivaya chanting",
+          "Rudra Abhishek"
+        ],
+        "spiritual_significance": "Spiritual awakening and consciousness transformation"
+      }
+    ],
+    "sacred_observances": [
+      {
+        "name": "Ekadashi",
+        "description": "Bi-monthly fasting on 11th lunar day",
+        "practice": "Fast from grains and beans, focus on spiritual activities",
+        "benefits": "Purification, spiritual progress, health benefits"
+      },
+      {
+        "name": "Guru Purnima",
+        "description": "Full moon day honoring the Guru principle",
+        "practice": "Honor spiritual teachers, study sacred texts, meditation",
+        "significance": "Guru-disciple tradition, spiritual guidance"
+      }
+    ]
+  }
+}

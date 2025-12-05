@@ -1,0 +1,45 @@
+# DharmaMind Performance & Caching Requirements
+# =============================================
+
+# Redis caching system
+redis==4.6.0
+redis[hiredis]==4.6.0  # High-performance Redis client
+
+# Async support for caching
+aioredis==2.0.1
+asyncio-throttle==1.0.2
+
+# Data serialization and compression
+msgpack==1.0.7
+lz4==4.3.2
+ujson==5.8.0
+
+# Performance monitoring
+psutil==5.9.6
+memory-profiler==0.61.0
+
+# Background task management
+celery==5.3.4
+flower==2.0.1  # Celery monitoring
+
+# Metrics and monitoring
+prometheus-client==0.19.0
+structlog==23.2.0
+
+# Additional performance libraries
+cachetools==5.3.2
+diskcache==5.6.3
+pymemcache==4.0.0
+
+# Data validation for caching
+pydantic==2.5.0
+marshmallow==3.20.1
+
+# Async utilities
+asyncio-mqtt==0.13.0
+aiofiles==23.2.1
+
+# Development and testing
+pytest-asyncio==0.21.1
+pytest-redis==3.0.2
+fakeredis==2.20.1

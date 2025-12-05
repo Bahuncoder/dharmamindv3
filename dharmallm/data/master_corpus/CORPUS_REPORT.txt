@@ -1,0 +1,69 @@
+======================================================================
+ULTIMATE SANSKRIT CORPUS REPORT
+======================================================================
+
+Generated: 2025-10-04
+
+Total texts: 1,736
+Total characters: 2,327,960
+Estimated verses: 29,099
+
+Progress: 3.48% of 837,000 verse goal
+Remaining: 807,901 verses
+
+======================================================================
+SOURCE BREAKDOWN
+======================================================================
+
+vedic_heritage_expanded: 1,004 texts
+gita_supersite_fixed: 701 texts
+wisdom_library_books: 14 texts
+wisdom_library_fixed: 8 texts
+
+======================================================================
+INCLUDED SOURCES
+======================================================================
+
+1. Existing pure Sanskrit corpus
+   - Original training texts
+   - 0 texts
+
+2. Vedic Heritage Portal (EXPANDED)
+   - Government source: https://vedicheritage.gov.in
+   - Complete 4 Vedas: Rigveda, Yajurveda, Samaveda, Atharvaveda
+   - 113 Upanishads
+   - 1,004 texts
+
+3. Gita Supersite IIT Kanpur (FIXED)
+   - Academic source: https://www.gitasupersite.iitk.ac.in
+   - Complete Bhagavad Gita (all 18 chapters, 701 verses)
+   - 100% success rate
+   - 701 verses
+
+4. Wisdom Library Books
+   - Source: https://www.wisdomlib.org
+   - Partial downloads (book landing pages only)
+   - 14 books
+
+5. Wisdom Library Fixed
+   - Definition/glossary texts
+   - 8 texts
+
+======================================================================
+NEXT STEPS
+======================================================================
+
+HIGH PRIORITY:
+- Download chapter-by-chapter content from Wisdom Library books
+- Target: Mahabharata (~100K verses), Ramayana (~24K verses)
+- Use GRETIL as alternative to Sanskrit Documents
+
+MEDIUM PRIORITY:
+- Download all Puranas (18 major + 18 minor)
+- Complete Brahmanas and Aranyakas
+- Add Dharma Shastras
+
+TRAINING:
+- Start training with current corpus
+- Incremental updates as more texts arrive
+- Scale model parameters as corpus grows

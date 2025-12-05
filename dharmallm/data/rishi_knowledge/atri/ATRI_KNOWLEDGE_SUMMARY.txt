@@ -1,0 +1,34 @@
+ATRI (MEDITATION MASTER) KNOWLEDGE BASE
+============================================================
+
+Collection Date: October 4, 2025
+
+PRIMARY TEXTS:
+  • Patanjali Yoga Sutras (195 sutras across 4 books)
+    - Samadhi Pada (51 sutras)
+    - Sadhana Pada (55 sutras)
+    - Vibhuti Pada (56 sutras)
+    - Kaivalya Pada (34 sutras)
+
+UPANISHADS:
+  • Mandukya Upanishad (OM meditation)
+  • Katha Upanishad (Inner journey)
+  • Isha Upanishad (Divine in all)
+  • Svetasvatara Upanishad (Meditation techniques)
+  • Kaivalya Upanishad (Liberation path)
+
+MEDITATION TECHNIQUES:
+  • Anapanasati (Breath awareness)
+  • So'ham (I Am That)
+  • Trataka (Candle gazing)
+  • Vipassana (Insight meditation)
+  • Chakra Meditation (Energy work)
+
+TOTAL FILES CREATED:
+  • Primary Texts: 2
+  • Upanishads: 5
+  • Techniques: 2
+  • TOTAL: 9 files
+
+STATUS: ✅ Ready for RAG embedding creation
+NEXT STEP: Run create_atri_rag.py to build vector database

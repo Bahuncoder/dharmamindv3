@@ -1,0 +1,23 @@
+======================================================================
+WISDOM LIBRARY DOWNLOAD SUMMARY
+======================================================================
+
+Books attempted: 57
+Books successful: 14
+Books failed: 43
+Success rate: 24.6%
+
+Total verses: 23
+Total books with content: 14
+
+Top 10 books by verse count:
+  1. tantraloka-sanskrit-text: 3 verses
+  2. agni-purana-sanskrit: 2 verses
+  3. lakshminarayana-samhita-sanskrit: 2 verses
+  4. satvata-samhita-sanskrit: 2 verses
+  5. kautilya-arthashastra-sanskrit: 2 verses
+  6. brihat-katha-shloka-samgraha-sanskrit: 2 verses
+  7. dhanurveda-samhita-sanskrit: 2 verses
+  8. hari-bhakti-vilasa-sanskrit-text: 2 verses
+  9. mahabharata-sanskrit: 1 verses
+  10. ashtanga-hridaya-samhita-sanskrit: 1 verses

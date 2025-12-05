@@ -1,0 +1,105 @@
+{
+    "folders": [
+        {
+            "name": "DharmaMind Complete System",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "git.autofetch": true,
+        "git.confirmSync": false,
+        "git.defaultCloneDirectory": ".",
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+        "git.openRepositoryInParentFolders": "always",
+        "extensions.autoUpdate": true,
+        "terminal.integrated.cwd": "${workspaceFolder}",
+        "typescript.preferences.importModuleSpecifier": "relative",
+        "eslint.workingDirectories": [
+            "dharmamind-chat",
+            "Brand_Webpage",
+            "backend"
+        ],
+        "python.defaultInterpreterPath": "./dharmamind_env/bin/python",
+        "git.ignoreLimitWarning": true,
+        "files.associations": {
+            "*.md": "markdown",
+            "*.tsx": "typescriptreact",
+            "*.jsx": "javascriptreact"
+        },
+        "workbench.editor.restoreViewState": true,
+        "workbench.editor.wrapTabs": true,
+        "editor.formatOnSave": true,
+        "git.enableSmartCommit": true,
+        "git.suggestSmartCommit": true
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Start Brand Website",
+                "type": "shell",
+                "command": "cd Brand_Webpage && npm run dev",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "isBackground": true,
+                "problemMatcher": []
+            },
+            {
+                "label": "Start Chat App",
+                "type": "shell",
+                "command": "cd dharmamind-chat && npm run dev",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "isBackground": true,
+                "problemMatcher": []
+            },
+            {
+                "label": "Restore Working State",
+                "type": "shell",
+                "command": "./restore_working_state.sh",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": true,
+                    "panel": "new"
+                }
+            }
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Brand Website Debug",
+                "type": "node",
+                "request": "launch",
+                "program": "${workspaceFolder}/Brand_Webpage/node_modules/.bin/next",
+                "args": [
+                    "dev",
+                    "-p",
+                    "3001"
+                ],
+                "cwd": "${workspaceFolder}/Brand_Webpage",
+                "console": "integratedTerminal",
+                "internalConsoleOptions": "neverOpen"
+            }
+        ]
+    }
+}

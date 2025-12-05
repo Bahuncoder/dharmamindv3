@@ -1,0 +1,151 @@
+% Text title            : kenopaniShad
+% File name             : kena.itx
+% Category              : upanishhat, svara
+% Location              : doc\_upanishhat
+% Transliterated by     : NA
+% Proofread by          : NA
+% Description-comments  : From Eight Upanishads, translated by Gambhirananda
+% Latest update         : April 29, 2010, August 3, 2022
+% Send corrections to   : sanskrit at cheerful dot c om
+%
+% This text is prepared by volunteers and is to be used for personal study 
+% and research. The file is not to be copied or reposted for promotion of 
+% any website or individuals or for commercial purpose without permission. 
+% Please help to maintain respect for volunteer spirit.
+%
+\documentstyle[11pt,multicol,itrans]{article}
+#include=ijag.inc
+#endwordvowel=.h
+\portraitwide
+\parindent=100pt                
+\let\usedvng=\Largedvng      % for 1 column     
+\pagenumbering{itrans} 
+\def\engtitle#1{\hrule\medskip\centerline{\LARGE #1}}
+\def\itxtitle#1{\medskip\centerline{\LARGEdvng #1}\medskip\hrule}
+\def\endtitles{\medskip\obeyspaceslines}
+%%
+\begin{document}
+\engtitle{.. Kena Upanishad ..}##
+\itxtitle{.. kenopaniShat ..}##\endtitles ##
+          || atha kenopaniShat ||
+OM ApyAyantu mamA~NgAni vAkprANashchakShuH
+shrotramatho balamindriyANi cha sarvANi |
+sarvaM brahmaupaniShadaM
+mA.ahaM brahma nirAkuryAM mA mA brahma
+nirAkarodanirAkaraNamastvanirAkaraNaM me.astu |
+tadAtmani nirate ya
+upaniShatsu dharmAste mayi santu te mayi santu |
+          OM shAntiH shAntiH shAntiH ||
+\medskip\hrule\medskip
+OM keneShitaM patati preShitaM manaH
+    kena prANaH prathamaH praiti yuktaH |
+keneShitAM vAchamimAM vadanti
+    chakShuH shrotraM ka u devo yunakti || 1||
+shrotrasya shrotraM manaso mano yad.h
+    vAcho ha vAchaM sa u prANasya prANaH |
+chakShuShashchakShuratimuchya dhIrAH
+    pretyAsmAllokAdamR^itA bhavanti || 2||
+na tatra chakShurgachChati na vAggachChati no manaH |
+na vidmo na vijAnImo yathaitadanushiShyAt || 3||
+anyadeva tadviditAdatho aviditAdadhi |
+iti shushruma pUrveShAM ye nastad.hvyAchachakShire || 4||
+yadvAchA.anabhyuditaM yena vAgabhyudyate |
+tadeva brahma tvaM viddhi nedaM yadidamupAsate || 5||
+yanmanasA na manute yenAhurmano matam |
+tadeva brahma tvaM viddhi nedaM yadidamupAsate || 6||
+yachchakShuShA na pashyati yena chakShU.NShi pashyati |
+tadeva brahma tvaM viddhi nedaM yadidamupAsate || 7||
+yachChrotreNa na shR^iNoti yena shrotramidaM shrutam |
+tadeva brahma tvaM viddhi nedaM yadidamupAsate || 8||
+yatprANena na prANiti yena prANaH praNIyate |
+tadeva brahma tvaM viddhi nedaM yadidamupAsate || 9||
+          || iti kenopaniShadi prathamaH khaNDaH ||
+\medskip\hrule\medskip
+yadi manyase suvedeti daharamevApi ## var ## dabhramevApi
+    nUnaM tvaM vettha brahmaNo rUpam |
+yadasya tvaM yadasya deveShvatha nu
+    mImA.Nsyameva te manye viditam || 1||
+nAhaM manye suvedeti no na vedeti veda cha |
+yo nastadveda tadveda no na vedeti veda cha || 2||
+yasyAmataM tasya mataM mataM yasya na veda saH |
+avij~nAtaM vijAnatAM vij~nAtamavijAnatAm || 3||
+pratibodhaviditaM matamamR^itatvaM hi vindate |
+AtmanA vindate vIryaM vidyayA vindate.amR^itam || 4||
+iha chedavedIdatha satyamasti
+    na chedihAvedInmahatI vinaShTiH |
+bhUteShu bhUteShu vichitya dhIrAH
+    pretyAsmAllokAdamR^itA bhavanti || 5||
+       || iti kenopaniShadi dvitIyaH khaNDaH ||
+\medskip\hrule\medskip
+brahma ha devebhyo vijigye tasya ha brahmaNo
+vijaye devA amahIyanta || 1||
+ta aikShantAsmAkamevAyaM vijayo.asmAkamevAyaM mahimeti |
+taddhaiShAM vijaj~nau tebhyo ha prAdurbabhUva tanna vyajAnata
+kimidaM yakShamiti || 2||
+te.agnimabruva~njAtaveda etadvijAnIhi
+kimidaM yakShamiti tatheti || 3||
+tadabhyadravattamabhyavadatko.asItyagnirvA
+ahamasmItyabravIjjAtavedA vA ahamasmIti || 4||
+tasmi{\m+}stvayi kiM vIryamityapIda{\m+} sarvaM
+daheyaM yadidaM pR^ithivyAmiti || 5||
+tasmai tR^iNaM nidadhAvetaddaheti |
+tadupapreyAya sarvajavena tanna shashAka dagdhuM sa tata eva
+nivavR^ite naitadashakaM vij~nAtuM yadetadyakShamiti || 6||
+atha vAyumabruvanvAyavetadvijAnIhi
+kimetadyakShamiti tatheti || 7||
+tadabhyadravattamabhyavadatko.asIti vAyurvA
+ahamasmItyabravInmAtarishvA vA ahamasmIti || 8||
+tasmi.Nstvayi kiM vIryamityapIda.N
+sarvamAdadIya yadidaM pR^ithivyAmiti || 9||
+tasmai tR^iNaM nidadhAvetadAdatsveti
+tadupapreyAya sarvajavena tanna shashAkAdAtuM sa tata eva
+nivavR^ite naitadashakaM vij~nAtuM yadetadyakShamiti || 10||
+athendramabruvanmaghavannetadvijAnIhi kimetadyakShamiti tatheti
+tadabhyadravattasmAttirodadhe || 11||
+sa tasminnevAkAshe striyamAjagAma bahushobhamAnAmumA.N
+haimavatIM tA.NhovAcha kimetadyakShamiti || 12||
+          || iti kenopaniShadi tR^itIyaH khaNDaH ||
+\medskip\hrule\medskip
+sA brahmeti hovAcha brahmaNo vA etadvijaye mahIyadhvamiti
+tato haiva vidA~nchakAra brahmeti || 1||
+tasmAdvA ete devA atitarAmivAnyAndevAnyadagnirvAyurindraste
+hyenannediShThaM pasparshuste hyenatprathamo vidA~nchakAra brahmeti || 2||
+tasmAdvA indro.atitarAmivAnyAndevAnsa
+hyenannediShThaM pasparsha sa hyenatprathamo vidA~nchakAra brahmeti || 3||
+tasyaiSha Adesho yadetadvidyuto vyadyutadA3
+##Extra `A'kAr is used in the sense of comparison##
+itIn nyamImiShadA3 ityadhidaivatam || 4||
+athAdhyAtmaM yaddetad.hgachChatIva cha mano.anena
+chaitadupasmaratyabhIkShNa.N sa~NkalpaH || 5||
+taddha tadvanaM nAma tadvanamityupAsitavyaM sa ya etadevaM vedAbhi
+haina{\m+} sarvANi bhUtAni sa.nvA~nChanti || 6||
+upaniShadaM bho brUhItyuktA ta upaniShad.hbrAhmIM vAva ta
+upaniShadamabrUmeti || 7||
+tasyai tapo damaH karmeti pratiShThA vedAH sarvA~NgAni
+satyamAyatanam || 8||
+yo vA etAmevaM vedApahatya pApmAnamanante svarge
+loke jyeye pratitiShThati pratitiShThati || 9||
+          || iti kenopaniShadi chaturthaH khaNDaH ||
+\medskip\hrule\medskip
+OM ApyAyantu mamA~NgAni vAkprANashchakShuH
+shrotramatho balamindriyANi cha sarvANi |
+sarvaM brahmaupaniShadaM
+mA.ahaM brahma nirAkuryAM mA mA brahma
+nirAkarodanirAkaraNamastvanirAkaraNaM me.astu |
+tadAtmani nirate ya
+upaniShatsu dharmAste mayi santu te mayi santu |
+          OM shAntiH shAntiH shAntiH ||
+
+          || iti kenopaniShat ||
+##
+
+From Eight Upanishads, translated by Gambhirananda
+var indicates variations
+
+\medskip\hrule\obeylines
+
+Please send corrections to sanskrit at cheerful dot c om
+Last updated \today
+https://sanskritdocuments.org
+
+\end{document}

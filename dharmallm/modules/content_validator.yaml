@@ -1,0 +1,14 @@
+name: content_validator
+description: Validates and ensures content aligns with authentic dharmic principles
+category: validation
+expertise_areas:
+  - content_validation
+  - authenticity_check
+  - dharmic_alignment
+  - scriptural_accuracy
+  - spiritual_integrity
+  - truth_verification
+  - quality_assurance
+  - ethical_compliance
+priority: high
+activation_threshold: 0.8

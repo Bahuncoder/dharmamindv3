@@ -1,0 +1,126 @@
+{
+  "vedic_months": [
+    {
+      "name": "Chaitra",
+      "gregorian_equivalent": "March-April",
+      "significance": "New Year, spring season"
+    },
+    {
+      "name": "Vaisakha",
+      "gregorian_equivalent": "April-May",
+      "significance": "Buddha Purnima, Akshaya Tritiya"
+    },
+    {
+      "name": "Jyeshtha",
+      "gregorian_equivalent": "May-June",
+      "significance": "Vat Savitri, Ganga Dussehra"
+    },
+    {
+      "name": "Ashadha",
+      "gregorian_equivalent": "June-July",
+      "significance": "Guru Purnima, Jagannath Rath Yatra"
+    },
+    {
+      "name": "Shravana",
+      "gregorian_equivalent": "July-August",
+      "significance": "Raksha Bandhan, Krishna Janmashtami"
+    },
+    {
+      "name": "Bhadrapada",
+      "gregorian_equivalent": "August-September",
+      "significance": "Ganesha Chaturthi, Pitru Paksha"
+    },
+    {
+      "name": "Ashvina",
+      "gregorian_equivalent": "September-October",
+      "significance": "Navaratri, Dussehra"
+    },
+    {
+      "name": "Kartika",
+      "gregorian_equivalent": "October-November",
+      "significance": "Diwali, Karva Chauth"
+    },
+    {
+      "name": "Agrahayana",
+      "gregorian_equivalent": "November-December",
+      "significance": "Gita Jayanti"
+    },
+    {
+      "name": "Pausha",
+      "gregorian_equivalent": "December-January",
+      "significance": "Makar Sankranti preparation"
+    },
+    {
+      "name": "Magha",
+      "gregorian_equivalent": "January-February",
+      "significance": "Vasant Panchami, Maha Shivaratri"
+    },
+    {
+      "name": "Phalguna",
+      "gregorian_equivalent": "February-March",
+      "significance": "Holi, Rang Panchami"
+    }
+  ],
+  "major_festivals": [
+    {
+      "name": "Diwali",
+      "month": "Kartika",
+      "lunar_day": "Amavasya (New Moon)",
+      "duration": "5 days",
+      "practices": [
+        "Light lamps",
+        "Lakshmi Puja",
+        "Sweets",
+        "Fireworks",
+        "Rangoli"
+      ],
+      "spiritual_significance": "Victory of light over darkness, inner illumination"
+    },
+    {
+      "name": "Navaratri",
+      "month": "Ashvina",
+      "duration": "9 nights",
+      "practices": [
+        "Fasting",
+        "Devi Puja",
+        "Chanting",
+        "Dancing",
+        "Reading Devi Mahatmya"
+      ],
+      "spiritual_significance": "Divine Mother worship, spiritual transformation"
+    },
+    {
+      "name": "Maha Shivaratri",
+      "month": "Magha/Phalguna",
+      "lunar_day": "Krishna Paksha Chaturdashi",
+      "practices": [
+        "Night vigil",
+        "Fasting",
+        "Shiva Puja",
+        "Om Namah Shivaya",
+        "Rudra Abhishek"
+      ],
+      "spiritual_significance": "Union of Shiva-Shakti, consciousness transformation"
+    }
+  ],
+  "monthly_observances": [
+    {
+      "name": "Ekadashi",
+      "frequency": "Twice monthly (11th day of each lunar fortnight)",
+      "practice": "Fasting from grains and beans",
+      "spiritual_benefit": "Purification and spiritual progress"
+    },
+    {
+      "name": "Purnima",
+      "frequency": "Monthly (Full Moon)",
+      "practice": "Meditation, charity, spiritual activities",
+      "spiritual_benefit": "Enhanced spiritual energy and clarity"
+    },
+    {
+      "name": "Amavasya",
+      "frequency": "Monthly (New Moon)",
+      "practice": "Ancestor worship, inner reflection",
+      "spiritual_benefit": "Connection with ancestral wisdom"
+    }
+  ]
+}

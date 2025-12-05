@@ -1,0 +1,14 @@
+name: ai_core
+description: Core AI reasoning and intelligence processing for DharmaMind
+category: ai_intelligence
+expertise_areas:
+  - artificial_intelligence
+  - reasoning
+  - cognitive_processing
+  - intelligent_responses
+  - decision_making
+  - problem_solving
+  - neural_networks
+  - machine_learning
+priority: high
+activation_threshold: 0.7

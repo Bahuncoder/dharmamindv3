@@ -1,0 +1,146 @@
+{
+  "jyotisha": {
+    "description": "Vedic Astrology - Science of Time and Cosmic Influence",
+    "core_principles": [
+      {
+        "concept": "Navagrahas",
+        "description": "Nine planetary influences",
+        "planets": [
+          "Surya (Sun)",
+          "Chandra (Moon)",
+          "Mangal (Mars)",
+          "Budha (Mercury)",
+          "Guru (Jupiter)",
+          "Shukra (Venus)",
+          "Shani (Saturn)",
+          "Rahu (North Node)",
+          "Ketu (South Node)"
+        ],
+        "application": "Understanding personality and life patterns"
+      },
+      {
+        "concept": "Rashis",
+        "description": "Twelve zodiac signs",
+        "signs": [
+          "Mesha",
+          "Vrishabha",
+          "Mithuna",
+          "Karka",
+          "Simha",
+          "Kanya",
+          "Tula",
+          "Vrishchika",
+          "Dhanu",
+          "Makara",
+          "Kumbha",
+          "Meena"
+        ],
+        "application": "Character analysis and compatibility"
+      }
+    ],
+    "practical_applications": [
+      "Muhurta (Auspicious timing selection)",
+      "Matching for marriage compatibility",
+      "Career guidance based on planetary strengths",
+      "Health predictions and remedies",
+      "Spiritual practices according to planetary periods"
+    ]
+  },
+  "ayurveda": {
+    "description": "Traditional Medicine - Science of Life and Longevity",
+    "core_principles": [
+      {
+        "concept": "Tridosha",
+        "description": "Three biological humors",
+        "doshas": {
+          "Vata": {
+            "elements": [
+              "Air",
+              "Space"
+            ],
+            "qualities": "Movement, circulation, nervous system",
+            "imbalance_signs": [
+              "Anxiety",
+              "Insomnia",
+              "Constipation",
+              "Joint pain"
+            ]
+          },
+          "Pitta": {
+            "elements": [
+              "Fire",
+              "Water"
+            ],
+            "qualities": "Metabolism, digestion, transformation",
+            "imbalance_signs": [
+              "Acidity",
+              "Inflammation",
+              "Anger",
+              "Skin disorders"
+            ]
+          },
+          "Kapha": {
+            "elements": [
+              "Earth",
+              "Water"
+            ],
+            "qualities": "Structure, immunity, lubrication",
+            "imbalance_signs": [
+              "Congestion",
+              "Weight gain",
+              "Lethargy",
+              "Depression"
+            ]
+          }
+        }
+      }
+    ],
+    "practical_applications": [
+      "Constitutional analysis (Prakriti determination)",
+      "Daily routine recommendations (Dinacharya)",
+      "Seasonal lifestyle adjustments (Ritucharya)",
+      "Diet according to constitution and condition",
+      "Herbal remedies and natural treatments",
+      "Yoga and meditation for health",
+      "Panchakarma detoxification procedures"
+    ]
+  },
+  "mantra_shastra": {
+    "description": "Science of Sacred Sounds and Vibrations",
+    "essential_mantras": [
+      {
+        "mantra": "ॐ",
+        "name": "Pranava",
+        "description": "Primordial sound, represents Brahman",
+        "benefits": [
+          "Calms mind",
+          "Connects to universal consciousness",
+          "Purifies energy"
+        ],
+        "chanting_method": "108 times daily, preferably at sunrise and sunset"
+      },
+      {
+        "mantra": "ॐ गं गणपतये नमः",
+        "name": "Ganesha Mantra",
+        "description": "Removes obstacles, grants success",
+        "benefits": [
+          "Obstacle removal",
+          "Success in endeavors",
+          "Wisdom enhancement"
+        ],
+        "when_to_chant": "Before starting new ventures or daily activities"
+      },
+      {
+        "mantra": "ॐ नमः शिवाय",
+        "name": "Panchakshari Mantra",
+        "description": "Five-syllable Shiva mantra for purification",
+        "benefits": [
+          "Spiritual purification",
+          "Inner peace",
+          "Dissolution of ego"
+        ],
+        "chanting_method": "Can be chanted continuously (Ajapa Japa)"
+      }
+    ]
+  }
+}

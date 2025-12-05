@@ -1,0 +1,50 @@
+{
+  "title": "Fundamentals of Sanatana Dharma",
+  "sage": "Maharishi Vashishta",
+  "source": "Dharma Shastras and Vashishta's Teachings",
+  "core_concepts": [
+    {
+      "concept": "What is Dharma?",
+      "sanskrit": "धर्म",
+      "definition": "Dharma means 'that which upholds'. It is righteousness, duty, moral law, and the cosmic order that sustains the universe.",
+      "explanation": "Dharma is not just religion - it is the eternal principles that govern right living, ethical conduct, and harmonious existence."
+    },
+    {
+      "concept": "The Ten Universal Virtues (Sadharana Dharma)",
+      "virtues": {
+        "1_Dhriti": "Steadfastness, patience, fortitude",
+        "2_Kshama": "Forgiveness, tolerance",
+        "3_Dama": "Self-control, restraint of senses",
+        "4_Asteya": "Non-stealing, honesty",
+        "5_Shaucha": "Purity of body and mind",
+        "6_Indriya-nigraha": "Mastery over senses",
+        "7_Dhi": "Intellect, wisdom, discrimination",
+        "8_Vidya": "Knowledge, learning",
+        "9_Satya": "Truthfulness",
+        "10_Akrodha": "Absence of anger, calmness"
+      },
+      "teaching": "These ten virtues are universal dharma - applicable to all humans regardless of birth, status, or circumstance."
+    },
+    {
+      "concept": "Svadharma vs Samanya Dharma",
+      "svadharma": "One's personal duty based on nature, stage of life, and circumstances",
+      "samanya_dharma": "Universal duties applicable to all (non-violence, truth, etc.)",
+      "principle": "When in conflict, svadharma may take precedence, but never at the cost of core ethical principles."
+    },
+    {
+      "concept": "Karma and Dharma",
+      "relationship": "Dharma guides right action; karma is the law of cause and effect",
+      "teaching": "Live according to dharma, and your karma becomes a vehicle for spiritual evolution rather than bondage."
+    }
+  ],
+  "key_principles": [
+    "Ahimsa (Non-violence) - in thought, word, and deed",
+    "Satya (Truth) - but truth must be beneficial, not harmful",
+    "Asteya (Non-stealing) - even in subtle forms like time, ideas",
+    "Brahmacharya (Self-control) - mastery over desires and senses",
+    "Aparigraha (Non-possessiveness) - freedom from greed",
+    "Dharma is context-dependent - what is right depends on time, place, circumstance",
+    "The greatest dharma is compassion toward all beings",
+    "When in doubt, ask: 'What would a wise, compassionate person do?'"
+  ]
+}
