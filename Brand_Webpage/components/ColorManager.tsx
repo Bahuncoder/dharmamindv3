@@ -157,7 +157,7 @@ const ColorManager: React.FC = () => {
                     value={customColors.brandSecondary}
                     onChange={(e) => handleCustomColorChange('brandSecondary', e.target.value)}
                     className="flex-1 px-2 py-1 text-xs border border-brand-accent rounded"
-                    placeholder="#8b5cf6"
+                    placeholder="#059669"
                   />
                 </div>
               </div>

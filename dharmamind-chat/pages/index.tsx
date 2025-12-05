@@ -123,7 +123,7 @@ const HomePage: React.FC = () => {
                  style={{
                    background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-hover))',
                    border: '3px solid var(--color-logo-emerald)',
-                   boxShadow: '0 20px 60px rgba(16, 185, 129, 0.4), 0 8px 30px rgba(249, 115, 22, 0.3)'
+                   boxShadow: '0 20px 60px rgba(16, 185, 129, 0.4), 0 8px 30px rgba(5, 150, 105, 0.3)'
                  }}>
               {/* Use exact same structure as Logo component */}
               <img
@@ -139,7 +139,7 @@ const HomePage: React.FC = () => {
               <div 
                 className="absolute inset-0 rounded-lg"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1))',
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.15))',
                   zIndex: 5
                 }}
               />

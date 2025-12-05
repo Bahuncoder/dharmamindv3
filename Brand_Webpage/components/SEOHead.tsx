@@ -100,7 +100,7 @@ export default function SEOHead({
       <meta name="twitter:site" content="@dharmamind" />
       
       {/* Additional Meta Tags */}
-      <meta name="theme-color" content="#8B5CF6" />
+      <meta name="theme-color" content="#10b981" />
       <meta name="application-name" content="DharmaMind" />
       <meta name="apple-mobile-web-app-title" content="DharmaMind" />
       <meta name="apple-mobile-web-app-capable" content="yes" />

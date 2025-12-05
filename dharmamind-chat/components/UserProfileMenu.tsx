@@ -106,8 +106,8 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
             onClick={handleUpgrade}
             className="w-full py-3 px-4 rounded-lg text-white font-semibold transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5 mb-3"
             style={{ 
-              background: 'linear-gradient(135deg, #f59e0b 0%, #10b981 100%)',
-              boxShadow: '0 4px 14px 0 rgba(245, 158, 11, 0.3)'
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              boxShadow: '0 4px 14px 0 rgba(16, 185, 129, 0.3)'
             }}
           >
             <div className="flex items-center justify-center space-x-2">

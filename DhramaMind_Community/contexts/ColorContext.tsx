@@ -49,22 +49,22 @@ interface ColorContextType {
 const themes: ColorTheme[] = [
   {
     name: 'dharma-default',
-    displayName: 'Dharma Gray',
-    description: 'Professional gray with emerald accents',
+    displayName: 'Dharma Emerald',
+    description: 'Spiritual emerald green - the official DharmaMind theme',
     colors: {
-      brandPrimary: '#6b7280',      // Gray-500: Main brand
+      brandPrimary: '#10b981',      // Emerald-500: Main brand
       brandAccent: '#10b981',       // Emerald-500: Accents/borders
-      brandSecondary: '#8b5cf6',    // Violet-500: Secondary actions
-      brandPrimaryHover: '#4b5563', // Gray-600
-      brandAccentHover: '#059669',  // Emerald-600
-      brandSecondaryHover: '#7c3aed', // Violet-600
+      brandSecondary: '#059669',    // Emerald-600: Secondary actions
+      brandPrimaryHover: '#059669', // Emerald-600
+      brandAccentHover: '#047857',  // Emerald-700
+      brandSecondaryHover: '#047857', // Emerald-700
       // Legacy mappings
-      primaryStart: '#6b7280',
-      primaryEnd: '#10b981',
-      primaryHoverStart: '#4b5563',
-      primaryHoverEnd: '#059669',
-      primary: '#6b7280',
-      primaryHover: '#4b5563',
+      primaryStart: '#10b981',
+      primaryEnd: '#059669',
+      primaryHoverStart: '#059669',
+      primaryHoverEnd: '#047857',
+      primary: '#10b981',
+      primaryHover: '#059669',
     }
   },
   {

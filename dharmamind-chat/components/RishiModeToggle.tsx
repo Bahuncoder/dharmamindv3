@@ -37,7 +37,7 @@ export const RishiGuidancePanel: React.FC<RishiGuidancePanelProps> = ({
         className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 hover:from-orange-100 hover:to-amber-100"
         style={{ 
           color: 'var(--color-text-primary, #1f2937)',
-          borderColor: selectedRishi ? 'var(--color-primary-saffron, #f59e0b)' : undefined 
+          borderColor: selectedRishi ? 'var(--color-border-emerald, #10b981)' : undefined 
         }}
         onClick={() => setIsExpanded(!isExpanded)}
       >
