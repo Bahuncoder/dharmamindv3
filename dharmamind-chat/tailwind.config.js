@@ -1,76 +1,71 @@
-/** @type {import('tailwindcss').Config} */
+/** 
+ * 🕉️ DharmaMind Chat (dharmamind.ai)
+ * Tailwind CSS Configuration
+ * 
+ * Purpose: Personal AI Spiritual Companion
+ * Accent: Sacred Emerald (#10b981)
+ * 
+ * @type {import('tailwindcss').Config} 
+ */
+
+const dmPreset = require('../shared/tailwind.preset.js');
+
 module.exports = {
+  presets: [dmPreset],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class', // Enable class-based dark mode
+  darkMode: 'class',
   theme: {
     extend: {
+      // Chat specific overrides
       colors: {
-        dharma: {
-          50: '#fdf8f0',
-          100: '#faf0e1',
-          200: '#f4dfc2',
-          300: '#ebc899',
-          400: '#e0aa6e',
-          500: '#d69143',
-          600: '#c87d39',
-          700: '#a66730',
-          800: '#85532c',
-          900: '#6e4528',
-          950: '#3b2213',
+        // Product-specific accent (Sacred Emerald for spiritual depth)
+        'product-accent': {
+          DEFAULT: '#10b981',
+          light: '#d1fae5',
+          dark: '#047857',
         },
-        lotus: {
-          50: '#fef7f0',
-          100: '#fdede0',
-          200: '#fad9c0',
-          300: '#f6bf95',
-          400: '#f09968',
-          500: '#ea7944',
-          600: '#db5f2a',
-          700: '#b64920',
-          800: '#913b1f',
-          900: '#74331e',
-          950: '#3e170d',
+        // Chat-specific color mappings
+        'chat-bg': {
+          primary: '#fafaf9',
+          secondary: '#f5f5f4',
+          dark: '#1c1917',
         },
-        peace: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
-        }
+        'chat-text': {
+          primary: '#1c1917',
+          secondary: '#57534e',
+          muted: '#78716c',
+        },
       },
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Crimson Text', 'serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+      backgroundImage: {
+        // Chat specific gradients
+        'hero-gradient': 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(13, 148, 136, 0.05) 100%)',
+        'chat-gradient': 'linear-gradient(135deg, #10b981 0%, #0d9488 100%)',
+        'rishi-gradient': 'linear-gradient(135deg, #10b981 0%, #8b5cf6 100%)',
+        'message-gradient': 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%)',
       },
+      boxShadow: {
+        'chat': '0 4px 20px rgba(16, 185, 129, 0.15)',
+        'chat-lg': '0 10px 40px rgba(16, 185, 129, 0.2)',
+        'message': '0 2px 8px rgba(0, 0, 0, 0.05)',
+        'rishi': '0 4px 20px rgba(139, 92, 246, 0.2)',
+      },
+      // Additional chat animations
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.3s ease-out',
-        'lotus-bloom': 'lotusBloom 2s ease-in-out infinite',
+        'typing': 'typing 1.4s ease-in-out infinite',
+        'message-in': 'messageIn 0.3s ease-out forwards',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        typing: {
+          '0%, 100%': { opacity: '0.3' },
+          '50%': { opacity: '1' },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        lotusBloom: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
+        messageIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px) scale(0.95)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
       },
     },
@@ -79,4 +74,4 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
   ],
-}
+};

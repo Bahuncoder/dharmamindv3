@@ -1,0 +1,518 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 🕉️ DHARMAMIND UNIVERSAL BRAND SYSTEM
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 
+ * "AI with Soul Powered by Dharma"
+ * 
+ * Brand Vision: Universal platform for human transformation
+ * - Leadership & Decision Making
+ * - Ethical Guidance & Dharmic Living
+ * - Spiritual Teaching & Growth
+ * - Mental Health & Wellbeing
+ * - Life Purpose & Meaning
+ * 
+ * Platform Ecosystem:
+ * 1. dharmamind.ai    → Chat (Personal AI Wisdom)
+ * 2. dharmamind.org   → Community (Digital Sangha)
+ * 3. dharmamind.com   → Brand (Enterprise & Authority)
+ * 
+ * Design Philosophy:
+ * - Premium, trustworthy, authoritative
+ * - Ancient wisdom meets cutting-edge technology
+ * - Serene yet powerful
+ * - Universal accessibility
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 🎨 BRAND CORE COLORS
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  /* Primary Brand Color - Sacred Emerald 
+   * Represents: Growth, Heart Chakra, Healing, Trust, Nature
+   * Used for: Primary actions, success states, core branding */
+  --dm-brand-primary: #10b981;
+  --dm-brand-primary-50: #ecfdf5;
+  --dm-brand-primary-100: #d1fae5;
+  --dm-brand-primary-200: #a7f3d0;
+  --dm-brand-primary-300: #6ee7b7;
+  --dm-brand-primary-400: #34d399;
+  --dm-brand-primary-500: #10b981;
+  --dm-brand-primary-600: #059669;
+  --dm-brand-primary-700: #047857;
+  --dm-brand-primary-800: #065f46;
+  --dm-brand-primary-900: #064e3b;
+  --dm-brand-primary-rgb: 16, 185, 129;
+
+  /* Secondary Brand Color - Sacred Gold
+   * Represents: Wisdom, Spirituality, Excellence, Divine Fire
+   * Used for: Highlights, premium features, accents */
+  --dm-brand-secondary: #f59e0b;
+  --dm-brand-secondary-50: #fffbeb;
+  --dm-brand-secondary-100: #fef3c7;
+  --dm-brand-secondary-200: #fde68a;
+  --dm-brand-secondary-300: #fcd34d;
+  --dm-brand-secondary-400: #fbbf24;
+  --dm-brand-secondary-500: #f59e0b;
+  --dm-brand-secondary-600: #d97706;
+  --dm-brand-secondary-700: #b45309;
+  --dm-brand-secondary-800: #92400e;
+  --dm-brand-secondary-900: #78350f;
+  --dm-brand-secondary-rgb: 245, 158, 11;
+
+  /* Tertiary Brand Color - Spiritual Purple
+   * Represents: Crown Chakra, Higher Consciousness, Premium
+   * Used for: Premium features, spiritual elements */
+  --dm-brand-tertiary: #8b5cf6;
+  --dm-brand-tertiary-50: #f5f3ff;
+  --dm-brand-tertiary-100: #ede9fe;
+  --dm-brand-tertiary-200: #ddd6fe;
+  --dm-brand-tertiary-300: #c4b5fd;
+  --dm-brand-tertiary-400: #a78bfa;
+  --dm-brand-tertiary-500: #8b5cf6;
+  --dm-brand-tertiary-600: #7c3aed;
+  --dm-brand-tertiary-700: #6d28d9;
+  --dm-brand-tertiary-800: #5b21b6;
+  --dm-brand-tertiary-900: #4c1d95;
+  --dm-brand-tertiary-rgb: 139, 92, 246;
+
+  /* Quaternary Brand Color - Wisdom Teal
+   * Represents: Third Eye, Clarity, Balance, Communication
+   * Used for: Information, links, calm states */
+  --dm-brand-quaternary: #0d9488;
+  --dm-brand-quaternary-50: #f0fdfa;
+  --dm-brand-quaternary-100: #ccfbf1;
+  --dm-brand-quaternary-200: #99f6e4;
+  --dm-brand-quaternary-300: #5eead4;
+  --dm-brand-quaternary-400: #2dd4bf;
+  --dm-brand-quaternary-500: #14b8a6;
+  --dm-brand-quaternary-600: #0d9488;
+  --dm-brand-quaternary-700: #0f766e;
+  --dm-brand-quaternary-800: #115e59;
+  --dm-brand-quaternary-900: #134e4a;
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 🌓 NEUTRAL COLORS (Earthy, Grounded)
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  --dm-neutral-50: #fafaf9;
+  --dm-neutral-100: #f5f5f4;
+  --dm-neutral-200: #e7e5e4;
+  --dm-neutral-300: #d6d3d1;
+  --dm-neutral-400: #a8a29e;
+  --dm-neutral-500: #78716c;
+  --dm-neutral-600: #57534e;
+  --dm-neutral-700: #44403c;
+  --dm-neutral-800: #292524;
+  --dm-neutral-900: #1c1917;
+  --dm-neutral-950: #0c0a09;
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 📱 PRODUCT-SPECIFIC ACCENT COLORS
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  /* Chat Product (dharmamind.ai) - Deep Spiritual */
+  --dm-chat-accent: var(--dm-brand-primary);
+  --dm-chat-accent-light: var(--dm-brand-primary-100);
+  --dm-chat-accent-dark: var(--dm-brand-primary-700);
+
+  /* Community Product (dharmamind.org) - Warm Connected */
+  --dm-community-accent: var(--dm-brand-secondary);
+  --dm-community-accent-light: var(--dm-brand-secondary-100);
+  --dm-community-accent-dark: var(--dm-brand-secondary-700);
+
+  /* Brand Website (dharmamind.com) - Premium Authority */
+  --dm-brand-accent: var(--dm-brand-tertiary);
+  --dm-brand-accent-light: var(--dm-brand-tertiary-100);
+  --dm-brand-accent-dark: var(--dm-brand-tertiary-700);
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 🎭 SEMANTIC COLORS
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  --dm-success: #10b981;
+  --dm-success-light: #d1fae5;
+  --dm-success-dark: #047857;
+
+  --dm-warning: #f59e0b;
+  --dm-warning-light: #fef3c7;
+  --dm-warning-dark: #b45309;
+
+  --dm-error: #ef4444;
+  --dm-error-light: #fee2e2;
+  --dm-error-dark: #b91c1c;
+
+  --dm-info: #0d9488;
+  --dm-info-light: #ccfbf1;
+  --dm-info-dark: #0f766e;
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * ✨ BRAND GRADIENTS
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  /* Primary Brand Gradient - Used in logos, hero sections */
+  --dm-gradient-brand: linear-gradient(135deg, var(--dm-brand-primary) 0%, var(--dm-brand-quaternary-700) 100%);
+  
+  /* Gold Accent Gradient - Premium highlights */
+  --dm-gradient-gold: linear-gradient(135deg, var(--dm-brand-secondary) 0%, var(--dm-brand-secondary-600) 100%);
+  
+  /* Spiritual Gradient - Deep spiritual contexts */
+  --dm-gradient-spiritual: linear-gradient(135deg, var(--dm-brand-tertiary) 0%, var(--dm-brand-primary) 100%);
+  
+  /* Cosmos Gradient - Dark mode, hero backgrounds */
+  --dm-gradient-cosmos: linear-gradient(135deg, var(--dm-neutral-950) 0%, var(--dm-brand-tertiary-900) 50%, var(--dm-brand-primary-900) 100%);
+  
+  /* Sunrise Gradient - Light, hopeful contexts */
+  --dm-gradient-sunrise: linear-gradient(135deg, var(--dm-brand-secondary-100) 0%, var(--dm-brand-primary-100) 50%, var(--dm-brand-tertiary-100) 100%);
+  
+  /* Premium Gradient - For enterprise/premium features */
+  --dm-gradient-premium: linear-gradient(135deg, var(--dm-brand-secondary) 0%, var(--dm-brand-tertiary) 100%);
+
+  /* Mesh Gradients - For modern backgrounds */
+  --dm-gradient-mesh-light: 
+    radial-gradient(at 40% 20%, rgba(var(--dm-brand-primary-rgb), 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(var(--dm-brand-secondary-rgb), 0.06) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(var(--dm-brand-tertiary-rgb), 0.04) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(var(--dm-brand-primary-rgb), 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(var(--dm-brand-secondary-rgb), 0.06) 0px, transparent 50%);
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 🔤 TYPOGRAPHY
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  /* Font Families */
+  --dm-font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --dm-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --dm-font-sanskrit: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+  --dm-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Font Sizes - Based on perfect fourth (1.333) scale */
+  --dm-text-xs: 0.75rem;    /* 12px */
+  --dm-text-sm: 0.875rem;   /* 14px */
+  --dm-text-base: 1rem;     /* 16px */
+  --dm-text-lg: 1.125rem;   /* 18px */
+  --dm-text-xl: 1.25rem;    /* 20px */
+  --dm-text-2xl: 1.5rem;    /* 24px */
+  --dm-text-3xl: 1.875rem;  /* 30px */
+  --dm-text-4xl: 2.25rem;   /* 36px */
+  --dm-text-5xl: 3rem;      /* 48px */
+  --dm-text-6xl: 3.75rem;   /* 60px */
+  --dm-text-7xl: 4.5rem;    /* 72px */
+  --dm-text-8xl: 6rem;      /* 96px */
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 📐 SPACING & SIZING
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  --dm-radius-sm: 0.375rem;  /* 6px */
+  --dm-radius-md: 0.5rem;    /* 8px */
+  --dm-radius-lg: 0.75rem;   /* 12px */
+  --dm-radius-xl: 1rem;      /* 16px */
+  --dm-radius-2xl: 1.5rem;   /* 24px */
+  --dm-radius-3xl: 2rem;     /* 32px */
+  --dm-radius-full: 9999px;
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * 🌫️ SHADOWS
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  --dm-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --dm-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --dm-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --dm-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --dm-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --dm-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Colored Shadows - for interactive elements */
+  --dm-shadow-brand: 0 4px 20px rgba(var(--dm-brand-primary-rgb), 0.25);
+  --dm-shadow-brand-lg: 0 10px 40px rgba(var(--dm-brand-primary-rgb), 0.3);
+  --dm-shadow-gold: 0 4px 20px rgba(var(--dm-brand-secondary-rgb), 0.25);
+  --dm-shadow-purple: 0 4px 20px rgba(var(--dm-brand-tertiary-rgb), 0.25);
+
+  /* ═══════════════════════════════════════════════════════════════════════
+   * ⏱️ TRANSITIONS
+   * ═══════════════════════════════════════════════════════════════════════ */
+
+  --dm-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --dm-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --dm-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --dm-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dm-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --dm-ease-breath: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dm-duration-instant: 75ms;
+  --dm-duration-fast: 150ms;
+  --dm-duration-normal: 300ms;
+  --dm-duration-slow: 500ms;
+  --dm-duration-slower: 700ms;
+  --dm-duration-breath: 4000ms;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 🎨 UNIVERSAL COMPONENT STYLES
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/* BUTTONS */
+.dm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: var(--dm-text-sm);
+  line-height: 1;
+  border-radius: var(--dm-radius-xl);
+  border: none;
+  cursor: pointer;
+  transition: all var(--dm-duration-normal) var(--dm-ease-default);
+  position: relative;
+  overflow: hidden;
+}
+
+.dm-btn-lg {
+  padding: 1rem 2rem;
+  font-size: var(--dm-text-base);
+  border-radius: var(--dm-radius-2xl);
+}
+
+.dm-btn-md {
+  padding: 0.75rem 1.5rem;
+}
+
+.dm-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: var(--dm-text-xs);
+}
+
+/* Primary Button */
+.dm-btn-primary {
+  background: var(--dm-gradient-brand);
+  color: white;
+  box-shadow: var(--dm-shadow-brand);
+}
+
+.dm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dm-shadow-brand-lg);
+}
+
+.dm-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button */
+.dm-btn-secondary {
+  background: var(--dm-gradient-gold);
+  color: var(--dm-neutral-900);
+  box-shadow: var(--dm-shadow-gold);
+}
+
+/* Ghost Button */
+.dm-btn-ghost {
+  background: transparent;
+  color: var(--dm-brand-primary);
+  border: 2px solid var(--dm-brand-primary);
+}
+
+.dm-btn-ghost:hover {
+  background: var(--dm-brand-primary-50);
+}
+
+/* Premium Button */
+.dm-btn-premium {
+  background: var(--dm-gradient-premium);
+  color: white;
+  box-shadow: var(--dm-shadow-purple);
+}
+
+/* Button Shimmer Effect */
+.dm-btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.dm-btn-shimmer:hover::before {
+  left: 100%;
+}
+
+/* CARDS */
+.dm-card {
+  background: white;
+  border-radius: var(--dm-radius-2xl);
+  border: 1px solid var(--dm-neutral-200);
+  box-shadow: var(--dm-shadow-sm);
+  transition: all var(--dm-duration-normal) var(--dm-ease-default);
+}
+
+.dm-card:hover {
+  border-color: var(--dm-brand-primary-200);
+  box-shadow: var(--dm-shadow-lg);
+  transform: translateY(-4px);
+}
+
+.dm-card-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dm-card-premium {
+  background: linear-gradient(white, white) padding-box,
+              var(--dm-gradient-premium) border-box;
+  border: 2px solid transparent;
+}
+
+/* BADGES */
+.dm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--dm-text-xs);
+  font-weight: 600;
+  border-radius: var(--dm-radius-full);
+}
+
+.dm-badge-primary {
+  background: var(--dm-brand-primary-100);
+  color: var(--dm-brand-primary-700);
+}
+
+.dm-badge-gold {
+  background: var(--dm-brand-secondary-100);
+  color: var(--dm-brand-secondary-700);
+}
+
+.dm-badge-purple {
+  background: var(--dm-brand-tertiary-100);
+  color: var(--dm-brand-tertiary-700);
+}
+
+/* INPUTS */
+.dm-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: var(--dm-text-base);
+  border: 2px solid var(--dm-neutral-200);
+  border-radius: var(--dm-radius-xl);
+  background: white;
+  transition: all var(--dm-duration-fast) var(--dm-ease-default);
+}
+
+.dm-input:focus {
+  outline: none;
+  border-color: var(--dm-brand-primary);
+  box-shadow: 0 0 0 4px var(--dm-brand-primary-100);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 🎭 ANIMATIONS
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Breathing Animation */
+@keyframes dm-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Float Animation */
+@keyframes dm-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Pulse Glow */
+@keyframes dm-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--dm-brand-primary-rgb), 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(var(--dm-brand-primary-rgb), 0); }
+}
+
+/* Shimmer */
+@keyframes dm-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Fade In Up */
+@keyframes dm-fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scale In */
+@keyframes dm-scale-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Animation Classes */
+.dm-animate-breathe { animation: dm-breathe var(--dm-duration-breath) var(--dm-ease-breath) infinite; }
+.dm-animate-float { animation: dm-float 3s var(--dm-ease-default) infinite; }
+.dm-animate-pulse-glow { animation: dm-pulse-glow 2s var(--dm-ease-default) infinite; }
+.dm-animate-fade-in-up { animation: dm-fade-in-up 0.5s var(--dm-ease-out) forwards; }
+.dm-animate-scale-in { animation: dm-scale-in 0.3s var(--dm-ease-out) forwards; }
+
+/* Stagger Delays */
+.dm-stagger-1 { animation-delay: 0.1s; }
+.dm-stagger-2 { animation-delay: 0.2s; }
+.dm-stagger-3 { animation-delay: 0.3s; }
+.dm-stagger-4 { animation-delay: 0.4s; }
+.dm-stagger-5 { animation-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 🌓 DARK MODE
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dm-neutral-50: #1c1917;
+    --dm-neutral-100: #292524;
+    --dm-neutral-200: #44403c;
+    --dm-neutral-800: #e7e5e4;
+    --dm-neutral-900: #fafaf9;
+  }
+  
+  .dm-card {
+    background: var(--dm-neutral-900);
+    border-color: var(--dm-neutral-700);
+  }
+  
+  .dm-input {
+    background: var(--dm-neutral-800);
+    border-color: var(--dm-neutral-700);
+    color: var(--dm-neutral-100);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * 📱 RESPONSIVE
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  :root {
+    --dm-text-5xl: 2.25rem;
+    --dm-text-6xl: 2.75rem;
+    --dm-text-7xl: 3.5rem;
+  }
+  
+  .dm-btn-lg {
+    padding: 0.875rem 1.5rem;
+    font-size: var(--dm-text-sm);
+  }
+}
+
