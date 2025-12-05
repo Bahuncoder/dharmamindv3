@@ -1,0 +1,353 @@
+/**
+ * ===================================
+ * DHARMAMIND UNIFIED DESIGN SYSTEM
+ * ===================================
+ * 
+ * 🎨 SINGLE SOURCE OF TRUTH FOR ALL FRONTENDS
+ * 
+ * Used by:
+ * - dharmamind-chat (Main Chat App)
+ * - Brand_Webpage (Marketing Website)
+ * - DhramaMind_Community (Community Platform)
+ * 
+ * Color Philosophy:
+ * - Emerald green (#10b981): Borders, accents, highlights
+ * - Light grays: Backgrounds, cards
+ * - Dark charcoal: Text
+ * - White/off-white: Primary backgrounds
+ */
+
+:root {
+  /* ===================================
+   * 🎯 MASTER BRAND COLORS
+   * ===================================
+   */
+
+  /* Primary: Light Gray System */
+  --dm-primary: #f3f4f6;
+  --dm-primary-hover: #e5e7eb;
+  --dm-primary-light: #f9fafb;
+  --dm-primary-dark: #d1d5db;
+
+  /* Accent: Emerald (borders and highlights only) */
+  --dm-accent: #10b981;
+  --dm-accent-hover: #059669;
+  --dm-accent-light: #d1fae5;
+  --dm-accent-dark: #047857;
+
+  /* Text Colors */
+  --dm-text: #1f2937;
+  --dm-text-secondary: #4b5563;
+  --dm-text-muted: #6b7280;
+  --dm-text-inverse: #ffffff;
+
+  /* Backgrounds */
+  --dm-bg-white: #ffffff;
+  --dm-bg-light: #f9fafb;
+  --dm-bg-medium: #f3f4f6;
+  --dm-bg-dark: #1f2937;
+
+  /* Borders */
+  --dm-border-light: #e5e7eb;
+  --dm-border-medium: #d1d5db;
+  --dm-border-accent: #10b981;
+
+  /* Brand Gradient */
+  --dm-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --dm-gradient-light: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+
+  /* Shadows */
+  --dm-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --dm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --dm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --dm-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --dm-shadow-accent: 0 4px 16px rgba(16, 185, 129, 0.25);
+  --dm-shadow-glow: 0 0 30px rgba(16, 185, 129, 0.15);
+
+  /* Transitions */
+  --dm-transition-fast: 0.15s ease-in-out;
+  --dm-transition: 0.2s ease-in-out;
+  --dm-transition-slow: 0.3s ease-in-out;
+
+  /* Border Radius */
+  --dm-radius-sm: 0.375rem;
+  --dm-radius: 0.5rem;
+  --dm-radius-lg: 0.75rem;
+  --dm-radius-xl: 1rem;
+  --dm-radius-2xl: 1.5rem;
+  --dm-radius-full: 9999px;
+
+  /* Glassmorphism */
+  --dm-glass: rgba(255, 255, 255, 0.8);
+  --dm-glass-strong: rgba(255, 255, 255, 0.95);
+  --dm-glass-blur: blur(20px);
+}
+
+/* ===================================
+ * 🎨 UNIFIED BUTTON SYSTEM
+ * =================================== */
+
+.dm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--dm-radius-lg);
+  transition: all var(--dm-transition);
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.dm-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+/* Primary Button: Light gray bg + emerald border */
+.dm-btn-primary {
+  background: var(--dm-primary);
+  color: var(--dm-text);
+  border-color: var(--dm-accent);
+}
+
+.dm-btn-primary:hover {
+  background: var(--dm-primary-hover);
+  border-color: var(--dm-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--dm-shadow-accent);
+}
+
+/* Accent Button: Emerald bg */
+.dm-btn-accent {
+  background: var(--dm-accent);
+  color: var(--dm-text-inverse);
+  border-color: var(--dm-accent);
+}
+
+.dm-btn-accent:hover {
+  background: var(--dm-accent-hover);
+  border-color: var(--dm-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--dm-shadow-accent);
+}
+
+/* Gradient Button */
+.dm-btn-gradient {
+  background: var(--dm-gradient);
+  color: var(--dm-text-inverse);
+  border-color: transparent;
+}
+
+.dm-btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dm-shadow-accent);
+}
+
+/* Outline Button */
+.dm-btn-outline {
+  background: transparent;
+  color: var(--dm-accent);
+  border-color: var(--dm-accent);
+}
+
+.dm-btn-outline:hover {
+  background: var(--dm-accent-light);
+  transform: translateY(-2px);
+}
+
+/* Ghost Button */
+.dm-btn-ghost {
+  background: transparent;
+  color: var(--dm-text);
+  border-color: var(--dm-border-medium);
+}
+
+.dm-btn-ghost:hover {
+  background: var(--dm-bg-light);
+  border-color: var(--dm-accent);
+}
+
+/* Button Sizes */
+.dm-btn-sm { padding: 0.5rem 1rem; font-size: 0.75rem; }
+.dm-btn-lg { padding: 1rem 2rem; font-size: 1rem; }
+.dm-btn-xl { padding: 1.25rem 2.5rem; font-size: 1.125rem; }
+
+/* ===================================
+ * 🎨 CARD SYSTEM
+ * =================================== */
+
+.dm-card {
+  background: var(--dm-bg-white);
+  border: 1px solid var(--dm-border-light);
+  border-radius: var(--dm-radius-xl);
+  padding: 1.5rem;
+  box-shadow: var(--dm-shadow-sm);
+  transition: all var(--dm-transition);
+}
+
+.dm-card:hover {
+  border-color: var(--dm-border-accent);
+  box-shadow: var(--dm-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.dm-card-glass {
+  background: var(--dm-glass);
+  backdrop-filter: var(--dm-glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--dm-radius-2xl);
+  padding: 2rem;
+  box-shadow: var(--dm-shadow-lg);
+}
+
+.dm-card-featured {
+  background: var(--dm-bg-white);
+  border: 2px solid var(--dm-accent);
+  border-radius: var(--dm-radius-2xl);
+  padding: 2rem;
+  box-shadow: var(--dm-shadow-accent);
+}
+
+.dm-card-elevated {
+  background: var(--dm-bg-white);
+  border: 1px solid var(--dm-border-light);
+  border-radius: var(--dm-radius-xl);
+  padding: 2rem;
+  box-shadow: var(--dm-shadow-md);
+  transition: all var(--dm-transition);
+}
+
+.dm-card-elevated:hover {
+  box-shadow: var(--dm-shadow-xl);
+  transform: translateY(-4px);
+}
+
+/* ===================================
+ * 🎨 SECTION BACKGROUNDS
+ * =================================== */
+
+.dm-section-white { background: var(--dm-bg-white); }
+.dm-section-light { background: var(--dm-bg-light); }
+.dm-section-gradient {
+  background: linear-gradient(135deg, var(--dm-bg-light) 0%, rgba(16, 185, 129, 0.05) 100%);
+}
+
+/* ===================================
+ * 🎨 TEXT UTILITIES
+ * =================================== */
+
+.dm-text-primary { color: var(--dm-text); }
+.dm-text-secondary { color: var(--dm-text-secondary); }
+.dm-text-muted { color: var(--dm-text-muted); }
+.dm-text-accent { color: var(--dm-accent); }
+.dm-text-inverse { color: var(--dm-text-inverse); }
+
+/* ===================================
+ * 🎨 GRADIENT UTILITIES
+ * =================================== */
+
+.dm-gradient-text {
+  background: var(--dm-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dm-gradient-bg { background: var(--dm-gradient); }
+.dm-gradient-bg-light { background: var(--dm-gradient-light); }
+
+/* ===================================
+ * 🎨 ICON CONTAINERS
+ * =================================== */
+
+.dm-icon-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--dm-radius-xl);
+  background: var(--dm-gradient-light);
+  font-size: 1.5rem;
+  transition: all var(--dm-transition);
+}
+
+.dm-icon-box:hover {
+  transform: scale(1.1);
+  box-shadow: var(--dm-shadow-accent);
+}
+
+.dm-icon-box-accent {
+  background: var(--dm-gradient);
+  color: var(--dm-text-inverse);
+}
+
+/* ===================================
+ * 🎨 BADGE SYSTEM
+ * =================================== */
+
+.dm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--dm-radius-full);
+  background: var(--dm-bg-light);
+  color: var(--dm-text);
+  border: 1px solid var(--dm-border-light);
+}
+
+.dm-badge-accent {
+  background: var(--dm-accent-light);
+  color: var(--dm-accent-dark);
+  border-color: var(--dm-accent);
+}
+
+/* ===================================
+ * 🎨 ANIMATIONS
+ * =================================== */
+
+@keyframes dm-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dm-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dm-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dm-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes dm-pulse-glow {
+  0%, 100% { box-shadow: var(--dm-shadow-accent); }
+  50% { box-shadow: var(--dm-shadow-glow); }
+}
+
+.dm-animate-fade-in { animation: dm-fade-in 0.5s ease-out; }
+.dm-animate-slide-up { animation: dm-slide-up 0.5s ease-out; }
+.dm-animate-scale-in { animation: dm-scale-in 0.3s ease-out; }
+.dm-animate-float { animation: dm-float 3s ease-in-out infinite; }
+.dm-animate-pulse-glow { animation: dm-pulse-glow 2s ease-in-out infinite; }
+
+/* Staggered animations */
+.dm-stagger-1 { animation-delay: 0.1s; }
+.dm-stagger-2 { animation-delay: 0.2s; }
+.dm-stagger-3 { animation-delay: 0.3s; }
+.dm-stagger-4 { animation-delay: 0.4s; }
+.dm-stagger-5 { animation-delay: 0.5s; }
+
