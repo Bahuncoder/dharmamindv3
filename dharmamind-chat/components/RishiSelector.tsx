@@ -1,6 +1,17 @@
-import React, { useState } from 'react';
-import { useColor } from '../contexts/ColorContext';
+/**
+ * 🕉️ Enhanced Sacred Rishi Selector
+ * ==================================
+ * 
+ * Immersive selection experience for the Nine Manas Putra (Mind-Born Rishis)
+ * Features sacred design, smooth animations, and spiritual theming
+ */
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { createPortal } from 'react-dom';
+import { useColor } from '../contexts/ColorContext';
+import { RishiAvatar, RISHI_SACRED_COLORS } from './RishiAvatar';
+import RishiCard, { RISHI_EXTENDED_DATA } from './RishiCard';
 
 interface Rishi {
   id: string;
@@ -22,6 +33,27 @@ interface RishiSelectorProps {
   availableRishis: Rishi[];
 }
 
+// Domain categories for filtering
+const DOMAIN_CATEGORIES = [
+  { id: 'all', label: 'All Guides', icon: '🕉️' },
+  { id: 'spiritual', label: 'Spiritual Growth', icon: '🧘' },
+  { id: 'wisdom', label: 'Wisdom & Knowledge', icon: '📚' },
+  { id: 'action', label: 'Action & Discipline', icon: '⚡' },
+  { id: 'healing', label: 'Healing & Compassion', icon: '💚' },
+];
+
+const RISHI_DOMAIN_MAP: Record<string, string[]> = {
+  atri: ['spiritual'],
+  bhrigu: ['wisdom', 'spiritual'],
+  vashishta: ['wisdom', 'action'],
+  vishwamitra: ['action', 'spiritual'],
+  gautama: ['healing', 'wisdom'],
+  jamadagni: ['action'],
+  kashyapa: ['healing', 'wisdom'],
+  angiras: ['spiritual', 'action'],
+  pulastya: ['wisdom', 'spiritual'],
+};
+
 export const RishiSelector: React.FC<RishiSelectorProps> = ({
   onRishiSelect,
   selectedRishi,
@@ -31,18 +63,31 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredRishi, setHoveredRishi] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const { currentTheme } = useColor();
   const colors = currentTheme.colors;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const selectedRishiData = availableRishis.find(r => r.id === selectedRishi);
   const isStandardMode = !selectedRishi || selectedRishi === '';
 
-  // Filter Rishis based on search
-  const filteredRishis = availableRishis.filter(rishi => 
-    rishi.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    rishi.specialization.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  // Filter Rishis based on search and category
+  const filteredRishis = availableRishis.filter(rishi => {
+    const matchesSearch = 
+      rishi.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      rishi.specialization.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = 
+      activeCategory === 'all' ||
+      RISHI_DOMAIN_MAP[rishi.id]?.includes(activeCategory);
+    
+    return matchesSearch && matchesCategory;
+  });
 
   const canAccessRishi = (rishi: Rishi) => {
     if (isDemo) return true;
@@ -50,274 +95,367 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
     return userSubscription !== 'basic';
   };
 
-  // Get icon SVG for each Rishi based on their personality
-  const getRishiIcon = (rishiId: string) => {
-    const iconMap: Record<string, JSX.Element> = {
-      marici: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ),
-      atri: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      angiras: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-        </svg>
-      ),
-      pulastya: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      pulaha: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-        </svg>
-      ),
-      kratu: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      daksha: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-        </svg>
-      ),
-      bhrigu: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-        </svg>
-      ),
-      vasishta: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-      ),
-    };
-    return iconMap[rishiId] || null;
+  const handleSelectRishi = (rishiId: string) => {
+    onRishiSelect(rishiId);
+    setIsExpanded(false);
+    setSearchQuery('');
+    setActiveCategory('all');
   };
 
+  // Mini selector in sidebar
   return (
     <React.Fragment>
       <div className="rishi-selector">
-        {/* Horizontal Mode Switcher */}
-        <div className="flex items-center gap-2 mb-3 px-1">
-          {/* Universal Guide */}
-          <button
-            onClick={() => !isStandardMode && onRishiSelect('')}
-            className={`flex-1 py-2 px-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 ${
-              isStandardMode ? 'bg-white shadow-sm' : 'hover:bg-gray-50'
-            }`}
-            style={{
-              border: isStandardMode ? `1px solid ${colors.borderSecondary}` : '1px solid transparent'
-            }}
-          >
-            <div className={`w-1.5 h-1.5 rounded-full ${isStandardMode ? 'bg-gray-400' : 'bg-gray-300'}`}></div>
-            <span className={`text-xs font-medium ${isStandardMode ? 'text-gray-900' : 'text-gray-500'}`}>
-              Universal
-            </span>
-          </button>
+        {/* Current Selection Display */}
+        <div className="mb-3 px-1">
+          <p className="text-[11px] uppercase tracking-wider text-gray-400 mb-2 font-medium">
+            Spiritual Guide
+          </p>
+          
+          {/* Mode Toggle */}
+          <div className="flex items-center gap-2">
+            {/* Universal Guide */}
+            <motion.button
+              onClick={() => !isStandardMode && onRishiSelect('')}
+              className={`flex-1 py-2.5 px-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${
+                isStandardMode 
+                  ? 'bg-gradient-to-r from-emerald-50 to-teal-50 shadow-sm border-2 border-emerald-200' 
+                  : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+              }`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className={`text-lg ${isStandardMode ? 'animate-pulse' : ''}`}>🕉️</span>
+              <span className={`text-xs font-semibold ${isStandardMode ? 'text-emerald-700' : 'text-gray-500'}`}>
+                Universal
+              </span>
+            </motion.button>
 
-          {/* Rishi Mode */}
-          <button
-            onClick={() => setIsExpanded(true)}
-            className={`flex-1 py-2 px-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 ${
-              !isStandardMode ? 'bg-white shadow-sm' : 'hover:bg-gray-50'
-            }`}
+            {/* Rishi Mode Button */}
+            <motion.button
+              onClick={() => setIsExpanded(true)}
+              className={`flex-1 py-2.5 px-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${
+                !isStandardMode 
+                  ? 'shadow-sm border-2' 
+                  : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+              }`}
+              style={{
+                background: !isStandardMode && selectedRishiData 
+                  ? `linear-gradient(135deg, ${RISHI_SACRED_COLORS[selectedRishi]?.primary}15 0%, ${RISHI_SACRED_COLORS[selectedRishi]?.secondary}10 100%)`
+                  : undefined,
+                borderColor: !isStandardMode && selectedRishiData
+                  ? RISHI_SACRED_COLORS[selectedRishi]?.primary
+                  : undefined
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {!isStandardMode && selectedRishiData ? (
+                <>
+                  <RishiAvatar rishiId={selectedRishi} size="sm" animated={true} showGlow={false} />
+                  <span 
+                    className="text-xs font-semibold truncate"
+                    style={{ color: RISHI_SACRED_COLORS[selectedRishi]?.primary }}
+                  >
+                    {selectedRishiData.name.split(' ')[1] || selectedRishiData.name}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-lg">🧘</span>
+                  <span className="text-xs font-semibold text-gray-500">
+                    Rishis
+                  </span>
+                </>
+              )}
+              
+              {/* Expand indicator */}
+              <motion.svg 
+                className="w-3 h-3 text-gray-400" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </motion.svg>
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Quick Access - Selected Rishi Info */}
+        {!isStandardMode && selectedRishiData && RISHI_EXTENDED_DATA[selectedRishi] && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-3 p-3 rounded-xl text-center"
             style={{
-              border: !isStandardMode ? `1px solid ${colors.borderPrimary}` : '1px solid transparent'
+              background: `linear-gradient(135deg, ${RISHI_SACRED_COLORS[selectedRishi]?.primary}10 0%, ${RISHI_SACRED_COLORS[selectedRishi]?.secondary}05 100%)`,
+              border: `1px solid ${RISHI_SACRED_COLORS[selectedRishi]?.primary}30`
             }}
           >
-            <div className={`w-1.5 h-1.5 rounded-full ${!isStandardMode ? 'bg-emerald-500' : 'bg-gray-300'}`}></div>
-            <span className={`text-xs font-medium ${!isStandardMode ? 'text-emerald-600' : 'text-gray-500'}`}>
-              {!isStandardMode && selectedRishiData ? selectedRishiData.name : 'Rishi'}
-            </span>
-          </button>
-        </div>
+            <p 
+              className="text-sm font-semibold mb-1"
+              style={{ color: RISHI_SACRED_COLORS[selectedRishi]?.primary }}
+            >
+              {RISHI_EXTENDED_DATA[selectedRishi].sacredMantra}
+            </p>
+            <p className="text-[10px] text-gray-500 italic">
+              "{RISHI_EXTENDED_DATA[selectedRishi].keyTeaching}"
+            </p>
+          </motion.div>
+        )}
       </div>
 
-      {/* Modal for Rishi Selection - Portaled to body for proper centering */}
-      {isExpanded && typeof window !== 'undefined' && createPortal(
-        <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
-          style={{ 
-            zIndex: 9999,
-            animation: 'fadeIn 0.15s ease-out'
-          }}
-          onClick={() => setIsExpanded(false)}
-        >
-          <div 
-            className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              animation: 'modalSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
+      {/* Full Selection Modal */}
+      {isExpanded && mounted && createPortal(
+        <AnimatePresence>
+          <motion.div 
+            className="fixed inset-0 flex items-center justify-center p-4"
+            style={{ zIndex: 9999 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            {/* Modal Header */}
-            <div className="px-6 py-4 border-b flex items-center justify-between" style={{ borderColor: colors.borderSecondary }}>
-              <div>
-                <h3 className="text-lg font-semibold" style={{ color: colors.textPrimary }}>
-                  Select Your Guide
-                </h3>
-                <p className="text-xs mt-0.5" style={{ color: colors.textSecondary }}>
-                  {availableRishis.length} spiritual guides available
-                </p>
-              </div>
-              <button
-                onClick={() => setIsExpanded(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 overflow-y-auto max-h-[calc(80vh-120px)]">
-              {/* Search Bar */}
-              <div className="relative mb-4">
-                <input
-                  type="text"
-                  placeholder="Search by name or expertise..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2.5 pl-10 rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                  style={{
-                    backgroundColor: colors.backgroundSecondary,
-                    border: `1px solid ${colors.borderSecondary}`,
-                    color: colors.textPrimary
-                  }}
-                />
-                <svg className="absolute left-3 top-3 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+            {/* Backdrop with sacred pattern */}
+            <motion.div 
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
+                backdropFilter: 'blur(12px)'
+              }}
+              onClick={() => setIsExpanded(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            
+            {/* Modal Container */}
+            <motion.div 
+              className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+              {/* Sacred Header */}
+              <div className="relative px-8 py-6 bg-gradient-to-r from-emerald-50 via-white to-purple-50 border-b border-gray-100">
+                {/* Decorative elements */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-amber-400 to-purple-400" />
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                      <span className="text-3xl">🕉️</span>
+                      <span>
+                        <span className="bg-gradient-to-r from-emerald-600 to-purple-600 bg-clip-text text-transparent">
+                          Nava Manas Putra
+                        </span>
+                        <span className="block text-sm font-normal text-gray-500 mt-0.5">
+                          The Nine Mind-Born Sages
+                        </span>
+                      </span>
+                    </h2>
+                  </div>
+                  
+                  <motion.button
+                    onClick={() => setIsExpanded(false)}
+                    className="p-2 rounded-xl hover:bg-gray-100 transition-colors"
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                  </button>
-                )}
-              </div>
-
-              {/* Results count */}
-              {searchQuery && (
-                <div className="text-xs px-2 mb-3" style={{ color: colors.textSecondary }}>
-                  Found {filteredRishis.length} of {availableRishis.length} Rishis
+                  </motion.button>
                 </div>
-              )}
+
+                {/* Search and Filter */}
+                <div className="mt-5 space-y-4">
+                  {/* Search Input */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search by name, expertise, or domain..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full px-5 py-3 pl-12 rounded-2xl text-sm bg-white border-2 border-gray-100 focus:border-emerald-300 focus:ring-4 focus:ring-emerald-100 transition-all duration-300 outline-none"
+                    />
+                    <svg 
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    {searchQuery && (
+                      <motion.button
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-100"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </motion.button>
+                    )}
+                  </div>
+
+                  {/* Category Filters */}
+                  <div className="flex flex-wrap gap-2">
+                    {DOMAIN_CATEGORIES.map((category) => (
+                      <motion.button
+                        key={category.id}
+                        onClick={() => setActiveCategory(category.id)}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                          activeCategory === category.id
+                            ? 'bg-emerald-100 text-emerald-700 shadow-sm'
+                            : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                        }`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span className="mr-1.5">{category.icon}</span>
+                        {category.label}
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
               {/* Rishi Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {filteredRishis.map((rishi) => (
-                  <button
-                    key={rishi.id}
-                    className={`relative rounded-lg p-3 text-left transition-all duration-150 group ${
-                      selectedRishi === rishi.id 
-                        ? 'ring-2 ring-emerald-500 bg-emerald-50' 
-                        : canAccessRishi(rishi) 
-                          ? 'hover:bg-gray-50 border border-gray-200' 
-                          : 'opacity-60 cursor-not-allowed border border-gray-200'
+              <div className="p-6 overflow-y-auto max-h-[calc(85vh-250px)]">
+                {/* Universal Guide Option */}
+                <motion.div 
+                  className="mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <p className="text-xs uppercase tracking-wider text-gray-400 mb-3 px-1 font-medium">
+                    Universal Guidance
+                  </p>
+                  <motion.button
+                    onClick={() => handleSelectRishi('')}
+                    className={`w-full p-5 rounded-2xl text-left transition-all duration-300 border-2 ${
+                      isStandardMode
+                        ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-300 shadow-lg'
+                        : 'bg-gray-50 border-transparent hover:bg-gray-100 hover:border-gray-200'
                     }`}
-                    onClick={() => {
-                      if (canAccessRishi(rishi)) {
-                        onRishiSelect(rishi.id);
-                        setIsExpanded(false);
-                        setSearchQuery('');
-                      }
-                    }}
-                    onMouseEnter={() => setHoveredRishi(rishi.id)}
-                    onMouseLeave={() => setHoveredRishi(null)}
-                    disabled={!canAccessRishi(rishi)}
+                    whileHover={{ scale: 1.01, y: -2 }}
+                    whileTap={{ scale: 0.99 }}
                   >
-                    <div className="flex items-start space-x-3">
-                      {/* Rishi Icon */}
-                      <div 
-                        className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${
-                          selectedRishi === rishi.id 
-                            ? 'bg-emerald-100 text-emerald-600' 
-                            : 'bg-gray-100 text-gray-600'
-                        }`}
-                      >
-                        {getRishiIcon(rishi.id)}
+                    <div className="flex items-center gap-4">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl ${
+                        isStandardMode 
+                          ? 'bg-gradient-to-br from-emerald-400 to-teal-500 shadow-lg'
+                          : 'bg-gray-200'
+                      }`}>
+                        🕉️
                       </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-semibold text-sm truncate" style={{ color: colors.textPrimary }}>
-                            {rishi.name}
-                          </span>
-                          {selectedRishi === rishi.id && (
-                            <svg className="w-4 h-4 text-emerald-500 flex-shrink-0 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                            </svg>
-                          )}
-                          {rishi.requires_upgrade && userSubscription === 'basic' && !isDemo && (
-                            <span className="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 font-semibold flex-shrink-0 ml-2">
-                              PRO
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-xs mb-1.5" style={{ color: colors.textSecondary }}>
-                          {rishi.sanskrit}
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          {rishi.specialization.slice(0, 2).map((spec, idx) => (
-                            <span key={idx} className="text-xs px-1.5 py-0.5 rounded" style={{
-                              backgroundColor: colors.background,
-                              color: colors.textSecondary
-                            }}>
-                              {spec}
-                            </span>
-                          ))}
-                        </div>
-                        {!canAccessRishi(rishi) && (
-                          <div className="text-xs mt-2 flex items-center space-x-1 text-amber-600">
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/>
-                            </svg>
-                            <span>Upgrade required</span>
-                          </div>
-                        )}
+                      <div className="flex-1">
+                        <h3 className={`text-lg font-bold ${isStandardMode ? 'text-emerald-700' : 'text-gray-700'}`}>
+                          Universal Guide
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1">
+                          Balanced wisdom from all dharmic traditions • General spiritual guidance
+                        </p>
                       </div>
+                      {isStandardMode && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center"
+                        >
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </motion.div>
+                      )}
                     </div>
-                  </button>
-                ))}
+                  </motion.button>
+                </motion.div>
+
+                {/* Rishis */}
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-gray-400 mb-3 px-1 font-medium">
+                    Sacred Rishis ({filteredRishis.length})
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <AnimatePresence mode="popLayout">
+                      {filteredRishis.map((rishi, index) => (
+                        <motion.div
+                          key={rishi.id}
+                          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          transition={{ delay: index * 0.05 }}
+                          layout
+                        >
+                          <RishiCard
+                            rishi={rishi}
+                            isSelected={selectedRishi === rishi.id}
+                            isLocked={!canAccessRishi(rishi)}
+                            onSelect={() => handleSelectRishi(rishi.id)}
+                            size="full"
+                            showDetails={true}
+                          />
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Empty State */}
+                  {filteredRishis.length === 0 && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="text-center py-12"
+                    >
+                      <span className="text-6xl mb-4 block">🔍</span>
+                      <p className="text-gray-500 text-lg">No Rishis found matching your search</p>
+                      <button
+                        onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+                        className="mt-3 text-emerald-600 font-medium hover:text-emerald-700 transition-colors"
+                      >
+                        Clear filters
+                      </button>
+                    </motion.div>
+                  )}
+                </div>
               </div>
 
-              {/* Empty State */}
-              {filteredRishis.length === 0 && (
-                <div className="text-center py-8">
-                  <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-sm font-medium" style={{ color: colors.textSecondary }}>
-                    No Rishis found matching "{searchQuery}"
-                  </p>
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="mt-2 text-xs font-medium"
-                    style={{ color: colors.borderPrimary }}
-                  >
-                    Clear search
-                  </button>
+              {/* Footer Info */}
+              {userSubscription === 'basic' && !isDemo && (
+                <div className="px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50 border-t border-amber-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">✨</span>
+                      <div>
+                        <p className="text-sm font-semibold text-amber-800">Unlock All Rishis</p>
+                        <p className="text-xs text-amber-600">Upgrade to access all 9 spiritual guides</p>
+                      </div>
+                    </div>
+                    <motion.button
+                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm shadow-lg"
+                      whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(245, 158, 11, 0.3)' }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Upgrade Now
+                    </motion.button>
+                  </div>
                 </div>
               )}
-            </div>
-          </div>
-        </div>,
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>,
         document.body
       )}
     </React.Fragment>
   );
 };
+
+export default RishiSelector;
