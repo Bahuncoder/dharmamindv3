@@ -8,7 +8,11 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSubscription } from '../hooks/useSubscription';
+<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
+=======
+import { useColors } from '../contexts/ColorContext';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import Logo from './Logo';
 
 // ===============================
@@ -42,7 +46,11 @@ export const UpgradePrompt: React.FC<UpgradePromptProps> = ({
     formatPrice
   } = useSubscription();
 
+<<<<<<< HEAD
   const { currentTheme } = useColor();
+=======
+  const { currentTheme } = useColors();
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   // Don't show if not on free plan
   if (!isFreePlan()) return null;
@@ -219,7 +227,11 @@ export const MiniUpgradeBanner: React.FC<MiniUpgradeBannerProps> = ({
   className = ''
 }) => {
   const { usage, isFreePlan, checkFeatureUsage, formatPrice } = useSubscription();
+<<<<<<< HEAD
   const { currentTheme } = useColor();
+=======
+  const { currentTheme } = useColors();
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   if (!isFreePlan() || !usage) return null;
 
@@ -307,7 +319,11 @@ export const UsageProgress: React.FC<UsageProgressProps> = ({
   className = ''
 }) => {
   const { checkFeatureUsage, isFreePlan } = useSubscription();
+<<<<<<< HEAD
   const { currentTheme } = useColor();
+=======
+  const { currentTheme } = useColors();
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   
   if (!isFreePlan()) return null;
   

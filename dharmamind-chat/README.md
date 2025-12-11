@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🧘 DharmaMind Chat - Enterprise Security Edition
 
 **🔐 MFA-Protected | 🧠 AI-Powered Spiritual Guidance | 📱 Progressive Web App**
@@ -46,6 +47,37 @@ A cutting-edge spiritual AI chat application with enterprise-grade security, fea
 - **MFA Setup**: Guided wizard with QR code and backup code generation
 - **Device Trust**: 30-day trusted device tokens for convenience
 - **Session Management**: Automatic logout and re-authentication prompts
+=======
+# DharmaMind Beta - Pure Chat App
+
+A streamlined beta AI wisdom chat application - no onboarding friction, direct to chat experience.
+
+## Beta Features
+
+- **Direct-to-Chat**: Click demo link and start chatting immediately  
+- **Zero Friction**: No setup, no onboarding, no barriers
+- **Pure Chat Interface**: Focused AI wisdom conversations
+- **Smart Routing**: Intelligent routing based on user status
+- **Demo Mode**: Instant access without registration
+
+## Beta Navigation Flow
+
+- **/** → **Landing Page** (main entry point)
+- **/?demo=true** → **Demo Chat** (instant access)
+- **/landing** → Main marketing/entry page with demo and sign up options
+- **/chat** → Main chat interface  
+- **Logo Click** → Returns to `/landing`
+- **Back to Home** → Returns to `/landing`
+
+## Beta Architecture
+
+This is a **pure chat application** with landing page as entry point:
+
+1. **Demo Link**: `/?demo=true` → `/chat?demo=true` (instant access)
+2. **Home/Logo**: All navigation goes to `/landing` (main entry point)
+3. **Landing Page**: Shows demo and sign up options
+4. **Beta Focus**: Landing page → Demo/Auth → Chat experience
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 ## Demo Link for Beta
 

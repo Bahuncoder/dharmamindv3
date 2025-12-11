@@ -8,7 +8,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSubscription } from '../hooks/useSubscription';
+<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
+=======
+import { useColors } from '../contexts/ColorContext';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { UpgradePrompt, UsageProgress } from './UpgradePrompt';
 import CentralizedSubscriptionModal from './CentralizedSubscriptionModal';
 import Logo from './Logo';
@@ -51,7 +55,11 @@ export const SubscriptionDashboard: React.FC = () => {
     isLoading
   } = useSubscription();
 
+<<<<<<< HEAD
   const { currentTheme } = useColor();
+=======
+  const { currentTheme } = useColors();
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [insights, setInsights] = useState<UsageInsight[]>([]);

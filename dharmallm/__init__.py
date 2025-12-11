@@ -18,6 +18,7 @@ __author__ = "DharmaMind Team"
 __email__ = "team@dharmamind.ai"
 __description__ = "AI with Soul powered by Dharma"
 
+<<<<<<< HEAD
 """
 🕉️ DharmaLLM Enhanced Package - Complete AI Training & Deployment System
 
@@ -173,6 +174,55 @@ except ImportError as e:
         pass
     class PerformanceMonitor:
         pass
+=======
+# Import core components
+from .config.advanced_config import (
+    DharmaLLMAdvancedConfig,
+    DharmaLLMConfigFactory,
+    ModelArchitecture,
+    TrainingStage,
+    WisdomTradition,
+    DharmicPrinciple,
+    EvaluationMetric,
+    OptimizationObjective
+)
+
+from .training.enterprise_trainer import (
+    DharmaLLMTrainingEngine,
+    DharmicLossFunction,
+    WisdomValidator,
+    CulturalAdapter
+)
+
+from .evaluate.advanced_evaluator import (
+    DharmaLLMAdvancedEvaluator,
+    EvaluationResult,
+    DharmicScore,
+    WisdomAssessment,
+    CulturalSensitivityScore,
+    CompassionMetrics,
+    SafetyAssessment
+)
+
+from .data.advanced_preprocessor import (
+    DharmaLLMDataProcessor,
+    DataQualityMetrics,
+    ProcessedDataSample,
+    TextCleaner,
+    DharmicContentAnalyzer,
+    CulturalSensitivityAnalyzer
+)
+
+from .models.model_manager import (
+    ModelRegistry,
+    ModelMetadata,
+    DharmaLLMServingEngine,
+    ModelDeploymentManager,
+    QualityGateSystem,
+    GenerationRequest,
+    GenerationResponse
+)
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 # Version and metadata
 __version__ = "2.0.0"
@@ -198,6 +248,7 @@ DHARMIC_PRINCIPLES = [
 
 WISDOM_TRADITIONS = [
     WisdomTradition.VEDANTIC,
+<<<<<<< HEAD
     WisdomTradition.HINDU,
     WisdomTradition.TANTRIC,
     WisdomTradition.AYURVEDIC
@@ -280,6 +331,47 @@ def quick_start(config_type="development"):
             "status": "fallback_mode",
             "mode": config_type
         }
+=======
+    WisdomTradition.BUDDHIST,
+    WisdomTradition.HINDU,
+    WisdomTradition.UNIVERSAL
+]
+
+# Convenience functions
+def create_config(config_type="development", **kwargs):
+    """Create DharmaLLM configuration"""
+    return DharmaLLMConfigFactory.create_config(config_type, **kwargs)
+
+def create_trainer(config):
+    """Create training engine"""
+    return DharmaLLMTrainingEngine(config)
+
+def create_evaluator(config):
+    """Create evaluation engine"""
+    return DharmaLLMAdvancedEvaluator(config)
+
+def create_data_processor(config):
+    """Create data processing pipeline"""
+    return DharmaLLMDataProcessor(config)
+
+def create_model_manager(config):
+    """Create model management system"""
+    registry = ModelRegistry("models/registry")
+    return ModelDeploymentManager(config, registry)
+
+# Quick start function
+def quick_start(config_type="development"):
+    """Quick start DharmaLLM system"""
+    config = create_config(config_type)
+    
+    return {
+        "config": config,
+        "trainer": create_trainer(config),
+        "evaluator": create_evaluator(config),
+        "data_processor": create_data_processor(config),
+        "model_manager": create_model_manager(config)
+    }
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 __all__ = [
     # Configuration

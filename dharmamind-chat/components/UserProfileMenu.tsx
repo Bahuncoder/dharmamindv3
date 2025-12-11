@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SparklesIcon } from '@heroicons/react/24/outline';
+<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
+=======
+import { useColors } from '../contexts/ColorContext';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { useRouter } from 'next/router';
@@ -16,7 +20,11 @@ interface UserProfileMenuProps {
 }
 
 const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, user: propUser, isDemo = false, onLogout: customLogout }) => {
+<<<<<<< HEAD
   const { currentTheme } = useColor();
+=======
+  const { currentTheme } = useColors();
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const { user: authUser, isAuthenticated, logout } = useAuth();
   const { upgradePlan } = useSubscription();
   const router = useRouter();
@@ -106,8 +114,13 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
             onClick={handleUpgrade}
             className="w-full py-3 px-4 rounded-lg text-white font-semibold transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5 mb-3"
             style={{ 
+<<<<<<< HEAD
               background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
               boxShadow: '0 4px 14px 0 rgba(16, 185, 129, 0.3)'
+=======
+              background: 'linear-gradient(135deg, #f59e0b 0%, #10b981 100%)',
+              boxShadow: '0 4px 14px 0 rgba(245, 158, 11, 0.3)'
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             }}
           >
             <div className="flex items-center justify-center space-x-2">

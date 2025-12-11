@@ -40,7 +40,11 @@ const ColorManager: React.FC = () => {
   const resetToDefault = () => {
     changeTheme('dharma-default');
     setCustomColors({
+<<<<<<< HEAD
       primaryStart: '#10b981',
+=======
+      primaryStart: '#d97706',
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       primaryEnd: '#059669',
     });
   };
@@ -147,7 +151,11 @@ const ColorManager: React.FC = () => {
                 value={customColors.primaryStart}
                 onChange={(e) => handleCustomColorChange('primaryStart', e.target.value)}
                 className="flex-1 px-4 py-3 border-2 border-border-light rounded-xl text-sm bg-primary-bg text-primary font-bold focus:border-primary focus:ring-2 focus:ring-focus transition-all"
+<<<<<<< HEAD
                 placeholder="#10b981"
+=======
+                placeholder="#d97706"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               />
             </div>
           </div>

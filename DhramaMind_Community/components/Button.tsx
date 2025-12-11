@@ -2,7 +2,11 @@ import React from 'react';
 
 interface ButtonProps {
   children: React.ReactNode;
+<<<<<<< HEAD
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'enterprise' | 'contact' | 'gradient';
+=======
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'enterprise' | 'contact';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   onClick?: () => void;
   disabled?: boolean;
@@ -13,7 +17,10 @@ interface ButtonProps {
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
   ariaLabel?: string;
+<<<<<<< HEAD
   animate?: boolean;
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   iconPosition = 'left',
   fullWidth = false,
+<<<<<<< HEAD
   ariaLabel,
   animate = true
 }) => {
@@ -106,12 +114,39 @@ const Button: React.FC<ButtonProps> = ({
     lg: 'w-5 h-5',
     xl: 'w-6 h-6'
   };
+=======
+  ariaLabel
+}) => {
+  const baseClasses = `inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden ${fullWidth ? 'w-full' : ''}`;
+  
+  const variants = {
+    primary: 'btn-primary shadow-md hover:shadow-xl focus:ring-focus transform hover:scale-105 active:scale-95',
+    secondary: 'btn-secondary focus:ring-focus transform hover:scale-105 active:scale-95',
+    outline: 'btn-outline focus:ring-focus transform hover:scale-105 active:scale-95',
+    contact: 'btn-contact focus:ring-focus transform hover:scale-105 active:scale-95',
+    enterprise: 'btn-enterprise shadow-md hover:shadow-xl focus:ring-focus transform hover:scale-105 active:scale-95',
+    ghost: 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 focus:ring-focus transform hover:scale-105 active:scale-95',
+    danger: 'bg-error text-white hover:bg-red-700 focus:ring-red-500/50 shadow-md hover:shadow-xl transform hover:scale-105 active:scale-95'
+  };
+
+  const sizes = {
+    xs: 'px-2 py-1 text-xs',
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-sm',
+    lg: 'px-6 py-3 text-base',
+    xl: 'px-8 py-4 text-lg'
+  };
+
+  const variantClasses = variants[variant];
+  const sizeClasses = sizes[size];
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
+<<<<<<< HEAD
       className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
       aria-label={ariaLabel}
     >
@@ -156,6 +191,29 @@ const Button: React.FC<ButtonProps> = ({
         <span className={`${iconSizes[size]} flex items-center justify-center transition-transform group-hover:scale-110 group-hover:translate-x-0.5`}>
           {icon}
         </span>
+=======
+      className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`}
+      aria-label={ariaLabel}
+    >
+      {/* Shimmer effect overlay for enhanced visual appeal */}
+      <div className="absolute inset-0 -top-1 -left-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 hover:opacity-20 transform skew-x-12 transition-all duration-700"></div>
+      
+      {loading && (
+        <svg className="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      )}
+      
+      {icon && iconPosition === 'left' && !loading && (
+        <span className="mr-2 text-current">{icon}</span>
+      )}
+      
+      <span className="relative z-10">{children}</span>
+      
+      {icon && iconPosition === 'right' && !loading && (
+        <span className="ml-2 text-current">{icon}</span>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       )}
     </button>
   );

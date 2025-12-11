@@ -5,10 +5,17 @@
 .enhanced-messages-container {
   background: linear-gradient(
     135deg,
+<<<<<<< HEAD
     var(--color-background, #f8fafc) 0%,
     var(--color-background-secondary, #ffffff) 25%,
     var(--color-background, #f8fafc) 50%,
     var(--color-background-secondary, #ffffff) 100%
+=======
+    var(--color-bg-primary) 0%,           /* using your centralized primary background */
+    var(--color-success-light) 25%,       /* using your centralized success light */
+    var(--color-bg-secondary) 50%,        /* using your centralized secondary background */
+    var(--color-bg-primary) 100%          /* using your centralized primary background */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -23,10 +30,16 @@
   right: 0;
   bottom: 0;
   background: 
+<<<<<<< HEAD
     radial-gradient(circle at 20% 20%, var(--color-border-primary, #10b981) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, var(--color-border-primary, #10b981) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, var(--color-background, #f8fafc) 0%, transparent 50%);
   opacity: 0.05;
+=======
+    radial-gradient(circle at 20% 20%, var(--color-focus-ring) 0%, transparent 50%),   /* using your centralized focus ring */
+    radial-gradient(circle at 80% 80%, var(--color-focus-ring) 0%, transparent 50%),  /* using your centralized focus ring */
+    radial-gradient(circle at 50% 50%, var(--color-bg-primary) 0%, transparent 50%);  /* using your centralized primary background */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   pointer-events: none;
   z-index: 1;
 }
@@ -36,14 +49,22 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(40px);
+<<<<<<< HEAD
   opacity: 0.08;
+=======
+  opacity: 0.15;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   animation: float 6s ease-in-out infinite;
 }
 
 .floating-orb-1 {
   width: 120px;
   height: 120px;
+<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-background, #f8fafc) 0%, var(--color-background-secondary, #ffffff) 100%);
+=======
+  background: linear-gradient(135deg, var(--color-focus-ring) 0%, var(--color-success-light) 100%);  /* using your centralized colors */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   top: 10%;
   left: 10%;
   animation-delay: 0s;
@@ -52,7 +73,11 @@
 .floating-orb-2 {
   width: 80px;
   height: 80px;
+<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-background-secondary, #ffffff) 0%, var(--color-background, #f8fafc) 100%);
+=======
+  background: linear-gradient(135deg, var(--color-focus-ring) 0%, var(--color-bg-primary) 100%);  /* using your centralized colors */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   top: 60%;
   right: 15%;
   animation-delay: 2s;
@@ -61,7 +86,11 @@
 .floating-orb-3 {
   width: 100px;
   height: 100px;
+<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-background, #f8fafc) 0%, var(--color-background-secondary, #ffffff) 100%);
+=======
+  background: linear-gradient(135deg, var(--color-focus-ring) 0%, var(--color-bg-primary) 100%);  /* using your centralized colors */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   bottom: 20%;
   left: 20%;
   animation-delay: 4s;
@@ -90,10 +119,17 @@
   right: 0;
   bottom: 0;
   background-image: 
+<<<<<<< HEAD
     radial-gradient(circle at 25% 25%, var(--color-border-primary, #10b981) 2px, transparent 2px),
     radial-gradient(circle at 75% 75%, var(--color-border-primary, #10b981) 2px, transparent 2px);
   background-size: 60px 60px;
   opacity: 0.03;
+=======
+    radial-gradient(circle at 25% 25%, var(--color-focus-ring) 2px, transparent 2px),  /* using your centralized focus ring */
+    radial-gradient(circle at 75% 75%, var(--color-focus-ring) 2px, transparent 2px);  /* using your centralized focus ring */
+  background-size: 60px 60px;
+  opacity: 0.1;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Modern Glass Morphism Effects */
@@ -115,7 +151,11 @@
 
 /* Enhanced Input Area - Using centralized colors */
 .enhanced-input-area {
+<<<<<<< HEAD
   background: var(--color-background, #f8fafc);
+=======
+  background: var(--color-bg-primary);           /* using your centralized primary background */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--color-border-light);   /* using your centralized light border */
@@ -131,8 +171,13 @@
   bottom: 0;
   background: linear-gradient(
     135deg,
+<<<<<<< HEAD
     var(--color-background, #f8fafc) 0%,      /* using centralized background */
     var(--color-background-secondary, #ffffff) 100%     /* using centralized secondary background */
+=======
+    var(--color-focus-ring) 0%,      /* using your centralized focus ring */
+    var(--color-focus-ring) 100%     /* using your centralized focus ring */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   );
   pointer-events: none;
 }
@@ -170,6 +215,7 @@
   box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<< HEAD
 /* User Message Styling - Using centralized colors */
 .message-user-enhanced {
   background: var(--color-background, #f1f5f9);
@@ -179,6 +225,16 @@
   max-width: 75%;
   border: 2px solid var(--color-border-primary, #10b981);
   box-shadow: 0 2px 8px var(--color-shadow-light, rgba(0, 0, 0, 0.1));
+=======
+/* User Message Styling - Soft, gentle colors */
+.message-user-enhanced {
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.8) 0%, rgba(251, 191, 36, 0.7) 100%);  /* soft emerald to soft saffron */
+  color: white;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 75%;
+  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.1);  /* very soft emerald shadow */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .message-user-enhanced::before {
@@ -189,11 +245,16 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
+<<<<<<< HEAD
   border-left: 12px solid var(--color-background, #f1f5f9);
+=======
+  border-left: 12px solid rgba(251, 191, 36, 0.7);  /* soft saffron tail */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
 
+<<<<<<< HEAD
 /* AI Message Styling - Using centralized colors */
 .message-ai-enhanced {
   background: var(--color-background-secondary, #ffffff);
@@ -202,6 +263,16 @@
   margin-right: auto;
   max-width: 80%;
   border: 1px solid var(--color-border-primary, #10b981);
+=======
+/* AI Message Styling */
+.message-ai-enhanced {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 80%;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.08);
   position: relative;
 }
@@ -214,7 +285,11 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
+<<<<<<< HEAD
   border-right: 12px solid var(--color-background-secondary, #ffffff);
+=======
+  border-right: 12px solid rgba(255, 255, 255, 0.9);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -234,6 +309,7 @@
 }
 
 .avatar-user {
+<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-background, #f1f5f9) 0%, var(--color-border-primary, #10b981) 100%);
   color: var(--color-text-primary, #1f2937);
 }
@@ -241,6 +317,15 @@
 .avatar-ai {
   background: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-background-secondary, #ffffff) 100%);
   color: var(--color-text-primary, #1f2937);
+=======
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.9) 0%, rgba(251, 191, 36, 0.8) 100%);  /* soft emerald to soft saffron */
+  color: white;
+}
+
+.avatar-ai {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.8) 0%, rgba(52, 211, 153, 0.9) 100%);  /* soft saffron to soft emerald */
+  color: white;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .enhanced-avatar::after {
@@ -250,7 +335,11 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
+<<<<<<< HEAD
   background: linear-gradient(45deg, var(--color-border-primary, #10b981), var(--color-background, #f1f5f9), var(--color-background-secondary, #ffffff), var(--color-border-primary, #10b981));
+=======
+  background: linear-gradient(45deg, rgba(52, 211, 153, 0.3), rgba(251, 191, 36, 0.3), rgba(255, 255, 255, 0.2), rgba(52, 211, 153, 0.3));  /* very soft cycle */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-radius: 50%;
   z-index: -1;
   opacity: 0;
@@ -263,29 +352,50 @@
 
 /* Enhanced Input Area */
 .enhanced-input-container {
+<<<<<<< HEAD
   background: var(--color-background, #f8fafc);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--color-border-primary, #10b981);
+=======
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   padding: 20px;
   border-radius: 0 0 24px 24px;
 }
 
 .enhanced-input-field {
+<<<<<<< HEAD
   background: var(--color-background-secondary, #ffffff);
   border: 2px solid var(--color-border-primary, #10b981);
   border-radius: 20px;
   padding: 16px 20px;
   font-size: 16px;
   color: var(--color-text-primary, #1f2937);
+=======
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(148, 163, 184, 0.2);
+  border-radius: 20px;
+  padding: 16px 20px;
+  font-size: 16px;
+  color: #1f2937;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .enhanced-input-field:focus {
   outline: none;
+<<<<<<< HEAD
   border-color: var(--color-border-primary, #10b981);
   box-shadow: 0 0 0 3px var(--color-shadow-light, rgba(0, 0, 0, 0.1));
   background: var(--color-background-secondary, #ffffff);
+=======
+  border-color: rgba(52, 211, 153, 0.4);  /* soft emerald focus */
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.05);  /* very soft emerald focus ring */
+  background: rgba(255, 255, 255, 0.95);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .enhanced-input-field::placeholder {
@@ -293,9 +403,15 @@
   font-weight: 400;
 }
 
+<<<<<<< HEAD
 /* Enhanced Send Button - Using centralized colors */
 .enhanced-send-button {
   background: var(--color-border-primary, #10b981);
+=======
+/* Enhanced Send Button - Soft colors */
+.enhanced-send-button {
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.85) 0%, rgba(251, 191, 36, 0.8) 100%);  /* soft emerald to soft saffron */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -303,18 +419,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
   color: var(--color-background-secondary, #ffffff);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px var(--color-shadow-medium, rgba(0, 0, 0, 0.2));
+=======
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);  /* soft emerald shadow */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   position: relative;
   overflow: hidden;
 }
 
 .enhanced-send-button:hover {
   transform: translateY(-2px) scale(1.05);
+<<<<<<< HEAD
   box-shadow: 0 4px 12px var(--color-shadow-medium, rgba(0, 0, 0, 0.3));
   opacity: 0.9;
+=======
+  box-shadow: 0 4px 12px rgba(52, 211, 153, 0.25);  /* soft emerald shadow */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .enhanced-send-button:active {
@@ -354,9 +481,15 @@
 }
 
 .enhanced-action-button:hover {
+<<<<<<< HEAD
   background: var(--color-background-secondary, #ffffff);
   border-color: var(--color-border-primary, #10b981);
   color: var(--color-border-primary, #10b981);
+=======
+  background: rgba(52, 211, 153, 0.08);  /* very soft emerald hover */
+  border-color: rgba(52, 211, 153, 0.3);  /* soft emerald border */
+  color: rgba(52, 211, 153, 0.8);  /* soft emerald text */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Typing Indicator */
@@ -382,7 +515,11 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+<<<<<<< HEAD
   background: var(--color-border-primary, #10b981);
+=======
+  background: rgba(52, 211, 153, 0.6);  /* soft emerald dots */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   animation: typingDotEnhanced 1.4s infinite ease-in-out;
 }
 
@@ -419,7 +556,14 @@
 .enhanced-welcome-title {
   font-size: 2rem;
   font-weight: 700;
+<<<<<<< HEAD
   color: var(--color-text-primary, #1f2937);
+=======
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.8) 0%, rgba(251, 191, 36, 0.8) 100%);  /* soft emerald to soft saffron */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   margin-bottom: 16px;
   line-height: 1.2;
 }
@@ -454,8 +598,13 @@
 .enhanced-suggestion-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
   border-color: var(--color-border-primary, #10b981);
   background: var(--color-background-secondary, #ffffff);
+=======
+  border-color: #10b981;  /* emerald border on hover */
+  background: rgba(255, 255, 255, 0.95);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .enhanced-suggestion-icon {
@@ -514,6 +663,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+<<<<<<< HEAD
   background: var(--color-background, #f8fafc);
   padding: 2px 8px;
   border-radius: 12px;
@@ -522,11 +672,25 @@
 }
 
 /* Floating Action Button - Using centralized colors */
+=======
+  background: rgba(16, 185, 129, 0.1);  /* emerald background */
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: #10b981;  /* emerald text */
+  font-weight: 500;
+}
+
+/* Floating Action Button - Brand colors */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 .enhanced-fab {
   position: fixed;
   bottom: 24px;
   right: 24px;
+<<<<<<< HEAD
   background: var(--color-border-primary, #10b981);
+=======
+  background: linear-gradient(135deg, #10b981 0%, #fbbf24 100%);  /* emerald to saffron */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border: none;
   border-radius: 50%;
   width: 56px;
@@ -536,14 +700,22 @@
   justify-content: center;
   color: white;
   cursor: pointer;
+<<<<<<< HEAD
   box-shadow: 0 8px 25px var(--color-shadow-strong, rgba(0, 0, 0, 0.4));
+=======
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);  /* emerald shadow */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
 }
 
 .enhanced-fab:hover {
   transform: translateY(-2px) scale(1.05);
+<<<<<<< HEAD
   box-shadow: 0 12px 35px var(--color-shadow-strong, rgba(0, 0, 0, 0.5));
+=======
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);  /* emerald shadow */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Responsive Design */

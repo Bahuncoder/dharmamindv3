@@ -25,7 +25,10 @@ import remarkGfm from 'remark-gfm';
 import SpiritualBackground from './SpiritualBackground';
 import BreathingGuide from './BreathingGuide';
 import VoiceWaveVisualization from './VoiceWaveVisualization';
+<<<<<<< HEAD
 import { chatService } from '../services/chatService';
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 interface Message {
   id: string;
@@ -39,9 +42,12 @@ interface Message {
   isSaved?: boolean;
   category?: string;
   emotional_tone?: string;
+<<<<<<< HEAD
   dharmic_insights?: string[];
   growth_suggestions?: string[];
   spiritual_context?: string;
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 interface LifeAspect {
@@ -168,6 +174,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
     }
 
     try {
+<<<<<<< HEAD
       // Use the enhanced chatService for comprehensive dharmic wisdom
       const response = await chatService.sendMessage(
         inputValue,
@@ -220,6 +227,24 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
       };
       
       setMessages(prev => [...prev, fallbackResponse]);
+=======
+      // Simulate API response for demo
+      setTimeout(() => {
+        const aiResponse: Message = {
+          id: (Date.now() + 1).toString(),
+          content: `Thank you for sharing your thoughts about ${selectedAspect?.name.toLowerCase() || 'life'}. Here's some wisdom to consider:\n\n**Mindful Approach**: Every challenge is an opportunity for growth and deeper understanding.\n\n**Practical Steps**:\n- Practice daily mindfulness meditation\n- Reflect on your core values\n- Take aligned action with compassion\n\n*Remember: The journey of consciousness is unique to each soul. Trust your inner wisdom.*`,
+          role: 'assistant',
+          timestamp: new Date(),
+          confidence: 0.92,
+          dharmic_alignment: 0.87,
+          category: selectedAspect?.id || 'general'
+        };
+        setMessages(prev => [...prev, aiResponse]);
+        setIsLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       setIsLoading(false);
     }
   };
@@ -443,6 +468,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                       }}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     >
+<<<<<<< HEAD
                       <div className="prose prose-sm max-w-none text-white/90">
                         <ReactMarkdown 
                           remarkPlugins={[remarkGfm]} 
@@ -502,6 +528,14 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                           )}
                         </div>
                       )}
+=======
+                      <ReactMarkdown 
+                        remarkPlugins={[remarkGfm]} 
+                        className="prose prose-sm max-w-none text-white/90"
+                      >
+                        {message.content}
+                      </ReactMarkdown>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       
                       {/* Message Metadata */}
                       {message.role === 'assistant' && (

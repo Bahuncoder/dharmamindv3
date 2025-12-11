@@ -72,7 +72,11 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
 
     switch (variant) {
       case 'link':
+<<<<<<< HEAD
         return `${sizeClasses[size]} text-neutral-900 hover:text-gold-600-dark underline transition-colors`;
+=======
+        return `${sizeClasses[size]} text-primary hover:text-primary-dark underline transition-colors`;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       case 'card':
         return `${sizeClasses[size]} card-background border border-card-border rounded-lg hover:shadow-md transition-shadow`;
       default:
@@ -148,12 +152,21 @@ export const SupportSection: React.FC<{
   if (compact) {
     return (
       <div className={`space-y-2 ${className}`}>
+<<<<<<< HEAD
         <h3 className="text-sm font-semibold text-neutral-900 mb-2">{title}</h3>
         <ul className="space-y-1 text-sm text-neutral-600">
           <li>
             <button 
               onClick={() => router.push('/help')} 
               className="hover:text-gold-600 text-left"
+=======
+        <h3 className="text-sm font-semibold text-primary mb-2">{title}</h3>
+        <ul className="space-y-1 text-sm text-secondary">
+          <li>
+            <button 
+              onClick={() => router.push('/help')} 
+              className="hover:text-primary text-left"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             >
               Help Center
             </button>
@@ -161,7 +174,11 @@ export const SupportSection: React.FC<{
           <li>
             <button 
               onClick={() => router.push('/contact')} 
+<<<<<<< HEAD
               className="hover:text-gold-600 text-left"
+=======
+              className="hover:text-primary text-left"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             >
               Contact
             </button>
@@ -173,8 +190,13 @@ export const SupportSection: React.FC<{
 
   return (
     <div className={`bg-page-background rounded-lg border border-card-border p-6 ${className}`}>
+<<<<<<< HEAD
       <h3 className="text-lg font-semibold text-neutral-900 mb-2">{title}</h3>
       <p className="text-neutral-600 mb-4">{subtitle}</p>
+=======
+      <h3 className="text-lg font-semibold text-primary mb-2">{title}</h3>
+      <p className="text-secondary mb-4">{subtitle}</p>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       
       {showLinks && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -184,8 +206,13 @@ export const SupportSection: React.FC<{
             className="text-left"
           >
             <div>
+<<<<<<< HEAD
               <div className="font-medium text-neutral-900">Help Center</div>
               <div className="text-sm text-neutral-600">Browse articles and guides</div>
+=======
+              <div className="font-medium text-primary">Help Center</div>
+              <div className="text-sm text-secondary">Browse articles and guides</div>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             </div>
           </ContactButton>
           
@@ -195,8 +222,13 @@ export const SupportSection: React.FC<{
             className="text-left"
           >
             <div>
+<<<<<<< HEAD
               <div className="font-medium text-neutral-900">Contact Us</div>
               <div className="text-sm text-neutral-600">Send us a message</div>
+=======
+              <div className="font-medium text-primary">Contact Us</div>
+              <div className="text-sm text-secondary">Send us a message</div>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             </div>
           </ContactButton>
         </div>
@@ -265,6 +297,7 @@ export const ContactForm: React.FC<{
   if (success) {
     return (
       <div className="text-center py-8">
+<<<<<<< HEAD
         <div className="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -272,6 +305,15 @@ export const ContactForm: React.FC<{
         </div>
         <h3 className="text-lg font-semibold text-neutral-900 mb-2">Message Sent! 🙏</h3>
         <p className="text-neutral-600">We'll get back to you within 24 hours.</p>
+=======
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-semibold text-primary mb-2">Message Sent! 🙏</h3>
+        <p className="text-secondary">We'll get back to you within 24 hours.</p>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       </div>
     );
   }
@@ -280,7 +322,11 @@ export const ContactForm: React.FC<{
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className={`grid gap-4 ${compact ? 'grid-cols-1' : 'grid-cols-2'}`}>
         <div>
+<<<<<<< HEAD
           <label className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+          <label className="block text-sm font-medium text-primary mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             Name *
           </label>
           <input
@@ -294,7 +340,11 @@ export const ContactForm: React.FC<{
         </div>
 
         <div>
+<<<<<<< HEAD
           <label className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+          <label className="block text-sm font-medium text-primary mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             Email *
           </label>
           <input
@@ -310,7 +360,11 @@ export const ContactForm: React.FC<{
 
       <div className={`grid gap-4 ${compact ? 'grid-cols-1' : 'grid-cols-2'}`}>
         <div>
+<<<<<<< HEAD
           <label className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+          <label className="block text-sm font-medium text-primary mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             Category
           </label>
           <select
@@ -327,7 +381,11 @@ export const ContactForm: React.FC<{
         </div>
 
         <div>
+<<<<<<< HEAD
           <label className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+          <label className="block text-sm font-medium text-primary mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             Priority
           </label>
           <select
@@ -343,7 +401,11 @@ export const ContactForm: React.FC<{
       </div>
 
       <div>
+<<<<<<< HEAD
         <label className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+        <label className="block text-sm font-medium text-primary mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           Subject *
         </label>
         <input
@@ -357,7 +419,11 @@ export const ContactForm: React.FC<{
       </div>
 
       <div>
+<<<<<<< HEAD
         <label className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+        <label className="block text-sm font-medium text-primary mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           Message *
         </label>
         <textarea
@@ -423,8 +489,13 @@ export const SupportContact: React.FC<{
 }) => {
   return (
     <div className={`text-center p-6 card-background rounded-lg ${className}`}>
+<<<<<<< HEAD
       <h3 className="text-lg font-semibold text-neutral-900 mb-2">{title}</h3>
       <p className="text-neutral-600 mb-4">{description}</p>
+=======
+      <h3 className="text-lg font-semibold text-primary mb-2">{title}</h3>
+      <p className="text-secondary mb-4">{description}</p>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       <ContactButton
         type="support"
         variant={variant}

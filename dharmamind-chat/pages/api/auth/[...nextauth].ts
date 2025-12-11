@@ -8,6 +8,7 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+<<<<<<< HEAD
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -66,22 +67,34 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, account, profile, user }) {
+=======
+    // Note: Test credentials provider removed for production
+  ],
+  callbacks: {
+    async jwt({ token, account, profile }) {
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
         token.accessToken = account.access_token
         token.provider = account.provider
       }
+<<<<<<< HEAD
       // Add plan from credentials provider
       if (user?.plan) {
         token.plan = user.plan
       }
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       return token
     },
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
       session.accessToken = token.accessToken as string
       session.provider = token.provider as string
+<<<<<<< HEAD
       session.user.plan = token.plan as string
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       return session
     },
     async redirect({ url, baseUrl }) {

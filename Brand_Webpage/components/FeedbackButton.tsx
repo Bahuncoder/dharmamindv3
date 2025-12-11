@@ -58,23 +58,41 @@ const variantConfigurations = {
   compact: {
     base: 'transition-all duration-300 hover:scale-102 inline-flex border border-card-border',
     colors: {
+<<<<<<< HEAD
       primary: 'card-background text-neutral-900 hover:bg-primary hover:text-white',
       secondary: 'card-background text-neutral-600 hover:bg-secondary hover:text-white',
       spiritual: 'card-background text-neutral-900 hover:bg-primary hover:text-white',
       success: 'card-background text-neutral-900 hover:bg-primary hover:text-white',
       warning: 'card-background text-neutral-900 hover:bg-primary hover:text-white',
       error: 'card-background text-neutral-900 hover:bg-primary hover:text-white'
+=======
+      primary: 'card-background text-primary hover:bg-primary hover:text-white',
+      secondary: 'card-background text-secondary hover:bg-secondary hover:text-white',
+      spiritual: 'card-background text-primary hover:bg-primary hover:text-white',
+      success: 'card-background text-primary hover:bg-primary hover:text-white',
+      warning: 'card-background text-primary hover:bg-primary hover:text-white',
+      error: 'card-background text-primary hover:bg-primary hover:text-white'
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     }
   },
   minimal: {
     base: 'transition-all duration-300 hover:scale-105 bg-transparent border-none',
     colors: {
+<<<<<<< HEAD
       primary: 'text-neutral-900 hover:text-gold-600-dark hover:bg-page-background',
       secondary: 'text-neutral-600 hover:text-gold-600-dark hover:bg-page-background',
       spiritual: 'text-neutral-900 hover:text-gold-600-dark hover:bg-page-background',
       success: 'text-neutral-900 hover:text-gold-600-dark hover:bg-page-background',
       warning: 'text-neutral-900 hover:text-gold-600-dark hover:bg-page-background',
       error: 'text-neutral-900 hover:text-gold-600-dark hover:bg-page-background'
+=======
+      primary: 'text-primary hover:text-primary-dark hover:bg-page-background',
+      secondary: 'text-secondary hover:text-secondary-dark hover:bg-page-background',
+      spiritual: 'text-primary hover:text-primary-dark hover:bg-page-background',
+      success: 'text-primary hover:text-primary-dark hover:bg-page-background',
+      warning: 'text-primary hover:text-primary-dark hover:bg-page-background',
+      error: 'text-primary hover:text-primary-dark hover:bg-page-background'
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     }
   },
   spiritual: {
@@ -208,7 +226,11 @@ const FeedbackTooltip: React.FC<{ text: string; children: React.ReactNode }> = (
       <AnimatePresence>
         {isVisible && (
           <motion.div
+<<<<<<< HEAD
             className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 card-background border border-card-border text-neutral-900 text-sm rounded-lg whitespace-nowrap z-50"
+=======
+            className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 card-background border border-card-border text-primary text-sm rounded-lg whitespace-nowrap z-50"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             initial={{ opacity: 0, y: 10, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.8 }}
@@ -356,7 +378,11 @@ const FeedbackButton: React.FC<FeedbackButtonProps> = ({
         }}
       />
       <motion.div
+<<<<<<< HEAD
         className="absolute inset-0 bg-neutral-100/10"
+=======
+        className="absolute inset-0 bg-white/10"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         animate={{
           opacity: [0, 0.3, 0],
         }}

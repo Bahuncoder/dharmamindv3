@@ -8,7 +8,10 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
+<<<<<<< HEAD
 import { siteConfig } from '../config/shared.config';
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -17,10 +20,17 @@ interface SubscriptionModalProps {
   targetPlan?: string;
 }
 
+<<<<<<< HEAD
 const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
   onClose,
   targetPlan
+=======
+const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  targetPlan 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }) => {
   const { user, isAuthenticated } = useAuth();
   const {
@@ -71,7 +81,11 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
       if (result) {
         const planName = availablePlans.find(p => p.id === planId)?.name;
         setSuccess(`Successfully upgraded to ${planName}! 🎉`);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         // Close modal after success
         setTimeout(() => {
           onClose();
@@ -111,15 +125,24 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             <div className="flex items-center bg-gray-100 rounded-lg p-1">
               <button
                 onClick={() => setBillingInterval('monthly')}
+<<<<<<< HEAD
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${billingInterval === 'monthly'
                     ? 'bg-white text-gray-900 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                   }`}
+=======
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  billingInterval === 'monthly'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               >
                 Monthly
               </button>
               <button
                 onClick={() => setBillingInterval('yearly')}
+<<<<<<< HEAD
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${billingInterval === 'yearly'
                     ? 'bg-white text-gray-900 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
@@ -128,6 +151,17 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 Yearly
                 <span className="ml-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
                   Save {siteConfig.pricing.annualDiscount}%
+=======
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  billingInterval === 'yearly'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Yearly
+                <span className="ml-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                  Save 17%
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 </span>
               </button>
             </div>
@@ -161,6 +195,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             {availablePlans.map((plan) => {
               const isCurrentPlan = currentPlan?.id === plan.id;
               const isPopular = plan.tier === 'pro';
+<<<<<<< HEAD
 
               return (
                 <div
@@ -171,6 +206,19 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         ? 'border-amber-300'
                         : 'border-gray-200'
                     } ${isPopular ? 'transform scale-105' : ''}`}
+=======
+              
+              return (
+                <div
+                  key={plan.id}
+                  className={`relative bg-white rounded-lg border-2 transition-all ${
+                    isCurrentPlan
+                      ? 'border-green-500 ring-2 ring-green-200'
+                      : isPopular
+                      ? 'border-amber-300'
+                      : 'border-gray-200'
+                  } ${isPopular ? 'transform scale-105' : ''}`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 >
                   {isPopular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -179,7 +227,11 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                       </span>
                     </div>
                   )}
+<<<<<<< HEAD
 
+=======
+                  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   <div className="p-6">
                     <div className="text-center mb-6">
                       <h3 className="text-xl font-semibold text-gray-900">{plan.name}</h3>
@@ -198,8 +250,14 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-center">
                           <svg
+<<<<<<< HEAD
                             className={`w-5 h-5 mr-3 ${feature.included ? 'text-green-500' : 'text-gray-300'
                               }`}
+=======
+                            className={`w-5 h-5 mr-3 ${
+                              feature.included ? 'text-green-500' : 'text-gray-300'
+                            }`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -219,6 +277,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     <button
                       onClick={() => handleUpgradeClick(plan.id)}
                       disabled={processing || isCurrentPlan}
+<<<<<<< HEAD
                       className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${isCurrentPlan
                           ? 'bg-green-100 text-green-700 cursor-not-allowed'
                           : processing
@@ -227,14 +286,32 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                               ? 'bg-gradient-to-r from-amber-600 to-emerald-600 text-white hover:from-amber-700 hover:to-emerald-700'
                               : 'bg-gray-900 text-white hover:bg-gray-800'
                         }`}
+=======
+                      className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
+                        isCurrentPlan
+                          ? 'bg-green-100 text-green-700 cursor-not-allowed'
+                          : processing
+                          ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                          : isPopular
+                          ? 'bg-gradient-to-r from-amber-600 to-emerald-600 text-white hover:from-amber-700 hover:to-emerald-700'
+                          : 'bg-gray-900 text-white hover:bg-gray-800'
+                      }`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     >
                       {processing
                         ? 'Processing...'
                         : isCurrentPlan
+<<<<<<< HEAD
                           ? 'Current Plan'
                           : plan.tier === 'basic'
                             ? 'Start Free'
                             : 'Upgrade'}
+=======
+                        ? 'Current Plan'
+                        : plan.tier === 'basic'
+                        ? 'Start Free'
+                        : 'Upgrade'}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     </button>
                   </div>
                 </div>
@@ -244,8 +321,13 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
           {/* Footer */}
           <div className="mt-8 text-center text-sm text-gray-500">
+<<<<<<< HEAD
             <p>{siteConfig.pricing.guarantees.moneyBack.description}</p>
             <p className="mt-1">{siteConfig.pricing.guarantees.cancelAnytime ? 'Cancel or change your plan anytime' : ''}</p>
+=======
+            <p>All plans include a 30-day money-back guarantee</p>
+            <p className="mt-1">Cancel or change your plan anytime</p>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           </div>
         </div>
       </div>

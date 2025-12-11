@@ -27,7 +27,11 @@ textarea.enhanced-textarea {
 }
 
 .enhanced-textarea::placeholder {
+<<<<<<< HEAD
   color: var(--color-text-secondary, #6b7280) !important;  /* Force use of centralized secondary text */
+=======
+  color: var(--color-text-tertiary) !important;  /* Force use of centralized tertiary text */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   font-weight: 400;
 }
 
@@ -56,17 +60,29 @@ textarea.enhanced-textarea {
 }
 
 .enhanced-input-container {
+<<<<<<< HEAD
   background: var(--color-background, #f8fafc);  /* using centralized background */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--color-border-primary, #10b981);  /* emerald green border */
+=======
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--color-border-emerald);  /* emerald green border */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   padding: 20px 24px;
   position: relative;
 }
 
 .enhanced-input-wrapper {
+<<<<<<< HEAD
   background: var(--color-background-secondary, #ffffff) !important;  /* using centralized secondary background */
   border: 2px solid var(--color-border-primary, #10b981) !important;  /* emerald green border - force priority */
+=======
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  border: 2px solid var(--color-border-emerald);  /* emerald green border */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-radius: 24px;
   padding: 12px 16px;
   display: flex;
@@ -78,9 +94,15 @@ textarea.enhanced-textarea {
 }
 
 .enhanced-input-wrapper.focused {
+<<<<<<< HEAD
   border-color: var(--color-border-primary, #10b981) !important;  /* keep emerald on focus - force priority */
   background: var(--color-background-secondary, #ffffff) !important;  /* using centralized secondary background */
   box-shadow: 0 0 0 3px var(--color-shadow-light, rgba(0, 0, 0, 0.1)) !important;  /* neutral shadow effect */
+=======
+  border-color: var(--color-border-emerald-light);  /* lighter emerald on focus */
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);  /* emerald glow effect */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .enhanced-input-wrapper::before {
@@ -90,7 +112,11 @@ textarea.enhanced-textarea {
   left: 0;
   right: 0;
   bottom: 0;
+<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-background, #f8fafc) 0%, var(--color-background-secondary, #ffffff) 100%);  /* using centralized backgrounds */
+=======
+  background: linear-gradient(135deg, var(--color-focus-ring) 0%, var(--color-focus-ring) 100%);  /* using your centralized focus ring */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
@@ -113,7 +139,11 @@ textarea.enhanced-textarea {
 
 .send-button.inactive svg,
 .send-button.inactive .heroicon {
+<<<<<<< HEAD
   color: var(--color-text-secondary, #6b7280) !important;
+=======
+  color: var(--color-text-tertiary) !important;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Input Actions */
@@ -204,7 +234,11 @@ textarea.enhanced-textarea {
 }
 
 .enhanced-textarea::placeholder {
+<<<<<<< HEAD
   color: var(--color-text-secondary, #6b7280);  /* using centralized secondary text */
+=======
+  color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   font-weight: 400;
 }
 
@@ -220,13 +254,22 @@ textarea.enhanced-textarea {
   right: 0;
   font-size: 11px;
   font-weight: 500;
+<<<<<<< HEAD
   color: var(--color-text-secondary, #6b7280);  /* using centralized secondary text */
   background: var(--color-background, #f8fafc);  /* using centralized background */
+=======
+  color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+  background: var(--color-bg-primary);  /* using your centralized primary background */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   padding: 2px 6px;
   border-radius: 8px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+<<<<<<< HEAD
   border: 1px solid var(--color-border-primary, #10b981);  /* using centralized border */
+=======
+  border: 1px solid var(--color-border-light);  /* using your centralized light border */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .character-counter.near-limit {
@@ -285,8 +328,13 @@ textarea.enhanced-textarea {
 
 /* Send Button - using centralized color system */
 .send-button {
+<<<<<<< HEAD
   background: var(--color-border-primary, #10b981);  /* solid emerald background */
   border: 2px solid var(--color-border-primary, #10b981);  /* emerald border */
+=======
+  background: var(--color-border-emerald);  /* solid emerald background */
+  border: 2px solid var(--color-border-emerald);  /* emerald border */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-radius: 12px;
   width: 44px;
   height: 44px;
@@ -296,13 +344,18 @@ textarea.enhanced-textarea {
   color: white !important;  /* force white icon color */
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+<<<<<<< HEAD
   box-shadow: 0 2px 8px var(--color-shadow-medium, rgba(0, 0, 0, 0.3));  /* neutral shadow for visibility */
+=======
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);  /* emerald shadow for visibility */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   position: relative;
   overflow: hidden;
   opacity: 1;  /* ensure full visibility */
 }
 
 .send-button.active {
+<<<<<<< HEAD
   background: var(--color-border-primary, #10b981);  /* keep emerald when active */
   transform: scale(1.05);  /* slight scale for feedback */
   box-shadow: 0 4px 12px var(--color-shadow-strong, rgba(0, 0, 0, 0.4));  /* stronger neutral shadow */
@@ -318,6 +371,23 @@ textarea.enhanced-textarea {
 
 .send-button:not(.inactive):hover {
   background: var(--color-border-primary, #10b981);  /* keep emerald on hover */
+=======
+  background: var(--color-border-emerald-light);  /* lighter emerald when active */
+  transform: scale(1.05);  /* slight scale for feedback */
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);  /* stronger emerald shadow */
+}
+
+.send-button.inactive {
+  background: var(--color-bg-tertiary);  /* using your centralized tertiary background */
+  color: var(--color-text-tertiary) !important;  /* using your centralized tertiary text */
+  box-shadow: none;
+  cursor: not-allowed;
+  border-color: var(--color-border-light);  /* light border when inactive */
+}
+
+.send-button:not(.inactive):hover {
+  background: var(--color-border-emerald-dark);  /* darker emerald on hover */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   transform: scale(1.1);  /* scale up on hover */
   box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);  /* enhanced emerald shadow */
 }
@@ -373,6 +443,7 @@ textarea.enhanced-textarea {
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .enhanced-input-container {
+<<<<<<< HEAD
     background: var(--color-background-secondary, #ffffff);  /* using centralized secondary background */
     border-color: var(--color-border-primary, #10b981);  /* emerald border in dark mode too */
   }
@@ -386,6 +457,21 @@ textarea.enhanced-textarea {
     background: var(--color-background, #f8fafc);  /* using centralized background */
     border-color: var(--color-border-primary, #10b981);  /* keep emerald on focus */
     box-shadow: 0 0 0 3px var(--color-shadow-light, rgba(0, 0, 0, 0.2));  /* neutral glow in dark mode */
+=======
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-emerald);  /* emerald border in dark mode too */
+  }
+  
+  .enhanced-input-wrapper {
+    background: var(--color-bg-primary);  /* using your centralized primary background */
+    border-color: var(--color-border-emerald);  /* emerald border in dark mode */
+  }
+  
+  .enhanced-input-wrapper.focused {
+    background: var(--color-bg-primary);  /* using your centralized primary background */
+    border-color: var(--color-border-emerald-light);  /* lighter emerald on focus */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);  /* emerald glow in dark mode */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   .enhanced-textarea {
@@ -393,6 +479,7 @@ textarea.enhanced-textarea {
   }
   
   .enhanced-textarea::placeholder {
+<<<<<<< HEAD
     color: var(--color-text-secondary, #6b7280);  /* using centralized secondary text */
   }
   
@@ -418,6 +505,33 @@ textarea.enhanced-textarea {
     background: var(--color-background-secondary, #ffffff);  /* using centralized secondary background */
     border-color: var(--color-border-primary, #10b981);  /* using centralized border */
     color: var(--color-text-secondary, #6b7280);  /* using centralized secondary text */
+=======
+    color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+  }
+  
+  .action-button {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-light);  /* using your centralized light border */
+    color: var(--color-text-secondary);  /* using your centralized secondary text */
+  }
+  
+  .action-button:hover {
+    background: var(--color-focus-ring);  /* using your centralized focus ring color */
+    border-color: var(--color-focus);  /* using your centralized focus color */
+    color: var(--color-success);  /* using your centralized success color */
+  }
+  
+  .voice-button {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-light);  /* using your centralized light border */
+    color: var(--color-text-secondary);  /* using your centralized secondary text */
+  }
+  
+  .character-counter {
+    background: var(--color-bg-secondary);  /* using your centralized secondary background */
+    border-color: var(--color-border-light);  /* using your centralized light border */
+    color: var(--color-text-tertiary);  /* using your centralized tertiary text */
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
 }
 

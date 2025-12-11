@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Logo from '../components/Logo';
+<<<<<<< HEAD
 import BrandHeader from '../components/BrandHeader';
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 interface FeatureRequest {
   id: string;
@@ -63,10 +66,17 @@ const FeatureRequestsPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+<<<<<<< HEAD
 
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
 
+=======
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     setSubmitted(true);
     setIsSubmitting(false);
   };
@@ -80,12 +90,21 @@ const FeatureRequestsPage: React.FC = () => {
 
   const getStatusColor = (status: FeatureRequest['status']) => {
     switch (status) {
+<<<<<<< HEAD
       case 'submitted': return 'bg-neutral-100 text-neutral-900';
       case 'under-review': return 'bg-gold-100 text-gold-700';
       case 'planned': return 'bg-gold-100 text-gold-700';
       case 'in-development': return 'bg-gold-100 text-gold-700';
       case 'completed': return 'bg-gold-100 text-green-800';
       default: return 'bg-neutral-100 text-neutral-900';
+=======
+      case 'submitted': return 'bg-gray-100 text-gray-800';
+      case 'under-review': return 'bg-blue-100 text-blue-800';
+      case 'planned': return 'bg-emerald-100 text-emerald-800';
+      case 'in-development': return 'bg-purple-100 text-purple-800';
+      case 'completed': return 'bg-green-100 text-green-800';
+      default: return 'bg-gray-100 text-gray-800';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     }
   };
 
@@ -109,6 +128,7 @@ const FeatureRequestsPage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+<<<<<<< HEAD
       <div className="min-h-screen bg-neutral-100">
         {/* Professional Brand Header with Breadcrumbs */}
         <BrandHeader
@@ -127,11 +147,47 @@ const FeatureRequestsPage: React.FC = () => {
               Shape the Future of DharmaMind
             </h1>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+=======
+      <div className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => router.back()}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <Logo 
+                  size="sm"
+                  onClick={() => router.push('/')}
+                />
+                <h1 className="text-xl font-semibold text-gray-900">Feature Requests</h1>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          
+          {/* Hero Section */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Shape the Future of DharmaMind
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               Your ideas matter. Submit feature requests and help us build the AI spiritual companion you've always envisioned.
             </p>
           </div>
 
           {/* Tabs */}
+<<<<<<< HEAD
           <div className="flex space-x-1 bg-neutral-100 p-1 rounded-lg mb-8">
             <button
               onClick={() => setActiveTab('submit')}
@@ -139,15 +195,33 @@ const FeatureRequestsPage: React.FC = () => {
                 ? 'bg-neutral-100 text-neutral-900 shadow-sm'
                 : 'text-neutral-600 hover:text-gold-600'
                 }`}
+=======
+          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg mb-8">
+            <button
+              onClick={() => setActiveTab('submit')}
+              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'submit'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             >
               Submit Request
             </button>
             <button
               onClick={() => setActiveTab('browse')}
+<<<<<<< HEAD
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${activeTab === 'browse'
                 ? 'bg-neutral-100 text-neutral-900 shadow-sm'
                 : 'text-neutral-600 hover:text-gold-600'
                 }`}
+=======
+              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'browse'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             >
               Browse Requests
             </button>
@@ -155,6 +229,7 @@ const FeatureRequestsPage: React.FC = () => {
 
           {/* Submit Tab */}
           {activeTab === 'submit' && (
+<<<<<<< HEAD
             <div className="bg-neutral-100 rounded-lg shadow-sm border border-neutral-300 p-6">
               {submitted ? (
                 <div className="text-center py-8">
@@ -165,6 +240,18 @@ const FeatureRequestsPage: React.FC = () => {
                   </div>
                   <h3 className="text-lg font-semibold text-neutral-900 mb-2">Request Submitted!</h3>
                   <p className="text-neutral-600 mb-6">
+=======
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              {submitted ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Request Submitted!</h3>
+                  <p className="text-gray-600 mb-6">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     Thank you for your feature request. Our team will review it and update you on its progress.
                   </p>
                   <button
@@ -173,7 +260,11 @@ const FeatureRequestsPage: React.FC = () => {
                       setFormData({ title: '', description: '', category: 'ai-features' });
                       setActiveTab('browse');
                     }}
+<<<<<<< HEAD
                     className="bg-gradient-to-r from-gold-600 to-gold-700 text-white px-6 py-2 rounded-lg hover:from-gold-700 hover:to-gold-800 transition-colors"
+=======
+                    className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:from-amber-700 hover:to-emerald-700 transition-colors"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   >
                     Browse Other Requests
                   </button>
@@ -181,7 +272,11 @@ const FeatureRequestsPage: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
+<<<<<<< HEAD
                     <label htmlFor="title" className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+                    <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       Feature Title *
                     </label>
                     <input
@@ -192,12 +287,20 @@ const FeatureRequestsPage: React.FC = () => {
                       value={formData.title}
                       onChange={handleInputChange}
                       placeholder="Brief, descriptive title for your feature request"
+<<<<<<< HEAD
                       className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+=======
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     />
                   </div>
 
                   <div>
+<<<<<<< HEAD
                     <label htmlFor="category" className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+                    <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       Category *
                     </label>
                     <select
@@ -206,7 +309,11 @@ const FeatureRequestsPage: React.FC = () => {
                       required
                       value={formData.category}
                       onChange={handleInputChange}
+<<<<<<< HEAD
                       className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+=======
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     >
                       <option value="ai-features">AI Features</option>
                       <option value="ui-ux">UI/UX</option>
@@ -218,7 +325,11 @@ const FeatureRequestsPage: React.FC = () => {
                   </div>
 
                   <div>
+<<<<<<< HEAD
                     <label htmlFor="description" className="block text-sm font-medium text-neutral-900 mb-2">
+=======
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       Detailed Description *
                     </label>
                     <textarea
@@ -229,7 +340,11 @@ const FeatureRequestsPage: React.FC = () => {
                       value={formData.description}
                       onChange={handleInputChange}
                       placeholder="Describe your feature request in detail. Include the problem it solves, how it would work, and why it would be valuable."
+<<<<<<< HEAD
                       className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+=======
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     />
                   </div>
 
@@ -237,7 +352,11 @@ const FeatureRequestsPage: React.FC = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
+<<<<<<< HEAD
                       className="bg-gradient-to-r from-gold-600 to-gold-700 text-white px-6 py-2 rounded-lg hover:from-gold-700 hover:to-gold-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+=======
+                      className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:from-amber-700 hover:to-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     >
                       {isSubmitting ? 'Submitting...' : 'Submit Request'}
                     </button>
@@ -251,13 +370,18 @@ const FeatureRequestsPage: React.FC = () => {
           {activeTab === 'browse' && (
             <div className="space-y-6">
               <div className="text-center">
+<<<<<<< HEAD
                 <p className="text-neutral-600">
+=======
+                <p className="text-gray-600">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   See what features the community is requesting and track development progress.
                 </p>
               </div>
 
               <div className="space-y-4">
                 {sampleRequests.map((request) => (
+<<<<<<< HEAD
                   <div key={request.id} className="bg-neutral-100 rounded-lg shadow-sm border border-neutral-300 p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
@@ -268,6 +392,18 @@ const FeatureRequestsPage: React.FC = () => {
                           {request.description}
                         </p>
                         <div className="flex items-center space-x-4 text-sm text-neutral-600">
+=======
+                  <div key={request.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                          {request.title}
+                        </h3>
+                        <p className="text-gray-600 mb-3">
+                          {request.description}
+                        </p>
+                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                           <span className="capitalize">{request.category.replace('-', ' ')}</span>
                           <span>•</span>
                           <span>{request.submittedAt.toLocaleDateString()}</span>
@@ -277,7 +413,11 @@ const FeatureRequestsPage: React.FC = () => {
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(request.status)}`}>
                           {getStatusText(request.status)}
                         </span>
+<<<<<<< HEAD
                         <div className="flex items-center space-x-1 text-sm text-neutral-600">
+=======
+                        <div className="flex items-center space-x-1 text-sm text-gray-500">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                           </svg>
@@ -290,7 +430,11 @@ const FeatureRequestsPage: React.FC = () => {
               </div>
 
               <div className="text-center py-8">
+<<<<<<< HEAD
                 <p className="text-neutral-600 text-sm">
+=======
+                <p className="text-gray-500 text-sm">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   Want to see your idea here? Switch to the Submit tab to create a new feature request.
                 </p>
               </div>

@@ -452,6 +452,7 @@ class SecurityMonitoringService:
         # Log critical alert
         self.logger.critical(f"SECURITY ALERT: {alert}")
         
+<<<<<<< HEAD
         # Send to alerting system
         await self._send_security_alert(alert)
     
@@ -577,6 +578,9 @@ class SecurityMonitoringService:
             
         except Exception as e:
             self.logger.error(f"❌ Failed to send Discord alert: {e}")
+=======
+        # TODO: Send to alerting system (Slack, email, etc.)
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     
     async def get_security_dashboard(self) -> Dict[str, Any]:
         """Get security monitoring dashboard data"""

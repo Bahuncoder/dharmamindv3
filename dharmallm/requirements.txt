@@ -21,12 +21,17 @@ loguru>=0.7.2
 
 # API Integration
 fastapi>=0.104.1
+<<<<<<< HEAD
 uvicorn[standard]>=0.24.0
 pydantic>=2.5.0
 
 # HTTP Client
 httpx>=0.25.0
 
+=======
+pydantic>=2.5.0
+
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 # Async Processing
 aiofiles>=23.2.1
 

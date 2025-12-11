@@ -1,0 +1,135 @@
+{
+  "advanced_vedantic_frameworks": {
+    "advaita_vedanta_advanced": {
+      "id": "advaita_advanced_001",
+      "title": "Adhyasa (Superimposition) - The Root of All Illusion",
+      "original_sanskrit": "यदा सर्वाणि भूतानि आत्मन्येवानुपश्यति । सर्वभूतेषु चात्मानं ततो न विजुगुप्सते ॥",
+      "transliteration": "yadā sarvāṇi bhūtāni ātmanyevānupaśyati | sarvabhūteṣu cātmānaṃ tato na vijugupsate ||",
+      "source": "Isha Upanishad 6, Shankara's Bhashya elaboration",
+      "acharya_commentary": "Adi Shankaracharya explains that Adhyasa is the fundamental error where we superimpose the properties of the body-mind complex upon the Atman, and vice versa. This mutual superimposition is the root cause of all suffering and bondage.",
+      "philosophical_depth": "When one sees all beings in the Self alone, and the Self in all beings, then one does not feel hatred or aversion. This is only possible when the superimposition (adhyasa) of 'I' and 'mine' upon the body-mind is completely transcended through direct knowledge of Brahman.",
+      "practical_application": {
+        "daily_practice": "Constantly discriminate between the seer and the seen, the knower and the known. Practice Sakshi Bhava (witness consciousness) throughout daily activities.",
+        "meditation_technique": "Atma-Anatma Viveka - systematic discrimination between Self and non-Self through guided inquiry",
+        "advanced_sadhana": "Nirguna Dhyana - meditation on the attributeless Brahman beyond all qualities and forms"
+      },
+      "cross_references": [
+        "Brahma Sutra Bhashya 1.1.1",
+        "Vivekachudamani verses 210-215",
+        "Mandukya Karika 2.12"
+      ],
+      "consciousness_level": "advanced_vedantic",
+      "prerequisite_understanding": ["basic_advaita", "maya_concept", "three_states_analysis"],
+      "warning_notes": "This teaching should only be given to qualified students who have purified their minds through ethical living and preliminary spiritual practices."
+    },
+    "sankhya_advanced": {
+      "id": "sankhya_advanced_001", 
+      "title": "Kaivalya - The Absolute Isolation of Purusha",
+      "original_sanskrit": "पुरुषार्थो ऽयं सर्वो गुणत्रयविमोक्षात् । साम्यावस्था गुणानां प्रकृतेर्महदादिमत् ॥",
+      "transliteration": "puruṣārtho 'yaṃ sarvo guṇatrayavimokṣāt | sāmyāvasthā guṇānāṃ prakṛtermahadādimat ||",
+      "source": "Sankhya Karika 68, Gaudapada's commentary",
+      "acharya_commentary": "Gaudapada explains that Kaivalya is not mere isolation but the supreme goal where Purusha realizes its complete independence from Prakriti. The three gunas return to their state of equilibrium, having fulfilled their purpose of showing the Purusha its true nature.",
+      "philosophical_depth": "Kaivalya represents the culmination of discriminative knowledge where consciousness (Purusha) recognizes its eternal separation from matter (Prakriti). This is not a state to be attained but the recognition of what has always been true - the absolute independence and purity of consciousness.",
+      "practical_application": {
+        "daily_practice": "Cultivate detached observation of the play of the three gunas in all experiences. Practice Purusha-Prakriti Viveka constantly.",
+        "meditation_technique": "Sakshi Purusha Dhyana - meditation on the witness consciousness that remains untouched by all modifications of Prakriti",
+        "advanced_sadhana": "Kevala Kaivalya Abhyasa - sustained practice of resting in pure consciousness without any objective support"
+      },
+      "cross_references": [
+        "Yoga Sutras 4.34",
+        "Sankhya Karika 21, 62-68",
+        "Tattva Samasa"
+      ],
+      "consciousness_level": "advanced_sankhya",
+      "prerequisite_understanding": ["twenty_five_principles", "three_gunas", "purusha_prakriti_distinction"],
+      "integration_notes": "This teaching perfectly complements Advaita Vedanta when understood as the preliminary discrimination necessary for Brahman realization."
+    }
+  },
+  "advanced_yoga_philosophy": {
+    "samadhi_states_advanced": {
+      "id": "yoga_advanced_001",
+      "title": "Nirbija Samadhi - Seedless Absorption",
+      "original_sanskrit": "तस्यापि निरोधे सर्वनिरोधान्निर्बीजः समाधिः ॥",
+      "transliteration": "tasyāpi nirodhe sarvanirodh ānnirbījaḥ samādhiḥ ||",
+      "source": "Yoga Sutras 1.51, Vyasa Bhashya elaboration",
+      "acharya_commentary": "Vyasa explains that in Nirbija Samadhi, even the subtle impressions (samskaras) that support Sabija Samadhi are dissolved. This is the state of complete cessation where consciousness rests in its own nature without any objective support whatsoever.",
+      "philosophical_depth": "This represents the highest achievement in Yoga where the yogin transcends even the subtle seeds of latent impressions. Unlike Sabija Samadhi which still has an object of concentration, Nirbija Samadhi is pure subjectivity - consciousness knowing itself without any mediation.",
+      "practical_application": {
+        "preparation_required": "Mastery of Sabija Samadhi in all its forms, complete purification of mind, total detachment from results",
+        "entry_method": "From the highest Sabija Samadhi, allow even the subtlest mental support to dissolve into pure awareness",
+        "advanced_technique": "Nirupadhika Samadhi - absorption without any conditioning or limiting adjuncts"
+      },
+      "stages_of_attainment": [
+        "Preliminary glimpses during deep Sabija Samadhi",
+        "Sustained periods of seedless absorption",
+        "Permanent establishment in unconditioned awareness",
+        "Complete transcendence of the Yogic process itself"
+      ],
+      "cross_references": [
+        "Yoga Sutras 3.8 (comparison with Sabija)",
+        "Hatha Yoga Pradipika 4.107-109",
+        "Shiva Sutras 1.1-3"
+      ],
+      "consciousness_level": "mastery",
+      "warning_notes": "This state cannot be forced or practiced directly. It arises spontaneously when all seeking and effort are transcended."
+    }
+  },
+  "tantric_philosophy_advanced": {
+    "spanda_doctrine": {
+      "id": "tantra_advanced_001",
+      "title": "Spanda - The Supreme Vibratory Movement of Consciousness",
+      "original_sanskrit": "यः स्वतन्त्रः स्वशक्त्या सकलं भुवनं स्वतः । निर्मिमीते विलापयत्युदयास्तमयौ जगत् ॥",
+      "transliteration": "yaḥ svatantraḥ svaśaktyā sakalaṃ bhuvanaṃ svataḥ | nirmimīte vilāpayaty udayāstamayau jagat ||",
+      "source": "Spanda Karika 1.1, Kallata's commentary",
+      "acharya_commentary": "Kallata explains that Spanda is the inherent dynamism of Shiva-consciousness, the spontaneous creative pulsation that manifests and dissolves the entire universe while remaining eternally free and self-dependent.",
+      "philosophical_depth": "Spanda represents the Kashmir Shaivism understanding that consciousness is not static pure awareness (as in Advaita) but dynamic creative power. This divine vibration is both the cause and substance of all manifestation, yet remains forever unbound by its own creations.",
+      "practical_application": {
+        "recognition_practice": "Pratyabhijna Yoga - recognizing the divine creative power in every moment of experience",
+        "breathing_technique": "Spanda Pranayama - breathing in harmony with the cosmic pulsation",
+        "advanced_method": "Shakti-Pata reception - awakening to the transmission of divine energy from guru to disciple"
+      },
+      "stages_of_realization": [
+        "Intellectual understanding of Spanda principle",
+        "Glimpses of dynamic consciousness in meditation",
+        "Recognition of Spanda in daily activities",
+        "Permanent establishment as Spanda-Shakti"
+      ],
+      "cross_references": [
+        "Vijnanabhairava Tantra verses 1-8",
+        "Shiva Sutras 1.12-13",
+        "Pratyabhijna Hridayam sutras 1-4"
+      ],
+      "consciousness_level": "tantric_mastery",
+      "unique_features": "Unlike other systems, Kashmir Shaivism sees the world as real divine play, not illusion to be transcended."
+    }
+  },
+  "advanced_dharma_philosophy": {
+    "rita_cosmic_order": {
+      "id": "dharma_advanced_001",
+      "title": "Rita - The Cosmic Principle of Natural Order",
+      "original_sanskrit": "ऋतं च सत्यं चाभीद्धात्तपसोऽध्यजायत । ततो रात्र्यजायत ततः समुद्रो अर्णवः ॥",
+      "transliteration": "ṛtaṃ ca satyaṃ cābhīddhāt tapaso 'dhyajāyata | tato rātryajāyata tataḥ samudro arṇavaḥ ||",
+      "source": "Rig Veda 10.190.1, Sayana's commentary",
+      "acharya_commentary": "Sayana explains that Rita is the cosmic principle that governs both natural and moral order. It is the divine law from which even the gods derive their power and authority.",
+      "philosophical_depth": "Rita represents the Vedic understanding that the universe operates according to divine principles of harmony, truth, and natural justice. This cosmic order is both transcendent (governing celestial movements) and immanent (manifesting in moral and spiritual law).",
+      "practical_application": {
+        "daily_alignment": "Live in harmony with natural rhythms and cosmic cycles",
+        "ethical_conduct": "Follow Dharma as participation in the cosmic order of Rita",
+        "spiritual_practice": "Rita Upasana - worship and meditation on cosmic harmony"
+      },
+      "modern_relevance": [
+        "Ecological consciousness and environmental harmony",
+        "Understanding natural law in science and spirituality",
+        "Social justice as reflection of cosmic justice",
+        "Ayurvedic medicine based on natural rhythms"
+      ],
+      "cross_references": [
+        "Rig Veda 1.123.13 (Rita and Varuna)",
+        "Atharva Veda 12.1.1 (Rita as cosmic truth)",
+        "Mahabharata Shanti Parva (Dharma-Rita relationship)"
+      ],
+      "consciousness_level": "cosmic_awareness",
+      "integration_with_other_systems": "Rita forms the foundation for understanding Dharma in all its applications - personal, social, and cosmic."
+    }
+  }
+}

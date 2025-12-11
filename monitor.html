@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DharmaMind Monitor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .online { background-color: #d4edda; color: #155724; }
+        .offline { background-color: #f8d7da; color: #721c24; }
+        .service { margin: 10px 0; padding: 15px; border: 1px solid #ddd; }
+        button { padding: 10px 20px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>DharmaMind System Monitor</h1>
+    
+    <button onclick="checkAll()">Refresh All</button>
+    
+    <div class="service">
+        <h3>Backend API (Port 8000)</h3>
+        <div id="backend-status" class="status offline">Checking...</div>
+        <a href="http://localhost:8000/docs" target="_blank">API Docs</a>
+    </div>
+    
+    <div class="service">
+        <h3>Chat App (Port 3001)</h3>
+        <div id="chat-status" class="status offline">Checking...</div>
+        <a href="http://localhost:3001" target="_blank">Open Chat</a>
+    </div>
+    
+    <div class="service">
+        <h3>Brand Website (Port 3000)</h3>
+        <div id="brand-status" class="status offline">Checking...</div>
+        <a href="http://localhost:3000" target="_blank">Open Website</a>
+    </div>
+    
+    <script>
+        function checkService(url, elementId) {
+            const element = document.getElementById(elementId);
+            element.textContent = 'Checking...';
+            element.className = 'status offline';
+            
+            fetch(url, {mode: 'no-cors'})
+                .then(() => {
+                    element.textContent = 'Online';
+                    element.className = 'status online';
+                })
+                .catch(() => {
+                    element.textContent = 'Offline';
+                    element.className = 'status offline';
+                });
+        }
+        
+        function checkAll() {
+            checkService('http://localhost:8000/health', 'backend-status');
+            checkService('http://localhost:3001', 'chat-status');
+            checkService('http://localhost:3000', 'brand-status');
+        }
+        
+        // Check on load
+        checkAll();
+        
+        // Auto refresh every 30 seconds
+        setInterval(checkAll, 30000);
+    </script>
+</body>
+</html>

@@ -22,6 +22,7 @@ security = HTTPBearer()
 # Secure password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+<<<<<<< HEAD
 # JWT Configuration with better security
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 if not SECRET_KEY:
@@ -29,6 +30,10 @@ if not SECRET_KEY:
 if len(SECRET_KEY) < 32:
     raise ValueError("JWT_SECRET_KEY must be at least 32 characters long")
 
+=======
+# JWT Configuration
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-secret-key-change-in-production")
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 

@@ -11,6 +11,7 @@ import UserProfileMenu from '../components/UserProfileMenu';
 import PersonalizedSuggestions from '../components/PersonalizedSuggestions';
 import FeedbackButton from '../components/FeedbackButton';
 import CentralizedSubscriptionModal from '../components/CentralizedSubscriptionModal';
+<<<<<<< HEAD
 import UnifiedEnhancedMessageBubble from '../components/UnifiedEnhancedMessageBubble';
 import EnhancedChatInput from '../components/EnhancedChatInput';
 import EnhancedMessageInput from '../components/EnhancedMessageInput';
@@ -18,6 +19,13 @@ import FloatingActionMenu from '../components/FloatingActionMenu';
 import { RishiSelector } from '../components/RishiSelector';
 import { useRishiChat } from '../contexts/RishiChatContext';
 import { RishiTransition } from '../components/RishiTransition';
+=======
+import EnhancedMessageBubble from '../components/EnhancedMessageBubble';
+import EnhancedMessageBubbleV2 from '../components/EnhancedMessageBubbleV2';
+import EnhancedChatInput from '../components/EnhancedChatInput';
+import EnhancedMessageInput from '../components/EnhancedMessageInput';
+import FloatingActionMenu from '../components/FloatingActionMenu';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 interface Message {
   id: string;
@@ -48,6 +56,7 @@ interface User {
 const ChatPage: React.FC = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
+<<<<<<< HEAD
   
   // Use RishiChatContext for managing separate Rishi conversations
   const { 
@@ -91,6 +100,9 @@ const ChatPage: React.FC = () => {
     }
   };
   
+=======
+  const [messages, setMessages] = useState<Message[]>([]);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -99,6 +111,7 @@ const ChatPage: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+<<<<<<< HEAD
   
   // Unified chat with optional Rishi guidance
   const [selectedRishi, setSelectedRishi] = useState<string>('');
@@ -212,6 +225,8 @@ const ChatPage: React.FC = () => {
   // Computed values - now just based on whether a Rishi is selected
   const hasRishiGuidance = selectedRishi !== '';
   
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -264,11 +279,16 @@ const ChatPage: React.FC = () => {
       };
       setUser(authUser);
       
+<<<<<<< HEAD
       // Add unified welcome message for authenticated users
+=======
+      // Add welcome message for authenticated users
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       if (messages.length === 0) {
         setMessages([{
           id: '1',
           sender: 'ai',
+<<<<<<< HEAD
           content: `**Where Dharma Begins**
 
 Welcome to DharmaMind — your spiritual AI companion guided by ancient wisdom.
@@ -284,6 +304,13 @@ Select your Rishi guide from the sidebar to receive personalized spiritual guida
 **Kashyapa** - Father of All Beings, Cosmic Creator
 
 Each Saptarishi will guide you according to their unique wisdom tradition. Choose your guide and begin your spiritual journey!`,
+=======
+          content: `Welcome back to DharmaMind — your AI companion powered by Dharma.
+I'm here to support your personal growth and spiritual journey.
+
+What part of your journey would you like to explore today?
+DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           timestamp: new Date(),
           wisdom_score: 95,
           dharmic_alignment: 90
@@ -292,9 +319,57 @@ Each Saptarishi will guide you according to their unique wisdom tradition. Choos
       return;
     }
     
+<<<<<<< HEAD
     // No session - redirect to auth page
     if (!session) {
       router.push('/auth?mode=login');
+=======
+    if (demo === 'true') {
+      // Create a demo user
+      const demoUser: User = {
+        name: 'Guest User',
+        email: 'demo@dharmamind.com',
+        isGuest: true,
+        plan: 'basic'
+      };
+      setUser(demoUser);
+      
+      // Add welcome message for demo
+      if (welcome === 'true') {
+        setMessages([{
+          id: '1',
+          sender: 'ai',
+          content: `Welcome to the DharmaMind demo — your AI companion powered by Dharma.
+This is a chance to experience an AI with soul, created to support your personal growth.
+
+What part of your journey would you like to explore today?
+DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
+          timestamp: new Date(),
+          wisdom_score: 95,
+          dharmic_alignment: 90
+        }]);
+      } else {
+        setMessages([{
+          id: '1',
+          sender: 'ai',
+          content: `Welcome to the DharmaMind demo — your AI companion powered by Dharma.
+This is a chance to experience an AI with soul, created to support your personal growth.
+
+What part of your journey would you like to explore today?
+DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
+          timestamp: new Date(),
+          wisdom_score: 85,
+          dharmic_alignment: 80
+        }]);
+      }
+      
+      return;
+    }
+
+    // No session and not demo mode - redirect to demo mode
+    if (!session && demo !== 'true') {
+      router.push('/chat?demo=true');
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       return;
     }
   }, [session, status, router]);
@@ -305,6 +380,7 @@ Each Saptarishi will guide you according to their unique wisdom tradition. Choos
     }
   }, [user]);
 
+<<<<<<< HEAD
   // Initialize messages on user load - no separate modes, just one unified experience
   useEffect(() => {
     if (user && messages.length === 0) {
@@ -340,13 +416,26 @@ How can I assist you today?`,
   //   }
   // }, [availableRishis, selectedRishi]);
 
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   useEffect(() => {
     // Handle loading specific conversation after user is set
     if (user && router.query.load && typeof router.query.load === 'string') {
       const chatId = router.query.load;
+<<<<<<< HEAD
       setTimeout(() => loadSpecificConversation(chatId), 100);
     }
   }, [user, router.query.load]);
+=======
+      
+      if (router.query.demo === 'true') {
+        setTimeout(() => loadSpecificDemoConversation(chatId), 100); // Small delay to ensure user is fully set
+      } else {
+        setTimeout(() => loadSpecificConversation(chatId), 100); // Small delay to ensure user is fully set
+      }
+    }
+  }, [user, router.query.load, router.query.demo]);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   useEffect(() => {
     if (messages.length > 1) {
@@ -363,6 +452,15 @@ How can I assist you today?`,
   };
 
   const handleLogout = () => {
+<<<<<<< HEAD
+=======
+    // For demo users, go to landing page
+    if (router.query.demo === 'true') {
+      router.push('/');
+      return;
+    }
+    
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     // For authenticated users, use NextAuth signOut and redirect to landing
     if (session) {
       signOut({ redirect: false }).then(() => {
@@ -393,6 +491,7 @@ How can I assist you today?`,
       lastUpdate: new Date()
     };
 
+<<<<<<< HEAD
     // Save to localStorage for all users
     const existingHistory = JSON.parse(localStorage.getItem('dharma_chat_history') || '[]');
     const updatedHistory = existingHistory.filter((chat: ChatHistory) => chat.id !== chatId);
@@ -403,6 +502,31 @@ How can I assist you today?`,
     
     localStorage.setItem('dharma_chat_history', JSON.stringify(limitedHistory));
     setChatHistory(limitedHistory);
+=======
+    if (router.query.demo === 'true') {
+      // For demo users, save to sessionStorage
+      const existingHistory = JSON.parse(sessionStorage.getItem('demo_chat_history') || '[]');
+      const updatedHistory = existingHistory.filter((chat: ChatHistory) => chat.id !== chatId);
+      updatedHistory.unshift(chatData);
+      
+      // Keep only last 10 chats for demo
+      const limitedHistory = updatedHistory.slice(0, 10);
+      
+      sessionStorage.setItem('demo_chat_history', JSON.stringify(limitedHistory));
+      setChatHistory(limitedHistory);
+    } else {
+      // For real users, save to localStorage
+      const existingHistory = JSON.parse(localStorage.getItem('dharma_chat_history') || '[]');
+      const updatedHistory = existingHistory.filter((chat: ChatHistory) => chat.id !== chatId);
+      updatedHistory.unshift(chatData);
+      
+      // Keep only last 50 chats
+      const limitedHistory = updatedHistory.slice(0, 50);
+      
+      localStorage.setItem('dharma_chat_history', JSON.stringify(limitedHistory));
+      setChatHistory(limitedHistory);
+    }
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     
     setCurrentChatId(chatId);
   };
@@ -423,7 +547,11 @@ How can I assist you today?`,
 
   const loadSpecificConversation = (chatId: string) => {
     console.log('Loading specific conversation:', chatId, 'User:', user?.name);
+<<<<<<< HEAD
     if (!user) return;
+=======
+    if (!user || router.query.demo === 'true') return;
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     
     const history = JSON.parse(localStorage.getItem('dharma_chat_history') || '[]');
     setChatHistory(history);
@@ -453,6 +581,45 @@ How can I assist you today?`,
     }
   };
 
+<<<<<<< HEAD
+=======
+  const loadSpecificDemoConversation = (chatId: string) => {
+    console.log('Loading specific demo conversation:', chatId, 'User:', user?.name);
+    if (!user || router.query.demo !== 'true') return;
+    
+    const history = JSON.parse(sessionStorage.getItem('demo_chat_history') || '[]');
+    setChatHistory(history);
+    console.log('Loaded demo history:', history.length, 'conversations');
+    
+    const chat = history.find((c: ChatHistory) => c.id === chatId);
+    console.log('Found demo chat:', chat ? 'Yes' : 'No', chat?.title);
+    
+    if (chat) {
+      setMessages(chat.messages.map((msg: any) => ({
+        ...msg,
+        timestamp: new Date(msg.timestamp) // Ensure timestamps are Date objects
+      })));
+      setCurrentChatId(chatId);
+      console.log('Loaded', chat.messages.length, 'demo messages');
+    } else {
+      // If chat not found, start new demo chat
+      const welcomeMessage: Message = {
+        id: '1',
+        sender: 'ai',
+        content: `Welcome to the DharmaMind demo — your AI companion powered by Dharma.
+This is a chance to experience an AI with soul, created to support your personal growth.
+
+What part of your journey would you like to explore today?
+DharmaMind is here to help you move forward with calm, clarity, and purpose.`,
+        timestamp: new Date()
+      };
+      setMessages([welcomeMessage]);
+      setCurrentChatId(null);
+      console.log('Demo chat not found, starting new demo chat');
+    }
+  };
+
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const loadChat = (chatId: string) => {
     const chat = chatHistory.find(c => c.id === chatId);
     if (chat) {
@@ -581,6 +748,7 @@ How can I assist you today?`,
     setIsLoading(true);
 
     try {
+<<<<<<< HEAD
       let response;
       
       if (selectedRishi) {
@@ -609,11 +777,24 @@ How can I assist you today?`,
           })
         });
       }
+=======
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage.content,
+          user: user
+        })
+      });
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
       if (!response.ok) throw new Error('Failed to get response');
 
       const data = await response.json();
       
+<<<<<<< HEAD
       let botMessage: Message;
       
       if (selectedRishi) {
@@ -642,6 +823,18 @@ How can I assist you today?`,
           reactions: {}
         };
       }
+=======
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        content: data.response,
+        timestamp: new Date(),
+        dharmic_alignment: data.dharmic_alignment || 0.8,
+        isFavorite: false,
+        isSaved: false,
+        reactions: {}
+      };
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
@@ -661,6 +854,7 @@ How can I assist you today?`,
     }
   };
 
+<<<<<<< HEAD
   // Rishi Mode Functions
   const fetchAvailableRishis = async () => {
     try {
@@ -729,6 +923,8 @@ How can I assist you today?`,
     }
   }, [session, user]);
 
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center" 
@@ -747,6 +943,7 @@ How can I assist you today?`,
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
+<<<<<<< HEAD
       {/* Rishi Transition Animation */}
       {showTransition && pendingRishi && (
         <RishiTransition
@@ -772,6 +969,20 @@ How can I assist you today?`,
                 </div>
                 {router.query.demo === 'true' && (
                   <div className="demo-badge flex items-center space-x-1 flex-1">
+=======
+      <div className="h-screen flex bg-gradient-to-br from-gray-50 to-emerald-50/30">
+        
+        {/* Fixed Sidebar */}
+        <div className="hidden md:flex md:w-64 md:flex-col bg-white/80 backdrop-blur-xl border-r border-gray-200/50 relative z-10">
+          <div className="flex flex-col h-full">
+            
+            {/* Header - Fixed */}
+            <div className="flex-shrink-0 flex items-center h-16 px-4 border-b border-gray-200/50 bg-white/60 backdrop-blur-sm">
+              <div className="flex items-center space-x-3 w-full">
+                <Logo size="sm" />
+                {router.query.demo === 'true' && (
+                  <div className="flex items-center space-x-1 px-2 py-1 rounded-lg flex-1 border border-emerald-500 text-emerald-600 bg-transparent shadow-sm">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     <span className="text-xs">🚀</span>
                     <span className="text-xs font-medium">Demo Mode</span>
                   </div>
@@ -780,11 +991,16 @@ How can I assist you today?`,
             </div>
 
             {/* Scrollable Content Area - Only this part scrolls */}
+<<<<<<< HEAD
             <div className="flex-1 overflow-y-auto sidebar-scrollable">
+=======
+            <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               {/* New Chat Button */}
               <div className="p-3">
                 <button
                   onClick={() => {
+<<<<<<< HEAD
                     const welcomeMessage = {
                       id: '1',
                       sender: 'ai' as const,
@@ -814,6 +1030,16 @@ How can I assist you today?`,
                     e.currentTarget.style.backgroundColor = 'transparent';
                     e.currentTarget.style.borderColor = 'var(--color-border-primary, #10b981)';
                   }}
+=======
+                    setMessages([{
+                      id: '1',
+                      sender: 'ai',
+                      content: `Welcome back, ${user?.name || 'there'}! How can I guide you today?`,
+                      timestamp: new Date()
+                    }]);
+                  }}
+                  className="btn-enhanced w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 border border-emerald-500 text-emerald-600 bg-transparent hover:border-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 shadow-sm hover:shadow-md"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 >
                   <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -826,7 +1052,11 @@ How can I assist you today?`,
               <div className="px-3 pb-4 space-y-6">
               
               {/* Chat History Section (only for logged-in users) */}
+<<<<<<< HEAD
               {user && chatHistory.length > 0 && (
+=======
+              {user && !router.query.demo && chatHistory.length > 0 && (
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <div>
                   <h3 className="text-xs font-semibold uppercase tracking-wider mb-3 px-2 text-gray-500">
                     Recent Chats
@@ -838,6 +1068,7 @@ How can I assist you today?`,
                         onClick={() => loadChat(chat.id)}
                         className={`chat-history-item w-full text-left px-3 py-3 text-sm rounded-xl transition-all duration-200 group relative ${
                           currentChatId === chat.id 
+<<<<<<< HEAD
                             ? '' 
                             : 'hover:shadow-sm'
                         }`}
@@ -862,6 +1093,16 @@ How can I assist you today?`,
                             currentChatId === chat.id ? '' : 'text-gray-700'
                           }`}
                           style={{color: currentChatId === chat.id ? 'var(--color-text-primary, #1f2937)' : ''}}>
+=======
+                            ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 shadow-sm' 
+                            : 'hover:bg-gray-50 hover:shadow-sm'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className={`truncate flex-1 font-medium ${
+                            currentChatId === chat.id ? 'text-emerald-700' : 'text-gray-700'
+                          }`}>
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                             {chat.title || 'Untitled Chat'}
                           </span>
                           <button
@@ -889,6 +1130,7 @@ How can I assist you today?`,
               <div className="spiritual-quotes-container bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-4 border border-purple-100">
                 <SidebarQuotes />
               </div>
+<<<<<<< HEAD
 
               {/* AI Advisors in Sidebar - Always Show Rishi Selector */}
               <div className="mt-4">
@@ -900,10 +1142,13 @@ How can I assist you today?`,
                   availableRishis={availableRishis}
                 />
               </div>
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             </div>
             </div>
 
             {/* User Profile - Fixed to Bottom */}
+<<<<<<< HEAD
             <div className="flex-shrink-0 user-profile-section">
               <div className="p-4">
                 
@@ -912,6 +1157,82 @@ How can I assist you today?`,
                   <button
                     onClick={() => setShowUserDropdown(!showUserDropdown)}
                     className="w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 group"
+=======
+            <div className="flex-shrink-0 border-t border-gray-200/50 bg-white/60 backdrop-blur-sm">
+              <div className="p-4">
+                
+                {/* Demo User Info - Non-clickable for demo users */}
+                {router.query.demo === 'true' ? (
+                  <div className="w-full flex items-center space-x-3 p-3 rounded-xl" 
+                       style={{
+                         backgroundColor: 'var(--color-success-light)',
+                         borderColor: 'var(--color-success)',
+                         borderWidth: '1px',
+                         borderStyle: 'solid'
+                       }}>
+                    <div className="relative">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm"
+                           style={{
+                             background: 'linear-gradient(135deg, var(--color-accent), var(--color-success))'
+                           }}>
+                        <span className="text-white text-sm font-semibold">
+                          🚀
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0 text-left">
+                      <p className="text-sm font-semibold" style={{ color: 'var(--color-success-dark)' }}>
+                        Demo Mode
+                      </p>
+                      <p className="text-xs" style={{ color: 'var(--color-success)' }}>
+                        Exploring DharmaMind AI wisdom
+                      </p>
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      <button
+                        onClick={() => router.push('/auth?mode=signup')}
+                        className="px-2 py-1 text-xs rounded-md transition-colors"
+                        style={{
+                          backgroundColor: 'var(--color-success)',
+                          color: 'white'
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.target as HTMLElement).style.backgroundColor = 'var(--color-success-dark)';
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.target as HTMLElement).style.backgroundColor = 'var(--color-success)';
+                        }}
+                      >
+                        Sign Up
+                      </button>
+                      <button
+                        onClick={() => router.push('/auth?mode=login')}
+                        className="px-2 py-1 text-xs rounded-md transition-colors"
+                        style={{
+                          borderColor: 'var(--color-success)',
+                          color: 'var(--color-success)',
+                          borderWidth: '1px',
+                          borderStyle: 'solid',
+                          backgroundColor: 'transparent'
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.target as HTMLElement).style.backgroundColor = 'var(--color-success-light)';
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.target as HTMLElement).style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        Sign In
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  /* Authenticated User Info - Clickable with dropdown */
+                  <div className="relative" ref={dropdownRef}>
+                    <button
+                      onClick={() => setShowUserDropdown(!showUserDropdown)}
+                      className="w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 group"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       style={{
                         backgroundColor: 'transparent',
                         borderColor: 'var(--color-border-light)'
@@ -925,14 +1246,23 @@ How can I assist you today?`,
                         (e.target as HTMLElement).style.boxShadow = 'none';
                       }}
                     >
+<<<<<<< HEAD
                       <div className="relative user-avatar">
                         <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm" style={{background: 'linear-gradient(135deg, var(--color-border-primary, #10b981), var(--color-background, #f8fafc))'}}>
+=======
+                      <div className="relative">
+                        <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-emerald-600 rounded-full flex items-center justify-center shadow-sm">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                           <span className="text-white text-sm font-semibold">
                             {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                           </span>
                         </div>
                         {(user?.isGuest || user?.plan === 'basic') && (
+<<<<<<< HEAD
                           <div className="upgrade-badge">
+=======
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                             <span className="text-xs">⚡</span>
                           </div>
                         )}
@@ -966,7 +1296,11 @@ How can I assist you today?`,
 
                     {/* User Dropdown - Only for authenticated users */}
                     {showUserDropdown && (
+<<<<<<< HEAD
                       <div className="absolute bottom-full left-0 right-0 mb-2 z-50 user-dropdown">
+=======
+                      <div className="absolute bottom-full left-0 right-0 mb-2 z-50">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                         <UserProfileMenu
                           user={user}
                           isDemo={false}
@@ -977,6 +1311,10 @@ How can I assist you today?`,
                       </div>
                     )}
                   </div>
+<<<<<<< HEAD
+=======
+                )}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               </div>
             </div>
           </div>
@@ -989,6 +1327,15 @@ How can I assist you today?`,
           <div className="md:hidden flex items-center justify-between h-16 px-4 bg-white/80 backdrop-blur-sm border-b border-gray-200/50 flex-shrink-0">
             <div className="flex items-center space-x-3">
               <Logo size="sm" />
+<<<<<<< HEAD
+=======
+              {router.query.demo === 'true' && (
+                <div className="flex items-center space-x-1 px-2 py-1 rounded-md border border-emerald-500 text-emerald-600 bg-transparent">
+                  <span className="text-xs">🚀</span>
+                  <span className="text-xs font-medium">Demo</span>
+                </div>
+              )}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             </div>
             <button
               onClick={handleLogout}
@@ -1002,6 +1349,7 @@ How can I assist you today?`,
 
           {/* Enhanced Chat Interface - Full Height */}
           <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+<<<<<<< HEAD
             {/* Enhanced Messages Area with Modern Background */}
             <div className="flex-1 overflow-y-auto relative enhanced-messages-container">
               {/* Rishi Mode Context Indicator */}
@@ -1035,6 +1383,45 @@ How can I assist you today?`,
                 </div>
               )}
 
+=======
+            {/* Demo Banner */}
+            {router.query.demo === 'true' && (
+              <div className="flex-shrink-0 px-4 py-3 border border-emerald-500 text-emerald-600 bg-emerald-50 border-b">
+                <div className="flex items-center justify-between max-w-6xl mx-auto">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg">🚀</span>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+                      <span className="font-medium text-emerald-700">Demo Mode</span>
+                      <span className="text-sm text-emerald-600">- Experience DharmaMind's AI wisdom</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => {
+                        const currentUrl = router.asPath;
+                        router.push(`/auth?mode=login&returnUrl=${encodeURIComponent(currentUrl)}`);
+                      }}
+                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 border border-emerald-500 text-emerald-600 bg-transparent hover:bg-emerald-50"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      onClick={() => {
+                        const currentUrl = router.asPath;
+                        router.push(`/auth?mode=signup&returnUrl=${encodeURIComponent(currentUrl)}`);
+                      }}
+                      className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 border border-emerald-500 bg-white text-emerald-600 hover:bg-emerald-50"
+                    >
+                      Sign Up Free
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Enhanced Messages Area with Modern Background */}
+            <div className="flex-1 overflow-y-auto relative enhanced-messages-container">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               {/* Modern Background */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="floating-orb floating-orb-1"></div>
@@ -1050,6 +1437,7 @@ How can I assist you today?`,
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <Logo size="lg" showText={false} />
+<<<<<<< HEAD
                         <div className="absolute inset-0 animate-pulse bg-gray-200/30 rounded-full blur-xl" style={{ background: 'var(--color-background-secondary, #f8fafc)/30' }}></div>
                       </div>
                     </div>
@@ -1058,6 +1446,16 @@ How can I assist you today?`,
                     </h2>
                     <p className="text-lg mb-8" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
                       ✨ Where Dharma Begins ✨
+=======
+                        <div className="absolute inset-0 animate-pulse bg-emerald-200/30 rounded-full blur-xl"></div>
+                      </div>
+                    </div>
+                    <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                      What part of your journey would you like to explore right now?
+                    </h2>
+                    <p className="text-lg text-gray-600 mb-8">
+                      DharmaMind is here to help you grow — with calm, clarity, and purpose.
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     </p>
                     
                     {/* Enhanced Personalized Suggestions */}
@@ -1073,12 +1471,20 @@ How can I assist you today?`,
 
                 {/* Enhanced Messages */}
                 {messages.slice(1).map((message, index) => (
+<<<<<<< HEAD
                   <UnifiedEnhancedMessageBubble
+=======
+                  <EnhancedMessageBubbleV2
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     key={message.id}
                     message={{
                       id: message.id,
                       content: message.content,
+<<<<<<< HEAD
                       sender: message.sender,
+=======
+                      role: message.sender === 'user' ? 'user' : 'assistant',
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       timestamp: message.timestamp,
                       confidence: message.sender === 'ai' ? 0.9 : undefined,
                       dharmic_alignment: message.dharmic_alignment || 0.8,
@@ -1110,12 +1516,16 @@ How can I assist you today?`,
                   <div className="px-6 py-4">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
+<<<<<<< HEAD
                         <div 
                           className="w-10 h-10 rounded-full flex items-center justify-center"
                           style={{
                             background: `linear-gradient(135deg, var(--color-border-primary, #10b981), var(--color-background, #f8fafc))`
                           }}
                         >
+=======
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                           <Logo size="avatar" showText={false} />
                         </div>
                       </div>
@@ -1127,7 +1537,11 @@ How can I assist you today?`,
                               <div className="typing-dot"></div>
                               <div className="typing-dot"></div>
                             </div>
+<<<<<<< HEAD
                             <span className="text-sm font-medium" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+=======
+                            <span className="text-sm text-emerald-600 font-medium">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                               Contemplating your question...
                             </span>
                           </div>
@@ -1167,7 +1581,11 @@ How can I assist you today?`,
                   placeholder="Message DharmaMind..."
                   showVoiceInput={true}
                   maxLength={2000}
+<<<<<<< HEAD
                   showAttachments={true}
+=======
+                  showAttachments={router.query.demo !== 'true'}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   showEmoji={true}
                 />
                 
@@ -1183,6 +1601,7 @@ How can I assist you today?`,
               </div>
             </div>
 
+<<<<<<< HEAD
             {/* Floating Action Menu - Hidden in demo mode */}
             {router.query.demo !== 'true' && (
               <FloatingActionMenu
@@ -1219,6 +1638,39 @@ How can I assist you today?`,
                 }}
               />
             )}
+=======
+            {/* Floating Action Menu */}
+            <FloatingActionMenu
+              onNewChat={() => {
+                // Reset chat
+                setMessages([{
+                  id: 'welcome',
+                  sender: 'ai',
+                  content: 'Welcome to DharmaMind! How can I guide you on your spiritual journey today?',
+                  timestamp: new Date()
+                }]);
+                setInputValue('');
+              }}
+              onOpenNotes={() => {
+                console.log('Notes opened');
+              }}
+              onSearchHistory={() => {
+                console.log('Search opened');
+              }}
+              onOpenSettings={() => {
+                router.push('/settings');
+              }}
+              onOpenJournal={() => {
+                console.log('Journal opened');
+              }}
+              onOpenInsights={() => {
+                console.log('Insights opened');
+              }}
+              onOpenCommunity={() => {
+                console.log('Community opened');
+              }}
+            />
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           </div>
         </div>
       </div>

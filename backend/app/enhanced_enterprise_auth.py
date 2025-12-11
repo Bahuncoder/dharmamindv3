@@ -1533,10 +1533,173 @@ async def reset_password(request: ResetPasswordRequest):
         )
 
 
+<<<<<<< HEAD
 # =================================================================
 # END OF AUTHENTICATION SYSTEM
 # Chat functionality is handled by the main backend at /api/chat/chat
 # =================================================================
+=======
+# Chat Models
+class ChatRequest(BaseModel):
+    message: str = Field(..., description="User message")
+    history: List[Dict[str, str]] = Field(default=[], description="Chat history")
+    user_id: str = Field(default="anonymous", description="User ID")
+
+
+class ChatResponse(BaseModel):
+    response: str
+    conversation_id: str
+    timestamp: str
+
+
+@app.post("/api/chat", response_model=ChatResponse)
+async def chat_endpoint(request: ChatRequest):
+    """
+    Process chat messages with DharmaMind AI and store conversation data
+    """
+    try:
+        message = request.message.strip()
+        user_id = request.user_id
+        
+        # Sanitize user input for security
+        clean_message = sanitize_input(message, SecurityLevel.HIGH)
+        
+        # Generate conversation ID
+        conversation_id = f"chat_{user_id}_{int(datetime.utcnow().timestamp())}"
+        
+        # DharmaMind wisdom responses based on spiritual guidance
+        response = generate_dharmic_response(clean_message)
+        
+        # Store the conversation in our data management system
+        if user_id and user_id != "anonymous":
+            try:
+                await store_chat_message(user_id, clean_message, response)
+                logger.info(f"Stored chat message for user: {user_id}")
+            except Exception as e:
+                logger.warning(f"Failed to store chat message: {e}")
+        
+        return ChatResponse(
+            response=response,
+            conversation_id=conversation_id,
+            timestamp=datetime.utcnow().isoformat()
+        )
+        
+    except Exception as e:
+        logger.error(f"Chat error: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to process chat message"
+        )
+
+
+def generate_dharmic_response(message: str) -> str:
+    """
+    Generate dharmic wisdom responses based on the user's message
+    """
+    message_lower = message.lower()
+    
+    # Meditation and Mindfulness
+    if any(word in message_lower for word in ['meditation', 'meditate', 'mindfulness', 'awareness', 'present']):
+        responses = [
+            "🧘‍♀️ In the stillness of meditation, you discover that peace was never lost—only temporarily obscured by the mind's chatter. Begin with gentle awareness of your breath, letting each exhale release what no longer serves you.",
+            "✨ Mindfulness is not about emptying the mind, but about becoming intimate with this moment exactly as it is. Start where you are, with compassion for yourself and patience for the process.",
+            "🌸 The present moment is the doorway to awakening. In meditation, we learn to rest in the space between thoughts, where infinite wisdom naturally arises."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Suffering and Challenges
+    elif any(word in message_lower for word in ['suffering', 'pain', 'difficult', 'hard', 'struggle', 'challenge']):
+        responses = [
+            "🌅 Every form of suffering carries within it the seeds of liberation. Your challenges are not obstacles to your spiritual path—they are the path itself, teaching you resilience and compassion.",
+            "💫 As the lotus blooms most beautifully from the deepest mud, your greatest growth often emerges from your most difficult experiences. Trust the process of transformation.",
+            "🕯️ Suffering is the invitation to go deeper, to find the unshakeable peace that exists beyond circumstances. You have survived every difficult day so far—you are stronger than you know."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Love and Relationships
+    elif any(word in message_lower for word in ['love', 'relationship', 'family', 'friend', 'partner', 'compassion']):
+        responses = [
+            "💝 True love begins with self-acceptance. When you cultivate unconditional love for yourself, you naturally become a source of love for others. Relationships are mirrors reflecting our inner state.",
+            "🌈 Every relationship is a teacher, offering opportunities to practice patience, forgiveness, and understanding. See conflicts as chances to grow in wisdom and compassion.",
+            "💖 Love is not something you find—it's something you are. When you align with your loving nature, you attract relationships that honor and celebrate your authentic self."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Fear and Anxiety
+    elif any(word in message_lower for word in ['fear', 'afraid', 'anxiety', 'anxious', 'worry', 'scared']):
+        responses = [
+            "🌟 Fear is often excitement without breath. Ground yourself in this moment through deep, conscious breathing. You are safe, you are supported, you are enough.",
+            "🦋 Fear cannot exist in the same space as love and presence. When anxiety arises, send yourself the same compassion you would offer a dear friend facing difficulties.",
+            "🌊 Like waves on the ocean, fears arise and pass away naturally. You are not your fears—you are the vast, peaceful awareness that witnesses them."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Purpose and Direction
+    elif any(word in message_lower for word in ['purpose', 'meaning', 'direction', 'lost', 'path', 'calling']):
+        responses = [
+            "🧭 Your purpose is not something you need to find—it's something you remember. Listen to what brings you alive, what makes your heart sing, what feels aligned with your deepest values.",
+            "🌱 Every experience has shaped you perfectly for your unique contribution to the world. Trust that your path is unfolding exactly as it should, even when you can't see the destination.",
+            "⭐ Your purpose evolves as you grow. Stay curious, follow what inspires you, and remember that sometimes the journey itself is the destination."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Gratitude and Joy
+    elif any(word in message_lower for word in ['grateful', 'gratitude', 'thankful', 'blessed', 'joy', 'happy']):
+        responses = [
+            "🙏 Gratitude is the fastest way to shift from scarcity to abundance. When we appreciate what we have, we open our hearts to receive even more blessings.",
+            "✨ Joy is your natural state—it doesn't depend on external circumstances. Cultivate moments of simple appreciation: a sunset, a smile, the breath of life itself.",
+            "🌻 Gratitude transforms ordinary moments into sacred experiences. Every blessing, no matter how small, is a reminder of the love that surrounds you."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Wisdom and Growth
+    elif any(word in message_lower for word in ['wisdom', 'growth', 'learning', 'understanding', 'insight']):
+        responses = [
+            "📚 True wisdom is knowing that every experience—joyful or challenging—contributes to your spiritual evolution. Embrace both the teacher and the lesson with equal grace.",
+            "🌳 Growth happens in spirals, not straight lines. Sometimes you'll revisit familiar lessons at deeper levels. This is not regression—it's integration.",
+            "💎 Wisdom is not accumulated knowledge but direct understanding. Trust your inner knowing—it has been guiding you faithfully all along."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Success and Achievement
+    elif any(word in message_lower for word in ['success', 'achieve', 'goal', 'ambition', 'career', 'money']):
+        responses = [
+            "🎯 True success is alignment between your actions and your values. When you pursue goals from a place of love rather than fear, success becomes a natural expression of your authentic self.",
+            "💰 Abundance flows most freely when we balance ambition with contentment, striving with acceptance. Success without inner peace is merely sophisticated suffering.",
+            "🏆 The highest achievement is becoming who you truly are. External accomplishments are beautiful expressions of your inner development, not substitutes for it."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Health and Wellbeing
+    elif any(word in message_lower for word in ['health', 'sick', 'tired', 'energy', 'body', 'healing']):
+        responses = [
+            "🌿 Your body is a sacred temple housing your beautiful soul. Listen to its wisdom—it speaks through sensations, energy levels, and intuitive knowing. Honor its needs with loving attention.",
+            "⚡ True vitality comes from aligning with natural rhythms: proper rest, nourishing food, joyful movement, and emotional balance. Healing happens when we remove obstacles to our natural state of wholeness.",
+            "🌱 Every cell in your body is constantly renewing itself. Focus on what supports your wellbeing: positive thoughts, loving relationships, and activities that bring you alive."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # Death and Loss
+    elif any(word in message_lower for word in ['death', 'dying', 'loss', 'grief', 'goodbye']):
+        responses = [
+            "🕊️ In the spiritual perspective, death is not an ending but a transformation—like a wave returning to the ocean. Love transcends physical form and continues to connect us across all dimensions.",
+            "💫 Grief is love with nowhere to go. Honor your feelings while remembering that the bonds of love are eternal. Those we've lost continue to guide and bless us in ways we may not always perceive.",
+            "🌅 Every ending births a new beginning. In times of loss, we're invited to discover the indestructible essence within ourselves that death cannot touch."
+        ]
+        return responses[hash(message) % len(responses)]
+    
+    # General spiritual guidance
+    else:
+        responses = [
+            "🌟 Every question you ask is a prayer for deeper understanding. Trust that the answers you seek are already within you, waiting to be discovered through quiet reflection and inner listening.",
+            "✨ You are exactly where you need to be on your spiritual journey. Every experience—joyful or challenging—is perfectly designed to awaken the wisdom and love that you truly are.",
+            "🙏 In this moment, breathe deeply and remember: you are infinitely loved, eternally supported, and perfectly whole exactly as you are. Your journey is sacred, and your growth is a gift to the world.",
+            "🧘‍♀️ The divine speaks to you through intuition, synchronicity, and the whispers of your heart. Stay open, stay curious, and trust the gentle guidance that emerges from stillness.",
+            "🌸 Spiritual growth is not about becoming someone different—it's about removing everything that isn't authentically you. You are already complete; you're simply remembering who you've always been."
+        ]
+        return responses[hash(message) % len(responses)]
+
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 if __name__ == "__main__":
     logger.info("Starting DharmaMind Enhanced Authentication Server...")

@@ -31,12 +31,21 @@ const AdminDashboard: React.FC = () => {
   const [stats, setStats] = useState<DashboardStats>({
     totalPosts: 42,
     totalViews: 15420,
+<<<<<<< HEAD
     totalUsers: 2847,
     activeUsers: 234,
     newComments: 156,
     pendingReviews: 3
   });
 
+=======
+    totalUsers: 1250,
+    activeUsers: 89,
+    newComments: 23,
+    pendingReviews: 5
+  });
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const [refreshing, setRefreshing] = useState(false);
 
   const [recentActivity] = useState<RecentActivity[]>([
@@ -82,7 +91,11 @@ const AdminDashboard: React.FC = () => {
         router.push('/admin/login');
         return;
       }
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       // Simulate loading
       const timer = setTimeout(() => setIsLoading(false), 800);
       return () => clearTimeout(timer);
@@ -155,7 +168,11 @@ const AdminDashboard: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.jpeg" />
       </Head>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       <div className="min-h-screen bg-secondary-bg">
         {/* Top Navigation Bar */}
         <nav className="bg-primary-bg shadow-lg border-b-2 border-border-primary">
@@ -167,9 +184,15 @@ const AdminDashboard: React.FC = () => {
                   <span className="text-lg font-black text-primary">Admin Dashboard</span>
                 </div>
               </div>
+<<<<<<< HEAD
 
               <div className="flex items-center space-x-4">
                 <button
+=======
+              
+              <div className="flex items-center space-x-4">
+                <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   onClick={handleRefresh}
                   disabled={refreshing}
                   className="p-2 rounded-full bg-neutral-100 text-secondary hover:bg-neutral-200 hover:text-primary transition-colors disabled:opacity-50"
@@ -187,7 +210,11 @@ const AdminDashboard: React.FC = () => {
                     </span>
                   </button>
                 </div>
+<<<<<<< HEAD
                 <button
+=======
+                <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   onClick={handleLogout}
                   className="btn-outline px-4 py-2 rounded-lg font-bold text-sm hover:bg-primary hover:text-white transition-all"
                 >
@@ -223,10 +250,18 @@ const AdminDashboard: React.FC = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
+<<<<<<< HEAD
                     className={`py-2 px-1 border-b-2 font-bold text-sm transition-colors ${activeTab === tab.id
                         ? 'border-primary text-primary'
                         : 'border-transparent text-secondary hover:text-primary hover:border-medium'
                       }`}
+=======
+                    className={`py-2 px-1 border-b-2 font-bold text-sm transition-colors ${
+                      activeTab === tab.id
+                        ? 'border-primary text-primary'
+                        : 'border-transparent text-secondary hover:text-primary hover:border-medium'
+                    }`}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   >
                     <span className="mr-2">{tab.icon}</span>
                     {tab.label}
@@ -305,7 +340,11 @@ const AdminDashboard: React.FC = () => {
               <div className="card-elevated p-8">
                 <h3 className="text-2xl font-black text-primary mb-6 tracking-tight">Quick Actions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<<<<<<< HEAD
                   <button
+=======
+                  <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     onClick={() => setActiveTab('content')}
                     className="btn-primary p-6 rounded-xl font-bold text-center hover:opacity-90 transition-all duration-300 group"
                   >
@@ -313,7 +352,11 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-lg">Create New Post</div>
                     <div className="text-sm opacity-80 mt-1">Write & publish</div>
                   </button>
+<<<<<<< HEAD
                   <button
+=======
+                  <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     onClick={() => setActiveTab('users')}
                     className="btn-outline p-6 rounded-xl font-bold text-center hover:bg-primary hover:text-white transition-all duration-300 group"
                   >
@@ -321,7 +364,11 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-lg">Manage Users</div>
                     <div className="text-sm opacity-70 mt-1 group-hover:opacity-100">Community control</div>
                   </button>
+<<<<<<< HEAD
                   <button
+=======
+                  <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     onClick={() => setActiveTab('analytics')}
                     className="btn-outline p-6 rounded-xl font-bold text-center hover:bg-primary hover:text-white transition-all duration-300 group"
                   >
@@ -329,7 +376,11 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-lg">View Analytics</div>
                     <div className="text-sm opacity-70 mt-1 group-hover:opacity-100">Insights & trends</div>
                   </button>
+<<<<<<< HEAD
                   <button
+=======
+                  <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     onClick={() => setActiveTab('settings')}
                     className="btn-outline p-6 rounded-xl font-bold text-center hover:bg-primary hover:text-white transition-all duration-300 group"
                   >
@@ -389,7 +440,11 @@ const AdminDashboard: React.FC = () => {
                   Create, edit, and manage all your blog posts and website content.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<<<<<<< HEAD
                   <button
+=======
+                  <button 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     onClick={() => router.push('/admin/editor')}
                     className="card-primary p-6 text-left hover:shadow-lg transition-all group"
                   >

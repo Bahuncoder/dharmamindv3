@@ -411,15 +411,23 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
           className="space-y-2"
         >
           <div className="flex items-center space-x-2 mb-3">
+<<<<<<< HEAD
             <span className="text-sm font-medium" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
+=======
+            <span className="text-sm font-medium text-gray-600">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               � Smart suggestions based on your preferences:
             </span>
             <button 
               onClick={generateSmartSuggestions}
+<<<<<<< HEAD
               className="text-xs transition-colors"
               style={{ color: 'var(--color-border-primary, #10b981)' }}
               onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+=======
+              className="text-xs text-emerald-500 hover:text-emerald-700 transition-colors"
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               title="Refresh smart suggestions"
             >
               ↻ Refresh
@@ -434,6 +442,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => handleSuggestionClick(suggestion)}
+<<<<<<< HEAD
                 className="text-left p-3 rounded-lg hover:shadow-md transition-all duration-200 group relative"
                 style={{
                   background: 'var(--color-background, #f8fafc)',
@@ -451,6 +460,13 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
                 <div className="flex items-start space-x-2">
                   <span className="mt-0.5" style={{ color: 'var(--color-border-primary, #10b981)' }}>🎯</span>
                   <span className="text-sm group-hover:opacity-80 line-clamp-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+=======
+                className="text-left p-3 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-100 rounded-lg hover:from-emerald-100 hover:to-green-100 hover:shadow-md transition-all duration-200 group relative"
+              >
+                <div className="flex items-start space-x-2">
+                  <span className="text-emerald-500 group-hover:text-emerald-600 mt-0.5">🎯</span>
+                  <span className="text-sm text-gray-700 group-hover:text-gray-900 line-clamp-2">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     {suggestion}
                   </span>
                 </div>
@@ -458,7 +474,11 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
                 {/* Learning indicator */}
                 {userInteractions.some(interaction => interaction.suggestion === suggestion) && (
                   <div className="absolute top-1 right-1">
+<<<<<<< HEAD
                     <span className="text-xs" style={{ color: 'var(--color-border-primary, #10b981)' }} title="Learned from your preferences">
+=======
+                    <span className="text-xs text-emerald-600" title="Learned from your preferences">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       ✨
                     </span>
                   </div>
@@ -468,7 +488,11 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
           </div>
           
           {/* Learning status indicator */}
+<<<<<<< HEAD
           <div className="flex items-center justify-center mt-4 text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
+=======
+          <div className="flex items-center justify-center mt-4 text-xs text-gray-500">
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             <span>
               💡 Learning from {userInteractions.length} interactions to personalize your experience
               {Object.keys(categoryWeights).length > 0 && (

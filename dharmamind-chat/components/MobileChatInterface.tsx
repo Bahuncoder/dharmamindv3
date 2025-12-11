@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext';
+<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
+=======
+import { useColors } from '../contexts/ColorContext';
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { useSubscription } from '../hooks/useSubscription';
 import VoiceInput from './VoiceInput';
 import UserProfileMenu from './UserProfileMenu';
@@ -45,7 +49,11 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
 
   // Authentication and subscription
   const { user, isAuthenticated } = useAuth();
+<<<<<<< HEAD
   const { currentTheme } = useColor();
+=======
+  const { currentTheme } = useColors();
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const { isFreePlan } = useSubscription();
 
   // Close dropdown when clicking outside

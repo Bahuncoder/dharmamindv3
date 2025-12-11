@@ -16,6 +16,7 @@
 
 :root {
   /* ===================================
+<<<<<<< HEAD
    * 🎯 MASTER BRAND COLORS - SIMPLIFIED SYSTEM
    * ===================================
    * ONLY TWO COLORS: Emerald borders + Light gray backgrounds/text
@@ -49,37 +50,81 @@
   --brand-text-muted: #6b7280;
   /* Gray-500: Muted text */
 
+=======
+   * 🎯 MASTER BRAND COLORS
+   * ===================================
+   * These are the ONLY colors you need to change to update the entire app
+   */
+  
+  /* 🔹 Primary Brand Color (Main theme color - used everywhere) */
+  --brand-primary: #6b7280;           /* Gray-500: Main brand color */
+  --brand-primary-hover: #4b5563;     /* Gray-600: Hover state */
+  --brand-primary-light: #9ca3af;     /* Gray-400: Light variant */
+  --brand-primary-dark: #374151;      /* Gray-700: Dark variant */
+  
+  /* 🔸 Accent Color (Borders, highlights, CTAs) */
+  --brand-accent: #10b981;            /* Emerald-500: Only accent color */
+  --brand-accent-hover: #059669;      /* Emerald-600: Accent hover */
+  --brand-accent-light: #6ee7b7;      /* Emerald-300: Light accent */
+  --brand-accent-dark: #047857;       /* Emerald-700: Dark accent */
+  
+  /* 🔹 Secondary Color (Supporting elements) */
+  --brand-secondary: #8b5cf6;         /* Violet-500: Secondary actions */
+  --brand-secondary-hover: #7c3aed;   /* Violet-600: Secondary hover */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎨 DERIVED COLORS (Auto-calculated from brand colors)
    * ===================================
    * These automatically update when you change the brand colors above
    */
+<<<<<<< HEAD
 
   /* Logo & Identity */
   --color-logo-primary: var(--brand-accent);
   --color-logo-secondary: var(--brand-primary);
 
+=======
+  
+  /* Logo & Identity */
+  --color-logo-primary: var(--brand-accent);
+  --color-logo-secondary: var(--brand-primary);
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* Primary System Colors */
   --color-primary: var(--brand-primary);
   --color-primary-hover: var(--brand-primary-hover);
   --color-primary-light: var(--brand-primary-light);
   --color-primary-dark: var(--brand-primary-dark);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* Accent System Colors */
   --color-accent: var(--brand-accent);
   --color-accent-hover: var(--brand-accent-hover);
   --color-accent-light: var(--brand-accent-light);
   --color-accent-dark: var(--brand-accent-dark);
+<<<<<<< HEAD
 
   /* Secondary System Colors */
   --color-secondary: var(--brand-secondary);
   --color-secondary-hover: var(--brand-secondary-hover);
 
+=======
+  
+  /* Secondary System Colors */
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-hover: var(--brand-secondary-hover);
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎯 NEUTRAL SYSTEM COLORS
    * ===================================
    * Background, text, and border colors
    */
+<<<<<<< HEAD
 
   /* Text Colors (Derived from brand) */
   --color-text-primary: #2C2C2C;
@@ -117,11 +162,36 @@
   --color-border-accent: var(--brand-accent);
   /* Accent borders use brand accent */
 
+=======
+  
+  /* Text Colors (Derived from brand) */
+  --color-text-primary: #2C2C2C;          /* Main text - dark charcoal */
+  --color-text-secondary: #6E6E6E;        /* Secondary text - medium gray */
+  --color-text-muted: var(--brand-primary-light);    /* Muted text uses brand light */
+  --color-text-inverse: #ffffff;          /* White text for dark backgrounds */
+  --color-text-accent: var(--brand-accent);          /* Accent text uses brand accent */
+  
+  /* Background Colors */
+  --color-bg-primary: #ffffff;            /* Main white background */
+  --color-bg-secondary: #f9fafb;          /* Light gray background */
+  --color-bg-tertiary: #f3f4f6;           /* Medium gray background */
+  --color-bg-dark: var(--brand-primary-dark);        /* Dark background uses brand */
+  --color-bg-accent: var(--brand-accent);            /* Accent background */
+  --color-bg-overlay: rgba(107, 114, 128, 0.75);     /* Overlay uses brand primary */
+  
+  /* Border Colors (Derived from brand) */
+  --color-border-light: #e5e7eb;          /* Light borders */
+  --color-border-medium: #d1d5db;         /* Medium borders */
+  --color-border-dark: var(--brand-primary-light);   /* Dark borders use brand */
+  --color-border-accent: var(--brand-accent);        /* Accent borders use brand accent */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎯 STATE COLORS
    * ===================================
    * Success, warning, error, info - integrated with brand
    */
+<<<<<<< HEAD
 
   --color-success: var(--brand-accent);
   /* Success uses brand accent (emerald) */
@@ -140,11 +210,24 @@
   --color-info-light: #e0e7ff;
   /* Light info background */
 
+=======
+  
+  --color-success: var(--brand-accent);           /* Success uses brand accent (emerald) */
+  --color-success-light: #d1fae5;                /* Light success background */
+  --color-warning: var(--brand-primary);         /* Warning uses brand primary */
+  --color-warning-light: #f3f4f6;               /* Light warning background */
+  --color-error: #ef4444;                       /* Error red */
+  --color-error-light: #fee2e2;                 /* Light error background */
+  --color-info: var(--brand-secondary);         /* Info uses brand secondary */
+  --color-info-light: #e0e7ff;                  /* Light info background */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎯 INTERACTION COLORS
    * ===================================
    * Focus, hover, active states - all derived from brand
    */
+<<<<<<< HEAD
 
   --color-focus: var(--brand-accent);
   /* Focus color uses brand accent */
@@ -155,11 +238,20 @@
   --color-active: var(--brand-primary-dark);
   /* Active uses brand dark */
 
+=======
+  
+  --color-focus: var(--brand-accent);           /* Focus color uses brand accent */
+  --color-focus-ring: rgba(16, 185, 129, 0.2); /* Focus ring uses brand accent with opacity */
+  --color-hover: var(--brand-primary-hover);   /* Hover uses brand hover */
+  --color-active: var(--brand-primary-dark);   /* Active uses brand dark */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎯 SPECIALIZED SYSTEM COLORS
    * ===================================
    * All derived from the master brand colors above
    */
+<<<<<<< HEAD
 
   /* Enterprise Colors (Professional look using brand colors) */
   --color-enterprise: var(--brand-primary-dark);
@@ -185,11 +277,29 @@
   --color-contact-border-hover: var(--brand-accent-hover);
   /* Accent hover border */
 
+=======
+  
+  /* Enterprise Colors (Professional look using brand colors) */
+  --color-enterprise: var(--brand-primary-dark);        /* Uses brand dark */
+  --color-enterprise-hover: var(--brand-primary);       /* Uses brand primary */
+  --color-enterprise-light: var(--brand-primary-light); /* Uses brand light */
+  --color-enterprise-bg: var(--color-bg-secondary);     /* Light background */
+  --color-enterprise-border: var(--brand-accent);       /* Accent border */
+  
+  /* Contact/Sales Colors (Derived from brand) */
+  --color-contact: var(--brand-primary);           /* Uses brand primary */
+  --color-contact-hover: var(--brand-primary-hover); /* Uses brand hover */
+  --color-contact-bg-hover: var(--color-bg-secondary); /* Light background */
+  --color-contact-border: var(--brand-accent);     /* Accent border */
+  --color-contact-border-hover: var(--brand-accent-hover); /* Accent hover border */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎯 LEGACY COMPATIBILITY
    * ===================================
    * These ensure old code still works while using the new system
    */
+<<<<<<< HEAD
 
   /* Old Logo Colors (Now point to new system) */
   --color-logo-emerald: var(--brand-accent);
@@ -224,22 +334,56 @@
   --color-neutral-900: #1c1917;
   /* Stone-900 */
 
+=======
+  
+  /* Old Logo Colors (Now point to new system) */
+  --color-logo-emerald: var(--brand-accent);
+  
+  /* Old Secondary Colors (Now point to new system) */
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-hover: var(--brand-secondary-hover);
+  --color-secondary-light: #a78bfa;               /* Violet-400 */
+  --color-secondary-dark: #6d28d9;                /* Violet-700 */
+  
+  /* Old Neutral Colors (Keep as-is for now) */
+  --color-neutral-50: #fafaf9;        /* Stone-50 */
+  --color-neutral-100: #f5f5f4;       /* Stone-100 */
+  --color-neutral-200: #e7e5e4;       /* Stone-200 */
+  --color-neutral-300: #d6d3d1;       /* Stone-300 */
+  --color-neutral-400: #a8a29e;       /* Stone-400 */
+  --color-neutral-500: #78716c;       /* Stone-500 */
+  --color-neutral-600: #57534e;       /* Stone-600 */
+  --color-neutral-700: #44403c;       /* Stone-700 */
+  --color-neutral-800: #292524;       /* Stone-800 */
+  --color-neutral-900: #1c1917;       /* Stone-900 */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* ===================================
    * 🎯 VISUAL DESIGN SYSTEM
    * ===================================
    * Shadows, transitions, and effects using brand colors
    */
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* Shadows (Enhanced with brand accent) */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+<<<<<<< HEAD
   --shadow-accent: 0 4px 12px rgba(16, 185, 129, 0.3);
   /* Accent shadow using brand accent */
   --shadow-brand: 0 4px 12px rgba(107, 114, 128, 0.2);
   /* Brand shadow using brand primary */
 
+=======
+  --shadow-accent: 0 4px 12px rgba(16, 185, 129, 0.3); /* Accent shadow using brand accent */
+  --shadow-brand: 0 4px 12px rgba(107, 114, 128, 0.2); /* Brand shadow using brand primary */
+  
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   /* Transitions */
   --transition-fast: 0.15s ease-in-out;
   --transition-normal: 0.2s ease-in-out;
@@ -378,6 +522,7 @@ p.quote-box {
  * Change the brand colors above and all buttons automatically update
  */
 
+<<<<<<< HEAD
 /* 🔹 Primary Buttons - Light gray with emerald borders */
 .btn-primary {
   background-color: var(--brand-primary);
@@ -390,6 +535,17 @@ p.quote-box {
   padding: 0.75rem 1.5rem;
   font-weight: 500;
   transition: all 0.3s ease;
+=======
+/* 🔹 Primary Buttons - Main actions using brand colors */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -398,6 +554,7 @@ p.quote-box {
 }
 
 .btn-primary:hover {
+<<<<<<< HEAD
   background-color: var(--brand-primary-hover);
   /* Slightly darker gray */
   color: var(--brand-text);
@@ -405,10 +562,18 @@ p.quote-box {
   border-color: var(--brand-accent-hover);
   /* Darker emerald border */
   transform: translateY(-1px);
+=======
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .btn-primary:focus {
   outline: none;
+<<<<<<< HEAD
   box-shadow: 0 0 0 3px var(--brand-accent-light);
   border-color: var(--brand-accent);
 }
@@ -425,6 +590,21 @@ p.quote-box {
   padding: 0.75rem 1.5rem;
   font-weight: 500;
   transition: all 0.3s ease;
+=======
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  border-color: var(--color-focus);
+}
+
+/* 🔸 Secondary Buttons - Supporting actions */
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -637,6 +817,7 @@ p.quote-box {
  */
 
 /* 🎯 Background Utilities - All use brand colors */
+<<<<<<< HEAD
 .bg-brand-primary {
   background-color: var(--brand-primary) !important;
 }
@@ -715,11 +896,42 @@ p.quote-box {
 .text-brand-secondary {
   color: var(--brand-secondary) !important;
 }
+=======
+.bg-brand-primary { background-color: var(--brand-primary) !important; }
+.bg-brand-primary:hover { background-color: var(--brand-primary-hover) !important; }
+.bg-brand-accent { background-color: var(--brand-accent) !important; }
+.bg-brand-accent:hover { background-color: var(--brand-accent-hover) !important; }
+.bg-brand-secondary { background-color: var(--brand-secondary) !important; }
+
+/* Legacy compatibility - redirect to brand colors */
+.bg-primary { background-color: var(--brand-primary) !important; }
+.bg-primary:hover { background-color: var(--brand-primary-hover) !important; }
+.bg-accent { background-color: var(--brand-accent) !important; }
+.bg-accent:hover { background-color: var(--brand-accent-hover) !important; }
+.bg-logo-gradient { background-color: var(--brand-accent) !important; }
+.bg-primary-clean { background-color: var(--brand-primary) !important; }
+.bg-primary-clean:hover { background-color: var(--brand-primary-hover) !important; }
+
+/* Section backgrounds */
+.bg-primary-background { background-color: var(--color-bg-secondary) !important; }
+.bg-primary-background-main { background-color: var(--color-bg-tertiary) !important; }
+.bg-section-light { background-color: var(--color-bg-secondary) !important; }
+.bg-card-white { background-color: var(--color-bg-primary) !important; }
+
+/* 🎯 Text Color Utilities - All use brand colors */
+.text-brand-primary { color: var(--brand-primary) !important; }
+.text-brand-accent { color: var(--brand-accent) !important; }
+.text-brand-secondary { color: var(--brand-secondary) !important; }
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 /* Legacy text colors - redirect to centralized system */
 .text-primary,
 h1.text-primary,
+<<<<<<< HEAD
 h2.text-primary,
+=======
+h2.text-primary, 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 h3.text-primary,
 h4.text-primary,
 span.text-primary,
@@ -728,6 +940,7 @@ p.text-primary {
   color: var(--color-text-primary) !important;
 }
 
+<<<<<<< HEAD
 .text-secondary {
   color: var(--color-text-secondary) !important;
 }
@@ -781,6 +994,25 @@ p.text-primary {
 .border-success {
   border-color: var(--color-success) !important;
 }
+=======
+.text-secondary { color: var(--color-text-secondary) !important; }
+.text-muted { color: var(--color-text-muted) !important; }
+.text-inverse { color: var(--color-text-inverse) !important; }
+
+/* 🎯 Border Utilities - All use brand colors */
+.border-brand-primary { border-color: var(--brand-primary) !important; }
+.border-brand-accent { border-color: var(--brand-accent) !important; }
+.border-brand-secondary { border-color: var(--brand-secondary) !important; }
+
+/* Legacy border colors */
+.border-primary { border-color: var(--brand-accent) !important; }
+.border-card { border-color: var(--color-border-light) !important; }
+.border-light { border-color: var(--color-border-light) !important; }
+.border-medium { border-color: var(--color-border-medium) !important; }
+.border-dark { border-color: var(--color-border-dark) !important; }
+.border-accent { border-color: var(--brand-accent) !important; }
+.border-success { border-color: var(--color-success) !important; }
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 /* 🎯 Override ALL Tailwind Orange/Amber Classes */
 /* These ensure no orange colors can appear anywhere in the app */
@@ -864,6 +1096,7 @@ button.hover\:text-primary:hover,
 }
 
 /* 🎯 Text Color Utilities - All use brand colors */
+<<<<<<< HEAD
 .text-brand-primary {
   color: var(--brand-primary) !important;
 }
@@ -875,11 +1108,20 @@ button.hover\:text-primary:hover,
 .text-brand-secondary {
   color: var(--brand-secondary) !important;
 }
+=======
+.text-brand-primary { color: var(--brand-primary) !important; }
+.text-brand-accent { color: var(--brand-accent) !important; }
+.text-brand-secondary { color: var(--brand-secondary) !important; }
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 /* Legacy text colors - redirect to centralized system */
 .text-primary,
 h1.text-primary,
+<<<<<<< HEAD
 h2.text-primary,
+=======
+h2.text-primary, 
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 h3.text-primary,
 h4.text-primary,
 span.text-primary,
@@ -888,6 +1130,7 @@ p.text-primary {
   color: var(--color-text-primary) !important;
 }
 
+<<<<<<< HEAD
 .text-secondary {
   color: var(--color-text-secondary) !important;
 }
@@ -941,6 +1184,25 @@ p.text-primary {
 .border-success {
   border-color: var(--color-success) !important;
 }
+=======
+.text-secondary { color: var(--color-text-secondary) !important; }
+.text-muted { color: var(--color-text-muted) !important; }
+.text-inverse { color: var(--color-text-inverse) !important; }
+
+/* 🎯 Border Utilities - All use brand colors */
+.border-brand-primary { border-color: var(--brand-primary) !important; }
+.border-brand-accent { border-color: var(--brand-accent) !important; }
+.border-brand-secondary { border-color: var(--brand-secondary) !important; }
+
+/* Legacy border colors */
+.border-primary { border-color: var(--brand-accent) !important; }
+.border-card { border-color: var(--color-border-light) !important; }
+.border-light { border-color: var(--color-border-light) !important; }
+.border-medium { border-color: var(--color-border-medium) !important; }
+.border-dark { border-color: var(--color-border-dark) !important; }
+.border-accent { border-color: var(--brand-accent) !important; }
+.border-success { border-color: var(--color-success) !important; }
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 /* 🎯 Override ALL Tailwind Orange/Amber Classes */
 /* These ensure no orange colors can appear anywhere in the app */
@@ -1026,4 +1288,8 @@ button.hover\:text-primary:hover,
 /* Fix loading spinners and other UI elements */
 .border-amber-600 {
   border-color: var(--brand-accent) !important;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc

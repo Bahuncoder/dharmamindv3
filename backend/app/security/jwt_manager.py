@@ -8,6 +8,7 @@ Implements comprehensive JWT security including:
 - Security fingerprinting
 """
 
+<<<<<<< HEAD
 # Try to import JWT libraries with fallbacks
 try:
     from jose import jwt, JWTError
@@ -61,11 +62,16 @@ except ImportError:
     redis = MockRedisModule()
     REDIS_AVAILABLE = False
 
+=======
+import jwt
+import redis
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import time
 import hashlib
 import secrets
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any, List
+<<<<<<< HEAD
 
 # Try to import FastAPI with fallback
 try:
@@ -100,6 +106,10 @@ except ImportError:
             return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
     PYDANTIC_AVAILABLE = False
 
+=======
+from fastapi import Request, HTTPException
+from pydantic import BaseModel
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import logging
 import json
 
@@ -287,9 +297,15 @@ class EnterpriseJWTManager:
                 ip_address=current_fingerprint.ip_hash
             )
             
+<<<<<<< HEAD
         except JWTError:
             raise HTTPException(status_code=401, detail="Token has expired")
         except JWTError:
+=======
+        except jwt.ExpiredSignatureError:
+            raise HTTPException(status_code=401, detail="Token has expired")
+        except jwt.InvalidTokenError:
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             raise HTTPException(status_code=401, detail="Invalid token")
         except Exception as e:
             logger.error(f"Token validation error: {e}")

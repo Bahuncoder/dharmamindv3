@@ -73,7 +73,11 @@ export default async function handler(
       console.log('Chat API: Backend unavailable, providing fallback response')
       
       // Generate a spiritual fallback response using the chatService
+<<<<<<< HEAD
       const fallbackResponse = chatService.generateEnhancedFallbackResponse(message)
+=======
+      const fallbackResponse = chatService.generateFallbackResponse(message)
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       
       return res.status(200).json(fallbackResponse)
     }

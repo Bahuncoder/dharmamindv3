@@ -350,6 +350,7 @@ export default function Auth() {
               </button>
             </div>
 
+<<<<<<< HEAD
             {/* Demo Credentials Banner - Only show in development */}
             {process.env.NODE_ENV === 'development' && mode === 'login' && (
               <motion.div
@@ -385,6 +386,8 @@ export default function Auth() {
               </motion.div>
             )}
 
+=======
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             {/* Error Messages */}
             <ErrorMessage 
               error={formError.error} 

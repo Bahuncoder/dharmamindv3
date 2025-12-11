@@ -1,0 +1,132 @@
+# 🔒 DharmaMind Secure Docker Compose Configuration
+# Enhanced security for spiritual AI containerization
+
+version: '3.8'
+
+services:
+  dharmamind-backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    
+    # Security configurations
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+    
+    # User security
+    user: "1000:1000"  # Non-root user
+    
+    # Resource limits (prevent DoS)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    
+    # Secure environment
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    
+    # Secrets (use Docker secrets in production)
+    secrets:
+      - jwt_secret
+      - db_encryption_key
+      - api_keys
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    
+    # Network security
+    networks:
+      - dharmamind-secure
+
+  dharmamind-frontend:
+    build:
+      context: ./dharmamind-chat
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    
+    # Security configurations
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=50m
+    
+    # User security
+    user: "1000:1000"
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    
+    networks:
+      - dharmamind-secure
+
+  # Reverse proxy with security headers
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "443:443"
+      - "80:80"
+    
+    # Security configurations
+    security_opt:
+      - no-new-privileges:true
+    
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    
+    depends_on:
+      - dharmamind-backend
+      - dharmamind-frontend
+    
+    networks:
+      - dharmamind-secure
+
+# Secure network
+networks:
+  dharmamind-secure:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# Docker secrets (use in production)
+secrets:
+  jwt_secret:
+    external: true
+  db_encryption_key:
+    external: true
+  api_keys:
+    external: true
+
+# Secure volumes
+volumes:
+  spiritual_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /secure/path/to/spiritual/data

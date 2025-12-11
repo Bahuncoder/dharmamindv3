@@ -500,12 +500,19 @@ class WisdomDepthEvaluator:
         }
         
         self.tradition_markers = {
+<<<<<<< HEAD
             WisdomTradition.VEDANTIC: ["atman", "brahman", "moksha", "maya", "dharma", "advaita", "dvaita"],
             WisdomTradition.SAMKHYA: ["purusha", "prakriti", "guna", "kaivalya", "samskaras"],
             WisdomTradition.YOGA: ["asana", "pranayama", "dharana", "dhyana", "samadhi", "yama", "niyama"],
             WisdomTradition.TANTRIC: ["shakti", "shiva", "kundalini", "chakra", "mantra", "yantra"],
             WisdomTradition.HINDU: ["karma", "dharma", "artha", "kama", "moksha", "samsara", "ahimsa"],
             WisdomTradition.VEDIC: ["rta", "yajna", "soma", "agni", "indra", "vedic", "hymns"]
+=======
+            WisdomTradition.VEDANTIC: ["atman", "brahman", "moksha", "maya", "dharma"],
+            WisdomTradition.BUDDHIST: ["buddha", "dharma", "sangha", "mindfulness", "compassion"],
+            WisdomTradition.HINDU: ["karma", "dharma", "artha", "kama", "moksha"],
+            WisdomTradition.UNIVERSAL: ["love", "compassion", "wisdom", "truth", "peace"]
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         }
         
         # Load pre-trained sentence transformer for semantic analysis
@@ -623,11 +630,19 @@ class CulturalSensitivityEvaluator:
         }
         
         self.tradition_contexts = {
+<<<<<<< HEAD
             "hindu": ["hinduism", "hindu", "vedic", "sanskrit", "dharma", "karma"],
             "vedantic": ["vedanta", "advaita", "brahman", "atman", "shankara"],
             "tantric": ["tantra", "shakti", "shiva", "kundalini", "chakra"],
             "ayurvedic": ["ayurveda", "dosha", "vata", "pitta", "kapha"],
             "puranic": ["purana", "vishnu", "shiva", "devi", "avatara"]
+=======
+            "hindu": ["hinduism", "hindu", "vedic", "sanskrit"],
+            "buddhist": ["buddhism", "buddhist", "zen", "mindfulness"],
+            "christian": ["christianity", "christian", "jesus", "christ"],
+            "islamic": ["islam", "muslim", "quran", "allah"],
+            "jewish": ["judaism", "jewish", "torah", "hebrew"]
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         }
     
     def evaluate(self, text: str) -> CulturalSensitivityScore:

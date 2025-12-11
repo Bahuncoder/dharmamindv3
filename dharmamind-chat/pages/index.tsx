@@ -52,7 +52,11 @@ const HomePage: React.FC = () => {
       
       // Immediate redirect - no waiting
       setTimeout(() => {
+<<<<<<< HEAD
         router.replace('/auth?mode=login');
+=======
+        router.replace('/chat?demo=true');
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       }, 100);
     }, 200);
   }, [router]);
@@ -123,7 +127,11 @@ const HomePage: React.FC = () => {
                  style={{
                    background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-hover))',
                    border: '3px solid var(--color-logo-emerald)',
+<<<<<<< HEAD
                    boxShadow: '0 20px 60px rgba(16, 185, 129, 0.4), 0 8px 30px rgba(5, 150, 105, 0.3)'
+=======
+                   boxShadow: '0 20px 60px rgba(16, 185, 129, 0.4), 0 8px 30px rgba(249, 115, 22, 0.3)'
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                  }}>
               {/* Use exact same structure as Logo component */}
               <img
@@ -139,7 +147,11 @@ const HomePage: React.FC = () => {
               <div 
                 className="absolute inset-0 rounded-lg"
                 style={{
+<<<<<<< HEAD
                   background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.15))',
+=======
+                  background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.1))',
+>>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   zIndex: 5
                 }}
               />
