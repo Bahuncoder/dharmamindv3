@@ -61,7 +61,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   const colorClasses = {
     primary: 'border-amber-600 border-t-transparent',
-    secondary: 'border-emerald-600 border-t-transparent', 
+    secondary: 'border-gold-600 border-t-transparent', 
     white: 'border-white border-t-transparent',
     gray: 'border-gray-300 border-t-gray-600'
   };
@@ -138,7 +138,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
               <div className="w-48">
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-gradient-to-r from-amber-600 to-emerald-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-gradient-to-r from-amber-600 to-gold-600 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
                   />
                 </div>
@@ -170,7 +170,7 @@ export const LoadingPage: React.FC<LoadingPageProps> = ({
         
         {showLogo && (
           <div className="flex justify-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-amber-600 to-gold-600 rounded-full flex items-center justify-center">
               <span className="text-white text-2xl font-bold">🕉️</span>
             </div>
           </div>
@@ -192,7 +192,7 @@ export const LoadingPage: React.FC<LoadingPageProps> = ({
           <div className="w-full max-w-xs mx-auto">
             <div className="w-full bg-stone-200 rounded-full h-2">
               <div 
-                className="bg-gradient-to-r from-amber-600 to-emerald-600 h-2 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-amber-600 to-gold-600 h-2 rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
               />
             </div>

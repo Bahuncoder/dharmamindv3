@@ -263,7 +263,7 @@ const CommunityPage: React.FC = () => {
                         <p className="font-semibold">{event.date}</p>
                         <p>{event.time}</p>
                         <p className="text-sm">
-                          <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                          <span className="inline-block w-2 h-2 bg-success-500 rounded-full mr-2"></span>
                           {event.type}
                         </p>
                       </div>

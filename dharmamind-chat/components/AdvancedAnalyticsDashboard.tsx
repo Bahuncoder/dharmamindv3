@@ -302,7 +302,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
     <div className={`flex items-center gap-2 ${isMobile ? 'text-xs' : 'text-sm'}`}>
       <div 
         className={`w-2 h-2 rounded-full ${
-          connectionStatus === 'connected' ? 'bg-green-500' : 
+          connectionStatus === 'connected' ? 'bg-success-500' : 
           connectionStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' : 
           'bg-red-500'
         }`}
@@ -344,12 +344,12 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
         aria-label={`${title}: ${formattedValue}`}
       >
         <div className="flex items-center justify-between mb-2">
-          <div className={`p-2 rounded-lg ${isHighContrast ? 'bg-gray-200' : 'bg-emerald-100'}`}>
+          <div className={`p-2 rounded-lg ${isHighContrast ? 'bg-gray-200' : 'bg-gold-100'}`}>
             {icon}
           </div>
           {trend !== undefined && (
             <div className={`flex items-center text-sm ${
-              trend > 0 ? 'text-green-600' : trend < 0 ? 'text-red-600' : 'text-gray-600'
+              trend > 0 ? 'text-success-600' : trend < 0 ? 'text-red-600' : 'text-gray-600'
             }`}>
               <ArrowTrendingUpIcon 
                 className={`w-4 h-4 ${trend < 0 ? 'rotate-180' : ''}`} 
@@ -422,7 +422,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
               className={`p-3 rounded-lg border-l-4 ${
                 alert.level === 'error' ? 'border-red-500 bg-red-50' :
                 alert.level === 'warning' ? 'border-yellow-500 bg-yellow-50' :
-                'border-blue-500 bg-blue-50'
+                'border-neutral-1000 bg-neutral-100'
               } ${isHighContrast ? 'border-2 border-black' : ''}`}
               role="alert"
               aria-label={`${alert.level} alert: ${alert.message}`}
@@ -457,7 +457,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
             animate={reduceMotion ? {} : { rotate: 360 }}
             transition={reduceMotion ? {} : { duration: 2, repeat: Infinity, ease: "linear" }}
             className={`w-8 h-8 border-2 border-t-transparent rounded-full mx-auto mb-4 ${
-              isHighContrast ? 'border-black' : 'border-emerald-500'
+              isHighContrast ? 'border-black' : 'border-gold-500'
             }`}
           />
           <p className={`${isHighContrast ? 'text-black font-semibold' : 'text-gray-600'}`}>
@@ -496,21 +496,21 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
           {renderMetricCard(
             'CPU Usage',
             systemMetrics.cpu_usage,
-            <CpuChipIcon className={`w-5 h-5 ${isHighContrast ? 'text-black' : 'text-emerald-600'}`} />,
+            <CpuChipIcon className={`w-5 h-5 ${isHighContrast ? 'text-black' : 'text-gold-600'}`} />,
             undefined,
             'percentage'
           )}
           {renderMetricCard(
             'Memory',
             systemMetrics.memory_usage,
-            <ChartBarIcon className={`w-5 h-5 ${isHighContrast ? 'text-black' : 'text-blue-600'}`} />,
+            <ChartBarIcon className={`w-5 h-5 ${isHighContrast ? 'text-black' : 'text-gold-600'}`} />,
             undefined,
             'percentage'
           )}
           {renderMetricCard(
             'Active Users',
             userAnalytics.active_users,
-            <UserGroupIcon className={`w-5 h-5 ${isHighContrast ? 'text-black' : 'text-purple-600'}`} />,
+            <UserGroupIcon className={`w-5 h-5 ${isHighContrast ? 'text-black' : 'text-gold-600'}`} />,
             5
           )}
           {renderMetricCard(
@@ -573,7 +573,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
                 className={`px-3 py-1 rounded-full text-sm ${
                   isHighContrast 
                     ? 'bg-gray-200 text-black border border-black font-semibold' 
-                    : 'bg-emerald-100 text-emerald-800'
+                    : 'bg-gold-100 text-gold-800'
                 }`}
               >
                 {topic}

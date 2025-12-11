@@ -40,7 +40,7 @@ const ConversationInsights: React.FC<ConversationInsightsProps> = ({ isOpen, onC
           <div className="p-6 border-b border-gray-200">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                <ChartBarIcon className="w-5 h-5 mr-2 text-emerald-600" />
+                <ChartBarIcon className="w-5 h-5 mr-2 text-gold-600" />
                 Conversation Insights
               </h2>
               <button
@@ -55,20 +55,20 @@ const ConversationInsights: React.FC<ConversationInsightsProps> = ({ isOpen, onC
           {/* Content */}
           <div className="p-6 space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-emerald-50 p-4 rounded-xl">
+              <div className="bg-gold-50 p-4 rounded-xl">
                 <div className="flex items-center justify-between">
-                  <SparklesIcon className="w-8 h-8 text-emerald-600" />
-                  <span className="text-2xl font-bold text-emerald-600">
+                  <SparklesIcon className="w-8 h-8 text-gold-600" />
+                  <span className="text-2xl font-bold text-gold-600">
                     {insights.totalMessages}
                   </span>
                 </div>
-                <p className="text-sm text-emerald-700 mt-2">Total Messages</p>
+                <p className="text-sm text-gold-700 mt-2">Total Messages</p>
               </div>
 
               <div className="bg-purple-50 p-4 rounded-xl">
                 <div className="flex items-center justify-between">
-                  <HeartIcon className="w-8 h-8 text-purple-600" />
-                  <span className="text-2xl font-bold text-purple-600">
+                  <HeartIcon className="w-8 h-8 text-gold-600" />
+                  <span className="text-2xl font-bold text-gold-600">
                     {Math.round(insights.averageDharmicAlignment * 100)}%
                   </span>
                 </div>
@@ -82,7 +82,7 @@ const ConversationInsights: React.FC<ConversationInsightsProps> = ({ isOpen, onC
                 {insights.wisdomTopics.map((topic, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium"
+                    className="px-3 py-1 bg-gold-100 text-gold-800 rounded-full text-sm font-medium"
                   >
                     {topic}
                   </span>
@@ -98,7 +98,7 @@ const ConversationInsights: React.FC<ConversationInsightsProps> = ({ isOpen, onC
               
               <div className="flex justify-between items-center">
                 <span className="text-gray-700">Spiritual Growth</span>
-                <span className="font-medium text-emerald-600">{insights.spiritualGrowth}</span>
+                <span className="font-medium text-gold-600">{insights.spiritualGrowth}</span>
               </div>
               
               <div className="flex justify-between items-center">

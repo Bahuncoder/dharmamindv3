@@ -8,11 +8,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSubscription } from '../hooks/useSubscription';
-<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
-=======
-import { useColors } from '../contexts/ColorContext';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import Logo from './Logo';
 
 // ===============================
@@ -46,11 +42,7 @@ export const UpgradePrompt: React.FC<UpgradePromptProps> = ({
     formatPrice
   } = useSubscription();
 
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   // Don't show if not on free plan
   if (!isFreePlan()) return null;
@@ -87,9 +79,9 @@ export const UpgradePrompt: React.FC<UpgradePromptProps> = ({
         };
       case 'feature':
         return {
-          bgColor: 'bg-blue-50',
-          borderColor: 'border-blue-200',
-          textColor: 'text-blue-800',
+          bgColor: 'bg-neutral-100',
+          borderColor: 'border-neutral-300',
+          textColor: 'text-neutral-800',
           buttonStyle: { backgroundColor: primaryColor, borderColor: primaryColor },
           buttonHoverStyle: { backgroundColor: primaryHover, borderColor: primaryHover },
           icon: '✨'
@@ -147,7 +139,7 @@ export const UpgradePrompt: React.FC<UpgradePromptProps> = ({
                   className={`h-2 rounded-full transition-all duration-300 ${
                     featureCheck.percentage >= 100 ? 'bg-red-500' :
                     featureCheck.percentage >= 90 ? 'bg-orange-500' :
-                    featureCheck.percentage >= 80 ? 'bg-yellow-500' : 'bg-green-500'
+                    featureCheck.percentage >= 80 ? 'bg-yellow-500' : 'bg-success-500'
                   }`}
                   style={{ width: `${Math.min(100, featureCheck.percentage)}%` }}
                 />
@@ -227,11 +219,7 @@ export const MiniUpgradeBanner: React.FC<MiniUpgradeBannerProps> = ({
   className = ''
 }) => {
   const { usage, isFreePlan, checkFeatureUsage, formatPrice } = useSubscription();
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   if (!isFreePlan() || !usage) return null;
 
@@ -319,11 +307,7 @@ export const UsageProgress: React.FC<UsageProgressProps> = ({
   className = ''
 }) => {
   const { checkFeatureUsage, isFreePlan } = useSubscription();
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   
   if (!isFreePlan()) return null;
   

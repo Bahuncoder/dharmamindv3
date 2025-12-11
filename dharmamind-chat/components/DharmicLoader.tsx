@@ -35,7 +35,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
         <div className="relative">
           {/* Glow background */}
           <motion.div
-            className={`${config.container} absolute inset-0 bg-emerald-500/20 rounded-full blur-xl`}
+            className={`${config.container} absolute inset-0 bg-gold-500/20 rounded-full blur-xl`}
             animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -58,7 +58,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
           
           {/* Rotating ring */}
           <motion.div
-            className={`${config.container} absolute inset-0 border-2 border-emerald-500/30 rounded-full`}
+            className={`${config.container} absolute inset-0 border-2 border-gold-500/30 rounded-full`}
             style={{ borderStyle: 'dashed' }}
             animate={{ rotate: 360 }}
             transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -85,7 +85,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
         <div className={`${config.container} relative`}>
           {/* Outer glow */}
           <motion.div
-            className="absolute inset-0 bg-emerald-500/10 rounded-full blur-xl"
+            className="absolute inset-0 bg-gold-500/10 rounded-full blur-xl"
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
@@ -101,7 +101,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
               }}
             >
               <motion.div
-                className={`${config.petals} bg-gradient-to-t from-emerald-500 to-teal-400 rounded-full`}
+                className={`${config.petals} bg-gradient-to-t from-gold-500 to-gold-400 rounded-full`}
                 animate={{
                   scaleY: [1, 1.3, 1],
                   opacity: [0.6, 1, 0.6]
@@ -150,7 +150,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
           {/* Outer ring */}
-          <div className="absolute inset-0 border-4 border-emerald-500 rounded-full" />
+          <div className="absolute inset-0 border-4 border-gold-500 rounded-full" />
           
           {/* Spokes */}
           {[0, 1, 2, 3, 4, 5, 6, 7].map((spoke) => (
@@ -159,17 +159,17 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
               className="absolute inset-0 flex items-center justify-center"
               style={{ transform: `rotate(${spoke * 45}deg)` }}
             >
-              <div className="w-0.5 h-full bg-emerald-500 opacity-60" />
+              <div className="w-0.5 h-full bg-gold-500 opacity-60" />
             </div>
           ))}
           
           {/* Inner ring */}
-          <div className="absolute inset-2 border-2 border-emerald-400 rounded-full" />
+          <div className="absolute inset-2 border-2 border-gold-400 rounded-full" />
           
           {/* Center hub */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              className="w-3 h-3 bg-emerald-600 rounded-full shadow-lg"
+              className="w-3 h-3 bg-gold-600 rounded-full shadow-lg"
               animate={{ scale: [1, 1.3, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             />
@@ -218,7 +218,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
             {[0, 1, 2, 3].map((dot) => (
               <motion.div
                 key={dot}
-                className="absolute w-1.5 h-1.5 bg-emerald-500 rounded-full"
+                className="absolute w-1.5 h-1.5 bg-gold-500 rounded-full"
                 style={{
                   transform: `rotate(${dot * 90}deg) translateX(${size === 'sm' ? 8 : size === 'md' ? 12 : size === 'lg' ? 16 : 24}px)`
                 }}
@@ -250,7 +250,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
           {[0, 1, 2].map((circle) => (
             <motion.div
               key={circle}
-              className="absolute rounded-full bg-emerald-500"
+              className="absolute rounded-full bg-gold-500"
               initial={{ scale: 0.5, opacity: 0.8 }}
               animate={{
                 scale: [0.5, 1.5],
@@ -268,7 +268,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
           
           {/* Center stable dot */}
           <motion.div
-            className="relative w-3 h-3 bg-emerald-600 rounded-full shadow-lg"
+            className="relative w-3 h-3 bg-gold-600 rounded-full shadow-lg"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
@@ -296,7 +296,7 @@ export const DharmicLoader: React.FC<DharmicLoaderProps> = ({
             key={dot}
             className={`
               ${size === 'sm' ? 'w-2 h-2' : size === 'md' ? 'w-3 h-3' : size === 'lg' ? 'w-4 h-4' : 'w-5 h-5'} 
-              bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full shadow-md
+              bg-gradient-to-br from-gold-500 to-gold-500 rounded-full shadow-md
             `}
             animate={{
               scale: [1, 1.5, 1],
@@ -353,7 +353,7 @@ export const DharmicTypingIndicator: React.FC<{ wisdom?: string }> = ({
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center gap-4 p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-lg border border-emerald-100 dark:border-emerald-900"
+      className="flex items-center gap-4 p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gold-100 dark:border-gold-900"
     >
       <DharmicLoader variant="lotus" size="sm" />
       
@@ -367,8 +367,8 @@ export const DharmicTypingIndicator: React.FC<{ wisdom?: string }> = ({
           {currentWisdom}
         </motion.p>
         <div className="flex items-center gap-1">
-          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-xs text-emerald-600 dark:text-emerald-400">
+          <span className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-pulse" />
+          <span className="text-xs text-gold-600 dark:text-gold-400">
             Wisdom incoming
           </span>
         </div>
@@ -393,12 +393,12 @@ export const DharmicPageLoader: React.FC<{
       {/* Background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-emerald-300/20 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gold-300/20 rounded-full blur-3xl"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 4, repeat: Infinity }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-300/20 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gold-300/20 rounded-full blur-3xl"
           animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 5, repeat: Infinity }}
         />
@@ -484,7 +484,7 @@ export const MeditationTimer: React.FC<MeditationTimerProps> = ({
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-6 shadow-lg border border-emerald-200 dark:border-emerald-800"
+      className="bg-gradient-to-br from-gold-50 to-gold-50 dark:from-gold-900/20 dark:to-gold-900/20 rounded-2xl p-6 shadow-lg border border-gold-200 dark:border-gold-800"
     >
       <div className="flex flex-col items-center gap-4">
         <div className="flex items-center gap-2">
@@ -495,7 +495,7 @@ export const MeditationTimer: React.FC<MeditationTimerProps> = ({
         </div>
 
         <motion.div
-          className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
+          className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold-600 to-gold-600"
           animate={isActive ? { scale: [1, 1.05, 1] } : {}}
           transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -513,7 +513,7 @@ export const MeditationTimer: React.FC<MeditationTimerProps> = ({
           ) : (
             <button
               onClick={onResume}
-              className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              className="px-5 py-2.5 bg-gold-500 hover:bg-gold-600 text-white rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5"
             >
               ▶️ Resume
             </button>

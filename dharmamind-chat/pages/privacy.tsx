@@ -110,8 +110,8 @@ const PrivacyPage: React.FC = () => {
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">Data Protection & Security</h2>
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                  <p className="text-blue-800 font-medium">🔒 Your spiritual conversations are encrypted and protected</p>
+                <div className="bg-neutral-100 border border-neutral-300 rounded-lg p-4 mb-4">
+                  <p className="text-neutral-800 font-medium">🔒 Your spiritual conversations are encrypted and protected</p>
                 </div>
                 <ul className="list-disc list-inside text-gray-700 space-y-2">
                   <li>End-to-end encryption for all conversations</li>

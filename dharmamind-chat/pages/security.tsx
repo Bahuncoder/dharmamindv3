@@ -90,7 +90,7 @@ const SecurityPage: React.FC = () => {
                 </ContactButton>
                 <button 
                   onClick={() => router.push('/auth?mode=login')}
-                  className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300"
+                  className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300"
                 >
                   Sign In
                 </button>
@@ -100,9 +100,9 @@ const SecurityPage: React.FC = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-amber-50 to-emerald-50 py-16">
+        <div className="bg-gradient-to-br from-amber-50 to-gold-50 py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-amber-600 to-gold-600 rounded-full flex items-center justify-center">
               <span className="text-white text-2xl">🛡️</span>
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -114,7 +114,7 @@ const SecurityPage: React.FC = () => {
             </p>
             
             <div className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-sm border border-gray-200">
-              <span className="text-green-600 mr-2">✅</span>
+              <span className="text-success-600 mr-2">✅</span>
               <span className="font-medium text-gray-900">
                 Zero security incidents in our history
               </span>
@@ -131,7 +131,7 @@ const SecurityPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {securityFeatures.map((feature, index) => (
               <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 mb-4 bg-gradient-to-r from-amber-100 to-emerald-100 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 mb-4 bg-gradient-to-r from-amber-100 to-gold-100 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">{feature.icon}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">{feature.title}</h3>
@@ -155,28 +155,28 @@ const SecurityPage: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">🔒 Data Protection</h3>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Encryption at Rest</div>
                       <div className="text-gray-600 text-sm">AES-256 encryption for all stored data</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Encryption in Transit</div>
                       <div className="text-gray-600 text-sm">TLS 1.3 for all data transmission</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Key Management</div>
                       <div className="text-gray-600 text-sm">Hardware Security Modules (HSMs)</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-emerald-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Data Retention</div>
                       <div className="text-gray-600 text-sm">Configurable retention policies</div>
@@ -190,28 +190,28 @@ const SecurityPage: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">🏗️ Infrastructure Security</h3>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Network Security</div>
                       <div className="text-gray-600 text-sm">VPC isolation, firewalls, DDoS protection</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Access Control</div>
                       <div className="text-gray-600 text-sm">Role-based access with principle of least privilege</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Monitoring</div>
                       <div className="text-gray-600 text-sm">24/7 security monitoring and alerting</div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-gold-600 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium text-gray-900">Backups</div>
                       <div className="text-gray-600 text-sm">Encrypted, geographically distributed backups</div>
@@ -236,7 +236,7 @@ const SecurityPage: React.FC = () => {
                 <h3 className="font-semibold text-gray-900 mb-2">{cert.name}</h3>
                 <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                   cert.status === 'Certified' || cert.status === 'Compliant'
-                    ? 'bg-green-100 text-green-800'
+                    ? 'bg-success-100 text-green-800'
                     : 'bg-yellow-100 text-yellow-800'
                 }`}>
                   {cert.status}
@@ -245,7 +245,7 @@ const SecurityPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="bg-gradient-to-r from-amber-50 to-emerald-50 rounded-lg p-8 text-center">
+          <div className="bg-gradient-to-r from-amber-50 to-gold-50 rounded-lg p-8 text-center">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               Transparency Report
             </h3>
@@ -253,7 +253,7 @@ const SecurityPage: React.FC = () => {
               We believe in transparency. View our latest security audit results and compliance reports.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300">
+              <button className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300">
                 View Audit Reports
               </button>
               <button className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
@@ -264,7 +264,7 @@ const SecurityPage: React.FC = () => {
         </div>
 
         {/* Security Practices */}
-        <div className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white">
+        <div className="bg-gradient-to-r from-amber-600 to-gold-600 text-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <h2 className="text-3xl font-bold mb-12 text-center">
               Our Security Practices
@@ -274,22 +274,22 @@ const SecurityPage: React.FC = () => {
               
               {/* Development Security */}
               <div className="bg-gray-800 rounded-lg p-8">
-                <h3 className="text-xl font-semibold mb-6 text-emerald-400">🔧 Development Security</h3>
+                <h3 className="text-xl font-semibold mb-6 text-gold-400">🔧 Development Security</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start space-x-2">
-                    <span className="text-emerald-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Secure coding practices and code reviews</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <span className="text-emerald-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Automated security testing in CI/CD pipelines</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <span className="text-emerald-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Regular dependency updates and vulnerability scanning</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <span className="text-emerald-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Static and dynamic application security testing</span>
                   </li>
                 </ul>
@@ -297,22 +297,22 @@ const SecurityPage: React.FC = () => {
 
               {/* Operational Security */}
               <div className="bg-gray-800 rounded-lg p-8">
-                <h3 className="text-xl font-semibold mb-6 text-blue-400">🛡️ Operational Security</h3>
+                <h3 className="text-xl font-semibold mb-6 text-gold-400">🛡️ Operational Security</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start space-x-2">
-                    <span className="text-blue-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>24/7 security operations center (SOC)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <span className="text-blue-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Automated threat detection and response</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <span className="text-blue-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Regular penetration testing by third parties</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <span className="text-blue-400 mt-1">•</span>
+                    <span className="text-gold-400 mt-1">•</span>
                     <span>Incident response and disaster recovery plans</span>
                   </li>
                 </ul>
@@ -334,7 +334,7 @@ const SecurityPage: React.FC = () => {
             <ContactButton
               variant="button"
               prefillCategory="support"
-              className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-8 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300"
+              className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-8 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300"
             >
               Contact Security Team
             </ContactButton>

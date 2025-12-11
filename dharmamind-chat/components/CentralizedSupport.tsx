@@ -82,7 +82,7 @@ export const ContactButton: React.FC<ContactButtonProps> = ({
       case 'card':
         return `${sizeClasses[size]} bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow`;
       default:
-        return `${sizeClasses[size]} bg-gradient-to-r from-amber-600 to-emerald-600 text-white rounded-lg hover:from-amber-700 hover:to-emerald-700 transition-colors`;
+        return `${sizeClasses[size]} bg-gradient-to-r from-amber-600 to-gold-600 text-white rounded-lg hover:from-amber-700 hover:to-gold-700 transition-colors`;
     }
   };
 
@@ -301,8 +301,8 @@ export const ContactForm: React.FC<{
   if (success) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -409,7 +409,7 @@ export const ContactForm: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-amber-600 to-emerald-600 text-white py-3 rounded-lg font-medium hover:from-amber-700 hover:to-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-gradient-to-r from-amber-600 to-gold-600 text-white py-3 rounded-lg font-medium hover:from-amber-700 hover:to-gold-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </button>
@@ -539,7 +539,7 @@ export const CentralizedFeedbackButton: React.FC<{
       case 'card':
         return `${sizeClasses[size]} bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow`;
       default:
-        return `${sizeClasses[size]} bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors`;
+        return `${sizeClasses[size]} bg-gradient-to-r from-gold-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors`;
     }
   };
 

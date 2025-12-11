@@ -105,8 +105,8 @@ const ContemplationPage: React.FC<ContemplationPageProps> = () => {
 
             <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg p-6 border border-gray-200 dark:border-gray-700">
               <div className="text-center">
-                <div className="bg-emerald-100 dark:bg-emerald-900/50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <LightBulbIcon className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                <div className="bg-gold-100 dark:bg-gold-900/50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <LightBulbIcon className="h-6 w-6 text-gold-600 dark:text-gold-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Deep Insights</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">

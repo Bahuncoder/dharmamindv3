@@ -38,7 +38,7 @@ const DemoLinksPage: React.FC = () => {
                 </p>
                 <Link
                   href="/chat?demo=true"
-                  className="inline-block bg-gradient-to-r from-amber-500 to-emerald-500 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-600 hover:to-emerald-600 transition-colors"
+                  className="inline-block bg-gradient-to-r from-amber-500 to-gold-500 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-600 hover:to-gold-600 transition-colors"
                 >
                   Try Beta Demo
                 </Link>
@@ -60,7 +60,7 @@ const DemoLinksPage: React.FC = () => {
                 </p>
                 <Link
                   href="/chat"
-                  className="inline-block bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-3 rounded-lg font-medium hover:from-green-600 hover:to-teal-600 transition-colors"
+                  className="inline-block bg-gradient-to-r from-green-500 to-gold-500 text-white px-6 py-3 rounded-lg font-medium hover:from-green-600 hover:to-gold-600 transition-colors"
                 >
                   Go to Chat
                 </Link>

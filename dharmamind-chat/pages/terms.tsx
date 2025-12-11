@@ -185,8 +185,8 @@ const TermsPage: React.FC = () => {
                   Your privacy is important to us. Please review our Privacy Policy to understand how we collect, 
                   use, and protect your information.
                 </p>
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="text-blue-800">
+                <div className="bg-neutral-100 border border-neutral-300 rounded-lg p-4">
+                  <p className="text-neutral-800">
                     <strong>Chat History Control:</strong> You have complete control over your conversation history. 
                     You can view, export, or delete your chats at any time through your account settings.
                   </p>

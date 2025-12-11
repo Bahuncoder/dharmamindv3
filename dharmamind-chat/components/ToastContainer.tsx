@@ -36,38 +36,38 @@ const ToastContainer: React.FC<ToastProps> = ({ toasts, onDismiss }) => {
         case 'copy':
           return <ClipboardDocumentIcon className="w-5 h-5" />;
         case 'favorite':
-          return <StarIcon className="w-5 h-5 text-emerald-500" />;
+          return <StarIcon className="w-5 h-5 text-gold-500" />;
         case 'save':
-          return <BookmarkIcon className="w-5 h-5 text-green-500" />;
+          return <BookmarkIcon className="w-5 h-5 text-success-500" />;
         case 'speak':
-          return <SpeakerWaveIcon className="w-5 h-5 text-blue-500" />;
+          return <SpeakerWaveIcon className="w-5 h-5 text-neutral-1000" />;
         case 'share':
-          return <div className="w-5 h-5 text-purple-500">🔗</div>;
+          return <div className="w-5 h-5 text-gold-500">🔗</div>;
       }
     }
 
     switch (type) {
       case 'success':
-        return <CheckCircleIcon className="w-5 h-5 text-green-500" />;
+        return <CheckCircleIcon className="w-5 h-5 text-success-500" />;
       case 'error':
         return <ExclamationTriangleIcon className="w-5 h-5 text-red-500" />;
       case 'warning':
         return <ExclamationTriangleIcon className="w-5 h-5 text-gray-500" />;
       default:
-        return <InformationCircleIcon className="w-5 h-5 text-blue-500" />;
+        return <InformationCircleIcon className="w-5 h-5 text-neutral-1000" />;
     }
   };
 
   const getBackgroundColor = (type: Toast['type']) => {
     switch (type) {
       case 'success':
-        return 'bg-green-50 border-green-200';
+        return 'bg-success-50 border-green-200';
       case 'error':
         return 'bg-red-50 border-red-200';
       case 'warning':
         return 'bg-gray-50 border-gray-200';
       default:
-        return 'bg-blue-50 border-blue-200';
+        return 'bg-neutral-100 border-neutral-300';
     }
   };
 
@@ -103,7 +103,7 @@ const ToastContainer: React.FC<ToastProps> = ({ toasts, onDismiss }) => {
                 {toast.action && (
                   <button
                     onClick={toast.action.onClick}
-                    className="mt-2 text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                    className="mt-2 text-sm font-medium text-gold-600 hover:text-neutral-800 transition-colors"
                   >
                     {toast.action.label}
                   </button>

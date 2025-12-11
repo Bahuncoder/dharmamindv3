@@ -59,7 +59,7 @@ const DemoRequestPage: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-50">
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-gold-50">
         <Head>
           <title>Demo Request Submitted - DharmaMind Enterprise</title>
           <meta name="description" content="Your enterprise demo request has been submitted successfully" />
@@ -86,8 +86,8 @@ const DemoRequestPage: React.FC = () => {
         {/* Success Message */}
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
@@ -129,7 +129,7 @@ const DemoRequestPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-gold-50">
       <Head>
         <title>Schedule Enterprise Demo - DharmaMind</title>
         <meta name="description" content="Schedule a personalized demo of DharmaMind Enterprise for your organization" />

@@ -83,8 +83,8 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
 
   const getAlignmentColor = (alignment?: number) => {
     if (!alignment) return 'text-gray-400';
-    if (alignment >= 0.9) return 'text-emerald-500';
-    if (alignment >= 0.7) return 'text-emerald-400';
+    if (alignment >= 0.9) return 'text-gold-500';
+    if (alignment >= 0.7) return 'text-gold-400';
     if (alignment >= 0.5) return 'text-yellow-400';
     return 'text-red-400';
   };
@@ -134,8 +134,8 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
       <div className={`max-w-[85%] md:max-w-[70%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
         {/* Avatar for AI messages */}
         {message.role === 'assistant' && (
-          <motion.div 
-            className="flex items-center justify-center w-8 h-8 mb-2 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-lg"
+          <motion.div
+            className="flex items-center justify-center w-8 h-8 mb-2 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 text-white shadow-lg"
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
@@ -145,12 +145,11 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
 
         {/* Message Bubble */}
         <motion.div
-          className={`relative rounded-2xl px-4 py-3 shadow-lg ${
-            message.role === 'user'
-              ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white ml-4'
+          className={`relative rounded-2xl px-4 py-3 shadow-lg ${message.role === 'user'
+              ? 'bg-gradient-to-br from-gold-500 to-gold-600 text-white ml-4'
               : 'bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-800 mr-4'
-          } ${expandedView ? 'transform scale-105' : ''}`}
-          whileHover={{ 
+            } ${expandedView ? 'transform scale-105' : ''}`}
+          whileHover={{
             scale: message.role === 'assistant' ? 1.02 : 1.01,
             boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
           }}
@@ -159,30 +158,31 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
           {/* Content */}
           <div className="relative z-10">
             {message.role === 'assistant' ? (
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className="prose prose-sm max-w-none prose-gray dark:prose-invert"
-                components={{
-                  p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
-                  ul: ({ children }) => <ul className="ml-4 mb-2 space-y-1">{children}</ul>,
-                  ol: ({ children }) => <ol className="ml-4 mb-2 space-y-1">{children}</ol>,
-                  li: ({ children }) => <li className="text-sm">{children}</li>,
-                  strong: ({ children }) => <strong className="font-semibold text-emerald-700">{children}</strong>,
-                  em: ({ children }) => <em className="italic text-emerald-600">{children}</em>,
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-emerald-300 pl-4 italic bg-emerald-50/50 py-2 rounded-r-lg">
-                      {children}
-                    </blockquote>
-                  ),
-                  code: ({ children }) => (
-                    <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono text-emerald-700">
-                      {children}
-                    </code>
-                  ),
-                }}
-              >
-                {message.content}
-              </ReactMarkdown>
+              <div className="prose prose-sm max-w-none prose-gray dark:prose-invert">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
+                    ul: ({ children }) => <ul className="ml-4 mb-2 space-y-1">{children}</ul>,
+                    ol: ({ children }) => <ol className="ml-4 mb-2 space-y-1">{children}</ol>,
+                    li: ({ children }) => <li className="text-sm">{children}</li>,
+                    strong: ({ children }) => <strong className="font-semibold text-gold-700">{children}</strong>,
+                    em: ({ children }) => <em className="italic text-gold-600">{children}</em>,
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-4 border-gold-300 pl-4 italic bg-gold-50/50 py-2 rounded-r-lg">
+                        {children}
+                      </blockquote>
+                    ),
+                    code: ({ children }) => (
+                      <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono text-gold-700">
+                        {children}
+                      </code>
+                    ),
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </div>
             ) : (
               <p className="leading-relaxed">{message.content}</p>
             )}
@@ -215,7 +215,7 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                   </div>
                 )}
               </div>
-              
+
               <div className="text-xs text-gray-500">
                 {formatTimestamp(message.timestamp)}
               </div>
@@ -224,7 +224,7 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
 
           {/* User message timestamp */}
           {message.role === 'user' && (
-            <div className="text-xs text-emerald-100 mt-2 text-right opacity-75">
+            <div className="text-xs text-gold-100 mt-2 text-right opacity-75">
               {formatTimestamp(message.timestamp)}
             </div>
           )}
@@ -235,7 +235,7 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
               {message.modules_used.map((module, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 capitalize"
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gold-100 text-gold-800 capitalize"
                 >
                   {module}
                 </span>
@@ -252,23 +252,22 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              className={`flex items-center space-x-1 mt-2 ${
-                message.role === 'user' ? 'justify-end' : 'justify-start'
-              }`}
+              className={`flex items-center space-x-1 mt-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'
+                }`}
             >
               {/* Copy Button */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={handleCopy}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-emerald-600 hover:border-emerald-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-gold-600 hover:border-gold-300 transition-all duration-200 shadow-sm"
                 title={copied ? 'Copied!' : 'Copy message'}
               >
                 {copied ? (
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="w-4 h-4 text-emerald-600"
+                    className="w-4 h-4 text-gold-600"
                   >
                     ✓
                   </motion.div>
@@ -297,11 +296,11 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onToggleSaved(message.id)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-gold-600 hover:border-gold-300 transition-all duration-200 shadow-sm"
                 title={message.isSaved ? 'Remove from saved' : 'Save message'}
               >
                 {message.isSaved ? (
-                  <BookmarkIconSolid className="w-4 h-4 text-blue-600" />
+                  <BookmarkIconSolid className="w-4 h-4 text-gold-600" />
                 ) : (
                   <BookmarkIcon className="w-4 h-4" />
                 )}
@@ -312,11 +311,11 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onSpeak(message.content, message.id)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-purple-600 hover:border-purple-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-gold-600 hover:border-purple-300 transition-all duration-200 shadow-sm"
                 title={isPlaying ? 'Stop speaking' : 'Read aloud'}
               >
                 {isPlaying ? (
-                  <SpeakerXMarkIcon className="w-4 h-4 text-purple-600" />
+                  <SpeakerXMarkIcon className="w-4 h-4 text-gold-600" />
                 ) : (
                   <SpeakerWaveIcon className="w-4 h-4" />
                 )}
@@ -328,7 +327,7 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => onRegenerate(message.id)}
-                  className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-emerald-600 hover:border-emerald-300 transition-all duration-200 shadow-sm"
+                  className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-gold-600 hover:border-gold-300 transition-all duration-200 shadow-sm"
                   title="Regenerate response"
                 >
                   <ArrowPathIcon className="w-4 h-4" />
@@ -340,7 +339,7 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onShare(message.content)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-green-600 hover:border-green-300 transition-all duration-200 shadow-sm"
+                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 text-gray-600 hover:text-success-600 hover:border-green-300 transition-all duration-200 shadow-sm"
                 title="Share message"
               >
                 <ShareIcon className="w-4 h-4" />
@@ -368,9 +367,8 @@ const EnhancedMessageBubble: React.FC<EnhancedMessageBubbleProps> = ({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              className={`flex items-center space-x-2 mt-2 p-2 bg-white/90 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-lg ${
-                message.role === 'user' ? 'justify-end' : 'justify-start'
-              }`}
+              className={`flex items-center space-x-2 mt-2 p-2 bg-white/90 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-lg ${message.role === 'user' ? 'justify-end' : 'justify-start'
+                }`}
             >
               {reactionEmojis.map((reaction) => (
                 <motion.button

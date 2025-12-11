@@ -4,8 +4,7 @@
 :root {
   /* Colors - NO orange/saffron, light grays with dark text */
   --primary-gradient: linear-gradient(135deg, var(--color-primary, #f3f4f6) 0%, var(--color-primary-hover, #e5e7eb) 100%);
-<<<<<<< HEAD
-  --emerald-border-gradient: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-border-primary, #10b981) 100%); /* For borders only */
+  --gold-border-gradient: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-border-primary, #10b981) 100%); /* For borders only */
   --secondary-gradient: linear-gradient(135deg, var(--color-background-secondary, #ffffff) 0%, var(--color-background, #f1f5f9) 100%);
   
   --primary-color: var(--color-primary, #f3f4f6);    /* Light gray, NO orange */
@@ -30,33 +29,6 @@
   --text-secondary-dark: var(--color-text-secondary, #a0aec0);
   --text-muted-light: var(--color-text-secondary, #6b7280);
   --text-muted-dark: var(--color-text-secondary, #718096);
-=======
-  --emerald-border-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%); /* For borders only */
-  --secondary-gradient: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-  
-  --primary-color: var(--color-primary, #f3f4f6);    /* Light gray, NO orange */
-  --secondary-color: #f9fafb;                        /* Very light gray */
-  --accent-color: #6b7280;                           /* Gray instead of orange */
-  --border-accent-color: #10b981;                    /* Emerald for borders only */
-  --wisdom-color: #4facfe;
-  --lotus-color: #fa709a;
-  
-  /* Neutral Colors */
-  --background-light: #fafbfc;
-  --background-dark: #1a1b23;
-  --surface-light: #ffffff;
-  --surface-dark: #242530;
-  --surface-secondary-light: #f7f8fa;
-  --surface-secondary-dark: #2a2b38;
-  
-  /* Text Colors */
-  --text-primary-light: #2d3748;
-  --text-primary-dark: #e2e8f0;
-  --text-secondary-light: #718096;
-  --text-secondary-dark: #a0aec0;
-  --text-muted-light: #a0aec0;
-  --text-muted-dark: #718096;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   
   /* Border Colors */
   --border-light: #e2e8f0;
@@ -599,26 +571,26 @@ p {
 
 .btn-secondary {
   background: var(--color-bg-primary);
-  color: var(--color-border-emerald);
-  border: 2px solid var(--color-border-emerald);
+  color: var(--color-border-gold);
+  border: 2px solid var(--color-border-gold);
 }
 
 .btn-secondary:hover {
   background: var(--color-bg-secondary);
-  color: var(--color-border-emerald-dark);
-  border-color: var(--color-border-emerald-dark);
+  color: var(--color-border-gold-dark);
+  border-color: var(--color-border-gold-dark);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--color-border-emerald);
-  border: 1px solid var(--color-border-emerald);
+  color: var(--color-border-gold);
+  border: 1px solid var(--color-border-gold);
 }
 
 .btn-ghost:hover {
   background: var(--color-bg-secondary);
-  color: var(--color-border-emerald-dark);
-  border-color: var(--color-border-emerald-dark);
+  color: var(--color-border-gold-dark);
+  border-color: var(--color-border-gold-dark);
 }
 
 .btn:disabled {

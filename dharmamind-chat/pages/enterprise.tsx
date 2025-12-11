@@ -177,15 +177,15 @@ const EnterprisePage: React.FC = () => {
               
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-stone-600">
                 <div className="flex items-center space-x-2">
-                  <span className="text-green-500">✓</span>
+                  <span className="text-success-500">✓</span>
                   <span>SOC 2 Type II Certified</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-green-500">✓</span>
+                  <span className="text-success-500">✓</span>
                   <span>GDPR & HIPAA Compliant</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-green-500">✓</span>
+                  <span className="text-success-500">✓</span>
                   <span>99.9% Uptime SLA</span>
                 </div>
               </div>
@@ -268,8 +268,8 @@ const EnterprisePage: React.FC = () => {
                 <li>✓ Stakeholder Impact Analysis: Consider all parties in complex decisions</li>
               </ul>
               
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
-                <p className="text-sm text-emerald-800">
+              <div className="bg-gold-50 border border-gold-200 rounded-lg p-4">
+                <p className="text-sm text-gold-800">
                   <strong>Impact:</strong> Build lasting trust with customers, attract top talent, transparent culture
                 </p>
               </div>
@@ -295,8 +295,8 @@ const EnterprisePage: React.FC = () => {
                 <li>✓ Personalized Journey: Identify unique skills, passions, and purpose</li>
               </ul>
               
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <p className="text-sm text-blue-800">
+              <div className="bg-neutral-100 border border-neutral-300 rounded-lg p-4">
+                <p className="text-sm text-neutral-800">
                   <strong>Impact:</strong> Reduced turnover, increased retention, highly motivated workforce
                 </p>
               </div>
@@ -333,15 +333,15 @@ const EnterprisePage: React.FC = () => {
                   <li>✓ Global CDN</li>
                   <li>✓ 24/7 monitoring</li>
                 </ul>
-                <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="w-full bg-gold-600 text-white py-3 rounded-lg hover:bg-gold-700 transition-colors">
                   Learn More
                 </button>
               </div>
 
               {/* Private Cloud */}
-              <div className="text-center p-8 border-2 border-emerald-200 rounded-xl bg-emerald-50 relative">
+              <div className="text-center p-8 border-2 border-gold-200 rounded-xl bg-gold-50 relative">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-gold-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                     Most Popular
                   </span>
                 </div>
@@ -358,7 +358,7 @@ const EnterprisePage: React.FC = () => {
                   <li>✓ Custom compliance</li>
                   <li>✓ SLA guarantees</li>
                 </ul>
-                <button className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition-colors" onClick={() => router.push('/demo-request')}>
+                <button className="w-full bg-gold-600 text-white py-3 rounded-lg hover:bg-gold-700 transition-colors" onClick={() => router.push('/demo-request')}>
                   Schedule Demo
                 </button>
               </div>
@@ -454,12 +454,12 @@ const EnterprisePage: React.FC = () => {
             {pricingTiers.map((tier, index) => (
               <div key={index} className={`relative rounded-xl p-8 ${
                 tier.popular 
-                  ? 'border-2 border-emerald-200 bg-emerald-50' 
+                  ? 'border-2 border-gold-200 bg-gold-50' 
                   : 'border border-stone-200 bg-white'
               }`}>
                 {tier.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-emerald-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-gold-600 text-white px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
                   </div>
@@ -477,7 +477,7 @@ const EnterprisePage: React.FC = () => {
                 <ul className="space-y-3 mb-8">
                   {tier.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center space-x-3">
-                      <span className="text-green-500 flex-shrink-0">✓</span>
+                      <span className="text-success-500 flex-shrink-0">✓</span>
                       <span className="text-stone-700">{feature}</span>
                     </li>
                   ))}
@@ -488,7 +488,7 @@ const EnterprisePage: React.FC = () => {
                   prefillCategory="partnership"
                   className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
                     tier.popular
-                      ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                      ? 'bg-gold-600 text-white hover:bg-gold-700'
                       : 'bg-primary-gradient hover:bg-primary-gradient text-white'
                   }`}
                 >

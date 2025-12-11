@@ -1,7 +1,6 @@
 import React from 'react';
 
 interface LoadingSpinnerProps {
-<<<<<<< HEAD
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'default' | 'dharmic' | 'pulse' | 'dots';
   text?: string;
@@ -27,28 +26,28 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   const DefaultSpinner = () => (
     <div className={`${sizes[size].spinner} relative`}>
       <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
-      <div className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin"></div>
+      <div className="absolute inset-0 rounded-full border-4 border-gold-500 border-t-transparent animate-spin"></div>
     </div>
   );
 
   const DharmicSpinner = () => (
     <div className={`${sizes[size].spinner} relative`}>
       {/* Outer ring */}
-      <div className="absolute inset-0 rounded-full border-4 border-emerald-200 animate-pulse"></div>
+      <div className="absolute inset-0 rounded-full border-4 border-gold-200 animate-pulse"></div>
       
       {/* Middle spinning ring */}
-      <div className="absolute inset-1 rounded-full border-4 border-transparent border-t-emerald-500 border-r-emerald-500 animate-spin"></div>
+      <div className="absolute inset-1 rounded-full border-4 border-transparent border-t-gold-500 border-r-gold-500 animate-spin"></div>
       
       {/* Inner spinning ring (opposite direction) */}
       <div 
-        className="absolute inset-2 rounded-full border-2 border-transparent border-b-emerald-400 border-l-emerald-400 animate-spin"
+        className="absolute inset-2 rounded-full border-2 border-transparent border-b-gold-400 border-l-gold-400 animate-spin"
         style={{ animationDirection: 'reverse', animationDuration: '0.75s' }}
       ></div>
       
       {/* Center Om symbol */}
       <div className="absolute inset-0 flex items-center justify-center">
         <span 
-          className="text-emerald-600 animate-pulse"
+          className="text-gold-600 animate-pulse"
           style={{ fontSize: size === 'xs' ? '0.5rem' : size === 'sm' ? '0.625rem' : size === 'md' ? '0.875rem' : size === 'lg' ? '1.125rem' : '1.5rem' }}
         >
           ॐ
@@ -56,25 +55,25 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
       </div>
       
       {/* Glow effect */}
-      <div className="absolute inset-0 rounded-full bg-emerald-500/10 blur-md animate-pulse"></div>
+      <div className="absolute inset-0 rounded-full bg-gold-500/10 blur-md animate-pulse"></div>
     </div>
   );
 
   const PulseSpinner = () => (
     <div className={`${sizes[size].spinner} relative flex items-center justify-center`}>
       {/* Ripple effects */}
-      <div className="absolute inset-0 rounded-full bg-emerald-500/30 animate-ping"></div>
+      <div className="absolute inset-0 rounded-full bg-gold-500/30 animate-ping"></div>
       <div 
-        className="absolute inset-2 rounded-full bg-emerald-500/40 animate-ping"
+        className="absolute inset-2 rounded-full bg-gold-500/40 animate-ping"
         style={{ animationDelay: '0.2s' }}
       ></div>
       <div 
-        className="absolute inset-4 rounded-full bg-emerald-500/50 animate-ping"
+        className="absolute inset-4 rounded-full bg-gold-500/50 animate-ping"
         style={{ animationDelay: '0.4s' }}
       ></div>
       
       {/* Center dot */}
-      <div className="relative w-2 h-2 rounded-full bg-emerald-600"></div>
+      <div className="relative w-2 h-2 rounded-full bg-gold-600"></div>
     </div>
   );
 
@@ -84,7 +83,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         <div
           key={i}
           className={`${size === 'xs' ? 'w-1.5 h-1.5' : size === 'sm' ? 'w-2 h-2' : size === 'md' ? 'w-3 h-3' : size === 'lg' ? 'w-4 h-4' : 'w-5 h-5'} 
-            rounded-full bg-emerald-500 animate-bounce`}
+            rounded-full bg-gold-500 animate-bounce`}
           style={{ animationDelay: `${i * 0.15}s` }}
         />
       ))}
@@ -114,98 +113,10 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm">
         {content}
-=======
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  color?: 'primary' | 'secondary' | 'white';
-  className?: string;
-}
-
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
-  size = 'md', 
-  color = 'primary',
-  className = '' 
-}) => {
-  const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12',
-    xl: 'w-16 h-16'
-  };
-
-  const colorClasses = {
-    primary: 'text-primary',
-    secondary: 'text-secondary',
-    white: 'text-white'
-  };
-
-  return (
-    <div className={`${sizeClasses[size]} ${colorClasses[color]} ${className}`}>
-      <svg className="animate-spin" fill="none" viewBox="0 0 24 24">
-        <circle 
-          className="opacity-25" 
-          cx="12" 
-          cy="12" 
-          r="10" 
-          stroke="currentColor" 
-          strokeWidth="4"
-        />
-        <path 
-          className="opacity-75" 
-          fill="currentColor" 
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        />
-      </svg>
-    </div>
-  );
-};
-
-interface SkeletonProps {
-  className?: string;
-  variant?: 'text' | 'rectangular' | 'circular';
-  width?: string | number;
-  height?: string | number;
-  lines?: number;
-}
-
-export const Skeleton: React.FC<SkeletonProps> = ({
-  className = '',
-  variant = 'text',
-  width,
-  height,
-  lines = 1
-}) => {
-  const baseClasses = 'loading-skeleton animate-pulse rounded';
-  
-  const variantClasses = {
-    text: 'h-4',
-    rectangular: 'h-20',
-    circular: 'rounded-full'
-  };
-
-  const style = {
-    width: width || (variant === 'circular' ? '40px' : '100%'),
-    height: height || (variant === 'text' ? '16px' : '80px')
-  };
-
-  if (variant === 'text' && lines > 1) {
-    return (
-      <div className={`space-y-2 ${className}`}>
-        {Array.from({ length: lines }).map((_, index) => (
-          <div
-            key={index}
-            className={`${baseClasses} ${variantClasses[variant]}`}
-            style={{
-              ...style,
-              width: index === lines - 1 ? '75%' : '100%'
-            }}
-          />
-        ))}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       </div>
     );
   }
 
-<<<<<<< HEAD
   return content;
 };
 
@@ -217,8 +128,8 @@ export const LoadingPage: React.FC<{ message?: string; submessage?: string }> = 
   <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-white">
     {/* Background orbs */}
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-emerald-200/30 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gold-200/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gold-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
     </div>
     
     <div className="relative z-10 flex flex-col items-center">
@@ -270,56 +181,8 @@ export const Skeleton: React.FC<{
     <div 
       className={`${baseClasses} ${variants[variant]} ${className}`}
       style={{ width, height }}
-=======
-  return (
-    <div
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
-      style={style}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     />
   );
 };
 
-<<<<<<< HEAD
-=======
-interface PulseDotsProps {
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'white';
-  className?: string;
-}
-
-export const PulseDots: React.FC<PulseDotsProps> = ({ 
-  size = 'md', 
-  color = 'primary',
-  className = '' 
-}) => {
-  const sizeClasses = {
-    sm: 'w-1 h-1',
-    md: 'w-2 h-2',
-    lg: 'w-3 h-3'
-  };
-
-  const colorClasses = {
-    primary: 'bg-primary',
-    secondary: 'bg-secondary',
-    white: 'bg-white'
-  };
-
-  return (
-    <div className={`flex space-x-1 justify-center items-center ${className}`}>
-      {[0, 1, 2].map((index) => (
-        <div
-          key={index}
-          className={`${sizeClasses[size]} ${colorClasses[color]} rounded-full animate-pulse`}
-          style={{
-            animationDelay: `${index * 0.2}s`,
-            animationDuration: '0.8s'
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 export default LoadingSpinner;

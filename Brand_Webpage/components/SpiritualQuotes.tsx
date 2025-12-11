@@ -111,11 +111,7 @@ const SpiritualQuotes: React.FC = () => {
       case 'Gita':
         return 'from-orange-500 to-red-500';
       case 'Upanishad':
-<<<<<<< HEAD
         return 'from-gold-500 to-gold-600';
-=======
-        return 'from-purple-500 to-blue-500';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       case 'Veda':
         return 'from-green-500 to-teal-500';
       default:
@@ -145,11 +141,7 @@ const SpiritualQuotes: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-<<<<<<< HEAD
           className="bg-neutral-100/80 backdrop-blur-sm rounded-2xl shadow-lg border border-neutral-300 p-8 mx-4"
-=======
-          className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 p-8 mx-4"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         >
           <div className="flex items-start space-x-4">
             <div className="flex-shrink-0">
@@ -159,20 +151,12 @@ const SpiritualQuotes: React.FC = () => {
             </div>
             
             <div className="flex-1 min-w-0">
-<<<<<<< HEAD
               <blockquote className="text-lg md:text-xl text-neutral-900 font-medium leading-relaxed mb-4 italic">
-=======
-              <blockquote className="text-lg md:text-xl text-gray-800 font-medium leading-relaxed mb-4 italic">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 "{currentQuote.text}"
               </blockquote>
               
               <div className="flex items-center justify-between">
-<<<<<<< HEAD
                 <cite className="text-sm md:text-base text-neutral-600 font-semibold not-italic">
-=======
-                <cite className="text-sm md:text-base text-gray-600 font-semibold not-italic">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   — {currentQuote.source}
                 </cite>
                 
@@ -184,11 +168,7 @@ const SpiritualQuotes: React.FC = () => {
           </div>
           
           {/* Progress indicator */}
-<<<<<<< HEAD
           <div className="mt-6 w-full bg-primary-background rounded-full h-1">
-=======
-          <div className="mt-6 w-full bg-gray-200 rounded-full h-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             <motion.div
               className={`h-1 rounded-full bg-gradient-to-r ${getCategoryColor(currentQuote.category)}`}
               initial={{ width: "0%" }}
@@ -211,11 +191,7 @@ const SpiritualQuotes: React.FC = () => {
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === quoteIndex 
                 ? `bg-gradient-to-r ${getCategoryColor(currentQuote.category)}` 
-<<<<<<< HEAD
                 : 'bg-primary-background hover:bg-neutral-100'
-=======
-                : 'bg-gray-300 hover:bg-gray-400'
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             }`}
           />
         ))}

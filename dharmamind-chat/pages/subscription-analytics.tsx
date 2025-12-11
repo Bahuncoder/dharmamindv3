@@ -10,11 +10,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
-=======
-import { useColors } from '../contexts/ColorContext';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import SubscriptionDashboard from '../components/SubscriptionDashboard';
 import { useNavigation } from '../hooks/useNavigation';
 import Logo from '../components/Logo';
@@ -26,16 +22,12 @@ import Logo from '../components/Logo';
 const SubscriptionAnalyticsPage: React.FC = () => {
   const { data: session } = useSession();
   const { goToAuth } = useNavigation();
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   // Redirect to auth if not logged in (optional, can allow demo mode)
   if (!session) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-neutral-100 to-indigo-50">
         <Head>
           <title>Subscription Analytics - DharmaMind</title>
           <meta name="description" content="Advanced subscription management and usage analytics for DharmaMind AI spiritual companion" />
@@ -78,11 +70,11 @@ const SubscriptionAnalyticsPage: React.FC = () => {
             </div>
 
             {/* Demo Banner */}
-            <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
+            <div className="mt-6 p-3 bg-neutral-100 border border-neutral-300 rounded-lg">
+              <p className="text-sm text-neutral-800">
                 💡 <strong>Demo Mode:</strong> You can still explore basic analytics without signing in
               </p>
-              <button className="mt-2 text-xs text-blue-600 hover:text-blue-800 underline">
+              <button className="mt-2 text-xs text-gold-600 hover:text-neutral-800 underline">
                 Continue as Guest
               </button>
             </div>
@@ -93,7 +85,7 @@ const SubscriptionAnalyticsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-neutral-100 to-indigo-50">
       <Head>
         <title>Subscription Analytics - DharmaMind</title>
         <meta name="description" content="Advanced subscription management and usage analytics for DharmaMind AI" />
@@ -144,9 +136,9 @@ const SubscriptionAnalyticsPage: React.FC = () => {
               © 2024 DharmaMind. All rights reserved.
             </div>
             <div className="flex space-x-4">
-              <a href="/privacy" className="hover:text-purple-600">Privacy</a>
-              <a href="/terms" className="hover:text-purple-600">Terms</a>
-              <a href="/help" className="hover:text-purple-600">Help</a>
+              <a href="/privacy" className="hover:text-gold-600">Privacy</a>
+              <a href="/terms" className="hover:text-gold-600">Terms</a>
+              <a href="/help" className="hover:text-gold-600">Help</a>
             </div>
           </div>
         </div>

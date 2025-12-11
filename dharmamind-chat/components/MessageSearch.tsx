@@ -172,11 +172,11 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
 
   const getTypeIcon = (type: 'user' | 'assistant') => {
     return type === 'user' ? (
-      <div className="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-medium">
+      <div className="w-6 h-6 bg-gold-100 text-gold-600 rounded-full flex items-center justify-center text-xs font-medium">
         U
       </div>
     ) : (
-      <div className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
+      <div className="w-6 h-6 bg-purple-100 text-gold-600 rounded-full flex items-center justify-center">
         <SparklesIcon className="w-3 h-3" />
       </div>
     );
@@ -205,7 +205,7 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-              <MagnifyingGlassIcon className="w-5 h-5 mr-2 text-emerald-600" />
+              <MagnifyingGlassIcon className="w-5 h-5 mr-2 text-gold-600" />
               Search Messages
             </h2>
             <button
@@ -225,14 +225,14 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for wisdom, guidance, or specific topics..."
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-gold-500 focus:border-gold-500 outline-none transition-all"
             />
             {isSearching && (
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-5 h-5 border-2 border-emerald-500 border-t-transparent rounded-full"
+                  className="w-5 h-5 border-2 border-gold-500 border-t-transparent rounded-full"
                 />
               </div>
             )}
@@ -274,7 +274,7 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
                     <select
                       value={selectedFilter}
                       onChange={(e) => setSelectedFilter(e.target.value as any)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 outline-none"
                     >
                       <option value="all">All Messages</option>
                       <option value="wisdom">Wisdom & Teachings</option>
@@ -290,7 +290,7 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
                     <select
                       value={dateFilter}
                       onChange={(e) => setDateFilter(e.target.value as any)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 outline-none"
                     >
                       <option value="all">All Time</option>
                       <option value="today">Today</option>
@@ -330,7 +330,7 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="p-4 border border-gray-200 rounded-xl hover:border-emerald-300 hover:bg-emerald-50/50 cursor-pointer transition-all group"
+                  className="p-4 border border-gray-200 rounded-xl hover:border-gold-300 hover:bg-gold-50/50 cursor-pointer transition-all group"
                   onClick={() => onSelectMessage(result)}
                 >
                   <div className="flex items-start space-x-3">
@@ -356,7 +356,7 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
                           {result.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800"
+                              className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gold-100 text-gold-800"
                             >
                               <TagIcon className="w-3 h-3 mr-1" />
                               {tag}
@@ -372,7 +372,7 @@ const MessageSearch: React.FC<MessageSearchProps> = ({
                       
                       {result.dharmic_alignment && (
                         <div className="flex items-center mt-2 text-xs text-gray-500">
-                          <SparklesIcon className="w-3 h-3 mr-1 text-emerald-500" />
+                          <SparklesIcon className="w-3 h-3 mr-1 text-gold-500" />
                           Dharmic alignment: {Math.round(result.dharmic_alignment * 100)}%
                         </div>
                       )}

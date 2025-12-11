@@ -25,7 +25,7 @@ const StatusPage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-gold-50">
         {/* Header */}
         <header className="border-b border-gray-200 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,7 +90,7 @@ const StatusPage: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900">Chat Services</h3>
                 <div className="flex items-center">
                   <div className="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
-                  <span className="text-sm text-green-600 font-medium">Operational</span>
+                  <span className="text-sm text-success-600 font-medium">Operational</span>
                 </div>
               </div>
               <p className="text-gray-600 text-sm">All chat services running normally</p>
@@ -101,7 +101,7 @@ const StatusPage: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900">API Gateway</h3>
                 <div className="flex items-center">
                   <div className="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
-                  <span className="text-sm text-green-600 font-medium">Operational</span>
+                  <span className="text-sm text-success-600 font-medium">Operational</span>
                 </div>
               </div>
               <p className="text-gray-600 text-sm">API responding normally</p>
@@ -112,7 +112,7 @@ const StatusPage: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900">Authentication</h3>
                 <div className="flex items-center">
                   <div className="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
-                  <span className="text-sm text-green-600 font-medium">Operational</span>
+                  <span className="text-sm text-success-600 font-medium">Operational</span>
                 </div>
               </div>
               <p className="text-gray-600 text-sm">Login services operational</p>

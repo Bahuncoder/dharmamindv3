@@ -178,8 +178,8 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
     // Helper functions from V1 and V2
     const getAlignmentColor = (alignment?: number) => {
         if (!alignment) return 'text-gray-400';
-        if (alignment >= 0.9) return 'text-emerald-500';
-        if (alignment >= 0.7) return 'text-emerald-400';
+        if (alignment >= 0.9) return 'text-gold-500';
+        if (alignment >= 0.7) return 'text-gold-400';
         if (alignment >= 0.5) return 'text-yellow-400';
         return 'text-red-400';
     };
@@ -218,7 +218,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                         ol: ({ children }) => <ol className="list-decimal pl-6 mb-3">{children}</ol>,
                         li: ({ children }) => <li className="mb-1">{children}</li>,
                         blockquote: ({ children }) => (
-                            <blockquote className="border-l-4 border-emerald-500 pl-4 italic my-4 text-gray-600 dark:text-gray-300">
+                            <blockquote className="border-l-4 border-gold-500 pl-4 italic my-4 text-gray-600 dark:text-gray-300">
                                 {children}
                             </blockquote>
                         ),
@@ -273,7 +273,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
             {/* Message Bubble */}
             <div
                 className={`relative rounded-2xl px-4 py-3 shadow-lg transition-all duration-200 ${userRole === 'user'
-                        ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white ml-auto'
+                        ? 'bg-gradient-to-r from-gold-500 to-gold-600 text-white ml-auto'
                         : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700'
                     } ${showActions || isHovered ? 'shadow-xl scale-[1.02]' : ''} ${isMobile ? 'touch-friendly-spacing' : ''} ${isHighContrast ? 'high-contrast-bubble' : ''}`}
                 style={{
@@ -293,7 +293,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                     >
                         <div className="flex items-center gap-1">
                             <div 
-                                className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"
+                                className="w-2 h-2 bg-gold-500 rounded-full animate-pulse"
                                 role="status"
                                 aria-label="AI responding"
                             ></div>
@@ -337,7 +337,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                             {message.modules_used.map((module, index) => (
                                 <span
                                     key={index}
-                                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 capitalize"
+                                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gold-100 dark:bg-gold-900 text-gold-800 dark:text-gold-200 capitalize"
                                 >
                                     {module}
                                 </span>
@@ -350,7 +350,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                 <footer 
                     id={`message-${message.id}-metadata`}
                     className={`text-xs mt-2 ${userRole === 'user'
-                        ? 'text-emerald-100'
+                        ? 'text-gold-100'
                         : 'text-gray-500 dark:text-gray-400'
                     }`}
                     role="contentinfo"
@@ -378,7 +378,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                     )}
                     {message.isSaved && (
                         <div 
-                            className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center"
+                            className="w-4 h-4 bg-neutral-1000 rounded-full flex items-center justify-center"
                             role="img"
                             aria-label="Saved message"
                         >
@@ -387,7 +387,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                     )}
                     {hasBeenRead && (
                         <div 
-                            className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center"
+                            className="w-4 h-4 bg-success-500 rounded-full flex items-center justify-center"
                             role="img"
                             aria-label="Message has been read"
                         >
@@ -418,7 +418,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                             aria-label={`Copy ${userRole === 'user' ? 'your' : 'AI'} message to clipboard`}
                             aria-keyshortcuts="Control+C"
                         >
-                            <ClipboardDocumentIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-emerald-600`} />
+                            <ClipboardDocumentIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-gold-600`} />
                         </button>
 
                         {/* Favorite Button */}
@@ -447,9 +447,9 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                             aria-pressed={message.isSaved}
                         >
                             {message.isSaved ? (
-                                <BookmarkSolidIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-blue-500`} />
+                                <BookmarkSolidIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-neutral-1000`} />
                             ) : (
-                                <BookmarkIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-blue-500`} />
+                                <BookmarkIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-neutral-1000`} />
                             )}
                         </button>
 
@@ -465,7 +465,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                                 {isPlaying ? (
                                     <SpeakerXMarkIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-red-500`} />
                                 ) : (
-                                    <SpeakerWaveIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-emerald-600`} />
+                                    <SpeakerWaveIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-gold-600`} />
                                 )}
                             </button>
                         )}
@@ -478,7 +478,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                                 title="Share message"
                                 aria-label="Share this message"
                             >
-                                <ShareIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-emerald-600`} />
+                                <ShareIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-gold-600`} />
                             </button>
                         )}
 
@@ -491,7 +491,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                                 aria-label="Regenerate AI response"
                                 aria-keyshortcuts="R"
                             >
-                                <ArrowPathIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-emerald-600`} />
+                                <ArrowPathIcon className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-gray-600 dark:text-gray-400 group-hover:text-gold-600`} />
                             </button>
                         )}
                     </motion.div>
@@ -521,7 +521,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                                         navigator.vibrate(50);
                                     }
                                 }}
-                                className={`${isMobile ? 'p-2 text-lg' : 'p-1 text-sm'} hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${isHighContrast ? 'high-contrast-reaction' : ''}`}
+                                className={`${isMobile ? 'p-2 text-lg' : 'p-1 text-sm'} hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500 ${isHighContrast ? 'high-contrast-reaction' : ''}`}
                                 title={`React with ${reaction}`}
                                 aria-label={`React with ${reaction} emoji`}
                             >
@@ -539,7 +539,7 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                         initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.8 }}
-                        className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-1 bg-emerald-600 text-white text-sm rounded-lg shadow-lg ${isMobile ? 'text-base px-4 py-2' : ''}`}
+                        className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 px-3 py-1 bg-gold-600 text-white text-sm rounded-lg shadow-lg ${isMobile ? 'text-base px-4 py-2' : ''}`}
                         role="status"
                         aria-live="polite"
                         aria-label="Message copied to clipboard"

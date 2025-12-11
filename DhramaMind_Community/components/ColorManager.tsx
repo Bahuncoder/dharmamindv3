@@ -10,7 +10,7 @@ import { useColors } from '../contexts/ColorContext';
 import Button from './Button';
 
 const ColorManager: React.FC = () => {
-  const { currentTheme, availableThemes, changeTheme, updateColors } = useColors();
+  const { currentTheme, availableThemes, changeTheme, updateBrandColors } = useColors();
   const [customColors, setCustomColors] = useState({
     primaryStart: currentTheme.colors.primaryStart,
     primaryEnd: currentTheme.colors.primaryEnd,
@@ -32,19 +32,15 @@ const ColorManager: React.FC = () => {
   const handleCustomColorChange = (colorKey: string, value: string) => {
     const newColors = { ...customColors, [colorKey]: value };
     setCustomColors(newColors);
-    
+
     // Update colors in real-time
-    updateColors(newColors);
+    updateBrandColors({ brandPrimary: newColors.primaryStart, brandAccent: newColors.primaryEnd });
   };
 
   const resetToDefault = () => {
     changeTheme('dharma-default');
     setCustomColors({
-<<<<<<< HEAD
       primaryStart: '#10b981',
-=======
-      primaryStart: '#d97706',
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       primaryEnd: '#059669',
     });
   };
@@ -55,7 +51,7 @@ const ColorManager: React.FC = () => {
   };
 
   const getThemeDisplayName = (name: string) => {
-    return name.split('-').map(word => 
+    return name.split('-').map(word =>
       word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
   };
@@ -73,16 +69,15 @@ const ColorManager: React.FC = () => {
         </div>
         <button
           onClick={() => setIsPreviewMode(!isPreviewMode)}
-          className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${
-            isPreviewMode 
-              ? 'bg-primary text-white' 
+          className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${isPreviewMode
+              ? 'bg-primary text-white'
               : 'bg-neutral-100 text-secondary hover:bg-neutral-200'
-          }`}
+            }`}
         >
           {isPreviewMode ? '👁️ Exit Preview' : '👀 Preview Mode'}
         </button>
       </div>
-      
+
       {/* Theme Selection Grid */}
       <div className="mb-8">
         <label className="block text-xl font-black text-primary mb-4">
@@ -93,11 +88,10 @@ const ColorManager: React.FC = () => {
             <button
               key={theme.name}
               onClick={() => handleThemeChange(theme.name)}
-              className={`group flex items-center p-5 rounded-xl border-2 transition-all duration-300 hover:shadow-lg ${
-                currentTheme.name === theme.name
+              className={`group flex items-center p-5 rounded-xl border-2 transition-all duration-300 hover:shadow-lg ${currentTheme.name === theme.name
                   ? 'border-primary bg-primary-gradient bg-opacity-10 shadow-md transform scale-105'
                   : 'border-border-light hover:border-primary hover:shadow-md'
-              }`}
+                }`}
             >
               <div className="flex items-center space-x-4 w-full">
                 <div
@@ -128,7 +122,7 @@ const ColorManager: React.FC = () => {
         <label className="block text-xl font-black text-primary mb-4">
           🎯 Custom Colors
         </label>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
             <label className="block text-sm font-bold text-secondary uppercase tracking-wide">
@@ -151,11 +145,7 @@ const ColorManager: React.FC = () => {
                 value={customColors.primaryStart}
                 onChange={(e) => handleCustomColorChange('primaryStart', e.target.value)}
                 className="flex-1 px-4 py-3 border-2 border-border-light rounded-xl text-sm bg-primary-bg text-primary font-bold focus:border-primary focus:ring-2 focus:ring-focus transition-all"
-<<<<<<< HEAD
                 placeholder="#10b981"
-=======
-                placeholder="#d97706"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               />
             </div>
           </div>
@@ -264,7 +254,7 @@ const ColorManager: React.FC = () => {
               Start Color
             </div>
             <div className="flex items-center justify-center space-x-2">
-              <div 
+              <div
                 className="w-6 h-6 rounded-full shadow-sm"
                 style={{ backgroundColor: currentTheme.colors.primaryStart }}
               />
@@ -278,7 +268,7 @@ const ColorManager: React.FC = () => {
               End Color
             </div>
             <div className="flex items-center justify-center space-x-2">
-              <div 
+              <div
                 className="w-6 h-6 rounded-full shadow-sm"
                 style={{ backgroundColor: currentTheme.colors.primaryEnd }}
               />

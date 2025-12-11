@@ -65,7 +65,7 @@ const VoiceWaveVisualization: React.FC<VoiceWaveVisualizationProps> = ({
           key={index}
           className={`bg-gradient-to-t ${
             isActive 
-              ? 'from-emerald-400 to-emerald-600' 
+              ? 'from-gold-400 to-gold-600' 
               : 'from-gray-300 to-gray-400'
           } rounded-t-sm`}
           style={{ width: getBarWidth() }}

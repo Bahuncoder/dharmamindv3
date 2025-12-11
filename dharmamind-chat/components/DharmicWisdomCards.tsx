@@ -44,7 +44,7 @@ export const DharmicInsightCard: React.FC<DharmicInsightCardProps> = ({
           className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800"
         >
           <div className="flex items-center gap-2 mb-3">
-            <SparklesIcon className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+            <SparklesIcon className="w-5 h-5 text-gold-600 dark:text-gold-400" />
             <h4 className="font-semibold text-purple-900 dark:text-purple-100">
               Spiritual Insights
             </h4>
@@ -58,7 +58,7 @@ export const DharmicInsightCard: React.FC<DharmicInsightCardProps> = ({
                 transition={{ delay: idx * 0.1 }}
                 className="flex items-start gap-2"
               >
-                <span className="text-purple-600 dark:text-purple-400 mt-1">✨</span>
+                <span className="text-gold-600 dark:text-gold-400 mt-1">✨</span>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   {insight}
                 </p>
@@ -74,10 +74,10 @@ export const DharmicInsightCard: React.FC<DharmicInsightCardProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800"
+          className="bg-gradient-to-br from-green-50 to-gold-50 dark:from-green-900/20 dark:to-gold-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800"
         >
           <div className="flex items-center gap-2 mb-3">
-            <LightBulbIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
+            <LightBulbIcon className="w-5 h-5 text-success-600 dark:text-green-400" />
             <h4 className="font-semibold text-green-900 dark:text-green-100">
               Growth Practices
             </h4>
@@ -91,7 +91,7 @@ export const DharmicInsightCard: React.FC<DharmicInsightCardProps> = ({
                 transition={{ delay: 0.1 + idx * 0.1 }}
                 className="flex items-start gap-2"
               >
-                <span className="text-green-600 dark:text-green-400 mt-1">🌱</span>
+                <span className="text-success-600 dark:text-green-400 mt-1">🌱</span>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   {practice}
                 </p>
@@ -167,8 +167,8 @@ export const DharmicAlignmentBadge: React.FC<DharmicAlignmentBadgeProps> = ({
   showLabel = true
 }) => {
   const getColor = () => {
-    if (score >= 0.9) return 'from-green-500 to-emerald-500';
-    if (score >= 0.7) return 'from-blue-500 to-cyan-500';
+    if (score >= 0.9) return 'from-green-500 to-gold-500';
+    if (score >= 0.7) return 'from-neutral-1000 to-cyan-500';
     if (score >= 0.5) return 'from-yellow-500 to-amber-500';
     return 'from-orange-500 to-red-500';
   };
@@ -268,18 +268,18 @@ export const QuickPracticeCard: React.FC<QuickPracticeCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
-      className="bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-xl p-4 border border-teal-200 dark:border-teal-800 cursor-pointer"
+      className="bg-gradient-to-br from-gold-50 to-cyan-50 dark:from-gold-900/20 dark:to-cyan-900/20 rounded-xl p-4 border border-gold-200 dark:border-gold-800 cursor-pointer"
       onClick={onStart}
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2">
-          <HeartIcon className="w-5 h-5 text-teal-600 dark:text-teal-400" />
-          <h4 className="font-semibold text-teal-900 dark:text-teal-100">
+          <HeartIcon className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+          <h4 className="font-semibold text-gold-900 dark:text-gold-100">
             {practice.name}
           </h4>
         </div>
         {practice.duration && (
-          <span className="text-xs bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300 px-2 py-1 rounded-full">
+          <span className="text-xs bg-gold-100 dark:bg-gold-900 text-gold-700 dark:text-gold-300 px-2 py-1 rounded-full">
             {practice.duration} min
           </span>
         )}
@@ -293,14 +293,14 @@ export const QuickPracticeCard: React.FC<QuickPracticeCardProps> = ({
         <div className="space-y-1">
           {practice.instructions.slice(0, 2).map((instruction, idx) => (
             <div key={idx} className="flex items-start gap-2">
-              <span className="text-teal-600 dark:text-teal-400 text-xs mt-0.5">•</span>
+              <span className="text-gold-600 dark:text-gold-400 text-xs mt-0.5">•</span>
               <p className="text-xs text-gray-600 dark:text-gray-400">
                 {instruction}
               </p>
             </div>
           ))}
           {practice.instructions.length > 2 && (
-            <p className="text-xs text-teal-600 dark:text-teal-400 font-medium">
+            <p className="text-xs text-gold-600 dark:text-gold-400 font-medium">
               +{practice.instructions.length - 2} more steps
             </p>
           )}
@@ -308,7 +308,7 @@ export const QuickPracticeCard: React.FC<QuickPracticeCardProps> = ({
       )}
 
       {onStart && (
-        <button className="mt-3 w-full bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors">
+        <button className="mt-3 w-full bg-gold-600 hover:bg-gold-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors">
           Begin Practice 🧘
         </button>
       )}

@@ -6,17 +6,18 @@
 import React from 'react';
 
 // Professional color scheme for guides
-export const RISHI_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  marici: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-  atri: { bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200' },
-  angiras: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
-  pulastya: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-  pulaha: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-  kratu: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
-  bhrigu: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
-  vasishta: { bg: 'bg-teal-50', text: 'text-teal-700', border: 'border-teal-200' },
-  daksha: { bg: 'bg-slate-50', text: 'text-slate-700', border: 'border-slate-200' },
-  default: { bg: 'bg-gray-50', text: 'text-gray-700', border: 'border-gray-200' },
+export const RISHI_COLORS: Record<string, { bg: string; text: string; border: string; primary: string; secondary: string; icon: string; glow: string }> = {
+  marici: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200', primary: '#d4a854', secondary: '#b8860b', icon: '☀️', glow: '#d4a854' },
+  atri: { bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200', primary: '#d4a854', secondary: '#b8860b', icon: '🌙', glow: '#d4a854' },
+  angiras: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200', primary: '#d4a854', secondary: '#b8860b', icon: '🔥', glow: '#d4a854' },
+  pulastya: { bg: 'bg-neutral-100', text: 'text-gold-700', border: 'border-neutral-300', primary: '#d4a854', secondary: '#b8860b', icon: '📖', glow: '#d4a854' },
+  pulaha: { bg: 'bg-gold-50', text: 'text-gold-700', border: 'border-gold-200', primary: '#d4a854', secondary: '#b8860b', icon: '🙏', glow: '#d4a854' },
+  kratu: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200', primary: '#d4a854', secondary: '#b8860b', icon: '⚡', glow: '#d4a854' },
+  bhrigu: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200', primary: '#d4a854', secondary: '#b8860b', icon: '✨', glow: '#d4a854' },
+  vasishta: { bg: 'bg-gold-50', text: 'text-gold-700', border: 'border-gold-200', primary: '#d4a854', secondary: '#b8860b', icon: '🕉️', glow: '#d4a854' },
+  daksha: { bg: 'bg-slate-50', text: 'text-slate-700', border: 'border-slate-200', primary: '#d4a854', secondary: '#b8860b', icon: '🌟', glow: '#d4a854' },
+  default: { bg: 'bg-gray-50', text: 'text-gray-700', border: 'border-gray-200', primary: '#d4a854', secondary: '#b8860b', icon: '🙏', glow: '#d4a854' },
+  '': { bg: 'bg-neutral-100', text: 'text-gold-700', border: 'border-neutral-300', primary: '#d4a854', secondary: '#b8860b', icon: '🙏', glow: '#d4a854' },
 };
 
 // For backwards compatibility
@@ -61,7 +62,7 @@ export const RishiAvatar: React.FC<RishiAvatarProps> = ({
         font-semibold
         border
         ${colors.border}
-        ${showGlow ? 'ring-2 ring-offset-2 ring-teal-500/30' : ''}
+        ${showGlow ? 'ring-2 ring-offset-2 ring-gold-500/30' : ''}
         ${animated ? 'transition-transform hover:scale-105' : ''}
         ${className}
       `}

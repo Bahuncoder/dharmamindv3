@@ -42,22 +42,22 @@ const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
       icon: ChatBubbleLeftRightIcon,
       label: 'New Chat',
       onClick: onNewChat,
-      color: 'from-emerald-500 to-emerald-600',
-      hoverColor: 'hover:from-emerald-600 hover:to-emerald-700'
+      color: 'from-gold-500 to-gold-600',
+      hoverColor: 'hover:from-gold-600 hover:to-gold-700'
     },
     {
       icon: DocumentTextIcon,
       label: 'Notes',
       onClick: onOpenNotes,
-      color: 'from-blue-500 to-blue-600',
-      hoverColor: 'hover:from-blue-600 hover:to-blue-700'
+      color: 'from-neutral-1000 to-gold-600',
+      hoverColor: 'hover:from-gold-600 hover:to-gold-700'
     },
     {
       icon: BookOpenIcon,
       label: 'Journal',
       onClick: onOpenJournal,
-      color: 'from-purple-500 to-purple-600',
-      hoverColor: 'hover:from-purple-600 hover:to-purple-700'
+      color: 'from-gold-500 to-gold-600',
+      hoverColor: 'hover:from-gold-600 hover:to-purple-700'
     },
     {
       icon: SparklesIcon,
@@ -169,8 +169,8 @@ const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
         onClick={toggleMenu}
         className={`
           w-14 h-14 rounded-full shadow-lg
-          bg-gradient-to-r from-emerald-500 to-emerald-600
-          hover:from-emerald-600 hover:to-emerald-700
+          bg-gradient-to-r from-gold-500 to-gold-600
+          hover:from-gold-600 hover:to-gold-700
           text-white flex items-center justify-center
           transition-all duration-300 transform
           hover:shadow-xl relative overflow-hidden
@@ -205,7 +205,7 @@ const FloatingActionMenu: React.FC<FloatingActionMenuProps> = ({
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 bg-emerald-400 rounded-full"
+          className="absolute inset-0 bg-gold-400 rounded-full"
         />
       </motion.button>
 

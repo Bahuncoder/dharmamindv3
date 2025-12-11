@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  PaperAirplaneIcon, 
-  SparklesIcon, 
-  UserCircleIcon, 
+import {
+  PaperAirplaneIcon,
+  SparklesIcon,
+  UserCircleIcon,
   ChevronDownIcon,
   ArrowPathIcon,
   BookmarkIcon,
@@ -25,10 +25,7 @@ import remarkGfm from 'remark-gfm';
 import SpiritualBackground from './SpiritualBackground';
 import BreathingGuide from './BreathingGuide';
 import VoiceWaveVisualization from './VoiceWaveVisualization';
-<<<<<<< HEAD
-import { chatService } from '../services/chatService';
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
+import chatService from '../services/chatService';
 
 interface Message {
   id: string;
@@ -42,12 +39,9 @@ interface Message {
   isSaved?: boolean;
   category?: string;
   emotional_tone?: string;
-<<<<<<< HEAD
   dharmic_insights?: string[];
   growth_suggestions?: string[];
   spiritual_context?: string;
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 interface LifeAspect {
@@ -80,7 +74,7 @@ const LIFE_ASPECTS: LifeAspect[] = [
     id: 'community',
     name: 'Community & Service',
     icon: UserGroupIcon,
-    color: 'text-green-600',
+    color: 'text-success-600',
     description: 'Contribute to collective wellbeing',
     keywords: ['community', 'service', 'society', 'contribution', 'impact']
   },
@@ -88,7 +82,7 @@ const LIFE_ASPECTS: LifeAspect[] = [
     id: 'career',
     name: 'Career & Purpose',
     icon: BriefcaseIcon,
-    color: 'text-purple-600',
+    color: 'text-gold-600',
     description: 'Find meaningful work and purpose',
     keywords: ['career', 'work', 'purpose', 'calling', 'profession', 'job']
   },
@@ -96,7 +90,7 @@ const LIFE_ASPECTS: LifeAspect[] = [
     id: 'life-balance',
     name: 'Life Balance',
     icon: HomeIcon,
-    color: 'text-teal-600',
+    color: 'text-gold-600',
     description: 'Harmonize all aspects of life',
     keywords: ['balance', 'harmony', 'wellness', 'health', 'lifestyle']
   },
@@ -112,7 +106,7 @@ const LIFE_ASPECTS: LifeAspect[] = [
     id: 'global-impact',
     name: 'Global Impact',
     icon: GlobeAltIcon,
-    color: 'text-emerald-600',
+    color: 'text-gold-600',
     description: 'Make a positive global difference',
     keywords: ['global', 'world', 'impact', 'change', 'humanity']
   }
@@ -174,7 +168,6 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
     }
 
     try {
-<<<<<<< HEAD
       // Use the enhanced chatService for comprehensive dharmic wisdom
       const response = await chatService.sendMessage(
         inputValue,
@@ -196,12 +189,12 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
         growth_suggestions: response.growth_suggestions,
         spiritual_context: response.spiritual_context
       };
-      
+
       setMessages(prev => [...prev, aiResponse]);
       setIsLoading(false);
     } catch (error) {
       console.error('Error sending message:', error);
-      
+
       // Enhanced fallback response
       const fallbackResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -225,26 +218,8 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
         ],
         spiritual_context: `This guidance relates to ${selectedAspect?.name.toLowerCase() || 'universal spiritual principles'} and supports your journey of conscious living and personal transformation.`
       };
-      
+
       setMessages(prev => [...prev, fallbackResponse]);
-=======
-      // Simulate API response for demo
-      setTimeout(() => {
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          content: `Thank you for sharing your thoughts about ${selectedAspect?.name.toLowerCase() || 'life'}. Here's some wisdom to consider:\n\n**Mindful Approach**: Every challenge is an opportunity for growth and deeper understanding.\n\n**Practical Steps**:\n- Practice daily mindfulness meditation\n- Reflect on your core values\n- Take aligned action with compassion\n\n*Remember: The journey of consciousness is unique to each soul. Trust your inner wisdom.*`,
-          role: 'assistant',
-          timestamp: new Date(),
-          confidence: 0.92,
-          dharmic_alignment: 0.87,
-          category: selectedAspect?.id || 'general'
-        };
-        setMessages(prev => [...prev, aiResponse]);
-        setIsLoading(false);
-      }, 2000);
-    } catch (error) {
-      console.error('Error sending message:', error);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       setIsLoading(false);
     }
   };
@@ -275,41 +250,41 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
     <div className={`organic-chat-container min-h-screen relative overflow-hidden ${meditationMode ? 'meditation-mode' : ''}`}>
       {/* Spiritual Background */}
       <SpiritualBackground />
-      
+
       {/* Breathing Guide */}
-      <BreathingGuide 
-        isVisible={isBreathingActive} 
+      <BreathingGuide
+        isVisible={isBreathingActive}
         onClose={() => setIsBreathingActive(false)}
       />
-      
+
       {/* Header with Aurora Effect */}
-      <motion.header 
+      <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className="relative z-10 backdrop-blur-xl bg-white/5 border-b border-white/10 px-6 py-4"
       >
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="flex items-center space-x-4"
             whileHover={{ scale: 1.02 }}
           >
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 1 }}
-              className="h-12 w-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center spiritual-glow"
+              className="h-12 w-12 bg-gradient-to-br from-gold-400 to-neutral-1000 rounded-full flex items-center justify-center spiritual-glow"
             >
               <SparklesIcon className="h-6 w-6 text-white" />
             </motion.div>
             <div>
-              <motion.h1 
-                className="text-3xl font-bold bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent"
-                animate={{ 
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] 
+              <motion.h1
+                className="text-3xl font-bold bg-gradient-to-r from-gold-400 via-gold-400 to-gold-400 bg-clip-text text-transparent"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
                 }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity, 
-                  ease: "linear" 
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
                 }}
               >
                 Universal Dharma
@@ -319,8 +294,8 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               </p>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="flex items-center space-x-3"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -330,7 +305,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="flex items-center space-x-2 bg-gradient-to-r from-emerald-100/20 to-blue-100/20 px-3 py-2 rounded-full backdrop-blur-md border border-white/20"
+                className="flex items-center space-x-2 bg-gradient-to-r from-gold-100/20 to-neutral-200/20 px-3 py-2 rounded-full backdrop-blur-md border border-white/20"
               >
                 <selectedAspect.icon className={`h-5 w-5 ${selectedAspect.color}`} />
                 <span className="text-sm font-medium text-white/90">
@@ -338,17 +313,16 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                 </span>
               </motion.div>
             )}
-            
+
             {/* Meditation Mode Toggle */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setMeditationMode(!meditationMode)}
-              className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${
-                meditationMode 
-                  ? 'bg-purple-500/30 border border-purple-400/50 text-purple-200' 
+              className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${meditationMode
+                  ? 'bg-gold-500/30 border border-gold-400/50 text-purple-200'
                   : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
-              }`}
+                }`}
               title="Toggle Meditation Mode"
             >
               <SparklesIcon className="h-5 w-5" />
@@ -359,11 +333,10 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsListening(!isListening)}
-              className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${
-                isListening 
-                  ? 'bg-red-500/30 border border-red-400/50 text-red-200' 
+              className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${isListening
+                  ? 'bg-red-500/30 border border-red-400/50 text-red-200'
                   : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
-              }`}
+                }`}
               title={isListening ? "Stop Listening" : "Start Voice Input"}
             >
               {isListening ? <StopIcon className="h-5 w-5" /> : <MicrophoneIcon className="h-5 w-5" />}
@@ -374,11 +347,10 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsBreathingActive(!isBreathingActive)}
-              className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${
-                isBreathingActive 
-                  ? 'bg-emerald-500/30 border border-emerald-400/50 text-emerald-200' 
+              className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${isBreathingActive
+                  ? 'bg-gold-500/30 border border-gold-400/50 text-gold-200'
                   : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
-              }`}
+                }`}
               title="Mindful Breathing Guide"
             >
               <HeartIcon className="h-5 w-5" />
@@ -407,7 +379,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => selectLifeAspect(aspect)}
-                    className="group p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:border-emerald-300/50 hover:bg-white/20 transition-all duration-200"
+                    className="group p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:border-gold-300/50 hover:bg-white/20 transition-all duration-200"
                   >
                     <aspect.icon className={`h-8 w-8 ${aspect.color} mx-auto mb-2 group-hover:scale-110 transition-transform`} />
                     <h3 className="text-sm font-medium text-white/90 mb-1">
@@ -434,14 +406,14 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-12"
               >
-                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center spiritual-glow">
+                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-gold-400 to-neutral-1000 rounded-full flex items-center justify-center spiritual-glow">
                   <SparklesIcon className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white/90 mb-2">
                   Welcome to Universal Dharma
                 </h3>
                 <p className="text-white/70 max-w-md mx-auto">
-                  Your AI companion for ethical decision-making, personal growth, and conscious living. 
+                  Your AI companion for ethical decision-making, personal growth, and conscious living.
                   Ask me anything about life's challenges and opportunities.
                 </p>
               </motion.div>
@@ -452,7 +424,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                     key={message.id}
                     initial={{ opacity: 0, y: 30, scale: 0.8 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ 
+                    transition={{
                       delay: index * 0.1,
                       type: "spring",
                       stiffness: 200,
@@ -460,23 +432,22 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                     }}
                     className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} mb-6`}
                   >
-                    <motion.div 
+                    <motion.div
                       className={`organic-bubble ${message.role} fade-in-up max-w-3xl`}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.02,
                         rotateY: message.role === 'user' ? -2 : 2,
                       }}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     >
-<<<<<<< HEAD
                       <div className="prose prose-sm max-w-none text-white/90">
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkGfm]} 
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
                         >
                           {message.content}
                         </ReactMarkdown>
                       </div>
-                      
+
                       {/* Enhanced Dharmic Insights and Growth Suggestions */}
                       {message.role === 'assistant' && (message.dharmic_insights || message.growth_suggestions || message.spiritual_context) && (
                         <div className="mt-6 space-y-4">
@@ -497,30 +468,30 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                               </ul>
                             </div>
                           )}
-                          
+
                           {/* Growth Suggestions */}
                           {message.growth_suggestions && message.growth_suggestions.length > 0 && (
-                            <div className="bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-lg p-4 border border-emerald-400/30">
+                            <div className="bg-gradient-to-r from-gold-500/20 to-gold-500/20 rounded-lg p-4 border border-gold-400/30">
                               <div className="flex items-center space-x-2 mb-3">
-                                <LightBulbIcon className="h-5 w-5 text-emerald-400" />
-                                <h4 className="text-sm font-semibold text-emerald-300">Growth Suggestions</h4>
+                                <LightBulbIcon className="h-5 w-5 text-gold-400" />
+                                <h4 className="text-sm font-semibold text-gold-300">Growth Suggestions</h4>
                               </div>
                               <ul className="space-y-2">
                                 {message.growth_suggestions.map((suggestion, idx) => (
                                   <li key={idx} className="text-xs text-white/80 flex items-start space-x-2">
-                                    <span className="text-emerald-400 mt-1">→</span>
+                                    <span className="text-gold-400 mt-1">→</span>
                                     <span>{suggestion}</span>
                                   </li>
                                 ))}
                               </ul>
                             </div>
                           )}
-                          
+
                           {/* Spiritual Context */}
                           {message.spiritual_context && (
-                            <div className="bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-lg p-4 border border-purple-400/30">
+                            <div className="bg-gradient-to-r from-gold-500/20 to-indigo-500/20 rounded-lg p-4 border border-gold-400/30">
                               <div className="flex items-center space-x-2 mb-2">
-                                <AcademicCapIcon className="h-5 w-5 text-purple-400" />
+                                <AcademicCapIcon className="h-5 w-5 text-gold-400" />
                                 <h4 className="text-sm font-semibold text-purple-300">Spiritual Context</h4>
                               </div>
                               <p className="text-xs text-white/80">{message.spiritual_context}</p>
@@ -528,15 +499,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                           )}
                         </div>
                       )}
-=======
-                      <ReactMarkdown 
-                        remarkPlugins={[remarkGfm]} 
-                        className="prose prose-sm max-w-none text-white/90"
-                      >
-                        {message.content}
-                      </ReactMarkdown>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
-                      
+
                       {/* Message Metadata */}
                       {message.role === 'assistant' && (
                         <div className="mt-4 pt-3 border-t border-white/20">
@@ -555,12 +518,12 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                                 </div>
                               )}
                             </div>
-                            
+
                             <div className="flex items-center space-x-2">
-                              <button className="hover:text-emerald-300 transition-colors">
+                              <button className="hover:text-gold-300 transition-colors">
                                 <BookmarkIcon className="h-4 w-4" />
                               </button>
-                              <button className="hover:text-emerald-300 transition-colors">
+                              <button className="hover:text-gold-300 transition-colors">
                                 <ShareIcon className="h-4 w-4" />
                               </button>
                             </div>
@@ -572,7 +535,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                 ))}
               </AnimatePresence>
             )}
-            
+
             {/* Loading Indicator */}
             {isLoading && (
               <motion.div
@@ -590,7 +553,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                 </div>
               </motion.div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
         </div>
@@ -636,15 +599,15 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder={selectedAspect 
-                      ? `Share your thoughts about ${selectedAspect.name.toLowerCase()}...` 
+                    placeholder={selectedAspect
+                      ? `Share your thoughts about ${selectedAspect.name.toLowerCase()}...`
                       : "What wisdom do you seek today? ✨"
                     }
                     className="mystical-input"
                     rows={1}
                     style={{ minHeight: '48px', maxHeight: '120px' }}
                   />
-                  
+
                   {/* Aspect Selector Button */}
                   <motion.button
                     whileHover={{ scale: 1.1, rotate: 180 }}
@@ -664,7 +627,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isLoading}
-                className="p-3 rounded-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 hover:from-emerald-400 hover:via-blue-400 hover:to-purple-400 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white shadow-lg hover:shadow-xl transition-all duration-300 spiritual-glow"
+                className="p-3 rounded-full bg-gradient-to-r from-gold-500 via-neutral-1000 to-gold-500 hover:from-gold-400 hover:via-gold-400 hover:to-gold-400 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white shadow-lg hover:shadow-xl transition-all duration-300 spiritual-glow"
                 style={{
                   background: 'linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6)',
                   backgroundSize: '200% 200%',

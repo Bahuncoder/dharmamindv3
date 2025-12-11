@@ -49,7 +49,6 @@ interface ColorContextType {
 const themes: ColorTheme[] = [
   {
     name: 'dharma-default',
-<<<<<<< HEAD
     displayName: 'Dharma Emerald',
     description: 'Spiritual emerald green - the official DharmaMind theme',
     colors: {
@@ -66,24 +65,6 @@ const themes: ColorTheme[] = [
       primaryHoverEnd: '#047857',
       primary: '#10b981',
       primaryHover: '#059669',
-=======
-    displayName: 'Dharma Gray',
-    description: 'Professional gray with emerald accents',
-    colors: {
-      brandPrimary: '#6b7280',      // Gray-500: Main brand
-      brandAccent: '#10b981',       // Emerald-500: Accents/borders
-      brandSecondary: '#8b5cf6',    // Violet-500: Secondary actions
-      brandPrimaryHover: '#4b5563', // Gray-600
-      brandAccentHover: '#059669',  // Emerald-600
-      brandSecondaryHover: '#7c3aed', // Violet-600
-      // Legacy mappings
-      primaryStart: '#6b7280',
-      primaryEnd: '#10b981',
-      primaryHoverStart: '#4b5563',
-      primaryHoverEnd: '#059669',
-      primary: '#6b7280',
-      primaryHover: '#4b5563',
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     }
   },
   {

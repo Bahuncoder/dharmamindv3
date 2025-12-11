@@ -1,19 +1,14 @@
 /**
  * Complete Visual Overhaul - Glass Morphism Chat Interface
  * Advanced Animations, Premium Typography, Enhanced Interactive Elements
- * Preserves existing emerald/gray color system
+ * Preserves existing gold/gray color system
  */
 
 /* === GLASS MORPHISM FOUNDATION === */
 .glass-morphism {
   backdrop-filter: blur(20px) saturate(180%);
-<<<<<<< HEAD
   background: var(--color-background-secondary, rgba(255, 255, 255, 0.85));
   border: 1px solid var(--color-border-primary, rgba(16, 185, 129, 0.3));
-=======
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.18);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
 
@@ -110,15 +105,15 @@
 
 .btn-premium-primary {
   background: var(--color-bg-primary);
-  color: var(--color-border-emerald);
-  border: 2px solid var(--color-border-emerald);
+  color: var(--color-border-gold);
+  border: 2px solid var(--color-border-gold);
   font-weight: 600;
 }
 
 .btn-premium-primary:hover {
   background: var(--color-bg-secondary);
-  border-color: var(--color-border-emerald-dark);
-  color: var(--color-border-emerald-dark);
+  border-color: var(--color-border-gold-dark);
+  color: var(--color-border-gold-dark);
 }
 
 .btn-premium-secondary {
@@ -129,21 +124,21 @@
 
 .btn-premium-secondary:hover {
   background: var(--color-bg-secondary);
-  border-color: var(--color-border-emerald);
-  color: var(--color-border-emerald);
+  border-color: var(--color-border-gold);
+  color: var(--color-border-gold);
 }
 
 .btn-premium-ghost {
   background: transparent;
-  color: var(--color-border-emerald);
-  border: 1px solid var(--color-border-emerald);
+  color: var(--color-border-gold);
+  border: 1px solid var(--color-border-gold);
   font-weight: 500;
 }
 
 .btn-premium-ghost:hover {
   background: var(--color-bg-secondary);
-  color: var(--color-border-emerald-dark);
-  border-color: var(--color-border-emerald-dark);
+  color: var(--color-border-gold-dark);
+  border-color: var(--color-border-gold-dark);
 }
 
 /* === ADVANCED ANIMATIONS === */
@@ -189,7 +184,7 @@
   }
 }
 
-@keyframes pulse-emerald {
+@keyframes pulse-gold {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
   }
@@ -210,8 +205,8 @@
   animation: fadeInScale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.animate-pulse-emerald {
-  animation: pulse-emerald 2s infinite;
+.animate-pulse-gold {
+  animation: pulse-gold 2s infinite;
 }
 
 /* === ENHANCED CHAT INTERFACE === */
@@ -251,7 +246,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-emerald), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-border-gold), transparent);
   opacity: 0.3;
 }
 
@@ -277,7 +272,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-emerald), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-border-gold), transparent);
   opacity: 0.3;
 }
 
@@ -314,7 +309,7 @@
 .message-bubble-user {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
-  border: 2px solid var(--color-border-emerald);
+  border: 2px solid var(--color-border-gold);
   margin-left: auto;
   margin-right: 0;
 }
@@ -378,14 +373,14 @@
 }
 
 .chat-messages-container::-webkit-scrollbar-thumb {
-  background: var(--color-border-emerald);
+  background: var(--color-border-gold);
   border-radius: 4px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 .chat-messages-container::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-emerald-dark);
+  background: var(--color-border-gold-dark);
   background-clip: content-box;
 }
 
@@ -406,21 +401,21 @@
 }
 
 /* === EMERALD ACCENT ENHANCEMENTS === */
-.emerald-glow {
+.gold-glow {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 
-.emerald-glow:hover {
+.gold-glow:hover {
   box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
 }
 
-.emerald-border-glow {
-  border: 1px solid var(--color-border-emerald);
+.gold-border-glow {
+  border: 1px solid var(--color-border-gold);
   box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.1);
 }
 
-.emerald-gradient-text {
-  background: linear-gradient(135deg, var(--color-border-emerald), var(--color-border-emerald-light));
+.gold-gradient-text {
+  background: linear-gradient(135deg, var(--color-border-gold), var(--color-border-gold-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

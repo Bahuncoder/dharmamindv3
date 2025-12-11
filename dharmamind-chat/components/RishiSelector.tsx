@@ -176,7 +176,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
               placeholder="Search guides..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all"
             />
           </div>
           
@@ -205,14 +205,14 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
             onClick={() => handleSelectRishi('')}
             className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all mb-1 ${
               isStandardMode 
-                ? 'bg-teal-50 border border-teal-200' 
+                ? 'bg-gold-50 border border-gold-200' 
                 : 'hover:bg-gray-50 border border-transparent'
             }`}
           >
             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-              isStandardMode ? 'bg-teal-100' : 'bg-gray-100'
+              isStandardMode ? 'bg-gold-100' : 'bg-gray-100'
             }`}>
-              <svg className={`w-5 h-5 ${isStandardMode ? 'text-teal-600' : 'text-gray-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className={`w-5 h-5 ${isStandardMode ? 'text-gold-600' : 'text-gray-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
@@ -221,7 +221,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
               <div className="text-xs text-gray-500 truncate">Standard AI for all topics</div>
             </div>
             {isStandardMode && (
-              <svg className="w-5 h-5 text-teal-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-gold-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             )}
@@ -242,7 +242,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
                 disabled={isLocked}
                 className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all mb-1 ${
                   isSelected 
-                    ? 'bg-teal-50 border border-teal-200' 
+                    ? 'bg-gold-50 border border-gold-200' 
                     : isLocked
                       ? 'opacity-50 cursor-not-allowed border border-transparent'
                       : 'hover:bg-gray-50 border border-transparent'
@@ -251,7 +251,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
                 {/* Avatar */}
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm ${
                   isSelected 
-                    ? 'bg-teal-600 text-white' 
+                    ? 'bg-gold-600 text-white' 
                     : 'bg-gray-100 text-gray-600'
                 }`}>
                   {rishi.name.charAt(0)}
@@ -272,7 +272,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
                 
                 {/* Check */}
                 {isSelected && (
-                  <svg className="w-5 h-5 text-teal-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-gold-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 )}

@@ -156,9 +156,9 @@ const FeatureRequestsPage: React.FC = () => {
     const colors = {
       'submitted': 'bg-gray-100 text-gray-800',
       'under-review': 'bg-yellow-100 text-yellow-800',
-      'planned': 'bg-blue-100 text-blue-800',
+      'planned': 'bg-neutral-200 text-neutral-800',
       'in-progress': 'bg-orange-100 text-orange-800',
-      'completed': 'bg-green-100 text-green-800',
+      'completed': 'bg-success-100 text-green-800',
       'declined': 'bg-red-100 text-red-800'
     };
     return colors[status];
@@ -550,7 +550,7 @@ const FeatureRequestsPage: React.FC = () => {
                   </h3>
                   <div className="space-y-3">
                     {features.filter(f => f.status === 'planned').map(feature => (
-                      <div key={feature.id} className="p-3 bg-blue-50 rounded-lg">
+                      <div key={feature.id} className="p-3 bg-neutral-100 rounded-lg">
                         <h4 className="font-medium text-gray-900">{feature.title}</h4>
                         <p className="text-sm text-gray-600 mt-1">{feature.votes} votes</p>
                       </div>
@@ -564,7 +564,7 @@ const FeatureRequestsPage: React.FC = () => {
                   </h3>
                   <div className="space-y-3">
                     {features.filter(f => f.status === 'completed').map(feature => (
-                      <div key={feature.id} className="p-3 bg-green-50 rounded-lg">
+                      <div key={feature.id} className="p-3 bg-success-50 rounded-lg">
                         <h4 className="font-medium text-gray-900">{feature.title}</h4>
                         <p className="text-sm text-gray-600 mt-1">{feature.votes} votes</p>
                       </div>

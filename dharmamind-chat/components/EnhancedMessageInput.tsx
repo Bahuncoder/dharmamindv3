@@ -140,23 +140,23 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
       case 'webp':
       case 'bmp':
       case 'svg':
-        return <PhotoIcon className="w-4 h-4 text-green-500" />;
+        return <PhotoIcon className="w-4 h-4 text-success-500" />;
       case 'doc':
       case 'docx':
       case 'rtf':
       case 'odt':
-        return <DocumentIcon className="w-4 h-4 text-blue-500" />;
+        return <DocumentIcon className="w-4 h-4 text-neutral-1000" />;
       case 'xls':
       case 'xlsx':
       case 'csv':
-        return <DocumentIcon className="w-4 h-4 text-emerald-500" />;
+        return <DocumentIcon className="w-4 h-4 text-gold-500" />;
       case 'ppt':
       case 'pptx':
         return <DocumentIcon className="w-4 h-4 text-orange-500" />;
       case 'mp4':
       case 'mov':
       case 'avi':
-        return <DocumentIcon className="w-4 h-4 text-purple-500" />;
+        return <DocumentIcon className="w-4 h-4 text-gold-500" />;
       case 'mp3':
       case 'wav':
         return <DocumentIcon className="w-4 h-4 text-indigo-500" />;
@@ -211,11 +211,6 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
                     <XMarkIcon className="w-4 h-4" />
                   </button>
                 </div>
-<<<<<<< HEAD
-=======
-                  </button>
-                </div>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               ))}
             </div>
           </motion.div>
@@ -226,7 +221,6 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
       <div
         className={`relative rounded-2xl border-2 transition-all duration-300 ${
           isFocused
-<<<<<<< HEAD
             ? 'shadow-lg'
             : ''
         } ${
@@ -239,13 +233,6 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
             backgroundColor: 'var(--color-background-secondary)'
           })
         }}
-=======
-            ? 'border-emerald-400 shadow-lg shadow-emerald-500/20 bg-white'
-            : 'border-gray-200 bg-white/80 backdrop-blur-sm'
-        } ${isDragOver ? 'border-emerald-500 bg-emerald-50/50' : ''} ${
-          disabled ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -257,7 +244,6 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-<<<<<<< HEAD
               className="absolute inset-0 rounded-2xl border-2 border-dashed flex items-center justify-center z-10"
               style={{
                 backgroundColor: 'var(--color-background-secondary)',
@@ -265,11 +251,6 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               }}
             >
               <div className="text-center" style={{ color: 'var(--color-primary)' }}>
-=======
-              className="absolute inset-0 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 border-dashed flex items-center justify-center z-10"
-            >
-              <div className="text-center text-emerald-600">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <DocumentIcon className="w-8 h-8 mx-auto mb-2" />
                 <p className="text-sm font-medium">Drop files here</p>
               </div>
@@ -285,16 +266,12 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               whileTap={{ scale: 0.9 }}
               onClick={() => fileInputRef.current?.click()}
               disabled={disabled}
-<<<<<<< HEAD
               className="flex-shrink-0 p-2 rounded-xl transition-all duration-200 disabled:opacity-50"
               style={{
                 backgroundColor: 'var(--color-background-secondary)',
                 color: 'var(--color-text-secondary)',
                 border: `1px solid var(--color-border-primary)`
               }}
-=======
-              className="flex-shrink-0 p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-emerald-600 transition-all duration-200 disabled:opacity-50"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               title="Attach files (PDF, Images, Documents)"
             >
               <PaperClipIcon className="w-5 h-5" />
@@ -375,7 +352,7 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setShowVoice(!showVoice)}
                 disabled={disabled}
-                className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-purple-600 transition-all duration-200 disabled:opacity-50"
+                className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gold-600 transition-all duration-200 disabled:opacity-50"
                 title="Voice input"
               >
                 <MicrophoneIcon className="w-5 h-5" />
@@ -388,15 +365,11 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
               whileTap={{ scale: 0.95 }}
               onClick={onSend}
               disabled={!value.trim() || isLoading || disabled || characterInfo.isOverLimit}
-<<<<<<< HEAD
               className="p-3 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg"
               style={{
                 backgroundColor: 'var(--color-border-primary)',
                 border: `2px solid var(--color-border-primary)`
               }}
-=======
-              className="p-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg hover:shadow-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               title={isLoading ? 'Sending...' : 'Send message'}
             >
               {isLoading ? (
@@ -417,17 +390,10 @@ const EnhancedMessageInput: React.FC<EnhancedMessageInputProps> = ({
           className="absolute inset-0 rounded-2xl pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ 
-<<<<<<< HEAD
             opacity: isFocused ? 0.3 : 0
           }}
           style={{
             background: 'var(--color-border-primary)'
-=======
-            opacity: isFocused ? 1 : 0,
-            background: isFocused 
-              ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%)'
-              : 'transparent'
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           }}
           transition={{ duration: 0.3 }}
         />

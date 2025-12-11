@@ -110,7 +110,7 @@ const AnalyticsPage: React.FC = () => {
               ${isSelected 
                 ? isHighContrast 
                   ? 'bg-black text-white border-black' 
-                  : 'bg-emerald-500 text-white border-emerald-500'
+                  : 'bg-gold-500 text-white border-gold-500'
                 : isHighContrast
                   ? 'bg-white text-black border-black hover:bg-gray-100'
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
@@ -198,7 +198,7 @@ const AnalyticsPage: React.FC = () => {
               className={`
                 flex items-center gap-2 px-3 py-2 rounded-lg text-sm border
                 ${!isMobile 
-                  ? isHighContrast ? 'bg-black text-white' : 'bg-emerald-500 text-white'
+                  ? isHighContrast ? 'bg-black text-white' : 'bg-gold-500 text-white'
                   : isHighContrast ? 'bg-white text-black border-black' : 'bg-white text-gray-600 border-gray-300'
                 }
               `}
@@ -211,7 +211,7 @@ const AnalyticsPage: React.FC = () => {
               className={`
                 flex items-center gap-2 px-3 py-2 rounded-lg text-sm border
                 ${isMobile 
-                  ? isHighContrast ? 'bg-black text-white' : 'bg-emerald-500 text-white'
+                  ? isHighContrast ? 'bg-black text-white' : 'bg-gold-500 text-white'
                   : isHighContrast ? 'bg-white text-black border-black' : 'bg-white text-gray-600 border-gray-300'
                 }
               `}
@@ -233,7 +233,7 @@ const AnalyticsPage: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className={`min-h-screen ${isHighContrast ? 'bg-white' : 'bg-gradient-to-br from-emerald-50 to-blue-50'}`}>
+      <div className={`min-h-screen ${isHighContrast ? 'bg-white' : 'bg-gradient-to-br from-gold-50 to-neutral-100'}`}>
         {/* Header */}
         <div className={`${isHighContrast ? 'bg-white border-b-2 border-black' : 'bg-white/80 backdrop-blur-sm border-b border-gray-200'} sticky top-0 z-40`}>
           <div className={`${isMobile ? 'px-4 py-3' : 'px-6 py-4'}`}>

@@ -215,7 +215,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
         <button
           onClick={handleGoogleAuth}
           disabled={isSubmitting || isLoading}
-          className="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+          className="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-neutral-1000 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
         >
           <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
             <path
@@ -259,7 +259,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleInputChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-1000 ${
                   errors.first_name ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="First name"
@@ -274,7 +274,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleInputChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-1000 ${
                   errors.last_name ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Last name"
@@ -292,7 +292,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-1000 ${
               errors.email ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Email address"
@@ -308,7 +308,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-1000 ${
               errors.password ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Password"
@@ -325,7 +325,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-1000 ${
                 errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Confirm password"
@@ -339,7 +339,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
         <button
           type="submit"
           disabled={isSubmitting || isLoading}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="w-full bg-gold-600 text-white py-2 px-4 rounded-lg hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-neutral-1000 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {isSubmitting || isLoading ? 'Processing...' : (mode === 'login' ? 'Sign In' : 'Create Account')}
         </button>
@@ -351,7 +351,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
           {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
           <button
             onClick={toggleMode}
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="text-gold-600 hover:text-gold-700 font-medium"
           >
             {mode === 'login' ? 'Sign up' : 'Sign in'}
           </button>
@@ -376,7 +376,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
             <button
               onClick={() => handleDemoLogin('free')}
               disabled={isSubmitting}
-              className="w-full bg-emerald-100 text-emerald-700 py-2 px-4 rounded-lg hover:bg-emerald-200 transition-colors disabled:opacity-50 text-sm"
+              className="w-full bg-gold-100 text-gold-700 py-2 px-4 rounded-lg hover:bg-gold-200 transition-colors disabled:opacity-50 text-sm"
             >
               🆓 Demo Mode (Free)
             </button>

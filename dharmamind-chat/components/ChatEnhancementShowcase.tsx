@@ -17,19 +17,19 @@ const ChatEnhancementShowcase: React.FC = () => {
       icon: SparklesIcon,
       title: "Enhanced Message Bubbles",
       description: "Interactive actions, spiritual metadata, and beautiful animations",
-      color: "from-emerald-400 to-emerald-600"
+      color: "from-gold-400 to-gold-600"
     },
     {
       icon: ChatBubbleLeftRightIcon,
       title: "Advanced Message Input",
       description: "Quick prompts, file attachments, voice input, and emoji picker",
-      color: "from-blue-400 to-blue-600"
+      color: "from-gold-400 to-gold-600"
     },
     {
       icon: MicrophoneIcon,
       title: "Voice Integration",
       description: "Speech-to-text input with visual feedback and spiritual audio",
-      color: "from-purple-400 to-purple-600"
+      color: "from-gold-400 to-gold-600"
     },
     {
       icon: MagnifyingGlassIcon,
@@ -64,7 +64,7 @@ const ChatEnhancementShowcase: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gold-50 p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -73,7 +73,7 @@ const ChatEnhancementShowcase: React.FC = () => {
           className="text-center mb-16"
         >
           <motion.h1 
-            className="text-5xl font-bold bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-6"
+            className="text-5xl font-bold bg-gradient-to-r from-gold-600 via-gold-600 to-gold-600 bg-clip-text text-transparent mb-6"
             animate={{ 
               backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] 
             }}
@@ -119,24 +119,24 @@ const ChatEnhancementShowcase: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="bg-gradient-to-r from-emerald-500 to-blue-600 rounded-3xl p-8 text-white text-center"
+          className="bg-gradient-to-r from-gold-500 to-gold-600 rounded-3xl p-8 text-white text-center"
         >
           <h2 className="text-3xl font-bold mb-6">Spiritual Technology Perfection</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="text-4xl font-bold mb-2">🧘‍♂️</div>
               <h3 className="font-semibold mb-2">Mindful Design</h3>
-              <p className="text-emerald-100">Every element crafted for contemplative interaction</p>
+              <p className="text-gold-100">Every element crafted for contemplative interaction</p>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">✨</div>
               <h3 className="font-semibold mb-2">Premium Experience</h3>
-              <p className="text-emerald-100">Glass morphism, smooth animations, and spiritual aesthetics</p>
+              <p className="text-gold-100">Glass morphism, smooth animations, and spiritual aesthetics</p>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">🕉️</div>
               <h3 className="font-semibold mb-2">Dharmic Intelligence</h3>
-              <p className="text-emerald-100">AI responses aligned with ancient wisdom traditions</p>
+              <p className="text-gold-100">AI responses aligned with ancient wisdom traditions</p>
             </div>
           </div>
         </motion.div>

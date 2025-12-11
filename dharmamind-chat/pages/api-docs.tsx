@@ -42,9 +42,9 @@ const ApiDocsPage: React.FC = () => {
   const getMethodColor = (method: string) => {
     switch (method) {
       case 'GET':
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-green-800';
       case 'POST':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-neutral-200 text-neutral-800';
       case 'PUT':
         return 'bg-yellow-100 text-yellow-800';
       case 'DELETE':
@@ -72,7 +72,7 @@ const ApiDocsPage: React.FC = () => {
                 onClick={() => router.push('/')}
                 className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-gold-600 rounded-lg flex items-center justify-center">
                   <span className="text-white text-sm font-bold">🕉</span>
                 </div>
                 <span className="text-xl font-semibold text-gray-900">DharmaMind API</span>
@@ -100,7 +100,7 @@ const ApiDocsPage: React.FC = () => {
                 </ContactButton>
                 <button 
                   onClick={() => router.push('/auth?mode=login')}
-                  className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300"
+                  className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300"
                 >
                   Sign In
                 </button>
@@ -110,7 +110,7 @@ const ApiDocsPage: React.FC = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-amber-50 to-emerald-50 py-16">
+        <div className="bg-gradient-to-br from-amber-50 to-gold-50 py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               🔌 DharmaMind API
@@ -121,7 +121,7 @@ const ApiDocsPage: React.FC = () => {
             
             <div className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-sm border border-gray-200">
               <span className="text-gray-600 mr-2">Base URL:</span>
-              <code className="font-mono text-emerald-600 font-medium">
+              <code className="font-mono text-gold-600 font-medium">
                 https://api.dharmamind.com/v1
               </code>
             </div>
@@ -142,7 +142,7 @@ const ApiDocsPage: React.FC = () => {
               </p>
               <div className="bg-stone-800 rounded-lg p-4 overflow-x-auto">
                 <code className="text-green-400 text-sm">
-                  <div className="text-blue-400">POST</div>
+                  <div className="text-gold-400">POST</div>
                   <div className="text-white">/api/auth/login</div>
                   <div className="mt-2 text-gray-300">{`{`}</div>
                   <div className="text-amber-300 ml-4">"email": "user@example.com",</div>
@@ -216,8 +216,8 @@ const ApiDocsPage: React.FC = () => {
                   <div className="text-green-400 ml-8">"timestamp": "2025-01-29T10:30:00Z"</div>
                   <div className="text-amber-300 ml-4">{`},`}</div>
                   <div className="text-amber-300 ml-4">"usage": {`{`}</div>
-                  <div className="text-blue-400 ml-8">"tokens_used": 150,</div>
-                  <div className="text-blue-400 ml-8">"remaining_quota": 850</div>
+                  <div className="text-gold-400 ml-8">"tokens_used": 150,</div>
+                  <div className="text-gold-400 ml-8">"remaining_quota": 850</div>
                   <div className="text-amber-300 ml-4">{`}`}</div>
                   <div className="text-gray-300">{`}`}</div>
                 </code>
@@ -233,21 +233,21 @@ const ApiDocsPage: React.FC = () => {
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
                 <div className="text-3xl mb-3">🆓</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Free Tier</h3>
-                <div className="text-2xl font-bold text-blue-600 mb-1">100</div>
+                <div className="text-2xl font-bold text-gold-600 mb-1">100</div>
                 <div className="text-gray-600 text-sm">requests/hour</div>
               </div>
               
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
                 <div className="text-3xl mb-3">💼</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Professional</h3>
-                <div className="text-2xl font-bold text-emerald-600 mb-1">1,000</div>
+                <div className="text-2xl font-bold text-gold-600 mb-1">1,000</div>
                 <div className="text-gray-600 text-sm">requests/hour</div>
               </div>
               
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
                 <div className="text-3xl mb-3">🏢</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Enterprise</h3>
-                <div className="text-2xl font-bold text-purple-600 mb-1">Custom</div>
+                <div className="text-2xl font-bold text-gold-600 mb-1">Custom</div>
                 <div className="text-gray-600 text-sm">unlimited available</div>
               </div>
             </div>
@@ -302,7 +302,7 @@ const ApiDocsPage: React.FC = () => {
                 <div className="text-4xl mb-4">📜</div>
                 <h3 className="font-semibold text-gray-900 mb-2">JavaScript</h3>
                 <code className="text-sm text-gray-600 mb-4 block">npm install dharmamind</code>
-                <button className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+                <button className="text-gold-600 hover:text-gold-700 font-medium text-sm">
                   View Docs →
                 </button>
               </div>
@@ -311,7 +311,7 @@ const ApiDocsPage: React.FC = () => {
                 <div className="text-4xl mb-4">🐍</div>
                 <h3 className="font-semibold text-gray-900 mb-2">Python</h3>
                 <code className="text-sm text-gray-600 mb-4 block">pip install dharmamind</code>
-                <button className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+                <button className="text-gold-600 hover:text-gold-700 font-medium text-sm">
                   View Docs →
                 </button>
               </div>
@@ -320,7 +320,7 @@ const ApiDocsPage: React.FC = () => {
                 <div className="text-4xl mb-4">💎</div>
                 <h3 className="font-semibold text-gray-900 mb-2">Ruby</h3>
                 <code className="text-sm text-gray-600 mb-4 block">gem install dharmamind</code>
-                <button className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+                <button className="text-gold-600 hover:text-gold-700 font-medium text-sm">
                   View Docs →
                 </button>
               </div>
@@ -329,7 +329,7 @@ const ApiDocsPage: React.FC = () => {
                 <div className="text-4xl mb-4">🔌</div>
                 <h3 className="font-semibold text-gray-900 mb-2">cURL</h3>
                 <code className="text-sm text-gray-600 mb-4 block">Direct HTTP calls</code>
-                <button className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+                <button className="text-gold-600 hover:text-gold-700 font-medium text-sm">
                   View Examples →
                 </button>
               </div>
@@ -337,7 +337,7 @@ const ApiDocsPage: React.FC = () => {
           </div>
 
           {/* Support */}
-          <div className="mt-16 bg-gradient-to-r from-amber-50 to-emerald-50 rounded-lg p-8 text-center">
+          <div className="mt-16 bg-gradient-to-r from-amber-50 to-gold-50 rounded-lg p-8 text-center">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               Need API Support? 🤝
             </h3>
@@ -348,7 +348,7 @@ const ApiDocsPage: React.FC = () => {
               <ContactButton
                 variant="button"
                 prefillCategory="support"
-                className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300"
+                className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300"
               >
                 Contact Developers
               </ContactButton>
@@ -370,7 +370,7 @@ const ApiDocsPage: React.FC = () => {
                 onClick={() => router.push('/')}
                 className="flex items-center justify-center space-x-3 mx-auto mb-4 hover:opacity-80 transition-opacity"
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-gold-600 rounded-lg flex items-center justify-center">
                   <span className="text-white text-sm font-bold">🕉</span>
                 </div>
                 <span className="text-xl font-semibold text-gray-900">DharmaMind</span>

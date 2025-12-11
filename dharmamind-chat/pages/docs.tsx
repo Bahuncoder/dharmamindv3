@@ -85,7 +85,7 @@ const DocsPage: React.FC = () => {
                 </ContactButton>
                 <button 
                   onClick={() => router.push('/auth?mode=login')}
-                  className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300"
+                  className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300"
                 >
                   Sign In
                 </button>
@@ -95,7 +95,7 @@ const DocsPage: React.FC = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-amber-50 to-emerald-50 py-16">
+        <div className="bg-gradient-to-br from-amber-50 to-gold-50 py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               📚 Documentation
@@ -107,15 +107,15 @@ const DocsPage: React.FC = () => {
             {/* Quick Links */}
             <div className="flex flex-wrap justify-center gap-4">
               <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="text-emerald-600 font-medium">Quick Start</div>
+                <div className="text-gold-600 font-medium">Quick Start</div>
                 <div className="text-sm text-gray-500">Get started in 5 minutes</div>
               </button>
               <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="text-blue-600 font-medium">API Reference</div>
+                <div className="text-gold-600 font-medium">API Reference</div>
                 <div className="text-sm text-gray-500">Complete API docs</div>
               </button>
               <button className="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="text-purple-600 font-medium">Examples</div>
+                <div className="text-gold-600 font-medium">Examples</div>
                 <div className="text-sm text-gray-500">Code samples & tutorials</div>
               </button>
             </div>
@@ -135,7 +135,7 @@ const DocsPage: React.FC = () => {
                     <div key={itemIndex} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer">
                       <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
                       <p className="text-gray-600 text-sm mb-4">{item.description}</p>
-                      <div className="flex items-center text-emerald-600 text-sm font-medium">
+                      <div className="flex items-center text-gold-600 text-sm font-medium">
                         Read more
                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -149,13 +149,13 @@ const DocsPage: React.FC = () => {
           </div>
 
           {/* API Quick Reference */}
-          <div className="mt-16 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-lg p-8 text-white">
+          <div className="mt-16 bg-gradient-to-r from-amber-600 to-gold-600 rounded-lg p-8 text-white">
             <h2 className="text-2xl font-bold mb-6">🔗 API Quick Reference</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               
               {/* Authentication */}
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-emerald-400">Authentication</h3>
+                <h3 className="text-lg font-semibold mb-4 text-gold-400">Authentication</h3>
                 <div className="bg-gray-800 rounded-lg p-4">
                   <code className="text-sm">
                     <div className="text-gray-400">// JWT Token Authentication</div>
@@ -168,7 +168,7 @@ const DocsPage: React.FC = () => {
 
               {/* Chat Endpoint */}
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-blue-400">Chat Endpoint</h3>
+                <h3 className="text-lg font-semibold mb-4 text-gold-400">Chat Endpoint</h3>
                 <div className="bg-gray-800 rounded-lg p-4">
                   <code className="text-sm">
                     <div className="text-gray-400">// Send message to DharmaMind</div>
@@ -181,7 +181,7 @@ const DocsPage: React.FC = () => {
             </div>
 
             <div className="mt-6 flex items-center space-x-4">
-              <button className="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg font-medium transition-colors">
+              <button className="bg-gold-600 hover:bg-gold-700 px-4 py-2 rounded-lg font-medium transition-colors">
                 View Full API Docs
               </button>
               <button className="border border-gray-600 hover:border-gray-500 px-4 py-2 rounded-lg font-medium transition-colors">
@@ -202,19 +202,19 @@ const DocsPage: React.FC = () => {
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">JavaScript</h3>
                 <p className="text-gray-600 text-sm mb-4">npm install dharmamind-js</p>
-                <button className="text-emerald-600 font-medium text-sm hover:text-emerald-700">
+                <button className="text-gold-600 font-medium text-sm hover:text-gold-700">
                   View Docs →
                 </button>
               </div>
 
               {/* Python SDK */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-neutral-200 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">🐍</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Python</h3>
                 <p className="text-gray-600 text-sm mb-4">pip install dharmamind</p>
-                <button className="text-emerald-600 font-medium text-sm hover:text-emerald-700">
+                <button className="text-gold-600 font-medium text-sm hover:text-gold-700">
                   View Docs →
                 </button>
               </div>
@@ -226,19 +226,19 @@ const DocsPage: React.FC = () => {
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">React</h3>
                 <p className="text-gray-600 text-sm mb-4">npm install @dharmamind/react</p>
-                <button className="text-emerald-600 font-medium text-sm hover:text-emerald-700">
+                <button className="text-gold-600 font-medium text-sm hover:text-gold-700">
                   View Docs →
                 </button>
               </div>
 
               {/* REST API */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-green-100 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-success-100 rounded-lg flex items-center justify-center">
                   <span className="text-2xl">🔌</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">REST API</h3>
                 <p className="text-gray-600 text-sm mb-4">Direct HTTP integration</p>
-                <button className="text-emerald-600 font-medium text-sm hover:text-emerald-700">
+                <button className="text-gold-600 font-medium text-sm hover:text-gold-700">
                   View Docs →
                 </button>
               </div>
@@ -246,7 +246,7 @@ const DocsPage: React.FC = () => {
           </div>
 
           {/* Support Section */}
-          <div className="mt-16 bg-gradient-to-r from-amber-50 to-emerald-50 rounded-lg p-8 text-center">
+          <div className="mt-16 bg-gradient-to-r from-amber-50 to-gold-50 rounded-lg p-8 text-center">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               Need help with integration? 🤝
             </h3>
@@ -257,7 +257,7 @@ const DocsPage: React.FC = () => {
               <ContactButton
                 variant="button"
                 prefillCategory="support"
-                className="bg-gradient-to-r from-amber-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-emerald-700 transition-all duration-300"
+                className="bg-gradient-to-r from-amber-600 to-gold-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-gold-700 transition-all duration-300"
               >
                 Contact Developer Support
               </ContactButton>

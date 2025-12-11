@@ -2,24 +2,17 @@ import React from 'react';
 
 interface ButtonProps {
   children: React.ReactNode;
-<<<<<<< HEAD
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'gradient' | 'spiritual';
-=======
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'enterprise' | 'contact';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
   loading?: boolean;
-<<<<<<< HEAD
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
   animate?: boolean;
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -30,7 +23,6 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   type = 'button',
   className = '',
-<<<<<<< HEAD
   loading = false,
   icon,
   iconPosition = 'left',
@@ -49,34 +41,34 @@ const Button: React.FC<ButtonProps> = ({
   
   const variants = {
     primary: `
-      bg-gradient-to-r from-emerald-500 to-emerald-600 text-white
-      shadow-lg shadow-emerald-500/25
-      hover:shadow-xl hover:shadow-emerald-500/30
-      focus:ring-emerald-500/50
+      bg-gradient-to-r from-gold-500 to-gold-600 text-white
+      shadow-lg shadow-gold-500/25
+      hover:shadow-xl hover:shadow-gold-500/30
+      focus:ring-gold-500/50
     `,
     gradient: `
-      bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white
-      shadow-lg shadow-emerald-500/25
-      hover:shadow-xl hover:shadow-emerald-500/40
-      focus:ring-emerald-500/50
+      bg-gradient-to-r from-gold-500 via-gold-500 to-gold-600 text-white
+      shadow-lg shadow-gold-500/25
+      hover:shadow-xl hover:shadow-gold-500/40
+      focus:ring-gold-500/50
     `,
     spiritual: `
-      bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white
-      shadow-lg shadow-emerald-600/30
-      hover:shadow-xl hover:shadow-emerald-600/40
-      focus:ring-emerald-600/50
-      border border-emerald-400/30
+      bg-gradient-to-r from-gold-600 via-gold-600 to-gold-700 text-white
+      shadow-lg shadow-gold-600/30
+      hover:shadow-xl hover:shadow-gold-600/40
+      focus:ring-gold-600/50
+      border border-gold-400/30
     `,
     secondary: `
-      bg-gray-100 text-gray-800 border-2 border-emerald-500
-      hover:bg-gray-200 hover:border-emerald-600
+      bg-gray-100 text-gray-800 border-2 border-gold-500
+      hover:bg-gray-200 hover:border-gold-600
       shadow-sm hover:shadow-md
-      focus:ring-emerald-500/30
+      focus:ring-gold-500/30
     `,
     outline: `
-      bg-transparent text-emerald-600 border-2 border-emerald-500
-      hover:bg-emerald-50 hover:border-emerald-600
-      focus:ring-emerald-500/30
+      bg-transparent text-gold-600 border-2 border-gold-500
+      hover:bg-gold-50 hover:border-gold-600
+      focus:ring-gold-500/30
     `,
     ghost: `
       bg-transparent text-gray-600 
@@ -106,39 +98,12 @@ const Button: React.FC<ButtonProps> = ({
     lg: 'w-5 h-5',
     xl: 'w-6 h-6'
   };
-=======
-  loading = false
-}) => {
-  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
-  
-  const variants = {
-    primary: 'btn-primary shadow-md hover:shadow-lg focus:ring-focus',
-    secondary: 'btn-secondary focus:ring-focus',
-    outline: 'btn-outline focus:ring-focus',
-    contact: 'btn-contact focus:ring-focus', // Contact sales specific styling
-    enterprise: 'btn-enterprise shadow-md hover:shadow-lg focus:ring-focus', // Enterprise specific styling
-    ghost: 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 focus:ring-focus',
-    danger: 'bg-error text-white hover:bg-red-700 focus:ring-red-500/50 shadow-md hover:shadow-lg'
-  };
-
-  const sizes = {
-    xs: 'px-2 py-1 text-xs',
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base',
-    xl: 'px-8 py-4 text-lg'
-  };
-
-  const variantClasses = variants[variant];
-  const sizeClasses = sizes[size];
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-<<<<<<< HEAD
       className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
     >
       {/* Shimmer effect */}
@@ -183,17 +148,6 @@ const Button: React.FC<ButtonProps> = ({
           {icon}
         </span>
       )}
-=======
-      className={`${baseClasses} ${variantClasses} ${sizeClasses} ${className}`}
-    >
-      {loading && (
-        <svg className="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-      )}
-      {children}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     </button>
   );
 };

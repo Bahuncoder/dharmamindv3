@@ -3,10 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Logo from './Logo';
 import Button from './Button';
-<<<<<<< HEAD
 import NotificationCenter from './NotificationCenter';
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import communityAuth from '../services/communityAuth';
 import type { DharmaMindUser } from '../services/communityAuth';
 
@@ -15,10 +12,7 @@ const Navigation: React.FC = () => {
   const [user, setUser] = useState<DharmaMindUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-<<<<<<< HEAD
   const [isScrolled, setIsScrolled] = useState(false);
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -32,7 +26,6 @@ const Navigation: React.FC = () => {
     checkAuth();
   }, []);
 
-<<<<<<< HEAD
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -42,8 +35,6 @@ const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const handleLogout = () => {
     communityAuth.logout();
     setUser(null);
@@ -52,10 +43,6 @@ const Navigation: React.FC = () => {
   };
 
   const handleLogin = () => {
-<<<<<<< HEAD
-=======
-    // Redirect to central auth hub (Chat App)
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     communityAuth.redirectToCentralAuth('login', router.asPath);
   };
 
@@ -71,13 +58,12 @@ const Navigation: React.FC = () => {
   };
 
   return (
-<<<<<<< HEAD
     <nav 
       className={`
         fixed top-0 left-0 right-0 z-50 
         transition-all duration-500 ease-out
         ${isScrolled 
-          ? 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-emerald-100' 
+          ? 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-gold-100' 
           : 'bg-white/70 backdrop-blur-md border-b border-transparent'
         }
       `}
@@ -85,7 +71,7 @@ const Navigation: React.FC = () => {
       {/* Gradient accent line */}
       <div className={`
         absolute top-0 left-0 right-0 h-0.5 
-        bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500
+        bg-gradient-to-r from-gold-400 via-gold-500 to-gold-500
         transition-opacity duration-500
         ${isScrolled ? 'opacity-100' : 'opacity-0'}
       `} />
@@ -100,10 +86,10 @@ const Navigation: React.FC = () => {
             <div className="relative">
               <Logo size="md" showText={false} />
               {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gold-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
+              <span className="text-xl font-bold text-gray-900 group-hover:text-gold-600 transition-colors">
                 DharmaMind
               </span>
               <span className="block text-xs text-gray-500 -mt-0.5">Community</span>
@@ -113,29 +99,12 @@ const Navigation: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {navigationLinks.map((link, index) => (
-=======
-    <nav className="w-full bg-primary-bg/95 backdrop-blur-md shadow-lg border-b-2 border-border-primary sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link 
-            href="/"
-            className="hover:opacity-80 transition-all duration-300 hover:scale-105"
-          >
-            <Logo size="md" showText={true} />
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navigationLinks.map((link) => (
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               link.external ? (
                 <a
                   key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-<<<<<<< HEAD
                   className="
                     group relative px-4 py-2 rounded-xl
                     text-gray-600 hover:text-gray-900
@@ -154,23 +123,16 @@ const Navigation: React.FC = () => {
                   </span>
                   {/* Hover background */}
                   <span className="absolute inset-0 rounded-xl bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-=======
-                  className="flex items-center space-x-2 text-secondary hover:text-primary transition-all duration-300 font-bold group"
-                >
-                  <span className="group-hover:scale-110 transition-transform">{link.icon}</span>
-                  <span>{link.label}</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 </a>
               ) : (
                 <Link
                   key={link.href}
                   href={link.href}
-<<<<<<< HEAD
                   className={`
                     group relative px-4 py-2 rounded-xl
                     transition-all duration-300
                     ${isActiveLink(link.href)
-                      ? 'text-emerald-600'
+                      ? 'text-gold-600'
                       : 'text-gray-600 hover:text-gray-900'
                     }
                   `}
@@ -184,14 +146,14 @@ const Navigation: React.FC = () => {
                   
                   {/* Active indicator */}
                   {isActiveLink(link.href) && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-emerald-500 rounded-full" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-gold-500 rounded-full" />
                   )}
                   
                   {/* Hover background */}
                   <span className={`
                     absolute inset-0 rounded-xl transition-opacity duration-300 -z-10
                     ${isActiveLink(link.href) 
-                      ? 'bg-emerald-50 opacity-100' 
+                      ? 'bg-gold-50 opacity-100' 
                       : 'bg-gray-100 opacity-0 group-hover:opacity-100'
                     }
                   `} />
@@ -206,10 +168,10 @@ const Navigation: React.FC = () => {
               rel="noopener noreferrer"
               className="
                 group relative ml-2 px-5 py-2.5 rounded-xl
-                bg-gradient-to-r from-emerald-500 to-emerald-600
+                bg-gradient-to-r from-gold-500 to-gold-600
                 text-white font-semibold
-                shadow-lg shadow-emerald-500/25
-                hover:shadow-xl hover:shadow-emerald-500/30 hover:-translate-y-0.5
+                shadow-lg shadow-gold-500/25
+                hover:shadow-xl hover:shadow-gold-500/30 hover:-translate-y-0.5
                 transition-all duration-300
                 overflow-hidden
               "
@@ -228,39 +190,10 @@ const Navigation: React.FC = () => {
             {/* Divider */}
             <div className="w-px h-8 bg-gray-200 mx-3" />
 
-=======
-                  className={`flex items-center space-x-2 transition-all duration-300 font-bold group relative ${
-                    isActiveLink(link.href)
-                      ? 'text-primary'
-                      : 'text-secondary hover:text-primary'
-                  }`}
-                >
-                  <span className="group-hover:scale-110 transition-transform">{link.icon}</span>
-                  <span>{link.label}</span>
-                  {isActiveLink(link.href) && (
-                    <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-primary rounded-full"></div>
-                  )}
-                </Link>
-              )
-            ))}
-            
-            {/* AI Chat Button */}
-            <a 
-              href="https://dharmamind.ai" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-outline px-4 py-2 rounded-lg font-bold hover:bg-primary hover:text-white transition-all duration-300 group"
-            >
-              <span className="mr-2 group-hover:scale-110 transition-transform">🤖</span>
-              AI Chat
-            </a>
-            
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             {/* Authentication Section */}
             {!isLoading && (
               <>
                 {user ? (
-<<<<<<< HEAD
                   <div className="flex items-center gap-3">
                     {/* Notifications */}
                     <NotificationCenter />
@@ -273,44 +206,27 @@ const Navigation: React.FC = () => {
                       <div className="relative">
                         <div className="
                           w-10 h-10 rounded-xl
-                          bg-gradient-to-br from-emerald-400 to-emerald-600
+                          bg-gradient-to-br from-gold-400 to-gold-600
                           flex items-center justify-center
                           text-white font-bold
-                          shadow-md shadow-emerald-500/20
+                          shadow-md shadow-gold-500/20
                           transition-transform group-hover:scale-105 duration-300
                         ">
                           {user.first_name?.charAt(0) || user.email.charAt(0).toUpperCase()}
                         </div>
                         {/* Online indicator */}
-                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
+                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-gold-500 rounded-full border-2 border-white" />
                       </div>
                       <div className="hidden xl:block text-left">
                         <div className="text-sm font-semibold text-gray-900">
                           {user.first_name || 'User'}
                         </div>
-                        <div className="text-xs text-emerald-600 flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-=======
-                  <div className="flex items-center space-x-4">
-                    {/* User Profile */}
-                    <div className="flex items-center space-x-3 p-2 rounded-lg hover:bg-neutral-100 transition-all duration-300 cursor-pointer group">
-                      <div className="relative">
-                        <div className="w-10 h-10 bg-primary-gradient rounded-full flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition-transform shadow-md">
-                          {user.first_name?.charAt(0) || user.email.charAt(0).toUpperCase()}
-                        </div>
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-success rounded-full border-2 border-white"></div>
-                      </div>
-                      <div className="hidden xl:block">
-                        <div className="text-sm font-bold text-primary">
-                          {user.first_name || 'User'}
-                        </div>
-                        <div className="text-xs text-muted">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
+                        <div className="text-xs text-gold-600 flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-pulse" />
                           Online
                         </div>
                       </div>
                     </div>
-<<<<<<< HEAD
 
                     {/* Logout Button */}
                     <button
@@ -326,30 +242,12 @@ const Navigation: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                       </svg>
                     </button>
-=======
-                    
-                    {/* Logout Button */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleLogout}
-                      className="font-bold"
-                      icon={<span>🚪</span>}
-                      iconPosition="left"
-                    >
-                      Logout
-                    </Button>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   </div>
                 ) : (
                   <Button
                     variant="primary"
                     size="md"
                     onClick={handleLogin}
-<<<<<<< HEAD
-=======
-                    className="font-bold"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     icon={<span>🔑</span>}
                     iconPosition="left"
                   >
@@ -361,7 +259,6 @@ const Navigation: React.FC = () => {
           </div>
 
           {/* Mobile menu button */}
-<<<<<<< HEAD
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="
@@ -399,36 +296,12 @@ const Navigation: React.FC = () => {
         `}>
           <div className="py-4 space-y-2 border-t border-gray-100">
             {navigationLinks.map((link, index) => (
-=======
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-neutral-100 transition-all duration-300"
-              aria-label="Toggle mobile menu"
-            >
-              <div className="w-6 h-6 flex flex-col justify-center items-center">
-                <span className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-1'}`}></span>
-                <span className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-                <span className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-1'}`}></span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 pb-6' : 'max-h-0'
-        }`}>
-          <div className="space-y-4 pt-4 border-t border-border-light">
-            {navigationLinks.map((link) => (
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               link.external ? (
                 <a
                   key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-<<<<<<< HEAD
                   className="
                     flex items-center gap-3 px-4 py-3 rounded-xl
                     text-gray-600 hover:text-gray-900 hover:bg-gray-50
@@ -442,24 +315,16 @@ const Navigation: React.FC = () => {
                   <svg className="w-4 h-4 ml-auto opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-=======
-                  className="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-100 transition-all duration-300 group"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <span className="text-xl group-hover:scale-110 transition-transform">{link.icon}</span>
-                  <span className="font-bold text-secondary group-hover:text-primary">{link.label}</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 </a>
               ) : (
                 <Link
                   key={link.href}
                   href={link.href}
-<<<<<<< HEAD
                   className={`
                     flex items-center gap-3 px-4 py-3 rounded-xl
                     transition-all duration-300
                     ${isActiveLink(link.href)
-                      ? 'bg-emerald-50 text-emerald-600'
+                      ? 'bg-gold-50 text-gold-600'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }
                   `}
@@ -468,7 +333,7 @@ const Navigation: React.FC = () => {
                   <span className="text-xl">{link.icon}</span>
                   <span className="font-medium">{link.label}</span>
                   {isActiveLink(link.href) && (
-                    <span className="ml-auto w-2 h-2 bg-emerald-500 rounded-full" />
+                    <span className="ml-auto w-2 h-2 bg-gold-500 rounded-full" />
                   )}
                 </Link>
               )
@@ -481,9 +346,9 @@ const Navigation: React.FC = () => {
               rel="noopener noreferrer"
               className="
                 flex items-center justify-center gap-2 px-4 py-3 mx-2 rounded-xl
-                bg-gradient-to-r from-emerald-500 to-emerald-600
+                bg-gradient-to-r from-gold-500 to-gold-600
                 text-white font-semibold
-                shadow-lg shadow-emerald-500/25
+                shadow-lg shadow-gold-500/25
                 transition-all duration-300
               "
               onClick={() => setIsMobileMenuOpen(false)}
@@ -503,7 +368,7 @@ const Navigation: React.FC = () => {
                     <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
                       <div className="
                         w-12 h-12 rounded-xl
-                        bg-gradient-to-br from-emerald-400 to-emerald-600
+                        bg-gradient-to-br from-gold-400 to-gold-600
                         flex items-center justify-center
                         text-white font-bold text-lg
                         shadow-md
@@ -515,49 +380,6 @@ const Navigation: React.FC = () => {
                           {user.first_name || 'User'}
                         </div>
                         <div className="text-sm text-gray-500">
-=======
-                  className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
-                    isActiveLink(link.href)
-                      ? 'bg-primary-gradient text-white'
-                      : 'hover:bg-neutral-100'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <span className="text-xl group-hover:scale-110 transition-transform">{link.icon}</span>
-                  <span className={`font-bold ${isActiveLink(link.href) ? 'text-white' : 'text-secondary group-hover:text-primary'}`}>
-                    {link.label}
-                  </span>
-                </Link>
-              )
-            ))}
-            
-            {/* Mobile AI Chat Button */}
-            <a 
-              href="https://dharmamind.ai" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center space-x-3 p-3 rounded-lg border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 group"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <span className="text-xl group-hover:scale-110 transition-transform">🤖</span>
-              <span className="font-bold">AI Chat</span>
-            </a>
-            
-            {/* Mobile Authentication */}
-            {!isLoading && (
-              <div className="pt-4 border-t border-border-light">
-                {user ? (
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3 p-3 bg-neutral-50 rounded-lg">
-                      <div className="w-12 h-12 bg-primary-gradient rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">
-                        {user.first_name?.charAt(0) || user.email.charAt(0).toUpperCase()}
-                      </div>
-                      <div>
-                        <div className="font-bold text-primary">
-                          {user.first_name || 'User'}
-                        </div>
-                        <div className="text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                           {user.email}
                         </div>
                       </div>
@@ -574,7 +396,6 @@ const Navigation: React.FC = () => {
                     </Button>
                   </div>
                 ) : (
-<<<<<<< HEAD
                   <div className="px-2">
                     <Button
                       variant="primary"
@@ -587,18 +408,6 @@ const Navigation: React.FC = () => {
                       Login to Continue
                     </Button>
                   </div>
-=======
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    onClick={handleLogin}
-                    fullWidth
-                    icon={<span>🔑</span>}
-                    iconPosition="left"
-                  >
-                    Login to Continue
-                  </Button>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 )}
               </div>
             )}

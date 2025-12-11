@@ -121,16 +121,16 @@ const TechnicalSpecsPage: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      api: 'bg-blue-100 text-blue-800 border-blue-200',
+      api: 'bg-neutral-200 text-neutral-800 border-neutral-300',
       security: 'bg-red-100 text-red-800 border-red-200',
-      integration: 'bg-green-100 text-green-800 border-green-200',
+      integration: 'bg-success-100 text-green-800 border-green-200',
       overview: 'bg-purple-100 text-purple-800 border-purple-200'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-gold-50">
       <Head>
         <title>Technical Specifications - DharmaMind Enterprise</title>
         <meta name="description" content="Download comprehensive technical documentation and specifications for DharmaMind Enterprise" />
@@ -316,7 +316,7 @@ const TechnicalSpecsPage: React.FC = () => {
               </h2>
               
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                <div className="text-center p-6 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg">
                   <div className="text-3xl mb-3">🎯</div>
                   <h3 className="font-semibold text-gray-900 mb-2">Schedule a Demo</h3>
                   <p className="text-sm text-gray-600 mb-4">
@@ -324,7 +324,7 @@ const TechnicalSpecsPage: React.FC = () => {
                   </p>
                   <button
                     onClick={() => router.push('/demo-request')}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                    className="bg-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 transition-colors"
                   >
                     Book Demo
                   </button>
@@ -339,7 +339,7 @@ const TechnicalSpecsPage: React.FC = () => {
                   <ContactButton
                     variant="button"
                     prefillCategory="support"
-                    className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                    className="bg-success-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
                   >
                     Contact Support
                   </ContactButton>
@@ -352,7 +352,7 @@ const TechnicalSpecsPage: React.FC = () => {
                     Try our API sandbox environment
                   </p>
                   <button
-                    className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+                    className="bg-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
                   >
                     API Sandbox
                   </button>
@@ -361,16 +361,16 @@ const TechnicalSpecsPage: React.FC = () => {
             </div>
 
             {/* Success Message */}
-            <div className="mt-8 bg-green-50 border border-green-200 rounded-lg p-6">
+            <div className="mt-8 bg-success-50 border border-green-200 rounded-lg p-6">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center mr-4">
+                  <svg className="w-5 h-5 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
                 <div>
                   <h3 className="font-semibold text-green-800">Access Granted!</h3>
-                  <p className="text-green-700 text-sm">
+                  <p className="text-success-700 text-sm">
                     You now have access to all technical documentation. Download any files you need for your evaluation.
                   </p>
                 </div>

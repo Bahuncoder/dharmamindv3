@@ -15,19 +15,11 @@ import {
   ChartBarIcon
 } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
-<<<<<<< HEAD
-=======
-import ReactMarkdown from 'react-markdown';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import remarkGfm from 'remark-gfm';
 import { apiService, ChatMessage, ChatResponse } from '../utils/apiService';
-import { chatService } from '../services/chatService';
+import chatService from '../services/chatService';
 import { useSubscription } from '../hooks/useSubscription';
-<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
-=======
-import { useColors } from '../contexts/ColorContext';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { useAuth } from '../contexts/AuthContext';
 import { UpgradePrompt, MiniUpgradeBanner, UsageProgress } from './UpgradePrompt';
 import CentralizedSubscriptionModal from './CentralizedSubscriptionModal';
@@ -39,11 +31,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 import ConversationInsights from './ConversationInsights';
 import EnhancedMessageInput from './EnhancedMessageInput';
-<<<<<<< HEAD
 import UnifiedEnhancedMessageBubble from './UnifiedEnhancedMessageBubble';
-=======
-import EnhancedMessageBubble from './EnhancedMessageBubble';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import ScrollToBottom from './ScrollToBottom';
 import FloatingActionMenu from './FloatingActionMenu';
 import TypingIndicator from './TypingIndicator';
@@ -85,11 +73,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     isFreePlan
   } = useSubscription();
 
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   // Toast notifications
   const {
@@ -113,7 +97,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
   // UI State
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-<<<<<<< HEAD
   
   // Enhanced UI State for better UX
   const [isMobile, setIsMobile] = useState(false);
@@ -121,17 +104,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const [lastReadMessageId, setLastReadMessageId] = useState<string | null>(null);
   const [unreadCount, setUnreadCount] = useState(0);
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-<<<<<<< HEAD
       content: '🕉️ Namaste! I am DharmaMind, your companion on the path of wisdom. How may I serve you today? I\'m here to provide spiritual guidance, answer questions about dharma, and support your journey of self-discovery.',
-=======
-      content: '🕉️ Namaste! I am DharmaMind, your companion on the path of wisdom. How may I serve you today?',
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       role: 'assistant',
       timestamp: new Date(),
       confidence: 1.0,
@@ -148,15 +125,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [hoveredMessageId, setHoveredMessageId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState<string | null>(null);
   const [savedMessages, setSavedMessages] = useState<string[]>([]);
-<<<<<<< HEAD
   
   // Enhanced Accessibility State
   const [focusedMessageId, setFocusedMessageId] = useState<string | null>(null);
   const [announceMessage, setAnnounceMessage] = useState<string>('');
   const [isHighContrast, setIsHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const [favoriteMessages, setFavoriteMessages] = useState<string[]>([]);
   const [showInsightsModal, setShowInsightsModal] = useState(false);
   const [currentTags, setCurrentTags] = useState<string[]>([]);
@@ -195,18 +169,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   }, [showUserDropdown]);
 
   const scrollToBottom = () => {
-<<<<<<< HEAD
     if (shouldAutoScroll) {
       messagesEndRef.current?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
     }
-=======
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   };
 
   useEffect(() => {
     scrollToBottom();
-<<<<<<< HEAD
   }, [messages, shouldAutoScroll, reduceMotion]);
 
   // Enhanced Mobile Detection and Responsive Features
@@ -284,9 +253,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       return () => clearTimeout(timer);
     }
   }, [announceMessage]);
-=======
-  }, [messages]);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   // Contemplation timer effect
   useEffect(() => {
@@ -309,7 +275,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const handleSendMessage = async () => {
     if (!inputMessage.trim() || isLoading) return;
 
-<<<<<<< HEAD
     // Enhanced message validation
     const messageContent = inputMessage.trim();
     if (messageContent.length > 4000) {
@@ -318,8 +283,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       return;
     }
 
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     // Check message usage before proceeding (subscription feature)
     const canSendMessage = await trackUsage('messages');
     if (!canSendMessage) {
@@ -331,11 +294,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
     const userMessage: Message = {
       id: Date.now().toString(),
-<<<<<<< HEAD
       content: messageContent,
-=======
-      content: inputMessage,
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       role: 'user',
       timestamp: new Date()
     };
@@ -345,7 +304,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     setIsLoading(true);
     setError(null);
     setUsageAlert(null);
-<<<<<<< HEAD
     
     // Enhanced UX feedback
     setShouldAutoScroll(true);
@@ -356,8 +314,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     if (isMobile && 'vibrate' in navigator) {
       navigator.vibrate(50);
     }
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
     // Check if user is asking for contemplation and suggest starting a session
     const contemplationKeywords = ['meditate', 'meditation', 'contemplate', 'contemplation', 'mindfulness', 'breathing', 'breath work', 'spiritual practice', 'inner peace', 'reflection'];
@@ -413,7 +369,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
         setMessages(prev => [...prev, assistantMessage]);
         
-<<<<<<< HEAD
         // Enhanced accessibility announcement
         setAnnounceMessage(`DharmaMind responded with ${assistantMessage.content.length < 100 ? assistantMessage.content : 'a detailed response'}`);
         
@@ -422,8 +377,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           setUnreadCount(prev => prev + 1);
         }
         
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         // Suggest contemplation session if user asked about meditation/contemplation
         if (isContemplationRequest && !contemplationMode) {
           setTimeout(() => {
@@ -466,10 +419,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         };
         setMessages(prev => [...prev, errorMessage]);
         setError('Failed to get response from dharmic chat service');
-<<<<<<< HEAD
         setAnnounceMessage('Sorry, I encountered a technical issue. Please try again.');
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       }
     } catch (error) {
       console.error('Chat error:', error);
@@ -482,21 +432,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       };
       setMessages(prev => [...prev, errorMessage]);
       setError('Network error occurred');
-<<<<<<< HEAD
       setAnnounceMessage('Connection error. Please check your internet and try again.');
       
       // Haptic feedback for error on mobile
       if (isMobile && 'vibrate' in navigator) {
         navigator.vibrate([100, 50, 100]);
       }
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     } finally {
       setIsLoading(false);
     }
   };
 
-<<<<<<< HEAD
   // Enhanced keyboard handling with accessibility
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -512,23 +458,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     if (e.key === 'Escape') {
       setInputMessage('');
       setAnnounceMessage('Message cleared');
-=======
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     }
   };
 
   const getAlignmentColor = (alignment?: number) => {
     if (!alignment) return 'text-gray-400';
-    if (alignment >= 0.8) return 'text-green-500';
-<<<<<<< HEAD
+    if (alignment >= 0.8) return 'text-success-500';
     if (alignment >= 0.6) return 'text-primary';
-=======
-    if (alignment >= 0.6) return 'text-emerald-400';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     return 'text-red-500';
   };
 
@@ -945,7 +881,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   };
 
   return (
-<<<<<<< HEAD
     <div 
       className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''} ${isMobile ? 'mobile-optimized' : ''} ${isKeyboardVisible ? 'keyboard-visible' : ''} ${reduceMotion ? 'reduce-motion' : ''} ${isHighContrast ? 'high-contrast' : ''}`}
       aria-label="DharmaMind spiritual guidance chat interface"
@@ -986,29 +921,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           <div className="lotus-pattern" style={{ bottom: '25%', left: '3%', animationDelay: '10s' }} aria-hidden="true"></div>
         </>
       )}
-=======
-    <div className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''}`}>
-      {/* Advanced Spiritual Background */}
-      <div className="floating-orbs-container">
-        <div className="floating-orb large" style={{ top: '10%', left: '20%', animationDelay: '0s' }}></div>
-        <div className="floating-orb medium" style={{ top: '60%', right: '15%', animationDelay: '2s' }}></div>
-        <div className="floating-orb small" style={{ top: '30%', left: '70%', animationDelay: '4s' }}></div>
-        <div className="floating-orb medium" style={{ bottom: '20%', left: '10%', animationDelay: '6s' }}></div>
-        <div className="floating-orb small" style={{ top: '80%', right: '40%', animationDelay: '8s' }}></div>
-      </div>
-      
-      {/* Sacred Geometry Background */}
-      <div className="sacred-geometry-bg"></div>
-      
-      {/* Lotus Patterns */}
-      <div className="lotus-pattern" style={{ top: '15%', right: '5%', animationDelay: '0s' }}></div>
-      <div className="lotus-pattern" style={{ bottom: '25%', left: '3%', animationDelay: '10s' }}></div>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       
       {/* Breathing Guide */}
       {showBreathingGuide && (
         <motion.div
-<<<<<<< HEAD
           initial={reduceMotion ? {} : { scale: 0, opacity: 0 }}
           animate={reduceMotion ? {} : { scale: 1, opacity: 1 }}
           exit={reduceMotion ? {} : { scale: 0, opacity: 0 }}
@@ -1019,14 +935,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           role="button"
           tabIndex={0}
           aria-label="Breathing guide visualization. Press Enter or click to hide."
-=======
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0, opacity: 0 }}
-          className="breathing-guide"
-          onClick={() => setShowBreathingGuide(false)}
-          title="Click to hide breathing guide"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         >
           <div className="breathing-circle"></div>
         </motion.div>
@@ -1039,14 +947,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       )}
       
       {/* Header */}
-<<<<<<< HEAD
       <header 
         className="flex-shrink-0 p-4 sm:p-6 chat-header-enhanced animate-slide-in-down relative z-10"
         role="banner"
       >
-=======
-      <div className="flex-shrink-0 p-4 sm:p-6 chat-header-enhanced animate-slide-in-down relative z-10">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         <div className="organic-chat-container">
           <div className="flex items-center space-x-3 sm:space-x-4">
             <div className="interactive-element spiritual-glow">
@@ -1059,7 +963,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               <p className="text-sm sm:text-base typography-caption text-gray-600 hidden sm:block mt-1">
                 Your spiritual wisdom companion
               </p>
-<<<<<<< HEAD
               {/* Mobile subtitle - shorter */}
               <p className="text-sm typography-caption text-gray-600 sm:hidden mt-1">
                 Spiritual wisdom guide
@@ -1069,14 +972,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             {/* Unread Message Indicator */}
             {unreadCount > 0 && (
               <div 
-                className="flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                className="flex items-center space-x-2 bg-neutral-200 text-neutral-800 px-3 py-1 rounded-full text-sm"
                 role="status"
                 aria-label={`${unreadCount} unread message${unreadCount > 1 ? 's' : ''}`}
               >
                 <span>{unreadCount} new</span>
                 <button 
                   onClick={() => scrollToBottom()}
-                  className="text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  className="text-gold-600 hover:text-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-1000 rounded"
                   aria-label="Scroll to latest message"
                 >
                   ↓
@@ -1091,13 +994,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 role="region"
                 aria-label="Conversation tags"
               >
-=======
-            </div>
-            
-            {/* Current Tags Display */}
-            {currentTags.length > 0 && (
-              <div className="hidden md:flex items-center space-x-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 {currentTags.slice(0, 2).map(tagId => {
                   const tag = availableTags.find(t => t.id === tagId);
                   return tag ? (
@@ -1105,14 +1001,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                       key={tagId}
                       className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                       style={{ backgroundColor: tag.color + '20', color: tag.color }}
-<<<<<<< HEAD
                       aria-label={`Tagged as ${tag.name}`}
                     >
                       <span className="mr-1" aria-hidden="true">{tag.icon}</span>
-=======
-                    >
-                      <span className="mr-1">{tag.icon}</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       {tag.name}
                     </span>
                   ) : null;
@@ -1138,7 +1029,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 onClick={() => setMeditationMode(!meditationMode)}
                 className={`p-2 rounded-full transition-all duration-300 ${
                   meditationMode 
-                    ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' 
+                    ? 'bg-purple-100 text-gold-600 dark:bg-purple-900/30 dark:text-gold-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
                 }`}
                 title="Toggle Meditation Mode"
@@ -1153,7 +1044,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 onClick={() => setShowBreathingGuide(!showBreathingGuide)}
                 className={`p-2 rounded-full transition-all duration-300 ${
                   showBreathingGuide 
-<<<<<<< HEAD
                     ? '' 
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
                 }`}
@@ -1164,11 +1054,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                     border: `1px solid var(--color-border-primary)`
                   })
                 }}
-=======
-                    ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
-                }`}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 title="Toggle Breathing Guide"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1222,14 +1107,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   />
                   {/* Mobile upgrade indicator */}
                   {isFreePlan() && (
-<<<<<<< HEAD
                     <span 
                       className="md:hidden w-2.5 h-2.5 rounded-full animate-pulse"
                       style={{ backgroundColor: 'var(--color-border-primary)' }}
                     ></span>
-=======
-                    <span className="md:hidden w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse-emerald"></span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   )}
                 </button>
 
@@ -1246,7 +1127,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             )}
             
             {error && (
-<<<<<<< HEAD
               <div 
                 className="px-2 sm:px-3 py-1 rounded-full text-xs"
                 style={{
@@ -1255,9 +1135,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   border: `1px solid var(--color-border-primary)`
                 }}
               >
-=======
-              <div className="bg-red-100 text-red-800 px-2 sm:px-3 py-1 rounded-full text-xs">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <span className="hidden sm:inline">Connection issue</span>
                 <span className="sm:hidden">!</span>
               </div>
@@ -1271,7 +1148,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             </div>
           )}
         </div>
-<<<<<<< HEAD
       </header>
 
       {/* Messages Container */}
@@ -1285,17 +1161,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         style={{
           scrollbarWidth: 'thin',
           scrollbarColor: 'var(--color-border-primary) transparent'
-=======
-      </div>
-
-      {/* Messages Container */}
-      <div 
-        ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 sm:space-y-8 scroll-smooth chat-messages-enhanced chat-messages-container organic-chat-container"
-        style={{
-          scrollbarWidth: 'thin',
-          scrollbarColor: '#10b981 transparent'
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         }}
       >
         <AnimatePresence mode="popLayout">
@@ -1315,11 +1180,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               className="animate-fade-in-scale"
             >
               <div className={`organic-bubble ${message.role === 'user' ? 'user' : 'ai'} fade-in-up`}>
-<<<<<<< HEAD
                 <UnifiedEnhancedMessageBubble
-=======
-                <EnhancedMessageBubble
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   key={message.id}
                   message={message}
                   isHovered={hoveredMessageId === message.id}
@@ -1349,7 +1210,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             exit={{ opacity: 0, y: 20 }}
             className="p-4 mx-4 mb-4"
           >
-<<<<<<< HEAD
             <div 
               className="rounded-xl p-6 shadow-lg"
               style={{
@@ -1358,14 +1218,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 color: `var(--color-text-primary)`
               }}
             >
-=======
-            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-xl p-6 border border-purple-200 dark:border-purple-700 shadow-lg">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               <div className="text-center mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   🕉️ Deep Contemplation Session
                 </h3>
-                <div className="text-2xl font-mono text-purple-600 dark:text-purple-400 mb-2">
+                <div className="text-2xl font-mono text-gold-600 dark:text-gold-400 mb-2">
                   {formatContemplationTime(contemplationTimer)}
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-300">
@@ -1377,7 +1234,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 {!isContemplationActive ? (
                   <button
                     onClick={resumeContemplation}
-<<<<<<< HEAD
                     className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
                     style={{
                       backgroundColor: `var(--color-border-primary)`,
@@ -1389,9 +1245,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                     onMouseOut={(e) => {
                       e.currentTarget.style.backgroundColor = `var(--color-border-primary)`;
                     }}
-=======
-                    className="flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   >
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
@@ -1401,15 +1254,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 ) : (
                   <button
                     onClick={pauseContemplation}
-<<<<<<< HEAD
                     className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
                     style={{
                       backgroundColor: `var(--color-border-secondary)`,
                       border: `2px solid var(--color-border-secondary)`
                     }}
-=======
-                    className="flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   >
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -1420,16 +1269,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 
                 <button
                   onClick={requestContemplationGuidance}
-<<<<<<< HEAD
                   className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
                   style={{
                     backgroundColor: `var(--color-primary)`,
                     border: `2px solid var(--color-border-primary)`,
                     color: `var(--color-text-primary)`
                   }}
-=======
-                  className="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 >
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
@@ -1439,15 +1284,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 
                 <button
                   onClick={stopContemplation}
-<<<<<<< HEAD
                   className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
                   style={{
                     backgroundColor: 'var(--color-error, #dc2626)',
                     border: `2px solid var(--color-border-primary)`
                   }}
-=======
-                  className="flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 >
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" />
@@ -1460,7 +1301,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 <input
                   type="text"
                   placeholder="Capture an insight or realization..."
-<<<<<<< HEAD
                   className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:border-transparent"
                   style={{
                     backgroundColor: `var(--color-background)`,
@@ -1468,9 +1308,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                     color: `var(--color-text-primary)`,
                     '--placeholder-color': `var(--color-text-secondary)`
                   } as React.CSSProperties}
-=======
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       const target = e.target as HTMLInputElement;
@@ -1490,11 +1327,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         )}
 
         <div ref={messagesEndRef} />
-<<<<<<< HEAD
       </main>
-=======
-      </div>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
       <ScrollToBottom 
         messagesContainerRef={messagesContainerRef}

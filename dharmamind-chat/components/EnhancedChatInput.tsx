@@ -6,12 +6,8 @@ import {
   StopIcon,
   PhotoIcon,
   FaceSmileIcon,
-<<<<<<< HEAD
   PlusIcon,
   XMarkIcon
-=======
-  PlusIcon
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 } from '@heroicons/react/24/outline';
 
 interface EnhancedChatInputProps {
@@ -26,15 +22,12 @@ interface EnhancedChatInputProps {
   showVoiceInput?: boolean;
   showAttachments?: boolean;
   showEmoji?: boolean;
-<<<<<<< HEAD
   isMobile?: boolean;
   reduceMotion?: boolean;
   isHighContrast?: boolean;
   onFileUpload?: (file: File) => void;
   supportedFileTypes?: string[];
   voiceRecordingTime?: number;
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
@@ -44,7 +37,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
   onVoiceRecord,
   isLoading,
   isRecording = false,
-<<<<<<< HEAD
   placeholder = "Share your thoughts or ask for guidance...",
   maxLength = 2000,
   showVoiceInput = true,
@@ -102,31 +94,11 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
   }, [isMobile]);
 
   // Enhanced keyboard handling
-=======
-  placeholder = "Type your message...",
-  maxLength = 2000,
-  showVoiceInput = true,
-  showAttachments = false,
-  showEmoji = false
-}) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [showActions, setShowActions] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
-    }
-  }, [value]);
-
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       if (value.trim() && !isLoading) {
         onSend();
-<<<<<<< HEAD
         // Haptic feedback on mobile
         if (isMobile && 'vibrate' in navigator) {
           navigator.vibrate(50);
@@ -139,16 +111,11 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
       setShowActions(false);
       textareaRef.current?.blur();
     }
-=======
-      }
-    }
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   };
 
   const handleSend = () => {
     if (value.trim() && !isLoading) {
       onSend();
-<<<<<<< HEAD
       // Haptic feedback on mobile
       if (isMobile && 'vibrate' in navigator) {
         navigator.vibrate(50);
@@ -214,17 +181,11 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-=======
-    }
-  };
-
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const characterCount = value.length;
   const isNearLimit = characterCount > maxLength * 0.8;
   const isOverLimit = characterCount > maxLength;
 
   return (
-<<<<<<< HEAD
     <div 
       className={`enhanced-input-container ${isMobile ? 'mobile-optimized' : ''} ${isHighContrast ? 'high-contrast' : ''}`}
       onDragEnter={handleDragEnter}
@@ -236,7 +197,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
       <AnimatePresence>
         {isDragOver && (
           <motion.div
-            className="absolute inset-0 z-10 flex items-center justify-center bg-emerald-50 dark:bg-emerald-900/20 border-2 border-dashed border-emerald-500 rounded-lg"
+            className="absolute inset-0 z-10 flex items-center justify-center bg-gold-50 dark:bg-gold-900/20 border-2 border-dashed border-gold-500 rounded-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -244,8 +205,8 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
             aria-label="File drop zone"
           >
             <div className="text-center">
-              <PhotoIcon className="w-12 h-12 mx-auto text-emerald-500 mb-2" />
-              <p className="text-emerald-700 dark:text-emerald-300 font-medium">Drop files here to upload</p>
+              <PhotoIcon className="w-12 h-12 mx-auto text-gold-500 mb-2" />
+              <p className="text-gold-700 dark:text-gold-300 font-medium">Drop files here to upload</p>
             </div>
           </motion.div>
         )}
@@ -325,57 +286,16 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
                         aria-label="File upload input"
                       />
                     </>
-=======
-    <div className="enhanced-input-container">
-      <div className="relative">
-        {/* Input Field Container */}
-        <motion.div
-          className={`enhanced-input-wrapper ${isFocused ? 'focused' : ''}`}
-          animate={{
-            scale: isFocused ? 1.02 : 1,
-            boxShadow: isFocused 
-              ? '0 0 0 3px rgba(102, 126, 234, 0.1), 0 8px 25px rgba(0, 0, 0, 0.1)'
-              : '0 2px 10px rgba(0, 0, 0, 0.05)'
-          }}
-          transition={{ duration: 0.2 }}
-        >
-          {/* Action Buttons - Left Side */}
-          <div className="input-actions-left">
-            <AnimatePresence>
-              {showActions && (
-                <motion.div
-                  className="flex items-center gap-2"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {showAttachments && (
-                    <button
-                      type="button"
-                      className="action-button"
-                      title="Attach file"
-                    >
-                      <PhotoIcon className="w-5 h-5" />
-                    </button>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                   )}
                   
                   {showEmoji && (
                     <button
                       type="button"
-<<<<<<< HEAD
                       className={`action-button ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
                       title="Add emoji"
                       aria-label="Add emoji"
                     >
                       <FaceSmileIcon className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} />
-=======
-                      className="action-button"
-                      title="Add emoji"
-                    >
-                      <FaceSmileIcon className="w-5 h-5" />
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     </button>
                   )}
                 </motion.div>
@@ -384,7 +304,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
 
             <button
               type="button"
-<<<<<<< HEAD
               className={`action-button plus-button ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
               onClick={() => setShowActions(!showActions)}
               title="More options"
@@ -394,15 +313,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
               <motion.div
                 animate={{ rotate: showActions && !reduceMotion ? 45 : 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.2 }}
-=======
-              className="action-button plus-button"
-              onClick={() => setShowActions(!showActions)}
-              title="More options"
-            >
-              <motion.div
-                animate={{ rotate: showActions ? 45 : 0 }}
-                transition={{ duration: 0.2 }}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               >
                 <PlusIcon className="w-5 h-5" />
               </motion.div>
@@ -416,7 +326,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
               value={value}
               onChange={(e) => onChange(e.target.value)}
               onKeyPress={handleKeyPress}
-<<<<<<< HEAD
               onFocus={() => {
                 setIsFocused(true);
                 if (isMobile) {
@@ -436,22 +345,12 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
               autoCorrect="on"
               autoCapitalize="sentences"
               spellCheck="true"
-=======
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              placeholder={placeholder}
-              className="enhanced-textarea"
-              rows={1}
-              disabled={isLoading}
-              maxLength={maxLength}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             />
             
             {/* Character Counter */}
             <AnimatePresence>
               {(isNearLimit || isFocused) && (
                 <motion.div
-<<<<<<< HEAD
                   id="character-counter"
                   className={`character-counter ${isOverLimit ? 'over-limit' : isNearLimit ? 'near-limit' : ''}`}
                   initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
@@ -465,31 +364,17 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
                   {isOverLimit && (
                     <span className="sr-only">Character limit exceeded</span>
                   )}
-=======
-                  className={`character-counter ${isOverLimit ? 'over-limit' : isNearLimit ? 'near-limit' : ''}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {characterCount}/{maxLength}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
           {/* Action Buttons - Right Side */}
-<<<<<<< HEAD
           <div className="input-actions-right" role="toolbar" aria-label="Send and voice actions">
-=======
-          <div className="input-actions-right">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             {/* Voice Recording Button */}
             {showVoiceInput && (
               <motion.button
                 type="button"
-<<<<<<< HEAD
                 className={`voice-button ${isRecording ? 'recording' : ''} ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
                 onClick={() => {
                   onVoiceRecord?.();
@@ -505,53 +390,27 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
                 aria-label={isRecording ? "Stop voice recording" : "Start voice recording"}
                 aria-pressed={isRecording}
                 aria-describedby="voice-status"
-=======
-                className={`voice-button ${isRecording ? 'recording' : ''}`}
-                onClick={onVoiceRecord}
-                disabled={isLoading}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                title={isRecording ? "Stop recording" : "Voice message"}
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               >
                 <AnimatePresence mode="wait">
                   {isRecording ? (
                     <motion.div
                       key="stop"
-<<<<<<< HEAD
                       initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.8 }}
                       transition={{ duration: reduceMotion ? 0 : 0.2 }}
                     >
                       <StopIcon className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} />
-=======
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <StopIcon className="w-5 h-5" />
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     </motion.div>
                   ) : (
                     <motion.div
                       key="mic"
-<<<<<<< HEAD
                       initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.8 }}
                       transition={{ duration: reduceMotion ? 0 : 0.2 }}
                     >
                       <MicrophoneIcon className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} />
-=======
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <MicrophoneIcon className="w-5 h-5" />
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -561,7 +420,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
             {/* Send Button */}
             <motion.button
               type="button"
-<<<<<<< HEAD
               className={`send-button ${value.trim() && !isLoading ? 'active' : 'inactive'} ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
               onClick={handleSend}
               disabled={!value.trim() || isLoading || isOverLimit}
@@ -571,14 +429,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
               aria-label={isLoading ? "Sending message" : "Send message"}
               aria-disabled={!value.trim() || isLoading || isOverLimit}
               aria-keyshortcuts="Enter"
-=======
-              className={`send-button ${value.trim() && !isLoading ? 'active' : 'inactive'}`}
-              onClick={handleSend}
-              disabled={!value.trim() || isLoading || isOverLimit}
-              whileHover={{ scale: value.trim() && !isLoading ? 1.05 : 1 }}
-              whileTap={{ scale: value.trim() && !isLoading ? 0.95 : 1 }}
-              title="Send message"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             >
               <AnimatePresence mode="wait">
                 {isLoading ? (
@@ -622,7 +472,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
           </div>
         </motion.div>
 
-<<<<<<< HEAD
         {/* Enhanced Recording Indicator */}
         <AnimatePresence>
           {isRecording && (
@@ -657,20 +506,6 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
                   </motion.button>
                 )}
               </div>
-=======
-        {/* Recording Indicator */}
-        <AnimatePresence>
-          {isRecording && (
-            <motion.div
-              className="recording-indicator"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="recording-dot" />
-              <span>Recording...</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             </motion.div>
           )}
         </AnimatePresence>

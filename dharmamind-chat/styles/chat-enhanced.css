@@ -256,12 +256,8 @@
   letter-spacing: 0.025em;
 }
 
-.emerald-gradient-text {
-<<<<<<< HEAD
+.gold-gradient-text {
   background: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-border-primary, #10b981) 100%);
-=======
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -347,11 +343,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-border-primary, #10b981), var(--color-border-primary, #10b981));
-=======
-  background: linear-gradient(135deg, #10b981, #059669);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   animation: loadingDotPulse 1.4s infinite ease-in-out;
 }
 
@@ -401,11 +393,7 @@
 }
 
 .btn-premium-primary {
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-border-primary, #10b981) 100%);
-=======
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   color: white;
   border: none;
 }
@@ -436,7 +424,7 @@
   animation: slideInUp 0.6s ease-out;
 }
 
-.animate-pulse-emerald {
+.animate-pulse-gold {
   animation: pulseEmerald 2s infinite;
 }
 
@@ -523,12 +511,8 @@
   color: #e2e8f0;
 }
 
-.meditation-mode .emerald-gradient-text {
-<<<<<<< HEAD
+.meditation-mode .gold-gradient-text {
   background: linear-gradient(135deg, var(--color-border-primary, #10b981) 0%, var(--color-border-primary, #10b981) 100%);
-=======
-  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -146,7 +146,7 @@ const ConversationsPage: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => router.push(user?.isGuest ? '/chat?demo=true' : '/chat')}
-                  className="bg-gradient-to-r from-amber-600 to-emerald-600 hover:from-amber-700 hover:to-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                  className="bg-gradient-to-r from-amber-600 to-gold-600 hover:from-amber-700 hover:to-gold-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                 >
                   New Chat
                 </button>
@@ -181,13 +181,13 @@ const ConversationsPage: React.FC = () => {
                       placeholder="Search conversations..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-sm"
                     />
                     
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-sm"
                     >
                       <option value="date">Sort by Date</option>
                       <option value="title">Sort by Title</option>
@@ -207,7 +207,7 @@ const ConversationsPage: React.FC = () => {
                       {!searchTerm && (
                         <button
                           onClick={() => router.push('/chat')}
-                          className="mt-4 bg-gradient-to-r from-amber-600 to-emerald-600 hover:from-amber-700 hover:to-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                          className="mt-4 bg-gradient-to-r from-amber-600 to-gold-600 hover:from-amber-700 hover:to-gold-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                         >
                           Start New Chat
                         </button>
@@ -219,7 +219,7 @@ const ConversationsPage: React.FC = () => {
                         <div
                           key={chat.id || index}
                           className={`p-4 hover:bg-gray-50 cursor-pointer transition-colors ${
-                            selectedChat?.id === chat.id ? 'bg-blue-50 border-r-2 border-blue-500' : ''
+                            selectedChat?.id === chat.id ? 'bg-neutral-100 border-r-2 border-neutral-1000' : ''
                           }`}
                           onClick={() => setSelectedChat(chat)}
                         >
@@ -274,7 +274,7 @@ const ConversationsPage: React.FC = () => {
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => openChatInMain(selectedChat)}
-                          className="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-emerald-600 hover:from-amber-700 hover:to-emerald-700 text-white rounded-md text-sm font-medium transition-all duration-200"
+                          className="px-3 py-1.5 bg-gradient-to-r from-amber-600 to-gold-600 hover:from-amber-700 hover:to-gold-700 text-white rounded-md text-sm font-medium transition-all duration-200"
                         >
                           Continue Chat
                         </button>
@@ -305,13 +305,13 @@ const ConversationsPage: React.FC = () => {
                           <div
                             className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                               message.type === 'user'
-                                ? 'bg-blue-600 text-white'
+                                ? 'bg-gold-600 text-white'
                                 : 'bg-gray-100 text-gray-900'
                             }`}
                           >
                             <p className="text-sm">{message.content}</p>
                             <p className={`text-xs mt-1 ${
-                              message.type === 'user' ? 'text-blue-100' : 'text-gray-500'
+                              message.type === 'user' ? 'text-neutral-200' : 'text-gray-500'
                             }`}>
                               {new Date(message.timestamp).toLocaleTimeString('en-US', {
                                 hour: '2-digit',

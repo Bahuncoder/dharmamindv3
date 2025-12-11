@@ -32,14 +32,14 @@ interface FeedbackButtonProps {
 // Complex styling configurations for different variants
 const variantConfigurations = {
   floating: {
-    base: 'fixed bg-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 backdrop-blur-sm border-2 border-emerald-500',
+    base: 'fixed bg-white shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 backdrop-blur-sm border-2 border-gold-500',
     colors: {
-      primary: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
-      secondary: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
-      spiritual: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
-      success: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
-      warning: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700',
-      error: 'text-emerald-600 hover:bg-gray-50 hover:text-emerald-700'
+      primary: 'text-gold-600 hover:bg-gray-50 hover:text-gold-700',
+      secondary: 'text-gold-600 hover:bg-gray-50 hover:text-gold-700',
+      spiritual: 'text-gold-600 hover:bg-gray-50 hover:text-gold-700',
+      success: 'text-gold-600 hover:bg-gray-50 hover:text-gold-700',
+      warning: 'text-gold-600 hover:bg-gray-50 hover:text-gold-700',
+      error: 'text-gold-600 hover:bg-gray-50 hover:text-gold-700'
     }
   },
   inline: {
@@ -47,8 +47,8 @@ const variantConfigurations = {
     colors: {
       primary: 'from-amber-600 to-orange-600 text-white hover:from-amber-700 hover:to-orange-700',
       secondary: 'from-slate-600 to-gray-700 text-white hover:from-slate-700 hover:to-gray-800',
-      spiritual: 'from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700',
-      success: 'from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700',
+      spiritual: 'from-gold-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700',
+      success: 'from-green-600 to-gold-600 text-white hover:from-green-700 hover:to-gold-700',
       warning: 'from-yellow-500 to-orange-500 text-white hover:from-yellow-600 hover:to-orange-600',
       error: 'from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800'
     }
@@ -59,7 +59,7 @@ const variantConfigurations = {
       primary: 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100 hover:border-amber-300',
       secondary: 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100 hover:border-stone-300',
       spiritual: 'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300',
-      success: 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100 hover:border-green-300',
+      success: 'bg-success-50 text-success-700 border-green-200 hover:bg-success-100 hover:border-green-300',
       warning: 'bg-yellow-50 text-yellow-700 border-yellow-200 hover:bg-yellow-100 hover:border-yellow-300',
       error: 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100 hover:border-red-300'
     }
@@ -69,8 +69,8 @@ const variantConfigurations = {
     colors: {
       primary: 'text-amber-600 hover:text-amber-700 hover:bg-amber-50',
       secondary: 'text-stone-600 hover:text-stone-700 hover:bg-stone-50',
-      spiritual: 'text-purple-600 hover:text-purple-700 hover:bg-purple-50',
-      success: 'text-green-600 hover:text-green-700 hover:bg-green-50',
+      spiritual: 'text-gold-600 hover:text-purple-700 hover:bg-purple-50',
+      success: 'text-success-600 hover:text-success-700 hover:bg-success-50',
       warning: 'text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50',
       error: 'text-red-600 hover:text-red-700 hover:bg-red-50'
     }
@@ -78,10 +78,10 @@ const variantConfigurations = {
   spiritual: {
     base: 'relative overflow-hidden bg-gradient-to-r shadow-lg hover:shadow-xl transform transition-all duration-500',
     colors: {
-      primary: 'from-purple-600 via-pink-600 to-indigo-600 text-white hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700',
-      secondary: 'from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700',
-      spiritual: 'from-violet-600 via-purple-600 to-indigo-600 text-white hover:from-violet-700 hover:via-purple-700 hover:to-indigo-700',
-      success: 'from-emerald-600 via-teal-600 to-cyan-600 text-white hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700',
+      primary: 'from-gold-600 via-pink-600 to-indigo-600 text-white hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700',
+      secondary: 'from-indigo-600 via-gold-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700',
+      spiritual: 'from-violet-600 via-gold-600 to-indigo-600 text-white hover:from-violet-700 hover:via-purple-700 hover:to-indigo-700',
+      success: 'from-gold-600 via-gold-600 to-cyan-600 text-white hover:from-gold-700 hover:via-gold-700 hover:to-cyan-700',
       warning: 'from-orange-600 via-amber-600 to-yellow-600 text-white hover:from-orange-700 hover:via-amber-700 hover:to-yellow-700',
       error: 'from-red-600 via-rose-600 to-pink-600 text-white hover:from-red-700 hover:via-rose-700 hover:to-pink-700'
     }
@@ -343,7 +343,7 @@ const FeedbackButton: React.FC<FeedbackButtonProps> = ({
   const spiritualEffects = variant === 'spiritual' && (
     <>
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-blue-400/20"
+        className="absolute inset-0 bg-gradient-to-r from-gold-400/20 via-pink-400/20 to-gold-400/20"
         animate={{
           x: ['-100%', '100%'],
         }}

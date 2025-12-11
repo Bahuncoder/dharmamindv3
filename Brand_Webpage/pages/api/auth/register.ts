@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // TODO: Replace with actual database
 const users: { id: string; name: string; email: string; password: string; plan: string }[] = [];
-=======
-import { NextApiRequest, NextApiResponse } from 'next';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -13,7 +9,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-<<<<<<< HEAD
     const { name, email, password } = req.body;
 
     // Validation
@@ -53,28 +48,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error) {
     console.error('Registration error:', error);
     return res.status(500).json({ message: 'Internal server error' });
-=======
-    // Forward the request to the backend API
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000';
-    
-    const response = await fetch(`${backendUrl}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(req.body),
-    });
-
-    const data = await response.json();
-
-    // Forward the response status and data
-    return res.status(response.status).json(data);
-  } catch (error) {
-    console.error('Registration proxy error:', error);
-    return res.status(500).json({ 
-      success: false, 
-      message: 'Internal server error' 
-    });
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
 }

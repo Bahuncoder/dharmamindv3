@@ -304,12 +304,12 @@ export default function Auth() {
         <meta name="description" content="DharmaMind authentication - Sign in or create your account" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-gold-50 via-white to-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-emerald-100/30 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+          <div className="absolute top-10 left-10 w-72 h-72 bg-gold-100/30 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
           <div className="absolute top-0 right-4 w-72 h-72 bg-gray-100/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-emerald-50/50 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-gold-50/50 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
         </div>
 
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -320,10 +320,10 @@ export default function Auth() {
                 showText={true} 
                 className="cursor-pointer transform hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute -inset-2 bg-gradient-to-r from-emerald-200 to-emerald-100 rounded-full opacity-20 blur-lg"></div>
+              <div className="absolute -inset-2 bg-gradient-to-r from-gold-200 to-gold-100 rounded-full opacity-20 blur-lg"></div>
             </div>
           </div>
-          <h2 className="mt-8 text-center text-4xl font-bold bg-gradient-to-r from-gray-900 via-emerald-800 to-gray-900 bg-clip-text text-transparent">
+          <h2 className="mt-8 text-center text-4xl font-bold bg-gradient-to-r from-gray-900 via-gold-800 to-gray-900 bg-clip-text text-transparent">
             {config.title}
           </h2>
           <p className="mt-4 text-center text-lg text-gray-600 font-medium">
@@ -350,35 +350,34 @@ export default function Auth() {
               </button>
             </div>
 
-<<<<<<< HEAD
             {/* Demo Credentials Banner - Only show in development */}
             {process.env.NODE_ENV === 'development' && mode === 'login' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 rounded-xl border-2 border-blue-200 bg-blue-50/80"
+                className="mb-6 p-4 rounded-xl border-2 border-neutral-300 bg-neutral-100/80"
               >
                 <div className="flex items-start">
-                  <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-gold-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div className="flex-1">
-                    <h4 className="text-sm font-semibold text-blue-900 mb-2">🧪 Demo Test Accounts</h4>
-                    <div className="space-y-1.5 text-xs text-blue-800">
+                    <h4 className="text-sm font-semibold text-neutral-900 mb-2">🧪 Demo Test Accounts</h4>
+                    <div className="space-y-1.5 text-xs text-neutral-800">
                       <div className="flex items-center justify-between bg-white/60 rounded px-2 py-1.5">
                         <span className="font-medium">Basic:</span>
-                        <code className="text-blue-600">demo@dharmamind.com</code>
+                        <code className="text-gold-600">demo@dharmamind.com</code>
                       </div>
                       <div className="flex items-center justify-between bg-white/60 rounded px-2 py-1.5">
                         <span className="font-medium">Pro:</span>
-                        <code className="text-blue-600">pro@dharmamind.com</code>
+                        <code className="text-gold-600">pro@dharmamind.com</code>
                       </div>
                       <div className="flex items-center justify-between bg-white/60 rounded px-2 py-1.5">
                         <span className="font-medium">Max:</span>
-                        <code className="text-blue-600">max@dharmamind.com</code>
+                        <code className="text-gold-600">max@dharmamind.com</code>
                       </div>
-                      <div className="text-center pt-1 border-t border-blue-200 mt-2">
-                        <span className="font-medium">Password (all):</span> <code className="text-blue-600 font-mono">test1234 / pro12345 / max12345</code>
+                      <div className="text-center pt-1 border-t border-neutral-300 mt-2">
+                        <span className="font-medium">Password (all):</span> <code className="text-gold-600 font-mono">test1234 / pro12345 / max12345</code>
                       </div>
                     </div>
                   </div>
@@ -386,8 +385,6 @@ export default function Auth() {
               </motion.div>
             )}
 
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             {/* Error Messages */}
             <ErrorMessage 
               error={formError.error} 
@@ -406,7 +403,7 @@ export default function Auth() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 p-3 rounded-xl text-sm bg-emerald-50 border border-emerald-200 text-emerald-700"
+                className="mb-4 p-3 rounded-xl text-sm bg-gold-50 border border-gold-200 text-gold-700"
               >
                 {success}
               </motion.div>
@@ -418,7 +415,7 @@ export default function Auth() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                      <svg className="w-4 h-4 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 mr-2 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                       First name
@@ -432,16 +429,16 @@ export default function Auth() {
                         required
                         value={formData.firstName}
                         onChange={handleInputChange}
-                        className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
+                        className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
                         placeholder="First name"
                       />
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     </div>
                   </div>
 
                   <div>
                     <label htmlFor="lastName" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                      <svg className="w-4 h-4 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 mr-2 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                       Last name
@@ -455,10 +452,10 @@ export default function Auth() {
                         required
                         value={formData.lastName}
                         onChange={handleInputChange}
-                        className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
+                        className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
                         placeholder="Last name"
                       />
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                     </div>
                   </div>
                 </div>
@@ -468,7 +465,7 @@ export default function Auth() {
               {mode !== 'verify' && (
                 <div>
                   <label htmlFor="email" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                    <svg className="w-4 h-4 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 mr-2 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                     </svg>
                     Email address
@@ -482,10 +479,10 @@ export default function Auth() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
+                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
                       placeholder="Enter your email address"
                     />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
                 </div>
               )}
@@ -494,7 +491,7 @@ export default function Auth() {
               {(mode === 'login' || mode === 'signup') && (
                 <div>
                   <label htmlFor="password" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                    <svg className="w-4 h-4 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 mr-2 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     Password
@@ -508,10 +505,10 @@ export default function Auth() {
                       required
                       value={formData.password}
                       onChange={handleInputChange}
-                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
+                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
                       placeholder={mode === 'signup' ? 'Create a strong password' : 'Enter your password'}
                     />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
                   {mode === 'signup' && (
                     <p className="mt-1 text-xs text-gray-500">
@@ -525,7 +522,7 @@ export default function Auth() {
               {mode === 'signup' && (
                 <div>
                   <label htmlFor="confirmPassword" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                    <svg className="w-4 h-4 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 mr-2 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Confirm password
@@ -539,10 +536,10 @@ export default function Auth() {
                       required
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
+                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300"
                       placeholder="Confirm your password"
                     />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
                 </div>
               )}
@@ -551,7 +548,7 @@ export default function Auth() {
               {mode === 'verify' && (
                 <div>
                   <label htmlFor="verificationCode" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                    <svg className="w-4 h-4 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 mr-2 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                     </svg>
                     Verification Code
@@ -564,10 +561,10 @@ export default function Auth() {
                       required
                       value={formData.verificationCode}
                       onChange={handleInputChange}
-                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300 text-center text-lg font-mono tracking-widest"
+                      className="appearance-none block w-full px-4 py-4 border-2 border-gray-200 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all duration-300 bg-white/80 text-gray-900 hover:border-gray-300 text-center text-lg font-mono tracking-widest"
                       placeholder="000000"
                     />
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold-500/5 to-transparent opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
                   <p className="mt-2 text-sm text-gray-600 text-center">
                     Check your email ({formData.email}) for the verification code
@@ -585,7 +582,7 @@ export default function Auth() {
                       type="checkbox"
                       checked={options.rememberMe}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
+                      className="h-4 w-4 text-gold-600 focus:ring-gold-500 border-gray-300 rounded"
                     />
                     <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
                       Remember me
@@ -596,7 +593,7 @@ export default function Auth() {
                     <button
                       type="button"
                       onClick={() => changeMode('forgot-password')}
-                      className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+                      className="font-medium text-gold-600 hover:text-gold-700 transition-colors duration-200"
                     >
                       Forgot your password?
                     </button>
@@ -615,11 +612,11 @@ export default function Auth() {
                       required
                       checked={options.acceptTerms}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded mt-0.5"
+                      className="h-4 w-4 text-gold-600 focus:ring-gold-500 border-gray-300 rounded mt-0.5"
                     />
                     <label htmlFor="acceptTerms" className="ml-3 block text-sm text-gray-700">
                       I agree to the{' '}
-                      <Link href="/terms" className="text-emerald-600 hover:text-emerald-700 underline">
+                      <Link href="/terms" className="text-gold-600 hover:text-gold-700 underline">
                         Terms of Service
                       </Link>
                     </label>
@@ -633,11 +630,11 @@ export default function Auth() {
                       required
                       checked={options.acceptPrivacy}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded mt-0.5"
+                      className="h-4 w-4 text-gold-600 focus:ring-gold-500 border-gray-300 rounded mt-0.5"
                     />
                     <label htmlFor="acceptPrivacy" className="ml-3 block text-sm text-gray-700">
                       I agree to the{' '}
-                      <Link href="/privacy" className="text-emerald-600 hover:text-emerald-700 underline">
+                      <Link href="/privacy" className="text-gold-600 hover:text-gold-700 underline">
                         Privacy Policy
                       </Link>
                     </label>
@@ -650,7 +647,7 @@ export default function Auth() {
                       type="checkbox"
                       checked={options.marketingConsent}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded mt-0.5"
+                      className="h-4 w-4 text-gold-600 focus:ring-gold-500 border-gray-300 rounded mt-0.5"
                     />
                     <label htmlFor="marketingConsent" className="ml-3 block text-sm text-gray-700">
                       I'd like to receive product updates and special offers (optional)
@@ -665,7 +662,7 @@ export default function Auth() {
                   type="submit"
                   isLoading={loading.isLoading}
                   loadingText="Processing..."
-                  className="w-full py-4 px-6 text-base font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105"
+                  className="w-full py-4 px-6 text-base font-semibold rounded-xl bg-gold-600 text-white hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105"
                 >
                   {config.submitText}
                 </LoadingButton>
@@ -689,7 +686,7 @@ export default function Auth() {
                     onClick={handleGoogleAuth}
                     isLoading={loading.isLoading}
                     loadingText="Authenticating..."
-                    className="w-full py-4 px-6 text-base font-semibold rounded-xl border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all duration-300"
+                    className="w-full py-4 px-6 text-base font-semibold rounded-xl border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gold-500 transition-all duration-300"
                   >
                     <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                       <path
@@ -723,7 +720,7 @@ export default function Auth() {
                     Don't have an account?{' '}
                     <button
                       onClick={() => changeMode('signup')}
-                      className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+                      className="font-semibold text-gold-600 hover:text-gold-700 transition-colors duration-200"
                     >
                       Sign up for free
                     </button>
@@ -735,7 +732,7 @@ export default function Auth() {
                     Already have an account?{' '}
                     <button
                       onClick={() => changeMode('login')}
-                      className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+                      className="font-semibold text-gold-600 hover:text-gold-700 transition-colors duration-200"
                     >
                       Sign in
                     </button>
@@ -747,7 +744,7 @@ export default function Auth() {
                     Remember your password?{' '}
                     <button
                       onClick={() => changeMode('login')}
-                      className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+                      className="font-medium text-gold-600 hover:text-gold-700 transition-colors duration-200"
                     >
                       Sign in
                     </button>

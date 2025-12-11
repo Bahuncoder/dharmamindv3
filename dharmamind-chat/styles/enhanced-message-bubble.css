@@ -44,7 +44,6 @@
 }
 
 .avatar-user {
-<<<<<<< HEAD
   background: var(--color-background-secondary);
   color: var(--color-text-primary);
   border: 2px solid var(--color-border-primary);
@@ -54,15 +53,6 @@
   background: var(--color-background-secondary);
   color: var(--color-text-primary);
   border: 2px solid var(--color-border-primary);
-=======
-  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);  /* using your centralized success colors */
-  color: white;
-}
-
-.avatar-ai {
-  background: linear-gradient(135deg, var(--color-success-dark) 0%, var(--color-success) 100%);  /* using your centralized success colors */
-  color: white;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 .avatar-text {
@@ -96,11 +86,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-<<<<<<< HEAD
   background: var(--color-border-primary);
-=======
-  background: var(--color-success);  /* using your centralized success color */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border: 2px solid white;
   z-index: 3;
 }
@@ -148,7 +134,6 @@
 
 /* User Message Styling - Using centralized colors */
 .message-user-enhanced {
-<<<<<<< HEAD
   background: var(--color-background);
   color: var(--color-text-primary);
   border: 2px solid var(--color-border-primary);
@@ -156,14 +141,6 @@
   margin-right: 0;
   max-width: 75%;
   box-shadow: var(--shadow-md);
-=======
-  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);  /* using your centralized success colors */
-  color: white;
-  margin-left: auto;
-  margin-right: 0;
-  max-width: 75%;
-  box-shadow: var(--shadow-emerald);  /* using your centralized emerald shadow */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-bottom-right-radius: 6px;
 }
 
@@ -175,11 +152,7 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-<<<<<<< HEAD
   border-left: 12px solid var(--color-background-secondary);
-=======
-  border-left: 12px solid var(--color-success-dark);  /* using your centralized success dark color */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -192,7 +165,6 @@
 
 /* AI Message Styling - Using centralized colors */
 .message-ai-enhanced {
-<<<<<<< HEAD
   background: var(--color-background-secondary);
   color: var(--color-text-primary);
   margin-left: 0;
@@ -200,15 +172,6 @@
   max-width: 85%;
   border: 1px solid var(--color-border-primary);
   box-shadow: var(--shadow-md);
-=======
-  background: var(--color-bg-primary);  /* using your centralized primary background */
-  color: var(--color-text-primary);  /* using your centralized primary text */
-  margin-left: 0;
-  margin-right: auto;
-  max-width: 85%;
-  border: 1px solid var(--color-border-light);  /* using your centralized light border */
-  box-shadow: var(--shadow-md);  /* using your centralized shadow */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-bottom-left-radius: 6px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -222,11 +185,7 @@
   transform: translateY(-50%);
   width: 0;
   height: 0;
-<<<<<<< HEAD
   border-right: 12px solid var(--color-background-secondary);
-=======
-  border-right: 12px solid var(--color-bg-primary);  /* using your centralized primary background */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
@@ -273,24 +232,14 @@
 }
 
 .ai-message-markdown a {
-<<<<<<< HEAD
   color: var(--color-border-primary);
   text-decoration: underline;
   text-decoration-color: var(--color-border-primary);
-=======
-  color: var(--color-success);  /* using your centralized success color */
-  text-decoration: underline;
-  text-decoration-color: var(--color-focus-ring);  /* using your centralized focus ring color */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   transition: text-decoration-color 0.2s ease;
 }
 
 .ai-message-markdown a:hover {
-<<<<<<< HEAD
   text-decoration-color: var(--color-border-primary);
-=======
-  text-decoration-color: var(--color-success);  /* using your centralized success color */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Message Metadata */
@@ -315,14 +264,9 @@
   display: flex;
   align-items: center;
   gap: 4px;
-<<<<<<< HEAD
   background: var(--color-background-secondary);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border-primary);
-=======
-  background: var(--color-success-light);  /* using your centralized success light color */
-  color: var(--color-success-dark);  /* using your centralized success dark color */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   padding: 2px 8px;
   border-radius: 12px;
   font-weight: 500;
@@ -370,24 +314,15 @@
 }
 
 .module-badge {
-<<<<<<< HEAD
   background: var(--color-background-secondary);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border-primary);
-=======
-  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);  /* using your centralized success colors */
-  color: white;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 10px;
   font-weight: 500;
   text-transform: capitalize;
-<<<<<<< HEAD
   box-shadow: var(--shadow-sm);
-=======
-  box-shadow: var(--shadow-emerald);  /* using your centralized emerald shadow */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Enhanced Message Actions */
@@ -431,7 +366,7 @@
   border-color: var(--color-focus);  /* using your centralized focus color */
   color: var(--color-success);  /* using your centralized success color */
   transform: translateY(-1px);
-  box-shadow: var(--shadow-emerald);  /* using your centralized emerald shadow */
+  box-shadow: var(--shadow-gold);  /* using your centralized gold shadow */
 }
 
 .enhanced-action-button.active {

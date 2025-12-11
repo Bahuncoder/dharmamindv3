@@ -191,17 +191,10 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
   // Loading state
   if (isLoading && subscriptionPlans.length === 0) {
     return (
-<<<<<<< HEAD
       <div className="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
         <div className="bg-neutral-100 rounded-xl p-8 max-w-md w-full text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
           <p className="text-neutral-600">Loading subscription plans...</p>
-=======
-      <div className="fixed inset-0 bg-stone-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-xl p-8 max-w-md w-full text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading subscription plans...</p>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
         </div>
       </div>
     );
@@ -213,20 +206,12 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
         
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-<<<<<<< HEAD
           <h2 className="text-2xl font-semibold text-neutral-900">
-=======
-          <h2 className="text-2xl font-semibold text-primary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             🕉️ Upgrade Your Spiritual Journey
           </h2>
           <button
             onClick={onClose}
-<<<<<<< HEAD
             className="text-neutral-600 hover:text-gold-600 transition-colors"
-=======
-            className="text-secondary hover:text-primary transition-colors"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -249,13 +234,8 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         {/* Current Plan */}
         <div className="mb-6 p-4 bg-primary-gradient-light border border-medium rounded-lg">
-<<<<<<< HEAD
           <p className="text-sm text-neutral-600 mb-1">Current Plan</p>
           <p className="font-semibold text-neutral-900 capitalize">{normalizedCurrentPlan}</p>
-=======
-          <p className="text-sm text-secondary mb-1">Current Plan</p>
-          <p className="font-semibold text-primary capitalize">{normalizedCurrentPlan}</p>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
           <p className="text-sm text-success">May your spiritual growth continue with wisdom 🌱</p>
         </div>
 
@@ -266,13 +246,8 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
               onClick={() => setBillingInterval('monthly')}
               className={`px-4 py-2 rounded-md transition-colors ${
                 billingInterval === 'monthly' 
-<<<<<<< HEAD
                   ? 'bg-primary-bg text-neutral-900 shadow-sm' 
                   : 'text-neutral-600'
-=======
-                  ? 'bg-primary-bg text-primary shadow-sm' 
-                  : 'text-secondary'
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               }`}
             >
               Monthly
@@ -281,13 +256,8 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
               onClick={() => setBillingInterval('yearly')}
               className={`px-4 py-2 rounded-md transition-colors ${
                 billingInterval === 'yearly' 
-<<<<<<< HEAD
                   ? 'bg-primary-bg text-neutral-900 shadow-sm' 
                   : 'text-neutral-600'
-=======
-                  ? 'bg-primary-bg text-primary shadow-sm' 
-                  : 'text-secondary'
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               }`}
             >
               Yearly
@@ -301,7 +271,6 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
           {/* Basic Plan */}
           <div className="card-primary hover:shadow-lg transition-all">
             <div className="text-center mb-4">
-<<<<<<< HEAD
               <h3 className="text-xl font-bold text-neutral-900 mb-2">Basic</h3>
               <p className="text-neutral-600 text-sm mb-4">Perfect for personal spiritual growth</p>
               
@@ -310,16 +279,6 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   ${billingInterval === 'monthly' ? '9' : '90'}
                 </span>
                 <span className="text-neutral-600">/{billingInterval === 'monthly' ? 'month' : 'year'}</span>
-=======
-              <h3 className="text-xl font-bold text-primary mb-2">Basic</h3>
-              <p className="text-secondary text-sm mb-4">Perfect for personal spiritual growth</p>
-              
-              <div className="mb-4">
-                <span className="text-3xl font-bold text-primary">
-                  ${billingInterval === 'monthly' ? '9' : '90'}
-                </span>
-                <span className="text-secondary">/{billingInterval === 'monthly' ? 'month' : 'year'}</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 {billingInterval === 'yearly' && (
                   <p className="text-success text-sm mt-1">
                     Save $18/year
@@ -329,41 +288,25 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </div>
             
             <ul className="space-y-3 mb-6">
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 100 AI conversations/month
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Basic dharmic guidance
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Email support
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -402,7 +345,6 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </div>
             
             <div className="text-center mb-4">
-<<<<<<< HEAD
               <h3 className="text-xl font-bold text-neutral-900 mb-2">Pro</h3>
               <p className="text-neutral-600 text-sm mb-4">Advanced spiritual guidance and insights</p>
               
@@ -411,16 +353,6 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   ${billingInterval === 'monthly' ? '19' : '190'}
                 </span>
                 <span className="text-neutral-600">/{billingInterval === 'monthly' ? 'month' : 'year'}</span>
-=======
-              <h3 className="text-xl font-bold text-primary mb-2">Pro</h3>
-              <p className="text-secondary text-sm mb-4">Advanced spiritual guidance and insights</p>
-              
-              <div className="mb-4">
-                <span className="text-3xl font-bold text-primary">
-                  ${billingInterval === 'monthly' ? '19' : '190'}
-                </span>
-                <span className="text-secondary">/{billingInterval === 'monthly' ? 'month' : 'year'}</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 {billingInterval === 'yearly' && (
                   <p className="text-success text-sm mt-1">
                     Save $38/year
@@ -430,51 +362,31 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </div>
             
             <ul className="space-y-3 mb-6">
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Unlimited AI conversations
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Advanced dharmic wisdom
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Priority support
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Personalized meditations
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -506,7 +418,6 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
           {/* Max Plan */}
           <div className="card-elevated bg-secondary-gradient-light border-2 border-medium hover:shadow-lg transition-all relative">
             <div className="text-center mb-4">
-<<<<<<< HEAD
               <h3 className="text-xl font-bold text-neutral-900 mb-2">Max</h3>
               <p className="text-neutral-600 text-sm mb-4">Ultimate spiritual transformation</p>
               
@@ -515,16 +426,6 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   ${billingInterval === 'monthly' ? '39' : '390'}
                 </span>
                 <span className="text-neutral-600">/{billingInterval === 'monthly' ? 'month' : 'year'}</span>
-=======
-              <h3 className="text-xl font-bold text-primary mb-2">Max</h3>
-              <p className="text-secondary text-sm mb-4">Ultimate spiritual transformation</p>
-              
-              <div className="mb-4">
-                <span className="text-3xl font-bold text-primary">
-                  ${billingInterval === 'monthly' ? '39' : '390'}
-                </span>
-                <span className="text-secondary">/{billingInterval === 'monthly' ? 'month' : 'year'}</span>
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 {billingInterval === 'yearly' && (
                   <p className="text-success text-sm mt-1">
                     Save $78/year
@@ -534,61 +435,37 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </div>
             
             <ul className="space-y-3 mb-6">
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Everything in Pro
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 1-on-1 spiritual mentoring
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Custom dharmic programs
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 24/7 premium support
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Early access to features
               </li>
-<<<<<<< HEAD
               <li className="flex items-start text-sm text-neutral-600">
-=======
-              <li className="flex items-start text-sm text-secondary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                 <svg className="w-4 h-4 text-success mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -621,30 +498,18 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
         {/* Payment Form */}
         {showPaymentForm && (
           <div className="border-t border-medium pt-6">
-<<<<<<< HEAD
             <h3 className="text-lg font-semibold text-neutral-900 mb-4">
-=======
-            <h3 className="text-lg font-semibold text-primary mb-4">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
               🔐 Secure Payment Information
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Card Information */}
               <div>
-<<<<<<< HEAD
                 <h4 className="font-medium text-neutral-900 mb-3">Card Details</h4>
                 
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                <h4 className="font-medium text-primary mb-3">Card Details</h4>
-                
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       Cardholder Name
                     </label>
                     <input
@@ -657,11 +522,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   </div>
                   
                   <div>
-<<<<<<< HEAD
                     <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                    <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       Card Number
                     </label>
                     <input
@@ -676,11 +537,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-<<<<<<< HEAD
                       <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                      <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                         Expiry Date
                       </label>
                       <input
@@ -694,11 +551,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     </div>
                     
                     <div>
-<<<<<<< HEAD
                       <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                      <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                         CVV
                       </label>
                       <input
@@ -716,19 +569,11 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
               
               {/* Billing Address */}
               <div>
-<<<<<<< HEAD
                 <h4 className="font-medium text-neutral-900 mb-3">Billing Address</h4>
                 
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                <h4 className="font-medium text-primary mb-3">Billing Address</h4>
-                
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       Street Address
                     </label>
                     <input
@@ -742,11 +587,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-<<<<<<< HEAD
                       <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                      <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                         City
                       </label>
                       <input
@@ -759,11 +600,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     </div>
                     
                     <div>
-<<<<<<< HEAD
                       <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                      <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                         State
                       </label>
                       <input
@@ -777,11 +614,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   </div>
                   
                   <div>
-<<<<<<< HEAD
                     <label className="block text-sm font-medium text-neutral-600 mb-1">
-=======
-                    <label className="block text-sm font-medium text-secondary mb-1">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
                       ZIP Code
                     </label>
                     <input
@@ -817,11 +650,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         {/* Security Footer */}
         <div className="mt-8 pt-6 border-t border-medium">
-<<<<<<< HEAD
           <div className="flex items-center justify-center space-x-6 text-sm text-neutral-500">
-=======
-          <div className="flex items-center justify-center space-x-6 text-sm text-tertiary">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             <div className="flex items-center">
               <svg className="w-4 h-4 mr-2 text-success" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
@@ -836,11 +665,7 @@ const CentralizedSubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </div>
           </div>
           
-<<<<<<< HEAD
           <p className="text-center text-xs text-neutral-500 mt-4">
-=======
-          <p className="text-center text-xs text-tertiary mt-4">
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             All subscriptions include dharmic AI guidance, secure data handling, and cancel anytime.
           </p>
         </div>

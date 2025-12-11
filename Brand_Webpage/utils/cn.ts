@@ -72,24 +72,14 @@ export function colorVariant(
 ): string {
   const variants = {
     primary: {
-<<<<<<< HEAD
       bg: 'bg-brand-primary hover:bg-brand-primary',
       text: 'text-secondary',
-=======
-      bg: 'bg-gray-500 hover:bg-gray-600',
-      text: 'text-gray-600',
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       border: 'border-emerald-500',
       ring: 'ring-emerald-500'
     },
     secondary: {
-<<<<<<< HEAD
       bg: 'bg-brand-primary hover:bg-primary-background',
       text: 'text-secondary',
-=======
-      bg: 'bg-gray-600 hover:bg-gray-700',
-      text: 'text-gray-600',
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
       border: 'border-gray-600',
       ring: 'ring-gray-500'
     },

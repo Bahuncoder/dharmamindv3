@@ -122,7 +122,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="mt-1 block w-32 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm rounded-md"
+                  className="mt-1 block w-32 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gold-500 focus:border-gold-500 sm:text-sm rounded-md"
                 >
                   <option value="English">English</option>
                   <option value="Spanish">Spanish</option>
@@ -150,8 +150,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={() => setResponseNotifications(!responseNotifications)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
-                    responseNotifications ? 'bg-emerald-600' : 'bg-gray-200'
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
+                    responseNotifications ? 'bg-gold-600' : 'bg-gray-200'
                   }`}
                 >
                   <span
@@ -170,8 +170,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={() => setTaskNotifications(!taskNotifications)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
-                    taskNotifications ? 'bg-emerald-600' : 'bg-gray-200'
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
+                    taskNotifications ? 'bg-gold-600' : 'bg-gray-200'
                   }`}
                 >
                   <span
@@ -200,7 +200,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 <select
                   value={theme}
                   onChange={(e) => setTheme(e.target.value)}
-                  className="mt-1 block w-32 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm rounded-md"
+                  className="mt-1 block w-32 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gold-500 focus:border-gold-500 sm:text-sm rounded-md"
                 >
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>
@@ -217,7 +217,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 <select
                   value={fontSize}
                   onChange={(e) => setFontSize(e.target.value)}
-                  className="mt-1 block w-32 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm rounded-md"
+                  className="mt-1 block w-32 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gold-500 focus:border-gold-500 sm:text-sm rounded-md"
                 >
                   <option value="small">Small</option>
                   <option value="medium">Medium</option>
@@ -245,7 +245,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                     onClose();
                     router.push('/conversations');
                   }}
-                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
                 >
                   View Archives
                 </button>
@@ -273,7 +273,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={exportChatHistory}
-                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
                 >
                   Export
                 </button>
@@ -287,8 +287,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={() => setImproveModel(!improveModel)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
-                    improveModel ? 'bg-emerald-600' : 'bg-gray-200'
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
+                    improveModel ? 'bg-gold-600' : 'bg-gray-200'
                   }`}
                 >
                   <span
@@ -307,7 +307,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={() => alert('Shared links management coming soon!')}
-                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
                 >
                   Manage
                 </button>
@@ -330,7 +330,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={handleSignOut}
-                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
                 >
                   Logout
                 </button>
@@ -344,8 +344,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                 </div>
                 <button
                   onClick={() => setMultifactorAuth(!multifactorAuth)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
-                    multifactorAuth ? 'bg-emerald-600' : 'bg-gray-200'
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
+                    multifactorAuth ? 'bg-gold-600' : 'bg-gray-200'
                   }`}
                 >
                   <span
@@ -399,7 +399,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                     {!user?.isGuest && (
                       <button
                         onClick={() => setIsSubscriptionModalOpen(true)}
-                        className="ml-2 text-emerald-600 hover:text-emerald-800 text-sm font-medium"
+                        className="ml-2 text-gold-600 hover:text-gold-800 text-sm font-medium"
                       >
                         Upgrade
                       </button>
@@ -466,7 +466,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, user: pr
                     onClick={() => setActiveCategory(category.id)}
                     className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                       activeCategory === category.id
-                        ? 'bg-emerald-100 text-emerald-800'
+                        ? 'bg-gold-100 text-gold-800'
                         : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                     }`}
                   >

@@ -138,7 +138,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                className="w-16 h-16 bg-gradient-to-r from-gold-500 to-gold-600 rounded-full flex items-center justify-center mx-auto mb-4"
               >
                 <span className="text-2xl">✓</span>
               </motion.div>
@@ -186,7 +186,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                   <div 
-                    className="bg-gradient-to-r from-gray-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
+                    className="bg-gradient-to-r from-gray-500 to-gold-500 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${(step / 3) * 100}%` }}
                   />
                 </div>
@@ -211,7 +211,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                             onClick={() => handleInputChange('feedback_type', type.value)}
                             className={`text-left p-3 rounded-lg border-2 transition-all ${
                               feedbackData.feedback_type === type.value
-                                ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
+                                ? 'border-gold-500 bg-gold-50 dark:bg-gold-900/20'
                                 : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
                             }`}
                           >
@@ -235,7 +235,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                         value={feedbackData.title}
                         onChange={(e) => handleInputChange('title', e.target.value)}
                         placeholder="Brief summary of your feedback"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 dark:bg-gray-700 dark:text-white"
                         maxLength={200}
                       />
                       <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -252,7 +252,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                         onChange={(e) => handleInputChange('content', e.target.value)}
                         placeholder="Please share your detailed feedback, suggestions, or concerns..."
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white resize-none"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 dark:bg-gray-700 dark:text-white resize-none"
                         maxLength={4000}
                       />
                       <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -336,7 +336,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                         value={feedbackData.user_email || ''}
                         onChange={(e) => handleInputChange('user_email', e.target.value)}
                         placeholder="your.email@example.com"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 dark:bg-gray-700 dark:text-white"
                       />
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         Only needed if you want us to follow up with you
@@ -349,7 +349,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                           type="checkbox"
                           checked={feedbackData.allow_contact}
                           onChange={(e) => handleInputChange('allow_contact', e.target.checked)}
-                          className="mt-1 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                          className="mt-1 rounded border-gray-300 text-gold-600 focus:ring-gold-500"
                         />
                         <div>
                           <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -366,7 +366,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                           type="checkbox"
                           checked={feedbackData.share_anonymously}
                           onChange={(e) => handleInputChange('share_anonymously', e.target.checked)}
-                          className="mt-1 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                          className="mt-1 rounded border-gray-300 text-gold-600 focus:ring-gold-500"
                         />
                         <div>
                           <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -396,7 +396,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                     <button
                       onClick={nextStep}
                       disabled={step === 1 && (!feedbackData.title.trim() || !feedbackData.content.trim())}
-                      className="px-6 py-2 bg-gradient-to-r from-gray-500 to-emerald-500 text-white font-medium rounded-lg hover:from-gray-600 hover:to-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                      className="px-6 py-2 bg-gradient-to-r from-gray-500 to-gold-500 text-white font-medium rounded-lg hover:from-gray-600 hover:to-gold-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     >
                       Next
                     </button>
@@ -404,7 +404,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="px-6 py-2 bg-gradient-to-r from-gray-500 to-emerald-500 text-white font-medium rounded-lg hover:from-gray-600 hover:to-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center space-x-2"
+                      className="px-6 py-2 bg-gradient-to-r from-gray-500 to-gold-500 text-white font-medium rounded-lg hover:from-gray-600 hover:to-gold-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center space-x-2"
                     >
                       {isSubmitting ? (
                         <>

@@ -9,7 +9,6 @@
   --tablet: 768px;
   --desktop: 1024px;
   --desktop-lg: 1440px;
-<<<<<<< HEAD
   
   /* Mobile-specific spacing */
   --mobile-padding: 1rem;
@@ -35,39 +34,26 @@
   .safe-area-right {
     padding-right: max(1rem, env(safe-area-inset-right));
   }
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 }
 
 /* Base mobile styles */
 @media (max-width: 768px) {
-<<<<<<< HEAD
   /* Enhanced Typography for mobile readability */
   h1 {
     font-size: 2rem !important;
     line-height: 1.2;
     margin-bottom: 1rem;
-=======
-  /* Typography adjustments */
-  h1 {
-    font-size: 2rem !important;
-    line-height: 1.2;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   h2 {
     font-size: 1.5rem !important;
     line-height: 1.3;
-<<<<<<< HEAD
     margin-bottom: 0.875rem;
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   h3 {
     font-size: 1.25rem !important;
     line-height: 1.4;
-<<<<<<< HEAD
     margin-bottom: 0.75rem;
   }
   
@@ -78,13 +64,10 @@
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   /* Container adjustments */
   .container {
-<<<<<<< HEAD
     padding-left: var(--mobile-padding);
     padding-right: var(--mobile-padding);
     max-width: 100%;
@@ -109,21 +92,10 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 2rem;
-=======
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  /* Chat interface mobile optimization */
-  .chat-container {
-    padding: 1rem 0.75rem;
-    max-width: 100%;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   .message-bubble {
     max-width: 90%;
-<<<<<<< HEAD
     padding: 0.875rem;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -172,29 +144,11 @@
   .btn:active::before, .action-button:active::before, .mobile-touch:active::before {
     width: 200px;
     height: 200px;
-=======
-    padding: 0.75rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  
-  /* Touch-friendly buttons */
-  .btn {
-    min-height: 44px; /* iOS touch target minimum */
-    padding: 12px 20px;
-    font-size: 1rem;
-    border-radius: 12px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   .btn-sm {
     min-height: 40px;
-<<<<<<< HEAD
     min-width: 40px;
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     padding: 8px 16px;
     font-size: 0.9rem;
   }
@@ -205,7 +159,6 @@
     font-size: 1.1rem;
   }
   
-<<<<<<< HEAD
   /* High contrast button support */
   .high-contrast-button {
     border: 2px solid currentColor !important;
@@ -257,17 +210,6 @@
   }
   
   /* Enhanced Navigation mobile */
-=======
-  /* Input fields mobile optimization */
-  .input-field {
-    min-height: 44px;
-    padding: 12px 16px;
-    font-size: 16px; /* Prevents zoom on iOS */
-    border-radius: 12px;
-  }
-  
-  /* Navigation mobile */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   .mobile-nav {
     position: fixed;
     bottom: 0;
@@ -276,37 +218,26 @@
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
     padding: 8px 0 max(8px, env(safe-area-inset-bottom));
     z-index: 1000;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     gap: 4px;
-=======
-    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
-    z-index: 1000;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   }
   
   .mobile-nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-<<<<<<< HEAD
     justify-content: center;
     padding: 8px 4px;
     min-height: var(--touch-target-size);
-=======
-    padding: 8px 4px;
-    min-height: 44px;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     color: #666;
     text-decoration: none;
     font-size: 0.75rem;
     font-weight: 500;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-<<<<<<< HEAD
     border-radius: 8px;
     transition: all 0.2s ease;
     position: relative;
@@ -343,32 +274,13 @@
   }
   
   /* Enhanced Header mobile optimization */
-=======
-  }
-  
-  .mobile-nav-item.active {
-    color: #667eea;
-  }
-  
-  .mobile-nav-item:hover {
-    color: #667eea;
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 8px;
-  }
-  
-  /* Header mobile optimization */
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   .mobile-header {
     position: sticky;
     top: 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
     padding: 8px 16px max(8px, env(safe-area-inset-top));
-=======
-    padding: 8px 16px calc(8px + env(safe-area-inset-top));
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     z-index: 999;
   }
   
@@ -376,7 +288,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-<<<<<<< HEAD
     min-height: var(--touch-target-size);
   }
   
@@ -403,35 +314,20 @@
   
   /* Enhanced Chat input area mobile */
   .chat-input-area, .enhanced-input-container {
-=======
-    min-height: 44px;
-  }
-  
-  /* Chat input area mobile */
-  .chat-input-area {
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     position: sticky;
     bottom: 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
     padding: 12px 16px max(12px, env(safe-area-inset-bottom));
     z-index: 100;
   }
   
   .chat-input-container, .enhanced-input-wrapper {
-=======
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  }
-  
-  .chat-input-container {
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     display: flex;
     align-items: flex-end;
     gap: 8px;
     max-width: 100%;
-<<<<<<< HEAD
     border-radius: var(--mobile-border-radius);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   }
@@ -460,30 +356,10 @@
   .chat-send-btn, .send-button, .voice-button {
     min-width: var(--touch-target-size);
     min-height: var(--touch-target-size);
-=======
-  }
-  
-  .chat-input {
-    flex: 1;
-    min-height: 44px;
-    max-height: 120px;
-    padding: 12px 16px;
-    font-size: 16px;
-    border: 1px solid #e2e8f0;
-    border-radius: 22px;
-    resize: none;
-    background: white;
-  }
-  
-  .chat-send-btn {
-    width: 44px;
-    height: 44px;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-<<<<<<< HEAD
     border: none;
     background: #10b981;
     color: white;
@@ -590,12 +466,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-=======
-    flex-shrink: 0;
-    background: #667eea;
-    color: white;
-    border: none;
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
   }
@@ -867,7 +737,6 @@
     display: none !important;
   }
 }
-<<<<<<< HEAD
 
 /* Enhanced Accessibility and Mobile Features */
 /* Accessibility enhancements for mobile */
@@ -1108,5 +977,3 @@
     height: 0.2rem;
   }
 }
-=======
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc

@@ -25,7 +25,7 @@ const getRishiIcon = (rishiId: string) => {
 
 const getRishiGradient = (rishiId: string) => {
   const colors = RISHI_SACRED_COLORS[rishiId];
-  if (!colors) return 'from-emerald-500 to-teal-600';
+  if (!colors) return 'from-gold-500 to-gold-600';
   return `from-[${colors.primary}] to-[${colors.secondary}]`;
 };
 

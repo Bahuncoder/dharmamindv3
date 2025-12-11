@@ -59,11 +59,11 @@ const SidebarQuotes: React.FC = () => {
   const getCategoryColor = (category: Quote['category']) => {
     switch (category) {
       case 'Gita':
-        return 'text-emerald-600';
+        return 'text-gold-600';
       case 'Upanishad':
-        return 'text-purple-600';
+        return 'text-gold-600';
       case 'Veda':
-        return 'text-green-600';
+        return 'text-success-600';
       default:
         return 'text-gray-600';
     }
@@ -117,7 +117,7 @@ const SidebarQuotes: React.FC = () => {
           {/* Simple progress bar */}
           <div className="mt-3 w-full bg-gray-200 rounded-full h-0.5">
             <motion.div
-              className="h-0.5 rounded-full bg-gradient-to-r from-purple-500 to-blue-500"
+              className="h-0.5 rounded-full bg-gradient-to-r from-gold-500 to-neutral-1000"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{ duration: 12, ease: "linear" }}

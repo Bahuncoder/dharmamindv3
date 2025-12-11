@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext';
-<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
-=======
-import { useColors } from '../contexts/ColorContext';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { useSubscription } from '../hooks/useSubscription';
 import VoiceInput from './VoiceInput';
 import UserProfileMenu from './UserProfileMenu';
@@ -49,11 +45,7 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
 
   // Authentication and subscription
   const { user, isAuthenticated } = useAuth();
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const { isFreePlan } = useSubscription();
 
   // Close dropdown when clicking outside
@@ -170,7 +162,7 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
               <span className="text-xl">←</span>
             </button>
             <div className="flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-emerald-100 rounded-full flex items-center justify-center mr-3">
+              <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gold-100 rounded-full flex items-center justify-center mr-3">
                 <span className="text-lg">🕉️</span>
               </div>
               <div>
@@ -184,7 +176,7 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
               <button
                 onClick={() => setShowVoiceInput(!showVoiceInput)}
                 className={`p-2 rounded-lg transition-colors ${
-                  showVoiceInput ? 'bg-emerald-100 text-emerald-600' : 'hover:bg-stone-100'
+                  showVoiceInput ? 'bg-gold-100 text-gold-600' : 'hover:bg-stone-100'
                 }`}
                 aria-label="Toggle voice input"
               >
@@ -230,7 +222,7 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
       >
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center py-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-emerald-100 rounded-full flex items-center justify-center mb-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-gold-100 rounded-full flex items-center justify-center mb-4">
               <span className="text-2xl">🕉️</span>
             </div>
             <h2 className="text-xl font-bold text-stone-800 mb-2">
@@ -264,7 +256,7 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                     message.sender === 'user'
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white ml-12'
+                      ? 'bg-gradient-to-r from-neutral-1000 to-gold-600 text-white ml-12'
                       : 'bg-white border border-stone-200 text-stone-800 mr-12'
                   }`}
                 >
@@ -289,7 +281,7 @@ const MobileChatInterface: React.FC<MobileChatInterfaceProps> = ({
                   
                   <div className="flex items-center justify-between mt-2">
                     <span className={`text-xs ${
-                      message.sender === 'user' ? 'text-blue-100' : 'text-stone-400'
+                      message.sender === 'user' ? 'text-neutral-200' : 'text-stone-400'
                     }`}>
                       {formatTime(message.timestamp)}
                     </span>

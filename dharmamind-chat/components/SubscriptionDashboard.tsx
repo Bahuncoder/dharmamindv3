@@ -8,11 +8,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSubscription } from '../hooks/useSubscription';
-<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
-=======
-import { useColors } from '../contexts/ColorContext';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { UpgradePrompt, UsageProgress } from './UpgradePrompt';
 import CentralizedSubscriptionModal from './CentralizedSubscriptionModal';
 import Logo from './Logo';
@@ -55,11 +51,7 @@ export const SubscriptionDashboard: React.FC = () => {
     isLoading
   } = useSubscription();
 
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [insights, setInsights] = useState<UsageInsight[]>([]);
@@ -86,28 +78,28 @@ export const SubscriptionDashboard: React.FC = () => {
         value: `${messageCheck.usage}/${messageCheck.limit === -1 ? '∞' : messageCheck.limit}`,
         trend: messageCheck.percentage > 80 ? 'up' : messageCheck.percentage > 50 ? 'stable' : 'down',
         description: `${messageCheck.percentage.toFixed(1)}% of monthly limit used`,
-        color: messageCheck.percentage > 90 ? 'text-red-600' : messageCheck.percentage > 80 ? 'text-gray-600' : 'text-green-600'
+        color: messageCheck.percentage > 90 ? 'text-red-600' : messageCheck.percentage > 80 ? 'text-gray-600' : 'text-success-600'
       },
       {
         title: 'Wisdom Modules Accessed',
         value: `${moduleCheck.usage}/${moduleCheck.limit === -1 ? '∞' : moduleCheck.limit}`,
         trend: moduleCheck.usage > 3 ? 'up' : 'stable',
         description: 'Different modules explored',
-        color: 'text-blue-600'
+        color: 'text-gold-600'
       },
       {
         title: 'Days Until Reset',
         value: calculateDaysUntilReset().toString(),
         trend: 'stable',
         description: 'Until usage resets',
-        color: 'text-purple-600'
+        color: 'text-gold-600'
       },
       {
         title: 'Plan Utilization',
         value: `${Math.round(messageCheck.percentage)}%`,
         trend: messageCheck.percentage > 50 ? 'up' : 'down',
         description: 'Overall plan usage',
-        color: messageCheck.percentage > 80 ? 'text-red-600' : 'text-green-600'
+        color: messageCheck.percentage > 80 ? 'text-red-600' : 'text-success-600'
       }
     ];
 
@@ -180,7 +172,7 @@ export const SubscriptionDashboard: React.FC = () => {
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-sm font-medium text-gray-600">{insight.title}</h3>
         <div className={`text-xs ${
-          insight.trend === 'up' ? 'text-green-600' : 
+          insight.trend === 'up' ? 'text-success-600' : 
           insight.trend === 'down' ? 'text-red-600' : 'text-gray-600'
         }`}>
           {insight.trend === 'up' ? '↗️' : insight.trend === 'down' ? '↘️' : '➡️'}
@@ -201,7 +193,7 @@ export const SubscriptionDashboard: React.FC = () => {
       className={`rounded-lg p-4 border-l-4 ${
         prediction.priority === 'high' ? 'border-red-500 bg-red-50' :
         prediction.priority === 'medium' ? 'border-gray-500 bg-gray-50' :
-        'border-blue-500 bg-blue-50'
+        'border-neutral-1000 bg-neutral-100'
       }`}
     >
       <div className="flex items-start justify-between">
@@ -209,14 +201,14 @@ export const SubscriptionDashboard: React.FC = () => {
           <h4 className={`font-medium text-sm ${
             prediction.priority === 'high' ? 'text-red-800' :
             prediction.priority === 'medium' ? 'text-gray-800' :
-            'text-blue-800'
+            'text-neutral-800'
           }`}>
             {prediction.title}
           </h4>
           <p className={`text-xs mt-1 ${
             prediction.priority === 'high' ? 'text-red-700' :
             prediction.priority === 'medium' ? 'text-gray-700' :
-            'text-blue-700'
+            'text-gold-700'
           }`}>
             {prediction.description}
           </p>
@@ -227,7 +219,7 @@ export const SubscriptionDashboard: React.FC = () => {
             className={`ml-3 px-3 py-1 text-xs font-medium rounded-full transition-colors ${
               prediction.priority === 'high' ? 'bg-red-600 hover:bg-red-700 text-white' :
               prediction.priority === 'medium' ? 'bg-gray-600 hover:bg-gray-700 text-white' :
-              'bg-blue-600 hover:bg-blue-700 text-white'
+              'bg-gold-600 hover:bg-gold-700 text-white'
             }`}
           >
             {prediction.actionText}
@@ -238,13 +230,13 @@ export const SubscriptionDashboard: React.FC = () => {
   );
 
   const FeatureComparisonCard: React.FC = () => (
-    <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border border-purple-200">
+    <div className="bg-gradient-to-r from-purple-50 to-neutral-100 rounded-lg p-6 border border-purple-200">
       <h3 className="text-lg font-semibold text-purple-900 mb-4">Plan Comparison</h3>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Free Plan */}
         <div className={`bg-white rounded-lg p-4 border-2 ${
-          isFreePlan() ? 'border-purple-500 ring-2 ring-purple-200' : 'border-gray-200'
+          isFreePlan() ? 'border-gold-500 ring-2 ring-purple-200' : 'border-gray-200'
         }`}>
           <div className="text-center mb-3">
             <h4 className="font-semibold text-gray-900">Free</h4>
@@ -261,7 +253,7 @@ export const SubscriptionDashboard: React.FC = () => {
 
         {/* Professional Plan */}
         <div className={`bg-white rounded-lg p-4 border-2 ${
-          isPremiumPlan() ? 'border-purple-500 ring-2 ring-purple-200' : 'border-gray-200'
+          isPremiumPlan() ? 'border-gold-500 ring-2 ring-purple-200' : 'border-gray-200'
         }`}>
           <div className="text-center mb-3">
             <h4 className="font-semibold text-purple-900">Professional</h4>
@@ -277,7 +269,7 @@ export const SubscriptionDashboard: React.FC = () => {
           {!isPremiumPlan() && (
             <button
               onClick={() => setShowSubscriptionModal(true)}
-              className="w-full mt-3 px-3 py-2 bg-purple-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition-colors"
+              className="w-full mt-3 px-3 py-2 bg-gold-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition-colors"
             >
               Upgrade Now
             </button>
@@ -286,7 +278,7 @@ export const SubscriptionDashboard: React.FC = () => {
 
         {/* Enterprise Plan */}
         <div className={`bg-white rounded-lg p-4 border-2 ${
-          isEnterprisePlan() ? 'border-purple-500 ring-2 ring-purple-200' : 'border-gray-200'
+          isEnterprisePlan() ? 'border-gold-500 ring-2 ring-purple-200' : 'border-gray-200'
         }`}>
           <div className="text-center mb-3">
             <h4 className="font-semibold text-purple-900">Enterprise</h4>
@@ -302,7 +294,7 @@ export const SubscriptionDashboard: React.FC = () => {
           {!isEnterprisePlan() && (
             <button
               onClick={() => setShowSubscriptionModal(true)}
-              className="w-full mt-3 px-3 py-2 bg-purple-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition-colors"
+              className="w-full mt-3 px-3 py-2 bg-gold-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition-colors"
             >
               Contact Sales
             </button>
@@ -320,7 +312,7 @@ export const SubscriptionDashboard: React.FC = () => {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-2"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gold-600 mx-auto mb-2"></div>
           <p className="text-gray-600">Loading subscription data...</p>
         </div>
       </div>
@@ -334,7 +326,7 @@ export const SubscriptionDashboard: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Subscription Dashboard</h1>
           <p className="text-gray-600">
-            Current Plan: <span className="font-medium text-purple-600">
+            Current Plan: <span className="font-medium text-gold-600">
               {currentPlan?.name || 'Basic'}
             </span>
           </p>
@@ -343,7 +335,7 @@ export const SubscriptionDashboard: React.FC = () => {
         {isFreePlan() && (
           <button
             onClick={() => setShowSubscriptionModal(true)}
-            className="px-4 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+            className="px-4 py-2 bg-gold-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
           >
             Upgrade Plan
           </button>

@@ -71,7 +71,7 @@ const ScrollToBottom: React.FC<ScrollToBottomProps> = ({
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="absolute -top-2 -right-2 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold"
+              className="absolute -top-2 -right-2 w-6 h-6 bg-gold-600 text-white rounded-full flex items-center justify-center text-xs font-bold"
             >
               {unreadCount > 9 ? '9+' : unreadCount}
             </motion.div>

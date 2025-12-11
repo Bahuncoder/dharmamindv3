@@ -55,9 +55,9 @@ const BreathingGuide: React.FC<BreathingGuideProps> = ({
 
   const getPhaseColor = () => {
     switch (phase) {
-      case 'inhale': return 'from-blue-400 to-blue-600';
-      case 'hold': return 'from-purple-400 to-purple-600';
-      case 'exhale': return 'from-emerald-400 to-emerald-600';
+      case 'inhale': return 'from-gold-400 to-gold-600';
+      case 'hold': return 'from-gold-400 to-gold-600';
+      case 'exhale': return 'from-gold-400 to-gold-600';
       case 'pause': return 'from-gray-400 to-gray-600';
     }
   };

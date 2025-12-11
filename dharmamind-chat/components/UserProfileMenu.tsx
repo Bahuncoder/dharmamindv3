@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SparklesIcon } from '@heroicons/react/24/outline';
-<<<<<<< HEAD
 import { useColor } from '../contexts/ColorContext';
-=======
-import { useColors } from '../contexts/ColorContext';
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { useRouter } from 'next/router';
@@ -20,11 +16,7 @@ interface UserProfileMenuProps {
 }
 
 const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, user: propUser, isDemo = false, onLogout: customLogout }) => {
-<<<<<<< HEAD
   const { currentTheme } = useColor();
-=======
-  const { currentTheme } = useColors();
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
   const { user: authUser, isAuthenticated, logout } = useAuth();
   const { upgradePlan } = useSubscription();
   const router = useRouter();
@@ -114,13 +106,8 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
             onClick={handleUpgrade}
             className="w-full py-3 px-4 rounded-lg text-white font-semibold transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5 mb-3"
             style={{ 
-<<<<<<< HEAD
               background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
               boxShadow: '0 4px 14px 0 rgba(16, 185, 129, 0.3)'
-=======
-              background: 'linear-gradient(135deg, #f59e0b 0%, #10b981 100%)',
-              boxShadow: '0 4px 14px 0 rgba(245, 158, 11, 0.3)'
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
             }}
           >
             <div className="flex items-center justify-center space-x-2">
@@ -168,7 +155,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
       }}
     >
       {/* User Info Header */}
-      <div className="px-4 py-3 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-emerald-50">
+      <div className="px-4 py-3 border-b border-gray-100 bg-gradient-to-r from-neutral-100 to-gold-50">
         <div className="flex items-center space-x-3">
           <div 
             className="w-12 h-12 rounded-full flex items-center justify-center ring-2 ring-white"
@@ -191,7 +178,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
             <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 ${
               (user.subscription_plan || user.plan) === 'basic' 
                 ? 'bg-yellow-100 text-yellow-800' 
-                : 'bg-green-100 text-green-800'
+                : 'bg-success-100 text-green-800'
             }`}>
               {(user.subscription_plan || user.plan) === 'basic' ? (
                 <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -217,9 +204,9 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
         {((user.subscription_plan || user.plan) === 'basic' || user.isGuest) && (
           <button
             onClick={handleUpgrade}
-            className="w-full flex items-center px-4 py-3 text-sm font-medium text-left hover:bg-gradient-to-r hover:from-amber-50 hover:to-emerald-50 transition-all duration-200 group border-b border-gray-50"
+            className="w-full flex items-center px-4 py-3 text-sm font-medium text-left hover:bg-gradient-to-r hover:from-amber-50 hover:to-gold-50 transition-all duration-200 group border-b border-gray-50"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-amber-500 to-emerald-600 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-amber-500 to-gold-600 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
               <SparklesIcon className="w-4 h-4 text-white" />
             </div>
             <div className="flex-1">
@@ -260,8 +247,8 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
           onClick={handleSettings}
           className="w-full flex items-center px-4 py-3 text-sm font-medium text-left hover:bg-gray-50 transition-colors group"
         >
-          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors">
-            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-8 h-8 rounded-lg bg-neutral-200 flex items-center justify-center mr-3 group-hover:bg-neutral-300 transition-colors">
+            <svg className="w-4 h-4 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
@@ -283,8 +270,8 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
             onClick={handleManageSubscription}
             className="w-full flex items-center px-4 py-3 text-sm font-medium text-left hover:bg-gray-50 transition-colors group"
           >
-            <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-colors">
-              <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-8 h-8 rounded-lg bg-success-100 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-colors">
+              <svg className="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
               </svg>
             </div>
@@ -306,7 +293,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
           className="w-full flex items-center px-4 py-3 text-sm font-medium text-left hover:bg-gray-50 transition-colors group"
         >
           <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center mr-3 group-hover:bg-purple-200 transition-colors">
-            <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
@@ -325,12 +312,12 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
         {isDemo && (
           <>
             <div className="border-t border-gray-100 my-2"></div>
-            <div className="px-4 py-3 bg-blue-50 mx-2 rounded-lg">
+            <div className="px-4 py-3 bg-neutral-100 mx-2 rounded-lg">
               <div className="text-center">
-                <div className="text-sm font-medium text-blue-800 mb-1">
+                <div className="text-sm font-medium text-neutral-800 mb-1">
                   🚀 Demo Mode
                 </div>
-                <p className="text-xs text-blue-600 mb-2">
+                <p className="text-xs text-gold-600 mb-2">
                   You're exploring DharmaMind! Sign up to save your conversations and unlock full features.
                 </p>
                 <div className="flex space-x-2">
@@ -339,7 +326,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
                       onClose();
                       router.push('/auth?mode=signup');
                     }}
-                    className="flex-1 px-2 py-1 bg-blue-600 text-white text-xs rounded-md hover:bg-blue-700 transition-colors"
+                    className="flex-1 px-2 py-1 bg-gold-600 text-white text-xs rounded-md hover:bg-gold-700 transition-colors"
                   >
                     Sign Up
                   </button>
@@ -348,7 +335,7 @@ const UserProfileMenu: React.FC<UserProfileMenuProps> = ({ onUpgrade, onClose, u
                       onClose();
                       router.push('/auth?mode=login');
                     }}
-                    className="flex-1 px-2 py-1 border border-blue-600 text-blue-600 text-xs rounded-md hover:bg-blue-50 transition-colors"
+                    className="flex-1 px-2 py-1 border border-gold-600 text-gold-600 text-xs rounded-md hover:bg-neutral-100 transition-colors"
                   >
                     Sign In
                   </button>
