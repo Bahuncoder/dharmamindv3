@@ -187,7 +187,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-tertiary hover:text-secondary text-2xl z-10"
+          className="absolute top-4 right-4 text-neutral-500 hover:text-gold-600 text-2xl z-10"
         >
           ×
         </button>
@@ -198,10 +198,10 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
         <div className="mb-4">
           <Logo size="sm" showText={false} />
         </div>
-        <h2 className="text-2xl font-bold text-primary mb-2">
+        <h2 className="text-2xl font-bold text-neutral-900 mb-2">
           {mode === 'login' ? 'Welcome Back' : 'Join DharmaMind'}
         </h2>
-        <p className="text-secondary">
+        <p className="text-neutral-600">
           {mode === 'login' 
             ? 'Continue your spiritual journey' 
             : 'Begin your path to enlightenment'
@@ -250,7 +250,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
           <div className="w-full border-t border-medium" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 modal-content text-tertiary">Or</span>
+          <span className="px-2 modal-content text-neutral-500">Or</span>
         </div>
       </div>
 
@@ -353,7 +353,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
 
       {/* Mode Toggle */}
       <div className="mt-6 text-center">
-        <p className="text-secondary text-sm">
+        <p className="text-neutral-600 text-sm">
           {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
           <button
             onClick={toggleMode}
@@ -368,7 +368,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
       <div className="mt-4 text-center">
         <button
           onClick={handleForgotPassword}
-          className="text-sm text-tertiary hover:text-secondary"
+          className="text-sm text-neutral-500 hover:text-gold-600"
         >
           Forgot password?
         </button>
@@ -377,7 +377,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
       {/* Demo Access */}
       {!hideDemo && (
         <div className="mt-8 pt-6 border-t border-medium">
-          <p className="text-center text-secondary mb-4 text-sm">Or try DharmaMind instantly:</p>
+          <p className="text-center text-neutral-600 mb-4 text-sm">Or try DharmaMind instantly:</p>
           <div className="space-y-2">
             <button
               onClick={() => handleDemoLogin('free')}

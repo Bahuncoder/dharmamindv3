@@ -97,7 +97,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
         <motion.header
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className={`bg-white/90 backdrop-blur-sm border-b border-brand-accent/50 sticky top-0 z-50 ${className}`}
+            className={`bg-neutral-100/90 backdrop-blur-sm border-b border-neutral-300/50 sticky top-0 z-50 ${className}`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
@@ -108,7 +108,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleBack}
-                                className="flex items-center justify-center w-10 h-10 rounded-lg text-secondary hover:text-primary hover:bg-section-light transition-all duration-200 group"
+                                className="flex items-center justify-center w-10 h-10 rounded-lg text-neutral-600 hover:text-gold-600 hover:bg-neutral-100 transition-all duration-200 group"
                                 title={canGoBack ? "Go back to previous page" : "Go to homepage"}
                             >
                                 <svg
@@ -133,7 +133,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                         {title && (
                             <>
                                 <div className="h-6 w-px bg-primary-background ml-2"></div>
-                                <h1 className="text-lg font-semibold text-primary hidden md:block ml-2">
+                                <h1 className="text-lg font-semibold text-neutral-900 hidden md:block ml-2">
                                     {title}
                                 </h1>
                             </>
@@ -144,19 +144,19 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                     <nav className="hidden md:flex items-center space-x-6">
                         <button
                             onClick={() => router.push('/features')}
-                            className="text-secondary hover:text-primary text-sm font-medium transition-colors"
+                            className="text-neutral-600 hover:text-gold-600 text-sm font-medium transition-colors"
                         >
                             Features
                         </button>
                         <button
                             onClick={() => router.push('/pricing')}
-                            className="text-secondary hover:text-primary text-sm font-medium transition-colors"
+                            className="text-neutral-600 hover:text-gold-600 text-sm font-medium transition-colors"
                         >
                             Pricing
                         </button>
                         <button
                             onClick={() => router.push('/about')}
-                            className="text-secondary hover:text-primary text-sm font-medium transition-colors"
+                            className="text-neutral-600 hover:text-gold-600 text-sm font-medium transition-colors"
                         >
                             About
                         </button>
@@ -175,7 +175,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                             // You can implement mobile menu here
                             console.log('Mobile menu clicked');
                         }}
-                        className="md:hidden p-2 rounded-lg text-secondary hover:text-primary hover:bg-section-light transition-colors"
+                        className="md:hidden p-2 rounded-lg text-neutral-600 hover:text-gold-600 hover:bg-neutral-100 transition-colors"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

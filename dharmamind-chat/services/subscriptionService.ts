@@ -3,9 +3,12 @@
  * 
  * Single source of truth for all subscription functionality
  * Consolidates: SubscriptionModal, SubscriptionManager, subscription-api.js, paymentAPI.ts
+ * 
+ * Uses shared config from Brand_Webpage for consistent pricing across platforms
  */
 
 import { authService } from './authService';
+import { siteConfig } from '../config/shared.config';
 
 // ===============================
 // UNIFIED TYPES & INTERFACES
@@ -188,7 +191,7 @@ class CentralizedSubscriptionService {
         headers: await this.getAuthHeaders(),
       });
 
-      const result = await this.handleResponse<{success: boolean, data: SubscriptionPlan[]}>(response);
+      const result = await this.handleResponse<{ success: boolean, data: SubscriptionPlan[] }>(response);
       this.subscriptionPlans = result.data;
       this.emit('plansLoaded', this.subscriptionPlans);
       return this.subscriptionPlans;
@@ -246,67 +249,66 @@ class CentralizedSubscriptionService {
   }
 
   private getDefaultPlans(): SubscriptionPlan[] {
-    return [
-      {
-        id: 'dharma_basic',
-        name: 'Basic',
-        description: 'Essential spiritual guidance',
-        tier: 'basic',
-        price: { monthly: 0, yearly: 0 },
-        currency: 'USD',
-        features: [
-          { feature_id: 'basic_chat', name: 'Basic Conversations', description: '50 messages per month', included: true, usage_limit: 50 },
-          { feature_id: 'basic_modules', name: 'Basic Modules', description: '5 wisdom modules', included: true, usage_limit: 5 },
-        ],
-        limits: {
-          messages_per_month: 50,
-          wisdom_modules: 5,
-          api_requests_per_month: 0,
+    // Map shared config plans to subscription service format
+    // Single source of truth: Brand_Webpage/config/site.config.ts
+    const configPlans = siteConfig.pricing.plans;
+
+    return configPlans.map((plan, index) => {
+      const tierMap: Record<string, 'basic' | 'pro' | 'max' | 'enterprise'> = {
+        'free': 'basic',
+        'pro': 'pro',
+        'enterprise': 'max'
+      };
+
+      const tier = tierMap[plan.id] || 'basic';
+
+      // Build features from the config plan
+      const features: PlanFeature[] = plan.features.map((feature, idx) => ({
+        feature_id: `${plan.id}_feature_${idx}`,
+        name: feature,
+        description: feature,
+        included: true,
+        usage_limit: undefined
+      }));
+
+      // Add limit-based features
+      if (plan.limits.conversationsPerMonth !== -1) {
+        features.unshift({
+          feature_id: 'conversations',
+          name: 'Monthly Conversations',
+          description: `${plan.limits.conversationsPerMonth} conversations per month`,
+          included: true,
+          usage_limit: plan.limits.conversationsPerMonth
+        });
+      } else {
+        features.unshift({
+          feature_id: 'unlimited_conversations',
+          name: 'Unlimited Conversations',
+          description: 'Unlimited spiritual guidance',
+          included: true
+        });
+      }
+
+      return {
+        id: `dharma_${plan.id}`,
+        name: plan.name,
+        description: plan.description,
+        tier,
+        price: {
+          monthly: plan.price.monthly === -1 ? 99.99 : plan.price.monthly,
+          yearly: plan.price.annual === -1 ? 999.99 : plan.price.annual * 12
         },
-      },
-      {
-        id: 'dharma_pro',
-        name: 'Pro',
-        description: 'Advanced spiritual guidance',
-        tier: 'pro',
-        price: { monthly: 29.99, yearly: 299.99 },
-        currency: 'USD',
-        popular: true,
-        trial_days: 14,
-        features: [
-          { feature_id: 'unlimited_chat', name: 'Unlimited Conversations', description: 'Unlimited spiritual guidance', included: true },
-          { feature_id: 'all_modules', name: 'All Wisdom Modules', description: 'Access to all 32 modules', included: true },
-          { feature_id: 'priority_support', name: 'Priority Support', description: '24/7 priority assistance', included: true },
-        ],
+        currency: siteConfig.pricing.currency,
+        popular: plan.highlighted,
+        trial_days: plan.id === 'pro' ? siteConfig.pricing.guarantees.freeTrial.days : undefined,
+        features,
         limits: {
-          messages_per_month: -1,
-          wisdom_modules: -1,
-          api_requests_per_month: 1000,
+          messages_per_month: plan.limits.conversationsPerMonth,
+          wisdom_modules: plan.id === 'free' ? 5 : -1,
+          api_requests_per_month: plan.limits.apiAccess ? 10000 : 0,
         },
-      },
-      {
-        id: 'dharma_max',
-        name: 'Max',
-        description: 'Ultimate spiritual experience',
-        tier: 'max',
-        price: { monthly: 49.99, yearly: 499.99 },
-        currency: 'USD',
-        trial_days: 14,
-        features: [
-          { feature_id: 'unlimited_chat', name: 'Unlimited Conversations', description: 'Unlimited spiritual guidance', included: true },
-          { feature_id: 'all_modules', name: 'All Wisdom Modules', description: 'Access to all 32+ modules', included: true },
-          { feature_id: 'priority_support', name: 'Priority Support', description: '24/7 priority assistance', included: true },
-          { feature_id: 'api_access', name: 'API Access', description: 'Full API integration', included: true },
-          { feature_id: 'custom_modules', name: 'Custom Modules', description: 'Personalized wisdom modules', included: true },
-          { feature_id: 'advanced_analytics', name: 'Advanced Analytics', description: 'Detailed progress tracking', included: true },
-        ],
-        limits: {
-          messages_per_month: -1,
-          wisdom_modules: -1,
-          api_requests_per_month: 10000,
-        },
-      },
-    ];
+      };
+    });
   }
 
   // ===============================
@@ -327,7 +329,7 @@ class CentralizedSubscriptionService {
       });
 
       const result = await this.handleResponse<{ success: boolean, data: Subscription[] }>(response);
-      const activeSubscription = result.data.find(sub => 
+      const activeSubscription = result.data.find(sub =>
         sub.status === 'active' || sub.status === 'trialing'
       );
 
@@ -478,7 +480,7 @@ class CentralizedSubscriptionService {
       style: 'currency',
       currency: currency
     }).format(amount);
-    
+
     return interval === 'year' ? `${formatted}/year` : `${formatted}/month`;
   }
 

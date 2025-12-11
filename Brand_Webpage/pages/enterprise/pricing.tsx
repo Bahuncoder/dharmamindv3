@@ -29,7 +29,7 @@ const EnterprisePricingPage: React.FC = () => {
                 "Limited to basic dharmic principles",
                 "Standard response times"
             ],
-            color: "border-brand-accent bg-brand-primary",
+            color: "border-gold-400 bg-neutral-100",
             buttonText: "Start Free Trial"
         },
         {
@@ -49,7 +49,7 @@ const EnterprisePricingPage: React.FC = () => {
                 "Custom branding options"
             ],
             limitations: [],
-            color: "border-brand-accent bg-accent-50",
+            color: "border-gold-400 bg-accent-50",
             buttonText: "Start Professional",
             popular: true
         },
@@ -72,7 +72,7 @@ const EnterprisePricingPage: React.FC = () => {
                 "Multi-region support"
             ],
             limitations: [],
-            color: "border-brand-accent bg-brand-primary",
+            color: "border-gold-400 bg-neutral-100",
             buttonText: "Contact Sales",
             isCustom: true
         }
@@ -169,7 +169,7 @@ const EnterprisePricingPage: React.FC = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="min-h-screen bg-section-light">
+            <div className="min-h-screen bg-neutral-100">
                 {/* Enterprise Brand Header */}
                 <BrandHeader
                     isEnterprise={true}
@@ -181,7 +181,7 @@ const EnterprisePricingPage: React.FC = () => {
                 />
 
                 {/* Hero Section */}
-                <div className="bg-brand-primary border-b-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-b-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -189,28 +189,28 @@ const EnterprisePricingPage: React.FC = () => {
                             transition={{ duration: 0.8 }}
                             className="text-center"
                         >
-                            <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-                                Enterprise <span className="text-brand-accent border-b-4 border-brand-accent">Pricing</span>
+                            <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
+                                Enterprise <span className="text-gold-600 border-b-4 border-gold-400">Pricing</span>
                             </h1>
-                            <p className="text-xl text-secondary max-w-3xl mx-auto leading-relaxed mb-8">
+                            <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed mb-8">
                                 Transparent, scalable pricing that grows with your dharmic transformation journey. All plans include our core wisdom engine.
                             </p>
 
                             {/* Billing Toggle */}
                             <div className="flex items-center justify-center space-x-4 mb-8">
-                                <span className={`text-sm ${billingCycle === 'monthly' ? 'text-brand-accent font-semibold' : 'text-secondary'}`}>
+                                <span className={`text-sm ${billingCycle === 'monthly' ? 'text-gold-600 font-semibold' : 'text-neutral-600'}`}>
                                     Monthly
                                 </span>
                                 <button
                                     onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
-                                    className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-background border-2 border-brand-accent transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+                                    className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-background border-2 border-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
                                 >
                                     <span
                                         className={`inline-block h-4 w-4 transform rounded-full bg-accent transition-transform ${billingCycle === 'annual' ? 'translate-x-6' : 'translate-x-1'
                                             }`}
                                     />
                                 </button>
-                                <span className={`text-sm ${billingCycle === 'annual' ? 'text-brand-accent font-semibold' : 'text-secondary'}`}>
+                                <span className={`text-sm ${billingCycle === 'annual' ? 'text-gold-600 font-semibold' : 'text-neutral-600'}`}>
                                     Annual
                                     <span className="ml-1 text-xs bg-accent text-white px-2 py-1 rounded-full">Save 15%</span>
                                 </span>
@@ -238,23 +238,23 @@ const EnterprisePricingPage: React.FC = () => {
                                 )}
 
                                 <div className="mb-6">
-                                    <h3 className="text-2xl font-bold text-primary mb-2">{tier.name}</h3>
-                                    <p className="text-secondary text-sm mb-4">{tier.description}</p>
+                                    <h3 className="text-2xl font-bold text-neutral-900 mb-2">{tier.name}</h3>
+                                    <p className="text-neutral-600 text-sm mb-4">{tier.description}</p>
 
                                     <div className="mb-4">
                                         {tier.isCustom ? (
-                                            <div className="text-3xl font-bold text-brand-accent">Custom</div>
+                                            <div className="text-3xl font-bold text-gold-600">Custom</div>
                                         ) : (
                                             <div>
-                                                <div className="text-3xl font-bold text-brand-accent">
+                                                <div className="text-3xl font-bold text-gold-600">
                                                     ${billingCycle === 'monthly' ? tier.monthlyPrice : Math.round(tier.annualPrice! / 12)}
-                                                    <span className="text-lg text-secondary">/month</span>
+                                                    <span className="text-lg text-neutral-600">/month</span>
                                                 </div>
                                                 {billingCycle === 'annual' && (
-                                                    <div className="text-sm text-secondary">
+                                                    <div className="text-sm text-neutral-600">
                                                         ${tier.annualPrice}/year
                                                         {tier.monthlyPrice && tier.annualPrice && (
-                                                            <span className="ml-2 text-brand-accent font-medium">
+                                                            <span className="ml-2 text-gold-600 font-medium">
                                                                 (Save ${calculateAnnualSavings(tier.monthlyPrice, tier.annualPrice).savings})
                                                             </span>
                                                         )}
@@ -264,20 +264,20 @@ const EnterprisePricingPage: React.FC = () => {
                                         )}
                                     </div>
 
-                                    <div className="text-sm text-secondary mb-6">{tier.userLimit}</div>
+                                    <div className="text-sm text-neutral-600 mb-6">{tier.userLimit}</div>
                                 </div>
 
                                 <ul className="space-y-3 mb-8">
                                     {tier.features.map((feature, idx) => (
                                         <li key={idx} className="flex items-center space-x-2">
-                                            <span className="text-brand-accent text-sm">✓</span>
-                                            <span className="text-sm text-primary">{feature}</span>
+                                            <span className="text-gold-600 text-sm">✓</span>
+                                            <span className="text-sm text-neutral-900">{feature}</span>
                                         </li>
                                     ))}
                                 </ul>
 
                                 <Button
-                                    className={`w-full ${tier.popular ? 'bg-accent hover:bg-accent text-white' : 'bg-brand-primary hover:bg-primary-background text-primary'} border-2 border-brand-accent py-3`}
+                                    className={`w-full ${tier.popular ? 'bg-accent hover:bg-accent text-white' : 'bg-neutral-100 hover:bg-primary-background text-neutral-900'} border-2 border-gold-400 py-3`}
                                     onClick={() => router.push(tier.isCustom ? '/contact' : '/signup')}
                                 >
                                     {tier.buttonText}
@@ -288,7 +288,7 @@ const EnterprisePricingPage: React.FC = () => {
                 </div>
 
                 {/* Add-ons */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-primary-background border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -296,10 +296,10 @@ const EnterprisePricingPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Add-on Services
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Enhance your DharmaMind experience with specialized services
                             </p>
                         </motion.div>
@@ -312,28 +312,28 @@ const EnterprisePricingPage: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+                                    className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="mb-6">
-                                        <h3 className="text-xl font-semibold text-primary mb-2">{addon.name}</h3>
-                                        <p className="text-secondary text-sm mb-4">{addon.description}</p>
-                                        <div className="text-2xl font-bold text-brand-accent">
+                                        <h3 className="text-xl font-semibold text-neutral-900 mb-2">{addon.name}</h3>
+                                        <p className="text-neutral-600 text-sm mb-4">{addon.description}</p>
+                                        <div className="text-2xl font-bold text-gold-600">
                                             ${addon.monthlyPrice}
-                                            <span className="text-lg text-secondary">/month</span>
+                                            <span className="text-lg text-neutral-600">/month</span>
                                         </div>
                                     </div>
 
                                     <ul className="space-y-2 mb-6">
                                         {addon.features.map((feature, idx) => (
                                             <li key={idx} className="flex items-center space-x-2">
-                                                <span className="text-brand-accent text-sm">✓</span>
-                                                <span className="text-sm text-primary">{feature}</span>
+                                                <span className="text-gold-600 text-sm">✓</span>
+                                                <span className="text-sm text-neutral-900">{feature}</span>
                                             </li>
                                         ))}
                                     </ul>
 
                                     <Button
-                                        className="w-full bg-accent hover:bg-accent text-white border-2 border-brand-accent py-2"
+                                        className="w-full bg-accent hover:bg-accent text-white border-2 border-gold-400 py-2"
                                         onClick={() => router.push('/contact')}
                                     >
                                         Add to Plan
@@ -345,7 +345,7 @@ const EnterprisePricingPage: React.FC = () => {
                 </div>
 
                 {/* Feature Comparison Table */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -353,29 +353,29 @@ const EnterprisePricingPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Feature Comparison
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Detailed comparison of features across all plans
                             </p>
                         </motion.div>
 
                         <div className="overflow-x-auto">
-                            <table className="w-full bg-primary-background border-2 border-brand-accent rounded-lg">
+                            <table className="w-full bg-primary-background border-2 border-gold-400 rounded-lg">
                                 <thead>
-                                    <tr className="border-b-2 border-brand-accent">
-                                        <th className="p-4 text-left text-primary font-semibold">Feature</th>
-                                        <th className="p-4 text-center text-primary font-semibold">Starter</th>
-                                        <th className="p-4 text-center text-primary font-semibold">Professional</th>
-                                        <th className="p-4 text-center text-primary font-semibold">Enterprise</th>
+                                    <tr className="border-b-2 border-gold-400">
+                                        <th className="p-4 text-left text-neutral-900 font-semibold">Feature</th>
+                                        <th className="p-4 text-center text-neutral-900 font-semibold">Starter</th>
+                                        <th className="p-4 text-center text-neutral-900 font-semibold">Professional</th>
+                                        <th className="p-4 text-center text-neutral-900 font-semibold">Enterprise</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {comparisonFeatures.map((category, categoryIndex) => (
                                         <React.Fragment key={categoryIndex}>
                                             <tr>
-                                                <td className="p-4 font-bold text-primary bg-brand-primary border-b border-brand-accent/30" colSpan={4}>
+                                                <td className="p-4 font-bold text-neutral-900 bg-neutral-100 border-b border-gold-400/30" colSpan={4}>
                                                     {category.category}
                                                 </td>
                                             </tr>
@@ -386,12 +386,12 @@ const EnterprisePricingPage: React.FC = () => {
                                                     whileInView={{ opacity: 1, x: 0 }}
                                                     viewport={{ once: true }}
                                                     transition={{ duration: 0.5, delay: (categoryIndex * category.features.length + featureIndex) * 0.05 }}
-                                                    className="border-b border-brand-accent/30"
+                                                    className="border-b border-gold-400/30"
                                                 >
-                                                    <td className="p-4 text-primary">{feature.name}</td>
-                                                    <td className="p-4 text-center text-secondary">{feature.starter}</td>
-                                                    <td className="p-4 text-center text-secondary">{feature.professional}</td>
-                                                    <td className="p-4 text-center text-brand-accent font-semibold">{feature.enterprise}</td>
+                                                    <td className="p-4 text-neutral-900">{feature.name}</td>
+                                                    <td className="p-4 text-center text-neutral-600">{feature.starter}</td>
+                                                    <td className="p-4 text-center text-neutral-600">{feature.professional}</td>
+                                                    <td className="p-4 text-center text-gold-600 font-semibold">{feature.enterprise}</td>
                                                 </motion.tr>
                                             ))}
                                         </React.Fragment>
@@ -403,7 +403,7 @@ const EnterprisePricingPage: React.FC = () => {
                 </div>
 
                 {/* FAQ Section */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-primary-background border-t-2 border-gold-400 py-16">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -411,7 +411,7 @@ const EnterprisePricingPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Frequently Asked Questions
                             </h2>
                         </motion.div>
@@ -441,10 +441,10 @@ const EnterprisePricingPage: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6"
+                                    className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6"
                                 >
-                                    <h3 className="text-lg font-semibold text-primary mb-3">{faq.question}</h3>
-                                    <p className="text-secondary">{faq.answer}</p>
+                                    <h3 className="text-lg font-semibold text-neutral-900 mb-3">{faq.question}</h3>
+                                    <p className="text-neutral-600">{faq.answer}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -452,7 +452,7 @@ const EnterprisePricingPage: React.FC = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -460,21 +460,21 @@ const EnterprisePricingPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-                            <h2 className="text-3xl font-bold text-primary">
+                            <h2 className="text-3xl font-bold text-neutral-900">
                                 Ready to Transform Your Organization?
                             </h2>
-                            <p className="text-lg text-secondary max-w-2xl mx-auto">
+                            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
                                 Start your 14-day free trial today or speak with our sales team about custom enterprise solutions.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Button
-                                    className="bg-accent hover:bg-accent text-white border-2 border-brand-accent px-8 py-3"
+                                    className="bg-accent hover:bg-accent text-white border-2 border-gold-400 px-8 py-3"
                                     onClick={() => router.push('/signup')}
                                 >
                                     Start Free Trial
                                 </Button>
                                 <Button
-                                    className="bg-brand-primary hover:bg-primary-background text-primary border-2 border-brand-accent px-8 py-3"
+                                    className="bg-neutral-100 hover:bg-primary-background text-neutral-900 border-2 border-gold-400 px-8 py-3"
                                     onClick={() => router.push('/contact')}
                                 >
                                     Contact Sales

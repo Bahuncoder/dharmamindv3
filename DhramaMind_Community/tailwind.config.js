@@ -1,48 +1,64 @@
-/** 
- * 🕉️ DharmaMind Community (dharmamind.org)
- * Tailwind CSS Configuration
- * 
- * Purpose: Digital Sangha - Connection & Engagement
- * Accent: Warm Gold (#f59e0b)
- * 
- * @type {import('tailwindcss').Config} 
+/**
+ * DharmaMind Community - Tailwind Config
+ * Minimalist Design: Grayscale + Gold Accent
  */
 
-const dmPreset = require('../shared/tailwind.preset.js');
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  presets: [dmPreset],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
-      // Community specific overrides
       colors: {
-        // Product-specific accent (Warm Gold for community warmth)
-        'product-accent': {
-          DEFAULT: '#f59e0b',
-          light: '#fef3c7',
-          dark: '#b45309',
+        // Brand colors - Minimalist Grayscale + Gold
+        // Dark gray ONLY for text, light grays for UI, gold for accents
+        brand: {
+          primary: '#1c1917',    // Near Black - TEXT ONLY
+          secondary: '#d4a854',  // Warm Gold - buttons, accents, CTAs
+          accent: '#d4a854',     // Warm Gold - highlights
+          light: '#78716c',      // Medium Gray - secondary text
+          muted: '#a8a29e',      // Light Gray - placeholder text
+        },
+        // Text colors (dark grays)
+        text: {
+          primary: '#1c1917',    // Main text
+          secondary: '#57534e',  // Secondary text
+          muted: '#78716c',      // Muted/placeholder
+          light: '#a8a29e',      // Very light text
+        },
+        // UI colors (light grays for backgrounds, borders)
+        ui: {
+          bg: '#fafaf9',         // Page background
+          surface: '#f5f5f4',    // Card/surface background
+          border: '#e7e5e4',     // Borders
+          hover: '#d6d3d1',      // Hover states
+        },
+        // Gold accent (buttons, links, highlights)
+        gold: {
+          DEFAULT: '#d4a854',
+          light: '#f4e4bd',
+          dark: '#b8860b',
+        },
+        neutral: {
+          50: '#fafaf9',
+          100: '#f5f5f4',
+          200: '#e7e5e4',
+          300: '#d6d3d1',
+          400: '#a8a29e',
+          500: '#78716c',
+          600: '#57534e',
+          700: '#44403c',
+          800: '#292524',
+          900: '#1c1917',
+          950: '#0c0a09',
         },
       },
-      backgroundImage: {
-        // Community specific gradients
-        'hero-gradient': 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(245, 158, 11, 0.1) 50%, rgba(16, 185, 129, 0.05) 100%)',
-        'community-gradient': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-        'connect-gradient': 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)',
-      },
-      boxShadow: {
-        'community': '0 25px 50px -12px rgba(245, 158, 11, 0.15), 0 10px 25px -5px rgba(16, 185, 129, 0.1)',
-        'card-warm': '0 20px 40px rgba(245, 158, 11, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05)',
+      fontFamily: {
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 };

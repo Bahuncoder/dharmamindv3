@@ -51,7 +51,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
             <motion.header
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className={`bg-white/95 backdrop-blur-sm border-b border-brand-accent/50 sticky top-0 z-50 ${className}`}
+                className={`bg-neutral-100/95 backdrop-blur-sm border-b border-neutral-300/50 sticky top-0 z-50 ${className}`}
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
@@ -63,7 +63,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                                 className="cursor-pointer hover:opacity-80 transition-opacity"
                             />
                             {isEnterprise && (
-                                <div className="ml-4 px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-semibold rounded-full">
+                                <div className="ml-4 px-3 py-1 bg-gradient-to-r from-gold-600 to-gold-700 text-white text-xs font-semibold rounded-full">
                                     ENTERPRISE
                                 </div>
                             )}
@@ -77,8 +77,8 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                                     whileHover={{ y: -1 }}
                                     onClick={() => handleNavigation(item.href)}
                                     className={`text-sm font-medium transition-colors px-3 py-2 rounded-lg ${router.pathname === item.href
-                                            ? 'text-primary bg-primary/10'
-                                            : 'text-primary hover:text-primary hover:bg-section-light'
+                                            ? 'text-neutral-900 bg-primary/10'
+                                            : 'text-neutral-900 hover:text-gold-600 hover:bg-neutral-100'
                                         }`}
                                 >
                                     {item.label}
@@ -109,7 +109,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                             {/* Mobile Menu Button */}
                             <button
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="lg:hidden p-2 rounded-lg text-secondary hover:bg-section-light"
+                                className="lg:hidden p-2 rounded-lg text-neutral-600 hover:bg-neutral-100"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     {isMobileMenuOpen ? (
@@ -130,7 +130,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="lg:hidden border-t border-brand-accent/50 bg-white"
+                            className="lg:hidden border-t border-neutral-300/50 bg-neutral-100"
                         >
                             <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
                                 {navItems.map((item) => (
@@ -138,8 +138,8 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                                         key={item.href}
                                         onClick={() => handleNavigation(item.href)}
                                         className={`block w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${router.pathname === item.href
-                                                ? 'text-primary bg-primary/10'
-                                                : 'text-primary hover:text-primary hover:bg-section-light'
+                                                ? 'text-neutral-900 bg-primary/10'
+                                                : 'text-neutral-900 hover:text-gold-600 hover:bg-neutral-100'
                                             }`}
                                     >
                                         {item.label}
@@ -148,7 +148,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                                 {!isEnterprise && (
                                     <button
                                         onClick={() => handleNavigation('/enterprise')}
-                                        className="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-primary hover:text-primary hover:bg-section-light"
+                                        className="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-neutral-900 hover:text-gold-600 hover:bg-neutral-100"
                                     >
                                         Enterprise
                                     </button>
@@ -164,7 +164,7 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="bg-section-light/80 border-b border-brand-accent/50"
+                    className="bg-neutral-100/80 border-b border-neutral-300/50"
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
                         <nav className="flex items-center space-x-2 text-sm">
@@ -174,15 +174,15 @@ const BrandHeader: React.FC<BrandHeaderProps> = ({
                                         whileHover={{ scale: 1.02 }}
                                         onClick={() => handleNavigation(crumb.href)}
                                         className={`font-medium transition-colors ${index === breadcrumbs.length - 1
-                                                ? 'text-primary cursor-default'
-                                                : 'text-primary hover:text-primary-dark cursor-pointer'
+                                                ? 'text-neutral-900 cursor-default'
+                                                : 'text-neutral-900 hover:text-gold-600-dark cursor-pointer'
                                             }`}
                                     >
                                         {crumb.label}
                                     </motion.button>
                                     {index < breadcrumbs.length - 1 && (
                                         <svg
-                                            className="w-4 h-4 text-secondary"
+                                            className="w-4 h-4 text-neutral-600"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"

@@ -62,9 +62,9 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   const colorClasses = {
     primary: 'border-amber-600 border-t-transparent',
-    secondary: 'border-emerald-600 border-t-transparent', 
+    secondary: 'border-gold-600 border-t-transparent', 
     white: 'border-white border-t-transparent',
-    gray: 'border-brand-accent border-t-gray-600'
+    gray: 'border-neutral-300 border-t-gray-600'
   };
 
   return (
@@ -123,14 +123,14 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
       {children}
       
       {isLoading && (
-        <div className={`absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 z-50 ${
+        <div className={`absolute inset-0 flex flex-col items-center justify-center bg-neutral-100 bg-opacity-90 z-50 ${
           blur ? 'backdrop-blur-sm' : ''
         }`}>
-          <div className="flex flex-col items-center space-y-4 p-6 bg-white rounded-lg shadow-lg border border-brand-accent">
+          <div className="flex flex-col items-center space-y-4 p-6 bg-neutral-100 rounded-lg shadow-lg border border-neutral-300">
             <LoadingSpinner size="lg" color="primary" />
             
             {message && (
-              <p className="text-sm font-medium text-primary text-center">
+              <p className="text-sm font-medium text-neutral-900 text-center">
                 {message}
               </p>
             )}
@@ -139,11 +139,11 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
               <div className="w-48">
                 <div className="w-full bg-primary-background rounded-full h-2">
                   <div 
-                    className="bg-gradient-to-r from-amber-600 to-emerald-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-gradient-to-r from-gold-600 to-gold-700 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
                   />
                 </div>
-                <p className="text-xs text-secondary text-center mt-1">
+                <p className="text-xs text-neutral-600 text-center mt-1">
                   {Math.round(progress)}% complete
                 </p>
               </div>
@@ -179,12 +179,12 @@ export const LoadingPage: React.FC<LoadingPageProps> = ({
           </div>
         )}
         
-        <h1 className="text-2xl font-bold mb-2 text-stone-800">DharmaMind</h1>
+        <h1 className="text-2xl font-bold mb-2 text-neutral-800">DharmaMind</h1>
         
-        <p className="text-stone-600 mb-6">{message}</p>
+        <p className="text-neutral-600 mb-6">{message}</p>
         
         {submessage && (
-          <p className="text-sm text-stone-500 mb-6">{submessage}</p>
+          <p className="text-sm text-neutral-500 mb-6">{submessage}</p>
         )}
         
         <div className="flex justify-center mb-6">
@@ -193,13 +193,13 @@ export const LoadingPage: React.FC<LoadingPageProps> = ({
         
         {progress !== undefined && (
           <div className="w-full max-w-xs mx-auto">
-            <div className="w-full bg-stone-200 rounded-full h-2">
+            <div className="w-full bg-neutral-200 rounded-full h-2">
               <div 
-                className="bg-gradient-to-r from-amber-600 to-emerald-600 h-2 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-gold-600 to-gold-700 h-2 rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
               />
             </div>
-            <p className="text-xs text-stone-500 text-center mt-2">
+            <p className="text-xs text-neutral-500 text-center mt-2">
               {Math.round(progress)}% complete
             </p>
           </div>
@@ -221,10 +221,10 @@ export const LoadingCard: React.FC<{
   className = ''
 }) => {
   return (
-    <div className={`bg-white rounded-lg shadow-sm border border-brand-accent p-8 ${className}`}>
+    <div className={`bg-neutral-100 rounded-lg shadow-sm border border-neutral-300 p-8 ${className}`}>
       <div className="flex flex-col items-center space-y-4">
         <LoadingSpinner size="lg" color="primary" />
-        <p className="text-sm font-medium text-secondary">{message}</p>
+        <p className="text-sm font-medium text-neutral-600">{message}</p>
       </div>
     </div>
   );
@@ -285,7 +285,7 @@ export const InlineLoading: React.FC<{
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       <LoadingSpinner size={size} color="primary" />
-      <span className={`${size === 'sm' ? 'text-sm' : 'text-base'} text-secondary`}>
+      <span className={`${size === 'sm' ? 'text-sm' : 'text-base'} text-neutral-600`}>
         {message}
       </span>
     </div>

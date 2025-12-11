@@ -41,7 +41,7 @@ const Footer: React.FC<FooterProps> = ({
   // Simple footer for minimal pages
   if (variant === 'simple') {
     return (
-      <footer className={`border-t border-stone-200/50 bg-white/80 backdrop-blur-sm ${className}`}>
+      <footer className={`border-t border-neutral-300 bg-neutral-200 ${className}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <Logo
@@ -51,25 +51,25 @@ const Footer: React.FC<FooterProps> = ({
             <nav className="flex justify-center items-center space-x-8 mb-6">
               <button
                 onClick={() => handleAnchorLink('#features')}
-                className="text-sm text-stone-600 hover:text-stone-800 transition-colors inline-block"
+                className="text-sm text-neutral-600 hover:text-gold-600 transition-colors inline-block"
               >
                 Features
               </button>
               <button
                 onClick={() => handleAnchorLink('#pricing')}
-                className="text-sm text-stone-600 hover:text-stone-800 transition-colors inline-block"
+                className="text-sm text-neutral-600 hover:text-gold-600 transition-colors inline-block"
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigation('/enterprise')}
-                className="text-sm text-stone-600 hover:text-stone-800 transition-colors inline-block"
+                className="text-sm text-neutral-600 hover:text-gold-600 transition-colors inline-block"
               >
                 Enterprise
               </button>
               <button
                 onClick={() => handleNavigation('/help')}
-                className="text-sm text-stone-600 hover:text-stone-800 transition-colors inline-block"
+                className="text-sm text-neutral-600 hover:text-gold-600 transition-colors inline-block"
               >
                 Help
               </button>
@@ -77,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({
                 variant="link"
                 prefillCategory="general"
                 showIcon={false}
-                className="!text-sm !text-stone-600 hover:!text-stone-800 !transition-colors !inline-block !no-underline"
+                className="!text-sm !text-neutral-600 hover:!text-gold-600 !transition-colors !inline-block !no-underline"
               >
                 Contact
               </ContactButton>
@@ -89,7 +89,7 @@ const Footer: React.FC<FooterProps> = ({
                 href="https://facebook.com/dharmamindai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-stone-400 hover:text-stone-600 transition-colors"
+                className="text-neutral-500 hover:text-gold-600 transition-colors"
                 aria-label="Follow us on Facebook"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@ const Footer: React.FC<FooterProps> = ({
                 href="https://twitter.com/dharmamindai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-stone-400 hover:text-stone-600 transition-colors"
+                className="text-neutral-500 hover:text-gold-600 transition-colors"
                 aria-label="Follow us on Twitter/X"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -111,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({
                 href="https://linkedin.com/company/dharmamindai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-stone-400 hover:text-stone-600 transition-colors"
+                className="text-neutral-500 hover:text-gold-600 transition-colors"
                 aria-label="Follow us on LinkedIn"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -120,7 +120,7 @@ const Footer: React.FC<FooterProps> = ({
               </a>
             </div>
 
-            <p className="text-sm text-stone-600 mb-4">
+            <p className="text-sm text-neutral-600 mb-4">
               AI with soul powered by dharma • Supreme consciousness through integrated wisdom
             </p>
           </div>
@@ -131,7 +131,7 @@ const Footer: React.FC<FooterProps> = ({
 
   // Professional footer (default) - comprehensive and polished
   return (
-    <footer className={`bg-white border-t border-gray-100 ${className}`}>
+    <footer className={`bg-neutral-200 border-t border-neutral-300 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {/* Main Footer Content */}
@@ -145,14 +145,14 @@ const Footer: React.FC<FooterProps> = ({
               onClick={() => handleNavigation('/')}
               className="mb-6 cursor-pointer"
             />
-            <p className="text-secondary mb-6 max-w-sm leading-relaxed">
+            <p className="text-neutral-600 mb-6 max-w-sm leading-relaxed">
               Revolutionary AI spiritual guidance platform that combines cutting-edge technology with ancient wisdom for modern professionals and leaders.
             </p>
 
             {/* Always visible Home link */}
             <button
               onClick={() => handleNavigation('/')}
-              className="inline-flex items-center px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors mb-4"
+              className="inline-flex items-center px-4 py-2 bg-gold-100 hover:bg-gold-200 text-neutral-800 rounded-lg transition-colors mb-4"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -162,13 +162,13 @@ const Footer: React.FC<FooterProps> = ({
 
             {/* Social Media */}
             <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium text-primary">Follow us:</span>
+              <span className="text-sm font-medium text-neutral-800">Follow us:</span>
               <div className="flex space-x-3">
                 <a
                   href="https://facebook.com/dharmamindai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 bg-section-light rounded-full flex items-center justify-center text-secondary hover:bg-brand-primary hover:text-primary transition-all duration-200"
+                  className="w-8 h-8 bg-neutral-300 rounded-full flex items-center justify-center text-neutral-600 hover:bg-gold-200 hover:text-gold-700 transition-all duration-200"
                   aria-label="Follow us on Facebook"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -179,7 +179,7 @@ const Footer: React.FC<FooterProps> = ({
                   href="https://twitter.com/dharmamindai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 bg-section-light rounded-full flex items-center justify-center text-secondary hover:bg-brand-primary hover:text-primary transition-all duration-200"
+                  className="w-8 h-8 bg-neutral-300 rounded-full flex items-center justify-center text-neutral-600 hover:bg-gold-200 hover:text-gold-700 transition-all duration-200"
                   aria-label="Follow us on Twitter/X"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -190,7 +190,7 @@ const Footer: React.FC<FooterProps> = ({
                   href="https://linkedin.com/company/dharmamindai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 bg-section-light rounded-full flex items-center justify-center text-secondary hover:bg-brand-primary hover:text-primary transition-all duration-200"
+                  className="w-8 h-8 bg-neutral-300 rounded-full flex items-center justify-center text-neutral-600 hover:bg-gold-200 hover:text-gold-700 transition-all duration-200"
                   aria-label="Follow us on LinkedIn"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ const Footer: React.FC<FooterProps> = ({
                   href="https://github.com/dharmamind"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 bg-section-light rounded-full flex items-center justify-center text-secondary hover:bg-brand-primary hover:text-primary transition-all duration-200"
+                  className="w-8 h-8 bg-neutral-300 rounded-full flex items-center justify-center text-neutral-600 hover:bg-gold-200 hover:text-gold-700 transition-all duration-200"
                   aria-label="Follow us on GitHub"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -214,12 +214,12 @@ const Footer: React.FC<FooterProps> = ({
 
           {/* Product Section */}
           <div>
-            <h3 className="text-sm font-semibold text-primary mb-4 uppercase tracking-wider">Product</h3>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Product</h3>
             <ul className="space-y-3">
               <li>
                 <button
                   onClick={() => handleAnchorLink('#features')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Features
                 </button>
@@ -227,7 +227,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleAnchorLink('#pricing')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Pricing
                 </button>
@@ -235,7 +235,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/enterprise')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Enterprise
                 </button>
@@ -243,7 +243,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/api-docs')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   API Documentation
                 </button>
@@ -253,12 +253,12 @@ const Footer: React.FC<FooterProps> = ({
 
           {/* Support Section */}
           <div>
-            <h3 className="text-sm font-semibold text-primary mb-4 uppercase tracking-wider">Support</h3>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Support</h3>
             <ul className="space-y-3">
               <li>
                 <button
                   onClick={() => handleNavigation('/help')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Help Center
                 </button>
@@ -268,7 +268,7 @@ const Footer: React.FC<FooterProps> = ({
                   variant="link"
                   prefillCategory="support"
                   showIcon={false}
-                  className="!text-secondary hover:!text-primary !text-left !block !text-sm !transition-colors !no-underline !justify-start !w-full !font-normal !p-0 !m-0"
+                  className="!text-neutral-600 hover:!text-gold-600 !text-left !block !text-sm !transition-colors !no-underline !justify-start !w-full !font-normal !p-0 !m-0"
                 >
                   Contact Support
                 </ContactButton>
@@ -276,7 +276,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/docs')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Documentation
                 </button>
@@ -284,7 +284,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/status')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   System Status
                 </button>
@@ -294,12 +294,12 @@ const Footer: React.FC<FooterProps> = ({
 
           {/* Company Section */}
           <div>
-            <h3 className="text-sm font-semibold text-primary mb-4 uppercase tracking-wider">Company</h3>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Company</h3>
             <ul className="space-y-3">
               <li>
                 <button
                   onClick={() => handleNavigation('/about')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   About Us
                 </button>
@@ -309,7 +309,7 @@ const Footer: React.FC<FooterProps> = ({
                   href="https://dharmamind.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Blog
                 </a>
@@ -317,7 +317,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/careers')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Careers
                 </button>
@@ -325,7 +325,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/privacy')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Privacy Policy
                 </button>
@@ -333,7 +333,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => handleNavigation('/terms')}
-                  className="text-secondary hover:text-primary text-left block text-sm transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 text-left block text-sm transition-colors"
                 >
                   Terms of Service
                 </button>
@@ -343,32 +343,32 @@ const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-brand-accent pt-8">
+        <div className="border-t border-neutral-300 pt-8">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
 
             {/* Legal Links */}
-            <div className="flex items-center space-x-4 text-sm text-secondary">
+            <div className="flex items-center space-x-4 text-sm text-neutral-600">
               <button
                 onClick={() => handleNavigation('/security')}
-                className="hover:text-primary transition-colors"
+                className="hover:text-gold-600 transition-colors"
               >
                 Security
               </button>
               <button
                 onClick={() => handleNavigation('/cookies')}
-                className="hover:text-primary transition-colors"
+                className="hover:text-gold-600 transition-colors"
               >
                 Cookie Policy
               </button>
             </div>
 
             {/* Copyright - Center */}
-            <div className="text-sm text-secondary">
+            <div className="text-sm text-neutral-600">
               <span>© 2025 DharmaMind. All rights reserved.</span>
             </div>
 
             {/* Tagline */}
-            <div className="text-sm text-secondary font-medium">
+            <div className="text-sm text-neutral-600 font-medium">
               Built with consciousness and compassion 🕉️
             </div>
           </div>

@@ -199,7 +199,7 @@ export const CentralizedHeader: React.FC<{
   const { user, isAuthenticated } = useAuth();
 
   return (
-    <header className="border-b border-stone-200/50 bg-white/95 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b border-neutral-200/50 bg-neutral-100/95 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Logo 
@@ -220,10 +220,10 @@ export const CentralizedHeader: React.FC<{
               <>
                 <div className="hidden sm:flex items-center space-x-3">
                   <div className="text-right">
-                    <div className="text-sm font-medium text-stone-900">
+                    <div className="text-sm font-medium text-neutral-900">
                       {user?.email?.split('@')[0] || 'User'}
                     </div>
-                    <div className="text-xs text-stone-500">
+                    <div className="text-xs text-neutral-500">
                       {user?.subscription_plan || 'Basic Plan'}
                     </div>
                   </div>
@@ -269,9 +269,9 @@ export const CentralizedFooter: React.FC<{
 
   if (variant === 'minimal') {
     return (
-      <footer className="border-t border-brand-accent bg-white py-4">
+      <footer className="border-t border-neutral-300 bg-neutral-100 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm text-secondary">
+          <p className="text-sm text-neutral-600">
             © 2025 DharmaMind. All rights reserved.
           </p>
         </div>
@@ -280,18 +280,18 @@ export const CentralizedFooter: React.FC<{
   }
 
   return (
-    <footer className="border-t border-brand-accent bg-white">
+    <footer className="border-t border-neutral-300 bg-neutral-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <Logo size="sm" onClick={goToHome} />
-            <p className="text-sm text-secondary mt-4">
+            <p className="text-sm text-neutral-600 mt-4">
               Your AI wisdom companion for spiritual growth and conscious decision-making.
             </p>
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-primary mb-4">Support</h3>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-4">Support</h3>
             <div className="space-y-2">
               <ContactButton type="help" variant="link" size="sm">
                 Help Center
@@ -303,17 +303,17 @@ export const CentralizedFooter: React.FC<{
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-primary mb-4">Account</h3>
+            <h3 className="text-sm font-semibold text-neutral-900 mb-4">Account</h3>
             <div className="space-y-2">
               <button 
                 onClick={() => goToAuth('login')}
-                className="block text-sm text-secondary hover:text-primary"
+                className="block text-sm text-neutral-600 hover:text-gold-600"
               >
                 Sign In
               </button>
               <button 
                 onClick={() => goToAuth('signup')}
-                className="block text-sm text-secondary hover:text-primary"
+                className="block text-sm text-neutral-600 hover:text-gold-600"
               >
                 Sign Up
               </button>
@@ -321,8 +321,8 @@ export const CentralizedFooter: React.FC<{
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-brand-accent text-center">
-          <p className="text-sm text-secondary">
+        <div className="mt-8 pt-8 border-t border-neutral-300 text-center">
+          <p className="text-sm text-neutral-600">
             © 2025 DharmaMind. All rights reserved.
           </p>
         </div>
@@ -355,9 +355,9 @@ export const CentralizedLayout: React.FC<{
       
       <main className="flex-1">
         {title && (
-          <div className="bg-gradient-to-br from-amber-50 to-emerald-50 py-8">
+          <div className="bg-gradient-to-br from-neutral-100 to-neutral-200 py-8">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h1 className="text-3xl font-bold text-primary">{title}</h1>
+              <h1 className="text-3xl font-bold text-neutral-900">{title}</h1>
             </div>
           </div>
         )}

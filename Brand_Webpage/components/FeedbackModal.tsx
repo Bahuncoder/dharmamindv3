@@ -143,13 +143,13 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
               >
                 <span className="text-2xl">✓</span>
               </motion.div>
-              <h3 className="text-2xl font-bold text-primary mb-2">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-2">
                 Thank You! 🙏
               </h3>
-              <p className="text-secondary mb-4">
+              <p className="text-neutral-600 mb-4">
                 Your feedback has been received and will help us improve DharmaMind for everyone.
               </p>
-              <p className="text-sm text-secondary">
+              <p className="text-sm text-neutral-600">
                 We truly appreciate your contribution to our spiritual AI journey.
               </p>
             </div>
@@ -158,16 +158,16 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-card-border">
                 <div>
-                  <h2 className="text-xl font-semibold text-primary">
+                  <h2 className="text-xl font-semibold text-neutral-900">
                     Share Your Feedback
                   </h2>
-                  <p className="text-sm text-secondary mt-1">
+                  <p className="text-sm text-neutral-600 mt-1">
                     Help us improve your DharmaMind experience
                   </p>
                 </div>
                 <button
                   onClick={onClose}
-                  className="text-secondary hover:text-primary transition-colors"
+                  className="text-neutral-600 hover:text-gold-600 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -178,10 +178,10 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
               {/* Progress Bar */}
               <div className="px-6 py-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-primary">
+                  <span className="text-sm font-medium text-neutral-900">
                     Step {step} of 3
                   </span>
-                  <span className="text-sm text-secondary">
+                  <span className="text-sm text-neutral-600">
                     {step === 1 ? 'Type & Content' : step === 2 ? 'Ratings' : 'Details'}
                   </span>
                 </div>
@@ -202,7 +202,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                     className="space-y-6"
                   >
                     <div>
-                      <label className="block text-sm font-medium text-primary mb-3">
+                      <label className="block text-sm font-medium text-neutral-900 mb-3">
                         What type of feedback would you like to share?
                       </label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -216,10 +216,10 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                                 : 'border-card-border hover:border-primary/50'
                             }`}
                           >
-                            <div className="font-medium text-sm text-primary">
+                            <div className="font-medium text-sm text-neutral-900">
                               {type.label}
                             </div>
-                            <div className="text-xs text-secondary mt-1">
+                            <div className="text-xs text-neutral-600 mt-1">
                               {type.description}
                             </div>
                           </button>
@@ -228,7 +228,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-primary mb-2">
+                      <label className="block text-sm font-medium text-neutral-900 mb-2">
                         Title *
                       </label>
                       <input
@@ -239,13 +239,13 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                         className="input-primary"
                         maxLength={200}
                       />
-                      <div className="text-xs text-secondary mt-1">
+                      <div className="text-xs text-neutral-600 mt-1">
                         {feedbackData.title.length}/200 characters
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-primary mb-2">
+                      <label className="block text-sm font-medium text-neutral-900 mb-2">
                         Details *
                       </label>
                       <textarea
@@ -256,7 +256,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                         className="input-primary resize-none"
                         maxLength={4000}
                       />
-                      <div className="text-xs text-secondary mt-1">
+                      <div className="text-xs text-neutral-600 mt-1">
                         {feedbackData.content.length}/4000 characters
                       </div>
                     </div>
@@ -271,10 +271,10 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                     className="space-y-6"
                   >
                     <div className="text-center mb-6">
-                      <h3 className="text-lg font-medium text-primary mb-2">
+                      <h3 className="text-lg font-medium text-neutral-900 mb-2">
                         Rate Your Experience
                       </h3>
-                      <p className="text-sm text-secondary">
+                      <p className="text-sm text-neutral-600">
                         Help us understand how we're doing (optional)
                       </p>
                     </div>
@@ -288,7 +288,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                       <div key={rating.key} className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
                           <span className="text-xl">{rating.icon}</span>
-                          <span className="font-medium text-primary">
+                          <span className="font-medium text-neutral-900">
                             {rating.label}
                           </span>
                         </div>
@@ -300,7 +300,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                               className={`w-8 h-8 rounded-full transition-colors ${
                                 (feedbackData[rating.key] as number) >= star
                                   ? 'btn-primary text-white'
-                                  : 'card-background text-secondary hover:bg-primary hover:text-white'
+                                  : 'card-background text-neutral-600 hover:bg-primary hover:text-white'
                               }`}
                             >
                               ★
@@ -320,16 +320,16 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                     className="space-y-6"
                   >
                     <div className="text-center mb-6">
-                      <h3 className="text-lg font-medium text-primary mb-2">
+                      <h3 className="text-lg font-medium text-neutral-900 mb-2">
                         Contact & Privacy
                       </h3>
-                      <p className="text-sm text-secondary">
+                      <p className="text-sm text-neutral-600">
                         Let us know how you'd like us to handle your feedback
                       </p>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-primary mb-2">
+                      <label className="block text-sm font-medium text-neutral-900 mb-2">
                         Email Address (Optional)
                       </label>
                       <input
@@ -339,7 +339,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                         placeholder="your.email@example.com"
                         className="input-primary"
                       />
-                      <p className="text-xs text-secondary mt-1">
+                      <p className="text-xs text-neutral-600 mt-1">
                         Only needed if you want us to follow up with you
                       </p>
                     </div>
@@ -350,13 +350,13 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                           type="checkbox"
                           checked={feedbackData.allow_contact}
                           onChange={(e) => handleInputChange('allow_contact', e.target.checked)}
-                          className="mt-1 rounded border-card-border text-primary focus:ring-primary"
+                          className="mt-1 rounded border-card-border text-neutral-900 focus:ring-primary"
                         />
                         <div>
-                          <div className="text-sm font-medium text-primary">
+                          <div className="text-sm font-medium text-neutral-900">
                             Allow follow-up contact
                           </div>
-                          <div className="text-xs text-secondary">
+                          <div className="text-xs text-neutral-600">
                             We may reach out to clarify your feedback or inform you of improvements
                           </div>
                         </div>
@@ -367,13 +367,13 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
                           type="checkbox"
                           checked={feedbackData.share_anonymously}
                           onChange={(e) => handleInputChange('share_anonymously', e.target.checked)}
-                          className="mt-1 rounded border-card-border text-primary focus:ring-primary"
+                          className="mt-1 rounded border-card-border text-neutral-900 focus:ring-primary"
                         />
                         <div>
-                          <div className="text-sm font-medium text-primary">
+                          <div className="text-sm font-medium text-neutral-900">
                             Share anonymously for improvements
                           </div>
-                          <div className="text-xs text-secondary">
+                          <div className="text-xs text-neutral-600">
                             Help us improve DharmaMind by sharing your feedback anonymously with our team
                           </div>
                         </div>
@@ -387,7 +387,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
               <div className="flex items-center justify-between p-6 border-t border-card-border">
                 <button
                   onClick={step === 1 ? onClose : prevStep}
-                  className="px-4 py-2 text-secondary hover:text-primary font-medium transition-colors"
+                  className="px-4 py-2 text-neutral-600 hover:text-gold-600 font-medium transition-colors"
                 >
                   {step === 1 ? 'Cancel' : 'Previous'}
                 </button>

@@ -4,6 +4,7 @@ import { AuthProvider } from '../contexts/AuthContext'
 import { ColorProvider } from '../contexts/ColorContext'
 import { SubscriptionProvider } from '../contexts/SubscriptionContext'
 import { ThemeProvider } from '../contexts/ThemeContext'
+import { RishiChatProvider } from '../contexts/RishiChatContext'
 import '../styles/globals.css'
 import '../styles/colors.css'
 import '../styles/chat.css'
@@ -25,7 +26,9 @@ export default function App({
         <SubscriptionProvider>
           <ColorProvider>
             <ThemeProvider>
-              <Component {...pageProps} />
+              <RishiChatProvider>
+                <Component {...pageProps} />
+              </RishiChatProvider>
             </ThemeProvider>
           </ColorProvider>
         </SubscriptionProvider>

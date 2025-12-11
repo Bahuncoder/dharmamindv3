@@ -119,7 +119,7 @@ const EnterpriseSecurityPage: React.FC = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="min-h-screen bg-section-light">
+            <div className="min-h-screen bg-neutral-100">
                 {/* Enterprise Brand Header */}
                 <BrandHeader
                     isEnterprise={true}
@@ -131,7 +131,7 @@ const EnterpriseSecurityPage: React.FC = () => {
                 />
 
                 {/* Hero Section */}
-                <div className="bg-brand-primary border-b-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-b-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -139,10 +139,10 @@ const EnterpriseSecurityPage: React.FC = () => {
                             transition={{ duration: 0.8 }}
                             className="text-center"
                         >
-                            <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-                                Enterprise <span className="text-brand-accent" style={{ borderBottom: '4px solid var(--brand-accent)' }}>Security</span>
+                            <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
+                                Enterprise <span className="text-gold-600" style={{ borderBottom: '4px solid var(--brand-accent)' }}>Security</span>
                             </h1>
-                            <p className="text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
                                 Bank-grade security protecting your spiritual wisdom and business data with the highest standards of privacy and compliance.
                             </p>
                         </motion.div>
@@ -157,10 +157,10 @@ const EnterpriseSecurityPage: React.FC = () => {
                         viewport={{ once: true }}
                         className="text-center mb-12"
                     >
-                        <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                        <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                             Security Foundation
                         </h2>
-                        <p className="text-lg text-secondary">
+                        <p className="text-lg text-neutral-600">
                             Built on four fundamental pillars of information security
                         </p>
                     </motion.div>
@@ -173,18 +173,18 @@ const EnterpriseSecurityPage: React.FC = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6 text-center"
+                                className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6 text-center"
                             >
                                 <div className="text-4xl mb-4">{pillar.icon}</div>
-                                <h3 className="text-xl font-semibold text-primary mb-3">{pillar.title}</h3>
-                                <p className="text-secondary">{pillar.description}</p>
+                                <h3 className="text-xl font-semibold text-neutral-900 mb-3">{pillar.title}</h3>
+                                <p className="text-neutral-600">{pillar.description}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
 
                 {/* Security Features */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-50 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -192,10 +192,10 @@ const EnterpriseSecurityPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Comprehensive Security Features
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Multi-layered security approach protecting every aspect of your data
                             </p>
                         </motion.div>
@@ -208,16 +208,16 @@ const EnterpriseSecurityPage: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+                                    className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="text-4xl mb-4">{feature.icon}</div>
-                                    <h3 className="text-xl font-semibold text-primary mb-3">{feature.title}</h3>
-                                    <p className="text-secondary mb-4">{feature.description}</p>
+                                    <h3 className="text-xl font-semibold text-neutral-900 mb-3">{feature.title}</h3>
+                                    <p className="text-neutral-600 mb-4">{feature.description}</p>
                                     <ul className="space-y-2">
                                         {feature.details.map((detail, idx) => (
                                             <li key={idx} className="flex items-center space-x-2">
-                                                <span className="text-brand-accent text-sm">✓</span>
-                                                <span className="text-sm text-primary">{detail}</span>
+                                                <span className="text-gold-600 text-sm">✓</span>
+                                                <span className="text-sm text-neutral-900">{detail}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -228,7 +228,7 @@ const EnterpriseSecurityPage: React.FC = () => {
                 </div>
 
                 {/* Certifications */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -236,10 +236,10 @@ const EnterpriseSecurityPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Compliance & Certifications
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Meeting the highest standards for security and privacy
                             </p>
                         </motion.div>
@@ -252,11 +252,11 @@ const EnterpriseSecurityPage: React.FC = () => {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="bg-primary-background border-2 border-brand-accent rounded-lg p-4 text-center hover:shadow-lg transition-all duration-300"
+                                    className="bg-neutral-50 border-2 border-gold-400 rounded-lg p-4 text-center hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="text-3xl mb-2">{cert.icon}</div>
-                                    <h3 className="text-sm font-semibold text-primary mb-1">{cert.name}</h3>
-                                    <span className="text-xs text-brand-accent font-medium">{cert.status}</span>
+                                    <h3 className="text-sm font-semibold text-neutral-900 mb-1">{cert.name}</h3>
+                                    <span className="text-xs text-gold-600 font-medium">{cert.status}</span>
                                 </motion.div>
                             ))}
                         </div>
@@ -264,7 +264,7 @@ const EnterpriseSecurityPage: React.FC = () => {
                 </div>
 
                 {/* Security Documentation */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-50 border-t-2 border-gold-400 py-16">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -272,10 +272,10 @@ const EnterpriseSecurityPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Security Documentation
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Transparent security practices and detailed documentation
                             </p>
                         </motion.div>
@@ -285,11 +285,11 @@ const EnterpriseSecurityPage: React.FC = () => {
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6"
+                                className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6"
                             >
-                                <h3 className="text-lg font-semibold text-primary mb-3">🔐 Security Whitepaper</h3>
-                                <p className="text-secondary mb-4">Comprehensive overview of our security architecture and practices</p>
-                                <Button className="bg-accent hover:bg-accent text-white border-2 border-brand-accent px-4 py-2 text-sm">
+                                <h3 className="text-lg font-semibold text-neutral-900 mb-3">🔐 Security Whitepaper</h3>
+                                <p className="text-neutral-600 mb-4">Comprehensive overview of our security architecture and practices</p>
+                                <Button className="bg-accent hover:bg-accent text-white border-2 border-gold-400 px-4 py-2 text-sm">
                                     Download PDF
                                 </Button>
                             </motion.div>
@@ -298,11 +298,11 @@ const EnterpriseSecurityPage: React.FC = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6"
+                                className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6"
                             >
-                                <h3 className="text-lg font-semibold text-primary mb-3">📋 Compliance Report</h3>
-                                <p className="text-secondary mb-4">Latest audit results and compliance status updates</p>
-                                <Button className="bg-accent hover:bg-accent text-white border-2 border-brand-accent px-4 py-2 text-sm">
+                                <h3 className="text-lg font-semibold text-neutral-900 mb-3">📋 Compliance Report</h3>
+                                <p className="text-neutral-600 mb-4">Latest audit results and compliance status updates</p>
+                                <Button className="bg-accent hover:bg-accent text-white border-2 border-gold-400 px-4 py-2 text-sm">
                                     View Report
                                 </Button>
                             </motion.div>
@@ -311,7 +311,7 @@ const EnterpriseSecurityPage: React.FC = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -319,21 +319,21 @@ const EnterpriseSecurityPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-                            <h2 className="text-3xl font-bold text-primary">
+                            <h2 className="text-3xl font-bold text-neutral-900">
                                 Questions About Our Security?
                             </h2>
-                            <p className="text-lg text-secondary max-w-2xl mx-auto">
+                            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
                                 Our security team is ready to answer your questions and provide additional documentation as needed.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Button
-                                    className="bg-accent hover:bg-accent text-white border-2 border-brand-accent px-8 py-3"
+                                    className="bg-accent hover:bg-accent text-white border-2 border-gold-400 px-8 py-3"
                                     onClick={() => router.push('/contact')}
                                 >
                                     Contact Security Team
                                 </Button>
                                 <Button
-                                    className="bg-brand-primary hover:bg-primary-background text-primary border-2 border-brand-accent px-8 py-3"
+                                    className="bg-neutral-100 hover:bg-primary-background text-neutral-900 border-2 border-gold-400 px-8 py-3"
                                     onClick={() => router.push('/enterprise/support')}
                                 >
                                     Enterprise Support

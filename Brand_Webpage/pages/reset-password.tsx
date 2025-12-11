@@ -75,7 +75,7 @@ export default function ResetPassword() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-emerald-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Link href="/" className="flex justify-center">
             <Logo size="md" showText={true} />
@@ -83,30 +83,30 @@ export default function ResetPassword() {
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white/80 backdrop-blur-sm py-8 px-4 shadow-lg sm:rounded-2xl sm:px-10 border border-stone-200/50 text-center">
+          <div className="bg-neutral-100/80 backdrop-blur-sm py-8 px-4 shadow-lg sm:rounded-2xl sm:px-10 border border-neutral-200/50 text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              className="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
             >
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </motion.div>
             
-            <h2 className="text-2xl font-bold text-stone-800 mb-4">Password Reset Successfully</h2>
+            <h2 className="text-2xl font-bold text-neutral-800 mb-4">Password Reset Successfully</h2>
             
-            <p className="text-stone-600 mb-6">
+            <p className="text-neutral-600 mb-6">
               Your password has been updated successfully. You can now sign in with your new password.
             </p>
             
-            <p className="text-sm text-stone-500 mb-8">
+            <p className="text-sm text-neutral-500 mb-8">
               Redirecting you to sign in page in 3 seconds...
             </p>
             
             <Link
               href="/login"
-              className="w-full inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-amber-600 to-emerald-600 hover:from-amber-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500/50 transition-all duration-300 shadow-md hover:shadow-lg"
+              className="w-full inline-flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500/50 transition-all duration-300 shadow-md hover:shadow-lg"
             >
               Continue to Sign In
             </Link>
@@ -117,21 +117,21 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-emerald-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link href="/" className="flex justify-center">
           <Logo size="md" showText={true} />
         </Link>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-stone-800">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-neutral-800">
           Reset your password
         </h2>
-        <p className="mt-2 text-center text-sm text-stone-600">
+        <p className="mt-2 text-center text-sm text-neutral-600">
           Enter your new password below
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white/80 backdrop-blur-sm py-8 px-4 shadow-lg sm:rounded-2xl sm:px-10 border border-stone-200/50">
+        <div className="bg-neutral-100/80 backdrop-blur-sm py-8 px-4 shadow-lg sm:rounded-2xl sm:px-10 border border-neutral-200/50">
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -144,7 +144,7 @@ export default function ResetPassword() {
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-stone-700">
+              <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
                 New password
               </label>
               <div className="mt-1">
@@ -156,17 +156,17 @@ export default function ResetPassword() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-4 py-3 border border-stone-300/50 rounded-xl shadow-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300 bg-white/70 backdrop-blur-sm"
+                  className="appearance-none block w-full px-4 py-3 border border-neutral-300/50 rounded-xl shadow-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500/50 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm"
                   placeholder="Enter your new password"
                 />
               </div>
-              <p className="mt-1 text-xs text-stone-500">
+              <p className="mt-1 text-xs text-neutral-500">
                 Must be at least 8 characters long
               </p>
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-stone-700">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-neutral-700">
                 Confirm new password
               </label>
               <div className="mt-1">
@@ -178,7 +178,7 @@ export default function ResetPassword() {
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="appearance-none block w-full px-4 py-3 border border-stone-300/50 rounded-xl shadow-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300 bg-white/70 backdrop-blur-sm"
+                  className="appearance-none block w-full px-4 py-3 border border-neutral-300/50 rounded-xl shadow-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500/50 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm"
                   placeholder="Confirm your new password"
                 />
               </div>
@@ -190,7 +190,7 @@ export default function ResetPassword() {
                 disabled={isLoading || !token}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-amber-600 to-emerald-600 hover:from-amber-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 {isLoading ? (
                   <div className="flex items-center space-x-2">
@@ -206,9 +206,9 @@ export default function ResetPassword() {
 
           <div className="mt-6">
             <div className="text-center">
-              <span className="text-sm text-stone-600">
+              <span className="text-sm text-neutral-600">
                 Remember your password?{' '}
-                <Link href="/login" className="font-medium text-emerald-600 hover:text-emerald-700 transition-colors duration-200">
+                <Link href="/login" className="font-medium text-gold-600 hover:text-gold-700 transition-colors duration-200">
                   Back to Sign In
                 </Link>
               </span>
@@ -216,7 +216,7 @@ export default function ResetPassword() {
           </div>
 
           {!token && (
-            <div className="mt-8 pt-6 border-t border-stone-200/50">
+            <div className="mt-8 pt-6 border-t border-neutral-200/50">
               <p className="text-xs text-red-500 text-center">
                 Invalid or missing reset token. Please request a new password reset.
               </p>

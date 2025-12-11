@@ -1,0 +1,19 @@
+{
+    "name": "@dharmamind/shared-config",
+    "version": "1.0.0",
+    "description": "Shared configuration for all DharmaMind platforms",
+    "main": "index.ts",
+    "types": "index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./pricing": "./pricing.ts",
+        "./support": "./support.ts"
+    },
+    "keywords": [
+        "dharmamind",
+        "config",
+        "shared"
+    ],
+    "author": "DharmaMind",
+    "license": "PROPRIETARY"
+}

@@ -13,10 +13,10 @@ export default function About() {
       <div className="min-h-screen bg-primary-background-main">
         {/* Your existing about content */}
         <div className="container mx-auto px-4 py-16">
-          <h1 className="text-4xl font-bold text-primary-text mb-8">
+          <h1 className="text-4xl font-bold text-neutral-900-text mb-8">
             About DharmaMind
           </h1>
-          <div className="text-lg text-primary-text-muted">
+          <div className="text-lg text-neutral-900-text-muted">
             <p className="mb-6">
               DharmaMind represents the harmonious fusion of ancient wisdom and cutting-edge artificial intelligence. 
               Our platform bridges the gap between timeless spiritual teachings and modern technology, making profound 

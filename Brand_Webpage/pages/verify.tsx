@@ -77,25 +77,25 @@ export default function VerifyAccount() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Logo size="lg" />
-          <h1 className="text-3xl font-bold text-primary mt-4">Verify Your Account</h1>
-          <p className="text-secondary mt-2">
+          <h1 className="text-3xl font-bold text-neutral-900 mt-4">Verify Your Account</h1>
+          <p className="text-neutral-600 mt-2">
             We've sent a verification code to your email
           </p>
         </div>
 
         {/* Verification Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-neutral-100 rounded-2xl shadow-xl p-8">
           <form onSubmit={handleVerify} className="space-y-6">
             {/* Email Display */}
             <div>
-              <label className="block text-sm font-medium text-primary mb-2">
+              <label className="block text-sm font-medium text-neutral-900 mb-2">
                 Email Address
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-brand-accent rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-section-light"
+                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-neutral-100"
                 placeholder="your.email@example.com"
                 required
                 readOnly={!!router.query.email}
@@ -104,19 +104,19 @@ export default function VerifyAccount() {
 
             {/* Verification Code */}
             <div>
-              <label className="block text-sm font-medium text-primary mb-2">
+              <label className="block text-sm font-medium text-neutral-900 mb-2">
                 Verification Code
               </label>
               <input
                 type="text"
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\\D/g, '').slice(0, 6))}
-                className="w-full px-4 py-3 border border-brand-accent rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-center text-2xl font-mono tracking-widest"
+                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-center text-2xl font-mono tracking-widest"
                 placeholder="000000"
                 maxLength={6}
                 required
               />
-              <p className="text-sm text-secondary mt-1">
+              <p className="text-sm text-neutral-600 mt-1">
                 Enter the 6-digit code sent to your email
               </p>
             </div>
@@ -132,7 +132,7 @@ export default function VerifyAccount() {
             <button
               type="submit"
               disabled={isLoading || code.length !== 6}
-              className="w-full bg-emerald-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="w-full bg-gold-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -146,14 +146,14 @@ export default function VerifyAccount() {
 
             {/* Resend Code */}
             <div className="text-center">
-              <p className="text-sm text-secondary mb-2">
+              <p className="text-sm text-neutral-600 mb-2">
                 Didn't receive the code?
               </p>
               <button
                 type="button"
                 onClick={handleResendCode}
                 disabled={resendLoading}
-                className="text-secondary hover:text-primary font-medium text-sm disabled:opacity-50"
+                className="text-neutral-600 hover:text-gold-600 font-medium text-sm disabled:opacity-50"
               >
                 {resendLoading ? 'Sending...' : 'Resend Code'}
               </button>
@@ -161,10 +161,10 @@ export default function VerifyAccount() {
           </form>
 
           {/* Back to Login */}
-          <div className="mt-8 pt-6 border-t border-light text-center">
+          <div className="mt-8 pt-6 border-t border-neutral-300 text-center">
             <button
               onClick={() => router.push('/auth?mode=login')}
-              className="text-secondary hover:text-primary text-sm"
+              className="text-neutral-600 hover:text-gold-600 text-sm"
             >
               ← Back to Login
             </button>
@@ -173,7 +173,7 @@ export default function VerifyAccount() {
 
         {/* Security Note */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-secondary">
+          <p className="text-xs text-neutral-600">
             🔒 Your verification code expires in 10 minutes for security
           </p>
         </div>

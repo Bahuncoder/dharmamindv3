@@ -11,40 +11,40 @@ export default function Enterprise() {
 
       <div className="min-h-screen bg-primary-background-main">
         <div className="container mx-auto px-4 py-16">
-          <h1 className="text-4xl font-bold text-primary-text mb-8">
+          <h1 className="text-4xl font-bold text-neutral-900-text mb-8">
             Enterprise Solutions for Purpose-Driven Organizations
           </h1>
-          <div className="text-lg text-primary-text-muted">
+          <div className="text-lg text-neutral-900-text-muted">
             <p className="mb-6">
               Transform your workplace culture with DharmaMind's ethical AI solutions designed for 
               purpose-driven employee engagement and workplace well-being.
             </p>
             
-            <h2 className="text-2xl font-semibold text-primary-text mb-4">
+            <h2 className="text-2xl font-semibold text-neutral-900-text mb-4">
               Our Enterprise Offerings:
             </h2>
             
             <ul className="space-y-4 mb-8">
               <li className="flex items-start">
-                <span className="text-brand-accent mr-3">•</span>
+                <span className="text-gold-600 mr-3">•</span>
                 <div>
                   <strong>Ethical Leadership Training:</strong> AI-powered coaching for conscious leadership development
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="text-brand-accent mr-3">•</span>
+                <span className="text-gold-600 mr-3">•</span>
                 <div>
                   <strong>Employee Retention Strategies:</strong> Purpose alignment tools to reduce turnover
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="text-brand-accent mr-3">•</span>
+                <span className="text-gold-600 mr-3">•</span>
                 <div>
                   <strong>Workplace Well-being Solutions:</strong> Stress management and mindfulness programs
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="text-brand-accent mr-3">•</span>
+                <span className="text-gold-600 mr-3">•</span>
                 <div>
                   <strong>Corporate Culture Improvement:</strong> Values-based decision making frameworks
                 </div>

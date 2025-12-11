@@ -8,11 +8,11 @@ interface LogoProps {
   className?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ 
-  size = 'md', 
-  showText = true, 
-  onClick, 
-  className = '' 
+const Logo: React.FC<LogoProps> = ({
+  size = 'md',
+  showText = true,
+  onClick,
+  className = ''
 }) => {
   const sizeClasses = {
     xs: {
@@ -23,7 +23,7 @@ const Logo: React.FC<LogoProps> = ({
       titleText: 'text-sm'
     },
     sm: {
-      container: 'w-8 h-8', 
+      container: 'w-8 h-8',
       image: 'w-8 h-8',
       imageSize: 32,
       text: 'text-sm',
@@ -33,7 +33,7 @@ const Logo: React.FC<LogoProps> = ({
       container: 'w-10 h-10',
       image: 'w-10 h-10',
       imageSize: 40,
-      text: 'text-lg', 
+      text: 'text-lg',
       titleText: 'text-xl'
     },
     lg: {
@@ -60,28 +60,28 @@ const Logo: React.FC<LogoProps> = ({
   };
 
   const currentSize = sizeClasses[size];
-  
+
   const LogoContent = () => (
     <>
-      <div className={`${currentSize.container} rounded-${size === 'avatar' ? 'full' : 'lg'} overflow-hidden shadow-lg bg-white border border-brand-accent relative`}>
+      <div className={`${currentSize.container} rounded-${size === 'avatar' ? 'full' : 'lg'} overflow-hidden shadow-lg bg-neutral-100 border border-neutral-300 relative`}>
         <Image
           src="/logo.jpeg"
           alt="DharmaMind Logo"
           width={currentSize.imageSize}
           height={currentSize.imageSize}
           className={`${currentSize.image} object-contain filter contrast-125 saturate-125 brightness-105 hue-rotate-0`}
-          style={{ 
+          style={{
             imageRendering: 'crisp-edges',
             filter: 'contrast(1.3) saturate(1.2) brightness(1.05) sharpen(1.5)'
           }}
           priority
           quality={100}
         />
-        {/* Emerald green border at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-500"></div>
+        {/* Gold accent border at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold-600"></div>
       </div>
       {showText && (
-        <span className={`font-bold text-primary ${currentSize.titleText} ml-3 tracking-tight drop-shadow-sm`}>
+        <span className={`font-bold text-neutral-900 ${currentSize.titleText} ml-3 tracking-tight drop-shadow-sm`}>
           DharmaMind
         </span>
       )}
@@ -90,7 +90,7 @@ const Logo: React.FC<LogoProps> = ({
 
   if (onClick) {
     return (
-      <button 
+      <button
         onClick={onClick}
         className={`flex items-center hover:opacity-80 transition-opacity ${className}`}
       >

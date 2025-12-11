@@ -21,7 +21,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 "Basic onboarding materials",
                 "Monthly office hours"
             ],
-            color: "border-brand-accent bg-brand-primary"
+            color: "border-gold-400 bg-neutral-100"
         },
         {
             name: "Professional",
@@ -35,7 +35,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 "Implementation guidance",
                 "Quarterly business reviews"
             ],
-            color: "border-brand-accent bg-accent-50",
+            color: "border-gold-400 bg-accent-50",
             popular: true
         },
         {
@@ -50,7 +50,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 "SLA guarantees",
                 "Priority feature requests"
             ],
-            color: "border-brand-accent bg-brand-primary"
+            color: "border-gold-400 bg-neutral-100"
         }
     ];
 
@@ -128,7 +128,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="min-h-screen bg-section-light">
+            <div className="min-h-screen bg-neutral-100">
                 {/* Enterprise Brand Header */}
                 <BrandHeader
                     isEnterprise={true}
@@ -140,7 +140,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 />
 
                 {/* Hero Section */}
-                <div className="bg-brand-primary border-b-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-b-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -148,10 +148,10 @@ const EnterpriseSupportPage: React.FC = () => {
                             transition={{ duration: 0.8 }}
                             className="text-center"
                         >
-                            <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-                                Enterprise <span className="text-brand-accent border-b-4 border-brand-accent">Support</span>
+                            <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
+                                Enterprise <span className="text-gold-600 border-b-4 border-gold-400">Support</span>
                             </h1>
-                            <p className="text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
                                 Comprehensive support services designed to ensure your success with dedicated experts, training, and 24/7 assistance.
                             </p>
                         </motion.div>
@@ -166,10 +166,10 @@ const EnterpriseSupportPage: React.FC = () => {
                         viewport={{ once: true }}
                         className="text-center mb-12"
                     >
-                        <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                        <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                             Support Plans
                         </h2>
-                        <p className="text-lg text-secondary">
+                        <p className="text-lg text-neutral-600">
                             Choose the level of support that matches your organization's needs
                         </p>
                     </motion.div>
@@ -190,20 +190,20 @@ const EnterpriseSupportPage: React.FC = () => {
                                     </div>
                                 )}
                                 <div className="text-center mb-6">
-                                    <h3 className="text-2xl font-bold text-primary mb-2">{tier.name}</h3>
-                                    <div className="text-3xl font-bold text-brand-accent mb-2">{tier.price}</div>
-                                    <p className="text-secondary">{tier.description}</p>
+                                    <h3 className="text-2xl font-bold text-neutral-900 mb-2">{tier.name}</h3>
+                                    <div className="text-3xl font-bold text-gold-600 mb-2">{tier.price}</div>
+                                    <p className="text-neutral-600">{tier.description}</p>
                                 </div>
                                 <ul className="space-y-3 mb-8">
                                     {tier.features.map((feature, idx) => (
                                         <li key={idx} className="flex items-center space-x-2">
-                                            <span className="text-brand-accent text-sm">✓</span>
-                                            <span className="text-sm text-primary">{feature}</span>
+                                            <span className="text-gold-600 text-sm">✓</span>
+                                            <span className="text-sm text-neutral-900">{feature}</span>
                                         </li>
                                     ))}
                                 </ul>
                                 <Button
-                                    className={`w-full ${tier.popular ? 'bg-accent hover:bg-accent text-white' : 'bg-brand-primary hover:bg-primary-background text-primary'} border-2 border-brand-accent py-2`}
+                                    className={`w-full ${tier.popular ? 'bg-accent hover:bg-accent text-white' : 'bg-neutral-100 hover:bg-primary-background text-neutral-900'} border-2 border-gold-400 py-2`}
                                     onClick={() => router.push('/contact')}
                                 >
                                     Get Started
@@ -214,7 +214,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 </div>
 
                 {/* Support Channels */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-50 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -222,10 +222,10 @@ const EnterpriseSupportPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Support Channels
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Multiple ways to get help when you need it
                             </p>
                         </motion.div>
@@ -238,14 +238,14 @@ const EnterpriseSupportPage: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6 text-center hover:shadow-lg transition-all duration-300"
+                                    className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6 text-center hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="text-4xl mb-4">{channel.icon}</div>
-                                    <h3 className="text-lg font-semibold text-primary mb-2">{channel.title}</h3>
-                                    <p className="text-secondary text-sm mb-3">{channel.description}</p>
-                                    <p className="text-xs text-brand-accent mb-4">{channel.availability}</p>
+                                    <h3 className="text-lg font-semibold text-neutral-900 mb-2">{channel.title}</h3>
+                                    <p className="text-neutral-600 text-sm mb-3">{channel.description}</p>
+                                    <p className="text-xs text-gold-600 mb-4">{channel.availability}</p>
                                     <Button
-                                        className="bg-accent hover:bg-accent text-white border-2 border-brand-accent px-4 py-2 text-sm"
+                                        className="bg-accent hover:bg-accent text-white border-2 border-gold-400 px-4 py-2 text-sm"
                                         onClick={() => router.push('/contact')}
                                     >
                                         {channel.action}
@@ -257,7 +257,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 </div>
 
                 {/* SLA Metrics */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -265,22 +265,22 @@ const EnterpriseSupportPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Service Level Agreements
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Guaranteed response times and service levels
                             </p>
                         </motion.div>
 
                         <div className="overflow-x-auto">
-                            <table className="w-full bg-primary-background border-2 border-brand-accent rounded-lg">
+                            <table className="w-full bg-neutral-50 border-2 border-gold-400 rounded-lg">
                                 <thead>
-                                    <tr className="border-b-2 border-brand-accent">
-                                        <th className="p-4 text-left text-primary font-semibold">Metric</th>
-                                        <th className="p-4 text-center text-primary font-semibold">Essential</th>
-                                        <th className="p-4 text-center text-primary font-semibold">Professional</th>
-                                        <th className="p-4 text-center text-primary font-semibold">Enterprise</th>
+                                    <tr className="border-b-2 border-gold-400">
+                                        <th className="p-4 text-left text-neutral-900 font-semibold">Metric</th>
+                                        <th className="p-4 text-center text-neutral-900 font-semibold">Essential</th>
+                                        <th className="p-4 text-center text-neutral-900 font-semibold">Professional</th>
+                                        <th className="p-4 text-center text-neutral-900 font-semibold">Enterprise</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -291,12 +291,12 @@ const EnterpriseSupportPage: React.FC = () => {
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                                            className="border-b border-brand-accent/30"
+                                            className="border-b border-gold-400/30"
                                         >
-                                            <td className="p-4 font-medium text-primary">{row.metric}</td>
-                                            <td className="p-4 text-center text-secondary">{row.essential}</td>
-                                            <td className="p-4 text-center text-secondary">{row.professional}</td>
-                                            <td className="p-4 text-center text-brand-accent font-semibold">{row.enterprise}</td>
+                                            <td className="p-4 font-medium text-neutral-900">{row.metric}</td>
+                                            <td className="p-4 text-center text-neutral-600">{row.essential}</td>
+                                            <td className="p-4 text-center text-neutral-600">{row.professional}</td>
+                                            <td className="p-4 text-center text-gold-600 font-semibold">{row.enterprise}</td>
                                         </motion.tr>
                                     ))}
                                 </tbody>
@@ -306,7 +306,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 </div>
 
                 {/* Resources */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-50 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -314,10 +314,10 @@ const EnterpriseSupportPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 border-b-4 border-brand-accent inline-block pb-2">
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 border-b-4 border-gold-400 inline-block pb-2">
                                 Self-Service Resources
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 Comprehensive resources to help you succeed independently
                             </p>
                         </motion.div>
@@ -330,16 +330,16 @@ const EnterpriseSupportPage: React.FC = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+                                    className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="text-4xl mb-4">{resource.icon}</div>
-                                    <h3 className="text-lg font-semibold text-primary mb-2">{resource.title}</h3>
-                                    <p className="text-secondary text-sm mb-4">{resource.description}</p>
+                                    <h3 className="text-lg font-semibold text-neutral-900 mb-2">{resource.title}</h3>
+                                    <p className="text-neutral-600 text-sm mb-4">{resource.description}</p>
                                     <ul className="space-y-2">
                                         {resource.items.map((item, idx) => (
                                             <li key={idx} className="flex items-center space-x-2">
-                                                <span className="text-brand-accent text-xs">•</span>
-                                                <span className="text-xs text-primary">{item}</span>
+                                                <span className="text-gold-600 text-xs">•</span>
+                                                <span className="text-xs text-neutral-900">{item}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -350,7 +350,7 @@ const EnterpriseSupportPage: React.FC = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -358,21 +358,21 @@ const EnterpriseSupportPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-                            <h2 className="text-3xl font-bold text-primary">
+                            <h2 className="text-3xl font-bold text-neutral-900">
                                 Ready to Get the Support You Need?
                             </h2>
-                            <p className="text-lg text-secondary max-w-2xl mx-auto">
+                            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
                                 Contact our team to discuss your support requirements and find the perfect plan for your organization.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Button
-                                    className="bg-accent hover:bg-accent text-white border-2 border-brand-accent px-8 py-3"
+                                    className="bg-accent hover:bg-accent text-white border-2 border-gold-400 px-8 py-3"
                                     onClick={() => router.push('/contact')}
                                 >
                                     Contact Support
                                 </Button>
                                 <Button
-                                    className="bg-brand-primary hover:bg-primary-background text-primary border-2 border-brand-accent px-8 py-3"
+                                    className="bg-neutral-100 hover:bg-primary-background text-neutral-900 border-2 border-gold-400 px-8 py-3"
                                     onClick={() => router.push('/enterprise/pricing')}
                                 >
                                     View Pricing

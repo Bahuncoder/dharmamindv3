@@ -141,19 +141,19 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   resetError
 }) => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-section-light px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-neutral-100 px-4">
+      <div className="max-w-md w-full bg-neutral-100 rounded-lg shadow-lg p-6 text-center">
         <div className="mb-4">
           <span className="text-6xl">😵</span>
         </div>
-        <h1 className="text-xl font-bold text-primary mb-2">
+        <h1 className="text-xl font-bold text-neutral-900 mb-2">
           Oops! Something went wrong
         </h1>
-        <p className="text-secondary mb-4">
+        <p className="text-neutral-600 mb-4">
           An unexpected error occurred. Please try refreshing the page.
         </p>
-        <details className="text-left mb-4 bg-section-light p-3 rounded border">
-          <summary className="cursor-pointer text-sm font-medium text-primary mb-2">
+        <details className="text-left mb-4 bg-neutral-100 p-3 rounded border">
+          <summary className="cursor-pointer text-sm font-medium text-neutral-900 mb-2">
             Error Details
           </summary>
           <pre className="text-xs text-red-600 whitespace-pre-wrap">
@@ -163,13 +163,13 @@ export const ErrorFallback: React.FC<ErrorFallbackProps> = ({
         <div className="space-y-2">
           <button
             onClick={resetError}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+            className="w-full bg-gold-600 text-white py-2 px-4 rounded-lg hover:bg-gold-700 transition-colors"
           >
             Try Again
           </button>
           <button
             onClick={() => window.location.reload()}
-            className="w-full bg-brand-primary text-white py-2 px-4 rounded-lg hover:bg-primary-background transition-colors"
+            className="w-full bg-neutral-100 text-white py-2 px-4 rounded-lg hover:bg-primary-background transition-colors"
           >
             Refresh Page
           </button>
@@ -192,12 +192,12 @@ export const NetworkError: React.FC<NetworkErrorProps> = ({
   className = ''
 }) => {
   return (
-    <div className={`bg-primary-clean border border-stone-200 rounded-lg p-4 ${className}`}>
+    <div className={`bg-primary-clean border border-neutral-200 rounded-lg p-4 ${className}`}>
       <div className="flex items-center space-x-3">
         <span className="text-2xl">🌐</span>
         <div className="flex-1">
-          <h3 className="font-medium text-primary">Connection Problem</h3>
-          <p className="text-secondary text-sm">
+          <h3 className="font-medium text-neutral-900">Connection Problem</h3>
+          <p className="text-neutral-600 text-sm">
             Unable to connect to the server. Please check your internet connection.
           </p>
         </div>
@@ -316,12 +316,12 @@ export const EmptyStateError: React.FC<EmptyStateErrorProps> = ({
   return (
     <div className={`text-center py-12 ${className}`}>
       <div className="text-6xl mb-4">{icon}</div>
-      <h3 className="text-lg font-medium text-primary mb-2">{title}</h3>
-      <p className="text-secondary mb-6">{description}</p>
+      <h3 className="text-lg font-medium text-neutral-900 mb-2">{title}</h3>
+      <p className="text-neutral-600 mb-6">{description}</p>
       {action && (
         <button
           onClick={action.onClick}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          className="bg-gold-600 text-white px-4 py-2 rounded-lg hover:bg-gold-700 transition-colors"
         >
           {action.label}
         </button>

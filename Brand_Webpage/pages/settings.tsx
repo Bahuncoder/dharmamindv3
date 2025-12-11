@@ -176,29 +176,29 @@ const SettingsPage: React.FC = () => {
         <meta name="description" content="Manage your DharmaMind preferences and account settings" />
       </Head>
       
-      <div className="min-h-screen bg-section-light dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen bg-neutral-100 dark:bg-neutral-900 transition-colors">
         {/* Header */}
-        <div className="bg-white dark:bg-primary-background border-b border-light dark:border-brand-accent">
+        <div className="bg-neutral-100 dark:bg-primary-background border-b border-neutral-300 dark:border-gold-400">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-4">
                 <button
                   onClick={handleBackToChat}
-                  className="text-secondary hover:text-secondary dark:text-secondary dark:hover:text-secondary"
+                  className="text-neutral-600 hover:text-gold-600 dark:text-neutral-600 dark:hover:text-gold-600"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
-                <h1 className="text-xl font-semibold text-primary dark:text-white">Settings</h1>
+                <h1 className="text-xl font-semibold text-neutral-900 dark:text-white">Settings</h1>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-emerald-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-gold-600 to-gold-700 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">
                     {user.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
-                <span className="text-sm text-primary dark:text-secondary">{user.name}</span>
+                <span className="text-sm text-neutral-900 dark:text-neutral-600">{user.name}</span>
               </div>
             </div>
           </div>
@@ -209,44 +209,44 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-8">
             
             {/* Account Section */}
-            <div className="bg-white dark:bg-primary-background rounded-lg shadow-sm border border-light dark:border-brand-accent">
-              <div className="px-6 py-4 border-b border-light dark:border-brand-accent">
-                <h2 className="text-lg font-medium text-primary dark:text-white">Account</h2>
+            <div className="bg-neutral-100 dark:bg-primary-background rounded-lg shadow-sm border border-neutral-300 dark:border-gold-400">
+              <div className="px-6 py-4 border-b border-neutral-300 dark:border-gold-400">
+                <h2 className="text-lg font-medium text-neutral-900 dark:text-white">Account</h2>
               </div>
               <div className="px-6 py-4 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-primary dark:text-secondary mb-1">
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-neutral-600 mb-1">
                     Name
                   </label>
                   <input
                     type="text"
                     value={user.name}
-                    className="w-full px-3 py-2 border border-brand-accent dark:border-brand-accent rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-white dark:bg-primary-background text-primary dark:text-white"
+                    className="w-full px-3 py-2 border border-gold-400 dark:border-gold-400 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-neutral-100 dark:bg-primary-background text-neutral-900 dark:text-white"
                     readOnly
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-primary dark:text-secondary mb-1">
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-neutral-600 mb-1">
                     Email
                   </label>
                   <input
                     type="email"
                     value={user.email}
-                    className="w-full px-3 py-2 border border-brand-accent dark:border-brand-accent rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-white dark:bg-primary-background text-primary dark:text-white"
+                    className="w-full px-3 py-2 border border-gold-400 dark:border-gold-400 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-neutral-100 dark:bg-primary-background text-neutral-900 dark:text-white"
                     readOnly
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-primary dark:text-secondary mb-1">
+                  <label className="block text-sm font-medium text-neutral-900 dark:text-neutral-600 mb-1">
                     Current Plan
                   </label>
                   <div className="flex items-center space-x-3">
-                    <span className="px-3 py-1 bg-brand-primary dark:bg-primary-background text-primary dark:text-secondary text-sm rounded-full capitalize">
+                    <span className="px-3 py-1 bg-neutral-100 dark:bg-primary-background text-neutral-900 dark:text-neutral-600 text-sm rounded-full capitalize">
                       {user.plan || 'free'}
                     </span>
                     <button 
                       onClick={() => router.push('/subscription')}
-                      className="text-sm text-secondary dark:text-secondary hover:text-primary dark:hover:text-secondary hover:underline transition-colors"
+                      className="text-sm text-neutral-600 dark:text-neutral-600 hover:text-gold-600 dark:hover:text-gold-600 hover:underline transition-colors"
                     >
                       Manage subscription
                     </button>
@@ -256,30 +256,30 @@ const SettingsPage: React.FC = () => {
             </div>
 
             {/* App Preferences Section */}
-            <div className="bg-white dark:bg-primary-background rounded-lg shadow-sm border border-light dark:border-brand-accent">
-              <div className="px-6 py-4 border-b border-light dark:border-brand-accent">
-                <h2 className="text-lg font-medium text-primary dark:text-white">App Preferences</h2>
+            <div className="bg-neutral-100 dark:bg-primary-background rounded-lg shadow-sm border border-neutral-300 dark:border-gold-400">
+              <div className="px-6 py-4 border-b border-neutral-300 dark:border-gold-400">
+                <h2 className="text-lg font-medium text-neutral-900 dark:text-white">App Preferences</h2>
               </div>
               <div className="px-6 py-4 space-y-6">
 
                 {/* Notifications */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <label className="text-sm font-medium text-primary">
+                    <label className="text-sm font-medium text-neutral-900">
                       Email notifications
                     </label>
-                    <p className="text-sm text-secondary">
+                    <p className="text-sm text-neutral-600">
                       Receive updates about your spiritual journey
                     </p>
                   </div>
                   <button
                     onClick={() => setNotifications(!notifications)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      notifications ? 'bg-brand-primary' : 'bg-primary-background'
+                      notifications ? 'bg-neutral-100' : 'bg-primary-background'
                     }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      className={`inline-block h-4 w-4 transform rounded-full bg-neutral-100 transition-transform ${
                         notifications ? 'translate-x-6' : 'translate-x-1'
                       }`}
                     />
@@ -289,21 +289,21 @@ const SettingsPage: React.FC = () => {
                 {/* Data Sharing */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <label className="text-sm font-medium text-primary">
+                    <label className="text-sm font-medium text-neutral-900">
                       Help improve DharmaMind
                     </label>
-                    <p className="text-sm text-secondary">
+                    <p className="text-sm text-neutral-600">
                       Share anonymized data to enhance AI responses
                     </p>
                   </div>
                   <button
                     onClick={() => setDataSharing(!dataSharing)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      dataSharing ? 'bg-brand-primary' : 'bg-primary-background'
+                      dataSharing ? 'bg-neutral-100' : 'bg-primary-background'
                     }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      className={`inline-block h-4 w-4 transform rounded-full bg-neutral-100 transition-transform ${
                         dataSharing ? 'translate-x-6' : 'translate-x-1'
                       }`}
                     />
@@ -313,21 +313,21 @@ const SettingsPage: React.FC = () => {
                 {/* Learn from Interactions */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <label className="text-sm font-medium text-primary">
+                    <label className="text-sm font-medium text-neutral-900">
                       Learn from my interactions
                     </label>
-                    <p className="text-sm text-secondary">
+                    <p className="text-sm text-neutral-600">
                       Allow AI to learn from your conversations for better personalized responses
                     </p>
                   </div>
                   <button
                     onClick={() => setLearnFromInteractions(!learnFromInteractions)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      learnFromInteractions ? 'bg-brand-primary' : 'bg-primary-background'
+                      learnFromInteractions ? 'bg-neutral-100' : 'bg-primary-background'
                     }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      className={`inline-block h-4 w-4 transform rounded-full bg-neutral-100 transition-transform ${
                         learnFromInteractions ? 'translate-x-6' : 'translate-x-1'
                       }`}
                     />
@@ -337,14 +337,14 @@ const SettingsPage: React.FC = () => {
             </div>
 
             {/* Chat History Section */}
-            <div className="bg-white dark:bg-primary-background rounded-lg shadow-sm border border-light dark:border-brand-accent">
-              <div className="px-6 py-4 border-b border-light dark:border-brand-accent">
-                <h2 className="text-lg font-medium text-primary dark:text-white">Chat History</h2>
-                <p className="text-sm text-secondary dark:text-secondary mt-1">
+            <div className="bg-neutral-100 dark:bg-primary-background rounded-lg shadow-sm border border-neutral-300 dark:border-gold-400">
+              <div className="px-6 py-4 border-b border-neutral-300 dark:border-gold-400">
+                <h2 className="text-lg font-medium text-neutral-900 dark:text-white">Chat History</h2>
+                <p className="text-sm text-neutral-600 dark:text-neutral-600 mt-1">
                   Manage your conversation history and data
                 </p>
                 {user?.isGuest && (
-                  <p className="text-sm text-secondary mt-1">
+                  <p className="text-sm text-neutral-600 mt-1">
                     Demo mode: History is temporary and will be cleared when you leave the app
                   </p>
                 )}
@@ -353,19 +353,19 @@ const SettingsPage: React.FC = () => {
                 
                 {/* Chat History Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-section-light rounded-lg p-4">
-                    <div className="text-sm font-medium text-secondary">Total Conversations</div>
-                    <div className="text-2xl font-bold text-primary">{chatHistory.length}</div>
+                  <div className="bg-neutral-100 rounded-lg p-4">
+                    <div className="text-sm font-medium text-neutral-600">Total Conversations</div>
+                    <div className="text-2xl font-bold text-neutral-900">{chatHistory.length}</div>
                   </div>
-                  <div className="bg-section-light rounded-lg p-4">
-                    <div className="text-sm font-medium text-secondary">Messages Sent</div>
-                    <div className="text-2xl font-bold text-primary">
+                  <div className="bg-neutral-100 rounded-lg p-4">
+                    <div className="text-sm font-medium text-neutral-600">Messages Sent</div>
+                    <div className="text-2xl font-bold text-neutral-900">
                       {chatHistory.reduce((total, chat) => total + chat.messages?.length || 0, 0)}
                     </div>
                   </div>
-                  <div className="bg-section-light rounded-lg p-4">
-                    <div className="text-sm font-medium text-secondary">Storage Used</div>
-                    <div className="text-2xl font-bold text-primary">
+                  <div className="bg-neutral-100 rounded-lg p-4">
+                    <div className="text-sm font-medium text-neutral-600">Storage Used</div>
+                    <div className="text-2xl font-bold text-neutral-900">
                       {Math.round(JSON.stringify(chatHistory).length / 1024)} KB
                     </div>
                   </div>
@@ -373,14 +373,14 @@ const SettingsPage: React.FC = () => {
 
                 {/* Chat History Actions */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 border border-light rounded-lg">
+                  <div className="flex items-center justify-between p-4 border border-neutral-300 rounded-lg">
                     <div>
-                      <h3 className="text-sm font-medium text-primary">Export Chat History</h3>
-                      <p className="text-sm text-secondary">Download all your conversations as a JSON file</p>
+                      <h3 className="text-sm font-medium text-neutral-900">Export Chat History</h3>
+                      <p className="text-sm text-neutral-600">Download all your conversations as a JSON file</p>
                     </div>
                     <button
                       onClick={exportChatHistory}
-                      className="px-4 py-2 bg-brand-primary hover:bg-primary-background text-primary rounded-md text-sm font-medium transition-colors"
+                      className="px-4 py-2 bg-neutral-100 hover:bg-primary-background text-neutral-900 rounded-md text-sm font-medium transition-colors"
                     >
                       Export
                     </button>
@@ -403,19 +403,19 @@ const SettingsPage: React.FC = () => {
                 {/* Recent Conversations Preview */}
                 {chatHistory.length > 0 && (
                   <div>
-                    <h3 className="text-sm font-medium text-primary mb-3">Recent Conversations</h3>
+                    <h3 className="text-sm font-medium text-neutral-900 mb-3">Recent Conversations</h3>
                     <div className="space-y-2 max-h-48 overflow-y-auto">
                       {chatHistory.slice(0, 5).map((chat, index) => (
-                        <div key={chat.id || index} className="flex items-center justify-between p-3 bg-section-light rounded-lg">
+                        <div key={chat.id || index} className="flex items-center justify-between p-3 bg-neutral-100 rounded-lg">
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-primary truncate">
+                            <p className="text-sm font-medium text-neutral-900 truncate">
                               {chat.title || 'Untitled Conversation'}
                             </p>
-                            <p className="text-xs text-secondary">
+                            <p className="text-xs text-neutral-600">
                               {new Date(chat.lastUpdate).toLocaleDateString()}
                             </p>
                           </div>
-                          <div className="text-xs text-secondary">
+                          <div className="text-xs text-neutral-600">
                             {chat.messages?.length || 0} messages
                           </div>
                         </div>
@@ -427,17 +427,17 @@ const SettingsPage: React.FC = () => {
             </div>
 
             {/* Privacy Section */}
-            <div className="bg-white dark:bg-primary-background rounded-lg shadow-sm border border-light dark:border-brand-accent">
-              <div className="px-6 py-4 border-b border-light dark:border-brand-accent">
-                <h2 className="text-lg font-medium text-primary dark:text-white">Privacy & Data</h2>
+            <div className="bg-neutral-100 dark:bg-primary-background rounded-lg shadow-sm border border-neutral-300 dark:border-gold-400">
+              <div className="px-6 py-4 border-b border-neutral-300 dark:border-gold-400">
+                <h2 className="text-lg font-medium text-neutral-900 dark:text-white">Privacy & Data</h2>
               </div>
               <div className="px-6 py-4 space-y-4">
                 <button 
                   onClick={downloadUserData}
-                  className="w-full text-left px-4 py-3 border border-light dark:border-brand-accent rounded-lg hover:bg-section-light dark:hover:bg-primary-background transition-colors"
+                  className="w-full text-left px-4 py-3 border border-neutral-300 dark:border-gold-400 rounded-lg hover:bg-neutral-100 dark:hover:bg-primary-background transition-colors"
                 >
-                  <div className="text-sm font-medium text-primary dark:text-white">Download your data</div>
-                  <div className="text-sm text-secondary dark:text-secondary">Export all your conversations and data</div>
+                  <div className="text-sm font-medium text-neutral-900 dark:text-white">Download your data</div>
+                  <div className="text-sm text-neutral-600 dark:text-neutral-600">Export all your conversations and data</div>
                 </button>
                 <button 
                   onClick={deleteAllMyData}
@@ -455,32 +455,32 @@ const SettingsPage: React.FC = () => {
             </div>
 
             {/* Support Section */}
-            <div className="bg-white rounded-lg shadow-sm border border-light">
-              <div className="px-6 py-4 border-b border-light">
-                <h2 className="text-lg font-medium text-primary">Support</h2>
+            <div className="bg-neutral-100 rounded-lg shadow-sm border border-neutral-300">
+              <div className="px-6 py-4 border-b border-neutral-300">
+                <h2 className="text-lg font-medium text-neutral-900">Support</h2>
               </div>
               <div className="px-6 py-4 space-y-4">
                 <button 
                   onClick={() => router.push('/help')}
-                  className="w-full text-left px-4 py-3 border border-light rounded-lg hover:bg-section-light transition-colors"
+                  className="w-full text-left px-4 py-3 border border-neutral-300 rounded-lg hover:bg-neutral-100 transition-colors"
                 >
-                  <div className="text-sm font-medium text-primary">Help Center</div>
-                  <div className="text-sm text-secondary">Get help and find answers</div>
+                  <div className="text-sm font-medium text-neutral-900">Help Center</div>
+                  <div className="text-sm text-neutral-600">Get help and find answers</div>
                 </button>
                 <ContactButton 
                   variant="card"
                   prefillCategory="support"
-                  className="w-full text-left px-4 py-3 border border-light rounded-lg hover:bg-section-light transition-colors"
+                  className="w-full text-left px-4 py-3 border border-neutral-300 rounded-lg hover:bg-neutral-100 transition-colors"
                 >
-                  <div className="text-sm font-medium text-primary">Contact Support</div>
-                  <div className="text-sm text-secondary">Get in touch with our team</div>
+                  <div className="text-sm font-medium text-neutral-900">Contact Support</div>
+                  <div className="text-sm text-neutral-600">Get in touch with our team</div>
                 </ContactButton>
                 <button 
                   onClick={() => router.push('/feature-requests')}
-                  className="w-full text-left px-4 py-3 border border-light rounded-lg hover:bg-section-light transition-colors"
+                  className="w-full text-left px-4 py-3 border border-neutral-300 rounded-lg hover:bg-neutral-100 transition-colors"
                 >
-                  <div className="text-sm font-medium text-primary">Feature Requests</div>
-                  <div className="text-sm text-secondary">Suggest new features</div>
+                  <div className="text-sm font-medium text-neutral-900">Feature Requests</div>
+                  <div className="text-sm text-neutral-600">Suggest new features</div>
                 </button>
               </div>
             </div>
@@ -489,7 +489,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex justify-center pt-8">
               <button
                 onClick={handleLogout}
-                className="px-6 py-2 border border-brand-accent rounded-lg text-primary hover:bg-section-light transition-colors"
+                className="px-6 py-2 border border-gold-400 rounded-lg text-neutral-900 hover:bg-neutral-100 transition-colors"
               >
                 Sign out
               </button>

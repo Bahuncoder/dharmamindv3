@@ -41,49 +41,49 @@ const Button: React.FC<ButtonProps> = ({
   
   const variants = {
     primary: `
-      bg-gradient-to-r from-emerald-500 to-emerald-600 text-white
-      shadow-lg shadow-emerald-500/25
-      hover:shadow-xl hover:shadow-emerald-500/30
-      focus:ring-emerald-500/50
+      bg-gradient-to-r from-gold-600 to-gold-700 text-white
+      shadow-lg shadow-gold-500/25
+      hover:shadow-xl hover:shadow-gold-500/30
+      focus:ring-gold-500/50
     `,
     gradient: `
-      bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 text-white
-      shadow-lg shadow-emerald-500/25
-      hover:shadow-xl hover:shadow-emerald-500/40
-      focus:ring-emerald-500/50
+      bg-gradient-to-r from-gold-500 via-gold-600 to-gold-700 text-white
+      shadow-lg shadow-gold-500/25
+      hover:shadow-xl hover:shadow-gold-500/40
+      focus:ring-gold-500/50
     `,
     secondary: `
-      bg-gray-100 text-gray-800 border-2 border-emerald-500
-      hover:bg-gray-200 hover:border-emerald-600
+      bg-neutral-100 text-neutral-800 border-2 border-gold-500
+      hover:bg-neutral-200 hover:border-gold-600
       shadow-sm hover:shadow-md
-      focus:ring-emerald-500/30
+      focus:ring-gold-500/30
     `,
     outline: `
-      bg-transparent text-emerald-600 border-2 border-emerald-500
-      hover:bg-emerald-50 hover:border-emerald-600
-      focus:ring-emerald-500/30
+      bg-transparent text-gold-600 border-2 border-gold-500
+      hover:bg-gold-50 hover:border-gold-600
+      focus:ring-gold-500/30
     `,
     soft: `
-      bg-emerald-50 text-emerald-700 border border-emerald-200
-      hover:bg-emerald-100 hover:border-emerald-300
-      focus:ring-emerald-500/30
+      bg-gold-50 text-gold-700 border border-gold-200
+      hover:bg-gold-100 hover:border-gold-300
+      focus:ring-gold-500/30
     `,
     contact: `
-      bg-white text-gray-800 border-2 border-emerald-500
-      hover:bg-emerald-50 hover:border-emerald-600
+      bg-neutral-100 text-neutral-800 border-2 border-gold-500
+      hover:bg-gold-50 hover:border-gold-600
       shadow-sm hover:shadow-md
-      focus:ring-emerald-500/30
+      focus:ring-gold-500/30
     `,
     enterprise: `
       bg-gradient-to-r from-gray-800 to-gray-900 text-white
-      border-2 border-emerald-500
+      border-2 border-gold-500
       shadow-lg shadow-gray-900/25
       hover:shadow-xl hover:from-gray-700 hover:to-gray-800
-      focus:ring-emerald-500/50
+      focus:ring-gold-500/50
     `,
     ghost: `
-      bg-transparent text-gray-600 
-      hover:text-gray-900 hover:bg-gray-100
+      bg-transparent text-neutral-600 
+      hover:text-neutral-900 hover:bg-neutral-100
       focus:ring-gray-500/30
     `,
     danger: `

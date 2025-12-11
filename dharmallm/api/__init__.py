@@ -1,6 +1,6 @@
-# 🕉️ DharmaLLM API Package
+# DharmaLLM API Package
 # Microservice API for DharmaLLM spiritual AI processing
 
-from .main import app
+from .production_main import app
 
 __all__ = ["app"]

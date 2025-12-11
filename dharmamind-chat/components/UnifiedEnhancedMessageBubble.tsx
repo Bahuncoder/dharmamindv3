@@ -355,8 +355,8 @@ const UnifiedEnhancedMessageBubble: React.FC<UnifiedEnhancedMessageBubbleProps> 
                     }`}
                     role="contentinfo"
                 >
-                    <time dateTime={message.timestamp.toISOString()}>
-                        {formatTimestamp(message.timestamp)}
+                    <time dateTime={new Date(message.timestamp).toISOString()}>
+                        {formatTimestamp(new Date(message.timestamp))}
                     </time>
                     {isVisible && (
                         <span className="sr-only">

@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """
-DharmaMind Backend - Authentication Service
-Clean authentication-only backend service.
+DharmaMind Backend - Enterprise API Gateway
+============================================
+
+Central API gateway for all DharmaMind services:
+- Authentication & User Management
+- Subscription & Billing
+- Chat Routing to DharmaLLM
+- Usage Tracking & Rate Limiting
+- Admin & Security
 """
 
 from datetime import datetime, timezone
@@ -10,26 +17,17 @@ import logging
 import os
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, HTTPException, Depends
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 # Import routers
 from .routes.auth import router as auth_router
-from .routes.mfa_auth import router as mfa_router  
-from .routes.admin_auth import router as admin_auth_router
-from .routes.feedback import router as feedback_router
+from .routes.llm_router import router as llm_router
 from .routes.health import router as health_router
-from .routes.llm_router import router as llm_router  # Simple LLM routing
 
-# Import database and config
-from .db.database import DatabaseManager
+# Import config
 from .config import settings
-
-# Import security middleware
-from .middleware.security import setup_security_middleware
 
 # Configure logging
 logging.basicConfig(
@@ -38,151 +36,111 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Global variables for state management
-database_manager: Optional[DatabaseManager] = None
-security = HTTPBearer()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan management - startup and shutdown."""
-    try:
-        # Initialize database manager
-        global database_manager
-        database_manager = DatabaseManager()
-        await database_manager.initialize()
-        logger.info("✅ Database manager initialized successfully")
-        
-        # Log startup
-        logger.info("🚀 DharmaMind Authentication Backend started successfully")
-        
-        yield
-        
-    except Exception as e:
-        logger.error(f"❌ Startup failed: {e}")
-        raise
-    finally:
-        # Cleanup
-        if database_manager:
-            await database_manager.close()
-        logger.info("🔄 DharmaMind Authentication Backend shutdown complete")
+    """Application lifespan - startup and shutdown"""
+    logger.info("Starting DharmaMind API Gateway...")
+    logger.info(f"Environment: {settings.ENVIRONMENT}")
+    logger.info(f"DharmaLLM URL: {settings.DHARMALLM_SERVICE_URL if hasattr(settings, 'DHARMALLM_SERVICE_URL') else 'http://localhost:8001'}")
+    yield
+    logger.info("Shutting down DharmaMind API Gateway...")
+
 
 # Create FastAPI app
 app = FastAPI(
-    title="DharmaMind Authentication Backend",
-    description="Clean authentication and user management service",
+    title="DharmaMind API Gateway",
+    description="Enterprise API gateway for DharmaMind platform",
     version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan
 )
 
-# Configure CORS
+# Configure CORS - Allow all frontends
+cors_origins = [
+    "http://localhost:3000",   # Chat
+    "http://localhost:3001",   # Brand Webpage
+    "http://localhost:3002",   # Community
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+    "http://127.0.0.1:3002",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Add trusted host middleware
-app.add_middleware(
-    TrustedHostMiddleware,
-    allowed_hosts=settings.ALLOWED_HOSTS
-)
-
-# Setup security middleware
-setup_security_middleware(app)
-
-# Include routers - Authentication, Chat, and Admin
+# Include routers
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
-app.include_router(mfa_router, prefix="/api/v1/mfa", tags=["multi-factor-auth"])
-app.include_router(admin_auth_router, prefix="/api/admin", tags=["admin-authentication"])
-app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
-app.include_router(llm_router, tags=["llm-routing"])  # Simple authenticated LLM routing
+app.include_router(llm_router, tags=["chat"])
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
 
-# Note: Chat functionality now handled entirely by frontend
-# Note: Wisdom functionality also handled by frontend with comprehensive fallback responses
+# Try to include optional routers
+try:
+    from .routes.mfa_auth import router as mfa_router
+    app.include_router(mfa_router, prefix="/api/v1/mfa", tags=["mfa"])
+except ImportError:
+    logger.warning("MFA router not available")
 
-# Import and include security dashboard router
-from .routes.security_dashboard import router as security_dashboard_router
-app.include_router(security_dashboard_router, prefix="/api/v1", tags=["security-dashboard"])
+try:
+    from .routes.feedback import router as feedback_router
+    app.include_router(feedback_router, prefix="/api/v1", tags=["feedback"])
+except ImportError:
+    logger.warning("Feedback router not available")
+
 
 @app.get("/")
 async def root():
-    """Root endpoint."""
+    """Root endpoint"""
     return {
-        "service": "DharmaMind Complete Backend",
+        "service": "DharmaMind API Gateway",
         "version": "2.0.0",
         "status": "operational",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "purpose": "Authentication, chat, and AI-powered spiritual guidance",
-        "features": ["authentication", "dharmic_chat", "spiritual_ai", "user_management"]
+        "endpoints": {
+            "chat": "/api/v1/chat",
+            "rishis": "/api/v1/rishis",
+            "subscription": "/api/v1/subscription/status",
+            "auth": "/auth/login",
+            "health": "/api/v1/health",
+            "docs": "/docs"
+        }
     }
 
-@app.get("/api/v1/status")
-async def status():
-    """Service status endpoint."""
-    try:
-        # Check database connection
-        db_status = "connected" if database_manager and await database_manager.health_check() else "disconnected"
-        
-        return {
-            "service": "dharmic_chat_complete",
-            "status": "healthy",
-            "database": db_status,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "version": "2.0.0",
-            "features": ["authentication", "dharmic_chat", "spiritual_ai", "dharmallm_integration"]
-        }
-    except Exception as e:
-        logger.error(f"Status check failed: {e}")
-        raise HTTPException(status_code=500, detail="Service unhealthy")
+
+@app.get("/health")
+async def health():
+    """Simple health check"""
+    return {"status": "healthy", "timestamp": datetime.now(timezone.utc).isoformat()}
+
 
 @app.exception_handler(404)
 async def not_found_handler(request: Request, exc: HTTPException):
-    """Handle 404 errors."""
+    """Handle 404 errors"""
     return JSONResponse(
         status_code=404,
         content={
             "error": "Not Found",
-            "message": "The requested endpoint does not exist",
-            "path": str(request.url.path),
-            "service": "authentication"
+            "message": f"Endpoint {request.url.path} not found",
+            "available_endpoints": ["/", "/docs", "/api/v1/chat", "/api/v1/health"]
         }
     )
+
 
 @app.exception_handler(500)
 async def internal_error_handler(request: Request, exc: Exception):
-    """Handle internal server errors."""
+    """Handle internal errors"""
     logger.error(f"Internal error: {exc}")
     return JSONResponse(
         status_code=500,
-        content={
-            "error": "Internal Server Error", 
-            "message": "An unexpected error occurred",
-            "service": "authentication"
-        }
+        content={"error": "Internal Server Error", "message": "An unexpected error occurred"}
     )
 
-# Dependency injection helpers
-async def get_database_manager() -> DatabaseManager:
-    """Get database manager instance."""
-    if not database_manager:
-        raise HTTPException(status_code=500, detail="Database manager not initialized")
-    return database_manager
-
-# Application metadata
-def get_app_info() -> Dict[str, Any]:
-    """Get application information."""
-    return {
-        "name": "DharmaMind Authentication Backend",
-        "version": "2.0.0",
-        "description": "Clean authentication and user management service",
-        "environment": os.getenv("ENVIRONMENT", "development"),
-        "timestamp": datetime.now(timezone.utc).isoformat()
-    }
 
 if __name__ == "__main__":
     import uvicorn

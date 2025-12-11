@@ -108,7 +108,7 @@ const EnterpriseSolutionsPage: React.FC = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="min-h-screen bg-section-light">
+            <div className="min-h-screen bg-neutral-100">
                 {/* Enterprise Brand Header */}
                 <BrandHeader
                     isEnterprise={true}
@@ -120,7 +120,7 @@ const EnterpriseSolutionsPage: React.FC = () => {
                 />
 
                 {/* Hero Section */}
-                <div className="bg-brand-primary border-b-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-b-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -128,10 +128,10 @@ const EnterpriseSolutionsPage: React.FC = () => {
                             transition={{ duration: 0.8 }}
                             className="text-center"
                         >
-                            <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-                                Enterprise <span className="text-brand-accent" style={{ borderBottom: '4px solid var(--brand-accent)' }}>Solutions</span>
+                            <h1 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
+                                Enterprise <span className="text-gold-600" style={{ borderBottom: '4px solid var(--brand-accent)' }}>Solutions</span>
                             </h1>
-                            <p className="text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
                                 Transform your organization with comprehensive AI-powered solutions that integrate ancient wisdom with modern business needs.
                             </p>
                         </motion.div>
@@ -148,16 +148,16 @@ const EnterpriseSolutionsPage: React.FC = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+                                className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
                             >
                                 <div className="text-4xl mb-4">{solution.icon}</div>
-                                <h3 className="text-xl font-semibold text-primary mb-3">{solution.title}</h3>
-                                <p className="text-secondary mb-4">{solution.description}</p>
+                                <h3 className="text-xl font-semibold text-neutral-900 mb-3">{solution.title}</h3>
+                                <p className="text-neutral-600 mb-4">{solution.description}</p>
                                 <ul className="space-y-2">
                                     {solution.features.map((feature, idx) => (
                                         <li key={idx} className="flex items-center space-x-2">
-                                            <span className="text-brand-accent text-sm">✓</span>
-                                            <span className="text-primary text-sm">{feature}</span>
+                                            <span className="text-gold-600 text-sm">✓</span>
+                                            <span className="text-neutral-900 text-sm">{feature}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -167,7 +167,7 @@ const EnterpriseSolutionsPage: React.FC = () => {
                 </div>
 
                 {/* Use Cases */}
-                <div className="bg-primary-background border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-50 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -175,10 +175,10 @@ const EnterpriseSolutionsPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="text-center mb-12"
                         >
-                            <h2 className="text-3xl font-bold text-primary mb-4 inline-block pb-2" style={{ borderBottom: '4px solid var(--brand-accent)' }}>
+                            <h2 className="text-3xl font-bold text-neutral-900 mb-4 inline-block pb-2" style={{ borderBottom: '4px solid var(--brand-accent)' }}>
                                 Industry Use Cases
                             </h2>
-                            <p className="text-lg text-secondary">
+                            <p className="text-lg text-neutral-600">
                                 See how organizations across industries are transforming with DharmaMind
                             </p>
                         </motion.div>
@@ -191,21 +191,21 @@ const EnterpriseSolutionsPage: React.FC = () => {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: index * 0.2 }}
-                                    className="bg-brand-primary border-2 border-brand-accent rounded-lg p-6"
+                                    className="bg-neutral-100 border-2 border-gold-400 rounded-lg p-6"
                                 >
-                                    <h3 className="text-lg font-semibold text-brand-accent mb-3">{useCase.industry}</h3>
+                                    <h3 className="text-lg font-semibold text-gold-600 mb-3">{useCase.industry}</h3>
                                     <div className="space-y-3">
                                         <div>
-                                            <h4 className="text-sm font-medium text-primary">Challenge:</h4>
-                                            <p className="text-sm text-secondary">{useCase.challenge}</p>
+                                            <h4 className="text-sm font-medium text-neutral-900">Challenge:</h4>
+                                            <p className="text-sm text-neutral-600">{useCase.challenge}</p>
                                         </div>
                                         <div>
-                                            <h4 className="text-sm font-medium text-primary">Solution:</h4>
-                                            <p className="text-sm text-secondary">{useCase.solution}</p>
+                                            <h4 className="text-sm font-medium text-neutral-900">Solution:</h4>
+                                            <p className="text-sm text-neutral-600">{useCase.solution}</p>
                                         </div>
                                         <div>
-                                            <h4 className="text-sm font-medium text-primary">Result:</h4>
-                                            <p className="text-sm font-semibold text-brand-accent">{useCase.result}</p>
+                                            <h4 className="text-sm font-medium text-neutral-900">Result:</h4>
+                                            <p className="text-sm font-semibold text-gold-600">{useCase.result}</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -215,7 +215,7 @@ const EnterpriseSolutionsPage: React.FC = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-brand-primary border-t-2 border-brand-accent py-16">
+                <div className="bg-neutral-100 border-t-2 border-gold-400 py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -223,10 +223,10 @@ const EnterpriseSolutionsPage: React.FC = () => {
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-                            <h2 className="text-3xl font-bold text-primary">
+                            <h2 className="text-3xl font-bold text-neutral-900">
                                 Ready to Transform Your Organization?
                             </h2>
-                            <p className="text-lg text-secondary max-w-2xl mx-auto">
+                            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
                                 Schedule a personalized demo to see how our enterprise solutions can address your unique challenges.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
