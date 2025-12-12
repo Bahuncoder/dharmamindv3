@@ -9,10 +9,12 @@ import { authService, User, AuthResponse, LoginCredentials, RegisterData } from 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
+  isGuest: boolean;
   isLoading: boolean;
   login: (credentials: LoginCredentials) => Promise<AuthResponse>;
   register: (userData: RegisterData) => Promise<AuthResponse>;
   demoLogin: (plan?: 'basic' | 'pro' | 'max' | 'enterprise') => Promise<AuthResponse>;
+  guestLogin: () => void;
   logout: () => Promise<void>;
   refreshUser: () => void;
   updateUserPlan: (plan: 'basic' | 'pro' | 'max' | 'enterprise') => void;
@@ -26,6 +28,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isGuest, setIsGuest] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // Initialize authentication state
@@ -33,6 +36,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const initAuth = () => {
       const currentUser = authService.getCurrentUser();
       setUser(currentUser);
+      
+      // Check if user was in guest mode
+      if (typeof window !== 'undefined') {
+        const guestMode = sessionStorage.getItem('dharma_guest_mode');
+        if (guestMode === 'true' && !currentUser) {
+          setIsGuest(true);
+        }
+      }
+      
       setIsLoading(false);
     };
 
@@ -82,6 +94,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       if (response.success && response.user) {
         setUser(response.user);
+        setIsGuest(false);
+        if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('dharma_guest_mode');
+        }
       }
       
       return response;
@@ -93,11 +109,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  // Guest login - no account needed, just start chatting
+  const guestLogin = (): void => {
+    setIsGuest(true);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('dharma_guest_mode', 'true');
+    }
+  };
+
   const logout = async (): Promise<void> => {
     try {
       setIsLoading(true);
       await authService.logout();
       setUser(null);
+      setIsGuest(false);
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem('dharma_guest_mode');
+      }
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
@@ -133,10 +161,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value: AuthContextType = {
     user,
     isAuthenticated: !!user && authService.isAuthenticated(),
+    isGuest,
     isLoading,
     login,
     register,
     demoLogin,
+    guestLogin,
     logout,
     refreshUser,
     updateUserPlan,

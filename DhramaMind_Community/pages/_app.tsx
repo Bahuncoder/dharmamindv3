@@ -44,7 +44,7 @@ const TopLoadingBar = ({ isLoading }: { isLoading: boolean }) => {
     <div className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-transparent">
       <div
         className="h-full bg-gradient-to-r from-gold-500 via-gold-600 to-gold-500 transition-all duration-300 ease-out"
-        style={{ 
+        style={{
           width: `${progress}%`,
           boxShadow: '0 0 10px rgba(212, 168, 84, 0.5)'
         }}

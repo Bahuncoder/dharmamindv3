@@ -48,6 +48,7 @@ interface User {
 const ChatPage: React.FC = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const { isAuthenticated, isGuest, guestLogin } = useAuth();
   
   // Use RishiChatContext for managing separate Rishi conversations
   const { 
@@ -292,12 +293,50 @@ Each Saptarishi will guide you according to their unique wisdom tradition. Choos
       return;
     }
     
-    // No session - redirect to auth page
-    if (!session) {
-      router.push('/auth?mode=login');
+    // Allow guest mode - no redirect needed
+    if (isGuest) {
+      const guestUser: User = {
+        name: 'Guest',
+        email: '',
+        plan: 'basic',
+        isGuest: true
+      };
+      setUser(guestUser);
+      
+      // Add welcome message for guest users
+      if (messages.length === 0) {
+        setMessages([{
+          id: '1',
+          sender: 'ai',
+          content: `**🙏 Welcome to DharmaMind**
+
+Experience AI with Soul — your spiritual companion guided by ancient wisdom.
+
+You're chatting as a **guest**. Feel free to explore and ask questions!
+
+**To unlock full features:**
+• Save your chat history
+• Access all 7 Saptarishi guides
+• Unlimited conversations
+• Personalized spiritual insights
+
+[Sign up for free](/auth?mode=register) or [Sign in](/auth?mode=login) to save your progress.
+
+**Start by asking me anything** about dharma, meditation, life guidance, or spiritual wisdom!`,
+          timestamp: new Date(),
+          wisdom_score: 95,
+          dharmic_alignment: 90
+        }]);
+      }
       return;
     }
-  }, [session, status, router]);
+    
+    // No session and not guest - auto-enable guest mode
+    if (!session && !isGuest) {
+      guestLogin();
+      return;
+    }
+  }, [session, status, router, isGuest, guestLogin]);
 
   useEffect(() => {
     if (user) {
@@ -984,6 +1023,35 @@ How can I assist you today?`,
 
         {/* Main Chat Area - Full Height */}
         <div className="flex-1 flex flex-col h-full overflow-hidden">
+          
+          {/* Guest Mode Banner */}
+          {user?.isGuest && (
+            <div className="flex-shrink-0 bg-gradient-to-r from-gold-50 to-amber-50 dark:from-gold-900/20 dark:to-amber-900/20 border-b border-gold-200 dark:border-gold-800 px-4 py-2">
+              <div className="max-w-4xl mx-auto flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-gold-600 dark:text-gold-400">✨</span>
+                  <span className="text-sm text-gold-800 dark:text-gold-200">
+                    You&apos;re chatting as a guest. 
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => router.push('/auth?mode=register')}
+                    className="text-sm font-medium text-gold-700 dark:text-gold-300 hover:text-gold-900 dark:hover:text-gold-100 underline"
+                  >
+                    Sign up free
+                  </button>
+                  <span className="text-gold-400">|</span>
+                  <button
+                    onClick={() => router.push('/auth?mode=login')}
+                    className="text-sm font-medium text-gold-700 dark:text-gold-300 hover:text-gold-900 dark:hover:text-gold-100 underline"
+                  >
+                    Sign in
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
           
           {/* Mobile Header */}
           <div className="md:hidden flex items-center justify-between h-16 px-4 bg-white/80 backdrop-blur-sm border-b border-gray-200/50 flex-shrink-0">

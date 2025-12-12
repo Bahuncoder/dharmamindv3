@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { useAuth } from '../contexts/AuthContext';
 
 // Spiritual interfaces
 interface LoadingStep {
@@ -19,6 +20,7 @@ interface LoadingState {
 
 const HomePage: React.FC = () => {
   const router = useRouter();
+  const { isAuthenticated, isGuest, guestLogin } = useAuth();
   const [showContent, setShowContent] = useState(false);
   const [loadingState, setLoadingState] = useState<LoadingState>({
     progress: 0,
@@ -36,7 +38,7 @@ const HomePage: React.FC = () => {
     { progress: 100, text: 'Entering conscious chat...', delay: 200, icon: '💫' }
   ];
 
-  // Progressive loading with demo chat redirect
+  // Progressive loading - go directly to chat (like ChatGPT/Gemini)
   const initializeLoading = useCallback(() => {
     setShowContent(true);
     
@@ -50,12 +52,16 @@ const HomePage: React.FC = () => {
       }));
       setLoadingText('Welcome to DharmaMind');
       
-      // Immediate redirect - no waiting
+      // If already authenticated, go to chat
+      // Otherwise, enable guest mode and go to chat
       setTimeout(() => {
-        router.replace('/auth?mode=login');
+        if (!isAuthenticated && !isGuest) {
+          guestLogin(); // Enable guest mode automatically
+        }
+        router.replace('/chat');
       }, 100);
     }, 200);
-  }, [router]);
+  }, [router, isAuthenticated, isGuest, guestLogin]);
 
   useEffect(() => {
     initializeLoading();
