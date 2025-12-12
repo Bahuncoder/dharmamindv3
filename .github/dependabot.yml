@@ -1,0 +1,142 @@
+# Dependabot configuration for automated security updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+
+version: 2
+updates:
+  # NPM - Brand Webpage
+  - package-ecosystem: "npm"
+    directory: "/Brand_Webpage"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "Bahuncoder"
+    labels:
+      - "dependencies"
+      - "security"
+    commit-message:
+      prefix: "deps(brand):"
+    # Group minor and patch updates
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # NPM - Chat App
+  - package-ecosystem: "npm"
+    directory: "/dharmamind-chat"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "Bahuncoder"
+    labels:
+      - "dependencies"
+      - "security"
+    commit-message:
+      prefix: "deps(chat):"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # NPM - Community App
+  - package-ecosystem: "npm"
+    directory: "/DhramaMind_Community"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "Bahuncoder"
+    labels:
+      - "dependencies"
+      - "security"
+    commit-message:
+      prefix: "deps(community):"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Python - Backend
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "Bahuncoder"
+    labels:
+      - "dependencies"
+      - "security"
+      - "python"
+    commit-message:
+      prefix: "deps(backend):"
+    groups:
+      security-critical:
+        patterns:
+          - "cryptography"
+          - "PyJWT"
+          - "passlib"
+          - "bcrypt"
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+
+  # Python - DharmaLLM
+  - package-ecosystem: "pip"
+    directory: "/dharmallm"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "Bahuncoder"
+    labels:
+      - "dependencies"
+      - "security"
+      - "ai-ml"
+    commit-message:
+      prefix: "deps(dharmallm):"
+
+  # Docker
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "ci-cd"
