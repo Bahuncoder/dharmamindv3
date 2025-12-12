@@ -76,6 +76,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add Enhanced Security Middleware
+try:
+    from .middleware.enhanced_security import EnhancedSecurityMiddleware
+    app.add_middleware(EnhancedSecurityMiddleware)
+    logger.info("🔒 Enhanced Security Middleware enabled")
+except ImportError as e:
+    logger.warning(f"Enhanced Security Middleware not available: {e}")
+
 # Include routers
 app.include_router(auth_router, prefix="/auth", tags=["authentication"])
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
@@ -110,6 +118,13 @@ try:
     app.include_router(subscription_router, prefix="/api/v1/subscription", tags=["subscription"])
 except ImportError:
     logger.warning("Subscription router not available")
+
+try:
+    from .routes.security_status import router as security_router
+    app.include_router(security_router, prefix="/api/v1", tags=["security"])
+    logger.info("🔐 Security status endpoints enabled")
+except ImportError:
+    logger.warning("Security status router not available")
 
 
 @app.get("/")
