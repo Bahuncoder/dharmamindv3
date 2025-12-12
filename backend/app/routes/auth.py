@@ -3,9 +3,9 @@ Enhanced Authentication routes for DharmaMind API
 Handles user authentication, registration, and session management with verification codes
 """
 
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, HTTPException, Depends, status, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, validator
 from datetime import datetime, timedelta
 from typing import Optional
 from passlib.context import CryptContext
@@ -37,6 +37,46 @@ class UserRegistration(BaseModel):
     password: str
     phone: Optional[str] = None
     plan: str = "free"
+    
+    @validator('password')
+    def validate_password_strength(cls, v):
+        """Validate password meets security requirements"""
+        issues = []
+        
+        # Minimum length
+        if len(v) < 8:
+            issues.append("Password must be at least 8 characters")
+        
+        # Maximum length
+        if len(v) > 128:
+            issues.append("Password must not exceed 128 characters")
+        
+        # Require uppercase
+        if not any(c.isupper() for c in v):
+            issues.append("Password must contain at least one uppercase letter")
+        
+        # Require lowercase
+        if not any(c.islower() for c in v):
+            issues.append("Password must contain at least one lowercase letter")
+        
+        # Require digit
+        if not any(c.isdigit() for c in v):
+            issues.append("Password must contain at least one number")
+        
+        # Require special character
+        special_chars = "!@#$%^&*()_+-=[]{}|;':\",./<>?"
+        if not any(c in special_chars for c in v):
+            issues.append("Password must contain at least one special character")
+        
+        # Check for common passwords
+        common = ['password', '123456', 'qwerty', 'admin', 'letmein', 'welcome']
+        if v.lower() in common:
+            issues.append("Password is too common")
+        
+        if issues:
+            raise ValueError("; ".join(issues))
+        
+        return v
 
 class VerificationRequest(BaseModel):
     email: EmailStr
@@ -395,3 +435,98 @@ async def get_current_user(current_user: dict = Depends(verify_token)):
 async def get_me(current_user: dict = Depends(verify_token)):
     """Get current user information"""
     return await get_current_user(current_user)
+
+
+# ================================
+# 🔐 SESSION MANAGEMENT ENDPOINTS
+# ================================
+
+@router.get("/sessions")
+async def get_user_sessions(current_user: dict = Depends(verify_token)):
+    """Get all active sessions for current user"""
+    try:
+        from ..security.session_manager import get_session_manager
+        session_manager = get_session_manager()
+        
+        sessions = session_manager.get_user_sessions(current_user["sub"])
+        
+        return {
+            "success": True,
+            "sessions": [
+                {
+                    "session_id": s.session_id,
+                    "created_at": s.created_at,
+                    "last_activity": s.last_activity,
+                    "ip_address": s.ip_address[:20] + "..." if len(s.ip_address) > 20 else s.ip_address,
+                    "user_agent": s.user_agent[:50] + "..." if len(s.user_agent) > 50 else s.user_agent,
+                    "is_active": s.is_active
+                }
+                for s in sessions
+            ],
+            "total": len(sessions)
+        }
+    except ImportError:
+        return {"success": True, "sessions": [], "total": 0, "message": "Session management not available"}
+
+
+@router.post("/sessions/revoke/{session_id}")
+async def revoke_session(session_id: str, current_user: dict = Depends(verify_token)):
+    """Revoke a specific session"""
+    try:
+        from ..security.session_manager import get_session_manager
+        session_manager = get_session_manager()
+        
+        # Verify session belongs to user
+        sessions = session_manager.get_user_sessions(current_user["sub"])
+        if not any(s.session_id == session_id for s in sessions):
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Session not found"
+            )
+        
+        session_manager.revoke_session(session_id, "user_revoked")
+        
+        return {"success": True, "message": "Session revoked successfully"}
+    except ImportError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Session management not available"
+        )
+
+
+@router.post("/sessions/revoke-all")
+async def revoke_all_sessions(current_user: dict = Depends(verify_token)):
+    """Revoke all sessions (logout everywhere)"""
+    try:
+        from ..security.session_manager import get_session_manager
+        session_manager = get_session_manager()
+        
+        session_manager.revoke_all_user_sessions(current_user["sub"], "logout_all")
+        
+        return {"success": True, "message": "All sessions revoked successfully"}
+    except ImportError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Session management not available"
+        )
+
+
+@router.post("/logout")
+async def logout(
+    request: Request,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    current_user: dict = Depends(verify_token)
+):
+    """Logout and blacklist current token"""
+    try:
+        from ..security.session_manager import get_session_manager
+        session_manager = get_session_manager()
+        
+        token = credentials.credentials
+        session_manager.blacklist_token(token, current_user["sub"], "logout")
+        
+        return {"success": True, "message": "Logged out successfully"}
+    except ImportError:
+        # Graceful degradation - just acknowledge logout
+        return {"success": True, "message": "Logged out"}
+
