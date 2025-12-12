@@ -182,7 +182,7 @@ class TestAuthenticationSecurity:
     async def test_jwt_token_expiry(self, async_client, test_user):
         """Test JWT token expiration handling."""
         # Create expired token
-        from jose import jwt
+        import jwt
         from datetime import datetime, timedelta
         from app.config import settings
         

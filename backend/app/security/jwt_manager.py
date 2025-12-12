@@ -10,14 +10,10 @@ Implements comprehensive JWT security including:
 
 # Try to import JWT libraries with fallbacks
 try:
-    from jose import jwt, JWTError
+    import jwt
+    from jwt import PyJWTError as JWTError
     JWT_AVAILABLE = True
 except ImportError:
-    try:
-        import jwt
-        from jwt import PyJWTError as JWTError
-        JWT_AVAILABLE = True
-    except ImportError:
         # Create mock JWT for testing
         class MockJWT:
             @staticmethod

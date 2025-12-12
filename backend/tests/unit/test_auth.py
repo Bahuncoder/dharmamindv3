@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 from unittest.mock import AsyncMock, patch, MagicMock
 
 from fastapi import HTTPException, status
-from jose import jwt
+import jwt
 from passlib.context import CryptContext
 
 from app.auth.auth_service import AuthService

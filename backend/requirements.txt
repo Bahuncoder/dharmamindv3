@@ -17,7 +17,7 @@ aioredis>=2.0.1
 
 # Authentication and Security
 passlib[bcrypt]>=1.7.4
-python-jose[cryptography]>=3.5.0
+PyJWT[crypto]>=2.10.0
 python-multipart>=0.0.18
 cryptography>=46.0.0
 

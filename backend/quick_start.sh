@@ -17,7 +17,7 @@ pip3 install --user --break-system-packages \
     pydantic==2.5.0 \
     email-validator \
     passlib \
-    python-jose \
+    PyJWT[crypto] \
     python-multipart
 
 echo "🚀 Starting DharmaMind backend with DharmaLLM integration..."
