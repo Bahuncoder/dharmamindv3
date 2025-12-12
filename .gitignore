@@ -60,6 +60,13 @@ trained_models/
 *.bin
 *.safetensors
 
+# Security - Private Keys and Certificates
+backend/keys/
+*.key
+*.pem
+*.crt
+!*.example.key
+
 # Cache
 cache/
 .history/

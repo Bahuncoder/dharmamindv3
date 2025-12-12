@@ -434,8 +434,17 @@ class DataEncryptionService:
         if key_env:
             return key_env.encode()
 
-        # Generate new key
-        password = os.getenv('SECRET_KEY', 'dharmamind-default-key').encode()
+        # Get secret key from environment (REQUIRED for security)
+        secret_key = os.getenv('SECRET_KEY')
+        if not secret_key:
+            import secrets
+            # Generate a secure random key for development only
+            # In production, SECRET_KEY must be set in environment
+            import logging
+            logging.warning("⚠️ SECRET_KEY not set - using random key (NOT for production)")
+            secret_key = secrets.token_urlsafe(32)
+        
+        password = secret_key.encode()
         salt = b'dharmamind-salt-2024'  # In production, use random salt
 
         kdf = PBKDF2HMAC(

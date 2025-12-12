@@ -7,6 +7,7 @@ import secrets
 import jwt
 import bcrypt
 import logging
+import json
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any, List
 from functools import wraps
@@ -584,8 +585,8 @@ class SecurityMonitoringService:
         alerts = self.redis_client.lrange('security_alerts', 0, 9)
         
         return {
-            'recent_events': [eval(event.decode()) for event in events],
-            'recent_alerts': [eval(alert.decode()) for alert in alerts],
+            'recent_events': [json.loads(event.decode()) for event in events],
+            'recent_alerts': [json.loads(alert.decode()) for alert in alerts],
             'total_events': self.redis_client.llen('security_events'),
             'total_alerts': self.redis_client.llen('security_alerts')
         }
@@ -797,7 +798,7 @@ class SecurityMetrics:
         
         for event in events:
             try:
-                event_data = eval(event.decode())
+                event_data = json.loads(event.decode())
                 event_type = event_data.get('event_type', 'unknown')
                 if 'attack' in event_type or 'injection' in event_type:
                     attack_counts[event_type] += 1
