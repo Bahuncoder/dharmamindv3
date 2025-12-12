@@ -116,7 +116,7 @@ export default function Products() {
                                     Community support
                                 </li>
                             </ul>
-                            <Button href="https://chat.dharmamind.ai" variant="outline" className="w-full">
+                            <Button href="https://dharmamind.ai" variant="outline" className="w-full">
                                 Get Started
                             </Button>
                         </div>
@@ -147,7 +147,7 @@ export default function Products() {
                                     Progress tracking
                                 </li>
                             </ul>
-                            <Button href="https://chat.dharmamind.ai/pro" className="w-full">
+                            <Button href="https://dharmamind.ai/pro" className="w-full">
                                 Start Free Trial
                             </Button>
                         </div>
@@ -252,7 +252,7 @@ export default function Products() {
                         Start your spiritual journey with AI that understands the depth of ancient wisdom.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button href="https://chat.dharmamind.ai" size="lg" external>
+                        <Button href="https://dharmamind.ai" size="lg" external>
                             Try DharmaMind Free
                         </Button>
                         <Button href={`mailto:${siteConfig.company.email}`} variant="outline" size="lg">

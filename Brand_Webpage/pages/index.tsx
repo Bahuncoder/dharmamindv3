@@ -29,7 +29,7 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="https://chat.dharmamind.ai" size="lg" external>
+            <Button href="https://dharmamind.ai" size="lg" external>
               Try DharmaMind Chat
             </Button>
             <Button href="/research" variant="outline" size="lg">
@@ -287,7 +287,7 @@ export default function Home() {
             Start a conversation that could change your perspective.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="https://chat.dharmamind.ai" size="lg" external>
+            <Button href="https://dharmamind.ai" size="lg" external>
               Try DharmaMind Free
             </Button>
             <Button href="/company" variant="outline" size="lg">

@@ -1,6 +1,6 @@
 /**
  * DharmaMind Community - Homepage
- * Clean, professional design
+ * Clean, professional design with improved readability
  */
 
 import React from 'react';
@@ -36,29 +36,29 @@ const HomePage: React.FC = () => {
         {/* Navigation */}
         <header className="bg-white border-b border-neutral-200">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="flex items-center justify-between h-14">
+            <div className="flex items-center justify-between h-16">
               <Link href="/" className="flex items-center gap-3">
-                <img src="/logo.jpeg" alt="DharmaMind" className="w-7 h-7 rounded-lg object-cover" />
-                <span className="font-medium text-neutral-900">Community</span>
+                <img src="/logo.jpeg" alt="DharmaMind" className="w-8 h-8 rounded-lg object-cover" />
+                <span className="text-lg font-semibold text-neutral-900">Community</span>
               </Link>
 
-              <nav className="hidden md:flex items-center gap-6">
-                <Link href="/discussions" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+              <nav className="hidden md:flex items-center gap-8">
+                <Link href="/discussions" className="text-base text-neutral-600 hover:text-neutral-900 transition-colors">
                   Discussions
                 </Link>
-                <Link href="/members" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+                <Link href="/members" className="text-base text-neutral-600 hover:text-neutral-900 transition-colors">
                   Members
                 </Link>
-                <Link href="/events" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+                <Link href="/events" className="text-base text-neutral-600 hover:text-neutral-900 transition-colors">
                   Events
                 </Link>
               </nav>
 
-              <div className="flex items-center gap-3">
-                <Link href="/login" className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+              <div className="flex items-center gap-4">
+                <Link href="/login" className="text-base text-neutral-600 hover:text-neutral-900 transition-colors">
                   Sign in
                 </Link>
-                <Link href="/signup" className="px-4 py-1.5 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                <Link href="/signup" className="px-5 py-2 bg-gold-600 text-white text-base font-medium rounded-lg hover:bg-gold-700 transition-colors">
                   Join
                 </Link>
               </div>
@@ -69,27 +69,27 @@ const HomePage: React.FC = () => {
         <main>
           {/* Hero */}
           <section className="bg-white border-b border-neutral-200">
-            <div className="max-w-6xl mx-auto px-6 py-16">
-              <div className="flex justify-center mb-8">
-                <img src="/logo.jpeg" alt="DharmaMind" className="w-20 h-20 rounded-2xl shadow-sm object-cover" />
+            <div className="max-w-6xl mx-auto px-6 py-20">
+              <div className="flex justify-center mb-10">
+                <img src="/logo.jpeg" alt="DharmaMind" className="w-24 h-24 rounded-2xl shadow-sm object-cover" />
               </div>
-              
-              <p className="text-xs font-medium text-neutral-500 uppercase tracking-widest text-center mb-4">
+
+              <p className="text-sm font-medium text-neutral-500 uppercase tracking-widest text-center mb-6">
                 AI with Soul
               </p>
 
-              <div className="max-w-xl mx-auto text-center">
-                <h1 className="text-3xl font-semibold text-neutral-900 mb-3">
+              <div className="max-w-2xl mx-auto text-center">
+                <h1 className="text-4xl md:text-5xl font-semibold text-neutral-900 mb-5">
                   A space for thoughtful conversation
                 </h1>
-                <p className="text-neutral-600 mb-6">
+                <p className="text-xl text-neutral-600 mb-8">
                   Connect with people who value depth, growth, and meaningful dialogue.
                 </p>
-                <div className="flex items-center justify-center gap-3">
-                  <Link href="/signup" className="px-6 py-2 bg-neutral-900 text-white font-medium rounded-lg hover:bg-neutral-800 transition-colors text-sm">
+                <div className="flex items-center justify-center gap-4">
+                  <Link href="/signup" className="px-8 py-3 bg-gold-600 text-white text-lg font-medium rounded-lg hover:bg-gold-700 transition-colors">
                     Join free
                   </Link>
-                  <Link href="/about" className="px-6 py-2 text-neutral-600 font-medium hover:text-neutral-900 transition-colors text-sm">
+                  <Link href="/about" className="px-8 py-3 text-neutral-600 text-lg font-medium hover:text-neutral-900 transition-colors">
                     Learn more
                   </Link>
                 </div>
@@ -99,64 +99,64 @@ const HomePage: React.FC = () => {
 
           {/* Stats */}
           <section className="bg-white border-b border-neutral-200">
-            <div className="max-w-6xl mx-auto px-6 py-6">
-              <div className="flex flex-wrap items-center justify-center gap-12 text-center">
+            <div className="max-w-6xl mx-auto px-6 py-10">
+              <div className="flex flex-wrap items-center justify-center gap-16 text-center">
                 <div>
-                  <p className="text-2xl font-semibold text-neutral-900">12k+</p>
-                  <p className="text-xs text-neutral-500">Members</p>
+                  <p className="text-4xl font-bold text-neutral-900">12k+</p>
+                  <p className="text-base text-neutral-500 mt-1">Members</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-semibold text-neutral-900">5.4k+</p>
-                  <p className="text-xs text-neutral-500">Discussions</p>
+                  <p className="text-4xl font-bold text-neutral-900">5.4k+</p>
+                  <p className="text-base text-neutral-500 mt-1">Discussions</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-semibold text-neutral-900">89</p>
-                  <p className="text-xs text-neutral-500">Countries</p>
+                  <p className="text-4xl font-bold text-neutral-900">89</p>
+                  <p className="text-base text-neutral-500 mt-1">Countries</p>
                 </div>
               </div>
             </div>
           </section>
 
           {/* Main Content */}
-          <section className="py-8 px-6">
+          <section className="py-12 px-6">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-3 gap-6">
+              <div className="grid lg:grid-cols-3 gap-8">
                 {/* Discussions */}
                 <div className="lg:col-span-2">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="font-medium text-neutral-900">Recent Discussions</h2>
-                    <Link href="/discussions" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
-                      View all
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-semibold text-neutral-900">Recent Discussions</h2>
+                    <Link href="/discussions" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">
+                      View all →
                     </Link>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-4">
                     {discussions.map((discussion) => (
                       <Link
                         key={discussion.id}
                         href={`/discussions/${discussion.id}`}
-                        className="block bg-white p-4 rounded-lg border border-neutral-200 hover:border-neutral-300 transition-colors"
+                        className="block bg-white p-5 rounded-xl border border-neutral-200 hover:border-neutral-300 hover:shadow-sm transition-all"
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1 min-w-0">
-                            <span className="inline-block px-2 py-0.5 text-xs text-neutral-500 bg-neutral-100 rounded mb-1.5">
+                            <span className="inline-block px-3 py-1 text-sm text-neutral-600 bg-neutral-100 rounded-full mb-2">
                               {discussion.category}
                             </span>
-                            <h3 className="text-sm font-medium text-neutral-900 mb-1">{discussion.title}</h3>
-                            <p className="text-xs text-neutral-500">by {discussion.author}</p>
+                            <h3 className="text-lg font-medium text-neutral-900 mb-2">{discussion.title}</h3>
+                            <p className="text-base text-neutral-500">by {discussion.author}</p>
                           </div>
                           <div className="text-right flex-shrink-0">
-                            <p className="text-sm font-medium text-neutral-900">{discussion.replies}</p>
-                            <p className="text-xs text-neutral-500">replies</p>
+                            <p className="text-xl font-semibold text-neutral-900">{discussion.replies}</p>
+                            <p className="text-sm text-neutral-500">replies</p>
                           </div>
                         </div>
                       </Link>
                     ))}
                   </div>
 
-                  <div className="mt-4 text-center">
-                    <Link href="/discussions/new" className="inline-flex items-center gap-1.5 text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="mt-6 text-center">
+                    <Link href="/discussions/new" className="inline-flex items-center gap-2 text-base text-neutral-600 hover:text-neutral-900 transition-colors">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                       </svg>
                       Start a discussion
@@ -165,42 +165,51 @@ const HomePage: React.FC = () => {
                 </div>
 
                 {/* Sidebar */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {/* Topics */}
-                  <div className="bg-white p-4 rounded-lg border border-neutral-200">
-                    <h3 className="text-sm font-medium text-neutral-900 mb-3">Topics</h3>
-                    <div className="space-y-2">
+                  <div className="bg-white p-6 rounded-xl border border-neutral-200">
+                    <h3 className="text-lg font-semibold text-neutral-900 mb-4">Popular Topics</h3>
+                    <div className="space-y-3">
                       {topics.map((topic, i) => (
                         <Link
                           key={i}
                           href={`/topics/${topic.name.toLowerCase().replace(' ', '-')}`}
-                          className="flex items-center justify-between text-sm hover:bg-neutral-50 -mx-2 px-2 py-1 rounded transition-colors"
+                          className="flex items-center justify-between text-base hover:bg-neutral-50 -mx-3 px-3 py-2 rounded-lg transition-colors"
                         >
-                          <span className="text-neutral-600">{topic.name}</span>
-                          <span className="text-xs text-neutral-500">{topic.count}</span>
+                          <span className="text-neutral-700">{topic.name}</span>
+                          <span className="text-sm text-neutral-500">{topic.count}</span>
                         </Link>
                       ))}
                     </div>
                   </div>
 
                   {/* Guidelines */}
-                  <div className="bg-white p-4 rounded-lg border border-neutral-200">
-                    <h3 className="text-sm font-medium text-neutral-900 mb-3">Guidelines</h3>
-                    <ul className="text-xs text-neutral-600 space-y-1.5">
-                      <li>• Be respectful and constructive</li>
-                      <li>• Share knowledge freely</li>
-                      <li>• Help others grow</li>
+                  <div className="bg-white p-6 rounded-xl border border-neutral-200">
+                    <h3 className="text-lg font-semibold text-neutral-900 mb-4">Community Guidelines</h3>
+                    <ul className="text-base text-neutral-600 space-y-3">
+                      <li className="flex items-start gap-2">
+                        <span className="text-gold-600">•</span>
+                        <span>Be respectful and constructive</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-gold-600">•</span>
+                        <span>Share knowledge freely</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-gold-600">•</span>
+                        <span>Help others grow</span>
+                      </li>
                     </ul>
                   </div>
 
                   {/* CTA */}
-                  <div className="bg-neutral-900 p-4 rounded-lg">
-                    <h3 className="text-sm font-medium text-white mb-1">Try DharmaMind AI</h3>
-                    <p className="text-xs text-neutral-400 mb-3">
+                  <div className="bg-gold-600 p-6 rounded-xl">
+                    <h3 className="text-lg font-semibold text-white mb-2">Try DharmaMind AI</h3>
+                    <p className="text-base text-gold-100 mb-4">
                       Personalized guidance powered by AI.
                     </p>
-                    <Link href="http://localhost:3000" className="block w-full text-center px-3 py-1.5 bg-white text-neutral-900 font-medium rounded text-xs hover:bg-neutral-100 transition-colors">
-                      Get started
+                    <Link href="https://dharmamind.ai" className="block w-full text-center px-4 py-2.5 bg-white text-gold-700 font-medium rounded-lg text-base hover:bg-gold-50 transition-colors">
+                      Get started free
                     </Link>
                   </div>
                 </div>
@@ -210,17 +219,17 @@ const HomePage: React.FC = () => {
         </main>
 
         {/* Footer */}
-        <footer className="bg-white border-t border-neutral-200 py-8 px-6 mt-8">
+        <footer className="bg-white border-t border-neutral-200 py-10 px-6 mt-8">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <img src="/logo.jpeg" alt="DharmaMind" className="w-5 h-5 rounded object-cover" />
-                <span className="text-xs text-neutral-500">© 2024 DharmaMind Community</span>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-3">
+                <img src="/logo.jpeg" alt="DharmaMind" className="w-6 h-6 rounded object-cover" />
+                <span className="text-base text-neutral-500">© 2024 DharmaMind Community</span>
               </div>
-              <div className="flex items-center gap-6">
-                <Link href="/privacy" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">Privacy</Link>
-                <Link href="/terms" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">Terms</Link>
-                <Link href="http://localhost:3001" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">DharmaMind</Link>
+              <div className="flex items-center gap-8">
+                <Link href="/privacy" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">Privacy</Link>
+                <Link href="/terms" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">Terms</Link>
+                <Link href="https://dharmamind.ai" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">DharmaMind</Link>
               </div>
             </div>
           </div>

@@ -67,7 +67,7 @@ export default function Header() {
                             Blog
                         </Link>
                         <a
-                            href="https://chat.dharmamind.ai"
+                            href="https://dharmamind.ai"
                             className="bg-gold-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gold-700 transition-colors"
                         >
                             Try DharmaMind
@@ -141,7 +141,7 @@ export default function Header() {
                                 Blog
                             </Link>
                             <a
-                                href="https://chat.dharmamind.ai"
+                                href="https://dharmamind.ai"
                                 className="bg-gold-600 text-white px-4 py-2 rounded-full text-sm font-medium text-center hover:bg-gold-700 transition-colors"
                             >
                                 Try DharmaMind

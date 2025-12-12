@@ -73,7 +73,7 @@ export default function EnterprisePage() {
             <Button href="/contact" size="lg">
               Contact Sales
             </Button>
-            <Button href="https://chat.dharmamind.ai" variant="outline" size="lg" external>
+            <Button href="https://dharmamind.ai" variant="outline" size="lg" external>
               Start free trial
             </Button>
           </div>

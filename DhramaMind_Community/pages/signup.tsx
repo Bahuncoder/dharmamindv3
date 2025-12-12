@@ -1,11 +1,12 @@
 /**
- * Community Signup - Redirects to Central Auth (Brand Webpage)
+ * Community Signup - Redirects to Central Auth (dharmamind.com)
  */
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_URL || 'http://localhost:3001';
+// Central Auth at dharmamind.com
+const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_URL || 'https://dharmamind.com';
 
 const SignupPage = () => {
   const router = useRouter();

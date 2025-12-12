@@ -176,7 +176,7 @@ The complete Nginx configuration provides:
 / → Brand Website (Next.js)
 /api/ → Backend API (FastAPI)
 /ws → WebSocket connections
-community.dharmamind.ai → Community Platform
+dharmamind.org → Community Platform
 monitoring.dharmamind.ai → Monitoring Dashboard
 ```
 
