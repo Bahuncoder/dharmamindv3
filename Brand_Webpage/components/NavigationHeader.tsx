@@ -105,7 +105,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                     <div className="flex items-center space-x-6">
                         {/* Smart Back Button - Clean arrow only */}
                         {showBackButton && (
-                                <motion.button
+                            <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleBack}
@@ -161,10 +161,10 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                         >
                             About
                         </button>
-                        
+
                         {/* Theme Toggle */}
                         <ThemeToggle />
-                        
+
                         <Button
                             variant="outline"
                             size="sm"
@@ -178,7 +178,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                     <div className="md:hidden flex items-center space-x-2">
                         {/* Theme Toggle for Mobile */}
                         <ThemeToggle />
-                        
+
                         <button
                             onClick={() => {
                                 // You can implement mobile menu here

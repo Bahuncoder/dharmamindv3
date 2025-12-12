@@ -45,8 +45,8 @@ export const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
                                 key={item.href}
                                 href={item.href}
                                 className={`text-base transition-colors ${isActive(item.href)
-                                        ? 'font-medium text-gold-600 dark:text-gold-400'
-                                        : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
+                                    ? 'font-medium text-gold-600 dark:text-gold-400'
+                                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
                                     }`}
                             >
                                 {item.name}

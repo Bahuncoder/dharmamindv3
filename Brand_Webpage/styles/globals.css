@@ -17,7 +17,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
     @apply bg-neutral-100 text-neutral-900;
     @apply dark:bg-neutral-900 dark:text-neutral-100;
@@ -26,10 +26,15 @@
   }
 
   /* Headings */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold text-neutral-900 dark:text-neutral-100;
   }
-  
+
   /* Links */
   a {
     @apply text-gold-600 hover:text-gold-700 dark:text-gold-400 dark:hover:text-gold-300 transition-colors;
@@ -40,33 +45,34 @@
     width: 8px;
     height: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
     @apply bg-neutral-200 dark:bg-neutral-800;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     @apply bg-neutral-400 dark:bg-neutral-600 rounded-full;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-neutral-500 dark:bg-neutral-500;
   }
 }
 
 @layer components {
+
   /* Buttons */
   .btn-primary {
     @apply px-6 py-3 bg-gold-600 text-white font-medium rounded-lg;
     @apply hover:bg-gold-700 transition-colors;
   }
-  
+
   .btn-secondary {
     @apply px-6 py-3 bg-neutral-200 text-neutral-900 font-medium rounded-lg;
     @apply hover:bg-neutral-300 transition-colors;
     @apply dark:bg-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-600;
   }
-  
+
   .btn-outline {
     @apply px-6 py-3 bg-transparent text-neutral-900 font-medium rounded-lg;
     @apply border border-neutral-300 hover:border-neutral-400 transition-colors;
@@ -93,11 +99,11 @@
   .section {
     @apply py-16 px-6;
   }
-  
+
   .section-light {
     @apply bg-neutral-50 dark:bg-neutral-800;
   }
-  
+
   .section-dark {
     @apply bg-neutral-900 text-white;
   }
@@ -107,18 +113,51 @@
   .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
   }
-  
+
   .animate-slide-up {
     animation: slideUp 0.3s ease-out;
   }
-  
+
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
-  
+
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Shimmer animation for skeleton loaders */
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Pulse animation (faster than default) */
+  .animate-pulse-fast {
+    animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
   }
 }
