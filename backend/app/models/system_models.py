@@ -142,6 +142,8 @@ class SystemHealth(BaseModel):
 
 class ModelConfiguration(BaseModel):
     """AI model configuration settings"""
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     config_id: str = Field(..., description="Configuration identifier")
     model_name: str = Field(..., description="AI model name")
     

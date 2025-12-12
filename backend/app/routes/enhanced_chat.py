@@ -42,6 +42,8 @@ router = APIRouter()
 
 class EnhancedChatRequest(BaseModel):
     """Enhanced chat request with DharmaLLM enterprise features"""
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     message: str = Field(..., description="User message", min_length=1, max_length=2000)
     user_id: Optional[str] = Field(default=None, description="User identifier")
     conversation_id: Optional[str] = Field(default=None, description="Conversation identifier")
@@ -55,6 +57,8 @@ class EnhancedChatRequest(BaseModel):
 
 class EnhancedChatResponse(BaseModel):
     """Enhanced response with enterprise metrics"""
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     response: str
     conversation_id: str
     

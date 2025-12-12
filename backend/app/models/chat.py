@@ -49,6 +49,8 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     """Enhanced response from chat completion with dharmic features"""
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     message: str = Field(..., description="Assistant response")
     conversation_id: str = Field(..., description="Conversation identifier")
     message_id: str = Field(..., description="Message unique identifier")

@@ -15,12 +15,13 @@
  *   <SafeHtml html={content} />
  */
 
-import DOMPurify from 'dompurify';
+import DOMPurify, { Config } from 'dompurify';
 
 /**
  * DOMPurify configuration for maximum security
+ * Using explicit Config type to ensure TypeScript compatibility
  */
-const DOMPURIFY_CONFIG: DOMPurify.Config = {
+const DOMPURIFY_CONFIG: Config = {
   // Allowed HTML tags
   ALLOWED_TAGS: [
     'p', 'br', 'b', 'i', 'em', 'strong', 'u', 's', 'strike',
@@ -32,27 +33,27 @@ const DOMPURIFY_CONFIG: DOMPurify.Config = {
     'div', 'span',
     'hr',
   ],
-  
+
   // Allowed attributes
   ALLOWED_ATTR: [
     'href', 'src', 'alt', 'title', 'class', 'id',
     'target', 'rel',
     'width', 'height',
   ],
-  
+
   // Force all links to open in new tab with security attributes
   ADD_ATTR: ['target', 'rel'],
-  
+
   // Disallow potentially dangerous protocols
   ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
-  
+
   // Additional security settings
   FORBID_TAGS: ['script', 'style', 'iframe', 'form', 'input', 'button'],
   FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onblur'],
-  
+
   // Data attributes (disabled for security)
   ALLOW_DATA_ATTR: false,
-  
+
   // Return string (not DOM node)
   RETURN_DOM: false,
   RETURN_DOM_FRAGMENT: false,
@@ -67,13 +68,13 @@ const DOMPURIFY_CONFIG: DOMPurify.Config = {
  */
 export function sanitizeHtml(
   dirty: string,
-  config?: DOMPurify.Config
+  config?: Config
 ): string {
   if (!dirty) return '';
-  
+
   // Merge custom config with defaults
-  const finalConfig = config ? { ...DOMPURIFY_CONFIG, ...config } : DOMPURIFY_CONFIG;
-  
+  const finalConfig: Config = config ? { ...DOMPURIFY_CONFIG, ...config } : DOMPURIFY_CONFIG;
+
   // Add security hooks
   DOMPurify.addHook('afterSanitizeAttributes', (node) => {
     // Set target="_blank" and rel="noopener noreferrer" for all links
@@ -81,18 +82,18 @@ export function sanitizeHtml(
       node.setAttribute('target', '_blank');
       node.setAttribute('rel', 'noopener noreferrer');
     }
-    
+
     // Ensure images have alt attribute
     if (node.tagName === 'IMG' && !node.getAttribute('alt')) {
       node.setAttribute('alt', 'Image');
     }
   });
-  
+
   const clean = DOMPurify.sanitize(dirty, finalConfig);
-  
+
   // Remove hook after use
   DOMPurify.removeHook('afterSanitizeAttributes');
-  
+
   return clean as string;
 }
 
@@ -104,7 +105,7 @@ export function sanitizeHtml(
  */
 export function escapeHtml(text: string): string {
   if (!text) return '';
-  
+
   const escapeMap: Record<string, string> = {
     '&': '&amp;',
     '<': '&lt;',
@@ -115,7 +116,7 @@ export function escapeHtml(text: string): string {
     '`': '&#x60;',
     '=': '&#x3D;',
   };
-  
+
   return text.replace(/[&<>"'`=/]/g, (char) => escapeMap[char]);
 }
 
@@ -127,9 +128,9 @@ export function escapeHtml(text: string): string {
  */
 export function sanitizeUrl(url: string): string {
   if (!url) return '';
-  
+
   const trimmed = url.trim().toLowerCase();
-  
+
   // Block dangerous protocols
   const dangerousProtocols = [
     'javascript:',
@@ -137,18 +138,18 @@ export function sanitizeUrl(url: string): string {
     'vbscript:',
     'file:',
   ];
-  
+
   for (const protocol of dangerousProtocols) {
     if (trimmed.startsWith(protocol)) {
       console.warn(`[Security] Blocked dangerous URL: ${url.substring(0, 50)}`);
       return '';
     }
   }
-  
+
   // Allow safe protocols
   const safeProtocols = ['http://', 'https://', 'mailto:', 'tel:', '/'];
   const isSafe = safeProtocols.some(p => trimmed.startsWith(p));
-  
+
   if (!isSafe && !trimmed.startsWith('#')) {
     // Relative URLs are okay, but log unknown patterns
     if (trimmed.includes(':')) {
@@ -156,7 +157,7 @@ export function sanitizeUrl(url: string): string {
       return '';
     }
   }
-  
+
   return url;
 }
 
@@ -166,25 +167,25 @@ export function sanitizeUrl(url: string): string {
  * @example
  * <SafeHtml html={userContent} className="prose" />
  */
+import React from 'react';
+
 interface SafeHtmlProps {
   html: string;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: 'div' | 'span' | 'p' | 'article' | 'section';
 }
 
-export function SafeHtml({ 
-  html, 
-  className = '', 
-  as: Component = 'div' 
+export function SafeHtml({
+  html,
+  className = '',
+  as = 'div'
 }: SafeHtmlProps): JSX.Element {
   const cleanHtml = sanitizeHtml(html);
-  
-  return (
-    <Component
-      className={className}
-      dangerouslySetInnerHTML={{ __html: cleanHtml }}
-    />
-  );
+
+  return React.createElement(as, {
+    className,
+    dangerouslySetInnerHTML: { __html: cleanHtml }
+  });
 }
 
 /**

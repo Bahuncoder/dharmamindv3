@@ -15,12 +15,13 @@
  *   <SafeHtml html={content} />
  */
 
-import DOMPurify from 'dompurify';
+import DOMPurify, { Config } from 'dompurify';
 
 /**
  * DOMPurify configuration for maximum security
+ * Using explicit Config type to ensure TypeScript compatibility
  */
-const DOMPURIFY_CONFIG: DOMPurify.Config = {
+const DOMPURIFY_CONFIG: Config = {
     // Allowed HTML tags
     ALLOWED_TAGS: [
         'p', 'br', 'b', 'i', 'em', 'strong', 'u', 's', 'strike',
@@ -67,12 +68,12 @@ const DOMPURIFY_CONFIG: DOMPurify.Config = {
  */
 export function sanitizeHtml(
     dirty: string,
-    config?: DOMPurify.Config
+    config?: Config
 ): string {
     if (!dirty) return '';
 
     // Merge custom config with defaults
-    const finalConfig = config ? { ...DOMPURIFY_CONFIG, ...config } : DOMPURIFY_CONFIG;
+    const finalConfig: Config = config ? { ...DOMPURIFY_CONFIG, ...config } : DOMPURIFY_CONFIG;
 
     // Add security hooks
     DOMPurify.addHook('afterSanitizeAttributes', (node) => {
@@ -166,26 +167,25 @@ export function sanitizeUrl(url: string): string {
  * @example
  * <SafeHtml html={userContent} className="prose" />
  */
+import React from 'react';
+
 interface SafeHtmlProps {
     html: string;
     className?: string;
-    as?: keyof JSX.IntrinsicElements;
+    as?: 'div' | 'span' | 'p' | 'article' | 'section';
 }
 
 export function SafeHtml({
     html,
     className = '',
-    as: Component = 'div'
+    as = 'div'
 }: SafeHtmlProps): JSX.Element {
     const cleanHtml = sanitizeHtml(html);
 
-    return (
-        <Component
-      className= { className }
-    dangerouslySetInnerHTML = {{ __html: cleanHtml }
-}
-    />
-  );
+    return React.createElement(as, {
+        className,
+        dangerouslySetInnerHTML: { __html: cleanHtml }
+    });
 }
 
 /**

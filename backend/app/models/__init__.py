@@ -81,6 +81,8 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     """Chat response model"""
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     response: str
     conversation_id: str
     message_id: str

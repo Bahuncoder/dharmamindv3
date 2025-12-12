@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/local", tags=["Local LLM"])
 
 class LocalLLMRequest(BaseModel):
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     message: str
     model_name: Optional[str] = "distilgpt2"
     max_length: Optional[int] = 512
@@ -24,6 +26,8 @@ class LocalLLMRequest(BaseModel):
     context: Optional[str] = None
 
 class LocalLLMResponse(BaseModel):
+    model_config = {'protected_namespaces': ()}  # Allow 'model_' prefix in fields
+    
     response: str
     model_name: str
     processing_time: float
