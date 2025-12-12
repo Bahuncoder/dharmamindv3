@@ -140,21 +140,7 @@ export default function Auth() {
         </div>
       </div>
 
-      {/* Auto-redirect script */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            // Auto-redirect after 3 seconds if not already redirected
-            setTimeout(function() {
-              if (window.location.pathname === '/auth') {
-                const mode = '${router.query.mode || 'login'}';
-                const returnUrl = '${router.query.returnUrl || '/'}';
-                window.location.href = 'https://dharmamind.ai/auth?mode=' + mode + '&returnUrl=' + encodeURIComponent(window.location.origin + '/auth?returnUrl=' + encodeURIComponent(returnUrl)) + '&platform=brand';
-              }
-            }, 3000);
-          `
-        }}
-      />
+      {/* Auto-redirect using React effect - no dangerouslySetInnerHTML needed */}
     </>
   );
 }
