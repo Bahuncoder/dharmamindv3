@@ -1,0 +1,68 @@
+{
+  "test@example.com": {
+    "code": "558081",
+    "expires": "2025-12-12T12:10:36.564757",
+    "data": {
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "TestPass123!",
+      "phone": null,
+      "plan": "free"
+    }
+  },
+  "testuser@example.com": {
+    "code": "214754",
+    "expires": "2025-12-12T12:11:15.674939",
+    "data": {
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "password": "TestPass123!",
+      "phone": null,
+      "plan": "free"
+    }
+  },
+  "test@test.com": {
+    "code": "799132",
+    "expires": "2025-12-12T12:11:27.803313",
+    "data": {
+      "name": "Test",
+      "email": "test@test.com",
+      "password": "Pass123!",
+      "phone": null,
+      "plan": "free"
+    }
+  },
+  "newuser@example.com": {
+    "code": "116590",
+    "expires": "2025-12-12T12:14:03.901176",
+    "data": {
+      "name": "Test User",
+      "email": "newuser@example.com",
+      "password": "TestPass123!",
+      "phone": null,
+      "plan": "free"
+    }
+  },
+  "newuser2@example.com": {
+    "code": "149274",
+    "expires": "2025-12-12T12:14:12.157028",
+    "data": {
+      "name": "Test User",
+      "email": "newuser2@example.com",
+      "password": "TestPass123!",
+      "phone": null,
+      "plan": "free"
+    }
+  },
+  "demo@dharmamind.com": {
+    "code": "624101",
+    "expires": "2025-12-12T12:14:25.620175",
+    "data": {
+      "name": "Demo User",
+      "email": "demo@dharmamind.com",
+      "password": "DemoPass123!",
+      "phone": null,
+      "plan": "premium"
+    }
+  }
+}

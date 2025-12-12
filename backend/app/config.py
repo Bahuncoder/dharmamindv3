@@ -8,7 +8,6 @@ Uses environment variables with sensible defaults and advanced features:
 - Advanced security configurations
 - Comprehensive monitoring settings
 - AI/ML model configurations
-<<<<<<< HEAD
 - D            # Validate subscription and payment secrets in production
             subscription_key = values.get("SUBSCRIPTION_ENCRYPTION_KEY", "")
             payment_secret = values.get("PAYMENT_WEBHOOK_SECRET", "")
@@ -25,16 +24,12 @@ Uses environment variables with sensible defaults and advanced features:
                 raise ValueError("Wildcard hosts (*) not allowed in production")
             
             # Basic validation - gateway URL should be configured for external LLM featuresarmic compliance settings
-=======
-- Dharmic compliance settings
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 - Performance optimization parameters
 """
 
 import os
 import logging
 from typing import List, Optional, Dict, Any, Union
-<<<<<<< HEAD
 try:
     from pydantic_settings import BaseSettings
     from pydantic import field_validator, model_validator, Field
@@ -74,13 +69,6 @@ except ImportError:
 
 # Load environment variables from .env file
 load_dotenv()
-=======
-from pydantic_settings import BaseSettings
-from pydantic import field_validator, model_validator, Field
-from pathlib import Path
-from enum import Enum
-import json
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
 
 class Environment(str, Enum):
     """Environment types"""
@@ -165,13 +153,8 @@ class Settings(BaseSettings):
         "X-Requested-With"
     ]
     
-<<<<<<< HEAD
     # Trusted Hosts - Restrictive by default
     ALLOWED_HOSTS: List[str] = ["localhost", "127.0.0.1", "dharmamind.com", "*.dharmamind.com"]
-=======
-    # Trusted Hosts
-    ALLOWED_HOSTS: List[str] = ["localhost", "127.0.0.1", "*"]
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     
     # ===============================
     # SUBSCRIPTION & PAYMENT SETTINGS
@@ -186,13 +169,8 @@ class Settings(BaseSettings):
     PAYPAL_WEBHOOK_ID: Optional[str] = None
     
     # Subscription Configuration
-<<<<<<< HEAD
     SUBSCRIPTION_ENCRYPTION_KEY: str = Field(default="", env="SUBSCRIPTION_ENCRYPTION_KEY")
     PAYMENT_WEBHOOK_SECRET: str = Field(default="", env="PAYMENT_WEBHOOK_SECRET")
-=======
-    SUBSCRIPTION_ENCRYPTION_KEY: str = "subscription-encryption-key-here"
-    PAYMENT_WEBHOOK_SECRET: str = "payment-webhook-secret-here"
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     
     # Billing Settings
     DEFAULT_CURRENCY: str = "USD"
@@ -275,15 +253,11 @@ class Settings(BaseSettings):
     HUGGINGFACE_MODEL: str = "microsoft/DialoGPT-large"
     HUGGINGFACE_ENDPOINT: Optional[str] = None
     
-<<<<<<< HEAD
     # DharmaLLM Service Configuration (Microservice)
     DHARMALLM_SERVICE_URL: str = "http://localhost:8001"
     DHARMALLM_SERVICE_TIMEOUT: int = 30
     
     # Legacy DharmaLLM Configuration (Deprecated - moved to microservice)
-=======
-    # DharmaLLM Configuration (Local Model)
->>>>>>> 0a7b3468604638c47efcf853a27e0c92a7e9fccc
     DHARMALLM_MODEL_PATH: str = "./models/dharmallm-7b"
     DHARMALLM_MAX_LENGTH: int = 2048
     DHARMALLM_TEMPERATURE: float = 0.7
