@@ -35,8 +35,8 @@ const DiscussionsPage: React.FC = () => {
                         <button
                             key={cat}
                             className={`px-4 py-2 rounded-lg text-base font-medium transition-colors ${cat === 'All'
-                                    ? 'bg-gold-600 text-white'
-                                    : 'bg-white border border-neutral-200 text-neutral-600 hover:border-gold-300 hover:text-gold-600'
+                                ? 'bg-gold-600 text-white'
+                                : 'bg-white border border-neutral-200 text-neutral-600 hover:border-gold-300 hover:text-gold-600'
                                 }`}
                         >
                             {cat}
