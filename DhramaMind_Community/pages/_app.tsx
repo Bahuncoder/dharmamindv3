@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import { ColorProvider } from '../contexts/ColorContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
 import { ToastProvider } from '../contexts/ToastContext';
 import { NotificationProvider } from '../contexts/NotificationContext';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -19,15 +20,17 @@ export default function App({
 }: AppProps) {
   return (
     <ErrorBoundary>
-      <ColorProvider>
-        <ToastProvider>
-          <NotificationProvider>
-            <SessionManager>
-              <Component {...pageProps} />
-            </SessionManager>
-          </NotificationProvider>
-        </ToastProvider>
-      </ColorProvider>
+      <ThemeProvider defaultTheme="system">
+        <ColorProvider>
+          <ToastProvider>
+            <NotificationProvider>
+              <SessionManager>
+                <Component {...pageProps} />
+              </SessionManager>
+            </NotificationProvider>
+          </ToastProvider>
+        </ColorProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

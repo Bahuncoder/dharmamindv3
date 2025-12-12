@@ -7,6 +7,7 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import ThemeToggle from './ThemeToggle';
 
 // ===========================================
 // HEADER COMPONENT
@@ -28,13 +29,13 @@ export const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
     const isActive = (href: string) => currentPath === href || currentPath.startsWith(href + '/');
 
     return (
-        <header className={`${transparent ? 'bg-transparent' : 'bg-white'} border-b border-neutral-200`}>
+        <header className={`${transparent ? 'bg-transparent' : 'bg-white dark:bg-neutral-900'} border-b border-neutral-200 dark:border-neutral-700`}>
             <div className="max-w-6xl mx-auto px-6">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3">
                         <img src="/logo.jpeg" alt="DharmaMind" className="w-8 h-8 rounded-lg object-cover" />
-                        <span className="text-lg font-semibold text-neutral-900">Community</span>
+                        <span className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Community</span>
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -44,8 +45,8 @@ export const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
                                 key={item.href}
                                 href={item.href}
                                 className={`text-base transition-colors ${isActive(item.href)
-                                        ? 'font-medium text-gold-600'
-                                        : 'text-neutral-600 hover:text-neutral-900'
+                                        ? 'font-medium text-gold-600 dark:text-gold-400'
+                                        : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
                                     }`}
                             >
                                 {item.name}
@@ -53,11 +54,12 @@ export const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
                         ))}
                     </nav>
 
-                    {/* Auth Buttons */}
+                    {/* Right Side: Theme Toggle + Auth Buttons */}
                     <div className="flex items-center gap-4">
+                        <ThemeToggle />
                         <Link
                             href="/login"
-                            className="text-base text-neutral-600 hover:text-neutral-900 transition-colors"
+                            className="text-base text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
                         >
                             Sign in
                         </Link>
@@ -79,24 +81,24 @@ export const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
 // ===========================================
 export const Footer: React.FC = () => {
     return (
-        <footer className="bg-white border-t border-neutral-200 py-10 px-6 mt-auto">
+        <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-700 py-10 px-6 mt-auto">
             <div className="max-w-6xl mx-auto">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-3">
                         <img src="/logo.jpeg" alt="DharmaMind" className="w-6 h-6 rounded object-cover" />
-                        <span className="text-base text-neutral-500">© 2024 DharmaMind Community</span>
+                        <span className="text-base text-neutral-500 dark:text-neutral-400">© 2024 DharmaMind Community</span>
                     </div>
                     <div className="flex items-center gap-8">
-                        <Link href="/privacy" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">
+                        <Link href="/privacy" className="text-base text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">
                             Privacy
                         </Link>
-                        <Link href="/terms" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">
+                        <Link href="/terms" className="text-base text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">
                             Terms
                         </Link>
-                        <a href="https://dharmamind.com" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">
+                        <a href="https://dharmamind.com" className="text-base text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">
                             DharmaMind
                         </a>
-                        <a href="https://dharmamind.ai" className="text-base text-neutral-500 hover:text-neutral-700 transition-colors">
+                        <a href="https://dharmamind.ai" className="text-base text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">
                             AI Chat
                         </a>
                     </div>
@@ -134,7 +136,7 @@ export const Layout: React.FC<LayoutProps> = ({
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="min-h-screen bg-neutral-50 flex flex-col">
+            <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex flex-col">
                 <Header transparent={transparentHeader} />
                 <main className="flex-1">
                     {children}

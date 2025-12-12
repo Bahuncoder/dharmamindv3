@@ -41,7 +41,7 @@ const Footer: React.FC<FooterProps> = ({
   // Simple footer for minimal pages
   if (variant === 'simple') {
     return (
-      <footer className={`border-t border-neutral-300 bg-neutral-200 ${className}`}>
+      <footer className={`border-t border-neutral-300 dark:border-neutral-700 bg-neutral-200 dark:bg-neutral-800 ${className}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <Logo
@@ -51,13 +51,13 @@ const Footer: React.FC<FooterProps> = ({
             <nav className="flex justify-center items-center space-x-8 mb-6">
               <button
                 onClick={() => handleAnchorLink('#features')}
-                className="text-sm text-neutral-600 hover:text-gold-600 transition-colors inline-block"
+                className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 transition-colors inline-block"
               >
                 Features
               </button>
               <button
                 onClick={() => handleAnchorLink('#pricing')}
-                className="text-sm text-neutral-600 hover:text-gold-600 transition-colors inline-block"
+                className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 transition-colors inline-block"
               >
                 Pricing
               </button>
@@ -131,7 +131,7 @@ const Footer: React.FC<FooterProps> = ({
 
   // Professional footer (default) - comprehensive and polished
   return (
-    <footer className={`bg-neutral-200 border-t border-neutral-300 ${className}`}>
+    <footer className={`bg-neutral-200 dark:bg-neutral-800 border-t border-neutral-300 dark:border-neutral-700 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {/* Main Footer Content */}
@@ -145,7 +145,7 @@ const Footer: React.FC<FooterProps> = ({
               onClick={() => handleNavigation('/')}
               className="mb-6 cursor-pointer"
             />
-            <p className="text-neutral-600 mb-6 max-w-sm leading-relaxed">
+            <p className="text-neutral-600 dark:text-neutral-400 mb-6 max-w-sm leading-relaxed">
               Revolutionary AI spiritual guidance platform that combines cutting-edge technology with ancient wisdom for modern professionals and leaders.
             </p>
 

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Logo from './Logo';
 import Button from './Button';
+import ThemeToggle from './ThemeToggle';
 
 interface NavigationHeaderProps {
     title?: string;
@@ -97,18 +98,18 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
         <motion.header
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className={`bg-neutral-100/90 backdrop-blur-sm border-b border-neutral-300/50 sticky top-0 z-50 ${className}`}
+            className={`bg-neutral-100/90 dark:bg-neutral-900/90 backdrop-blur-sm border-b border-neutral-300/50 dark:border-neutral-700/50 sticky top-0 z-50 ${className}`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center space-x-6">
                         {/* Smart Back Button - Clean arrow only */}
                         {showBackButton && (
-                            <motion.button
+                                <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleBack}
-                                className="flex items-center justify-center w-10 h-10 rounded-lg text-neutral-600 hover:text-gold-600 hover:bg-neutral-100 transition-all duration-200 group"
+                                className="flex items-center justify-center w-10 h-10 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 group"
                                 title={canGoBack ? "Go back to previous page" : "Go to homepage"}
                             >
                                 <svg
@@ -132,8 +133,8 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                         {/* Page Title */}
                         {title && (
                             <>
-                                <div className="h-6 w-px bg-primary-background ml-2"></div>
-                                <h1 className="text-lg font-semibold text-neutral-900 hidden md:block ml-2">
+                                <div className="h-6 w-px bg-primary-background dark:bg-neutral-700 ml-2"></div>
+                                <h1 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 hidden md:block ml-2">
                                     {title}
                                 </h1>
                             </>
@@ -144,22 +145,26 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                     <nav className="hidden md:flex items-center space-x-6">
                         <button
                             onClick={() => router.push('/features')}
-                            className="text-neutral-600 hover:text-gold-600 text-sm font-medium transition-colors"
+                            className="text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 text-sm font-medium transition-colors"
                         >
                             Features
                         </button>
                         <button
                             onClick={() => router.push('/pricing')}
-                            className="text-neutral-600 hover:text-gold-600 text-sm font-medium transition-colors"
+                            className="text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 text-sm font-medium transition-colors"
                         >
                             Pricing
                         </button>
                         <button
                             onClick={() => router.push('/about')}
-                            className="text-neutral-600 hover:text-gold-600 text-sm font-medium transition-colors"
+                            className="text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 text-sm font-medium transition-colors"
                         >
                             About
                         </button>
+                        
+                        {/* Theme Toggle */}
+                        <ThemeToggle />
+                        
                         <Button
                             variant="outline"
                             size="sm"
@@ -170,17 +175,22 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
                     </nav>
 
                     {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => {
-                            // You can implement mobile menu here
-                            console.log('Mobile menu clicked');
-                        }}
-                        className="md:hidden p-2 rounded-lg text-neutral-600 hover:text-gold-600 hover:bg-neutral-100 transition-colors"
-                    >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
+                    <div className="md:hidden flex items-center space-x-2">
+                        {/* Theme Toggle for Mobile */}
+                        <ThemeToggle />
+                        
+                        <button
+                            onClick={() => {
+                                // You can implement mobile menu here
+                                console.log('Mobile menu clicked');
+                            }}
+                            className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </motion.header>
