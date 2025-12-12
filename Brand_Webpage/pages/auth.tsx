@@ -45,7 +45,7 @@ export default function Auth() {
   const handleCentralAuthRedirect = () => {
     const mode = router.query.mode as string || 'login';
     const returnUrl = router.query.returnUrl as string || '/';
-    
+
     // Redirect to Chat App (Central Auth Hub)
     brandAuth.redirectToCentralAuth(mode as 'login' | 'signup', returnUrl);
   };
@@ -76,13 +76,13 @@ export default function Auth() {
             {/* Glass morphism effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/30 rounded-3xl"></div>
             <div className="relative z-10">
-              
+
               {/* Logo */}
               <div className="mb-8">
                 <div className="relative inline-block">
-                  <Logo 
-                    size="lg" 
-                    showText={true} 
+                  <Logo
+                    size="lg"
+                    showText={true}
                     className="cursor-pointer transform hover:scale-105 transition-transform duration-300"
                     onClick={() => goToHome()}
                   />
@@ -114,7 +114,7 @@ export default function Auth() {
                 >
                   Continue to Login
                 </button>
-                
+
                 <p className="text-xs text-neutral-600">
                   Don't have an account?{' '}
                   <button

@@ -37,8 +37,8 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "eslint-config-next": "^14.0.0"
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.0.10"
   },
   "keywords": [
     "dharmamind",
