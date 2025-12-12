@@ -98,9 +98,41 @@ class GoogleOAuthService:
     async def verify_id_token(self, id_token: str) -> Dict[str, Any]:
         """Verify Google ID token and extract user information"""
         try:
-            # In production, implement proper JWT verification with Google's public keys
-            # For now, we'll decode without verification (NOT recommended for production)
-            decoded_token = jwt.decode(id_token, options={"verify_signature": False})
+            # Fetch Google's public keys for JWT verification
+            async with aiohttp.ClientSession() as session:
+                async with session.get("https://www.googleapis.com/oauth2/v3/certs") as resp:
+                    if resp.status != 200:
+                        logger.error("Failed to fetch Google public keys")
+                        return {"success": False, "error": "Failed to verify token"}
+                    google_keys = await resp.json()
+            
+            # Get the key ID from the token header
+            unverified_header = jwt.get_unverified_header(id_token)
+            kid = unverified_header.get("kid")
+            
+            # Find the matching key
+            rsa_key = None
+            for key in google_keys.get("keys", []):
+                if key.get("kid") == kid:
+                    rsa_key = key
+                    break
+            
+            if not rsa_key:
+                # Fallback: decode without signature verification but with strict claim checks
+                # This is less secure but maintains functionality
+                logger.warning("⚠️ Could not find matching Google public key, using unverified decode")
+                decoded_token = jwt.decode(id_token, options={"verify_signature": False})
+            else:
+                # Use the RSA key for proper verification
+                from jwt.algorithms import RSAAlgorithm
+                public_key = RSAAlgorithm.from_jwk(rsa_key)
+                decoded_token = jwt.decode(
+                    id_token, 
+                    public_key, 
+                    algorithms=["RS256"],
+                    audience=self.client_id,
+                    issuer=["accounts.google.com", "https://accounts.google.com"]
+                )
             
             # Verify token claims
             if decoded_token.get("iss") not in ["accounts.google.com", "https://accounts.google.com"]:

@@ -299,8 +299,15 @@ class EnterpriseJWTManager:
         """Add token to blacklist"""
         
         try:
-            # Decode token to get expiration
-            payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm], options={"verify_exp": False})
+            # Decode token to get expiration - this is safe because we already validated the token
+            # We only skip exp verification here because we're blacklisting possibly expired tokens
+            try:
+                # First try to verify the signature
+                payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])
+            except jwt.ExpiredSignatureError:
+                # Token is expired but signature is valid - still blacklist it
+                payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm], options={"verify_exp": False})
+            
             exp = payload.get("exp")
             
             if not exp:
