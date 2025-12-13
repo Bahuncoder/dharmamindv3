@@ -16,7 +16,7 @@ interface ColorTheme {
     primaryHoverEnd: string;
     primary: string;
     primaryHover: string;
-    borderPrimary: string;      // Emerald border color
+    borderPrimary: string;      // Gold border color
     borderSecondary: string;    // Secondary border color
     textPrimary: string;        // Text colors
     textSecondary: string;      // Secondary text color
@@ -58,7 +58,7 @@ interface ColorContextType {
 // Predefined themes
 const themes: ColorTheme[] = [
   {
-    name: 'light-gray-emerald', // New default theme
+    name: 'light-gray-gold', // Gold theme
     colors: {
       primaryStart: '#f8fafc',        // Very light gray
       primaryEnd: '#f1f5f9',          // Light gray
@@ -66,8 +66,8 @@ const themes: ColorTheme[] = [
       primaryHoverEnd: '#cbd5e1',     // Medium gray
       primary: '#f8fafc',             // Very light gray backgrounds
       primaryHover: '#e2e8f0',        // Medium light gray on hover
-      borderPrimary: '#10b981',       // Emerald green for borders
-      borderSecondary: '#6ee7b7',     // Light emerald for secondary borders
+      borderPrimary: '#d4a854',       // Gold for borders
+      borderSecondary: '#e4b864',     // Light gold for secondary borders
       textPrimary: '#1f2937',         // Dark gray text
       textSecondary: '#6b7280',       // Medium gray text
       background: '#f1f5f9',          // Light gray background for user messages
@@ -123,49 +123,49 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.style.setProperty('--color-primary-hover-end', colors.primaryHoverEnd);
     root.style.setProperty('--color-primary', colors.primary);
     root.style.setProperty('--color-primary-hover', colors.primaryHover);
-    
+
     // Border colors - Emerald green for borders
     root.style.setProperty('--color-border-primary', colors.borderPrimary);
     root.style.setProperty('--color-border-secondary', colors.borderSecondary);
-    
+
     // Text colors
     root.style.setProperty('--color-text-primary', colors.textPrimary);
     root.style.setProperty('--color-text-secondary', colors.textSecondary);
-    
+
     // Background colors
     root.style.setProperty('--color-background', colors.background);
     root.style.setProperty('--color-background-secondary', colors.backgroundSecondary);
-    
+
     // Error colors
     root.style.setProperty('--color-error', colors.error);
     root.style.setProperty('--color-error-background', colors.errorBackground);
     root.style.setProperty('--color-error-text', colors.errorText);
-    
+
     // Success colors
     root.style.setProperty('--color-success', colors.success);
     root.style.setProperty('--color-success-background', colors.successBackground);
     root.style.setProperty('--color-success-text', colors.successText);
-    
+
     // Warning colors
     root.style.setProperty('--color-warning', colors.warning);
     root.style.setProperty('--color-warning-background', colors.warningBackground);
     root.style.setProperty('--color-warning-text', colors.warningText);
-    
+
     // Shadow colors
     root.style.setProperty('--color-shadow-light', colors.shadowLight);
     root.style.setProperty('--color-shadow-medium', colors.shadowMedium);
     root.style.setProperty('--color-shadow-strong', colors.shadowStrong);
-    
+
     // Surface colors
     root.style.setProperty('--color-surface-light', colors.surfaceLight);
     root.style.setProperty('--color-surface-dark', colors.surfaceDark);
-    
+
     // Additional utility colors
     root.style.setProperty('--color-accent', colors.accent);
     root.style.setProperty('--color-wisdom', colors.wisdom);
     root.style.setProperty('--color-lotus', colors.lotus);
-    
-    // Update focus ring color to use emerald border color
+
+    // Update focus ring color to use gold border color
     root.style.setProperty('--color-focus', colors.borderPrimary);
     const borderRgb = hexToRgb(colors.borderPrimary);
     if (borderRgb) {

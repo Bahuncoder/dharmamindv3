@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const initAuth = () => {
       const currentUser = authService.getCurrentUser();
       setUser(currentUser);
-      
+
       // Check if user was in guest mode
       if (typeof window !== 'undefined') {
         const guestMode = sessionStorage.getItem('dharma_guest_mode');
@@ -44,7 +44,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setIsGuest(true);
         }
       }
-      
+
       setIsLoading(false);
     };
 
@@ -55,11 +55,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       const response = await authService.login(credentials);
-      
+
       if (response.success && response.user) {
         setUser(response.user);
       }
-      
+
       return response;
     } catch (error) {
       console.error('Login error:', error);
@@ -73,11 +73,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       const response = await authService.register(userData);
-      
+
       if (response.success && response.user) {
         setUser(response.user);
       }
-      
+
       return response;
     } catch (error) {
       console.error('Registration error:', error);
@@ -91,7 +91,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       const response = await authService.demoLogin(plan);
-      
+
       if (response.success && response.user) {
         setUser(response.user);
         setIsGuest(false);
@@ -99,7 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           sessionStorage.removeItem('dharma_guest_mode');
         }
       }
-      
+
       return response;
     } catch (error) {
       console.error('Demo login error:', error);

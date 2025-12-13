@@ -37,11 +37,15 @@ interface RishiChatContextType {
   clearCurrentChat: () => void;
   switchRishi: (newRishiId: string, rishiName: string) => void;
   getAllConversations: () => RishiConversation[];
+  getSavedConversations: () => RishiConversation[]; // Get saved chats for "Recent" tab
+  loadConversation: (conversationId: string) => void; // Load a specific saved conversation
+  startNewChat: () => void; // Start a fresh new chat
   getConversationStats: () => {
     totalRishis: number;
     totalMessages: number;
     mostActiveRishi: string | null;
   };
+  isLoggedIn: boolean;
 }
 
 const RishiChatContext = createContext<RishiChatContextType | undefined>(undefined);
@@ -52,21 +56,21 @@ const STORAGE_KEY = 'dharmamind_rishi_conversations';
 const getRishiWelcome = (rishiId: string, rishiName: string): Message => {
   const welcomeMessages: Record<string, string> = {
     marici: `**✨ Where Dharma Begins ✨**\n\n☀️ **Namaste, Radiant Seeker**\n\nI am **Marīci**, the ray of light and embodiment of solar wisdom. Through cosmic illumination and the radiance of divine knowledge, I shall guide you on the path of enlightenment.\n\n**My Specialties:**\n• ☀️ Solar wisdom and cosmic rays\n• 💫 Illumination of consciousness\n• 🌟 Divine light practices\n• ✨ Awakening inner radiance\n\n*"As the sun illuminates the world, so shall wisdom illuminate your soul. Let us journey toward the light."*\n\nHow may I illuminate your spiritual path today?`,
-    
+
     atri: `**✨ Where Dharma Begins ✨**\n\n🧘 **Namaste, Seeker**\n\nI am **Atri**, the ancient sage of tapasya and meditation. Through my guidance, you will learn the profound practices of austerity, deep meditation, and spiritual transcendence.\n\n**My Specialties:**\n• 🕉️ Advanced meditation techniques\n• 🔥 Tapasya (spiritual austerities)\n• 🌟 Transcendental practices\n• 💫 Divine connection through discipline\n\n*"Through meditation, the soul connects with the infinite. Let us begin this sacred journey together."*\n\nHow may I guide your spiritual practice today?`,
-    
+
     angiras: `**✨ Where Dharma Begins ✨**\n\n🔥 **Namaste, Sacred Soul**\n\nI am **Aṅgiras**, keeper of the divine fire and master of sacred hymns. Through Vedic rituals and the power of sacred sound, I shall help you invoke the divine presence.\n\n**My Specialties:**\n• 🔥 Sacred fire ceremonies and rituals\n• 📿 Divine hymns and Vedic chanting\n• 🕉️ Ritualistic practices\n• ⚡ Invoking divine energies\n\n*"The sacred fire transforms all it touches. Through ritual and hymn, we kindle the divine flame within."*\n\nWhat sacred practice shall we perform together?`,
-    
+
     pulastya: `**✨ Where Dharma Begins ✨**\n\n🗺️ **Namaste, Wandering Soul**\n\nI am **Pulastya**, knower of sacred lands and master of cosmological wisdom. I shall guide you through the geography of consciousness and the sacred places of spiritual power.\n\n**My Specialties:**\n• 🏔️ Sacred geography and holy sites\n• 🌌 Cosmological understanding\n• 🗺️ Pilgrimage and sacred journeys\n• 🌍 Universal spatial wisdom\n\n*"Every place holds sacred power, and every journey is a pilgrimage. Let us explore the landscape of the divine."*\n\nWhat spiritual journey shall we embark upon?`,
-    
+
     pulaha: `**✨ Where Dharma Begins ✨**\n\n🌬️ **Namaste, Living Soul**\n\nI am **Pulaha**, master of life force and pranic wisdom. Through breath and the subtle energies of prana, I shall help you awaken and harmonize your vital forces.\n\n**My Specialties:**\n• 🌬️ Pranayama and breath work\n• ⚡ Life force cultivation\n• 💫 Subtle energy practices\n• 🧘 Vital body awakening\n\n*"In the breath lies the bridge between body and spirit. Let us harness the power of prana."*\n\nHow shall we work with your life force today?`,
-    
+
     kratu: `**✨ Where Dharma Begins ✨**\n\n⚡ **Namaste, Devoted Soul**\n\nI am **Kratu**, embodiment of divine action and sacrificial power. Through yajna (sacrifice) and yogic will, I shall guide you in manifesting the Supreme through righteous action.\n\n**My Specialties:**\n• 🔥 Divine action and sacrifice\n• 💪 Yogic power and willpower\n• ⚡ Manifestation through action\n• 🙏 Devotional practices\n\n*"Action performed as sacred offering becomes the path to the Divine. Let us act with divine purpose."*\n\nWhat divine action shall we manifest together?`,
-    
+
     daksha: `**✨ Where Dharma Begins ✨**\n\n🎨 **Namaste, Skillful Seeker**\n\nI am **Dakṣa**, master of righteous creation and skillful action. Through dharmic skill and creative wisdom, I shall help you manifest divine will in the world.\n\n**My Specialties:**\n• 🎯 Skill and mastery\n• 🌱 Righteous creation\n• ⚖️ Dharmic action\n• 🛠️ Manifesting divine purpose\n\n*"Skill wedded to dharma becomes the hand of the Divine. Let us create with sacred purpose."*\n\nWhat shall we skillfully create on your spiritual path?`,
-    
+
     bhrigu: `**✨ Where Dharma Begins ✨**\n\n⭐ **Namaste, Blessed Soul**\n\nI am **Bhṛgu**, the great sage of astrology and karma philosophy. I shall help you understand the cosmic patterns that shape your life and guide you along your karmic path.\n\n**My Specialties:**\n• 🌌 Vedic astrology and cosmic patterns\n• ⚖️ Karma philosophy and understanding\n• 📖 Divine knowledge and wisdom\n• 🔮 Life path guidance\n\n*"The stars above mirror the journey within. Let us read the cosmic map of your destiny."*\n\nWhat aspect of your karmic journey shall we explore?`,
-    
+
     vasishta: `**✨ Where Dharma Begins ✨**\n\n👑 **Namaste, Noble One**\n\nI am **Vasiṣṭha**, the royal guru and teacher of Lord Rama. I offer you the wisdom of dharmic leadership, righteous living, and divine knowledge.\n\n**My Specialties:**\n• 📚 Dharmic principles and righteous living\n• 👑 Leadership and royal wisdom\n• 🏛️ Spiritual teaching and guidance\n• ⚔️ Courage in the face of challenges\n\n*"As I guided Rama, so shall I guide you toward dharmic excellence and spiritual mastery."*\n\nHow may I serve your quest for dharmic wisdom?`
   };
 
@@ -98,46 +102,93 @@ const getStandardWelcome = (): Message => ({
 
 export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [conversations, setConversations] = useState<Map<string, RishiConversation>>(new Map());
-  const [currentRishi, setCurrentRishi] = useState<string>(''); // Empty string = Standard AI
+  const [savedConversations, setSavedConversations] = useState<RishiConversation[]>([]); // Saved history for "Recent" tab
+  const [currentRishi, setCurrentRishi] = useState<string>(''); // Empty string = DharmaMind (general)
+  const [currentConversationId, setCurrentConversationId] = useState<string>(`new-${Date.now()}`); // Track current conversation
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  // Load conversations from localStorage on mount
+  // Check if user is logged in (not a guest)
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          const conversationsMap = new Map<string, RishiConversation>();
-          
-          Object.entries(parsed).forEach(([key, value]: [string, any]) => {
-            conversationsMap.set(key, {
-              ...value,
-              messages: value.messages.map((msg: any) => ({
-                ...msg,
-                timestamp: new Date(msg.timestamp)
-              })),
-              lastActive: new Date(value.lastActive)
-            });
-          });
-          
-          setConversations(conversationsMap);
-        } catch (error) {
-          console.error('Error loading Rishi conversations:', error);
-        }
-      }
+      // Check for auth token or user data in localStorage
+      const authToken = localStorage.getItem('auth_token');
+      const userData = localStorage.getItem('user_data');
+      setIsLoggedIn(!!(authToken || userData));
     }
   }, []);
 
-  // Save conversations to localStorage whenever they change
+  // Load SAVED conversations from localStorage for logged-in users (for "Recent" tab)
+  // But DON'T auto-load into current chat - always start fresh
   useEffect(() => {
-    if (typeof window !== 'undefined' && conversations.size > 0) {
-      const toStore: Record<string, any> = {};
-      conversations.forEach((value, key) => {
-        toStore[key] = value;
-      });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
+    if (typeof window !== 'undefined') {
+      if (isLoggedIn) {
+        // Logged-in user: load saved conversations for history/recent tab
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            const savedList: RishiConversation[] = [];
+
+            Object.entries(parsed).forEach(([key, value]: [string, any]) => {
+              savedList.push({
+                ...value,
+                messages: value.messages.map((msg: any) => ({
+                  ...msg,
+                  timestamp: new Date(msg.timestamp)
+                })),
+                lastActive: new Date(value.lastActive)
+              });
+            });
+
+            // Sort by lastActive (most recent first)
+            savedList.sort((a, b) => b.lastActive.getTime() - a.lastActive.getTime());
+            setSavedConversations(savedList);
+          } catch (error) {
+            console.error('Error loading saved conversations:', error);
+          }
+        }
+      } else {
+        // Guest user: no saved history
+        setSavedConversations([]);
+      }
+
+      // ALWAYS start with a fresh/clean chat (empty conversations map)
+      setConversations(new Map());
+      setCurrentConversationId(`new-${Date.now()}`);
     }
-  }, [conversations]);
+  }, [isLoggedIn]);
+
+  // Save current conversation to localStorage when it has messages (for logged-in users)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && isLoggedIn && conversations.size > 0) {
+      // Merge current conversation into saved conversations
+      const currentConv = conversations.get(currentRishi);
+      if (currentConv && currentConv.messages.length > 1) { // More than just welcome message
+        const stored = localStorage.getItem(STORAGE_KEY) || '{}';
+        const existing = JSON.parse(stored);
+
+        // Save with conversation ID as key
+        existing[currentConversationId] = {
+          ...currentConv,
+          conversationId: currentConversationId
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+
+        // Update saved conversations list
+        const savedList: RishiConversation[] = Object.values(existing).map((value: any) => ({
+          ...value,
+          messages: value.messages.map((msg: any) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp)
+          })),
+          lastActive: new Date(value.lastActive)
+        }));
+        savedList.sort((a, b) => b.lastActive.getTime() - a.lastActive.getTime());
+        setSavedConversations(savedList);
+      }
+    }
+  }, [conversations, isLoggedIn, currentRishi, currentConversationId]);
 
   const getCurrentMessages = (): Message[] => {
     const conversation = conversations.get(currentRishi);
@@ -149,7 +200,7 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
       const newMap = new Map(prev);
       const conversation = newMap.get(currentRishi) || {
         rishiId: currentRishi,
-        rishiName: currentRishi || 'Standard AI',
+        rishiName: currentRishi || 'DharmaMind',
         messages: [],
         conversationId: `conv-${currentRishi}-${Date.now()}`,
         lastActive: new Date(),
@@ -159,7 +210,7 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
       conversation.messages.push(message);
       conversation.lastActive = new Date();
       conversation.messageCount = conversation.messages.length;
-      
+
       newMap.set(currentRishi, conversation);
       return newMap;
     });
@@ -169,7 +220,7 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
     setConversations(prev => {
       const newMap = new Map(prev);
       const conversation = newMap.get(currentRishi);
-      
+
       if (conversation) {
         // Keep only the welcome message
         const welcomeMessage = conversation.messages[0];
@@ -178,7 +229,7 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
         conversation.messageCount = conversation.messages.length;
         newMap.set(currentRishi, conversation);
       }
-      
+
       return newMap;
     });
   };
@@ -190,13 +241,13 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
     // Check if conversation exists for this Rishi
     if (!conversations.has(newRishiId)) {
       // Create new conversation with welcome message
-      const welcomeMessage = newRishiId === '' 
+      const welcomeMessage = newRishiId === ''
         ? getStandardWelcome()
         : getRishiWelcome(newRishiId, rishiName);
 
       const newConversation: RishiConversation = {
         rishiId: newRishiId,
-        rishiName: rishiName || 'Standard AI',
+        rishiName: rishiName || 'DharmaMind',
         messages: [welcomeMessage],
         conversationId: `conv-${newRishiId}-${Date.now()}`,
         lastActive: new Date(),
@@ -228,6 +279,34 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
     );
   };
 
+  // Get saved conversations for "Recent Chats" tab
+  const getSavedConversations = (): RishiConversation[] => {
+    return savedConversations;
+  };
+
+  // Load a specific saved conversation (when user clicks on recent chat)
+  const loadConversation = (conversationId: string) => {
+    const savedConv = savedConversations.find(c => c.conversationId === conversationId);
+    if (savedConv) {
+      setCurrentConversationId(conversationId);
+      setCurrentRishi(savedConv.rishiId);
+
+      // Load this conversation into the active conversations map
+      setConversations(prev => {
+        const newMap = new Map(prev);
+        newMap.set(savedConv.rishiId, savedConv);
+        return newMap;
+      });
+    }
+  };
+
+  // Start a fresh new chat (clears current conversation)
+  const startNewChat = () => {
+    setCurrentConversationId(`new-${Date.now()}`);
+    setConversations(new Map()); // Clear all active conversations
+    // The welcome message will be created when switchRishi is called
+  };
+
   const getConversationStats = () => {
     const convs = Array.from(conversations.values());
     const totalMessages = convs.reduce((sum, conv) => sum + conv.messageCount, 0);
@@ -250,7 +329,11 @@ export const RishiChatProvider: React.FC<{ children: ReactNode }> = ({ children 
     clearCurrentChat,
     switchRishi,
     getAllConversations,
-    getConversationStats
+    getSavedConversations,
+    loadConversation,
+    startNewChat,
+    getConversationStats,
+    isLoggedIn
   };
 
   return (

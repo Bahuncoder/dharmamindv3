@@ -38,7 +38,7 @@ const suggestionCategories: SuggestionCategory[] = [
     keywords: ['meditat', 'breath', 'mindful', 'calm', 'peace', 'relax'],
     suggestions: [
       "Guide me through meditation",
-      "Lead me through breathing exercises", 
+      "Lead me through breathing exercises",
       "Help me with mindfulness practice",
       "Guide me through loving-kindness meditation",
       "Teach me body scan meditation",
@@ -100,8 +100,8 @@ const suggestionCategories: SuggestionCategory[] = [
   }
 ];
 
-const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({ 
-  onSuggestionClick, 
+const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
+  onSuggestionClick,
   messages,
   className = ''
 }) => {
@@ -114,7 +114,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
   useEffect(() => {
     const savedInteractions = localStorage.getItem('dharmamind_user_interactions');
     const savedWeights = localStorage.getItem('dharmamind_category_weights');
-    
+
     if (savedInteractions) {
       try {
         const interactions = JSON.parse(savedInteractions);
@@ -139,7 +139,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
     const timeOfDay = getTimeOfDay();
     const dayOfWeek = getDayOfWeek();
     const category = detectSuggestionCategory(suggestion);
-    
+
     const newInteraction: UserInteraction = {
       suggestion,
       timestamp: new Date(),
@@ -171,10 +171,10 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
 
       // Keep only last 100 interactions to prevent memory bloat
       const trimmedInteractions = updatedInteractions.slice(-100);
-      
+
       // Save to localStorage
       localStorage.setItem('dharmamind_user_interactions', JSON.stringify(trimmedInteractions));
-      
+
       return trimmedInteractions;
     });
 
@@ -182,7 +182,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
     setCategoryWeights(prev => {
       const newWeights = { ...prev };
       newWeights[category] = (newWeights[category] || 1.0) + 0.1;
-      
+
       // Normalize weights to prevent infinite growth
       const maxWeight = Math.max(...Object.values(newWeights));
       if (maxWeight > 3.0) {
@@ -190,7 +190,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
           newWeights[key] = newWeights[key] / maxWeight * 3.0;
         });
       }
-      
+
       localStorage.setItem('dharmamind_category_weights', JSON.stringify(newWeights));
       return newWeights;
     });
@@ -211,21 +211,21 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
 
   const detectSuggestionCategory = (suggestion: string): string => {
     const lowerSuggestion = suggestion.toLowerCase();
-    
+
     for (const category of suggestionCategories) {
       if (category.keywords.some(keyword => lowerSuggestion.includes(keyword))) {
         return category.name;
       }
     }
-    
+
     return 'general';
   };
 
   const analyzeMessagePatterns = () => {
     if (messages.length <= 1) return {};
-    
+
     const patterns: Record<string, number> = {};
-    
+
     // Analyze recent user messages for keywords
     const recentUserMessages = messages
       .filter(msg => msg.sender === 'user')
@@ -238,7 +238,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
         const mentions = recentUserMessages.filter(msg => msg.includes(keyword)).length;
         categoryScore += mentions;
       });
-      
+
       if (categoryScore > 0) {
         patterns[category.name] = categoryScore;
       }
@@ -256,7 +256,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
 
     // Analyze current conversation patterns
     const messagePatterns = analyzeMessagePatterns();
-    
+
     // Get user's preferred categories based on interaction history
     const preferredCategories = userInteractions.reduce((acc, interaction) => {
       acc[interaction.category] = (acc[interaction.category] || 0) + interaction.frequency;
@@ -265,8 +265,8 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
 
     // Get contextual preferences (time/day patterns)
     const contextualPreferences = userInteractions
-      .filter(interaction => 
-        interaction.timeOfDay === timeOfDay || 
+      .filter(interaction =>
+        interaction.timeOfDay === timeOfDay ||
         interaction.dayOfWeek === dayOfWeek
       )
       .reduce((acc, interaction) => {
@@ -278,28 +278,28 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
 
     // Calculate weighted scores for each category
     const categoryScores: Record<string, number> = {};
-    
+
     suggestionCategories.forEach(category => {
       let score = category.weight;
-      
+
       // Boost based on user interaction history
       score += (preferredCategories[category.name] || 0) * 0.3;
-      
+
       // Boost based on current conversation patterns
       score += (messagePatterns[category.name] || 0) * 0.5;
-      
+
       // Boost based on contextual preferences
       score += (contextualPreferences[category.name] || 0) * 0.2;
-      
+
       // Boost based on saved category weights
       score *= (categoryWeights[category.name] || 1.0);
-      
+
       categoryScores[category.name] = score;
     });
 
     // Sort categories by score and select top suggestions
     const sortedCategories = Object.entries(categoryScores)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 3); // Top 3 categories
 
     // Generate suggestions from top categories
@@ -317,7 +317,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
         const availableSuggestions = category.suggestions.filter(
           suggestion => !currentSuggestions.includes(suggestion)
         );
-        
+
         const selectedSuggestions = [
           ...userFavoritesInCategory.slice(0, 1),
           ...availableSuggestions.slice(0, 1)
@@ -349,28 +349,28 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
           evening: ["Help me reflect on today's lessons", "Guide me through evening peace"],
           night: ["Help me prepare for restful sleep", "Guide me in releasing today's stress"]
         };
-        
+
         suggestions = timeBasedSuggestions[timeOfDay] || timeBasedSuggestions.morning;
       }
     }
 
     // Ensure we have exactly 3 unique suggestions
     const uniqueSuggestions = Array.from(new Set(suggestions)).slice(0, 3);
-    
+
     // If we need more suggestions, add from less preferred categories
     while (uniqueSuggestions.length < 3) {
       const remainingCategories = suggestionCategories.filter(
-        category => !uniqueSuggestions.some(suggestion => 
+        category => !uniqueSuggestions.some(suggestion =>
           category.suggestions.includes(suggestion)
         )
       );
-      
+
       if (remainingCategories.length > 0) {
         const randomCategory = remainingCategories[Math.floor(Math.random() * remainingCategories.length)];
         const availableSuggestions = randomCategory.suggestions.filter(
           suggestion => !uniqueSuggestions.includes(suggestion)
         );
-        
+
         if (availableSuggestions.length > 0) {
           uniqueSuggestions.push(availableSuggestions[0]);
         } else {
@@ -392,7 +392,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
 
   useEffect(() => {
     generateSmartSuggestions();
-    
+
     // Refresh suggestions periodically and after interactions
     const interval = setInterval(generateSmartSuggestions, 60 * 1000); // Every minute
     return () => clearInterval(interval);
@@ -414,10 +414,10 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
             <span className="text-sm font-medium" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
               � Smart suggestions based on your preferences:
             </span>
-            <button 
+            <button
               onClick={generateSmartSuggestions}
               className="text-xs transition-colors"
-              style={{ color: 'var(--color-border-primary, #10b981)' }}
+              style={{ color: 'var(--color-border-primary, #d4a854)' }}
               onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               title="Refresh smart suggestions"
@@ -425,7 +425,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
               ↻ Refresh
             </button>
           </div>
-          
+
           <div className="grid gap-2 md:grid-cols-1 lg:grid-cols-3">
             {currentSuggestions.map((suggestion, index) => (
               <motion.button
@@ -437,7 +437,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
                 className="text-left p-3 rounded-lg hover:shadow-md transition-all duration-200 group relative"
                 style={{
                   background: 'var(--color-background, #f8fafc)',
-                  border: `1px solid var(--color-border-primary, #10b981)`,
+                  border: `1px solid var(--color-border-primary, #d4a854)`,
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'var(--color-background-secondary, #ffffff)';
@@ -449,16 +449,16 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
                 }}
               >
                 <div className="flex items-start space-x-2">
-                  <span className="mt-0.5" style={{ color: 'var(--color-border-primary, #10b981)' }}>🎯</span>
+                  <span className="mt-0.5" style={{ color: 'var(--color-border-primary, #d4a854)' }}>🎯</span>
                   <span className="text-sm group-hover:opacity-80 line-clamp-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
                     {suggestion}
                   </span>
                 </div>
-                
+
                 {/* Learning indicator */}
                 {userInteractions.some(interaction => interaction.suggestion === suggestion) && (
                   <div className="absolute top-1 right-1">
-                    <span className="text-xs" style={{ color: 'var(--color-border-primary, #10b981)' }} title="Learned from your preferences">
+                    <span className="text-xs" style={{ color: 'var(--color-border-primary, #d4a854)' }} title="Learned from your preferences">
                       ✨
                     </span>
                   </div>
@@ -466,7 +466,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
               </motion.button>
             ))}
           </div>
-          
+
           {/* Learning status indicator */}
           <div className="flex items-center justify-center mt-4 text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
             <span>
@@ -474,7 +474,7 @@ const PersonalizedSuggestions: React.FC<PersonalizedSuggestionsProps> = ({
               {Object.keys(categoryWeights).length > 0 && (
                 <span className="ml-2">
                   | Preferences: {Object.entries(categoryWeights)
-                    .sort(([,a], [,b]) => b - a)
+                    .sort(([, a], [, b]) => b - a)
                     .slice(0, 2)
                     .map(([category]) => category)
                     .join(', ')}

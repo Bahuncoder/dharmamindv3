@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { 
-  PaperAirplaneIcon, 
-  SparklesIcon, 
-  UserCircleIcon, 
+import {
+  PaperAirplaneIcon,
+  SparklesIcon,
+  UserCircleIcon,
   ChevronDownIcon,
   ClipboardDocumentIcon,
   ArrowPathIcon,
@@ -30,10 +30,9 @@ import { useConversationTags } from '../hooks/useConversationTags';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 import ConversationInsights from './ConversationInsights';
-import EnhancedMessageInput from './EnhancedMessageInput';
+import EnhancedChatInput from './EnhancedChatInput';
 import UnifiedEnhancedMessageBubble from './UnifiedEnhancedMessageBubble';
 import ScrollToBottom from './ScrollToBottom';
-import FloatingActionMenu from './FloatingActionMenu';
 import TypingIndicator from './TypingIndicator';
 import MessageSearch from './MessageSearch';
 
@@ -60,7 +59,7 @@ interface ChatInterfaceProps {
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   // Router for navigation
   const router = useRouter();
-  
+
   // Authentication
   const { user, isAuthenticated } = useAuth();
 
@@ -97,7 +96,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
   // UI State
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  
+
   // Enhanced UI State for better UX
   const [isMobile, setIsMobile] = useState(false);
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -125,7 +124,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [hoveredMessageId, setHoveredMessageId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState<string | null>(null);
   const [savedMessages, setSavedMessages] = useState<string[]>([]);
-  
+
   // Enhanced Accessibility State
   const [focusedMessageId, setFocusedMessageId] = useState<string | null>(null);
   const [announceMessage, setAnnounceMessage] = useState<string>('');
@@ -139,7 +138,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [meditationMode, setMeditationMode] = useState(false);
   const [showMessageSearch, setShowMessageSearch] = useState(false);
   const [showFloatingMenu, setShowFloatingMenu] = useState(true);
-  
+
   // Deep Contemplation Integration
   const [contemplationMode, setContemplationMode] = useState(false);
   const [currentContemplationSession, setCurrentContemplationSession] = useState<any>(null);
@@ -147,7 +146,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   const [contemplationInsights, setContemplationInsights] = useState<string[]>([]);
   const [contemplationTimer, setContemplationTimer] = useState(0);
   const [isContemplationActive, setIsContemplationActive] = useState(false);
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -181,8 +180,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   // Enhanced Mobile Detection and Responsive Features
   useEffect(() => {
     const checkMobile = () => {
-      const isMobileDevice = window.innerWidth <= 768 || 
-        ('ontouchstart' in window) || 
+      const isMobileDevice = window.innerWidth <= 768 ||
+        ('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0);
       setIsMobile(isMobileDevice);
     };
@@ -200,14 +199,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     // Detect accessibility preferences
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const prefersHighContrast = window.matchMedia('(prefers-contrast: high)').matches;
-    
+
     setReduceMotion(prefersReducedMotion);
     setIsHighContrast(prefersHighContrast);
-    
+
     checkMobile();
     window.addEventListener('resize', handleResize);
     window.addEventListener('orientationchange', handleResize);
-    
+
     // Listen for viewport changes (mobile keyboard)
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', handleResize);
@@ -231,7 +230,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       const { scrollTop, scrollHeight, clientHeight } = container;
       const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
       setShouldAutoScroll(isNearBottom);
-      
+
       // Update read status
       if (isNearBottom && messages.length > 0) {
         const lastMessage = messages[messages.length - 1];
@@ -304,7 +303,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     setIsLoading(true);
     setError(null);
     setUsageAlert(null);
-    
+
     // Enhanced UX feedback
     setShouldAutoScroll(true);
     setUnreadCount(0);
@@ -319,13 +318,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     const contemplationKeywords = ['meditate', 'meditation', 'contemplate', 'contemplation', 'mindfulness', 'breathing', 'breath work', 'spiritual practice', 'inner peace', 'reflection'];
     const lowerInput = inputMessage.toLowerCase();
     const isContemplationRequest = contemplationKeywords.some(keyword => lowerInput.includes(keyword));
-    
+
     // Check for direct contemplation commands
     if (lowerInput.includes('start contemplation') || lowerInput.includes('begin contemplation') || lowerInput.includes('start meditation')) {
       startIntegratedContemplation();
       return;
     }
-    
+
     // Check for dedicated contemplation page request
     if (lowerInput.includes('open contemplation page') || lowerInput.includes('contemplation page') || lowerInput.includes('dedicated contemplation') || lowerInput.includes('sacred space')) {
       router.push('/contemplation');
@@ -368,15 +367,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         };
 
         setMessages(prev => [...prev, assistantMessage]);
-        
+
         // Enhanced accessibility announcement
         setAnnounceMessage(`DharmaMind responded with ${assistantMessage.content.length < 100 ? assistantMessage.content : 'a detailed response'}`);
-        
+
         // Update unread count for better UX
         if (!shouldAutoScroll) {
           setUnreadCount(prev => prev + 1);
         }
-        
+
         // Suggest contemplation session if user asked about meditation/contemplation
         if (isContemplationRequest && !contemplationMode) {
           setTimeout(() => {
@@ -392,7 +391,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             setMessages(prev => [...prev, contemplationSuggestion]);
           }, 1000);
         }
-        
+
         // Update conversation ID for continuity
         if (response.conversation_id) {
           setConversationId(response.conversation_id);
@@ -433,7 +432,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       setMessages(prev => [...prev, errorMessage]);
       setError('Network error occurred');
       setAnnounceMessage('Connection error. Please check your internet and try again.');
-      
+
       // Haptic feedback for error on mobile
       if (isMobile && 'vibrate' in navigator) {
         navigator.vibrate([100, 50, 100]);
@@ -497,7 +496,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     // Remove the current assistant message
     const updatedMessages = messages.filter(msg => msg.id !== messageId);
     setMessages(updatedMessages);
-    
+
     // Regenerate response
     setIsLoading(true);
     try {
@@ -529,9 +528,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
   const toggleFavorite = (messageId: string) => {
     const isCurrentlyFavorite = favoriteMessages.includes(messageId);
-    
-    setFavoriteMessages(prev => 
-      isCurrentlyFavorite 
+
+    setFavoriteMessages(prev =>
+      isCurrentlyFavorite
         ? prev.filter(id => id !== messageId)
         : [...prev, messageId]
     );
@@ -545,9 +544,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
   const toggleSaved = (messageId: string) => {
     const isCurrentlySaved = savedMessages.includes(messageId);
-    
-    setSavedMessages(prev => 
-      isCurrentlySaved 
+
+    setSavedMessages(prev =>
+      isCurrentlySaved
         ? prev.filter(id => id !== messageId)
         : [...prev, messageId]
     );
@@ -587,19 +586,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
     speechSynthesis.cancel();
     showSpeaking();
-    
+
     const utterance = new SpeechSynthesisUtterance(content);
     utterance.rate = 0.7; // Slower for spiritual content
     utterance.pitch = 0.9; // Slightly deeper
     utterance.volume = 0.8;
-    
+
     utterance.onstart = () => setIsPlaying(messageId);
     utterance.onend = () => setIsPlaying(null);
     utterance.onerror = () => {
       setIsPlaying(null);
       showError('Speech Error', 'Unable to speak this message');
     };
-    
+
     speechSynthesis.speak(utterance);
   };
 
@@ -607,7 +606,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
     setMessageReactions(prev => {
       const messageReacts = prev[messageId] || [];
       const existingReaction = messageReacts.find((r: any) => r.type === reactionType);
-      
+
       if (existingReaction) {
         // Toggle reaction
         existingReaction.userReacted = !existingReaction.userReacted;
@@ -620,7 +619,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           userReacted: true
         });
       }
-      
+
       return {
         ...prev,
         [messageId]: messageReacts.filter((r: any) => r.count > 0)
@@ -681,9 +680,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       dharmic_alignment: 1.0,
       modules_used: ['contemplation']
     };
-    
+
     setMessages(prev => [...prev, contemplationChoice]);
-    
+
     // Add quick action buttons in chat
     setTimeout(() => {
       const actionMessage: Message = {
@@ -720,7 +719,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         setContemplationTimer(0);
         setIsContemplationActive(true);
         setContemplationInsights([]);
-        
+
         // Add contemplation start message to chat
         const contemplationMessage: Message = {
           id: Date.now().toString(),
@@ -732,7 +731,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           modules_used: ['contemplation'],
           isContemplation: true
         };
-        
+
         setMessages(prev => [...prev, contemplationMessage]);
       }
     } catch (error) {
@@ -757,7 +756,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       if (response.ok) {
         const guidance = await response.json();
         setContemplationGuidance(guidance.guidance);
-        
+
         // Add guidance message to chat
         const guidanceMessage: Message = {
           id: Date.now().toString(),
@@ -769,7 +768,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           modules_used: ['contemplation'],
           isGuidance: true
         };
-        
+
         setMessages(prev => [...prev, guidanceMessage]);
       }
     } catch (error) {
@@ -793,7 +792,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
       if (response.ok) {
         setContemplationInsights(prev => [...prev, insight]);
-        
+
         // Add insight message to chat
         const insightMessage: Message = {
           id: Date.now().toString(),
@@ -805,7 +804,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           modules_used: ['contemplation'],
           isInsight: true
         };
-        
+
         setMessages(prev => [...prev, insightMessage]);
       }
     } catch (error) {
@@ -828,7 +827,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
 
       if (response.ok) {
         const summary = await response.json();
-        
+
         // Add completion message to chat
         const completionMessage: Message = {
           id: Date.now().toString(),
@@ -840,9 +839,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
           modules_used: ['contemplation'],
           isCompletion: true
         };
-        
+
         setMessages(prev => [...prev, completionMessage]);
-        
+
         // Reset contemplation state
         setContemplationMode(false);
         setCurrentContemplationSession(null);
@@ -881,23 +880,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
   };
 
   return (
-    <div 
+    <div
       className={`flex flex-col h-full chat-container relative ${meditationMode ? 'meditation-mode' : ''} ${isMobile ? 'mobile-optimized' : ''} ${isKeyboardVisible ? 'keyboard-visible' : ''} ${reduceMotion ? 'reduce-motion' : ''} ${isHighContrast ? 'high-contrast' : ''}`}
       aria-label="DharmaMind spiritual guidance chat interface"
     >
       {/* Screen Reader Announcements */}
-      <div 
-        aria-live="polite" 
-        aria-atomic="true" 
+      <div
+        aria-live="polite"
+        aria-atomic="true"
         className="sr-only"
         role="status"
       >
         {announceMessage}
       </div>
-      
+
       {/* Skip to main content link for accessibility */}
-      <a 
-        href="#chat-messages" 
+      <a
+        href="#chat-messages"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md"
       >
         Skip to chat messages
@@ -912,16 +911,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             <div className="floating-orb medium" style={{ bottom: '20%', left: '10%', animationDelay: '6s' }}></div>
             <div className="floating-orb small" style={{ top: '80%', right: '40%', animationDelay: '8s' }}></div>
           </div>
-          
+
           {/* Sacred Geometry Background */}
           <div className="sacred-geometry-bg" aria-hidden="true"></div>
-          
+
           {/* Lotus Patterns */}
           <div className="lotus-pattern" style={{ top: '15%', right: '5%', animationDelay: '0s' }} aria-hidden="true"></div>
           <div className="lotus-pattern" style={{ bottom: '25%', left: '3%', animationDelay: '10s' }} aria-hidden="true"></div>
         </>
       )}
-      
+
       {/* Breathing Guide */}
       {showBreathingGuide && (
         <motion.div
@@ -941,13 +940,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       )}
       {/* Usage Alert Banner */}
       {isFreePlan() && shouldShowUpgradePrompt('messages') && (
-        <MiniUpgradeBanner 
+        <MiniUpgradeBanner
           onUpgrade={() => setShowSubscriptionModal(true)}
         />
       )}
-      
+
       {/* Header */}
-      <header 
+      <header
         className="flex-shrink-0 p-4 sm:p-6 chat-header-enhanced animate-slide-in-down relative z-10"
         role="banner"
       >
@@ -968,16 +967,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 Spiritual wisdom guide
               </p>
             </div>
-            
+
             {/* Unread Message Indicator */}
             {unreadCount > 0 && (
-              <div 
+              <div
                 className="flex items-center space-x-2 bg-neutral-200 text-neutral-800 px-3 py-1 rounded-full text-sm"
                 role="status"
                 aria-label={`${unreadCount} unread message${unreadCount > 1 ? 's' : ''}`}
               >
                 <span>{unreadCount} new</span>
-                <button 
+                <button
                   onClick={() => scrollToBottom()}
                   className="text-gold-600 hover:text-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-1000 rounded"
                   aria-label="Scroll to latest message"
@@ -986,10 +985,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 </button>
               </div>
             )}
-            
+
             {/* Current Tags Display */}
             {currentTags.length > 0 && (
-              <div 
+              <div
                 className="hidden md:flex items-center space-x-1"
                 role="region"
                 aria-label="Conversation tags"
@@ -1015,23 +1014,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 )}
               </div>
             )}
-            
+
             {/* Theme Toggle & Insights */}
             <div className="flex items-center space-x-3">
               <div className="interactive-element">
                 <ThemeToggle size="sm" />
               </div>
-              
+
               {/* Meditation Mode Toggle */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setMeditationMode(!meditationMode)}
-                className={`p-2 rounded-full transition-all duration-300 ${
-                  meditationMode 
-                    ? 'bg-purple-100 text-gold-600 dark:bg-purple-900/30 dark:text-gold-400' 
+                className={`p-2 rounded-full transition-all duration-300 ${meditationMode
+                    ? 'bg-purple-100 text-gold-600 dark:bg-purple-900/30 dark:text-gold-400'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
-                }`}
+                  }`}
                 title="Toggle Meditation Mode"
               >
                 <SparklesIcon className="h-4 w-4" />
@@ -1042,11 +1040,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setShowBreathingGuide(!showBreathingGuide)}
-                className={`p-2 rounded-full transition-all duration-300 ${
-                  showBreathingGuide 
-                    ? '' 
+                className={`p-2 rounded-full transition-all duration-300 ${showBreathingGuide
+                    ? ''
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
-                }`}
+                  }`}
                 style={{
                   ...(showBreathingGuide && {
                     backgroundColor: 'var(--color-background-secondary)',
@@ -1060,7 +1057,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </motion.button>
-              
+
               <button
                 onClick={() => setShowInsightsModal(true)}
                 className="btn-premium btn-premium-ghost flex items-center space-x-2"
@@ -1072,25 +1069,25 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 </span>
               </button>
             </div>
-            
+
             {/* Usage Progress in Header - Desktop Only */}
             {isFreePlan() && (
               <div className="hidden lg:block w-32">
-                <UsageProgress 
-                  feature="messages" 
+                <UsageProgress
+                  feature="messages"
                   showDetails={false}
                   className="mr-4"
                 />
               </div>
             )}
-            
+
             {/* User Profile Dropdown */}
             {isAuthenticated && user && (
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setShowUserDropdown(!showUserDropdown)}
                   className="btn-premium btn-premium-secondary flex items-center space-x-2 animate-pulse-emerald"
-                  style={{ 
+                  style={{
                     borderColor: currentTheme.colors.primary + '20',
                     backgroundColor: showUserDropdown ? currentTheme.colors.primary + '10' : 'transparent'
                   }}
@@ -1102,12 +1099,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                       {user.subscription_plan} Plan
                     </p>
                   </div>
-                  <ChevronDownIcon 
-                    className={`h-4 w-4 transition-transform duration-300 ${showUserDropdown ? 'rotate-180' : ''}`} 
+                  <ChevronDownIcon
+                    className={`h-4 w-4 transition-transform duration-300 ${showUserDropdown ? 'rotate-180' : ''}`}
                   />
                   {/* Mobile upgrade indicator */}
                   {isFreePlan() && (
-                    <span 
+                    <span
                       className="md:hidden w-2.5 h-2.5 rounded-full animate-pulse"
                       style={{ backgroundColor: 'var(--color-border-primary)' }}
                     ></span>
@@ -1125,9 +1122,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                 </AnimatePresence>
               </div>
             )}
-            
+
             {error && (
-              <div 
+              <div
                 className="px-2 sm:px-3 py-1 rounded-full text-xs"
                 style={{
                   backgroundColor: 'var(--color-error-background, #fef2f2)',
@@ -1140,7 +1137,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               </div>
             )}
           </div>
-          
+
           {/* Mobile Usage Progress */}
           {isFreePlan() && (
             <div className="lg:hidden mt-3">
@@ -1151,7 +1148,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       </header>
 
       {/* Messages Container */}
-      <main 
+      <main
         id="chat-messages"
         ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 sm:space-y-8 scroll-smooth chat-messages-enhanced chat-messages-container organic-chat-container"
@@ -1170,8 +1167,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ 
-                duration: 0.4, 
+              transition={{
+                duration: 0.4,
                 delay: index * 0.1,
                 type: "spring",
                 stiffness: 500,
@@ -1210,7 +1207,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
             exit={{ opacity: 0, y: 20 }}
             className="p-4 mx-4 mb-4"
           >
-            <div 
+            <div
               className="rounded-xl p-6 shadow-lg"
               style={{
                 background: `var(--color-background-secondary)`,
@@ -1229,7 +1226,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   {currentContemplationSession.practice_type.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())} • {currentContemplationSession.tradition}
                 </div>
               </div>
-              
+
               <div className="flex justify-center space-x-3 mb-4">
                 {!isContemplationActive ? (
                   <button
@@ -1266,7 +1263,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                     Pause
                   </button>
                 )}
-                
+
                 <button
                   onClick={requestContemplationGuidance}
                   className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
@@ -1281,7 +1278,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   </svg>
                   Guide Me
                 </button>
-                
+
                 <button
                   onClick={stopContemplation}
                   className="flex items-center px-4 py-2 text-white rounded-lg transition-colors"
@@ -1296,7 +1293,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
                   Complete
                 </button>
               </div>
-              
+
               <div className="text-center">
                 <input
                   type="text"
@@ -1329,13 +1326,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         <div ref={messagesEndRef} />
       </main>
 
-      <ScrollToBottom 
+      <ScrollToBottom
         messagesContainerRef={messagesContainerRef}
       />
 
       {/* Usage Alert */}
       {usageAlert && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
@@ -1356,14 +1353,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
       <div className="flex-shrink-0 p-6 sm:p-8 chat-input-enhanced animate-slide-in-up relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="mystical-input-container">
-            <EnhancedMessageInput
+            <EnhancedChatInput
               value={inputMessage}
               onChange={setInputMessage}
               onSend={handleSendMessage}
               isLoading={isLoading}
               showVoiceInput={true}
               placeholder="Ask me anything about spiritual wisdom, dharma, or life guidance..."
-              disabled={isLoading}
             />
           </div>
         </div>
@@ -1386,20 +1382,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onMessageSend }) => {
         isOpen={showInsightsModal}
         onClose={() => setShowInsightsModal(false)}
       />
-
-      {/* Floating Action Menu */}
-      {showFloatingMenu && (
-        <FloatingActionMenu
-          onNewChat={handleNewChat}
-          onOpenNotes={handleOpenNotes}
-          onSearchHistory={handleSearchHistory}
-          onOpenSettings={handleOpenSettings}
-          onOpenJournal={handleOpenJournal}
-          onOpenInsights={handleOpenInsights}
-          onOpenCommunity={handleOpenCommunity}
-          onOpenContemplation={handleOpenContemplation}
-        />
-      )}
 
       {/* Message Search Modal */}
       <MessageSearch

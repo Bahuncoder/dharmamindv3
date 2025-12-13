@@ -25,10 +25,20 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   // Show loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-neutral-900 to-indigo-900 flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p>Loading...</p>
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-14 h-14 mx-auto mb-5 rounded-xl overflow-hidden border-2 border-gold-500/30 shadow-md">
+            <img
+              src="/logo.jpeg"
+              alt="DharmaMind"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          </div>
         </div>
       </div>
     );
@@ -58,7 +68,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
               This feature requires a paid subscription plan.
             </p>
           </div>
-          
+
           <div className="space-y-3">
             <button
               onClick={() => window.location.href = '/?upgrade=true'}

@@ -17,10 +17,10 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChartBarIcon, 
-  CpuChipIcon, 
-  UserGroupIcon, 
+import {
+  ChartBarIcon,
+  CpuChipIcon,
+  UserGroupIcon,
   HeartIcon,
   ClockIcon,
   ExclamationTriangleIcon,
@@ -139,7 +139,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
     }
 
     setConnectionStatus('connecting');
-    
+
     try {
       // Connect to backend dashboard WebSocket
       const wsUrl = `${process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000'}/api/dashboard/ws/${dashboardId}`;
@@ -294,24 +294,23 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
     if (isHighContrast) {
       return value >= thresholds.danger ? '#000000' : value >= thresholds.warning ? '#444444' : '#666666';
     }
-    return value >= thresholds.danger ? '#ef4444' : value >= thresholds.warning ? '#f59e0b' : '#10b981';
+    return value >= thresholds.danger ? '#ef4444' : value >= thresholds.warning ? '#f59e0b' : '#d4a854';
   };
 
   // Render connection status indicator
   const renderConnectionStatus = () => (
     <div className={`flex items-center gap-2 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-      <div 
-        className={`w-2 h-2 rounded-full ${
-          connectionStatus === 'connected' ? 'bg-success-500' : 
-          connectionStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' : 
-          'bg-red-500'
-        }`}
+      <div
+        className={`w-2 h-2 rounded-full ${connectionStatus === 'connected' ? 'bg-success-500' :
+            connectionStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' :
+              'bg-red-500'
+          }`}
         aria-label={`Connection status: ${connectionStatus}`}
       />
       <span className={`${isHighContrast ? 'text-black font-semibold' : 'text-gray-600'}`}>
-        {connectionStatus === 'connected' ? 'Live' : 
-         connectionStatus === 'connecting' ? 'Connecting...' : 
-         'Disconnected'}
+        {connectionStatus === 'connected' ? 'Live' :
+          connectionStatus === 'connecting' ? 'Connecting...' :
+            'Disconnected'}
       </span>
       {lastUpdate && (
         <span className={`${isHighContrast ? 'text-black' : 'text-gray-500'} text-xs`}>
@@ -323,15 +322,15 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
 
   // Render metric card
   const renderMetricCard = (
-    title: string, 
-    value: number | string, 
-    icon: React.ReactNode, 
+    title: string,
+    value: number | string,
+    icon: React.ReactNode,
     trend?: number,
     format: 'number' | 'percentage' | 'custom' = 'number'
   ) => {
     const formattedValue = format === 'percentage' ? formatPercentage(Number(value)) :
-                          format === 'number' ? formatNumber(Number(value)) : 
-                          value;
+      format === 'number' ? formatNumber(Number(value)) :
+        value;
 
     return (
       <motion.div
@@ -348,11 +347,10 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
             {icon}
           </div>
           {trend !== undefined && (
-            <div className={`flex items-center text-sm ${
-              trend > 0 ? 'text-success-600' : trend < 0 ? 'text-red-600' : 'text-gray-600'
-            }`}>
-              <ArrowTrendingUpIcon 
-                className={`w-4 h-4 ${trend < 0 ? 'rotate-180' : ''}`} 
+            <div className={`flex items-center text-sm ${trend > 0 ? 'text-success-600' : trend < 0 ? 'text-red-600' : 'text-gray-600'
+              }`}>
+              <ArrowTrendingUpIcon
+                className={`w-4 h-4 ${trend < 0 ? 'rotate-180' : ''}`}
               />
               <span>{Math.abs(trend)}%</span>
             </div>
@@ -409,7 +407,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
           Recent Alerts
         </h3>
       </div>
-      
+
       <div className="space-y-2 max-h-60 overflow-y-auto">
         {alerts.length === 0 ? (
           <p className={`${isHighContrast ? 'text-black' : 'text-gray-500'} text-sm text-center py-4`}>
@@ -419,11 +417,10 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
           alerts.map((alert) => (
             <div
               key={alert.id}
-              className={`p-3 rounded-lg border-l-4 ${
-                alert.level === 'error' ? 'border-red-500 bg-red-50' :
-                alert.level === 'warning' ? 'border-yellow-500 bg-yellow-50' :
-                'border-neutral-1000 bg-neutral-100'
-              } ${isHighContrast ? 'border-2 border-black' : ''}`}
+              className={`p-3 rounded-lg border-l-4 ${alert.level === 'error' ? 'border-red-500 bg-red-50' :
+                  alert.level === 'warning' ? 'border-yellow-500 bg-yellow-50' :
+                    'border-neutral-1000 bg-neutral-100'
+                } ${isHighContrast ? 'border-2 border-black' : ''}`}
               role="alert"
               aria-label={`${alert.level} alert: ${alert.message}`}
             >
@@ -456,9 +453,8 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
           <motion.div
             animate={reduceMotion ? {} : { rotate: 360 }}
             transition={reduceMotion ? {} : { duration: 2, repeat: Infinity, ease: "linear" }}
-            className={`w-8 h-8 border-2 border-t-transparent rounded-full mx-auto mb-4 ${
-              isHighContrast ? 'border-black' : 'border-gold-500'
-            }`}
+            className={`w-8 h-8 border-2 border-t-transparent rounded-full mx-auto mb-4 ${isHighContrast ? 'border-black' : 'border-gold-500'
+              }`}
           />
           <p className={`${isHighContrast ? 'text-black font-semibold' : 'text-gray-600'}`}>
             Loading dashboard...
@@ -469,7 +465,7 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
   }
 
   return (
-    <div 
+    <div
       className={`p-4 space-y-6 ${className} ${isMobile ? 'px-2' : ''}`}
       role="main"
       aria-label="Advanced Analytics Dashboard"
@@ -570,11 +566,10 @@ const AdvancedAnalyticsDashboard: React.FC<DashboardProps> = ({
             {dharmaInsights.popular_topics.map((topic, index) => (
               <span
                 key={index}
-                className={`px-3 py-1 rounded-full text-sm ${
-                  isHighContrast 
-                    ? 'bg-gray-200 text-black border border-black font-semibold' 
+                className={`px-3 py-1 rounded-full text-sm ${isHighContrast
+                    ? 'bg-gray-200 text-black border border-black font-semibold'
                     : 'bg-gold-100 text-gold-800'
-                }`}
+                  }`}
               >
                 {topic}
               </span>

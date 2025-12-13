@@ -13,7 +13,7 @@ const DemoLinksPage: React.FC = () => {
 
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50 to-stone-50">
         <div className="max-w-4xl mx-auto px-4 py-16">
-          
+
           <div className="text-center mb-12">
             <Logo size="lg" />
             <h1 className="text-3xl font-bold text-stone-900 mt-6 mb-4">
@@ -25,7 +25,7 @@ const DemoLinksPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+
             {/* Beta Demo Link */}
             <div className="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
               <div className="text-center">
@@ -60,7 +60,7 @@ const DemoLinksPage: React.FC = () => {
                 </p>
                 <Link
                   href="/chat"
-                  className="inline-block bg-gradient-to-r from-green-500 to-gold-500 text-white px-6 py-3 rounded-lg font-medium hover:from-green-600 hover:to-gold-600 transition-colors"
+                  className="inline-block bg-gradient-to-r from-gold-500 to-gold-600 text-white px-6 py-3 rounded-lg font-medium hover:from-gold-600 hover:to-gold-700 transition-colors"
                 >
                   Go to Chat
                 </Link>

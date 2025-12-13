@@ -37,7 +37,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
   onComplete
 }) => {
   const [phase, setPhase] = useState<'exit' | 'center' | 'enter'>('exit');
-  
+
   const toColors = RISHI_SACRED_COLORS[toRishi] || RISHI_SACRED_COLORS[''];
   const fromColors = fromRishi ? RISHI_SACRED_COLORS[fromRishi] : null;
   const extendedData = RISHI_EXTENDED_DATA[toRishi];
@@ -45,13 +45,13 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
   useEffect(() => {
     if (show) {
       setPhase('exit');
-      
+
       const centerTimer = setTimeout(() => setPhase('center'), 600);
       const enterTimer = setTimeout(() => setPhase('enter'), 1400);
       const completeTimer = setTimeout(() => {
         onComplete();
       }, 2800);
-      
+
       return () => {
         clearTimeout(centerTimer);
         clearTimeout(enterTimer);
@@ -136,7 +136,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
 
           {/* Main Transition Content */}
           <div className="relative z-10 flex flex-col items-center justify-center">
-            
+
             {/* Outgoing Rishi */}
             <AnimatePresence>
               {phase === 'exit' && fromRishi && fromColors && (
@@ -165,7 +165,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                 <motion.div
                   className="flex flex-col items-center"
                   initial={{ scale: 0, rotate: -180, opacity: 0 }}
-                  animate={{ 
+                  animate={{
                     scale: [0, 2, 1.5],
                     rotate: [0, 360, 720],
                     opacity: [0, 1, 1]
@@ -186,7 +186,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                     transition={{ duration: 1, repeat: Infinity }}
                   >
                     <span className="text-9xl">🕉️</span>
-                    
+
                     {/* Ripple Effects */}
                     {[...Array(3)].map((_, i) => (
                       <motion.div
@@ -201,7 +201,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                           ease: 'easeOut'
                         }}
                       >
-                        <div 
+                        <div
                           className="w-32 h-32 rounded-full border-2"
                           style={{ borderColor: toColors.primary }}
                         />
@@ -224,7 +224,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                   {/* Rishi Avatar with Sacred Glow */}
                   <motion.div
                     className="relative mb-8"
-                    animate={{ 
+                    animate={{
                       y: [0, -10, 0],
                       scale: [1, 1.05, 1]
                     }}
@@ -244,9 +244,9 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
-                    
+
                     {/* Icon */}
-                    <motion.span 
+                    <motion.span
                       className="text-9xl relative z-10 block"
                       style={{
                         filter: `drop-shadow(0 0 30px ${toColors.glow})`
@@ -270,7 +270,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                     >
                       {toRishi === '' ? 'Returning to' : 'Entering the guidance of'}
                     </motion.p>
-                    
+
                     <motion.h2
                       className="text-5xl font-bold text-white"
                       style={{
@@ -285,7 +285,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      {toRishiName || 'Universal Guide'}
+                      {toRishiName || 'DharmaMind'}
                     </motion.h2>
 
                     {/* Extended Data */}
@@ -296,19 +296,19 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                         transition={{ delay: 0.5 }}
                         className="mt-4 space-y-3"
                       >
-                        <p 
+                        <p
                           className="text-lg font-medium"
                           style={{ color: toColors.secondary }}
                         >
                           {extendedData.title}
                         </p>
-                        
+
                         <div className="flex items-center justify-center gap-4 text-sm text-white/70">
                           <span>🔥 {extendedData.element}</span>
                           <span>•</span>
                           <span>🌀 {extendedData.chakra}</span>
                         </div>
-                        
+
                         <motion.p
                           className="text-xl italic text-white/80 max-w-md mt-4"
                           initial={{ opacity: 0 }}
@@ -317,7 +317,7 @@ export const RishiTransition: React.FC<RishiTransitionProps> = ({
                         >
                           "{extendedData.keyTeaching}"
                         </motion.p>
-                        
+
                         <motion.p
                           className="text-2xl mt-6"
                           style={{ color: toColors.primary }}
@@ -383,22 +383,22 @@ export const RishiContextBadge: React.FC<RishiContextBadgeProps> = ({
         boxShadow: `0 4px 20px ${colors.glow}`
       }}
     >
-      <motion.span 
+      <motion.span
         className="text-2xl"
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         {colors.icon}
       </motion.span>
-      
+
       <div className="flex flex-col">
         <span className="text-white font-semibold text-sm">{rishiName}</span>
         <span className="text-white/70 text-xs">
-          {messageCount} message{messageCount !== 1 ? 's' : ''} 
+          {messageCount} message{messageCount !== 1 ? 's' : ''}
           {extendedData && ` • ${extendedData.element}`}
         </span>
       </div>
-      
+
       {onSwitch && (
         <motion.button
           onClick={onSwitch}
@@ -432,7 +432,7 @@ export const MiniRishiIndicator: React.FC<MiniRishiIndicatorProps> = ({
   const colors = RISHI_SACRED_COLORS[rishiId] || RISHI_SACRED_COLORS[''];
 
   return (
-    <div 
+    <div
       className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium"
       style={{
         backgroundColor: `${colors.primary}15`,

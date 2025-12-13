@@ -320,8 +320,8 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => setMeditationMode(!meditationMode)}
               className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${meditationMode
-                  ? 'bg-gold-500/30 border border-gold-400/50 text-purple-200'
-                  : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
+                ? 'bg-gold-500/30 border border-gold-400/50 text-purple-200'
+                : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
                 }`}
               title="Toggle Meditation Mode"
             >
@@ -334,8 +334,8 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsListening(!isListening)}
               className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${isListening
-                  ? 'bg-red-500/30 border border-red-400/50 text-red-200'
-                  : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
+                ? 'bg-red-500/30 border border-red-400/50 text-red-200'
+                : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
                 }`}
               title={isListening ? "Stop Listening" : "Start Voice Input"}
             >
@@ -348,8 +348,8 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsBreathingActive(!isBreathingActive)}
               className={`p-3 rounded-full backdrop-blur-md transition-all duration-300 ${isBreathingActive
-                  ? 'bg-gold-500/30 border border-gold-400/50 text-gold-200'
-                  : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
+                ? 'bg-gold-500/30 border border-gold-400/50 text-gold-200'
+                : 'bg-white/10 border border-white/20 text-white/70 hover:bg-white/20'
                 }`}
               title="Mindful Breathing Guide"
             >
@@ -629,7 +629,7 @@ const AdvancedSpiritualChatInterface: React.FC = () => {
                 disabled={!inputValue.trim() || isLoading}
                 className="p-3 rounded-full bg-gradient-to-r from-gold-500 via-neutral-1000 to-gold-500 hover:from-gold-400 hover:via-gold-400 hover:to-gold-400 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white shadow-lg hover:shadow-xl transition-all duration-300 spiritual-glow"
                 style={{
-                  background: 'linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6)',
+                  background: 'linear-gradient(135deg, var(--brand-secondary, #d4a854), var(--brand-primary, #1e5a8a), var(--color-primary-light, #1e7a8a))',
                   backgroundSize: '200% 200%',
                   animation: 'gradient-shift 3s ease infinite'
                 }}

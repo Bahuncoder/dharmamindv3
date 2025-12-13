@@ -69,14 +69,14 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
 
   // Filter Rishis
   const filteredRishis = availableRishis.filter(rishi => {
-    const matchesSearch = 
+    const matchesSearch =
       rishi.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       rishi.specialization.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
-    
-    const matchesCategory = 
+
+    const matchesCategory =
       activeCategory === 'all' ||
       RISHI_DOMAIN_MAP[rishi.id]?.includes(activeCategory);
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -109,17 +109,17 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
           </span>
         )}
       </div>
-      
+
       {/* Label */}
       <div className="text-left">
         <div className="text-sm font-medium text-gray-900">
-          {isStandardMode ? 'General AI' : selectedRishiData?.name}
+          {isStandardMode ? 'DharmaMind' : selectedRishiData?.name}
         </div>
         <div className="text-xs text-gray-500">
-          {isStandardMode ? 'Standard assistant' : selectedRishiData?.specialization[0]}
+          {isStandardMode ? 'Spiritual wisdom assistant' : selectedRishiData?.specialization[0]}
         </div>
       </div>
-      
+
       {/* Chevron */}
       <svg className="w-4 h-4 text-gray-400 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -139,7 +139,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-      
+
       {/* Modal */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -165,7 +165,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
               </svg>
             </button>
           </div>
-          
+
           {/* Search */}
           <div className="mt-4 relative">
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -179,46 +179,43 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
               className="w-full pl-10 pr-4 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500 transition-all"
             />
           </div>
-          
+
           {/* Category tabs */}
           <div className="flex gap-1 mt-4 overflow-x-auto pb-1">
             {DOMAIN_CATEGORIES.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all ${
-                  activeCategory === cat.id
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-all ${activeCategory === cat.id
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+                  }`}
               >
                 {cat.label}
               </button>
             ))}
           </div>
         </div>
-        
+
         {/* Guide List */}
         <div className="max-h-80 overflow-y-auto p-2">
           {/* Standard AI Option */}
           <button
             onClick={() => handleSelectRishi('')}
-            className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all mb-1 ${
-              isStandardMode 
-                ? 'bg-gold-50 border border-gold-200' 
-                : 'hover:bg-gray-50 border border-transparent'
-            }`}
+            className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all mb-1 ${isStandardMode
+              ? 'bg-gold-50 border border-gold-200'
+              : 'hover:bg-gray-50 border border-transparent'
+              }`}
           >
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-              isStandardMode ? 'bg-gold-100' : 'bg-gray-100'
-            }`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isStandardMode ? 'bg-gold-100' : 'bg-gray-100'
+              }`}>
               <svg className={`w-5 h-5 ${isStandardMode ? 'text-gold-600' : 'text-gray-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-medium text-gray-900 text-sm">General Assistant</div>
-              <div className="text-xs text-gray-500 truncate">Standard AI for all topics</div>
+              <div className="font-medium text-gray-900 text-sm">DharmaMind</div>
+              <div className="text-xs text-gray-500 truncate">Spiritual wisdom assistant</div>
             </div>
             {isStandardMode && (
               <svg className="w-5 h-5 text-gold-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -226,37 +223,40 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
               </svg>
             )}
           </button>
-          
+
           {/* Divider */}
           <div className="h-px bg-gray-100 my-2" />
-          
-          {/* Specialized Guides */}
+
+          {/* Rishi Label */}
+          <div className="px-2 py-1.5 mb-1">
+            <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Rishis (Sages)</span>
+          </div>
+
+          {/* Specialized Rishis */}
           {filteredRishis.map(rishi => {
             const isSelected = selectedRishi === rishi.id;
             const isLocked = !canAccessRishi(rishi);
-            
+
             return (
               <button
                 key={rishi.id}
                 onClick={() => !isLocked && handleSelectRishi(rishi.id)}
                 disabled={isLocked}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all mb-1 ${
-                  isSelected 
-                    ? 'bg-gold-50 border border-gold-200' 
-                    : isLocked
-                      ? 'opacity-50 cursor-not-allowed border border-transparent'
-                      : 'hover:bg-gray-50 border border-transparent'
-                }`}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all mb-1 ${isSelected
+                  ? 'bg-gold-50 border border-gold-200'
+                  : isLocked
+                    ? 'opacity-50 cursor-not-allowed border border-transparent'
+                    : 'hover:bg-gray-50 border border-transparent'
+                  }`}
               >
                 {/* Avatar */}
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm ${
-                  isSelected 
-                    ? 'bg-gold-600 text-white' 
-                    : 'bg-gray-100 text-gray-600'
-                }`}>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm ${isSelected
+                  ? 'bg-gold-600 text-white'
+                  : 'bg-gray-100 text-gray-600'
+                  }`}>
                   {rishi.name.charAt(0)}
                 </div>
-                
+
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
@@ -269,7 +269,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
                     {rishi.specialization.slice(0, 2).join(' · ')}
                   </div>
                 </div>
-                
+
                 {/* Check */}
                 {isSelected && (
                   <svg className="w-5 h-5 text-gold-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -279,14 +279,14 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
               </button>
             );
           })}
-          
+
           {filteredRishis.length === 0 && (
             <div className="py-8 text-center text-gray-500 text-sm">
               No guides found
             </div>
           )}
         </div>
-        
+
         {/* Footer */}
         <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
           <p className="text-xs text-gray-500 text-center">
@@ -300,7 +300,7 @@ export const RishiSelector: React.FC<RishiSelectorProps> = ({
   return (
     <>
       <TriggerButton />
-      
+
       {mounted && createPortal(
         <AnimatePresence>
           {isExpanded && <ModalContent />}

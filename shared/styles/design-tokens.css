@@ -5,125 +5,144 @@
  */
 
 :root {
-  /* ========================================
+   /* ========================================
      BRAND COLORS (from logo)
      ======================================== */
-  --brand-primary: #1e5a8a;        /* Deep wisdom blue */
-  --brand-secondary: #d4a854;      /* Warm gold */
-  --brand-accent: #c75d3a;         /* Warm coral */
-  
-  /* ========================================
+   --brand-primary: #1e5a8a;
+   /* Deep wisdom blue */
+   --brand-secondary: #d4a854;
+   /* Warm gold */
+   --brand-accent: #c75d3a;
+   /* Warm coral */
+
+   /* ========================================
      NEUTRAL PALETTE (warm grays)
      ======================================== */
-  --neutral-50: #fafaf9;
-  --neutral-100: #f5f5f4;
-  --neutral-200: #e7e5e4;
-  --neutral-300: #d6d3d1;
-  --neutral-400: #a8a29e;
-  --neutral-500: #78716c;
-  --neutral-600: #57534e;
-  --neutral-700: #44403c;
-  --neutral-800: #292524;
-  --neutral-900: #1c1917;
-  
-  /* ========================================
+   --neutral-50: #fafaf9;
+   --neutral-100: #f5f5f4;
+   --neutral-200: #e7e5e4;
+   --neutral-300: #d6d3d1;
+   --neutral-400: #a8a29e;
+   --neutral-500: #78716c;
+   --neutral-600: #57534e;
+   --neutral-700: #44403c;
+   --neutral-800: #292524;
+   --neutral-900: #1c1917;
+
+   /* ========================================
      SEMANTIC COLORS
      ======================================== */
-  --text-primary: var(--neutral-900);
-  --text-secondary: var(--neutral-600);
-  --text-muted: var(--neutral-500);
-  --text-inverse: #ffffff;
-  
-  --bg-primary: #ffffff;
-  --bg-secondary: var(--neutral-50);
-  --bg-tertiary: var(--neutral-100);
-  
-  --border-default: var(--neutral-200);
-  --border-subtle: var(--neutral-100);
-  
-  /* ========================================
+   --text-primary: var(--neutral-900);
+   --text-secondary: var(--neutral-600);
+   --text-muted: var(--neutral-500);
+   --text-inverse: #ffffff;
+
+   --bg-primary: #ffffff;
+   --bg-secondary: var(--neutral-50);
+   --bg-tertiary: var(--neutral-100);
+
+   --border-default: var(--neutral-200);
+   --border-subtle: var(--neutral-100);
+
+   /* ========================================
      INTERACTIVE STATES
      ======================================== */
-  --interactive-default: var(--neutral-900);
-  --interactive-hover: var(--neutral-800);
-  --interactive-muted: var(--neutral-600);
-  --interactive-muted-hover: var(--neutral-900);
-  
-  /* ========================================
+   --interactive-default: var(--neutral-900);
+   --interactive-hover: var(--neutral-800);
+   --interactive-muted: var(--neutral-600);
+   --interactive-muted-hover: var(--neutral-900);
+
+   /* ========================================
+     STATE COLORS (Feedback)
+     ======================================== */
+   --success: #059669;
+   --success-light: #10b981;
+   --success-bg: rgba(5, 150, 105, 0.08);
+   --warning: #d97706;
+   --warning-light: #f59e0b;
+   --warning-bg: rgba(217, 119, 6, 0.08);
+   --error: #dc2626;
+   --error-light: #ef4444;
+   --error-bg: rgba(220, 38, 38, 0.08);
+   --info: #0284c7;
+   --info-light: #3b82f6;
+   --info-bg: rgba(2, 132, 199, 0.08);
+
+   /* ========================================
      SPACING SCALE
      ======================================== */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-  
-  /* ========================================
+   --space-1: 0.25rem;
+   --space-2: 0.5rem;
+   --space-3: 0.75rem;
+   --space-4: 1rem;
+   --space-5: 1.25rem;
+   --space-6: 1.5rem;
+   --space-8: 2rem;
+   --space-10: 2.5rem;
+   --space-12: 3rem;
+   --space-16: 4rem;
+   --space-20: 5rem;
+   --space-24: 6rem;
+
+   /* ========================================
      TYPOGRAPHY
      ======================================== */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
-  
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-  
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.625;
-  
-  --tracking-tight: -0.025em;
-  --tracking-normal: 0;
-  --tracking-wide: 0.025em;
-  --tracking-wider: 0.05em;
-  --tracking-widest: 0.1em;
-  
-  /* ========================================
+   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+   --font-serif: Georgia, 'Times New Roman', serif;
+
+   --text-xs: 0.75rem;
+   --text-sm: 0.875rem;
+   --text-base: 1rem;
+   --text-lg: 1.125rem;
+   --text-xl: 1.25rem;
+   --text-2xl: 1.5rem;
+   --text-3xl: 1.875rem;
+   --text-4xl: 2.25rem;
+   --text-5xl: 3rem;
+
+   --leading-tight: 1.25;
+   --leading-normal: 1.5;
+   --leading-relaxed: 1.625;
+
+   --tracking-tight: -0.025em;
+   --tracking-normal: 0;
+   --tracking-wide: 0.025em;
+   --tracking-wider: 0.05em;
+   --tracking-widest: 0.1em;
+
+   /* ========================================
      RADII
      ======================================== */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-full: 9999px;
-  
-  /* ========================================
+   --radius-sm: 0.25rem;
+   --radius-md: 0.5rem;
+   --radius-lg: 0.75rem;
+   --radius-xl: 1rem;
+   --radius-2xl: 1.5rem;
+   --radius-full: 9999px;
+
+   /* ========================================
      SHADOWS
      ======================================== */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  
-  /* ========================================
+   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+   /* ========================================
      TRANSITIONS
      ======================================== */
-  --transition-fast: 150ms ease;
-  --transition-normal: 200ms ease;
-  --transition-slow: 300ms ease;
-  
-  /* ========================================
+   --transition-fast: 150ms ease;
+   --transition-normal: 200ms ease;
+   --transition-slow: 300ms ease;
+
+   /* ========================================
      LAYOUT
      ======================================== */
-  --max-width-sm: 640px;
-  --max-width-md: 768px;
-  --max-width-lg: 1024px;
-  --max-width-xl: 1280px;
-  --max-width-content: 72rem;
-  --max-width-narrow: 48rem;
+   --max-width-sm: 640px;
+   --max-width-md: 768px;
+   --max-width-lg: 1024px;
+   --max-width-xl: 1280px;
+   --max-width-content: 72rem;
+   --max-width-narrow: 48rem;
 }
 
 /* ========================================
@@ -131,42 +150,42 @@
    ======================================== */
 [data-theme="dark"],
 .dark {
-  --text-primary: var(--neutral-100);
-  --text-secondary: var(--neutral-400);
-  --text-muted: var(--neutral-500);
-  --text-inverse: var(--neutral-900);
-  
-  --bg-primary: var(--neutral-900);
-  --bg-secondary: var(--neutral-800);
-  --bg-tertiary: var(--neutral-700);
-  
-  --border-default: var(--neutral-700);
-  --border-subtle: var(--neutral-800);
-  
-  --interactive-default: var(--neutral-100);
-  --interactive-hover: #ffffff;
-  --interactive-muted: var(--neutral-400);
-  --interactive-muted-hover: var(--neutral-100);
+   --text-primary: var(--neutral-100);
+   --text-secondary: var(--neutral-400);
+   --text-muted: var(--neutral-500);
+   --text-inverse: var(--neutral-900);
+
+   --bg-primary: var(--neutral-900);
+   --bg-secondary: var(--neutral-800);
+   --bg-tertiary: var(--neutral-700);
+
+   --border-default: var(--neutral-700);
+   --border-subtle: var(--neutral-800);
+
+   --interactive-default: var(--neutral-100);
+   --interactive-hover: #ffffff;
+   --interactive-muted: var(--neutral-400);
+   --interactive-muted-hover: var(--neutral-100);
 }
 
 /* ========================================
    BASE STYLES
    ======================================== */
 * {
-  box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 html {
-  font-family: var(--font-sans);
-  line-height: var(--leading-normal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+   font-family: var(--font-sans);
+   line-height: var(--leading-normal);
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+   margin: 0;
+   background-color: var(--bg-primary);
+   color: var(--text-primary);
 }
 
 /* ========================================
@@ -174,21 +193,51 @@ body {
    ======================================== */
 
 /* Text colors */
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-muted { color: var(--text-muted); }
-.text-inverse { color: var(--text-inverse); }
-.text-brand { color: var(--brand-primary); }
+.text-primary {
+   color: var(--text-primary);
+}
+
+.text-secondary {
+   color: var(--text-secondary);
+}
+
+.text-muted {
+   color: var(--text-muted);
+}
+
+.text-inverse {
+   color: var(--text-inverse);
+}
+
+.text-brand {
+   color: var(--brand-primary);
+}
 
 /* Background colors */
-.bg-primary { background-color: var(--bg-primary); }
-.bg-secondary { background-color: var(--bg-secondary); }
-.bg-tertiary { background-color: var(--bg-tertiary); }
-.bg-interactive { background-color: var(--interactive-default); }
+.bg-primary {
+   background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+   background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+   background-color: var(--bg-tertiary);
+}
+
+.bg-interactive {
+   background-color: var(--interactive-default);
+}
 
 /* Border colors */
-.border-default { border-color: var(--border-default); }
-.border-subtle { border-color: var(--border-subtle); }
+.border-default {
+   border-color: var(--border-default);
+}
+
+.border-subtle {
+   border-color: var(--border-subtle);
+}
 
 /* ========================================
    COMPONENT TOKENS
@@ -196,61 +245,58 @@ body {
 
 /* Buttons */
 .btn-primary {
-  background-color: var(--interactive-default);
-  color: var(--text-inverse);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-lg);
-  font-weight: 500;
-  font-size: var(--text-sm);
-  transition: background-color var(--transition-fast);
-  border: none;
-  cursor: pointer;
+   background-color: var(--interactive-default);
+   color: var(--text-inverse);
+   padding: var(--space-3) var(--space-6);
+   border-radius: var(--radius-lg);
+   font-weight: 500;
+   font-size: var(--text-sm);
+   transition: background-color var(--transition-fast);
+   border: none;
+   cursor: pointer;
 }
 
 .btn-primary:hover {
-  background-color: var(--interactive-hover);
+   background-color: var(--interactive-hover);
 }
 
 .btn-secondary {
-  background-color: var(--bg-primary);
-  color: var(--text-secondary);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-lg);
-  font-weight: 500;
-  font-size: var(--text-sm);
-  transition: all var(--transition-fast);
-  border: 1px solid var(--border-default);
-  cursor: pointer;
+   background-color: var(--bg-primary);
+   color: var(--text-secondary);
+   padding: var(--space-3) var(--space-6);
+   border-radius: var(--radius-lg);
+   font-weight: 500;
+   font-size: var(--text-sm);
+   transition: all var(--transition-fast);
+   border: 1px solid var(--border-default);
+   cursor: pointer;
 }
 
 .btn-secondary:hover {
-  border-color: var(--neutral-300);
-  background-color: var(--bg-secondary);
+   border-color: var(--neutral-300);
+   background-color: var(--bg-secondary);
 }
 
 /* Cards */
 .card {
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-xl);
-  padding: var(--space-8);
+   background-color: var(--bg-primary);
+   border: 1px solid var(--border-default);
+   border-radius: var(--radius-xl);
+   padding: var(--space-8);
 }
 
 .card:hover {
-  border-color: var(--neutral-300);
-  box-shadow: var(--shadow-sm);
+   border-color: var(--neutral-300);
+   box-shadow: var(--shadow-sm);
 }
 
 /* Links */
 .link {
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
-  text-decoration: none;
+   color: var(--text-secondary);
+   transition: color var(--transition-fast);
+   text-decoration: none;
 }
 
 .link:hover {
-  color: var(--text-primary);
+   color: var(--text-primary);
 }
-
-
-

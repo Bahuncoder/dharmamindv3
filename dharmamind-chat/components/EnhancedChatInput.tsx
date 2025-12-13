@@ -105,7 +105,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
         }
       }
     }
-    
+
     // Additional keyboard shortcuts
     if (e.key === 'Escape') {
       setShowActions(false);
@@ -147,11 +147,11 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
     e.preventDefault();
     e.stopPropagation();
     setIsDragOver(false);
-    
+
     if (showAttachments && onFileUpload) {
       const files = Array.from(e.dataTransfer.files);
       files.forEach(file => {
-        if (supportedFileTypes.some(type => 
+        if (supportedFileTypes.some(type =>
           type === file.type || type.includes('*') && file.type.startsWith(type.split('/')[0])
         )) {
           onFileUpload(file);
@@ -186,7 +186,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
   const isOverLimit = characterCount > maxLength;
 
   return (
-    <div 
+    <div
       className={`enhanced-input-container ${isMobile ? 'mobile-optimized' : ''} ${isHighContrast ? 'high-contrast' : ''}`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
@@ -246,8 +246,8 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
           }}
           transition={{ duration: reduceMotion ? 0 : 0.2 }}
           style={{
-            border: '2px solid var(--color-border-primary, #10b981)',
-            boxShadow: isFocused 
+            border: '2px solid var(--color-border-primary, #d4a854)',
+            boxShadow: isFocused
               ? '0 0 0 3px var(--color-shadow-light, rgba(0, 0, 0, 0.1)), 0 8px 25px var(--color-shadow-medium, rgba(0, 0, 0, 0.1))'
               : '0 2px 10px var(--color-shadow-light, rgba(0, 0, 0, 0.05))'
           }}
@@ -287,7 +287,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
                       />
                     </>
                   )}
-                  
+
                   {showEmoji && (
                     <button
                       type="button"
@@ -346,7 +346,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
               autoCapitalize="sentences"
               spellCheck="true"
             />
-            
+
             {/* Character Counter */}
             <AnimatePresence>
               {(isNearLimit || isFocused) && (

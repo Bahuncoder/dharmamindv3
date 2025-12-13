@@ -107,7 +107,7 @@ const TechnicalSpecsPage: React.FC = () => {
     link.href = '#';
     link.download = `${item.title.replace(/\s+/g, '_')}.pdf`;
     link.click();
-    
+
     // Show download notification
     alert(`Downloading ${item.title}...`);
   };
@@ -121,16 +121,16 @@ const TechnicalSpecsPage: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      api: 'bg-neutral-200 text-neutral-800 border-neutral-300',
-      security: 'bg-red-100 text-red-800 border-red-200',
-      integration: 'bg-success-100 text-green-800 border-green-200',
-      overview: 'bg-purple-100 text-purple-800 border-purple-200'
+      api: 'bg-neutral-100 text-neutral-800 border-neutral-300 dark:bg-neutral-700 dark:text-neutral-200 dark:border-neutral-600',
+      security: 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800',
+      integration: 'bg-gold-100 text-gold-800 border-gold-200 dark:bg-gold-900/30 dark:text-gold-300 dark:border-gold-800',
+      overview: 'bg-neutral-100 text-neutral-800 border-neutral-300 dark:bg-neutral-700 dark:text-neutral-200 dark:border-neutral-600'
     };
-    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
+    return colors[category as keyof typeof colors] || 'bg-neutral-100 text-neutral-800 border-neutral-300';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-gold-50">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
       <Head>
         <title>Technical Specifications - DharmaMind Enterprise</title>
         <meta name="description" content="Download comprehensive technical documentation and specifications for DharmaMind Enterprise" />
@@ -140,18 +140,18 @@ const TechnicalSpecsPage: React.FC = () => {
       <header className="bg-white/80 backdrop-blur-sm border-b border-stone-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Logo 
+            <Logo
               size="sm"
               onClick={() => router.push('/')}
             />
             <div className="flex items-center space-x-4">
-              <button 
+              <button
                 onClick={() => router.push('/demo-request')}
                 className="text-amber-600 hover:text-amber-700 font-medium"
               >
                 Schedule Demo
               </button>
-              <button 
+              <button
                 onClick={() => router.push('/')}
                 className="text-stone-600 hover:text-stone-900"
               >
@@ -169,7 +169,7 @@ const TechnicalSpecsPage: React.FC = () => {
             📚 Technical Specifications & Documentation
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Access comprehensive technical documentation, API references, security whitepapers, 
+            Access comprehensive technical documentation, API references, security whitepapers,
             and integration guides for DharmaMind Enterprise.
           </p>
         </div>
@@ -235,11 +235,10 @@ const TechnicalSpecsPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                    isSubmitting 
-                      ? 'opacity-50 cursor-not-allowed' 
+                  className={`w-full bg-gradient-to-r from-amber-600 via-orange-500 to-red-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 ${isSubmitting
+                      ? 'opacity-50 cursor-not-allowed'
                       : 'hover:from-amber-700 hover:via-orange-600 hover:to-red-600'
-                  }`}
+                    }`}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
@@ -271,11 +270,10 @@ const TechnicalSpecsPage: React.FC = () => {
               {['all', 'api', 'security', 'integration', 'overview'].map((filter) => (
                 <button
                   key={filter}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                    filter === 'all' 
-                      ? 'bg-amber-600 text-white' 
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${filter === 'all'
+                      ? 'bg-amber-600 text-white'
                       : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   {filter === 'all' ? 'All Documents' : filter.charAt(0).toUpperCase() + filter.slice(1)}
                 </button>
@@ -292,10 +290,10 @@ const TechnicalSpecsPage: React.FC = () => {
                       {item.category}
                     </span>
                   </div>
-                  
+
                   <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-2">{item.description}</p>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-500">{item.fileSize}</span>
                     <button
@@ -314,7 +312,7 @@ const TechnicalSpecsPage: React.FC = () => {
               <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                 🚀 Ready to Get Started?
               </h2>
-              
+
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="text-center p-6 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg">
                   <div className="text-3xl mb-3">🎯</div>
@@ -329,30 +327,30 @@ const TechnicalSpecsPage: React.FC = () => {
                     Book Demo
                   </button>
                 </div>
-                
-                <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+
+                <div className="text-center p-6 bg-gradient-to-br from-gold-50 to-gold-100 dark:from-gold-900/20 dark:to-gold-800/20 rounded-lg">
                   <div className="text-3xl mb-3">💬</div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Ask Questions</h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Ask Questions</h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
                     Get technical support from our engineering team
                   </p>
                   <ContactButton
                     variant="button"
                     prefillCategory="support"
-                    className="bg-success-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                    className="bg-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 transition-colors"
                   >
                     Contact Support
                   </ContactButton>
                 </div>
-                
-                <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+
+                <div className="text-center p-6 bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-700 rounded-lg">
                   <div className="text-3xl mb-3">🛠️</div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Start Building</h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Start Building</h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
                     Try our API sandbox environment
                   </p>
                   <button
-                    className="bg-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+                    className="bg-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 transition-colors"
                   >
                     API Sandbox
                   </button>
@@ -361,16 +359,16 @@ const TechnicalSpecsPage: React.FC = () => {
             </div>
 
             {/* Success Message */}
-            <div className="mt-8 bg-success-50 border border-green-200 rounded-lg p-6">
+            <div className="mt-8 bg-gold-50 dark:bg-gold-900/20 border border-gold-200 dark:border-gold-800 rounded-lg p-6">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center mr-4">
-                  <svg className="w-5 h-5 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-gold-100 dark:bg-gold-900/30 rounded-full flex items-center justify-center mr-4">
+                  <svg className="w-5 h-5 text-gold-600 dark:text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-green-800">Access Granted!</h3>
-                  <p className="text-success-700 text-sm">
+                  <h3 className="font-semibold text-gold-800 dark:text-gold-300">Access Granted!</h3>
+                  <p className="text-gold-700 dark:text-gold-400 text-sm">
                     You now have access to all technical documentation. Download any files you need for your evaluation.
                   </p>
                 </div>

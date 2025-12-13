@@ -15,37 +15,40 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-serif: 'Crimson Pro', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
+
+  /* Primary border/accent - GOLD theme */
+  --color-border-primary: #d4a854;
+
   /* Chat-specific colors (using brand colors) */
   --color-primary: var(--brand-primary);
   --color-primary-light: #1e7a8a;
   --color-primary-dark: #164a6a;
   --color-primary-subtle: rgba(30, 90, 138, 0.08);
   --color-primary-muted: rgba(30, 90, 138, 0.15);
-  
+
   /* Accent */
   --color-accent: var(--brand-secondary);
   --color-accent-light: #e4b864;
   --color-accent-subtle: rgba(212, 168, 84, 0.1);
-  
+
   /* Map to semantic names */
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-tertiary: var(--bg-tertiary);
   --color-bg-elevated: var(--bg-primary);
   --color-bg-sunken: var(--bg-secondary);
-  
+
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary: var(--text-muted);
   --color-text-muted: var(--neutral-400);
   --color-text-inverse: var(--text-inverse);
-  
+
   --color-border-light: var(--border-default);
   --color-border-medium: var(--neutral-300);
   --color-border-strong: var(--neutral-400);
   --color-border-focus: var(--brand-primary);
-  
+
   /* Gray scale */
   --color-gray-50: var(--neutral-50);
   --color-gray-100: var(--neutral-100);
@@ -57,22 +60,26 @@
   --color-gray-700: var(--neutral-700);
   --color-gray-800: var(--neutral-800);
   --color-gray-900: var(--neutral-900);
-  
-  /* State colors */
-  --color-success: #059669;
-  --color-success-bg: rgba(5, 150, 105, 0.08);
-  --color-warning: #d97706;
-  --color-warning-bg: rgba(217, 119, 6, 0.08);
-  --color-error: #dc2626;
-  --color-error-bg: rgba(220, 38, 38, 0.08);
-  --color-info: #0284c7;
-  --color-info-bg: rgba(2, 132, 199, 0.08);
-  
+
+  /* State colors - referencing centralized design tokens */
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  --color-warning-bg: var(--warning-bg);
+  --color-error: var(--error);
+  --color-error-light: var(--error-light);
+  --color-error-bg: var(--error-bg);
+  --color-info: var(--info);
+  --color-info-light: var(--info-light);
+  --color-info-bg: var(--info-bg);
+
   /* Shadows */
   --shadow-xs: var(--shadow-sm);
   --shadow-primary: 0 4px 14px rgba(30, 90, 138, 0.15);
   --shadow-accent: 0 4px 14px rgba(212, 168, 84, 0.12);
-  
+
   /* Legacy mappings */
   --color-focus-ring: rgba(30, 90, 138, 0.3);
   --color-focus: var(--brand-primary);
@@ -87,16 +94,16 @@ html.dark {
   --color-bg-tertiary: var(--neutral-700);
   --color-bg-elevated: var(--neutral-800);
   --color-bg-sunken: var(--neutral-900);
-  
+
   --color-text-primary: var(--neutral-100);
   --color-text-secondary: var(--neutral-300);
   --color-text-tertiary: var(--neutral-400);
   --color-text-muted: var(--neutral-500);
-  
+
   --color-border-light: var(--neutral-700);
   --color-border-medium: var(--neutral-600);
   --color-border-strong: var(--neutral-500);
-  
+
   --color-primary-subtle: rgba(30, 90, 138, 0.15);
   --color-primary-muted: rgba(30, 90, 138, 0.25);
 }
@@ -275,7 +282,9 @@ html.dark {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Scrollbar */
@@ -311,16 +320,22 @@ html.dark {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(8px);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }

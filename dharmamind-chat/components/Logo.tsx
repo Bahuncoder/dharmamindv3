@@ -10,11 +10,11 @@ interface LogoProps {
   className?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ 
-  size = 'md', 
-  showText = true, 
-  onClick, 
-  className = '' 
+const Logo: React.FC<LogoProps> = ({
+  size = 'md',
+  showText = true,
+  onClick,
+  className = ''
 }) => {
   const router = useRouter();
   const { user, isAuthenticated } = useAuth();
@@ -35,13 +35,13 @@ const Logo: React.FC<LogoProps> = ({
       titleText: 'text-sm'
     },
     sm: {
-      container: 'w-8 h-8', 
+      container: 'w-8 h-8',
       text: 'text-sm',
       titleText: 'text-lg'
     },
     md: {
       container: 'w-10 h-10',
-      text: 'text-lg', 
+      text: 'text-lg',
       titleText: 'text-xl'
     },
     lg: {
@@ -62,15 +62,15 @@ const Logo: React.FC<LogoProps> = ({
   };
 
   const currentSize = sizeClasses[size];
-  
+
   const LogoContent = () => (
     <>
       <div className={`${currentSize.container} rounded-${size === 'avatar' ? 'full' : 'lg'} flex items-center justify-center overflow-hidden relative`}
-           style={{
-             background: 'var(--color-bg-primary)',
-             border: '3px solid var(--color-logo-emerald)',
-             boxShadow: '0 4px 16px rgba(16, 185, 129, 0.2)'
-           }}>
+        style={{
+          background: 'var(--color-bg-primary, #fafaf9)',
+          border: '2px solid var(--color-border-primary, #d4a854)',
+          boxShadow: '0 2px 8px rgba(212, 168, 84, 0.15)'
+        }}>
         <Image
           src="/logo.jpeg"
           alt="DharmaMind Logo"
@@ -83,12 +83,12 @@ const Logo: React.FC<LogoProps> = ({
       {showText && (
         <div className="ml-3">
           <span className={`font-semibold ${currentSize.titleText}`}
-                style={{color: 'var(--color-text-primary)'}}>
+            style={{ color: 'var(--color-text-primary)' }}>
             DharmaMind
           </span>
           {isAuthenticated && user && (
             <div className={`${size === 'xs' || size === 'sm' ? 'text-xs' : 'text-sm'} font-medium`}
-                 style={{color: 'var(--color-emerald)'}}>
+              style={{ color: 'var(--color-border-primary, #d4a854)' }}>
               Current: {user.subscription_plan.charAt(0).toUpperCase() + user.subscription_plan.slice(1)}
             </div>
           )}
@@ -98,11 +98,11 @@ const Logo: React.FC<LogoProps> = ({
   );
 
   return (
-    <button 
+    <button
       onClick={handleClick}
       className={`flex items-center transition-all duration-300 hover:scale-105 group ${className}`}
       style={{
-        filter: 'hover:drop-shadow(0 8px 16px rgba(16, 185, 129, 0.4))'
+        filter: 'hover:drop-shadow(0 8px 16px rgba(212, 168, 84, 0.4))'
       }}
     >
       <LogoContent />

@@ -21,7 +21,7 @@ const SettingsPage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [activeCategory, setActiveCategory] = useState<SettingsCategory>('general');
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
-  
+
   // Settings states
   const [language, setLanguage] = useState('English');
   const [responseNotifications, setResponseNotifications] = useState(true);
@@ -35,7 +35,7 @@ const SettingsPage: React.FC = () => {
   React.useEffect(() => {
     // Check if user came from demo mode
     const { demo } = router.query;
-    
+
     if (demo === 'true') {
       const demoUser: User = {
         name: 'Guest User',
@@ -83,7 +83,7 @@ const SettingsPage: React.FC = () => {
 
   const exportChatHistory = () => {
     const dataStr = JSON.stringify([], null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
     const exportFileDefaultName = 'dharmamind-chat-history.json';
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -112,7 +112,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">General Settings</h3>
-              
+
               {/* Language */}
               <div className="flex items-center justify-between py-4 border-b border-gray-200">
                 <div>
@@ -141,7 +141,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Preferences</h3>
-              
+
               {/* Response Notifications */}
               <div className="flex items-center justify-between py-4 border-b border-gray-200">
                 <div>
@@ -150,14 +150,12 @@ const SettingsPage: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setResponseNotifications(!responseNotifications)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
-                    responseNotifications ? 'bg-gold-600' : 'bg-gray-200'
-                  }`}
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${responseNotifications ? 'bg-gold-600' : 'bg-gray-200'
+                    }`}
                 >
                   <span
-                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                      responseNotifications ? 'translate-x-5' : 'translate-x-0'
-                    }`}
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${responseNotifications ? 'translate-x-5' : 'translate-x-0'
+                      }`}
                   />
                 </button>
               </div>
@@ -170,14 +168,12 @@ const SettingsPage: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setTaskNotifications(!taskNotifications)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
-                    taskNotifications ? 'bg-gold-600' : 'bg-gray-200'
-                  }`}
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${taskNotifications ? 'bg-gold-600' : 'bg-gray-200'
+                    }`}
                 >
                   <span
-                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                      taskNotifications ? 'translate-x-5' : 'translate-x-0'
-                    }`}
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${taskNotifications ? 'translate-x-5' : 'translate-x-0'
+                      }`}
                   />
                 </button>
               </div>
@@ -190,7 +186,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">Personalization</h3>
-              
+
               {/* Theme */}
               <div className="flex items-center justify-between py-4 border-b border-gray-200">
                 <div>
@@ -233,7 +229,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">Data Controls</h3>
-              
+
               {/* Archived Chats */}
               <div className="flex items-center justify-between py-4 border-b border-gray-200">
                 <div>
@@ -284,14 +280,12 @@ const SettingsPage: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setImproveModel(!improveModel)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
-                    improveModel ? 'bg-gold-600' : 'bg-gray-200'
-                  }`}
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${improveModel ? 'bg-gold-600' : 'bg-gray-200'
+                    }`}
                 >
                   <span
-                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                      improveModel ? 'translate-x-5' : 'translate-x-0'
-                    }`}
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${improveModel ? 'translate-x-5' : 'translate-x-0'
+                      }`}
                   />
                 </button>
               </div>
@@ -318,7 +312,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">Security Settings</h3>
-              
+
               {/* Logout This Device */}
               <div className="flex items-center justify-between py-4 border-b border-gray-200">
                 <div>
@@ -341,14 +335,12 @@ const SettingsPage: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setMultifactorAuth(!multifactorAuth)}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${
-                    multifactorAuth ? 'bg-gold-600' : 'bg-gray-200'
-                  }`}
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 ${multifactorAuth ? 'bg-gold-600' : 'bg-gray-200'
+                    }`}
                 >
                   <span
-                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                      multifactorAuth ? 'translate-x-5' : 'translate-x-0'
-                    }`}
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${multifactorAuth ? 'translate-x-5' : 'translate-x-0'
+                      }`}
                   />
                 </button>
               </div>
@@ -379,7 +371,7 @@ const SettingsPage: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">Account Management</h3>
-              
+
               {/* Account Information */}
               <div className="py-4 border-b border-gray-200">
                 <h4 className="text-sm font-medium text-gray-900 mb-2">Account Information</h4>
@@ -391,7 +383,7 @@ const SettingsPage: React.FC = () => {
                     <span className="font-medium">Email:</span> {user?.email || 'Not provided'}
                   </p>
                   <p className="text-sm text-gray-600">
-                    <span className="font-medium">Plan:</span> 
+                    <span className="font-medium">Plan:</span>
                     <span className="ml-1 capitalize">{user?.plan || 'Basic'}</span>
                     {!user?.isGuest && (
                       <button
@@ -429,8 +421,17 @@ const SettingsPage: React.FC = () => {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-xl overflow-hidden border-2 border-gold-500/30 shadow-md">
+            <img src="/logo.jpeg" alt="DharmaMind" className="w-full h-full object-cover" />
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -442,9 +443,9 @@ const SettingsPage: React.FC = () => {
         <meta name="description" content="Manage your DharmaMind account settings and preferences" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900">
         {/* Header */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
+        <header className="bg-white dark:bg-neutral-800 shadow-sm border-b border-neutral-200 dark:border-neutral-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <button
@@ -453,7 +454,7 @@ const SettingsPage: React.FC = () => {
               >
                 <Logo size="sm" showText={true} />
               </button>
-              
+
               <div className="flex items-center space-x-4">
                 <ContactButton variant="link" />
                 <button
@@ -470,7 +471,7 @@ const SettingsPage: React.FC = () => {
         {/* Main Content */}
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6">
-            
+
             {/* Sidebar */}
             <div className="lg:w-64 flex-shrink-0">
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
@@ -480,11 +481,10 @@ const SettingsPage: React.FC = () => {
                     <button
                       key={category.id}
                       onClick={() => setActiveCategory(category.id)}
-                      className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                        activeCategory === category.id
+                      className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${activeCategory === category.id
                           ? 'bg-gold-100 text-gold-800'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                      }`}
+                        }`}
                     >
                       <span className="mr-3">{category.icon}</span>
                       {category.name}

@@ -19,12 +19,17 @@ const SignupPage = () => {
   }, [callbackUrl]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center">
       <div className="text-center">
-        <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-4">
-          <span className="text-white font-bold text-sm">D</span>
+        <div className="w-12 h-12 mx-auto mb-4 rounded-xl overflow-hidden border-2 border-gold-500/30 shadow-md">
+          <img src="/logo.jpeg" alt="DharmaMind" className="w-full h-full object-cover" />
         </div>
-        <p className="text-gray-500">Redirecting to sign up...</p>
+        <p className="text-neutral-600 dark:text-neutral-400 text-sm">Redirecting to sign up...</p>
+        <div className="flex items-center justify-center gap-1 mt-3">
+          <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+        </div>
       </div>
     </div>
   );

@@ -10,13 +10,6 @@ import { RishiChatProvider } from '../contexts/RishiChatContext'
 import '../styles/globals.css'
 import '../styles/colors.css'
 import '../styles/chat.css'
-import '../styles/chat-enhanced.css'
-import '../styles/chat-interface-enhanced.css'
-import '../styles/enhanced-chat-ui.css'
-import '../styles/enhanced-message-bubble.css'
-import '../styles/enhanced-input.css'
-import '../styles/advanced-spiritual-design.css'
-import '../styles/enhanced-layout.css'
 
 // Top loading bar component
 const TopLoadingBar = ({ isLoading }: { isLoading: boolean }) => {
