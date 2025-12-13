@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
@@ -16,6 +16,7 @@ import EnhancedChatInput from '../components/EnhancedChatInput';
 import { RishiSelector } from '../components/RishiSelector';
 import { useRishiChat } from '../contexts/RishiChatContext';
 import { RishiTransition } from '../components/RishiTransition';
+import { useVoiceRecording } from '../hooks/useVoiceRecording';
 
 interface Message {
   id: string;
@@ -102,6 +103,32 @@ const ChatPage: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+
+  // Voice recording with universal browser support
+  const handleVoiceTranscript = useCallback((text: string) => {
+    setInputValue(text);
+    setVoiceError(null);
+  }, []);
+
+  const handleVoiceError = useCallback((error: string) => {
+    setVoiceError(error);
+    // Auto-clear error after 5 seconds
+    setTimeout(() => setVoiceError(null), 5000);
+  }, []);
+
+  const {
+    isRecording,
+    recordingTime: voiceRecordingTime,
+    isSupported: voiceSupported,
+    supportType: voiceSupportType,
+    toggleRecording: handleVoiceRecord
+  } = useVoiceRecording({
+    onTranscript: handleVoiceTranscript,
+    onError: handleVoiceError,
+    language: 'en-US',
+    maxDuration: 60
+  });
 
   // Unified chat with optional Rishi guidance
   const [selectedRishi, setSelectedRishi] = useState<string>('');
@@ -1169,6 +1196,18 @@ How can I assist you today?`,
             {/* Enhanced Input Area - Fixed at Bottom */}
             <div className="flex-shrink-0 border-t border-gray-200/30 enhanced-input-area">
               <div className="max-w-4xl mx-auto px-6 py-4">
+                {/* Voice Error Message */}
+                {voiceError && (
+                  <div className="mb-3 px-4 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                    <p className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {voiceError}
+                    </p>
+                  </div>
+                )}
+
                 {/* Enhanced Personalized Suggestions for ongoing conversations */}
                 {messages.length > 1 && (
                   <div className="mb-4">
@@ -1188,12 +1227,16 @@ How can I assist you today?`,
                     event.preventDefault = () => { };
                     handleSubmit(event);
                   }}
+                  onVoiceRecord={handleVoiceRecord}
                   isLoading={isLoading}
+                  isRecording={isRecording}
+                  voiceRecordingTime={voiceRecordingTime}
                   placeholder="Message DharmaMind..."
-                  showVoiceInput={true}
+                  showVoiceInput={voiceSupported}
                   maxLength={2000}
                   showAttachments={true}
-                  showEmoji={true}
+                  showEmoji={false}
+                  isMobile={isMobile}
                 />
 
                 {/* Disclaimer hidden per user request */}

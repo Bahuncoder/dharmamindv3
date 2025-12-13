@@ -4,8 +4,6 @@ import {
   PaperAirplaneIcon,
   MicrophoneIcon,
   StopIcon,
-  PhotoIcon,
-  FaceSmileIcon,
   PlusIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -205,7 +203,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
             aria-label="File drop zone"
           >
             <div className="text-center">
-              <PhotoIcon className="w-12 h-12 mx-auto text-gold-500 mb-2" />
+              <PlusIcon className="w-12 h-12 mx-auto text-gold-500 mb-2" />
               <p className="text-gold-700 dark:text-gold-300 font-medium">Drop files here to upload</p>
             </div>
           </motion.div>
@@ -256,67 +254,29 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
         >
           {/* Action Buttons - Left Side */}
           <div className="input-actions-left" role="toolbar" aria-label="Input actions">
-            <AnimatePresence>
-              {(showActions || isMobile) && (
-                <motion.div
-                  className="flex items-center gap-2"
-                  initial={{ opacity: 0, x: reduceMotion ? 0 : -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: reduceMotion ? 0 : -20 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.2 }}
+            {/* Simple + button that opens file picker */}
+            {showAttachments && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className={`action-button plus-button ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
+                  title="Add file"
+                  aria-label="Add file"
                 >
-                  {showAttachments && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className={`action-button ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
-                        title="Attach file (images, documents)"
-                        aria-label="Attach file"
-                      >
-                        <PhotoIcon className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} />
-                      </button>
-                      <input
-                        ref={fileInputRef}
-                        type="file"
-                        multiple
-                        accept={supportedFileTypes.join(',')}
-                        onChange={handleFileSelect}
-                        className="hidden"
-                        aria-label="File upload input"
-                      />
-                    </>
-                  )}
-
-                  {showEmoji && (
-                    <button
-                      type="button"
-                      className={`action-button ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
-                      title="Add emoji"
-                      aria-label="Add emoji"
-                    >
-                      <FaceSmileIcon className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} />
-                    </button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <button
-              type="button"
-              className={`action-button plus-button ${isMobile ? 'mobile-touch' : ''} ${isHighContrast ? 'high-contrast-button' : ''}`}
-              onClick={() => setShowActions(!showActions)}
-              title="More options"
-              aria-label="Toggle additional options"
-              aria-expanded={showActions}
-            >
-              <motion.div
-                animate={{ rotate: showActions && !reduceMotion ? 45 : 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.2 }}
-              >
-                <PlusIcon className="w-5 h-5" />
-              </motion.div>
-            </button>
+                  <PlusIcon className={`${isMobile ? 'w-6 h-6' : 'w-5 h-5'}`} />
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  multiple
+                  accept={supportedFileTypes.join(',')}
+                  onChange={handleFileSelect}
+                  className="hidden"
+                  aria-label="File upload input"
+                />
+              </>
+            )}
           </div>
 
           {/* Text Input */}
